@@ -38,6 +38,45 @@ node pruebas/navegador-ingreso.js        # los ocho usuarios
 Todos salen con código 0 si pasan. Los de navegador necesitan la ruta de Chromium que llevan
 escrita arriba; en este entorno es `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`.
 
+## La vista previa de una sola página
+
+Para revisar la beta desde un enlace, sin descargar la carpeta, hay un generador que mete las 17
+páginas en un solo archivo:
+
+```bash
+node herramientas/empaquetar-vista-previa.js       # escribe vista-previa.html y -suelta.html
+node pruebas/vista-previa-navegacion.js            # se empaqueta solo y prueba el resultado
+node pruebas/vista-previa-flujos.js
+```
+
+**Esto no es el entregable.** El entregable es la carpeta, que se abre con `file://` y sin red. La
+vista previa es una copia derivada, y por eso se genera de los archivos reales y nunca a mano: si
+cambias una página y no vuelves a generarla, el enlace muestra una versión distinta de la que se
+presenta. Las dos pruebas se empaquetan solas en cada corrida para que eso no pueda pasar
+inadvertido.
+
+Qué cambia respecto de la carpeta, y por qué:
+
+- **La navegación pasa a ser por `#`**, porque un artifact es un solo documento. El generador
+  reescribe mecánicamente los nueve saltos por JS y la función que lee la ruta; si aparece un salto
+  nuevo que no sabe reescribir, **falla en vez de emitir una vista previa a medias**.
+- **Fuentes, logo y emblema quedan incrustados** como `data:` URI.
+- **La exportación a CSV y la impresión no funcionan**: el visor bloquea las descargas que inicia la
+  propia página. En vez de dejar botones muertos, avisan en pantalla que eso sí funciona en la
+  carpeta real. El CSV se sigue generando y el aviso dice cuántas filas salieron.
+
+Dos trampas que ya se pisaron al construirlo, por si hay que tocarlo:
+
+- **`assets/demo.js` lleva en su cabecera el texto `</script>`**, que es la etiqueta que hay que
+  borrar para un uso real. Dentro de un bloque de guion eso cierra el bloque aunque venga en un
+  comentario, y partía el paquete en dos. El generador lo escapa y además cuenta las etiquetas de
+  cierre del resultado. Un `<script>` de apertura, en cambio, es texto inerte: solo `</script`
+  saca al analizador de ahí.
+- **El archivo que se publica no lleva `<html>`, `<head>` ni `<body>`**: los pone el publicador. Si
+  se abre suelto, los guiones caen en el `<head>` y `document.body` todavía es `null`. Por eso el
+  enrutador espera al DOM, y el generador escribe además una copia envuelta (`-suelta.html`) para
+  poder probar con un navegador exactamente lo que se publica.
+
 ## Cómo está organizado
 
 ```
@@ -73,6 +112,8 @@ assets/
   demo.js      barra de demostración. SE ELIMINA ANTES DE UN USO REAL
 
 stitch/        export original de Stitch. Solo referencia, no se publica
+pruebas/       guiones de verificación. No se publican
+herramientas/  generador de la vista previa de una sola página. No se publica
 ```
 
 Las 23 páginas de la especificación caben en estos 17 archivos: las páginas 5 a 11 son las siete
