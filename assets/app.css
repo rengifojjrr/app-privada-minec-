@@ -100,6 +100,7 @@ button { cursor: pointer; }
   padding: 0 var(--e-lg);
   background: var(--fondo); border-bottom: 1px solid var(--borde-suave);
 }
+.pi-barra.sola { left: 0; }
 .pi-beta {
   display: inline-flex; align-items: center; gap: 6px; flex: none;
   background: var(--secundario-tenue); color: var(--sobre-secundario-tenue);
@@ -436,24 +437,73 @@ table.tabla td.acciones { text-align: right; white-space: nowrap; }
    Piezas especificas
    ========================================================================= */
 
-/* Selector de rol (index.html) */
-.pi-portada { min-height: 100vh; display: grid; place-items: center; padding: var(--e-xl) var(--e-md) calc(var(--demo-alto) + var(--e-xl)); }
-.pi-portada-caja { width: 100%; max-width: 940px; }
-.pi-portada-cab { display: flex; align-items: center; gap: var(--e-md); margin-bottom: var(--e-lg); }
-.pi-portada-cab svg.logo { width: 56px; height: 56px; flex: none; border-radius: var(--r-md); }
-.pi-roles { display: grid; gap: var(--e-md); grid-template-columns: repeat(auto-fit, minmax(268px, 1fr)); }
-.pi-rol {
-  display: flex; flex-direction: column; gap: var(--e-xs); text-align: left;
-  padding: var(--e-md);
-  background: var(--superficie); border: 1px solid var(--borde-suave);
-  border-radius: var(--r-sm); box-shadow: var(--sombra-sm);
+/* ============================================================================
+   Ingreso (index.html) y página de acceso restringido
+   ========================================================================= */
+.pi-portada {
+  min-height: 100vh; display: grid; place-items: center;
+  /* El relleno superior deja hueco a la barra fija de la marca. */
+  padding: calc(var(--barra-alto) + var(--e-xl)) var(--e-md) calc(var(--demo-alto) + var(--e-xl));
 }
-.pi-rol:hover { border-color: var(--primario); box-shadow: var(--sombra-md); }
-.pi-rol-cab { display: flex; align-items: center; gap: var(--e-sm); }
-.pi-rol-cab .pi-avatar { width: 40px; height: 40px; font-size: var(--c-md); }
-.pi-rol-cab strong { display: block; font-size: var(--c-lg); font-weight: 600; }
-.pi-rol .badge { align-self: flex-start; }
-.pi-rol ul { margin: 0; padding-left: 18px; font-size: var(--c-sm); color: var(--texto-suave); }
+.pi-portada-caja { width: 100%; max-width: 468px; }
+.pi-portada-caja.ancha { max-width: 620px; }
+
+.pi-acceso-marca { margin-bottom: var(--e-lg); }
+.pi-acceso-marca .logo {
+  display: block; width: 52px; height: 52px; margin-bottom: var(--e-sm);
+}
+.pi-acceso-marca .logo svg {
+  display: block; width: 100%; height: 100%; border-radius: var(--r-md);
+}
+.pi-acceso-marca h1 { font-size: 30px; line-height: 36px; letter-spacing: -0.02em; }
+.pi-acceso-marca p { margin-top: var(--e-2xs); color: var(--texto-suave); font-size: var(--c-md); }
+
+.pi-acceso-error {
+  display: flex; align-items: flex-start; gap: var(--e-xs);
+  margin-bottom: var(--e-sm); padding: var(--e-xs) var(--e-sm);
+  background: var(--error-tenue); color: var(--sobre-error-tenue);
+  border: 1px solid var(--error-borde); border-radius: var(--r-xs);
+  font-size: var(--c-sm); line-height: var(--lh-csm);
+}
+.pi-acceso-error svg { flex: none; margin-top: 1px; }
+
+.pi-divisor {
+  border: 0; border-top: 1px solid var(--borde-fino);
+  margin: var(--e-md) 0;
+}
+
+/* Cuentas de prueba: un botón por usuario, agrupados por área. */
+.pi-cuentas-nota { font-size: var(--c-sm); color: var(--texto-suave); margin-bottom: var(--e-sm); }
+.pi-cuentas-grupo { margin-bottom: var(--e-sm); }
+.pi-cuentas-grupo > .eti {
+  display: flex; align-items: center; gap: 5px; margin-bottom: 5px;
+}
+.pi-cuentas-lista { display: flex; flex-wrap: wrap; gap: 5px; }
+.pi-cuenta {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px var(--e-xs);
+  background: var(--superficie); color: var(--texto);
+  border: 1px solid var(--borde); border-radius: var(--r-xs);
+  font-size: var(--c-sm); text-align: left;
+}
+.pi-cuenta:hover { background: var(--superficie-media); border-color: var(--primario); }
+.pi-cuenta[aria-pressed='true'] {
+  background: var(--primario-tenue); border-color: var(--primario);
+  color: var(--sobre-primario-tenue); font-weight: 600;
+}
+.pi-cuenta .rol {
+  font-family: var(--fuente-mono); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase; color: var(--texto-tenue);
+}
+.pi-cuenta[aria-pressed='true'] .rol { color: var(--primario); }
+.pi-cuenta:disabled { opacity: 0.5; cursor: not-allowed; text-decoration: line-through; }
+.pi-cuenta:disabled:hover { background: var(--superficie); border-color: var(--borde); }
+
+.pi-acceso-pie {
+  margin-top: var(--e-md); text-align: center;
+  font-family: var(--fuente-mono); font-size: var(--mono-sm);
+  color: var(--texto-tenue); letter-spacing: 0.02em;
+}
 
 /* Etapas */
 .etapas-tira { display: grid; gap: var(--e-xs); grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
@@ -573,6 +623,8 @@ table.tabla td.acciones { text-align: right; white-space: nowrap; }
   .pi-usuario-txt { display: none; }
   .pi-barra-fin .btn span, .pi-barra-fin .btn { font-size: var(--c-sm); }
   .pi-lienzo { margin-left: 0; padding: var(--e-md) var(--e-md) calc(var(--demo-alto) + var(--e-2xl)); }
+  /* En móvil la barra no es fija, así que el ingreso no necesita ese hueco. */
+  .pi-portada { padding-top: var(--e-lg); }
   .rejilla-2, .rejilla-3, .rejilla-4 { grid-template-columns: 1fr; }
 }
 

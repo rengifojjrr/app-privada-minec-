@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Seleccionar rol &middot; Beta &middot; Proyectos Integrales</title>
+<title>Ingreso &middot; Beta &middot; Proyectos Integrales</title>
 <meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/tokens.css">
 <link rel="stylesheet" href="assets/app.css">
 <!-- seed, store y auth van en el head: la guarda de permisos debe correr
-     ANTES de pintar. Si el rol no puede ver esta página, auth.js redirige. -->
+     ANTES de pintar. Si el rol no puede ver esta pagina, auth.js redirige. -->
 <script src="assets/seed.js"></script>
 <script src="assets/store.js"></script>
 <script src="assets/auth.js"></script>
@@ -25,73 +25,139 @@
 <script>
 
 PI.listo(function () {
-  var S = PI.store, U = PI.ui, A = PI.auth;
+  var S = PI.store, U = PI.ui, A = PI.auth, F = PI.fmt;
   var cont = document.getElementById('pi-contenido');
+  var CLAVE = window.PI_CLAVE_DEMO;
+  var elegido = null;
+  var error = '';
 
-  /* La entrada al sistema es un selector de rol, no un ingreso con
-     contrasena: esta beta no tiene servidor ni cuentas reales. */
-  var porRol = {};
-  S.estado.usuarios.forEach(function (u) { if (!porRol[u.rol] && u.activo) porRol[u.rol] = u; });
-  Object.keys(window.PI_USUARIO_POR_ROL).forEach(function (r) {
-    var u = S.buscarUsuario(window.PI_USUARIO_POR_ROL[r]);
-    if (u) porRol[r] = u;
-  });
+  /* Las cuentas de prueba se agrupan por área. Salen de la lista real de
+     usuarios, así que un usuario creado en Usuarios aparece aquí sin tocar
+     este archivo, y uno desactivado aparece tachado y no deja entrar. */
+  var AREAS = [
+    { titulo: 'Operación técnica', icono: 'engineering', roles: ['coordinador', 'profesional'] },
+    { titulo: 'Administración',    icono: 'account_balance_wallet', roles: ['administracion'] },
+    { titulo: 'Gobierno y control', icono: 'verified', roles: ['direccion', 'admin'] }
+  ];
 
-  var loQueVe = {
-    admin: ['Usuarios, catálogos y bitácora general', 'Acceso completo a todos los proyectos'],
-    coordinador: ['Crea proyectos y asigna equipo', 'Aprueba o devuelve etapas'],
-    profesional: ['Solo sus proyectos asignados', 'Captura mediciones y sube documentos', 'Ve el equipo, pero solo su honorario'],
-    administracion: ['Registra y liquida movimientos', 'Reportes de cierre de mes'],
-    direccion: ['Consolidado de la cartera en pantalla oscura', 'Solo lectura']
-  };
+  function usuariosDe(area) {
+    return S.estado.usuarios.filter(function (u) { return area.roles.indexOf(u.rol) !== -1; })
+      .sort(function (a, b) {
+        var ra = area.roles.indexOf(a.rol), rb = area.roles.indexOf(b.rol);
+        return ra !== rb ? ra - rb : a.nombre.localeCompare(b.nombre, 'es');
+      });
+  }
 
   function pintar() {
-    var html = '<div class="pi-portada-cab">' +
+    var html = '<div class="pi-acceso-marca">' +
       '<span class="logo">' + PI.shell.LOGO + '</span>' +
-      '<div><h1>Proyectos Integrales</h1>' +
-      '<p class="suave">Sistema de gestion de proyectos ambientales y forestales. ' +
-      'Elige un rol para recorrer el sistema: cada uno ve una aplicación distinta.</p></div></div>';
+      '<h1>Proyectos Integrales</h1>' +
+      '<p>Gestión de proyectos ambientales y forestales — acceso a la plataforma</p>' +
+      '</div>';
 
-    html += '<div class="aviso aviso-aviso" style="margin-bottom:24px">' + U.icono('warning') +
-      '<div><strong>Beta de demostración con datos de ejemplo</strong>' +
-      'No hay servidor ni base de datos. Todo se guarda en este navegador y no se comparte entre equipos. ' +
-      'No se pide contrasena porque no existen cuentas reales.</div></div>';
+    html += '<div class="tarjeta"><div class="tarjeta-cuerpo">';
 
-    html += '<div class="pi-roles">';
-    S.catalogos().roles.forEach(function (r) {
-      var u = porRol[r.id];
-      if (!u) return;
-      html += '<button type="button" class="pi-rol" data-rol="' + r.id + '">' +
-        '<div class="pi-rol-cab"><span class="pi-avatar">' + U.esc(PI.fmt.iniciales(u.nombre)) + '</span>' +
-        '<span><strong>' + U.esc(r.nombre) + '</strong>' +
-        '<span class="sm tenue">' + U.esc(u.nombre) + '</span></span></div>' +
-        '<p class="sm suave">' + U.esc(r.descripcion) + '</p>' +
-        '<ul>' + (loQueVe[r.id] || []).map(function (x) { return '<li>' + U.esc(x) + '</li>'; }).join('') + '</ul>' +
-        '</button>';
+    if (error) {
+      html += '<div class="pi-acceso-error" role="alert">' + U.icono('error', 'icono-sm') +
+        '<span>' + U.esc(error) + '</span></div>';
+    }
+
+    html += '<form id="f-acceso" novalidate>' +
+      '<div class="pila-sm">' +
+      '<div class="campo"><label for="a-correo">Correo</label>' +
+      '<input id="a-correo" type="email" autocomplete="username" spellcheck="false" ' +
+      'placeholder="usuario@proyectosintegrales.com.ve" value="' + U.esc(elegido ? elegido.correo : '') + '"></div>' +
+      '<div class="campo"><label for="a-clave">Contraseña</label>' +
+      '<input id="a-clave" type="password" autocomplete="current-password" ' +
+      'value="' + U.esc(elegido ? CLAVE : '') + '"></div>' +
+      '<button type="submit" class="btn btn-primario" style="width:100%">' +
+      'Ingresar ' + U.icono('logout', 'icono-sm') + '</button>' +
+      '</div></form>';
+
+    html += '<hr class="pi-divisor">';
+
+    html += '<p class="pi-cuentas-nota">Cuentas de prueba (contraseña <span class="mono">' +
+      U.esc(CLAVE) + '</span>):</p>';
+
+    AREAS.forEach(function (area) {
+      var lista = usuariosDe(area);
+      if (!lista.length) return;
+      html += '<div class="pi-cuentas-grupo"><span class="eti">' +
+        U.icono(area.icono, 'icono-sm') + U.esc(area.titulo) + '</span>' +
+        '<div class="pi-cuentas-lista">';
+      lista.forEach(function (u) {
+        html += '<button type="button" class="pi-cuenta" data-u="' + u.id + '"' +
+          ' aria-pressed="' + (elegido && elegido.id === u.id) + '"' +
+          (u.activo ? '' : ' disabled') +
+          ' title="' + U.esc(u.correo + (u.activo ? '' : ' — usuario desactivado')) + '">' +
+          U.esc(u.nombre.split(' ').slice(0, 2).join(' ')) +
+          '<span class="rol">' + U.esc(A.nombreRol(u.rol)) + '</span></button>';
+      });
+      html += '</div></div>';
     });
-    html += '</div>';
 
-    html += '<div class="fila" style="margin-top:24px;justify-content:space-between">' +
-      '<p class="sm tenue">También puedes cambiar de rol en cualquier momento desde la barra inferior.</p>' +
-      '<button type="button" class="btn btn-sm btn-borde" id="btn-reiniciar">' +
-      U.icono('restart_alt', 'icono-sm') + ' Reiniciar datos de ejemplo</button></div>';
+    html += '<p class="sm tenue" style="margin-top:12px">Pulsa una cuenta para cargar sus credenciales. ' +
+      'Cada rol ve una aplicación distinta: el menú, las páginas y los montos cambian con quien entra.</p>';
+
+    html += '<hr class="pi-divisor">' +
+      '<div class="fila" style="justify-content:space-between;gap:8px">' +
+      '<span class="sm tenue">Datos guardados en este navegador</span>' +
+      '<button type="button" class="btn btn-sm btn-borde" id="b-reiniciar">' +
+      U.icono('restart_alt', 'icono-sm') + ' Reiniciar datos</button></div>';
+
+    html += '</div></div>';
+
+    html += '<p class="pi-acceso-pie">Versión de demostración &middot; datos de ejemplo &middot; ' +
+      'sin servidor y sin conexión</p>';
 
     cont.innerHTML = html;
+    conectar();
+  }
 
-    Array.prototype.forEach.call(cont.querySelectorAll('[data-rol]'), function (b) {
+  function conectar() {
+    Array.prototype.forEach.call(cont.querySelectorAll('[data-u]'), function (b) {
       b.addEventListener('click', function () {
-        S.cambiarRol(b.getAttribute('data-rol'));
-        window.location.href = 'panel.html';
+        elegido = S.buscarUsuario(b.getAttribute('data-u'));
+        error = '';
+        pintar();
+        var c = document.getElementById('a-clave');
+        if (c) c.focus();
       });
     });
-    document.getElementById('btn-reiniciar').addEventListener('click', function () {
+
+    document.getElementById('f-acceso').addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      ingresar(document.getElementById('a-correo').value.trim(),
+               document.getElementById('a-clave').value);
+    });
+
+    document.getElementById('b-reiniciar').addEventListener('click', function () {
       U.confirmar({
         titulo: 'Reiniciar datos de ejemplo',
-        texto: 'Se borran los datos guardados en este navegador y se recarga la semilla original.',
+        texto: 'Se borran los datos guardados en este navegador y se recarga la semilla original. ' +
+               'Úsalo entre un ensayo y el siguiente.',
         confirmar: 'Reiniciar', peligro: true,
         alConfirmar: function () { S.reiniciar(); window.location.reload(); }
       });
     });
+  }
+
+  /* La comprobación es local y deliberadamente simple: no hay servidor donde
+     validar nada. Cualquier correo de la lista de usuarios más la clave de
+     demostración entra como ese usuario, con su rol. */
+  function ingresar(correo, clave) {
+    if (!correo) { error = 'Escribe el correo, o pulsa una de las cuentas de prueba.'; return pintar(); }
+    var u = S.estado.usuarios.filter(function (x) {
+      return x.correo.toLowerCase() === correo.toLowerCase();
+    })[0];
+    if (!u) { error = 'No hay ninguna cuenta con ese correo. Usa una de las cuentas de prueba.'; return pintar(); }
+    if (!u.activo) { error = u.nombre + ' está desactivado y no puede entrar. Reactívalo desde Usuarios como Admin.'; return pintar(); }
+    if (clave !== CLAVE) { error = 'Contraseña incorrecta. La de todas las cuentas de prueba es ' + CLAVE + '.'; return pintar(); }
+
+    S.entrarComo(u.id);
+    S.registrar('SESION_INICIADA', 'Usuario', null, 'Ingreso al sistema como ' + A.nombreRol(u.rol) + '.');
+    U.aviso('Bienvenido, ' + u.nombre.split(' ')[0], 'Entraste como ' + A.nombreRol(u.rol) + '.', 'ok');
+    window.setTimeout(function () { window.location.href = A.inicioDe(u.rol); }, 550);
   }
 
   pintar();

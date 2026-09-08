@@ -45,7 +45,7 @@ window.PI = window.PI || {};
   function barraSuperior(simple) {
     var u = PI.store.usuario();
     var rol = PI.auth.nombreRol();
-    var html = '<header class="pi-barra">';
+    var html = '<header class="pi-barra' + (simple ? ' sola' : '') + '">';
     if (simple) {
       html += '<div class="fila" style="gap:10px;flex:none">' +
         '<span style="width:30px;height:30px;display:block">' + LOGO + '</span>' +
@@ -54,19 +54,22 @@ window.PI = window.PI || {};
     html += marcaBeta();
     if (!simple) {
       html += '<div class="pi-buscar">' + icono('search') +
-        '<input type="search" id="pi-búsqueda-global" placeholder="Buscar proyecto, contratante o código" ' +
+        '<input type="search" id="pi-buscador-global" placeholder="Buscar proyecto, contratante o código" ' +
         'aria-label="Buscar proyecto, contratante o código"></div>';
     }
-    html += '<div class="pi-barra-fin">';
+    /* En las páginas públicas (ingreso y sin permiso) la barra no muestra la
+       identidad: en el ingreso todavía no hay sesión que mostrar. */
     if (!simple) {
-      html += '<a class="btn btn-sm btn-plano" href="perfil.html">' + icono('badge', 'icono-sm') + ' Mi perfil</a>';
+      html += '<div class="pi-barra-fin">' +
+        '<a class="btn btn-sm btn-plano" href="perfil.html">' + icono('badge', 'icono-sm') + ' Mi perfil</a>' +
+        '<a class="btn btn-sm btn-plano" href="index.html" title="Volver al ingreso">' +
+        icono('logout', 'icono-sm') + ' Salir</a>' +
+        '<div class="pi-usuario"><div class="pi-usuario-txt"><strong>' + esc(u ? u.nombre : '—') +
+        '</strong><span class="eti">' + esc(rol) + '</span></div>' +
+        '<span class="pi-avatar">' + esc(PI.fmt.iniciales(u ? u.nombre : '?')) + '</span></div>' +
+        '</div>';
     }
-    html += '<a class="btn btn-sm btn-plano" href="index.html" title="Volver al selector de rol">' +
-      icono('logout', 'icono-sm') + ' Cambiar rol</a>';
-    html += '<div class="pi-usuario"><div class="pi-usuario-txt"><strong>' + esc(u ? u.nombre : '—') +
-      '</strong><span class="eti">' + esc(rol) + '</span></div>' +
-      '<span class="pi-avatar">' + esc(PI.fmt.iniciales(u ? u.nombre : '?')) + '</span></div>';
-    html += '</div></header>';
+    html += '</header>';
     return html;
   }
 
@@ -95,7 +98,7 @@ window.PI = window.PI || {};
 
   /* Búsqueda global: lleva al listado de proyectos con el texto aplicado. */
   function conectarBusqueda() {
-    var q = document.getElementById('pi-búsqueda-global');
+    var q = document.getElementById('pi-buscador-global');
     if (!q) return;
     q.addEventListener('keydown', function (ev) {
       if (ev.key !== 'Enter' || !q.value.trim()) return;

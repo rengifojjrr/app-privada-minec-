@@ -515,8 +515,14 @@
     };
   };
 
+  /* Clave única de todas las cuentas de prueba. Existe solo para que el
+     ingreso de la demostración se parezca a uno real: no hay contraseñas
+     guardadas por usuario ni cifrado, porque no hay servidor. Se va junto con
+     este archivo cuando el sistema tenga autenticación de verdad. */
+  window.PI_CLAVE_DEMO = 'demo1234';
+
   /* Usuario de referencia por rol: el que se activa al elegir un rol en la
-     portada o en la barra de demo. */
+     barra de demostración. */
   window.PI_USUARIO_POR_ROL = {
     admin: 'u-08',
     coordinador: 'u-01',

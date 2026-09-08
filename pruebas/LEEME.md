@@ -17,6 +17,7 @@ node pruebas/datos-y-permisos.js        # modelo de datos, catálogos, flujo de 
 node pruebas/sintaxis-html.js *.html    # sintaxis de los guiones en línea de las 17 páginas
 node pruebas/navegador-navegacion.js    # las 17 páginas en file:// con la red bloqueada
 node pruebas/navegador-flujos.js        # las comprobaciones que el encargo pide por fase
+node pruebas/navegador-ingreso.js       # que los ocho usuarios entren con su propio rol
 node pruebas/navegador-responsive.js    # 1440, 768 y 390 px; deja capturas en el scratchpad
 node pruebas/navegador-barras.js        # que las barras no se corten ni tapen el contenido
 node pruebas/acentos.js                 # busca texto visible al que le falte una tilde

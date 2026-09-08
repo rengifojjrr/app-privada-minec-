@@ -23,7 +23,7 @@ Todo cambio debe probarse ahí, porque es lo que se rompe primero.
 ## Cómo está organizado
 
 ```
-index.html              selector de rol; la entrada al sistema
+index.html              ingreso por usuario; la entrada al sistema
 panel.html              inicio, distinto para cada rol
 proyectos.html          listado con búsqueda, cinco filtros y orden por columna
 proyecto-nuevo.html     asistente de alta en 3 pasos
@@ -117,6 +117,22 @@ de bitácora de días anteriores.
 - **Nunca metas una entidad HTML en un texto que pase por `esc()`.** Se ve literalmente en pantalla.
   Usa el carácter.
 
+## El ingreso
+
+`index.html` es un inicio de sesión por usuario, no por rol: se entra con el correo de una de las
+ocho personas de la semilla y la clave `PI_CLAVE_DEMO`, y el rol sale del usuario. Las cuentas de
+prueba se listan agrupadas por área y se generan de la lista real de usuarios, así que un usuario
+creado en `usuarios.html` aparece ahí sin tocar este archivo, y uno desactivado aparece deshabilitado
+y no deja entrar.
+
+Es un ingreso honesto, no una simulación: dice en pantalla que es una demostración, muestra la
+contraseña, y la comprobación ocurre en el navegador porque no hay servidor. Lo que no tiene, a
+propósito, es registro público, recuperación de contraseña por correo ni segundo factor: las tres
+cosas están prohibidas por el encargo y ninguna funciona sin servidor.
+
+Las páginas públicas (`index.html` y `sin-permiso.html`) llevan `publica: true` en `auth.js`: no
+tienen menú lateral, su barra superior ocupa todo el ancho y no muestra la identidad.
+
 ## Las cinco reglas del sistema
 
 1. **El volumen de madera nunca se calcula.** El sistema captura hectáreas, número de árboles,
@@ -139,8 +155,10 @@ de bitácora de días anteriores.
 1. **La barra de demostración.** Borra `assets/demo.js`, borra la línea
    `<script src="assets/demo.js"></script>` de los diecisiete HTML y borra el bloque `.pi-demo` de
    `assets/app.css`. Nada más depende de ella: `shell.js` comprueba si existe antes de montarla.
-2. **El selector de rol de `index.html`.** Es la entrada de la demo, no un ingreso real. Un uso real
-   necesita autenticación de verdad, y eso necesita servidor.
+2. **El ingreso de `index.html`.** Parece un inicio de sesión, pero no lo es: la lista de cuentas de
+   prueba está a la vista, la contraseña es la misma para todas y la comprobación ocurre en el
+   navegador. Un uso real necesita autenticación de verdad contra un servidor. También hay que
+   borrar `PI_CLAVE_DEMO` de `assets/seed.js`.
 3. **El botón "Reiniciar datos de ejemplo" de `perfil.html`**, y con él el bloque "Datos de ejemplo"
    de esa misma página.
 4. **La marca `Beta · datos de ejemplo`** de la barra superior, en `shell.js`.

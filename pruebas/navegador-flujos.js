@@ -19,12 +19,16 @@ function bien(m){ console.log('  OK  ' + m); }
   function checkErr(donde){ if (errores.length) malo(donde + ': ' + errores.slice(0,2).join(' | ')); }
 
   // ---------- 1. Entrar eligiendo un rol desde la portada ----------
-  console.log('=== 1. Portada: elegir rol ===');
+  console.log('=== 1. Ingreso: entrar como un usuario ===');
   await ir('index.html');
-  await pag.click('[data-rol="coordinador"]');
-  await pag.waitForLoadState('load'); await pag.waitForTimeout(300);
-  if (!pag.url().endsWith('panel.html')) malo('elegir rol no llevó al panel');
-  else bien('elegir Coordinador lleva al panel');
+  await pag.click('[data-u="u-01"]');
+  await pag.waitForTimeout(200);
+  await pag.click('button[type=submit]');
+  await pag.waitForURL(/panel\.html/, { timeout: 8000 }).catch(() => {});
+  await pag.waitForFunction(() => window.PI && window.PI.store, null, { timeout: 8000 });
+  await pag.waitForTimeout(250);
+  if (!pag.url().endsWith('panel.html')) malo('ingresar no llevó al panel');
+  else bien('ingresar como Carlos Mendoza lleva al panel');
   const rolActivo = await pag.evaluate(() => PI.store.rol());
   if (rolActivo !== 'coordinador') malo('el rol no quedó activo'); else bien('el rol quedó guardado: ' + rolActivo);
 
