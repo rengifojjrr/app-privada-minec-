@@ -16,7 +16,7 @@ Y se ejecutan desde la raíz del proyecto:
 node pruebas/datos-y-permisos.js        # modelo de datos, catálogos, flujo de etapas, permisos
 node pruebas/sintaxis-html.js *.html    # sintaxis de los guiones en línea de las 17 páginas
 node pruebas/navegador-navegacion.js    # las 17 páginas en file:// con la red bloqueada
-node pruebas/navegador-flujos.js        # los diez pasos del criterio de aceptación
+node pruebas/navegador-flujos.js        # las comprobaciones que el encargo pide por fase
 node pruebas/navegador-responsive.js    # 1440, 768 y 390 px; deja capturas en el scratchpad
 node pruebas/navegador-barras.js        # que las barras no se corten ni tapen el contenido
 node pruebas/acentos.js                 # busca texto visible al que le falte una tilde
@@ -34,7 +34,8 @@ aprobarla sí, que el volumen se guarde sin transformación, que una categoría 
 rechace, que el Profesional no vea el total de honorarios, que desactivar un usuario no lo borre, y
 que el estado sobreviva a un reinicio.
 
-**navegador-flujos.js** recorre los diez pasos del criterio de aceptación en un navegador real:
+**navegador-flujos.js** recorre en un navegador real las comprobaciones que el encargo pide al
+describir cada fase. No es el criterio de aceptación de la especificación, que nunca se recibió:
 elegir rol, crear un proyecto con sus diez etapas, completar una etapa como Profesional, registrar
 un documento, capturar tres mediciones, comprobar que el Profesional ve el equipo pero solo su
 honorario, devolver y aprobar una compuerta, registrar y liquidar un movimiento, desactivar un
