@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aprobaciones &middot; Beta &middot; Proyectos Integrales</title>
-<meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<title>Aprobaciones &middot; Beta &middot; MONPICA</title>
+<meta name="description" content="Beta navegable del sistema de gestión de proyectos de MONPICA — Montilla Proyectos Integrales C.A. Datos de ejemplo.">
+<link rel="icon" type="image/png" href="assets/marca/favicon.png">
 <link rel="stylesheet" href="assets/tokens.css">
 <link rel="stylesheet" href="assets/app.css">
 <!-- seed, store y auth van en el head: la guarda de permisos debe correr
@@ -79,7 +79,7 @@ PI.listo(function () {
       '<div><span class="eti">Responsable</span><div class="sm">' + U.esc(S.nombreUsuario(e.responsableId)) + '</div></div>' +
       '<div><span class="eti">Plazo</span><div class="mono">' + U.esc(e.fechaFin) +
       ' <span class="sm ' + (S.etapaVencida(e) ? '' : 'tenue') + '"' +
-      (S.etapaVencida(e) ? ' style="color:var(--error);font-weight:600"' : '') + '>' + U.esc(F.plazo(e.fechaFin)) + '</span></div></div>' +
+      (S.etapaVencida(e) ? ' style="color:var(--error);font-weight:600"' : '') + '>' + U.esc(F.plazoEtapa(e)) + '</span></div></div>' +
       '</div>' +
       (e.comentario ? '<div class="aviso">' + U.icono('info') + '<div><strong>Nota del responsable</strong>' + U.esc(e.comentario) + '</div></div>' : '') +
       '<div class="pozo" style="margin-top:12px"><span class="eti">Al aprobar</span>' +
@@ -158,7 +158,7 @@ PI.listo(function () {
         csv: function (x) { return S.nombreUsuario(x.etapa.responsableId); } },
       { clave: 'plazo', titulo: 'Plazo', tipo: 'mono', orden: true,
         valorOrden: function (x) { var d = S.aDate(x.etapa.fechaFin); return d ? d.getTime() : 0; },
-        render: function (x) { return '<span class="mono">' + U.esc(x.etapa.fechaFin) + '</span><span class="sub">' + U.esc(F.plazo(x.etapa.fechaFin)) + '</span>'; },
+        render: function (x) { return '<span class="mono">' + U.esc(x.etapa.fechaFin) + '</span><span class="sub">' + U.esc(F.plazoEtapa(x.etapa)) + '</span>'; },
         csv: function (x) { return x.etapa.fechaFin; } },
       { clave: 'estado', titulo: 'Estado', orden: true,
         valorOrden: function (x) { return x.etapa.estado; },

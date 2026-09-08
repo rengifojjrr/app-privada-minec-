@@ -43,9 +43,9 @@ const conDosVencidas = E.proyectos.filter(p => S.etapasVencidas(p).length >= 2);
 console.log('con dos o mas etapas vencidas:', conDosVencidas.map(p => p.id + ' (' + S.etapasVencidas(p).length + ')').join(', '));
 ok(conDosVencidas.length >= 1, 'debe haber un proyecto con dos etapas vencidas');
 
-const p1 = S.buscarProyecto('PI-2024-001');
+const p1 = S.buscarProyecto('MP-2024-001');
 const parcelas = [...new Set(p1.mediciones.map(m => m.parcela))];
-console.log('parcelas medidas en PI-2024-001:', parcelas.join(', '));
+console.log('parcelas medidas en MP-2024-001:', parcelas.join(', '));
 ok(parcelas.length >= 3, 'deben haber mediciones en tres parcelas');
 
 const cats = new Set();
@@ -119,14 +119,14 @@ ok(A.puedeVer('catalogos.html','admin'), 'admin debe ver catalogos');
 
 console.log('\n=== FLUJO DE ETAPAS ===');
 S.cambiarRol('coordinador');
-const p2 = S.buscarProyecto('PI-2024-002');
-ok(p2.estado === 'Detenido', 'PI-2024-002 debe empezar detenido');
+const p2 = S.buscarProyecto('MP-2024-002');
+ok(p2.estado === 'Detenido', 'MP-2024-002 debe empezar detenido');
 ok(p2.etapas[5].estado === 'Esperando aprobacion' || p2.etapas[5].estado === 'Esperando aprobación', 'etapa 6 en espera, es: ' + p2.etapas[5].estado);
 ok(p2.etapas[6].estado === 'Bloqueada', 'etapa 7 debe estar bloqueada');
-S.devolverEtapa('PI-2024-002', 6, 'Faltan las firmas de los especialistas y la matriz de impacto consolidada.');
+S.devolverEtapa('MP-2024-002', 6, 'Faltan las firmas de los especialistas y la matriz de impacto consolidada.');
 ok(p2.etapas[5].estado === 'Devuelta', 'tras devolver, la etapa 6 queda Devuelta');
 ok(p2.etapas[6].estado === 'Bloqueada', 'la etapa 7 sigue bloqueada tras devolver');
-S.aprobarEtapa('PI-2024-002', 6, 'Conforme. Se habilita la entrega del informe final.');
+S.aprobarEtapa('MP-2024-002', 6, 'Conforme. Se habilita la entrega del informe final.');
 ok(p2.etapas[5].estado === 'Aprobada', 'tras aprobar, la etapa 6 queda Aprobada');
 ok(p2.etapas[6].estado === 'Pendiente', 'la etapa 7 se desbloquea, es: ' + p2.etapas[6].estado);
 ok(p2.estado === 'En ejecución' || p2.estado === 'En ejecucion', 'el proyecto deja de estar detenido, es: ' + p2.estado);
@@ -134,7 +134,7 @@ console.log('  devolver -> aprobar -> desbloquear: correcto');
 
 console.log('\n=== MEDICIONES: el volumen es captura manual ===');
 const antes = p1.mediciones.length;
-const m = S.agregarMedicion('PI-2024-001', { parcela:'P-04', hectareas:2, especieId:'sp-01', arboles:30, altura:12.5, dap:26.4, volumen:41.7 });
+const m = S.agregarMedicion('MP-2024-001', { parcela:'P-04', hectareas:2, especieId:'sp-01', arboles:30, altura:12.5, dap:26.4, volumen:41.7 });
 ok(m && m.volumen === 41.7, 'el volumen se guarda exactamente como se captura');
 ok(p1.mediciones.length === antes + 1, 'la medicion se agrega');
 const resumen = S.resumenPorEspecie(p1);
@@ -144,15 +144,15 @@ ok(Math.abs(fila.volumen - suma) < 1e-9, 'el resumen por especie solo suma los v
 console.log('  volumen guardado sin transformacion; resumen = suma simple');
 
 console.log('\n=== FINANZAS: lista controlada y por liquidar ===');
-ok(S.agregarMovimiento('PI-2024-001', {tipo:'Egreso', categoria:'Categoria inventada', concepto:'x', monto:100, estado:'Liquidado'}) === null,
+ok(S.agregarMovimiento('MP-2024-001', {tipo:'Egreso', categoria:'Categoria inventada', concepto:'x', monto:100, estado:'Liquidado'}) === null,
    'una categoria fuera del catalogo debe ser rechazada');
-ok(S.agregarMovimiento('PI-2024-001', {tipo:'Egreso', categoria:'Combustible y transporte', concepto:'x', monto:100, estado:'Inventado'}) === null,
+ok(S.agregarMovimiento('MP-2024-001', {tipo:'Egreso', categoria:'Combustible y transporte', concepto:'x', monto:100, estado:'Inventado'}) === null,
    'un estado fuera del catalogo debe ser rechazado');
-const mv = S.agregarMovimiento('PI-2024-001', {tipo:'Egreso', categoria:'Combustible y transporte', concepto:'Traslado adicional', monto:100, estado:'Por liquidar'});
+const mv = S.agregarMovimiento('MP-2024-001', {tipo:'Egreso', categoria:'Combustible y transporte', concepto:'Traslado adicional', monto:100, estado:'Por liquidar'});
 ok(mv !== null, 'una categoria del catalogo debe aceptarse');
 const t1 = S.totalesFinancieros(p1);
 ok(t1.porLiquidar >= 100, 'lo por liquidar se contabiliza aparte');
-S.liquidarMovimiento('PI-2024-001', mv.id);
+S.liquidarMovimiento('MP-2024-001', mv.id);
 const t2 = S.totalesFinancieros(p1);
 ok(Math.abs((t2.egresos - t1.egresos) - 100) < 1e-9, 'al liquidar, el monto pasa a egresos ejecutados');
 console.log('  categorias controladas y por-liquidar fuera del ejecutado: correcto');
@@ -192,7 +192,7 @@ console.log('  ' + nuevo.id + ' creado con 10 etapas');
 console.log('\n=== PERSISTENCIA ===');
 const antesJson = JSON.stringify(S.estado.proyectos.length);
 ok(Object.keys(almacen).length > 0, 'algo se guardo en localStorage');
-const guardado = JSON.parse(almacen['PI_BETA_DATOS_V3']);
+const guardado = JSON.parse(almacen['PI_BETA_DATOS_V4']);
 ok(guardado.proyectos.length === S.estado.proyectos.length, 'lo guardado coincide con el estado en memoria');
 S.reiniciar();
 ok(S.estado.proyectos.length === 6, 'reiniciar vuelve a 6 proyectos, hay ' + S.estado.proyectos.length);
@@ -203,6 +203,27 @@ console.log('  dinero:', F.dinero(1234567.5), '| corto:', F.dineroCorto(1234567.
 console.log('  fecha de hoy:', S.fechaHoy(), '| plazo(+3d):', F.plazo(S.deDate(new Date(Date.now()+3*86400000))));
 ok(/^\d{2}\/\d{2}\/\d{4}$/.test(S.fechaHoy()), 'las fechas van en DD/MM/AAAA');
 ok(F.dinero(1000).indexOf('$') === 0, 'los montos llevan simbolo de dolar');
+
+// El plazo de una etapa depende del estado, no solo de la fecha: una etapa
+// aprobada no esta vencida aunque su fecha ya paso.
+const ayer = S.deDate(new Date(Date.now() - 210 * 86400000));
+const manana = S.deDate(new Date(Date.now() + 5 * 86400000));
+console.log('  plazoEtapa aprobada + fecha pasada:', F.plazoEtapa({ estado: 'Aprobada', fechaFin: ayer }));
+ok(F.plazoEtapa({ estado: 'Aprobada', fechaFin: ayer }).indexOf('vencido') === -1,
+   'una etapa aprobada con fecha pasada no se lee como vencida');
+ok(F.plazoEtapa({ estado: 'Bloqueada', fechaFin: ayer }).indexOf('vencido') === -1,
+   'una etapa bloqueada no se lee como vencida');
+ok(F.plazoEtapa({ estado: 'En proceso', fechaFin: ayer }).indexOf('vencido') === 0,
+   'una etapa en proceso con fecha pasada si se lee como vencida');
+ok(F.plazoEtapa({ estado: 'En proceso', fechaFin: manana }).indexOf('faltan') === 0,
+   'una etapa en proceso con fecha futura muestra los dias que faltan');
+// Y el texto tiene que coincidir con etapaVencida, que es quien pinta el rojo.
+[['Aprobada', false], ['Bloqueada', false], ['En proceso', true], ['Pendiente', true], ['Devuelta', true]]
+  .forEach(function (par) {
+    const e = { estado: par[0], fechaFin: ayer };
+    ok(S.etapaVencida(e) === par[1] && (F.plazoEtapa(e).indexOf('vencido') === 0) === par[1],
+       'el texto y el rojo coinciden para una etapa ' + par[0]);
+  });
 
 console.log('\n' + (fallos ? 'FALLOS: ' + fallos : 'TODAS LAS COMPROBACIONES PASARON'));
 process.exit(fallos ? 1 : 0);

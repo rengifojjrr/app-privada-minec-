@@ -61,7 +61,7 @@ Tras el segundo export **ninguna página queda sin diseño**, pero la cobertura 
 
 | # | Página | Archivo | Pantalla que se sigue | Cobertura |
 |---|---|---|---|---|
-| 1 | Selector de rol | `index.html` | ninguna sirve | **Hay que diseñarla.** Las dos versiones son un login con contraseña. Solo se aprovecha la rejilla del "Simulador de Perfiles". |
+| 1 | Selector de rol | `index.html` | ninguna sirve | **Hay que diseñarla.** Las dos versiones son un login con contraseña. Solo se aprovecha la rejilla del "Simulador de Perfiles". *(Acabó siendo un ingreso por usuario: sección 7.)* |
 | 2 | Panel de inicio | `panel.html` | `2_panel` | Completa. Una sola variante de rol; las otras cuatro se extienden. |
 | 3 | Proyectos | `proyectos.html` | `3_proyectos` | Completa. |
 | 4 | Nuevo proyecto | `proyecto-nuevo.html` | `4_nuevo_proyecto` | Solo el paso 2. Pasos 1 y 3 hay que derivarlos. |
@@ -136,7 +136,7 @@ La configuración de Tailwind es **idéntica en las 26 pantallas** que la traen,
 6. **Sistema chileno, no venezolano.** Esto es el hallazgo más grande y el más caro. El export está ambientado en Chile de forma sistemática: RUT como identificador fiscal en 12 pantallas (incluido el marcador del formulario de alta), los organismos SEA, SEIA, ICSARA, SMA, CONAF, DGA, SAG, DGC y MOP/DOH como columna vertebral del flujo, leyes chilenas citadas como base legal, topónimos, correos `.cl`, teléfonos `+56`, domicilio en Santiago, especies del bosque templado chileno y del desierto de Atacama, y consulta indígena chilena como etapa del proyecto en cinco pantallas. Solo tres de las 27 pantallas se salvan: etapas y mediciones, equipo y finanzas, y catálogos. Toda la semilla se reescribe.
 7. **Montos en pesos chilenos.** "Moneda Base: CLP (Pesos Chilenos)", un selector con opción CLP, montos como `$ 980.400.000 CLP`, un tipo de cambio de referencia de 960 y pólizas en Unidades de Fomento. El encargo exige dólares. Se convierte todo a USD y se elimina el selector de moneda.
 8. **Ocho formatos de fecha distintos** y casi ninguno es `DD/MM/AAAA`. Se unifica.
-9. **La página 1 es un login con contraseña**, en las dos versiones, con segundo factor completo (2FA, TOTP, FIDO2, YubiKey, PIN, token de identidad) tanto en el ingreso como en la aprobación de etapas. También hay recuperación de contraseña por correo y cambio de contraseña en el perfil. El encargo pide un selector de rol sin contraseña. Se rediseña.
+9. **La página 1 es un login con contraseña**, en las dos versiones, con segundo factor completo (2FA, TOTP, FIDO2, YubiKey, PIN, token de identidad) tanto en el ingreso como en la aprobación de etapas. También hay recuperación de contraseña por correo y cambio de contraseña en el perfil. El encargo pide un selector de rol sin contraseña. Se rediseña. *(Esta conclusión cambió después: ver la sección 7.)*
 10. **Texto libre donde debe haber lista controlada**: el alta de especie forestal tiene tres campos libres (nombre común, científico y familia), y también son libres contratante, rol técnico, autor del documento, versión, región y observaciones. Los estados y tipos existen como cadenas sueltas sin catálogo. Buena noticia parcial: en el resto del export hay 81 listas desplegables y **ningún** campo libre para categoría financiera, tipo de proyecto o estado.
 
 ### 4.2 Función que Stitch inventó y la beta no puede sostener
@@ -204,13 +204,140 @@ Para no dar la impresión de que hay que tirar todo:
 
 ---
 
-## 6. Al aprobar la Fase 0
+## 6. Lo que se construyó (Fases 1 a 5)
 
-Arranco la Fase 1: `tokens.css`, `app.css`, `shell.js`, `auth.js`, `store.js`, `seed.js`, `ui.js`, más `index.html`, `panel.html` y `sin-permiso.html`. Verificación: entrar con los cinco roles y ver el menú cambiar; escribir a mano la dirección de una página prohibida y caer en "Sin permiso"; todo abierto con `file://` y sin red.
+La Fase 0 se aprobó con la instrucción de hacerlo todo de una vez, así que las cinco fases se
+construyeron seguidas en vez de parar a validar cada una.
+
+| Fase | Entregó | Cómo se comprobó |
+|---|---|---|
+| 1 | `tokens.css`, `app.css`, `shell.js`, `auth.js`, `store.js`, `seed.js`, `ui.js`, `icons.js`, `demo.js`, más `index.html`, `panel.html` y `sin-permiso.html` | Los cinco roles ven menús distintos; una dirección escrita a mano de una página prohibida cae en "Sin permiso" sin mostrar el contenido |
+| 2 | `proyectos.html`, `proyecto-nuevo.html`, `proyecto.html` con sus siete pestañas | Alta en tres pasos; búsqueda, cinco filtros y orden por columna; las siete pestañas pintan y la de finanzas se oculta a quien no puede verla |
+| 3 | `aprobaciones.html`, `calendario.html`, `contratantes.html` | Devolver una etapa y luego aprobarla desbloquea la siguiente y reanuda el proyecto |
+| 4 | `reportes.html`, `direccion.html` | Los cuatro reportes exportan CSV; Dirección se proyecta en oscuro |
+| 5 | `usuarios.html`, `catalogos.html`, `bitacora.html`, `perfil.html`, `fase2-portal.html`, `fase3-asistente.html` | Desactivar un usuario queda en la bitácora con fecha, hora y autor; no hay borrado físico |
+
+La verificación no fue a ojo: en `pruebas/` quedan siete guiones que se corren con Node y con
+Chromium, y que abren las páginas por `file://` **abortando toda petición que no sea `file:`,
+`data:` o `blob:`**. Es la única forma de sostener la promesa de que funciona sin red: si algo
+pidiera un recurso remoto, la prueba lo ve.
+
+- `datos-y-permisos.js` — la capa de datos sin navegador: permisos por rol y por pestaña, flujo de
+  etapas, que el volumen se guarde sin transformarlo, que una categoría fuera del catálogo se
+  rechace desde el código, honorarios por rol, formato de fechas y montos.
+- `sintaxis-html.js` — compila el `<script>` en línea de cada una de las 17 páginas.
+- `navegador-navegacion.js` — las 17 páginas y las 7 pestañas abren sin un solo error de consola;
+  la guarda redirige de verdad y la pantalla de "Sin permiso" **nombra** la página bloqueada; cero
+  peticiones a la red; las dos tipografías cargan y ningún icono queda roto.
+- `navegador-flujos.js` — los recorridos completos, incluida la barra de demostración.
+- `navegador-responsive.js` — 360, 390, 768 y 1440 px sin desborde horizontal en ninguna página.
+- `navegador-barras.js` — que nada quede tapado por las barras fijas, que `--demo-alto` coincida
+  con la altura real y que la barra de demostración contraste con su fondo en los dos temas.
+- `navegador-ingreso.js` — los ocho usuarios entran con su propio rol; el desactivado no entra.
 
 ---
 
-## Anexo · Inventario estructurado
+## 7. El ingreso: de selector de rol a inicio de sesión por usuario
+
+La Fase 0 concluyó que la página 1 había que diseñarla, porque las dos versiones de Stitch eran un
+login con contraseña y segundo factor, y el encargo pedía un selector de rol sin contraseña.
+
+Después llegó una captura de referencia y la instrucción de hacer un ingreso así, "pero de cada
+usuario y con los colores y todo lo que estamos usando". Eso cambió la decisión: `index.html` ya no
+es un selector de rol, es un inicio de sesión por persona. Se entra con el correo de uno de los ocho
+usuarios de la semilla y el rol sale del usuario, no de un botón.
+
+Lo que sí se copió de la referencia: la composición de una sola columna centrada, la marca arriba,
+el par correo/contraseña y un pie discreto.
+
+Lo que **no** se copió, y por qué:
+
+- **"Crear cuenta".** El registro público está prohibido por el encargo y no funciona sin servidor.
+- **"¿Olvidaste tu contraseña?".** Recuperación por correo: prohibida por el encargo, e imposible
+  sin servidor de correo.
+- **Ingreso con proveedores externos.** Es una integración con terceros y exige internet.
+
+Un botón que no hace nada se nota más en una demostración que su ausencia, así que ninguno de los
+tres se dibujó.
+
+Es un ingreso honesto, no una simulación: dice en pantalla que es una demostración, muestra la
+contraseña, lista las cuentas de prueba agrupadas por área y comprueba en el navegador porque no hay
+servidor. Las cuentas se generan de la lista real de usuarios, así que un usuario creado en
+`usuarios.html` aparece ahí sin tocar `index.html`, y uno desactivado aparece deshabilitado y no
+deja entrar.
+
+---
+
+## 8. La marca: de la paleta de Stitch a MONPICA
+
+Con el brochure del cliente llegó la identidad real, y con ella se reemplazó todo lo que hasta
+entonces era una paleta derivada del export de Stitch.
+
+**Qué es real ahora** (y por eso vive en `shell.js`, no en `seed.js`: sobrevive cuando el sistema
+deje de ser una demostración):
+
+- Razón social, lema, descripción, misión y alcance.
+- RIF `J-40690232-2`, sede en Guanare (estado Portuguesa), correo y teléfono.
+- El logo y el emblema, extraídos del PDF con su máscara de transparencia y guardados en
+  `assets/marca/` como PNG locales. No hay ningún recurso remoto.
+- La paleta: el verde de la hoja y de la montaña del logo, el azul del río y de la palabra MONPICA,
+  el verde de los títulos y el lima de las ondas del brochure. Los hexadecimales y su procedencia
+  están comentados en la cabecera de `tokens.css`.
+- La cartera de servicios, que pasó a ser el catálogo `tiposProyecto`; los cinco contratantes; y las
+  tres especies comerciales (puy, algarrobo, teca) al frente del catálogo de especies.
+
+**Qué sigue siendo inventado**, y está dicho en la cabecera de `seed.js`: las ocho personas del
+equipo, todos los montos, todas las fechas, todos los códigos de proyecto y todas las mediciones.
+
+**Dos decisiones que conviene no deshacer sin consultar al cliente:**
+
+1. **Los RIF de los cinco contratantes dicen "Por confirmar".** El brochure los nombra como clientes
+   reales pero no da su RIF, y un número de identificación fiscal inventado para una empresa que
+   existe no es un dato de ejemplo: es un registro falso. Se dejó el hueco a la vista. Lo mismo con
+   los nombres de contacto. MONPICA tiene que aportarlos.
+2. **El brochure dice "RECURSO HÍBRIDOS" y "GESTIÓN HÍBRIDA".** Casi con seguridad es un error de
+   tipeo por "HÍDRICOS" e "HÍDRICA": la empresa hace estudios de agua, y "recurso híbrido" no
+   significa nada en ese contexto. Se usó la palabra corregida (`Estudio de recurso hídrico`). Si el
+   cliente confirma que quiso decir otra cosa, hay que cambiarlo en el catálogo `tiposProyecto` de
+   `seed.js`.
+
+**Lo que el brochure prometía y no se construyó.** Tres textos del brochure y del export de Stitch
+anunciaban cubicación automática de madera. Se quitaron. La regla más importante del encargo es que
+el volumen no se calcula nunca, así que la ficha de mediciones dice que el volumen es captura manual
+del profesional. El único `Math.PI` del proyecto está en `ui.js`, calcula la circunferencia del
+anillo de avance, y lleva un comentario que lo aclara.
+
+---
+
+## 9. Defectos encontrados durante la construcción
+
+Se anotan porque casi todos son trampas que se pueden volver a pisar.
+
+| Defecto | Causa | Qué se hizo |
+|---|---|---|
+| La versión de teléfono se rompía en tres páginas | Un `style="grid-template-columns:…"` en línea gana a las consultas de medio | Clases `rejilla-lateral`, `rejilla-lateral-sm`, `rejilla-lateral-inv`, `kpis-3` |
+| Una tarjeta de indicador se desapilaba | El tono `aviso` heredaba `display:flex` de `.aviso`, que es la caja de aviso | Tonos con prefijo: `tono-ok`, `tono-aviso`, `tono-alerta` |
+| Salía `&MIDDOT;` literal en pantalla | Una entidad HTML dentro de un texto que pasa por `esc()` | El carácter `·` directamente |
+| El campo de búsqueda perdía su relleno izquierdo | Una regla posterior con la misma especificidad | Se subió la especificidad del selector |
+| El pie del menú y el final de la página quedaban debajo de la barra de demostración | La barra crece a dos o tres filas en pantalla estrecha y su altura estaba fija en el CSS | La barra se mide y publica su altura real en `--demo-alto` |
+| La barra superior tapaba el título en teléfono | Seguía fija en pantalla estrecha | `position: static` en móvil y se oculta la búsqueda global |
+| Salía "Septiembre De 2026" | `text-transform: capitalize` capitaliza cada palabra | Se capitaliza solo la primera letra, en JS |
+| La barra superior de las páginas públicas quedaba corrida | `left: var(--menu-ancho)` sin menú lateral | `.pi-barra.sola { left: 0 }` |
+| Roles y nombres de archivo con acento | Un pase automático de acentuación que debía tocar solo textos visibles alcanzó identificadores (`administracion`, `direccion.html`, la propiedad `categoria`) y rompió `agregarMovimiento` en silencio | Revertido con precisión; el acento quedó solo en las etiquetas visibles |
+| "Sin permiso" decía siempre "página desconocida" | La guarda escribe `?pagina=` y la página leía `p.get('página')`, con acento: otra víctima del mismo pase | Se lee `pagina`; la prueba de navegación ahora exige que la pantalla **nombre** la página bloqueada |
+| La barra de demostración se volvía ilegible en Dirección | Colgaba de `--superficie-inversa`, que **por definición** se invierte con el tema: en oscuro la barra se volvía clara y su texto casi blanco quedaba sobre casi blanco (contraste 1:1) | Tokens propios `--demo-*` que no se redefinen en `html.oscuro`; la prueba de barras mide el contraste en los dos temas |
+| Las etapas ya aprobadas se leían como "vencido hace 210 días" | `F.plazo` solo mira la fecha, mientras `etapaVencida` sí excluye las aprobadas y bloqueadas: el texto y el rojo usaban criterios distintos | `F.plazoEtapa(etapa)`, que mira el estado; la prueba comprueba que el texto y el rojo coincidan |
+| El icono de pestaña era el logo descartado | Quedó incrustado como `data:` URI en las 17 páginas | Apunta a `assets/marca/favicon.png` |
+
+Las dos últimas filas y la de "Sin permiso" son del mismo tipo: **dos caminos que deberían decir lo
+mismo y no lo dicen**. Un parámetro que se escribe con un nombre y se lee con otro, un color que
+depende de un token que se invierte, un texto que usa un criterio distinto al del color que lo
+acompaña. Ninguno de los tres rompe nada visiblemente, y por eso las pruebas que solo miran "abrió
+sin error" los dejaban pasar. Las tres pruebas correspondientes ahora comparan los dos caminos.
+
+---
+
+## Anexo · Inventario estructurado de la Fase 0
 
 En `stitch/_inventario-fase0/` quedan los datos crudos del análisis, para no rederivarlos en la Fase 2:
 

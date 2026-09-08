@@ -11,7 +11,7 @@ window.PI = window.PI || {};
 (function (PI) {
   'use strict';
 
-  var CLAVE = 'PI_BETA_DATOS_V3';
+  var CLAVE = 'PI_BETA_DATOS_V4';
   var estado = null;
   var disponible = true;
 
@@ -33,7 +33,7 @@ window.PI = window.PI || {};
     if (crudo) {
       try {
         var d = JSON.parse(crudo);
-        if (d && d.version === 3 && Array.isArray(d.proyectos)) return d;
+        if (d && d.version === 4 && Array.isArray(d.proyectos)) return d;
       } catch (e) { /* dato corrupto: se resiembra */ }
     }
     var fresco = window.PI_SEED();
@@ -105,6 +105,18 @@ window.PI = window.PI || {};
       if (d === 0) return 'vence hoy';
       if (d === 1) return 'vence mañana';
       return 'faltan ' + d + ' días';
+    },
+
+    /* Plazo de una etapa, que no es lo mismo que el plazo de una fecha suelta:
+       una etapa aprobada no esta vencida aunque su fecha ya paso, y una
+       bloqueada todavia no cuenta. Sin esto, las etapas ya cerradas de un
+       proyecto viejo se leian todas como "vencido hace 210 dias". El criterio
+       tiene que ser el mismo que usa etapaVencida. */
+    plazoEtapa: function (etapa) {
+      if (!etapa) return '';
+      if (etapa.estado === 'Aprobada') return 'etapa aprobada';
+      if (etapa.estado === 'Bloqueada') return 'aún no inicia';
+      return fmt.plazo(etapa.fechaFin);
     }
   };
 
@@ -323,8 +335,8 @@ window.PI = window.PI || {};
     /* --- Proyectos -------------------------------------------------------- */
     crearProyecto: function (datos) {
       var anio = new Date().getFullYear();
-      var n = store.estado.proyectos.filter(function (p) { return p.id.indexOf('PI-' + anio) === 0; }).length + 1;
-      var id = 'PI-' + anio + '-' + String(n).padStart(3, '0');
+      var n = store.estado.proyectos.filter(function (p) { return p.id.indexOf('MP-' + anio) === 0; }).length + 1;
+      var id = 'MP-' + anio + '-' + String(n).padStart(3, '0');
       var acum = 0;
       var etapasNuevas = store.estado.catalogos.plantillaEtapas.map(function (t, i) {
         acum += t.dias;

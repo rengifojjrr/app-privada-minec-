@@ -2,10 +2,10 @@ const { chromium } = require('/tmp/pw/node_modules/playwright');
 const PAGS = ['index.html','panel.html','proyectos.html','proyecto-nuevo.html','aprobaciones.html','calendario.html',
  'contratantes.html','reportes.html','direccion.html','usuarios.html','catalogos.html','bitacora.html','perfil.html',
  'sin-permiso.html','fase2-portal.html','fase3-asistente.html',
- ...['resumen','etapas','equipo','documentos','mediciones','finanzas','bitacora'].map(t => 'proyecto.html?id=PI-2024-001&tab='+t),
- ...['resumen','etapas','equipo','documentos','finanzas'].map(t => 'proyecto.html?id=PI-2024-002&tab='+t),
- ...['resumen','etapas'].map(t => 'proyecto.html?id=PI-2024-003&tab='+t),
- 'proyecto.html?id=PI-2024-004&tab=resumen','proyecto.html?id=PI-2024-005&tab=resumen','proyecto.html?id=PI-2023-018&tab=resumen'];
+ ...['resumen','etapas','equipo','documentos','mediciones','finanzas','bitacora'].map(t => 'proyecto.html?id=MP-2024-001&tab='+t),
+ ...['resumen','etapas','equipo','documentos','finanzas'].map(t => 'proyecto.html?id=MP-2024-002&tab='+t),
+ ...['resumen','etapas'].map(t => 'proyecto.html?id=MP-2024-003&tab='+t),
+ 'proyecto.html?id=MP-2024-004&tab=resumen','proyecto.html?id=MP-2024-005&tab=resumen','proyecto.html?id=MP-2023-018&tab=resumen'];
 (async () => {
   const nav = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args: ['--allow-file-access-from-files','--no-sandbox'] });
   const ctx = await nav.newContext({ viewport: { width: 1600, height: 1200 } });

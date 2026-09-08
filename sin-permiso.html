@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sin permiso &middot; Beta &middot; Proyectos Integrales</title>
-<meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<title>Sin permiso &middot; Beta &middot; MONPICA</title>
+<meta name="description" content="Beta navegable del sistema de gestión de proyectos de MONPICA — Montilla Proyectos Integrales C.A. Datos de ejemplo.">
+<link rel="icon" type="image/png" href="assets/marca/favicon.png">
 <link rel="stylesheet" href="assets/tokens.css">
 <link rel="stylesheet" href="assets/app.css">
 <!-- seed, store y auth van en el head: la guarda de permisos debe correr
@@ -27,7 +27,7 @@
 PI.listo(function () {
   var U = PI.ui, A = PI.auth, S = PI.store;
   var p = new URLSearchParams(window.location.search);
-  var pagina = p.get('página') || '';
+  var pagina = p.get('pagina') || '';
   var def = A.PAGINAS[pagina];
   var u = S.usuario();
 
@@ -38,7 +38,7 @@ PI.listo(function () {
     U.icono('lock', 'icono-xl') + '</span>' +
     '<div class="eti" style="color:var(--error)">Acceso restringido</div>' +
     '<h1 style="margin:4px 0 8px">Sin permiso para esta página</h1>' +
-    '<p class="suave">Tu rol actual no tiene acceso a este modulo. Cambia de rol en la barra inferior ' +
+    '<p class="suave">Tu rol actual no tiene acceso a este módulo. Cambia de rol en la barra inferior ' +
     'o vuelve al panel de inicio.</p>' +
     '<div class="pozo" style="margin:24px 0;text-align:left">' +
     fila('Página solicitada', pagina || 'desconocida') +

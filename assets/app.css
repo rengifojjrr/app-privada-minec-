@@ -26,7 +26,7 @@ h1 { font-size: var(--t-lg); line-height: var(--lh-lg); }
 h2 { font-size: var(--t-md); line-height: var(--lh-md); }
 h3 { font-size: var(--t-sm); line-height: var(--lh-sm); }
 p { margin: 0; }
-a { color: var(--primario); text-decoration: none; }
+a { color: var(--azul); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 button, input, select, textarea { font: inherit; color: inherit; }
@@ -66,10 +66,22 @@ button { cursor: pointer; }
 .pi-marca {
   display: flex; align-items: center; gap: var(--e-sm);
   padding: var(--e-md); border-bottom: 1px solid var(--borde-fino);
+  color: inherit; text-decoration: none;
 }
-.pi-marca svg { width: 34px; height: 34px; flex: none; border-radius: var(--r-sm); }
-.pi-marca-txt strong { display: block; font-size: var(--c-md); font-weight: 600; line-height: 1.2; }
-.pi-marca-txt span { display: block; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--secundario); font-weight: 600; }
+.pi-marca:hover { background: var(--superficie-media); text-decoration: none; }
+.pi-marca img { width: 34px; height: 34px; flex: none; display: block; }
+.pi-marca-txt strong {
+  display: block; font-size: var(--c-lg); font-weight: 700; line-height: 1.15;
+  letter-spacing: 0.02em; color: var(--azul);
+}
+.pi-marca-txt span {
+  display: block; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--primario); font-weight: 600;
+}
+/* Marca en la barra superior de las páginas públicas. */
+.pi-barra-marca { display: flex; align-items: center; gap: var(--e-xs); flex: none; }
+.pi-barra-marca img { display: block; flex: none; }
+.pi-barra-marca strong { font-size: var(--c-lg); font-weight: 700; letter-spacing: 0.02em; color: var(--azul); }
 
 .pi-nav { flex: 1; overflow-y: auto; padding: var(--e-md) var(--e-sm); }
 .pi-nav-grupo { margin-bottom: var(--e-lg); }
@@ -146,27 +158,27 @@ button { cursor: pointer; }
   position: fixed; inset: auto 0 0 0; z-index: 60; height: var(--demo-alto);
   display: flex; align-items: center; gap: var(--e-sm);
   padding: 0 var(--e-md);
-  background: var(--superficie-inversa); color: var(--sobre-superficie-inversa);
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--demo-fondo); color: var(--demo-texto);
+  border-top: 1px solid var(--demo-borde);
   font-size: var(--c-sm);
 }
 .pi-demo[hidden] { display: none; }
 .pi-demo-eti {
   font-family: var(--fuente-mono); font-size: var(--mono-sm); font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase; color: var(--primario-claro); flex: none;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--demo-acento); flex: none;
 }
 .pi-demo-roles { display: flex; gap: 4px; flex-wrap: wrap; }
 .pi-demo button {
-  background: rgba(255, 255, 255, 0.08); color: var(--sobre-superficie-inversa);
-  border: 1px solid rgba(255, 255, 255, 0.14); border-radius: var(--r-xs);
+  background: var(--demo-boton); color: var(--demo-texto);
+  border: 1px solid var(--demo-borde); border-radius: var(--r-xs);
   padding: 4px 10px; font-size: var(--c-sm);
 }
-.pi-demo button:hover { background: rgba(255, 255, 255, 0.16); }
+.pi-demo button:hover { background: var(--demo-boton-hover); }
 .pi-demo button[aria-pressed='true'] {
-  background: var(--primario-claro); color: #002116; border-color: var(--primario-claro); font-weight: 600;
+  background: var(--demo-acento); color: var(--demo-sobre-acento); border-color: var(--demo-acento); font-weight: 600;
 }
 .pi-demo-fin { margin-left: auto; display: flex; align-items: center; gap: var(--e-sm); }
-.pi-demo-fin .mono { font-size: var(--mono-sm); color: rgba(240, 241, 237, 0.55); }
+.pi-demo-fin .mono { font-size: var(--mono-sm); color: var(--demo-tenue); }
 
 /* ============================================================================
    Botones
@@ -213,12 +225,12 @@ input[type='email'], select, textarea {
 textarea { min-height: 84px; resize: vertical; line-height: var(--lh-cmd); }
 select {
   appearance: none; padding-right: 30px; cursor: pointer;
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='%23717974'%3E%3Cpath d='M8 11L3.5 6h9z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='%236b7862'%3E%3Cpath d='M8 11L3.5 6h9z'/%3E%3C/svg%3E");
   background-repeat: no-repeat; background-position: right 9px center;
 }
 input:focus, select:focus, textarea:focus {
   outline: none; border-color: var(--primario);
-  box-shadow: 0 0 0 2px rgba(2, 54, 39, 0.15);
+  box-shadow: 0 0 0 2px rgba(42, 121, 0, 0.18);
 }
 input:disabled, select:disabled, textarea:disabled { background: var(--superficie-media); color: var(--texto-tenue); cursor: not-allowed; }
 input::placeholder, textarea::placeholder { color: var(--texto-tenue); }
@@ -355,7 +367,7 @@ table.tabla td.acciones { text-align: right; white-space: nowrap; }
 .badge-aviso { background: var(--secundario-tenue); color: var(--sobre-secundario-tenue); border-color: var(--secundario-borde); }
 .badge-mal   { background: var(--error-tenue);      color: var(--sobre-error-tenue);      border-color: var(--error-borde); }
 .badge-neutro{ background: var(--superficie-alta);  color: var(--texto-suave);            border-color: var(--borde); }
-.badge-info  { background: var(--superficie-media);  color: var(--primario);              border-color: var(--primario-borde); }
+.badge-info  { background: var(--azul-tenue);        color: var(--sobre-azul-tenue);       border-color: var(--azul-borde); }
 
 .aviso {
   display: flex; align-items: flex-start; gap: var(--e-sm);
@@ -397,7 +409,7 @@ table.tabla td.acciones { text-align: right; white-space: nowrap; }
 .pi-modal-fondo {
   position: fixed; inset: 0; z-index: 80;
   display: grid; place-items: center; padding: var(--e-md);
-  background: rgba(25, 28, 26, 0.45);
+  background: rgba(22, 33, 15, 0.5);
 }
 .pi-modal {
   width: 100%; max-width: 560px; max-height: 88vh; display: flex; flex-direction: column;
@@ -448,15 +460,14 @@ table.tabla td.acciones { text-align: right; white-space: nowrap; }
 .pi-portada-caja { width: 100%; max-width: 468px; }
 .pi-portada-caja.ancha { max-width: 620px; }
 
-.pi-acceso-marca { margin-bottom: var(--e-lg); }
-.pi-acceso-marca .logo {
-  display: block; width: 52px; height: 52px; margin-bottom: var(--e-sm);
+.pi-acceso-marca { margin-bottom: var(--e-lg); text-align: center; }
+.pi-acceso-marca .logo { display: block; margin: 0 auto var(--e-xs); }
+.pi-acceso-marca .logo img { display: block; max-width: 100%; height: auto; }
+.pi-acceso-marca .lema {
+  font-size: var(--c-lg); line-height: var(--lh-clg); font-weight: 600;
+  color: var(--primario); max-width: 34ch; margin: 0 auto;
 }
-.pi-acceso-marca .logo svg {
-  display: block; width: 100%; height: 100%; border-radius: var(--r-md);
-}
-.pi-acceso-marca h1 { font-size: 30px; line-height: 36px; letter-spacing: -0.02em; }
-.pi-acceso-marca p { margin-top: var(--e-2xs); color: var(--texto-suave); font-size: var(--c-md); }
+.pi-acceso-marca p + p { margin-top: var(--e-2xs); }
 
 .pi-acceso-error {
   display: flex; align-items: flex-start; gap: var(--e-xs);
@@ -501,9 +512,11 @@ table.tabla td.acciones { text-align: right; white-space: nowrap; }
 
 .pi-acceso-pie {
   margin-top: var(--e-md); text-align: center;
+  display: flex; flex-direction: column; gap: 3px;
   font-family: var(--fuente-mono); font-size: var(--mono-sm);
   color: var(--texto-tenue); letter-spacing: 0.02em;
 }
+.pi-acceso-pie span { display: inline-flex; align-items: center; gap: 4px; }
 
 /* Etapas */
 .etapas-tira { display: grid; gap: var(--e-xs); grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
@@ -617,6 +630,7 @@ table.tabla td.acciones { text-align: right; white-space: nowrap; }
     background: var(--superficie-baja);
   }
   .pi-beta { font-size: 10px; padding: 3px 6px; }
+  .pi-barra-marca .sm { display: none; }
   .pi-barra-fin { margin-left: auto; }
   /* El buscador global sobra en pantalla estrecha: cada listado trae el suyo. */
   .pi-buscar { display: none; }

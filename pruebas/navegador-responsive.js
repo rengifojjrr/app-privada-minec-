@@ -17,15 +17,15 @@ function malo(m){ console.log('  FALLA: ' + m); fallos++; }
     await pag.goto(BASE + '/index.html'); await pag.evaluate(r => PI.store.cambiarRol(r), rol);
 
     const RUTAS = etiqueta === 'movil'
-      ? ['panel.html','proyectos.html','proyecto.html?id=PI-2024-001&tab=etapas',
-         'proyecto.html?id=PI-2024-001&tab=mediciones','proyecto.html?id=PI-2024-001&tab=finanzas',
+      ? ['panel.html','proyectos.html','proyecto.html?id=MP-2024-001&tab=etapas',
+         'proyecto.html?id=MP-2024-001&tab=mediciones','proyecto.html?id=MP-2024-001&tab=finanzas',
          'aprobaciones.html','calendario.html','contratantes.html','reportes.html','direccion.html',
          'usuarios.html','catalogos.html','bitacora.html','perfil.html','index.html','sin-permiso.html',
          'fase2-portal.html','fase3-asistente.html','proyecto-nuevo.html']
-      : ['index.html','panel.html','proyectos.html','proyecto.html?id=PI-2024-002&tab=resumen',
-         'proyecto.html?id=PI-2024-002&tab=etapas','proyecto.html?id=PI-2024-001&tab=equipo',
-         'proyecto.html?id=PI-2024-001&tab=mediciones','proyecto.html?id=PI-2024-001&tab=finanzas',
-         'proyecto.html?id=PI-2024-001&tab=documentos','proyecto.html?id=PI-2024-001&tab=bitacora',
+      : ['index.html','panel.html','proyectos.html','proyecto.html?id=MP-2024-002&tab=resumen',
+         'proyecto.html?id=MP-2024-002&tab=etapas','proyecto.html?id=MP-2024-001&tab=equipo',
+         'proyecto.html?id=MP-2024-001&tab=mediciones','proyecto.html?id=MP-2024-001&tab=finanzas',
+         'proyecto.html?id=MP-2024-001&tab=documentos','proyecto.html?id=MP-2024-001&tab=bitacora',
          'proyecto-nuevo.html','aprobaciones.html','calendario.html','contratantes.html','reportes.html',
          'direccion.html','usuarios.html','catalogos.html','bitacora.html','perfil.html',
          'sin-permiso.html','fase2-portal.html','fase3-asistente.html'];

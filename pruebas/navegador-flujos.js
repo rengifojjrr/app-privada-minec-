@@ -28,7 +28,7 @@ function bien(m){ console.log('  OK  ' + m); }
   await pag.waitForFunction(() => window.PI && window.PI.store, null, { timeout: 8000 });
   await pag.waitForTimeout(250);
   if (!pag.url().endsWith('panel.html')) malo('ingresar no llevó al panel');
-  else bien('ingresar como Carlos Mendoza lleva al panel');
+  else bien('ingresar como Carlos Montilla lleva al panel');
   const rolActivo = await pag.evaluate(() => PI.store.rol());
   if (rolActivo !== 'coordinador') malo('el rol no quedó activo'); else bien('el rol quedó guardado: ' + rolActivo);
 
@@ -61,7 +61,7 @@ function bien(m){ console.log('  OK  ' + m); }
   // ---------- 3. Profesional: completar etapa, subir documento, 3 mediciones ----------
   console.log('\n=== 3. Profesional: etapa, documento y tres mediciones ===');
   await ir('panel.html'); await rol('profesional');
-  await ir('proyecto.html?id=PI-2024-001&tab=etapas');
+  await ir('proyecto.html?id=MP-2024-001&tab=etapas');
   const mias = await pag.evaluate(() => document.querySelectorAll('[data-completar]').length);
   if (!mias) malo('el profesional no ve ninguna etapa que pueda completar');
   else bien('el profesional puede actuar sobre ' + mias + ' etapa(s) asignada(s)');
@@ -71,18 +71,18 @@ function bien(m){ console.log('  OK  ' + m); }
   await pag.waitForTimeout(1000);
   checkErr('completar etapa');
 
-  await ir('proyecto.html?id=PI-2024-001&tab=documentos');
-  const antesDocs = await pag.evaluate(() => PI.store.buscarProyecto('PI-2024-001').documentos.length);
+  await ir('proyecto.html?id=MP-2024-001&tab=documentos');
+  const antesDocs = await pag.evaluate(() => PI.store.buscarProyecto('MP-2024-001').documentos.length);
   await pag.click('#b-subir'); await pag.waitForSelector('.pi-modal');
   await pag.fill('#d-n', 'anexo_fotografico_parcela_p04.pdf');
   await pag.selectOption('#d-t', { index: 4 });
   await pag.click('.pi-modal [data-confirmar]'); await pag.waitForTimeout(900);
-  const despuesDocs = await pag.evaluate(() => PI.store.buscarProyecto('PI-2024-001').documentos.length);
+  const despuesDocs = await pag.evaluate(() => PI.store.buscarProyecto('MP-2024-001').documentos.length);
   if (despuesDocs !== antesDocs + 1) malo('el documento no se registró'); else bien('documento registrado por nombre');
   checkErr('registrar documento');
 
-  await ir('proyecto.html?id=PI-2024-001&tab=mediciones');
-  const antesMed = await pag.evaluate(() => PI.store.buscarProyecto('PI-2024-001').mediciones.length);
+  await ir('proyecto.html?id=MP-2024-001&tab=mediciones');
+  const antesMed = await pag.evaluate(() => PI.store.buscarProyecto('MP-2024-001').mediciones.length);
   for (const m of [['P-07','2.5',1,'34','14.2','28.6','52.400'],['P-07','2.5',2,'22','11.8','24.1','31.250'],['P-08','1.8',3,'18','16.4','33.9','44.900']]) {
     await pag.fill('#c-parcela', m[0]); await pag.fill('#c-ha', m[1]);
     await pag.selectOption('#c-especie', { index: m[2] });
@@ -91,7 +91,7 @@ function bien(m){ console.log('  OK  ' + m); }
     await pag.click('#b-medir'); await pag.waitForTimeout(950);
   }
   const med = await pag.evaluate(() => {
-    const p = PI.store.buscarProyecto('PI-2024-001');
+    const p = PI.store.buscarProyecto('MP-2024-001');
     const ult = p.mediciones.slice(0, 3);
     return { n: p.mediciones.length, vols: ult.map(m => m.volumen) };
   });
@@ -104,7 +104,7 @@ function bien(m){ console.log('  OK  ' + m); }
 
   // ---------- 4. El profesional ve el equipo pero solo su honorario ----------
   console.log('\n=== 4. Honorarios: el profesional solo ve el suyo ===');
-  await ir('proyecto.html?id=PI-2024-001&tab=equipo');
+  await ir('proyecto.html?id=MP-2024-001&tab=equipo');
   const hon = await pag.evaluate(() => {
     const filas = Array.from(document.querySelectorAll('tbody tr'));
     return {
@@ -126,7 +126,7 @@ function bien(m){ console.log('  OK  ' + m); }
   const tieneFin = await pag.evaluate(() => Array.from(document.querySelectorAll('.pestanas a')).some(a => /finanzas/i.test(a.textContent)));
   if (tieneFin) malo('el profesional ve la pestaña de finanzas');
   else bien('no ve la pestaña de finanzas');
-  await ir('proyecto.html?id=PI-2024-001&tab=finanzas');
+  await ir('proyecto.html?id=MP-2024-001&tab=finanzas');
   const tabCaida = await pag.evaluate(() => {
     const a = document.querySelector('.pestanas a[aria-current="page"]');
     return a ? a.textContent.trim() : '';
@@ -150,7 +150,7 @@ function bien(m){ console.log('  OK  ' + m); }
   await pag.fill('#ap-com', 'Faltan las firmas de los especialistas en avifauna y la matriz de impacto consolidada.');
   await pag.click('.pi-modal [data-confirmar]'); await pag.waitForTimeout(1200);
   const trasDevolver = await pag.evaluate(() => {
-    const p = PI.store.buscarProyecto('PI-2024-002');
+    const p = PI.store.buscarProyecto('MP-2024-002');
     return { e6: p.etapas[5].estado, e7: p.etapas[6].estado, com: p.etapas[5].comentario.slice(0,30) };
   });
   if (trasDevolver.e6 !== 'Devuelta') malo('la etapa 6 no quedó devuelta: ' + trasDevolver.e6);
@@ -159,7 +159,7 @@ function bien(m){ console.log('  OK  ' + m); }
   else bien('la etapa 7 sigue bloqueada');
 
   // volver a enviarla y aprobarla
-  await ir('proyecto.html?id=PI-2024-002&tab=etapas');
+  await ir('proyecto.html?id=MP-2024-002&tab=etapas');
   await pag.click('[data-completar="6"]'); await pag.waitForSelector('.pi-modal');
   await pag.click('.pi-modal [data-confirmar]'); await pag.waitForTimeout(1000);
   await ir('aprobaciones.html');
@@ -167,7 +167,7 @@ function bien(m){ console.log('  OK  ' + m); }
   await pag.fill('#ap-com', 'Conforme. Verificadas las coordenadas y las firmas. Se habilita la entrega del informe final.');
   await pag.click('.pi-modal [data-confirmar]'); await pag.waitForTimeout(1300);
   const trasAprobar = await pag.evaluate(() => {
-    const p = PI.store.buscarProyecto('PI-2024-002');
+    const p = PI.store.buscarProyecto('MP-2024-002');
     return { e6: p.etapas[5].estado, e7: p.etapas[6].estado, estado: p.estado };
   });
   if (trasAprobar.e6 !== 'Aprobada') malo('la etapa 6 no quedó aprobada: ' + trasAprobar.e6);
@@ -181,8 +181,8 @@ function bien(m){ console.log('  OK  ' + m); }
   // ---------- 6. Administración: registrar y liquidar movimiento ----------
   console.log('\n=== 6. Administración: movimiento financiero ===');
   await ir('panel.html'); await rol('administracion');
-  await ir('proyecto.html?id=PI-2024-003&tab=finanzas');
-  const antesFin = await pag.evaluate(() => PI.store.buscarProyecto('PI-2024-003').finanzas.length);
+  await ir('proyecto.html?id=MP-2024-003&tab=finanzas');
+  const antesFin = await pag.evaluate(() => PI.store.buscarProyecto('MP-2024-003').finanzas.length);
   await pag.click('.filtros .fin button:last-child'); await pag.waitForSelector('.pi-modal');
   await pag.selectOption('#m-tipo', 'Egreso');
   await pag.fill('#m-monto', '1480');
@@ -191,21 +191,21 @@ function bien(m){ console.log('  OK  ' + m); }
   await pag.selectOption('#m-estado', 'Por liquidar');
   await pag.click('.pi-modal [data-confirmar]'); await pag.waitForTimeout(1000);
   const trasFin = await pag.evaluate(() => {
-    const p = PI.store.buscarProyecto('PI-2024-003');
+    const p = PI.store.buscarProyecto('MP-2024-003');
     const t = PI.store.totalesFinancieros(p);
     return { n: p.finanzas.length, porLiquidar: t.porLiquidar, egresos: t.egresos, id: p.finanzas[0].id };
   });
   if (trasFin.n !== antesFin + 1) malo('el movimiento no se registró'); else bien('movimiento registrado');
   await pag.click('[data-liquidar="' + trasFin.id + '"]'); await pag.waitForSelector('.pi-modal');
   await pag.click('.pi-modal [data-confirmar]'); await pag.waitForTimeout(1000);
-  const trasLiq = await pag.evaluate(() => PI.store.totalesFinancieros(PI.store.buscarProyecto('PI-2024-003')));
+  const trasLiq = await pag.evaluate(() => PI.store.totalesFinancieros(PI.store.buscarProyecto('MP-2024-003')));
   if (Math.abs((trasLiq.egresos - trasFin.egresos) - 1480) > 0.01) malo('al liquidar no pasó al ejecutado');
   else bien('al liquidar, los 1.480 USD pasan al ejecutado');
   checkErr('finanzas');
 
   // ---------- 7. La lista controlada no acepta texto libre ----------
   console.log('\n=== 7. Ninguna categoría es texto libre ===');
-  await ir('proyecto.html?id=PI-2024-003&tab=finanzas');
+  await ir('proyecto.html?id=MP-2024-003&tab=finanzas');
   const esSelect = await pag.evaluate(async () => {
     document.querySelector('.filtros .fin button:last-child').click();
     await new Promise(r => setTimeout(r, 250));
@@ -214,7 +214,7 @@ function bien(m){ console.log('  OK  ' + m); }
   });
   if (esSelect.etiqueta !== 'SELECT') malo('la categoría no es una lista: ' + esSelect.etiqueta);
   else bien('la categoría es una lista de ' + esSelect.opciones + ' opciones, no un campo de texto');
-  const rechazo = await pag.evaluate(() => PI.store.agregarMovimiento('PI-2024-003', {
+  const rechazo = await pag.evaluate(() => PI.store.agregarMovimiento('MP-2024-003', {
     tipo: 'Egreso', categoria: 'Categoría escrita a mano', concepto: 'prueba', monto: 50, estado: 'Liquidado' }));
   if (rechazo !== null) malo('el sistema aceptó una categoría fuera del catálogo');
   else bien('una categoría fuera del catálogo se rechaza incluso desde el código');
@@ -255,15 +255,15 @@ function bien(m){ console.log('  OK  ' + m); }
   console.log('\n=== 10. Los cambios sobreviven al recargar ===');
   const antesRecarga = await pag.evaluate(() => ({
     proyectos: PI.store.estado.proyectos.length,
-    med: PI.store.buscarProyecto('PI-2024-001').mediciones.length,
-    e6: PI.store.buscarProyecto('PI-2024-002').etapas[5].estado,
+    med: PI.store.buscarProyecto('MP-2024-001').mediciones.length,
+    e6: PI.store.buscarProyecto('MP-2024-002').etapas[5].estado,
     u07: PI.store.buscarUsuario('u-07').activo
   }));
   await ir('panel.html');
   const trasRecarga = await pag.evaluate(() => ({
     proyectos: PI.store.estado.proyectos.length,
-    med: PI.store.buscarProyecto('PI-2024-001').mediciones.length,
-    e6: PI.store.buscarProyecto('PI-2024-002').etapas[5].estado,
+    med: PI.store.buscarProyecto('MP-2024-001').mediciones.length,
+    e6: PI.store.buscarProyecto('MP-2024-002').etapas[5].estado,
     u07: PI.store.buscarUsuario('u-07').activo
   }));
   if (JSON.stringify(antesRecarga) !== JSON.stringify(trasRecarga)) malo('el estado cambió al recargar');

@@ -4,8 +4,9 @@ Notas para quien retome este proyecto. La bitácora de decisiones está en `PROG
 
 ## Qué es esto
 
-Una beta navegable de un sistema de gestión de proyectos para una consultora ambiental y forestal
-venezolana. Se construyó para presentarla en una reunión con el cliente, en una sala donde la
+Una beta navegable de un sistema de gestión de proyectos para **MONPICA — Montilla Proyectos
+Integrales C.A.**, una consultora ambiental, forestal, agrícola y civil de Guanare, estado
+Portuguesa. Se construyó para presentarla en una reunión con el cliente, en una sala donde la
 conexión puede fallar.
 
 Son HTML, CSS y JavaScript planos. **Sin compilación, sin npm, sin bundler, sin framework.** Se
@@ -20,6 +21,23 @@ python3 -m http.server 8080     # y abrir http://localhost:8080
 Pero el escenario de la reunión es `file://`: abrir `index.html` directamente, con la red apagada.
 Todo cambio debe probarse ahí, porque es lo que se rompe primero.
 
+En `pruebas/` hay siete guiones que hacen exactamente eso. Los de navegador abren las páginas por
+`file://` **abortando toda petición que no sea `file:`, `data:` o `blob:`**, que es la única forma de
+sostener la promesa de que funciona sin red.
+
+```bash
+node pruebas/datos-y-permisos.js         # la capa de datos, sin navegador
+node pruebas/sintaxis-html.js *.html     # compila el <script> de cada página
+node pruebas/navegador-navegacion.js     # 17 páginas, 7 pestañas, guardas, cero red
+node pruebas/navegador-flujos.js         # los recorridos completos
+node pruebas/navegador-responsive.js     # 360, 390, 768 y 1440 px
+node pruebas/navegador-barras.js         # barras fijas, --demo-alto y contraste
+node pruebas/navegador-ingreso.js        # los ocho usuarios
+```
+
+Todos salen con código 0 si pasan. Los de navegador necesitan la ruta de Chromium que llevan
+escrita arriba; en este entorno es `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`.
+
 ## Cómo está organizado
 
 ```
@@ -27,7 +45,7 @@ index.html              ingreso por usuario; la entrada al sistema
 panel.html              inicio, distinto para cada rol
 proyectos.html          listado con búsqueda, cinco filtros y orden por columna
 proyecto-nuevo.html     asistente de alta en 3 pasos
-proyecto.html           ficha con 7 pestañas   →  ?id=PI-2024-001&tab=etapas
+proyecto.html           ficha con 7 pestañas   →  ?id=MP-2024-001&tab=etapas
 aprobaciones.html       cola de etapas esperando decisión
 calendario.html         plazos de todas las etapas abiertas
 contratantes.html       directorio en maestro-detalle
@@ -42,8 +60,9 @@ fase2-portal.html       maqueta sin funcionamiento
 fase3-asistente.html    maqueta sin funcionamiento
 
 assets/
-  tokens.css   variables visuales extraídas del export de Stitch
+  tokens.css   variables visuales: la paleta es de MONPICA, la escala es del export de Stitch
   app.css      estilos de la aplicación, construidos contra esas variables
+  marca/       logo, emblema e icono de pestaña del cliente, en PNG local
   fonts/       dos tipografías variables locales, 65 KB en total
   icons.js     sprite SVG de 70 iconos, inyectado en línea
   seed.js      datos de ejemplo
@@ -80,9 +99,14 @@ En `assets/seed.js`, que define `window.PI_SEED` como una **función**, no como 
 deliberado: las fechas se generan relativas al día en que se siembra, así que en cada ensayo de la
 demo siempre hay etapas vencidas y plazos próximos, sin tener que editar nada.
 
-Al abrir cualquier página, `store.js` busca la clave `PI_BETA_DATOS_V3` en `localStorage`. Si no
-existe, o si su `version` no es 3, siembra de nuevo. Para forzar una resiembra tras cambiar la
+Al abrir cualquier página, `store.js` busca la clave `PI_BETA_DATOS_V4` en `localStorage`. Si no
+existe, o si su `version` no es 4, siembra de nuevo. Para forzar una resiembra tras cambiar la
 estructura de los datos, sube ese número de versión en los dos archivos.
+
+La cabecera de `seed.js` dice qué parte de la semilla es real y qué parte es inventada. Resumido: el
+contexto, la cartera de servicios, los cinco contratantes y las tres especies comerciales salen del
+brochure del cliente; las ocho personas, todos los montos, todas las fechas y todos los códigos son
+invento. Los RIF de los contratantes dicen "Por confirmar" a propósito — ver más abajo.
 
 La semilla trae ocho usuarios que cubren los cinco roles, seis contratantes, seis proyectos en
 estados distintos (uno detenido esperando aprobación, uno con dos etapas vencidas), mediciones en
@@ -116,11 +140,22 @@ de bitácora de días anteriores.
   de la página nunca se desplaza en horizontal.
 - **Nunca metas una entidad HTML en un texto que pase por `esc()`.** Se ve literalmente en pantalla.
   Usa el carácter.
+- **Los tokens `--superficie-inversa` y `--sobre-superficie-inversa` se invierten con el tema.** Eso
+  es lo que significan. Si necesitas cromo que se vea igual en claro y en oscuro — como la barra de
+  demostración — dale tokens propios y no los redefinas en `html.oscuro`. La barra ya se rompió una
+  vez por esto: en `direccion.html` se volvía clara y su texto quedaba con contraste 1:1.
+- **Si un texto y un color dicen lo mismo, tienen que salir del mismo criterio.** `etapaVencida()`
+  decide el rojo; `F.plazoEtapa()` decide el texto. Las dos excluyen las etapas aprobadas y
+  bloqueadas. Cuando el texto salía de `F.plazo()`, que solo mira la fecha, una etapa aprobada de un
+  proyecto viejo se leía como "vencido hace 210 días".
+- **Un parámetro de dirección se escribe y se lee con el mismo nombre, sin acentos.** La guarda de
+  `auth.js` escribe `?pagina=`, y `sin-permiso.html` lo lee así. Ya se rompió una vez.
 
 ## El ingreso
 
 `index.html` es un inicio de sesión por usuario, no por rol: se entra con el correo de una de las
-ocho personas de la semilla y la clave `PI_CLAVE_DEMO`, y el rol sale del usuario. Las cuentas de
+ocho personas de la semilla y la clave que guarda `PI_CLAVE_DEMO` en `seed.js` (hoy `monpica2025`),
+y el rol sale del usuario. Las cuentas de
 prueba se listan agrupadas por área y se generan de la lista real de usuarios, así que un usuario
 creado en `usuarios.html` aparece ahí sin tocar este archivo, y uno desactivado aparece deshabilitado
 y no deja entrar.
@@ -132,6 +167,32 @@ cosas están prohibidas por el encargo y ninguna funciona sin servidor.
 
 Las páginas públicas (`index.html` y `sin-permiso.html`) llevan `publica: true` en `auth.js`: no
 tienen menú lateral, su barra superior ocupa todo el ancho y no muestra la identidad.
+
+## La marca
+
+La identidad del cliente vive en el objeto `MARCA` de `assets/shell.js`, no en `seed.js`, y la
+distinción importa: **es lo único de esta beta que no es un dato de ejemplo**. Razón social, lema,
+RIF, sede, correo, teléfono, logo y emblema son los reales, así que sobreviven cuando el sistema
+deje de ser una demostración. Todo lo demás de la semilla se borra.
+
+La paleta de `tokens.css` se muestreó del logo y de los vectores del brochure; la cabecera del
+archivo lista cada hexadecimal con su procedencia. La marca aporta el color; el export de Stitch
+sigue aportando la escala, los radios, el espaciado y la densidad de las tablas. El ámbar de aviso y
+el rojo de error **no** son de la marca: el brochure no tiene ninguno, son funcionales y se
+eligieron para armonizar con el verde.
+
+El logo y el emblema son PNG locales en `assets/marca/`, con transparencia. Se usan con
+`PI.shell.logoCompleto(ancho)` y `PI.shell.emblema(px)`; no hay ningún recurso remoto.
+
+Dos cosas que el cliente tiene que resolver y que conviene no rellenar por cuenta propia:
+
+- **Los RIF y los contactos de los cinco contratantes dicen "Por confirmar".** Son empresas reales
+  que el brochure nombra sin dar su RIF. Inventar un número de identificación fiscal para una
+  empresa que existe no produce un dato de ejemplo, produce un registro falso. El hueco se dejó a la
+  vista a propósito.
+- **El brochure dice "RECURSO HÍBRIDOS" y "GESTIÓN HÍBRIDA".** Es casi con seguridad un error de
+  tipeo por "HÍDRICOS" e "HÍDRICA". Se usó la palabra corregida en el catálogo `tiposProyecto` de
+  `seed.js`.
 
 ## Las cinco reglas del sistema
 
@@ -153,20 +214,24 @@ tienen menú lateral, su barra superior ocupa todo el ancho y no muestra la iden
 ## Qué hay que quitar antes de un uso real
 
 1. **La barra de demostración.** Borra `assets/demo.js`, borra la línea
-   `<script src="assets/demo.js"></script>` de los diecisiete HTML y borra el bloque `.pi-demo` de
-   `assets/app.css`. Nada más depende de ella: `shell.js` comprueba si existe antes de montarla.
+   `<script src="assets/demo.js"></script>` de los diecisiete HTML, y borra de `assets/app.css` el
+   bloque `.pi-demo` y de `assets/tokens.css` el bloque de tokens `--demo-*`. Nada más depende de
+   ella: `shell.js` comprueba si existe antes de montarla.
 2. **El ingreso de `index.html`.** Parece un inicio de sesión, pero no lo es: la lista de cuentas de
    prueba está a la vista, la contraseña es la misma para todas y la comprobación ocurre en el
    navegador. Un uso real necesita autenticación de verdad contra un servidor. También hay que
    borrar `PI_CLAVE_DEMO` de `assets/seed.js`.
 3. **El botón "Reiniciar datos de ejemplo" de `perfil.html`**, y con él el bloque "Datos de ejemplo"
    de esa misma página.
-4. **La marca `Beta · datos de ejemplo`** de la barra superior, en `shell.js`.
+4. **La marca `Beta · datos de ejemplo`** de la barra superior, en `shell.js`. El objeto `MARCA`
+   de ese mismo archivo **se queda**: son los datos reales del cliente, no de ejemplo.
 5. **`assets/seed.js` completo**, y con él la resiembra automática de `store.js`. Los datos tendrían
    que venir de un servidor.
 6. **`stitch/`**, que es material de referencia y no forma parte de lo que se publica.
 7. **Los avisos que explican las limitaciones de la beta**: los que dicen que los documentos se
    registran solo por nombre, que no hay servidor, o que los datos no se comparten entre equipos.
+8. **`pruebas/`**, si se quiere: son guiones de verificación, no forman parte de lo publicable. Pero
+   conviene conservarlos mientras el proyecto siga cambiando.
 
 Y lo que habría que construir, no quitar: servidor y base de datos, almacenamiento real de archivos,
 autenticación, y respaldo. Mientras eso no exista, esto es una demostración, no un sistema.

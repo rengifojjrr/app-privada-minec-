@@ -13,16 +13,40 @@ window.PI = window.PI || {};
 (function (PI) {
   'use strict';
 
-  /* Logo. Tomado del export de Stitch, que lo entrega como SVG en linea: es el
-     único recurso gráfico del export que no depende de internet. */
-  var LOGO =
-    '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Proyectos Integrales">' +
-    '<rect width="100" height="100" rx="14" fill="#1F4D3D"/>' +
-    '<path d="M50 18C32 18 18 32 18 50c0 18 14 32 32 32s32-14 32-32" fill="none" stroke="#F7F6F2" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 4" opacity=".4"/>' +
-    '<path d="M50 28c-12 0-22 10-22 22s10 22 22 22 22-10 22-22" fill="none" stroke="#9A6B3F" stroke-width="3.5" stroke-linecap="round"/>' +
-    '<path d="M50 22l14 24-14-4-14 4z" fill="#F7F6F2"/>' +
-    '<path d="M50 42l16 26-16-6-16 6z" fill="#F7F6F2" opacity=".95"/>' +
-    '<rect x="48" y="62" width="4" height="18" rx="2" fill="#9A6B3F"/></svg>';
+  /* ==========================================================================
+     Identidad del cliente. Tomada de su brochure: los datos de contacto y el
+     RIF son los reales de la empresa. Es lo único de esta beta que NO es un
+     dato de ejemplo, y por eso vive aquí y no en seed.js: sobrevive cuando el
+     sistema deje de ser una demostración.
+     ======================================================================= */
+  var MARCA = {
+    nombre: 'MONPICA',
+    razon: 'Montilla Proyectos Integrales C.A.',
+    lema: 'Soluciones ambientales, forestales, agrícolas y civiles integrales',
+    descripcion: 'Consultora especializada en ingeniería ambiental, forestal, agrícola y civil, ' +
+                 'y desarrolladora de planes y modelos de inversión en el sector forestal.',
+    mision: 'Viabilizar proyectos respetando el marco jurídico.',
+    alcance: 'Diagnóstico, permisología y ejecución de obras.',
+    rif: 'J-40690232-2',
+    sede: 'Guanare, estado Portuguesa',
+    correo: 'monpica2025@gmail.com',
+    telefono: '0414-536 53 05',
+    /* El logo y el emblema son archivos locales: no hay recursos remotos. */
+    logo: 'assets/marca/monpica-logo.png',
+    emblema: 'assets/marca/monpica-emblema.png'
+  };
+
+  /* Emblema del logo, para el menú lateral y la barra superior. */
+  function emblema(px) {
+    return '<img src="' + MARCA.emblema + '" width="' + px + '" height="' + px +
+      '" alt="' + MARCA.nombre + '" decoding="async">';
+  }
+
+  /* Logo completo con la palabra, para el ingreso. */
+  function logoCompleto(ancho) {
+    return '<img src="' + MARCA.logo + '" width="' + ancho + '" alt="' +
+      MARCA.nombre + ' — ' + MARCA.razon + '" decoding="async">';
+  }
 
   function esc(t) { return PI.ui.esc(t); }
   function icono(n, c) { return PI.ui.icono(n, c); }
@@ -47,9 +71,9 @@ window.PI = window.PI || {};
     var rol = PI.auth.nombreRol();
     var html = '<header class="pi-barra' + (simple ? ' sola' : '') + '">';
     if (simple) {
-      html += '<div class="fila" style="gap:10px;flex:none">' +
-        '<span style="width:30px;height:30px;display:block">' + LOGO + '</span>' +
-        '<strong>Proyectos Integrales</strong></div>';
+      html += '<div class="pi-barra-marca">' + emblema(30) +
+        '<strong>' + esc(MARCA.nombre) + '</strong>' +
+        '<span class="sm tenue">' + esc(MARCA.razon) + '</span></div>';
     }
     html += marcaBeta();
     if (!simple) {
@@ -75,10 +99,11 @@ window.PI = window.PI || {};
 
   function menuLateral() {
     var actual = PI.auth.paginaActual();
-    var html = '<aside class="pi-menu"><div class="pi-marca">' +
-      '<span>' + LOGO + '</span>' +
-      '<span class="pi-marca-txt"><strong>Proyectos Integrales</strong><span>Ingeniería y ambiente</span></span>' +
-      '</div><nav class="pi-nav" aria-label="Navegación principal">';
+    var html = '<aside class="pi-menu"><a class="pi-marca" href="' + PI.auth.inicioDe(PI.auth.rol()) + '">' +
+      emblema(34) +
+      '<span class="pi-marca-txt"><strong>' + esc(MARCA.nombre) + '</strong>' +
+      '<span>Proyectos integrales</span></span>' +
+      '</a><nav class="pi-nav" aria-label="Navegación principal">';
     PI.auth.menu().forEach(function (g) {
       html += '<div class="pi-nav-grupo"><span class="eti">' + esc(g.titulo) + '</span>';
       g.enlaces.forEach(function (e) {
@@ -91,8 +116,9 @@ window.PI = window.PI || {};
       });
       html += '</div>';
     });
-    html += '</nav><div class="pi-menu-pie"><span class="eti">Datos locales</span>' +
-      '<div class="mono">Navegador &middot; sin servidor</div></div></aside>';
+    html += '</nav><div class="pi-menu-pie">' +
+      '<span class="eti">' + esc(MARCA.sede) + '</span>' +
+      '<div class="mono">RIF ' + esc(MARCA.rif) + '</div></div></aside>';
     return html;
   }
 
@@ -107,7 +133,9 @@ window.PI = window.PI || {};
   }
 
   var shell = {
-    LOGO: LOGO,
+    MARCA: MARCA,
+    emblema: emblema,
+    logoCompleto: logoCompleto,
 
     montar: function () {
       var archivo = PI.auth.paginaActual();
@@ -128,7 +156,7 @@ window.PI = window.PI || {};
 
       if (window.PI_DEMO) window.PI_DEMO.montar();
 
-      document.title = (def.titulo || 'Proyectos Integrales') + ' · Beta · Proyectos Integrales';
+      document.title = (def.titulo || MARCA.nombre) + ' · Beta · ' + MARCA.nombre;
       document.body.classList.remove('pi-verificando');
 
       if (!PI.store.disponible()) {

@@ -1,13 +1,24 @@
 /* ============================================================================
    tokens.css — Variables visuales del sistema.
 
-   Valores extraidos del export de Stitch: la configuracion de Tailwind
-   embebida (identica en las 26 pantallas) verificada por muestreo de pixeles
-   sobre las capturas renderizadas.
+   La paleta es la de MONPICA — Montilla Proyectos Integrales C.A., muestreada
+   pixel a pixel de su logo y de los vectores de su brochure:
 
-   La prosa de stitch/.../field_dossier_technical_workspace/DESIGN.md declara
-   una SEGUNDA paleta (#1F4D3D, #F7F6F2, #9A6B3F, #B4462F) que no se renderiza
-   en ninguna pantalla. Manda la que se ve. Ver PROGRESO.md, hallazgo H-50.
+     #008800  verde de la hoja del logo
+     #003200  verde de la montaña del logo
+     #0064b2  azul del río y de la palabra MONPICA
+     #3cc4ea  azul claro del arroyo
+     #2a7900  verde de los títulos del brochure
+     #76b72a  verde lima de las ondas del brochure
+     #7dc144  verde lima claro de los subtítulos
+     #2f6602  verde oscuro de apoyo
+
+   La escala, los radios, los espaciados y la densidad de las tablas vienen
+   del export de Stitch, que es lo que define la forma del sistema. La marca
+   aporta el color; Stitch aporta la estructura.
+
+   Los estados (ámbar de aviso, rojo de error) no salen de la marca porque el
+   brochure no tiene ninguno: son funcionales y se eligieron para armonizar.
 
    Nada de esto depende de internet.
    ========================================================================= */
@@ -32,53 +43,70 @@
 }
 
 :root {
-  /* --- Color: verde institucional ---------------------------------------- */
-  --primario: #023627;
-  --primario-hover: #1f4d3d;
-  --primario-contenedor: #1f4d3d;
+  /* --- Marca: verde MONPICA ---------------------------------------------
+     El verde de los títulos del brochure manda las acciones y el estado
+     activo. El verde de la montaña del logo es el tono profundo. --------- */
+  --primario: #2a7900;
+  --primario-hover: #1f5a00;
+  --primario-contenedor: #003200;
   --sobre-primario: #ffffff;
-  --primario-tenue: #bcedd7;
-  --sobre-primario-tenue: #002116;
-  --primario-claro: #a1d1bc;
-  --primario-borde: #8dbda8;
+  --primario-tenue: #e2f3cd;
+  --sobre-primario-tenue: #1a4a00;
+  --primario-claro: #7dc144;
+  --primario-borde: #a9d47a;
 
-  /* --- Color: ambar (en proceso, por liquidar, atencion) ---------------- */
-  --secundario: #80552b;
-  --secundario-hover: #653e16;
+  /* --- Marca: lima del brochure (avance, acentos) ------------------------ */
+  --lima: #76b72a;
+  --lima-claro: #7dc144;
+
+  /* --- Marca: azul MONPICA (informacion, enlaces, agua) ------------------ */
+  --azul: #0064b2;
+  --azul-hover: #004e8c;
+  --sobre-azul: #ffffff;
+  --azul-tenue: #d9ecfb;
+  --sobre-azul-tenue: #003a68;
+  --azul-claro: #3cc4ea;
+  --azul-borde: #9ccbee;
+
+  /* --- Estado: ambar (en proceso, por liquidar, atencion) ----------------
+     No sale de la marca: el brochure no trae ningun ambar. Se eligio para
+     armonizar con el verde sin competir con el. --------------------------- */
+  --secundario: #8a5a00;
+  --secundario-hover: #6b4500;
   --sobre-secundario: #ffffff;
-  --secundario-tenue: #ffdcc0;
-  --sobre-secundario-tenue: #2d1600;
-  --secundario-contenedor: #fec390;
-  --secundario-borde: #f5bb88;
+  --secundario-tenue: #fdeccd;
+  --sobre-secundario-tenue: #4a2f00;
+  --secundario-contenedor: #f7d08a;
+  --secundario-borde: #eec87e;
 
-  /* --- Color: rojo (vencido, devuelto, error) --------------------------- */
-  --terciario: #610c00;
-  --terciario-tenue: #ffdad3;
-  --sobre-terciario-tenue: #3e0500;
-  --error: #ba1a1a;
+  /* --- Estado: rojo (vencido, devuelto, error) --------------------------- */
+  --terciario: #7a1200;
+  --terciario-tenue: #ffdcd4;
+  --sobre-terciario-tenue: #4a0900;
+  --error: #b81c1c;
   --sobre-error: #ffffff;
-  --error-tenue: #ffdad6;
-  --sobre-error-tenue: #93000a;
-  --error-borde: #ffb4a4;
-  --fila-alerta: #fff4f3;
+  --error-tenue: #fddad6;
+  --sobre-error-tenue: #8c0009;
+  --error-borde: #f2b0a6;
+  --fila-alerta: #fff5f3;
 
-  /* --- Superficies ------------------------------------------------------- */
-  --fondo: #f8faf6;
+  /* --- Superficies. Blanco de papel con la insinuacion verde del brochure. */
+  --fondo: #f7faf4;
   --superficie: #ffffff;
-  --superficie-baja: #f3f4f0;
-  --superficie-media: #edeeeb;
-  --superficie-alta: #e7e9e5;
-  --superficie-maxima: #e1e3df;
-  --superficie-inversa: #2e312f;
-  --sobre-superficie-inversa: #f0f1ed;
+  --superficie-baja: #f1f5ec;
+  --superficie-media: #e9efe2;
+  --superficie-alta: #e1e9d8;
+  --superficie-maxima: #d8e2cd;
+  --superficie-inversa: #1d2a1b;
+  --sobre-superficie-inversa: #eef3e8;
 
   /* --- Texto y bordes ---------------------------------------------------- */
-  --texto: #191c1a;
-  --texto-suave: #414944;
-  --texto-tenue: #717974;
-  --borde: #c0c8c3;
-  --borde-suave: rgba(192, 200, 195, 0.45);
-  --borde-fino: rgba(192, 200, 195, 0.28);
+  --texto: #16210f;
+  --texto-suave: #3c4a33;
+  --texto-tenue: #6b7862;
+  --borde: #bccbb0;
+  --borde-suave: rgba(188, 203, 176, 0.5);
+  --borde-fino: rgba(188, 203, 176, 0.32);
 
   /* --- Tipografia -------------------------------------------------------- */
   --fuente: 'Hanken Grotesk', 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -122,10 +150,25 @@
   --control-alto: 36px;
   --ancho-max: 1680px;
 
+  /* --- Barra de demostracion. SE VA CON demo.js ---------------------------
+     No usan los tokens de superficie a proposito: la barra es un sobrepuesto
+     de la demo, no una superficie del tema, y tiene que leerse igual en claro
+     y en oscuro. Si colgara de --superficie-inversa se volveria clara en
+     direccion.html y su texto quedaria invisible. Por eso estos valores NO se
+     redefinen en html.oscuro. ---------------------------------------------- */
+  --demo-fondo: #1d2a1b;
+  --demo-texto: #eef3e8;
+  --demo-tenue: rgba(240, 243, 232, 0.6);
+  --demo-acento: #7dc144;
+  --demo-sobre-acento: #10260a;
+  --demo-boton: rgba(255, 255, 255, 0.08);
+  --demo-boton-hover: rgba(255, 255, 255, 0.18);
+  --demo-borde: rgba(255, 255, 255, 0.16);
+
   /* --- Sombras ----------------------------------------------------------- */
-  --sombra-sm: 0 1px 8px rgba(25, 28, 26, 0.04);
-  --sombra-md: 0 4px 16px -2px rgba(25, 28, 26, 0.08);
-  --sombra-lg: 0 12px 32px -8px rgba(25, 28, 26, 0.18);
+  --sombra-sm: 0 1px 8px rgba(22, 33, 15, 0.05);
+  --sombra-md: 0 4px 16px -2px rgba(22, 33, 15, 0.09);
+  --sombra-lg: 0 12px 32px -8px rgba(22, 33, 15, 0.2);
 }
 
 /* ============================================================================
@@ -136,48 +179,59 @@
    los acentos claros que ya existen en la paleta. No hay una paleta nueva.
    ========================================================================= */
 html.oscuro {
-  --primario: #a1d1bc;
-  --primario-hover: #bcedd7;
-  --primario-contenedor: #1f4d3d;
-  --sobre-primario: #002116;
-  --primario-tenue: rgba(161, 209, 188, 0.16);
-  --sobre-primario-tenue: #a1d1bc;
-  --primario-claro: #a1d1bc;
-  --primario-borde: rgba(161, 209, 188, 0.4);
+  --primario: #9ed46a;
+  --primario-hover: #b6e28a;
+  --primario-contenedor: #2a7900;
+  --sobre-primario: #10260a;
+  --primario-tenue: rgba(158, 212, 106, 0.16);
+  --sobre-primario-tenue: #b6e28a;
+  --primario-claro: #9ed46a;
+  --primario-borde: rgba(158, 212, 106, 0.42);
 
-  --secundario: #f5bb88;
-  --secundario-hover: #fec390;
-  --sobre-secundario: #2d1600;
-  --secundario-tenue: rgba(245, 187, 136, 0.16);
-  --sobre-secundario-tenue: #f5bb88;
-  --secundario-contenedor: rgba(245, 187, 136, 0.3);
-  --secundario-borde: rgba(245, 187, 136, 0.4);
+  --lima: #9ed46a;
+  --lima-claro: #b6e28a;
 
-  --terciario: #ffb4a4;
-  --terciario-tenue: rgba(255, 180, 164, 0.16);
-  --sobre-terciario-tenue: #ffb4a4;
-  --error: #ffb4a4;
-  --sobre-error: #3e0500;
+  --azul: #6cc0f0;
+  --azul-hover: #8fd2f6;
+  --sobre-azul: #00304f;
+  --azul-tenue: rgba(108, 192, 240, 0.16);
+  --sobre-azul-tenue: #8fd2f6;
+  --azul-claro: #3cc4ea;
+  --azul-borde: rgba(108, 192, 240, 0.42);
+
+  --secundario: #f0c069;
+  --secundario-hover: #f7d08a;
+  --sobre-secundario: #3a2500;
+  --secundario-tenue: rgba(240, 192, 105, 0.16);
+  --sobre-secundario-tenue: #f0c069;
+  --secundario-contenedor: rgba(240, 192, 105, 0.3);
+  --secundario-borde: rgba(240, 192, 105, 0.42);
+
+  --terciario: #ffb3a3;
+  --terciario-tenue: rgba(255, 179, 163, 0.16);
+  --sobre-terciario-tenue: #ffb3a3;
+  --error: #ffb3a3;
+  --sobre-error: #4a0900;
   --error-tenue: rgba(255, 150, 128, 0.16);
   --sobre-error-tenue: #ff9680;
   --error-borde: rgba(255, 150, 128, 0.42);
   --fila-alerta: rgba(255, 150, 128, 0.07);
 
-  --fondo: #232624;
-  --superficie: #2e312f;
-  --superficie-baja: #292c2a;
-  --superficie-media: #363a37;
-  --superficie-alta: #404341;
-  --superficie-maxima: #4a4e4b;
-  --superficie-inversa: #f0f1ed;
-  --sobre-superficie-inversa: #191c1a;
+  --fondo: #141c12;
+  --superficie: #1d2a1b;
+  --superficie-baja: #182114;
+  --superficie-media: #253524;
+  --superficie-alta: #2f412d;
+  --superficie-maxima: #3a4d37;
+  --superficie-inversa: #eef3e8;
+  --sobre-superficie-inversa: #16210f;
 
-  --texto: #f0f1ed;
-  --texto-suave: #c0c8c3;
-  --texto-tenue: #8f9793;
-  --borde: #4a4e4b;
-  --borde-suave: rgba(120, 128, 124, 0.4);
-  --borde-fino: rgba(120, 128, 124, 0.24);
+  --texto: #eef3e8;
+  --texto-suave: #c2d0b7;
+  --texto-tenue: #8d9c84;
+  --borde: #3a4d37;
+  --borde-suave: rgba(140, 160, 132, 0.4);
+  --borde-fino: rgba(140, 160, 132, 0.24);
 
   --sombra-sm: 0 1px 8px rgba(0, 0, 0, 0.3);
   --sombra-md: 0 4px 16px -2px rgba(0, 0, 0, 0.4);

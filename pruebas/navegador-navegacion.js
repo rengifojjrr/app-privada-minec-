@@ -58,7 +58,7 @@ function malo(m){ console.log('  FALLA: ' + m); fallos++; }
 
   console.log('\n=== 2. Las 7 pestañas de la ficha ===');
   for (const t of TABS) {
-    const errs = await abrir(BASE + '/proyecto.html?id=PI-2024-002&tab=' + t);
+    const errs = await abrir(BASE + '/proyecto.html?id=MP-2024-002&tab=' + t);
     const activa = await pag.evaluate(() => {
       const a = document.querySelector('.pestanas a[aria-current="page"]');
       return a ? a.textContent.trim() : null;
@@ -94,7 +94,15 @@ function malo(m){ console.log('  FALLA: ' + m); fallos++; }
     for (const p of lista) {
       await abrir(BASE + '/' + p);
       const final = pag.url().split('/').pop();
-      if (!final.startsWith('sin-permiso.html')) malo(`${rol} pudo abrir ${p} (terminó en ${final})`);
+      if (!final.startsWith('sin-permiso.html')) { malo(`${rol} pudo abrir ${p} (terminó en ${final})`); continue; }
+      // Y la pantalla tiene que decir QUE pagina se bloqueo: si el parametro de
+      // la direccion no coincide con el que lee sin-permiso.html, cae en
+      // "desconocida" y el usuario no sabe a donde quiso entrar.
+      const informe = await pag.evaluate(() => document.getElementById('pi-contenido').textContent);
+      if (!informe.includes(p)) malo(`${rol}: sin-permiso no nombra la pagina bloqueada ${p}`);
+      if (informe.includes('desconocida') || informe.includes('no registrado')) {
+        malo(`${rol}: sin-permiso no identifico ${p} (parametro de direccion mal leido)`);
+      }
     }
     // y una permitida debe abrirse
     await abrir(BASE + '/proyectos.html');
