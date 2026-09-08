@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-surface": "#191c1a",
+        "inverse-surface": "#2e312f",
+        "surface-container-low": "#f3f4f0",
+        "surface-container": "#edeeeb",
+        "primary": "#023627",
+        "tertiary-container": "#82220e",
+        "secondary-fixed-dim": "#f5bb88",
+        "primary-fixed": "#bcedd7",
+        "secondary": "#80552b",
+        "outline": "#717974",
+        "on-primary-fixed": "#002116",
+        "surface-bright": "#f8faf6",
+        "on-surface-variant": "#414944",
+        "inverse-primary": "#a1d1bc",
+        "secondary-container": "#fec390",
+        "tertiary-fixed-dim": "#ffb4a4",
+        "on-tertiary-fixed": "#3e0500",
+        "surface-dim": "#d9dad7",
+        "on-error-container": "#93000a",
+        "on-tertiary-fixed-variant": "#852410",
+        "surface-container-high": "#e7e9e5",
+        "on-error": "#ffffff",
+        "on-primary": "#ffffff",
+        "surface-variant": "#e1e3df",
+        "on-secondary-fixed": "#2d1600",
+        "on-primary-fixed-variant": "#214f3f",
+        "surface-container-lowest": "#ffffff",
+        "primary-container": "#1f4d3d",
+        "tertiary": "#610c00",
+        "on-secondary": "#ffffff",
+        "error-container": "#ffdad6",
+        "error": "#ba1a1a",
+        "inverse-on-surface": "#f0f1ed",
+        "surface": "#f8faf6",
+        "primary-fixed-dim": "#a1d1bc",
+        "on-secondary-container": "#794e25",
+        "surface-container-highest": "#e1e3df",
+        "on-tertiary-container": "#ff9680",
+        "background": "#f8faf6",
+        "secondary-fixed": "#ffdcc0",
+        "surface-tint": "#3a6756",
+        "on-secondary-fixed-variant": "#653e16",
+        "tertiary-fixed": "#ffdad3",
+        "on-tertiary": "#ffffff",
+        "on-primary-container": "#8dbda8",
+        "on-background": "#191c1a",
+        "outline-variant": "#c0c8c3"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "spacing-xl": "2rem",
+        "table-gutter": "0.75rem",
+        "spacing-md": "1rem",
+        "spacing-lg": "1.5rem",
+        "spacing-xs": "0.5rem",
+        "spacing-3xs": "0.125rem",
+        "spacing-2xl": "3rem",
+        "layout-margin-desktop": "2rem",
+        "spacing-3xl": "4rem",
+        "layout-margin-mobile": "1rem",
+        "spacing-2xs": "0.25rem",
+        "spacing-sm": "0.75rem",
+        "layout-margin-tablet": "1.5rem"
+      },
+      "fontFamily": {
+        "body-md": ["Hanken Grotesk"],
+        "headline-xl-mobile": ["Hanken Grotesk"],
+        "label-caps": ["Hanken Grotesk"],
+        "data-mono-lg": ["JetBrains Mono"],
+        "body-sm": ["Hanken Grotesk"],
+        "headline-xl": ["Hanken Grotesk"],
+        "headline-sm": ["Hanken Grotesk"],
+        "headline-lg": ["Hanken Grotesk"],
+        "headline-md": ["Hanken Grotesk"],
+        "data-mono-md": ["JetBrains Mono"],
+        "body-lg": ["Hanken Grotesk"],
+        "label-tabular": ["JetBrains Mono"]
+      },
+      "fontSize": {
+        "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+        "headline-xl-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+        "data-mono-lg": ["15px", {"lineHeight": "22px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+        "headline-sm": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600"}],
+        "headline-lg": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "data-mono-md": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+        "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+        "label-tabular": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+      }
+    }
+  }
+}</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-spacing-md flex items-center gap-spacing-xs bg-surface-container-low"><div class="flex items-center justify-center w-7 h-7 bg-primary rounded-lg text-on-primary font-headline-sm text-headline-sm">PI</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight">Proyectos Integrales</span><span class="font-label-caps text-label-caps text-secondary uppercase">Ingeniería &amp; Ambiente</span></div></div><div class="px-spacing-md py-spacing-xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operación Técnica</span></div><nav class="flex flex-col gap-spacing-3xs px-spacing-xs flex-1" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm"><a aria-current="page" class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded transition-colors bg-primary-container text-on-primary-container font-headline-sm" data-path="proyectos" href="#"><span class="material-symbols-outlined text-[20px]">folder_supervised</span><span class="font-body-sm text-body-sm">Proyectos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="aprobaciones" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span class="font-body-sm text-body-sm">Aprobaciones</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="calendario" href="#"><span class="material-symbols-outlined text-[20px]">event_note</span><span class="font-body-sm text-body-sm">Calendario</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contratantes" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-sm text-body-sm">Contratantes</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-body-sm text-body-sm">Reportes</span></a><div class="my-spacing-xs px-spacing-xs"><div class="h-[1px] bg-outline-variant/30"></div></div><div class="px-spacing-xs py-spacing-3xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Gobierno &amp; Control</span></div><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="direccion-ejecutiva" href="#"><span class="material-symbols-outlined text-[20px]">query_stats</span><span class="font-body-sm text-body-sm">Dirección</span><span class="ml-auto font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-inverse-surface text-inverse-on-surface">DARK</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="font-body-sm text-body-sm">Usuarios</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="catalogos" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-sm text-body-sm">Catálogos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="bitacora-general" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-body-sm text-body-sm">Bitácora General</span></a></nav></div><div class="p-spacing-md bg-surface-container-high"><div class="flex items-center justify-between"><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Estándar Técnico</span><span class="font-data-mono-md text-data-mono-md text-primary">ISO 14001 / EIA-v2</span></div><span class="material-symbols-outlined text-outline text-[18px]">format_image_left</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex items-center justify-between px-spacing-lg"><div class="flex items-center gap-spacing-md flex-1 max-w-2xl"><img alt="Logo Proyectos Integrales" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WWI3mVDk-K0VvmFiCvo8p33fqbfLEk7YLxC1GudbnlFUpaiGriHUaR624tyiQNmYunExODktoHOUwF3QL8qZ_IwSF5S_2YljkWvDXX_F70wU2BcAir0ZOTnqLI_71vsDpk6z_zbXASIS0ueLJ7tFBZNvfS6T8aTnTgjZaqsX3YPQTL3hOBf9ordXhPZXWaXrXj9-I0-5Fd6nraudX80Q_6v0_NI_5xzQXtCkGU4fxStFzd9olGwfezDU0"/><div class="relative w-full max-w-md"><span class="material-symbols-outlined absolute left-spacing-xs top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full pl-8 pr-spacing-sm py-spacing-2xs bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Buscar código de expediente, matriz ambiental, contratante o profesional..." type="text"/></div></div><div class="flex items-center gap-spacing-md"><div class="flex items-center gap-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded"><span class="font-label-caps text-label-caps text-secondary uppercase font-semibold">Entrar como:</span><select class="bg-transparent font-body-sm text-body-sm text-on-surface font-medium outline-none cursor-pointer"><option value="admin">Admin</option><option value="coordinador">Coordinador</option><option value="profesional">Profesional</option><option value="administracion">Administración</option><option value="direccion">Dirección</option></select></div><div class="flex items-center gap-spacing-2xs"><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">help</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-spacing-lg pb-spacing-xl flex-1 bg-background"><div class="flex flex-col w-full">
+<!-- Projection Mode Dark Surface Container -->
+<div class="relative w-full rounded-xl bg-inverse-surface text-inverse-on-surface shadow-2xl p-spacing-lg md:p-spacing-xl overflow-hidden">
+<!-- Ambient Backdrop Shimmers for Projector Optics -->
+<div class="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-primary-container/20 blur-3xl pointer-events-none"></div>
+<div class="absolute bottom-0 -left-20 w-80 h-80 rounded-full bg-secondary/15 blur-3xl pointer-events-none"></div>
+<!-- Header Toolbar: Boardroom Mode -->
+<div class="relative z-10 flex flex-wrap items-center justify-between gap-spacing-md pb-spacing-lg border-b border-outline-variant/15">
+<div class="flex flex-col gap-spacing-3xs">
+<div class="flex items-center gap-spacing-xs">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-inverse-primary animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-inverse-primary uppercase tracking-wider">VISTA DE DIRECCIÓN — MODO SALA / PROYECCIÓN</span>
+<span class="bg-primary/40 text-inverse-primary font-label-tabular text-label-tabular px-spacing-xs py-spacing-3xs rounded">DISP: 4K UHD LED</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-inverse-on-surface tracking-tight">Consolidado Ejecutivo de Portafolio Técnico</h1>
+</div>
+<!-- Projection Rotation Controls (Strict Read-Only Mode) -->
+<div class="flex items-center gap-spacing-sm bg-surface-container-highest/10 px-spacing-md py-spacing-xs rounded-lg backdrop-blur-md">
+<div class="flex items-center gap-spacing-2xs">
+<span class="material-symbols-outlined text-[18px] text-inverse-primary">autoplay</span>
+<span class="font-data-mono-md text-data-mono-md text-inverse-on-surface">Rotación automática activa: <span class="text-inverse-primary font-semibold" id="countdown-timer">15s</span></span>
+</div>
+<div class="h-4 w-[1px] bg-outline/40"></div>
+<button class="flex items-center gap-spacing-2xs px-spacing-sm py-spacing-3xs rounded bg-surface-container-highest/20 hover:bg-surface-container-highest/30 text-inverse-on-surface text-body-sm font-headline-sm transition-colors cursor-pointer" id="toggle-rotation-btn" onclick="toggleRotation()">
+<span class="material-symbols-outlined text-[16px]" id="toggle-icon">pause</span>
+<span id="toggle-label">Pausar rotación</span>
+</button>
+</div>
+</div>
+<!-- Executive Warning Banner -->
+<div class="relative z-10 mt-spacing-md bg-tertiary-container/30 rounded-lg p-spacing-sm flex items-center justify-between gap-spacing-md">
+<div class="flex items-center gap-spacing-sm min-w-0">
+<div class="flex-shrink-0 w-8 h-8 rounded bg-tertiary text-on-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-tertiary-container">Alerta Directiva: 2 Expedientes con Etapas Vencidas Requieren Asignación Crítica</span>
+<span class="font-body-sm text-body-sm text-outline-variant">EXP-2024-004 (Permisología Forestal SMA) &amp; EXP-2023-089 (Compuerta EIA Etapa 6) presentan desvío temporal &gt; 18 días hábiles.</span>
+</div>
+</div>
+<div class="flex-shrink-0 font-label-tabular text-label-tabular text-tertiary-fixed-dim bg-tertiary/60 px-spacing-xs py-spacing-2xs rounded">
+        RESOLUCIÓN ASAMBLEA REQ.
+      </div>
+</div>
+<!-- Core KPI Ribbon (Hero Metrics) -->
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-spacing-md my-spacing-lg">
+<!-- Total Cartera -->
+<div class="p-spacing-md rounded-lg bg-surface-container-highest/10 backdrop-blur-md flex flex-col justify-between">
+<div class="flex items-center justify-between text-outline-variant">
+<span class="font-label-caps text-label-caps uppercase">Cartera Total Contratada</span>
+<span class="material-symbols-outlined text-[20px] text-inverse-primary">account_balance_wallet</span>
+</div>
+<div class="mt-spacing-sm">
+<div class="font-headline-xl text-headline-xl text-inverse-on-surface font-label-tabular">$307,000.00 <span class="font-body-sm text-body-sm text-inverse-primary">USD</span></div>
+<div class="flex items-center gap-spacing-2xs mt-spacing-2xs text-inverse-primary font-data-mono-md text-data-mono-md">
+<span class="material-symbols-outlined text-[16px]">verified</span> 100% Cobertura contractual
+          </div>
+</div>
+</div>
+<!-- Total Ejecutado -->
+<div class="p-spacing-md rounded-lg bg-surface-container-highest/10 backdrop-blur-md flex flex-col justify-between">
+<div class="flex items-center justify-between text-outline-variant">
+<span class="font-label-caps text-label-caps uppercase">Presupuesto Ejecutado</span>
+<span class="material-symbols-outlined text-[20px] text-secondary-fixed-dim">paid</span>
+</div>
+<div class="mt-spacing-sm">
+<div class="font-headline-xl text-headline-xl text-inverse-on-surface font-label-tabular">$142,850.00 <span class="font-body-sm text-body-sm text-secondary-fixed-dim">USD</span></div>
+<div class="flex items-center gap-spacing-2xs mt-spacing-2xs text-secondary-fixed-dim font-data-mono-md text-data-mono-md">
+<span class="material-symbols-outlined text-[16px]">pie_chart</span> 46.5% Gasto sobre techo
+          </div>
+</div>
+</div>
+<!-- Avance Ponderado Global -->
+<div class="p-spacing-md rounded-lg bg-surface-container-highest/10 backdrop-blur-md flex flex-col justify-between">
+<div class="flex items-center justify-between text-outline-variant">
+<span class="font-label-caps text-label-caps uppercase">Avance Ponderado Global</span>
+<span class="material-symbols-outlined text-[20px] text-inverse-primary">trending_up</span>
+</div>
+<div class="mt-spacing-sm">
+<div class="flex items-baseline gap-spacing-xs">
+<span class="font-headline-xl text-headline-xl text-inverse-on-surface font-label-tabular">58.4%</span>
+<span class="font-data-mono-md text-data-mono-md text-inverse-primary">+3.8% mes ant.</span>
+</div>
+<div class="w-full bg-surface-container-highest/20 h-2 rounded-full mt-spacing-xs overflow-hidden">
+<div class="bg-inverse-primary h-full rounded-full" style="width: 58.4%;"></div>
+</div>
+</div>
+</div>
+<!-- Distribución de Proyectos Activos -->
+<div class="p-spacing-md rounded-lg bg-surface-container-highest/10 backdrop-blur-md flex flex-col justify-between">
+<div class="flex items-center justify-between text-outline-variant">
+<span class="font-label-caps text-label-caps uppercase">6 Proyectos Activos</span>
+<span class="material-symbols-outlined text-[20px] text-outline">hub</span>
+</div>
+<div class="mt-spacing-xs grid grid-cols-2 gap-x-spacing-xs gap-y-spacing-3xs font-data-mono-md text-data-mono-md">
+<div class="flex items-center gap-spacing-2xs">
+<span class="w-2 h-2 rounded-full bg-inverse-primary"></span>
+<span class="text-inverse-on-surface">2 Ejecución</span>
+</div>
+<div class="flex items-center gap-spacing-2xs">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span>
+<span class="text-inverse-on-surface">1 Compuerta E6</span>
+</div>
+<div class="flex items-center gap-spacing-2xs">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span>
+<span class="text-inverse-on-surface">1 Permisos</span>
+</div>
+<div class="flex items-center gap-spacing-2xs">
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+<span class="text-inverse-on-surface">1 Oferta | 1 Cier.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Projection Analytics Canvas -->
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-spacing-lg">
+<!-- High-Density Physical vs Budgetary Variance Ledger -->
+<div class="lg:col-span-8 flex flex-col rounded-lg bg-surface-container-highest/5 p-spacing-md overflow-hidden">
+<div class="flex items-center justify-between pb-spacing-sm border-b border-outline-variant/15">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-inverse-primary text-[22px]">table_rows</span>
+<h2 class="font-headline-md text-headline-md text-inverse-on-surface">Matriz Analítica de Expedientes</h2>
+</div>
+<div class="flex items-center gap-spacing-sm font-label-tabular text-label-tabular text-outline-variant">
+<span class="flex items-center gap-spacing-3xs"><span class="w-2.5 h-1 bg-inverse-primary inline-block"></span> Físico</span>
+<span class="flex items-center gap-spacing-3xs"><span class="w-2.5 h-1 bg-secondary-fixed-dim inline-block"></span> Financiero</span>
+</div>
+</div>
+<div class="overflow-x-auto mt-spacing-sm">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead>
+<tr class="text-outline-variant font-label-caps text-label-caps uppercase border-b border-outline-variant/10">
+<th class="py-spacing-xs px-spacing-xs">Código &amp; Denominación</th>
+<th class="py-spacing-xs px-spacing-xs">Estado / Fase</th>
+<th class="py-spacing-xs px-spacing-xs text-right">Contratado</th>
+<th class="py-spacing-xs px-spacing-xs text-right">Ejecutado</th>
+<th class="py-spacing-xs px-spacing-xs text-center">Físico vs Gasto</th>
+<th class="py-spacing-xs px-spacing-xs text-right">Desvío</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10 font-data-mono-md text-data-mono-md">
+<!-- Expediente 1 -->
+<tr class="hover:bg-surface-container-highest/10 transition-colors">
+<td class="py-spacing-sm px-spacing-xs">
+<div class="font-headline-sm text-headline-sm text-inverse-on-surface font-headline-sm">EXP-2024-001</div>
+<div class="font-body-sm text-body-sm text-outline-variant truncate max-w-xs">Línea Transmisión Eléctrica 220kV Alto Loa</div>
+</td>
+<td class="py-spacing-sm px-spacing-xs">
+<span class="inline-flex items-center gap-spacing-3xs px-spacing-xs py-spacing-3xs rounded bg-inverse-primary/10 text-inverse-primary text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-inverse-primary"></span> EJECUCIÓN
+                  </span>
+</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-inverse-on-surface">$120,000.00</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-secondary-fixed-dim">$78,000.00</td>
+<td class="py-spacing-sm px-spacing-xs">
+<div class="flex flex-col gap-1 w-32 mx-auto">
+<div class="flex justify-between text-[11px] text-outline-variant">
+<span>72.0%</span><span>65.0%</span>
+</div>
+<div class="w-full bg-surface-container-highest/20 h-1.5 rounded overflow-hidden flex flex-col gap-0.5">
+<div class="bg-inverse-primary h-full" style="width: 72%;"></div>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-inverse-primary font-semibold">+7.0%</td>
+</tr>
+<!-- Expediente 2 (En Alerta) -->
+<tr class="hover:bg-surface-container-highest/10 transition-colors bg-tertiary-container/10">
+<td class="py-spacing-sm px-spacing-xs">
+<div class="font-headline-sm text-headline-sm text-tertiary-fixed-dim">EXP-2023-089</div>
+<div class="font-body-sm text-body-sm text-outline-variant truncate max-w-xs">EIA Terminal Portuario Graneles del Sur</div>
+</td>
+<td class="py-spacing-sm px-spacing-xs">
+<span class="inline-flex items-center gap-spacing-3xs px-spacing-xs py-spacing-3xs rounded bg-tertiary/40 text-tertiary-fixed-dim text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed-dim"></span> COMPUERTA E6
+                  </span>
+</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-inverse-on-surface">$64,000.00</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-secondary-fixed-dim">$41,600.00</td>
+<td class="py-spacing-sm px-spacing-xs">
+<div class="flex flex-col gap-1 w-32 mx-auto">
+<div class="flex justify-between text-[11px] text-outline-variant">
+<span>61.5%</span><span>65.0%</span>
+</div>
+<div class="w-full bg-surface-container-highest/20 h-1.5 rounded overflow-hidden">
+<div class="bg-tertiary-fixed-dim h-full" style="width: 61.5%;"></div>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-tertiary-fixed-dim font-semibold">-3.5%</td>
+</tr>
+<!-- Expediente 3 (En Alerta) -->
+<tr class="hover:bg-surface-container-highest/10 transition-colors bg-tertiary-container/10">
+<td class="py-spacing-sm px-spacing-xs">
+<div class="font-headline-sm text-headline-sm text-tertiary-fixed-dim">EXP-2024-004</div>
+<div class="font-body-sm text-body-sm text-outline-variant truncate max-w-xs">Plan Compensación Forestal Cuenca Maipo</div>
+</td>
+<td class="py-spacing-sm px-spacing-xs">
+<span class="inline-flex items-center gap-spacing-3xs px-spacing-xs py-spacing-3xs rounded bg-secondary/30 text-secondary-fixed text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed"></span> PERMISOLOGÍA
+                  </span>
+</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-inverse-on-surface">$45,000.00</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-secondary-fixed-dim">$11,250.00</td>
+<td class="py-spacing-sm px-spacing-xs">
+<div class="flex flex-col gap-1 w-32 mx-auto">
+<div class="flex justify-between text-[11px] text-outline-variant">
+<span>22.0%</span><span>25.0%</span>
+</div>
+<div class="w-full bg-surface-container-highest/20 h-1.5 rounded overflow-hidden">
+<div class="bg-secondary-fixed h-full" style="width: 22%;"></div>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-tertiary-fixed-dim font-semibold">-3.0%</td>
+</tr>
+<!-- Expediente 4 -->
+<tr class="hover:bg-surface-container-highest/10 transition-colors">
+<td class="py-spacing-sm px-spacing-xs">
+<div class="font-headline-sm text-headline-sm text-inverse-on-surface">EXP-2024-009</div>
+<div class="font-body-sm text-body-sm text-outline-variant truncate max-w-xs">Monitoreo Hidrobiológico Río Claro</div>
+</td>
+<td class="py-spacing-sm px-spacing-xs">
+<span class="inline-flex items-center gap-spacing-3xs px-spacing-xs py-spacing-3xs rounded bg-inverse-primary/10 text-inverse-primary text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-inverse-primary"></span> EJECUCIÓN
+                  </span>
+</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-inverse-on-surface">$38,000.00</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-secondary-fixed-dim">$12,000.00</td>
+<td class="py-spacing-sm px-spacing-xs">
+<div class="flex flex-col gap-1 w-32 mx-auto">
+<div class="flex justify-between text-[11px] text-outline-variant">
+<span>44.0%</span><span>31.5%</span>
+</div>
+<div class="w-full bg-surface-container-highest/20 h-1.5 rounded overflow-hidden">
+<div class="bg-inverse-primary h-full" style="width: 44%;"></div>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-inverse-primary font-semibold">+12.5%</td>
+</tr>
+<!-- Expediente 5 -->
+<tr class="hover:bg-surface-container-highest/10 transition-colors">
+<td class="py-spacing-sm px-spacing-xs">
+<div class="font-headline-sm text-headline-sm text-inverse-on-surface">EXP-2024-012</div>
+<div class="font-body-sm text-body-sm text-outline-variant truncate max-w-xs">Declaración Ambiental Parque Fotovoltaico Sol</div>
+</td>
+<td class="py-spacing-sm px-spacing-xs">
+<span class="inline-flex items-center gap-spacing-3xs px-spacing-xs py-spacing-3xs rounded bg-surface-container-highest/30 text-outline-variant text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span> OFERTA TÉCNICA
+                  </span>
+</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-inverse-on-surface">$22,000.00</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-secondary-fixed-dim">$0.00</td>
+<td class="py-spacing-sm px-spacing-xs">
+<div class="flex flex-col gap-1 w-32 mx-auto">
+<div class="flex justify-between text-[11px] text-outline-variant">
+<span>10.0%</span><span>0.0%</span>
+</div>
+<div class="w-full bg-surface-container-highest/20 h-1.5 rounded overflow-hidden">
+<div class="bg-outline-variant h-full" style="width: 10%;"></div>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-outline-variant font-semibold">0.0%</td>
+</tr>
+<!-- Expediente 6 -->
+<tr class="hover:bg-surface-container-highest/10 transition-colors">
+<td class="py-spacing-sm px-spacing-xs">
+<div class="font-headline-sm text-headline-sm text-inverse-on-surface">EXP-2023-044</div>
+<div class="font-body-sm text-body-sm text-outline-variant truncate max-w-xs">Auditoría Acuífero Salar de Atacama F1</div>
+</td>
+<td class="py-spacing-sm px-spacing-xs">
+<span class="inline-flex items-center gap-spacing-3xs px-spacing-xs py-spacing-3xs rounded bg-surface-container-highest/30 text-inverse-on-surface text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-inverse-primary"></span> CERRADO / AUDIT.
+                  </span>
+</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-inverse-on-surface">$18,000.00</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-secondary-fixed-dim">$18,000.00</td>
+<td class="py-spacing-sm px-spacing-xs">
+<div class="flex flex-col gap-1 w-32 mx-auto">
+<div class="flex justify-between text-[11px] text-outline-variant">
+<span>100%</span><span>100%</span>
+</div>
+<div class="w-full bg-surface-container-highest/20 h-1.5 rounded overflow-hidden">
+<div class="bg-inverse-primary h-full" style="width: 100%;"></div>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-xs text-right text-inverse-primary font-semibold">0.0%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Right Column: Visual Infographics for Executive Review -->
+<div class="lg:col-span-4 flex flex-col gap-spacing-md">
+<!-- Physical Progress Radar / Balance Graphic -->
+<div class="p-spacing-md rounded-lg bg-surface-container-highest/5 flex flex-col justify-between">
+<div class="flex items-center justify-between pb-spacing-xs border-b border-outline-variant/15">
+<span class="font-label-caps text-label-caps text-outline-variant uppercase">Ejecución Presupuestaria Total</span>
+<span class="font-label-tabular text-label-tabular text-inverse-primary">46.5% vs Techo</span>
+</div>
+<!-- Inline Minimal SVG Gauge Chart -->
+<div class="py-spacing-md flex items-center justify-center relative">
+<svg class="w-44 h-44 -rotate-90 transform" viewbox="0 0 100 100">
+<!-- Background Circle -->
+<circle class="text-surface-container-highest/20" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<!-- Executed Segment -->
+<circle class="text-secondary-fixed-dim" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="134.4" stroke-linecap="round" stroke-width="8"></circle>
+<!-- Physical Progress Overlay Ring -->
+<circle class="text-inverse-primary" cx="50" cy="50" fill="transparent" r="32" stroke="currentColor" stroke-dasharray="201" stroke-dashoffset="83.6" stroke-linecap="round" stroke-width="6"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="font-headline-lg text-headline-lg text-inverse-on-surface font-label-tabular">58.4%</span>
+<span class="font-label-caps text-label-caps text-outline-variant uppercase">Avance Medio</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-spacing-xs pt-spacing-xs border-t border-outline-variant/15 text-center font-data-mono-md text-data-mono-md">
+<div class="bg-surface-container-highest/10 p-spacing-2xs rounded">
+<div class="text-outline-variant text-[11px]">Comprometido</div>
+<div class="text-secondary-fixed-dim font-semibold">$142.8k</div>
+</div>
+<div class="bg-surface-container-highest/10 p-spacing-2xs rounded">
+<div class="text-outline-variant text-[11px]">Margen Remanente</div>
+<div class="text-inverse-primary font-semibold">$164.1k</div>
+</div>
+</div>
+</div>
+<!-- Real-Time Field Verification Status -->
+<div class="p-spacing-md rounded-lg bg-surface-container-highest/5 flex flex-col justify-between flex-1">
+<div class="flex items-center justify-between pb-spacing-2xs border-b border-outline-variant/15">
+<span class="font-label-caps text-label-caps text-outline-variant uppercase">Campañas &amp; Auditorías en Terreno</span>
+<span class="flex items-center gap-1 font-label-tabular text-label-tabular text-inverse-primary">
+<span class="w-2 h-2 rounded-full bg-inverse-primary animate-ping"></span> EN VIVO
+            </span>
+</div>
+<div class="flex flex-col gap-spacing-sm my-spacing-sm font-body-sm text-body-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[18px] text-inverse-primary">forest</span>
+<span class="text-inverse-on-surface">Cuadrilla 02 (Maipo)</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-inverse-primary">GPS Sinc. 100%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed-dim">water_drop</span>
+<span class="text-inverse-on-surface">Muestreo Río Claro</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-secondary-fixed-dim">Fase 4 / 6</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[18px] text-outline">verified_user</span>
+<span class="text-inverse-on-surface">Inspección SMA Alto Loa</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-outline-variant">Aprobada s/ Obs.</span>
+</div>
+</div>
+<div class="p-spacing-xs rounded bg-surface-container-highest/10 text-[12px] font-data-mono-md text-outline-variant flex items-center justify-between">
+<span>Última reconciliación contable:</span>
+<span class="text-inverse-on-surface font-semibold">Hoy, 14:30 CLT</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Projection Room Subtle Footer / Watermark -->
+<div class="relative z-10 mt-spacing-lg pt-spacing-sm border-t border-outline-variant/10 flex flex-wrap items-center justify-between text-outline-variant font-data-mono-md text-[11px]">
+<div class="flex items-center gap-spacing-md">
+<span>SISTEMA DE GOBERNANZA TÉCNICA PI-SIGA</span>
+<span>•</span>
+<span>AUDITORÍA AMBIENTAL &amp; FORENSE</span>
+<span>•</span>
+<span>SESIÓN DIRECTIVA ORDINARIA N° 42</span>
+</div>
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+<span>DATOS CIFRADOS EN TRÁNSITO / SOLO LECTURA EJECUTIVA</span>
+</div>
+</div>
+</div>
+</div>
+<script>
+  let secondsRemaining = 15;
+  let isPaused = false;
+  let timerInterval;
+
+  function runCountdown() {
+    timerInterval = setInterval(() => {
+      if (!isPaused) {
+        secondsRemaining--;
+        if (secondsRemaining <= 0) {
+          secondsRemaining = 15;
+          // Loop rotation visual trigger (in real system triggers carousel/tab slide)
+          const timerEl = document.getElementById('countdown-timer');
+          if (timerEl) {
+            timerEl.classList.add('opacity-40');
+            setTimeout(() => timerEl.classList.remove('opacity-40'), 300);
+          }
+        }
+        const display = document.getElementById('countdown-timer');
+        if (display) {
+          display.textContent = secondsRemaining + 's';
+        }
+      }
+    }, 1000);
+  }
+
+  function toggleRotation() {
+    isPaused = !isPaused;
+    const label = document.getElementById('toggle-label');
+    const icon = document.getElementById('toggle-icon');
+    const timerDisplay = document.getElementById('countdown-timer');
+
+    if (isPaused) {
+      if (label) label.textContent = 'Reanudar rotación';
+      if (icon) icon.textContent = 'play_arrow';
+      if (timerDisplay) timerDisplay.textContent = 'Pausado';
+    } else {
+      if (label) label.textContent = 'Pausar rotación';
+      if (icon) icon.textContent = 'pause';
+      secondsRemaining = 15;
+      if (timerDisplay) timerDisplay.textContent = secondsRemaining + 's';
+    }
+  }
+
+  // Initialize countdown on mount
+  runCountdown();
+</script></main></div></body></html>

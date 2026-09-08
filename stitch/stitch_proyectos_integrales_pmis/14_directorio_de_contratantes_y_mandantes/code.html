@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-surface": "#191c1a",
+        "inverse-surface": "#2e312f",
+        "surface-container-low": "#f3f4f0",
+        "surface-container": "#edeeeb",
+        "primary": "#023627",
+        "tertiary-container": "#82220e",
+        "secondary-fixed-dim": "#f5bb88",
+        "primary-fixed": "#bcedd7",
+        "secondary": "#80552b",
+        "outline": "#717974",
+        "on-primary-fixed": "#002116",
+        "surface-bright": "#f8faf6",
+        "on-surface-variant": "#414944",
+        "inverse-primary": "#a1d1bc",
+        "secondary-container": "#fec390",
+        "tertiary-fixed-dim": "#ffb4a4",
+        "on-tertiary-fixed": "#3e0500",
+        "surface-dim": "#d9dad7",
+        "on-error-container": "#93000a",
+        "on-tertiary-fixed-variant": "#852410",
+        "surface-container-high": "#e7e9e5",
+        "on-error": "#ffffff",
+        "on-primary": "#ffffff",
+        "surface-variant": "#e1e3df",
+        "on-secondary-fixed": "#2d1600",
+        "on-primary-fixed-variant": "#214f3f",
+        "surface-container-lowest": "#ffffff",
+        "primary-container": "#1f4d3d",
+        "tertiary": "#610c00",
+        "on-secondary": "#ffffff",
+        "error-container": "#ffdad6",
+        "error": "#ba1a1a",
+        "inverse-on-surface": "#f0f1ed",
+        "surface": "#f8faf6",
+        "primary-fixed-dim": "#a1d1bc",
+        "on-secondary-container": "#794e25",
+        "surface-container-highest": "#e1e3df",
+        "on-tertiary-container": "#ff9680",
+        "background": "#f8faf6",
+        "secondary-fixed": "#ffdcc0",
+        "surface-tint": "#3a6756",
+        "on-secondary-fixed-variant": "#653e16",
+        "tertiary-fixed": "#ffdad3",
+        "on-tertiary": "#ffffff",
+        "on-primary-container": "#8dbda8",
+        "on-background": "#191c1a",
+        "outline-variant": "#c0c8c3"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "spacing-xl": "2rem",
+        "table-gutter": "0.75rem",
+        "spacing-md": "1rem",
+        "spacing-lg": "1.5rem",
+        "spacing-xs": "0.5rem",
+        "spacing-3xs": "0.125rem",
+        "spacing-2xl": "3rem",
+        "layout-margin-desktop": "2rem",
+        "spacing-3xl": "4rem",
+        "layout-margin-mobile": "1rem",
+        "spacing-2xs": "0.25rem",
+        "spacing-sm": "0.75rem",
+        "layout-margin-tablet": "1.5rem"
+      },
+      "fontFamily": {
+        "body-md": ["Hanken Grotesk"],
+        "headline-xl-mobile": ["Hanken Grotesk"],
+        "label-caps": ["Hanken Grotesk"],
+        "data-mono-lg": ["JetBrains Mono"],
+        "body-sm": ["Hanken Grotesk"],
+        "headline-xl": ["Hanken Grotesk"],
+        "headline-sm": ["Hanken Grotesk"],
+        "headline-lg": ["Hanken Grotesk"],
+        "headline-md": ["Hanken Grotesk"],
+        "data-mono-md": ["JetBrains Mono"],
+        "body-lg": ["Hanken Grotesk"],
+        "label-tabular": ["JetBrains Mono"]
+      },
+      "fontSize": {
+        "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+        "headline-xl-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+        "data-mono-lg": ["15px", {"lineHeight": "22px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+        "headline-sm": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600"}],
+        "headline-lg": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "data-mono-md": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+        "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+        "label-tabular": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+      }
+    }
+  }
+}</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-spacing-md flex items-center gap-spacing-xs bg-surface-container-low"><div class="flex items-center justify-center w-7 h-7 bg-primary rounded-lg text-on-primary font-headline-sm text-headline-sm">PI</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight">Proyectos Integrales</span><span class="font-label-caps text-label-caps text-secondary uppercase">Ingeniería &amp; Ambiente</span></div></div><div class="px-spacing-md py-spacing-xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operación Técnica</span></div><nav class="flex flex-col gap-spacing-3xs px-spacing-xs flex-1" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm"><a aria-current="page" class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded transition-colors bg-primary-container text-on-primary-container font-headline-sm" data-path="proyectos" href="#"><span class="material-symbols-outlined text-[20px]">folder_supervised</span><span class="font-body-sm text-body-sm">Proyectos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="aprobaciones" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span class="font-body-sm text-body-sm">Aprobaciones</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="calendario" href="#"><span class="material-symbols-outlined text-[20px]">event_note</span><span class="font-body-sm text-body-sm">Calendario</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contratantes" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-sm text-body-sm">Contratantes</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-body-sm text-body-sm">Reportes</span></a><div class="my-spacing-xs px-spacing-xs"><div class="h-[1px] bg-outline-variant/30"></div></div><div class="px-spacing-xs py-spacing-3xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Gobierno &amp; Control</span></div><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="direccion-ejecutiva" href="#"><span class="material-symbols-outlined text-[20px]">query_stats</span><span class="font-body-sm text-body-sm">Dirección</span><span class="ml-auto font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-inverse-surface text-inverse-on-surface">DARK</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="font-body-sm text-body-sm">Usuarios</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="catalogos" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-sm text-body-sm">Catálogos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="bitacora-general" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-body-sm text-body-sm">Bitácora General</span></a></nav></div><div class="p-spacing-md bg-surface-container-high"><div class="flex items-center justify-between"><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Estándar Técnico</span><span class="font-data-mono-md text-data-mono-md text-primary">ISO 14001 / EIA-v2</span></div><span class="material-symbols-outlined text-outline text-[18px]">format_image_left</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex items-center justify-between px-spacing-lg"><div class="flex items-center gap-spacing-md flex-1 max-w-2xl"><img alt="Logo Proyectos Integrales" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WWI3mVDk-K0VvmFiCvo8p33fqbfLEk7YLxC1GudbnlFUpaiGriHUaR624tyiQNmYunExODktoHOUwF3QL8qZ_IwSF5S_2YljkWvDXX_F70wU2BcAir0ZOTnqLI_71vsDpk6z_zbXASIS0ueLJ7tFBZNvfS6T8aTnTgjZaqsX3YPQTL3hOBf9ordXhPZXWaXrXj9-I0-5Fd6nraudX80Q_6v0_NI_5xzQXtCkGU4fxStFzd9olGwfezDU0"/><div class="relative w-full max-w-md"><span class="material-symbols-outlined absolute left-spacing-xs top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full pl-8 pr-spacing-sm py-spacing-2xs bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Buscar código de expediente, matriz ambiental, contratante o profesional..." type="text"/></div></div><div class="flex items-center gap-spacing-md"><div class="flex items-center gap-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded"><span class="font-label-caps text-label-caps text-secondary uppercase font-semibold">Entrar como:</span><select class="bg-transparent font-body-sm text-body-sm text-on-surface font-medium outline-none cursor-pointer"><option value="admin">Admin</option><option value="coordinador">Coordinador</option><option value="profesional">Profesional</option><option value="administracion">Administración</option><option value="direccion">Dirección</option></select></div><div class="flex items-center gap-spacing-2xs"><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">help</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-spacing-lg pb-spacing-xl flex-1 bg-background"><div class="flex flex-col w-full gap-spacing-lg">
+<!-- 1. Encabezado de Gobernanza y Contratos -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-spacing-md bg-surface-container-lowest p-spacing-lg rounded-lg shadow-sm">
+<div class="flex flex-col gap-spacing-2xs max-w-3xl">
+<div class="flex items-center gap-spacing-xs">
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-wider">Subdirección de Finanzas &amp; Legal</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Módulo 14 · Clientes Corporativos</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Gestión de Contratantes y Mandantes Institucionales</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Directorio maestro de mandantes públicos y corporativos, solvencia contractual, pólizas de garantía de seriedad vigentes y cartera de expedientes técnicos en ejecución activa.
+      </p>
+</div>
+<div class="flex flex-wrap items-center gap-spacing-xs">
+<button class="flex items-center gap-spacing-xs px-spacing-sm py-spacing-xs bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-headline-sm text-body-sm rounded-lg transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-outline">download</span>
+<span>Descargar Cartera (.CSV / PDF)</span>
+</button>
+<button class="flex items-center gap-spacing-xs px-spacing-md py-spacing-xs bg-primary hover:bg-primary-container text-on-primary font-headline-sm text-body-sm rounded-lg shadow-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">add_business</span>
+<span>+ Registrar Nuevo Contratante</span>
+</button>
+</div>
+</div>
+<!-- 2. Métricas Clave de la Cartera de Clientes -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-spacing-md">
+<!-- Métrica 1 -->
+<div class="p-spacing-md bg-surface-container-lowest rounded-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps uppercase">Mandantes Activos</span>
+<span class="material-symbols-outlined text-primary text-[20px]">corporate_fare</span>
+</div>
+<div class="mt-spacing-sm flex items-baseline gap-spacing-xs">
+<span class="font-data-mono-lg text-headline-xl text-primary font-semibold">14</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">organizaciones</span>
+</div>
+<div class="mt-spacing-xs flex items-center justify-between text-on-surface-variant pt-spacing-2xs bg-surface-container-low/50 px-spacing-xs rounded">
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">8 Privado / Energía</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">6 Sector Público</span>
+</div>
+</div>
+<!-- Métrica 2 -->
+<div class="p-spacing-md bg-surface-container-lowest rounded-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps uppercase">Monto Total Contratado</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">payments</span>
+</div>
+<div class="mt-spacing-sm flex items-baseline gap-spacing-xs">
+<span class="font-data-mono-lg text-headline-xl text-primary font-semibold">$420,000</span>
+<span class="font-label-tabular text-label-tabular text-secondary uppercase font-semibold">USD</span>
+</div>
+<div class="mt-spacing-xs flex items-center justify-between text-on-surface-variant pt-spacing-2xs px-spacing-xs">
+<span class="font-body-sm text-body-sm text-on-surface-variant">En ejecución fiscal 2024</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-medium">92% facturable</span>
+</div>
+</div>
+<!-- Métrica 3 -->
+<div class="p-spacing-md bg-surface-container-lowest rounded-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps uppercase">Garantías y Boletas</span>
+<span class="material-symbols-outlined text-primary text-[20px]">verified_user</span>
+</div>
+<div class="mt-spacing-sm flex items-baseline gap-spacing-xs">
+<span class="font-data-mono-lg text-headline-xl text-primary font-semibold">100%</span>
+<span class="font-body-sm text-body-sm text-primary-container font-medium">Al Día</span>
+</div>
+<div class="mt-spacing-xs flex items-center justify-between text-on-surface-variant pt-spacing-2xs px-spacing-xs">
+<span class="font-body-sm text-body-sm text-on-surface-variant">0 pólizas vencidas</span>
+<span class="font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs bg-primary-fixed/30 text-on-primary-fixed-variant rounded">12 VIGENTES</span>
+</div>
+</div>
+<!-- Métrica 4 -->
+<div class="p-spacing-md bg-surface-container-lowest rounded-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps uppercase">Tasa Satisfacción / SLA</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">thumb_up</span>
+</div>
+<div class="mt-spacing-sm flex items-baseline gap-spacing-xs">
+<span class="font-data-mono-lg text-headline-xl text-primary font-semibold">96.4%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">visación</span>
+</div>
+<div class="mt-spacing-xs flex items-center justify-between text-on-surface-variant pt-spacing-2xs px-spacing-xs">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Resolución R-Técnica</span>
+<span class="font-data-mono-md text-data-mono-md text-secondary font-medium">4.2 días prom.</span>
+</div>
+</div>
+</div>
+<!-- 3. Barra de Búsqueda y Filtros de Clientes -->
+<div class="flex flex-col lg:flex-row gap-spacing-sm items-stretch lg:items-center justify-between p-spacing-sm bg-surface-container-lowest rounded-lg shadow-sm">
+<div class="relative flex-1 max-w-xl">
+<span class="material-symbols-outlined absolute left-spacing-sm top-1/2 -translate-y-1/2 text-outline text-[18px]">filter_list</span>
+<input class="w-full pl-9 pr-spacing-md py-spacing-xs bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded-lg outline-none focus:bg-surface-container-lowest transition-colors" id="clientSearchInput" placeholder="Buscar por Razón Social, RUT (ej. 76.842.190-K) o contraparte..." type="text"/>
+</div>
+<div class="flex flex-wrap items-center gap-spacing-xs">
+<div class="flex items-center gap-spacing-2xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded-lg">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Sector:</span>
+<select class="bg-transparent font-body-sm text-body-sm text-on-surface outline-none cursor-pointer">
+<option value="all">Todos los Sectores</option>
+<option value="energia">Energía Renovable</option>
+<option value="forestal">Forestal &amp; Silvícola</option>
+<option value="publico">Obras Públicas / MOP</option>
+<option value="mineria">Minería &amp; Faenas</option>
+</select>
+</div>
+<div class="flex items-center gap-spacing-2xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded-lg">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Contrato:</span>
+<select class="bg-transparent font-body-sm text-body-sm text-on-surface outline-none cursor-pointer">
+<option value="all">Cualquier Estado</option>
+<option value="vigente">Vigente (Activo)</option>
+<option value="renovar">Por Renovar (&lt; 60 d)</option>
+<option value="cierre">En Cierre Técnico</option>
+</select>
+</div>
+<div class="flex items-center gap-spacing-2xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded-lg">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Riesgo Cobro:</span>
+<select class="bg-transparent font-body-sm text-body-sm text-on-surface outline-none cursor-pointer">
+<option value="all">Todos</option>
+<option value="bajo">Riesgo Bajo (A+)</option>
+<option value="controlado">Riesgo Controlado</option>
+</select>
+</div>
+<button class="p-spacing-xs bg-surface-container hover:bg-surface-container-high text-on-surface-variant rounded-lg" title="Limpiar filtros">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+</button>
+</div>
+</div>
+<!-- Contenedor Principal: Lista y Drawer Lateral Integrado -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-spacing-md items-start">
+<!-- 4. Directorio de Contratantes (Cards / Tabla Maestra de Alta Densidad) -->
+<div class="lg:col-span-7 flex flex-col gap-spacing-xs">
+<div class="flex items-center justify-between px-spacing-2xs mb-spacing-2xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Mandantes Registrados (Ordenados por Facturación Activa)</span>
+<span class="font-label-tabular text-label-tabular text-secondary">5 VISIBLES EN VISTA RÁPIDA</span>
+</div>
+<!-- Item 1: Generadora Eólica del Norte S.A. (Seleccionado por defecto) -->
+<div class="contractor-card cursor-pointer p-spacing-md bg-surface-container-lowest rounded-lg shadow-sm transition-all hover:shadow-md bg-primary-fixed/10" id="card-eolica" onclick="selectContractor('eolica')">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-spacing-xs">
+<div class="flex items-start gap-spacing-sm">
+<div class="w-10 h-10 rounded bg-primary-container text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">wind_power</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-spacing-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-primary">Generadora Eólica del Norte S.A.</span>
+<span class="font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-surface-container text-on-surface-variant">RUT 76.842.190-K</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-spacing-3xs">Sector: Energía Renovable No Convencional (ERNC)</span>
+</div>
+</div>
+<div class="flex sm:flex-col items-end gap-spacing-2xs">
+<span class="font-label-tabular text-label-tabular px-spacing-xs py-spacing-3xs rounded bg-primary-fixed text-on-primary-fixed-variant font-medium flex items-center gap-spacing-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              Vigente / En Regla
+            </span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">$185,000 USD</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-spacing-xs mt-spacing-md pt-spacing-sm bg-surface-container-low/40 p-spacing-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Expedientes Activos</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">2 proyectos (PI-2024-002 EIA)</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Contacto Técnico Principal</span>
+<span class="font-body-sm text-body-sm text-on-surface">Ing. Matías Silva (Sustentab.)</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Póliza Garantía</span>
+<span class="font-label-tabular text-label-tabular text-primary">Santander · Dic 2024</span>
+</div>
+</div>
+</div>
+<!-- Item 2: Maderas del Maule S.A. -->
+<div class="contractor-card cursor-pointer p-spacing-md bg-surface-container-lowest rounded-lg shadow-sm transition-all hover:shadow-md" id="card-maule" onclick="selectContractor('maule')">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-spacing-xs">
+<div class="flex items-start gap-spacing-sm">
+<div class="w-10 h-10 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">forest</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-spacing-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface">Maderas del Maule S.A.</span>
+<span class="font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-surface-container text-on-surface-variant">RUT 96.512.330-4</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-spacing-3xs">Sector: Silvícola, Manejo Forestal y Biomasa</span>
+</div>
+</div>
+<div class="flex sm:flex-col items-end gap-spacing-2xs">
+<span class="font-label-tabular text-label-tabular px-spacing-xs py-spacing-3xs rounded bg-primary-fixed text-on-primary-fixed-variant font-medium flex items-center gap-spacing-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              Vigente
+            </span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">$74,500 USD</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-spacing-xs mt-spacing-md pt-spacing-sm bg-surface-container-low/40 p-spacing-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Expedientes Activos</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">1 proyecto (PI-2024-001 Roble)</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Contacto Técnico Principal</span>
+<span class="font-body-sm text-body-sm text-on-surface">Roberto Larraín G.</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Póliza Garantía</span>
+<span class="font-label-tabular text-label-tabular text-primary">BCI Seguros · Ene 2025</span>
+</div>
+</div>
+</div>
+<!-- Item 3: Dirección de Obras Hidráulicas (DOH - MOP Biobío) -->
+<div class="contractor-card cursor-pointer p-spacing-md bg-surface-container-lowest rounded-lg shadow-sm transition-all hover:shadow-md" id="card-doh" onclick="selectContractor('doh')">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-spacing-xs">
+<div class="flex items-start gap-spacing-sm">
+<div class="w-10 h-10 rounded bg-surface-container-highest text-on-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">account_balance</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-spacing-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface">Dirección de Obras Hidráulicas (DOH - MOP)</span>
+<span class="font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-surface-container text-on-surface-variant">RUT 61.201.000-0</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-spacing-3xs">Sector: Infraestructura Pública y Gestión de Cuencas</span>
+</div>
+</div>
+<div class="flex sm:flex-col items-end gap-spacing-2xs">
+<span class="font-label-tabular text-label-tabular px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-on-surface-variant font-medium flex items-center gap-spacing-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              Licitación MOP
+            </span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">$92,000 USD</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-spacing-xs mt-spacing-md pt-spacing-sm bg-surface-container-low/40 p-spacing-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Expedientes Activos</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">1 proyecto (PI-2024-003 Laja)</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Inspector Fiscal MOP</span>
+<span class="font-body-sm text-body-sm text-on-surface">Ing. Claudia Valdés</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Boleta Fiel Cumplimiento</span>
+<span class="font-label-tabular text-label-tabular text-primary">BancoEstado · Mar 2025</span>
+</div>
+</div>
+</div>
+<!-- Item 4: Consorcio Minero Atacama SpA -->
+<div class="contractor-card cursor-pointer p-spacing-md bg-surface-container-lowest rounded-lg shadow-sm transition-all hover:shadow-md" id="card-minero" onclick="selectContractor('minero')">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-spacing-xs">
+<div class="flex items-start gap-spacing-sm">
+<div class="w-10 h-10 rounded bg-surface-container-high text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">landscape</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-spacing-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface">Consorcio Minero Atacama SpA</span>
+<span class="font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-surface-container text-on-surface-variant">RUT 77.104.920-1</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-spacing-3xs">Sector: Minería de Cobre &amp; Transmisión de Alta Tensión</span>
+</div>
+</div>
+<div class="flex sm:flex-col items-end gap-spacing-2xs">
+<span class="font-label-tabular text-label-tabular px-spacing-xs py-spacing-3xs rounded bg-primary-fixed text-on-primary-fixed-variant font-medium flex items-center gap-spacing-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              Vigente
+            </span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">$48,500 USD</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-spacing-xs mt-spacing-md pt-spacing-sm bg-surface-container-low/40 p-spacing-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Expedientes Activos</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">1 proyecto (PI-2024-004 LAT)</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Gerencia Permisos</span>
+<span class="font-body-sm text-body-sm text-on-surface">Rodrigo Saavedra</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Póliza Garantía</span>
+<span class="font-label-tabular text-label-tabular text-primary">Mapfre · Nov 2024</span>
+</div>
+</div>
+</div>
+<!-- Item 5: Celulosa Austral SpA -->
+<div class="contractor-card cursor-pointer p-spacing-md bg-surface-container-lowest rounded-lg shadow-sm transition-all hover:shadow-md" id="card-celulosa" onclick="selectContractor('celulosa')">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-spacing-xs">
+<div class="flex items-start gap-spacing-sm">
+<div class="w-10 h-10 rounded bg-surface-container-low text-outline flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">factory</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-spacing-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface">Celulosa Austral SpA</span>
+<span class="font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-surface-container text-on-surface-variant">RUT 76.320.890-8</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-spacing-3xs">Sector: Complejo Industrial &amp; Efluentes Tratados</span>
+</div>
+</div>
+<div class="flex sm:flex-col items-end gap-spacing-2xs">
+<span class="font-label-tabular text-label-tabular px-spacing-xs py-spacing-3xs rounded bg-secondary-fixed text-on-secondary-fixed-variant font-medium flex items-center gap-spacing-3xs">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              En Cierre Técnico
+            </span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant font-semibold">$20,000 USD</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-spacing-xs mt-spacing-md pt-spacing-sm bg-surface-container-low/40 p-spacing-xs rounded">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Expedientes Activos</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Informe de Cierre Final</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Auditor Ambiental</span>
+<span class="font-body-sm text-body-sm text-on-surface">María Elena Henríquez</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Garantía Seriedad</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">En Proceso Devolución</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 5. Ficha Detallada Lateral / Dossier Integral del Contratante Seleccionado -->
+<div class="lg:col-span-5 flex flex-col gap-spacing-md bg-surface-container-lowest p-spacing-lg rounded-lg shadow-sm sticky top-20">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-spacing-2xs">
+<span class="font-label-caps text-label-caps text-primary uppercase font-bold">Dossier de Mandante</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="font-label-tabular text-label-tabular text-secondary font-medium">EXP-CL-001</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary mt-spacing-3xs" id="detailTitle">Generadora Eólica del Norte S.A.</h2>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant" id="detailRut">RUT: 76.842.190-K · Santiago, Chile</span>
+</div>
+<div class="flex items-center gap-spacing-2xs">
+<button class="w-8 h-8 flex items-center justify-center rounded bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors" title="Editar Mandante">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors" title="Ver Expediente Completo">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+</div>
+</div>
+<!-- Sección Contacto y Contraparte FEA -->
+<div class="p-spacing-sm bg-surface-container-low rounded-lg flex flex-col gap-spacing-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Contrapartes Designadas</span>
+<span class="font-label-tabular text-label-tabular text-primary font-medium flex items-center gap-spacing-3xs">
+<span class="material-symbols-outlined text-[14px]">key</span> FEA Registrada
+          </span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-spacing-xs pt-spacing-3xs">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Ing. Matías Silva P.</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Contraparte Técnica Titular</span>
+<span class="font-data-mono-md text-data-mono-md text-primary mt-spacing-3xs">msilva@eolicadelnorte.cl</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Abg. Paula Santelices</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Apoderada Legal / Firmante FEA</span>
+<span class="font-data-mono-md text-data-mono-md text-primary mt-spacing-3xs">psantelices@eolicadelnorte.cl</span>
+</div>
+</div>
+</div>
+<!-- Proyectos Vinculados & Avances -->
+<div class="flex flex-col gap-spacing-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Expedientes &amp; Avance Físico/Financiero</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">2 Contratos Activos</span>
+</div>
+<!-- Proyecto 1 -->
+<div class="p-spacing-sm bg-surface-container-low/60 rounded-lg flex flex-col gap-spacing-xs">
+<div class="flex items-start justify-between gap-spacing-xs">
+<div class="flex flex-col">
+<span class="font-headline-sm text-body-sm text-on-surface font-semibold">PI-2024-002: EIA Parque Eólico Península</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Línea Base Flora, Fauna y Ruido Submarino</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-primary font-bold">$120,000 USD</span>
+</div>
+<div class="flex flex-col gap-spacing-3xs mt-spacing-3xs">
+<div class="flex items-center justify-between font-label-tabular text-label-tabular text-on-surface-variant">
+<span>Avance Técnico Físico: 78%</span>
+<span>Devengado: $93,600 USD</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 78%;"></div>
+</div>
+</div>
+</div>
+<!-- Proyecto 2 -->
+<div class="p-spacing-sm bg-surface-container-low/60 rounded-lg flex flex-col gap-spacing-xs">
+<div class="flex items-start justify-between gap-spacing-xs">
+<div class="flex flex-col">
+<span class="font-headline-sm text-body-sm text-on-surface font-semibold">PI-2024-006: Monitoreo Avifauna Estacional</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Campaña de Invierno y Primavera 2024</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-primary font-bold">$65,000 USD</span>
+</div>
+<div class="flex flex-col gap-spacing-3xs mt-spacing-3xs">
+<div class="flex items-center justify-between font-label-tabular text-label-tabular text-on-surface-variant">
+<span>Avance Técnico Físico: 42%</span>
+<span>Devengado: $27,300 USD</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 42%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Matriz de Pólizas y Garantías Contractuales -->
+<div class="flex flex-col gap-spacing-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Pólizas y Boletas de Garantía</span>
+<span class="font-label-tabular text-label-tabular text-primary font-semibold">AUDITADAS 100%</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase">
+<th class="py-spacing-2xs px-spacing-xs">Tipo / N° Póliza</th>
+<th class="py-spacing-2xs px-spacing-xs">Aseguradora</th>
+<th class="py-spacing-2xs px-spacing-xs text-right">Monto</th>
+<th class="py-spacing-2xs px-spacing-xs text-right">Vencimiento</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm divide-y divide-transparent">
+<tr class="bg-surface-container-lowest">
+<td class="py-spacing-xs px-spacing-xs">
+<div class="font-medium text-on-surface">Fiel Cumplimiento</div>
+<div class="font-label-tabular text-label-tabular text-on-surface-variant">POL-8849-STND</div>
+</td>
+<td class="py-spacing-xs px-spacing-xs text-on-surface-variant">Santander Seguros</td>
+<td class="py-spacing-xs px-spacing-xs text-right font-data-mono-md text-data-mono-md text-on-surface">1,200 UF</td>
+<td class="py-spacing-xs px-spacing-xs text-right font-label-tabular text-label-tabular text-primary font-semibold">18/12/2024</td>
+</tr>
+<tr class="bg-surface-container-low/30">
+<td class="py-spacing-xs px-spacing-xs">
+<div class="font-medium text-on-surface">Seriedad Oferta EIA</div>
+<div class="font-label-tabular text-label-tabular text-on-surface-variant">POL-1092-CHL</div>
+</td>
+<td class="py-spacing-xs px-spacing-xs text-on-surface-variant">Consorcio Nac.</td>
+<td class="py-spacing-xs px-spacing-xs text-right font-data-mono-md text-data-mono-md text-on-surface">450 UF</td>
+<td class="py-spacing-xs px-spacing-xs text-right font-label-tabular text-label-tabular text-primary font-semibold">28/02/2025</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Historial DTE Facturación SII -->
+<div class="flex flex-col gap-spacing-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Conciliación Tributaria DTE</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">Últimos 3 Documentos</span>
+</div>
+<div class="flex flex-col gap-spacing-2xs">
+<div class="flex items-center justify-between p-spacing-xs bg-surface-container-low rounded">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[18px] text-primary">receipt</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Factura Electrónica N° 1042</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">Emitida 04/10/2024 · Hito Entregable 2</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">$38,500 USD</span>
+<span class="font-label-tabular text-label-tabular text-primary font-medium">Conciliada Banco</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-spacing-xs bg-surface-container-low rounded">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary">pending_actions</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Factura Electrónica N° 1058</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">Emitida 02/11/2024 · Hito Entregable 3</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-data-mono-md text-data-mono-md text-secondary font-semibold">$45,000 USD</span>
+<span class="font-label-tabular text-label-tabular text-secondary font-medium">En Cobranza (14d)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Acciones de Gestión Rápida -->
+<div class="pt-spacing-xs flex items-center justify-between gap-spacing-xs">
+<button class="flex-1 py-spacing-xs px-spacing-sm bg-surface-container text-on-surface hover:bg-surface-container-high rounded font-body-sm text-body-sm font-medium transition-colors text-center">
+          Emitir Estado de Pago
+        </button>
+<button class="flex-1 py-spacing-xs px-spacing-sm bg-primary text-on-primary hover:bg-primary-container rounded font-body-sm text-body-sm font-medium transition-colors text-center">
+          Auditar Pólizas
+        </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function selectContractor(id) {
+    // Quitar estados activos previos
+    const cards = document.querySelectorAll('.contractor-card');
+    cards.forEach(card => {
+      card.classList.remove('bg-primary-fixed/10');
+    });
+
+    const activeCard = document.getElementById('card-' + id);
+    if (activeCard) {
+      activeCard.classList.add('bg-primary-fixed/10');
+    }
+
+    // Datos simulados para actualizar la ficha lateral
+    const clientData = {
+      'eolica': {
+        title: 'Generadora Eólica del Norte S.A.',
+        rut: 'RUT: 76.842.190-K · Santiago, Chile'
+      },
+      'maule': {
+        title: 'Maderas del Maule S.A.',
+        rut: 'RUT: 96.512.330-4 · Talca, Maule'
+      },
+      'doh': {
+        title: 'Dirección de Obras Hidráulicas (DOH)',
+        rut: 'RUT: 61.201.000-0 · Concepción, Biobío'
+      },
+      'minero': {
+        title: 'Consorcio Minero Atacama SpA',
+        rut: 'RUT: 77.104.920-1 · Copiapó, Atacama'
+      },
+      'celulosa': {
+        title: 'Celulosa Austral SpA',
+        rut: 'RUT: 76.320.890-8 · Valdivia, Los Ríos'
+      }
+    };
+
+    if (clientData[id]) {
+      const titleEl = document.getElementById('detailTitle');
+      const rutEl = document.getElementById('detailRut');
+      if (titleEl) titleEl.innerText = clientData[id].title;
+      if (rutEl) rutEl.innerText = clientData[id].rut;
+    }
+  }
+
+  // Filtrado reactivo en input de búsqueda
+  const searchInput = document.getElementById('clientSearchInput');
+  if (searchInput) {
+    searchInput.addEventListener('input', function(e) {
+      const term = e.target.value.toLowerCase();
+      const cards = document.querySelectorAll('.contractor-card');
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (text.includes(term)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  }
+</script></main></div></body></html>

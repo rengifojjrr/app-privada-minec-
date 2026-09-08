@@ -1,0 +1,3090 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-surface": "#191c1a",
+        "inverse-surface": "#2e312f",
+        "surface-container-low": "#f3f4f0",
+        "surface-container": "#edeeeb",
+        "primary": "#023627",
+        "tertiary-container": "#82220e",
+        "secondary-fixed-dim": "#f5bb88",
+        "primary-fixed": "#bcedd7",
+        "secondary": "#80552b",
+        "outline": "#717974",
+        "on-primary-fixed": "#002116",
+        "surface-bright": "#f8faf6",
+        "on-surface-variant": "#414944",
+        "inverse-primary": "#a1d1bc",
+        "secondary-container": "#fec390",
+        "tertiary-fixed-dim": "#ffb4a4",
+        "on-tertiary-fixed": "#3e0500",
+        "surface-dim": "#d9dad7",
+        "on-error-container": "#93000a",
+        "on-tertiary-fixed-variant": "#852410",
+        "surface-container-high": "#e7e9e5",
+        "on-error": "#ffffff",
+        "on-primary": "#ffffff",
+        "surface-variant": "#e1e3df",
+        "on-secondary-fixed": "#2d1600",
+        "on-primary-fixed-variant": "#214f3f",
+        "surface-container-lowest": "#ffffff",
+        "primary-container": "#1f4d3d",
+        "tertiary": "#610c00",
+        "on-secondary": "#ffffff",
+        "error-container": "#ffdad6",
+        "error": "#ba1a1a",
+        "inverse-on-surface": "#f0f1ed",
+        "surface": "#f8faf6",
+        "primary-fixed-dim": "#a1d1bc",
+        "on-secondary-container": "#794e25",
+        "surface-container-highest": "#e1e3df",
+        "on-tertiary-container": "#ff9680",
+        "background": "#f8faf6",
+        "secondary-fixed": "#ffdcc0",
+        "surface-tint": "#3a6756",
+        "on-secondary-fixed-variant": "#653e16",
+        "tertiary-fixed": "#ffdad3",
+        "on-tertiary": "#ffffff",
+        "on-primary-container": "#8dbda8",
+        "on-background": "#191c1a",
+        "outline-variant": "#c0c8c3"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "spacing-xl": "2rem",
+        "table-gutter": "0.75rem",
+        "spacing-md": "1rem",
+        "spacing-lg": "1.5rem",
+        "spacing-xs": "0.5rem",
+        "spacing-3xs": "0.125rem",
+        "spacing-2xl": "3rem",
+        "layout-margin-desktop": "2rem",
+        "spacing-3xl": "4rem",
+        "layout-margin-mobile": "1rem",
+        "spacing-2xs": "0.25rem",
+        "spacing-sm": "0.75rem",
+        "layout-margin-tablet": "1.5rem"
+      },
+      "fontFamily": {
+        "body-md": ["Hanken Grotesk"],
+        "headline-xl-mobile": ["Hanken Grotesk"],
+        "label-caps": ["Hanken Grotesk"],
+        "data-mono-lg": ["JetBrains Mono"],
+        "body-sm": ["Hanken Grotesk"],
+        "headline-xl": ["Hanken Grotesk"],
+        "headline-sm": ["Hanken Grotesk"],
+        "headline-lg": ["Hanken Grotesk"],
+        "headline-md": ["Hanken Grotesk"],
+        "data-mono-md": ["JetBrains Mono"],
+        "body-lg": ["Hanken Grotesk"],
+        "label-tabular": ["JetBrains Mono"]
+      },
+      "fontSize": {
+        "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+        "headline-xl-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+        "data-mono-lg": ["15px", {"lineHeight": "22px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+        "headline-sm": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600"}],
+        "headline-lg": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "data-mono-md": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+        "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+        "label-tabular": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+      }
+    }
+  }
+}</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-spacing-md flex items-center gap-spacing-xs bg-surface-container-low"><div class="flex items-center justify-center w-7 h-7 bg-primary rounded-lg text-on-primary font-headline-sm text-headline-sm">PI</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight">Proyectos Integrales</span><span class="font-label-caps text-label-caps text-secondary uppercase">Ingeniería &amp; Ambiente</span></div></div><div class="px-spacing-md py-spacing-xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operación Técnica</span></div><nav class="flex flex-col gap-spacing-3xs px-spacing-xs flex-1" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm"><a aria-current="page" class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded transition-colors bg-primary-container text-on-primary-container font-headline-sm" data-path="proyectos" href="#"><span class="material-symbols-outlined text-[20px]">folder_supervised</span><span class="font-body-sm text-body-sm">Proyectos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="aprobaciones" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span class="font-body-sm text-body-sm">Aprobaciones</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="calendario" href="#"><span class="material-symbols-outlined text-[20px]">event_note</span><span class="font-body-sm text-body-sm">Calendario</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contratantes" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-sm text-body-sm">Contratantes</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-body-sm text-body-sm">Reportes</span></a><div class="my-spacing-xs px-spacing-xs"><div class="h-[1px] bg-outline-variant/30"></div></div><div class="px-spacing-xs py-spacing-3xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Gobierno &amp; Control</span></div><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="direccion-ejecutiva" href="#"><span class="material-symbols-outlined text-[20px]">query_stats</span><span class="font-body-sm text-body-sm">Dirección</span><span class="ml-auto font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-inverse-surface text-inverse-on-surface">DARK</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="font-body-sm text-body-sm">Usuarios</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="catalogos" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-sm text-body-sm">Catálogos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="bitacora-general" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-body-sm text-body-sm">Bitácora General</span></a></nav></div><div class="p-spacing-md bg-surface-container-high"><div class="flex items-center justify-between"><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Estándar Técnico</span><span class="font-data-mono-md text-data-mono-md text-primary">ISO 14001 / EIA-v2</span></div><span class="material-symbols-outlined text-outline text-[18px]">format_image_left</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex items-center justify-between px-spacing-lg"><div class="flex items-center gap-spacing-md flex-1 max-w-2xl"><img alt="Logo Proyectos Integrales" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WWI3mVDk-K0VvmFiCvo8p33fqbfLEk7YLxC1GudbnlFUpaiGriHUaR624tyiQNmYunExODktoHOUwF3QL8qZ_IwSF5S_2YljkWvDXX_F70wU2BcAir0ZOTnqLI_71vsDpk6z_zbXASIS0ueLJ7tFBZNvfS6T8aTnTgjZaqsX3YPQTL3hOBf9ordXhPZXWaXrXj9-I0-5Fd6nraudX80Q_6v0_NI_5xzQXtCkGU4fxStFzd9olGwfezDU0"/><div class="relative w-full max-w-md"><span class="material-symbols-outlined absolute left-spacing-xs top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full pl-8 pr-spacing-sm py-spacing-2xs bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Buscar código de expediente, matriz ambiental, contratante o profesional..." type="text"/></div></div><div class="flex items-center gap-spacing-md"><div class="flex items-center gap-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded"><span class="font-label-caps text-label-caps text-secondary uppercase font-semibold">Entrar como:</span><select class="bg-transparent font-body-sm text-body-sm text-on-surface font-medium outline-none cursor-pointer"><option value="admin">Admin</option><option value="coordinador">Coordinador</option><option value="profesional">Profesional</option><option value="administracion">Administración</option><option value="direccion">Dirección</option></select></div><div class="flex items-center gap-spacing-2xs"><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">help</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-spacing-lg pb-spacing-xl flex-1 bg-background"><div class="flex flex-col w-full text-on-surface">
+<!-- Dynamic Notification Toast Container -->
+<div class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none" id="toast-container"></div>
+<!-- Global Modal Container -->
+<div class="fixed inset-0 bg-on-surface/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4" id="modal-container"></div>
+<!-- Sub-Nav & Page Router Breadcrumbs / Quick Switcher -->
+<div class="mb-spacing-lg bg-surface-container-lowest p-spacing-sm rounded-lg shadow-sm flex flex-wrap items-center justify-between gap-spacing-md">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">folder_open</span>
+<div class="flex items-center gap-1.5 font-body-sm text-body-sm text-on-surface-variant">
+<span class="font-semibold text-primary">Proyectos Integrales</span>
+<span>/</span>
+<span class="text-on-surface font-medium" id="current-view-breadcrumb">Panel de Inicio</span>
+</div>
+</div>
+<!-- Direct Page Navigator for immediate QA testing of all 23 views -->
+<div class="flex items-center gap-spacing-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Vista Rápida:</span>
+<select class="bg-surface-container-low text-on-surface font-body-sm text-body-sm px-spacing-xs py-1 rounded outline-none border-0 font-medium cursor-pointer" id="quick-page-select">
+<optgroup label="General &amp; Inicio">
+<option value="1">1. Ingreso / Switch de Rol</option>
+<option selected="" value="2">2. Panel de Inicio (Dashboard)</option>
+<option value="3">3. Proyectos (Filtros &amp; Estados)</option>
+<option value="4">4. Nuevo Proyecto (3 Pasos)</option>
+</optgroup>
+<optgroup label="Ficha de Proyecto">
+<option value="5">5. Ficha - Resumen</option>
+<option value="6">6. Ficha - Etapas (Compuerta 6 a 7)</option>
+<option value="7">7. Ficha - Equipo &amp; Honorarios (Privacidad)</option>
+<option value="8">8. Ficha - Documentos (Versionado)</option>
+<option value="9">9. Ficha - Mediciones de Campo (Sin Ec.)</option>
+<option value="10">10. Ficha - Finanzas (Partidas / Por Liquidar)</option>
+<option value="11">11. Ficha - Bitácora Inmutable de Proyecto</option>
+</optgroup>
+<optgroup label="Operación &amp; Gestión">
+<option value="12">12. Aprobaciones Pendientes (Cola)</option>
+<option value="13">13. Calendario de Entregas</option>
+<option value="14">14. Contratantes &amp; Dossiers</option>
+<option value="15">15. Reportes Técnicos / Financieros</option>
+</optgroup>
+<optgroup label="Gobierno &amp; Control">
+<option value="16">16. Dirección Ejecutiva (Modo Dark / Rotador 15s)</option>
+<option value="17">17. Gestión de Usuarios &amp; Roles</option>
+<option value="18">18. Catálogos &amp; Plantillas de 10 Etapas</option>
+<option value="19">19. Bitácora General (Audit Trail)</option>
+<option value="20">20. Sin Permiso (Error 403 Informativo)</option>
+<option value="21">21. Mi Perfil Profesional</option>
+<option value="22">22. Portal de Contratantes (Fase 2)</option>
+<option value="23">23. Asistente de Informes IA (Fase 3)</option>
+</optgroup>
+</select>
+<button class="h-8 px-2.5 bg-surface-container-high hover:bg-surface-container rounded text-on-surface text-body-sm font-medium flex items-center gap-1 transition-colors" id="btn-export-csv-view" title="Exportar vista a CSV">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span class="hidden sm:inline">CSV</span>
+</button>
+</div>
+</div>
+<!-- Primary Dynamic Content Container -->
+<div class="w-full" id="app-viewport">
+<!-- Rendered dynamically by SPA router -->
+</div>
+</div>
+<script>
+/**
+ * SISTEMA INTEGRADO DE GESTIÓN DE PROYECTOS INTEGRALES (PI)
+ * Arquitectura SPA Nativa con Persistencia Local, Control RBAC Estricto,
+ * Bitácora Criptográfica Simulada Inmutable, y Vistas Técnicas de Alta Densidad.
+ */
+
+(function () {
+  const STORAGE_KEY = 'PI_ENTERPRISE_CORE_DATA_V2';
+
+  // MATRIZ DE PERMISOS (5 ROLES)
+  const PERMISSIONS = {
+    admin: {
+      canManageUsers: true,
+      canEditCatalogs: true,
+      canViewAuditTrail: true,
+      canApproveGateways: true,
+      canViewAllFees: true,
+      canViewFinances: true,
+      canCreateProjects: true,
+      canCaptureField: true,
+      canViewDirectorDark: true
+    },
+    coordinador: {
+      canManageUsers: false,
+      canEditCatalogs: false,
+      canViewAuditTrail: false,
+      canApproveGateways: true, // Responsable técnico de compuerta Etapa 6
+      canViewAllFees: true,
+      canViewFinances: true,
+      canCreateProjects: true,
+      canCaptureField: true,
+      canViewDirectorDark: true
+    },
+    profesional: {
+      canManageUsers: false,
+      canEditCatalogs: false,
+      canViewAuditTrail: false,
+      canApproveGateways: false,
+      canViewAllFees: false, // Solo ve su monto personal
+      canViewFinances: false, // No ve sección administrativa ni finanzas
+      canCreateProjects: false,
+      canCaptureField: true,
+      canViewDirectorDark: false
+    },
+    administracion: {
+      canManageUsers: false,
+      canEditCatalogs: false,
+      canViewAuditTrail: false,
+      canApproveGateways: false,
+      canViewAllFees: true,
+      canViewFinances: true,
+      canCreateProjects: true,
+      canCaptureField: false,
+      canViewDirectorDark: true
+    },
+    direccion: {
+      canManageUsers: false,
+      canEditCatalogs: false,
+      canViewAuditTrail: false,
+      canApproveGateways: false,
+      canViewAllFees: 'TOTAL_ONLY', // Solo ve consolidado general
+      canViewFinances: true,
+      canCreateProjects: false,
+      canCaptureField: false,
+      canViewDirectorDark: true
+    }
+  };
+
+  // DATOS PRECARGADOS ESTÁNDAR
+  const DEFAULT_STATE = {
+    currentUser: "carlos.mendoza", // Default user (Coordinador)
+    currentRole: "coordinador",
+    currentProjectId: "PI-2024-002",
+    users: [
+      { id: "carlos.mendoza", nombre: "Carlos Mendoza", rol: "coordinador", especialidad: "Ingeniería Ambiental & EIA", activo: true, honorario: 3200 },
+      { id: "elena.ramos", nombre: "Elena Ramos", rol: "profesional", especialidad: "Ingeniería Forestal & Dasonomía", activo: true, honorario: 2400 },
+      { id: "marcos.silva", nombre: "Marcos Silva", rol: "coordinador", especialidad: "Hidráulica & Cuencas", activo: true, honorario: 3100 },
+      { id: "patricia.duarte", nombre: "Patricia Duarte", rol: "administracion", especialidad: "Contabilidad & Finanzas", activo: true, honorario: 2100 },
+      { id: "roberto.gomez", nombre: "Roberto Gómez", rol: "direccion", especialidad: "Dirección General & Operaciones", activo: true, honorario: 4500 },
+      { id: "sofia.alcala", nombre: "Sofía Alcalá", rol: "profesional", especialidad: "Marco Legal Ambiental", activo: true, honorario: 2200 },
+      { id: "diego.torres", nombre: "Diego Torres", rol: "profesional", especialidad: "Ingeniería Civil & Topografía", activo: true, honorario: 2300 },
+      { id: "luis.vallenilla", nombre: "Luis Vallenilla", rol: "admin", especialidad: "Administrador del Sistema & QA", activo: true, honorario: 2800 }
+    ],
+    standardStages: [
+      { num: 1, nombre: "Alineación & Revisión de Antecedentes Legales", compuerta: false },
+      { num: 2, nombre: "Plan de Trabajo & Protocolo de Seguridad de Campo", compuerta: false },
+      { num: 3, nombre: "Levantamiento de Información Primaria y Cartografía", compuerta: false },
+      { num: 4, nombre: "Procesamiento de Muestras y Análisis Dasonómico", compuerta: false },
+      { num: 5, nombre: "Modelación de Impacto y Matrices de Valoración", compuerta: false },
+      { num: 6, nombre: "Consolidación de Informe Borrador (HITO CRÍTICO)", compuerta: true }, // Compuerta obligatoria
+      { num: 7, nombre: "Revisión Interdisciplinaria & Control de Calidad", compuerta: false },
+      { num: 8, nombre: "Consulta Pública / Audiencias Técnicas", compuerta: false },
+      { num: 9, nombre: "Expediente Definitivo y Radicación ante Autoridad", compuerta: false },
+      { num: 10, nombre: "Cierre Técnico, Auditoría y Liquidación Final", compuerta: false }
+    ],
+    catalogs: {
+      species: [
+        { id: "sp-1", nombreComun: "Palo Blanco", nombreCientifico: "Calycophyllum candidissimum", densidad: "0.78 g/cm³", protegido: false },
+        { id: "sp-2", nombreComun: "Yiguire", nombreCientifico: "Trichilia trifolia", densidad: "0.64 g/cm³", protegido: false },
+        { id: "sp-3", nombreComun: "Majomo", nombreCientifico: "Lonchocarpus sericeus", densidad: "0.71 g/cm³", protegido: true },
+        { id: "sp-4", nombreComun: "Guatácare", nombreCientifico: "Eschweilera tenax", densidad: "0.85 g/cm³", protegido: false },
+        { id: "sp-5", nombreComun: "Mora de Guayana", nombreCientifico: "Mora excelsa", densidad: "0.92 g/cm³", protegido: false }
+      ],
+      financialCategories: [
+        "Honorarios Profesionales",
+        "Logística & Viáticos de Campo",
+        "Ensayos de Laboratorio Acreditado",
+        "Cartografía Satelital & Sensores",
+        "Tasas de Radicación y Notaría",
+        "Equipamiento Técnico & Alquiler 4x4",
+        "Seguridad Industrial & EPP"
+      ]
+    },
+    projects: [
+      {
+        id: "PI-2024-001",
+        nombre: "Inventario Forestal y Plan de Manejo Cuenca Río Aro",
+        contratante: "Consorcio Maderero del Sur C.A.",
+        rif: "J-40918231-0",
+        fechaInicio: "15/01/2024",
+        fechaFinPrevista: "28/06/2024",
+        estado: "En Ejecución",
+        progreso: 60,
+        presupuestoTotal: 48500,
+        coordinadorId: "carlos.mendoza",
+        ubicacion: "Sector El Almacén, Bolívar (WGS84 7°42'18\"N 64°15'30\"W)",
+        etapas: [
+          { num: 1, nombre: "Alineación & Revisión de Antecedentes", estado: "Aprobada", fechaFin: "30/01/2024", vencida: false },
+          { num: 2, nombre: "Plan de Trabajo & Protocolo de Seguridad", estado: "Aprobada", fechaFin: "14/02/2024", vencida: false },
+          { num: 3, nombre: "Levantamiento de Campo y Cartografía", estado: "Completada Tarde", fechaFin: "10/03/2024", vencida: true },
+          { num: 4, nombre: "Procesamiento de Muestras y Análisis Dasonómico", estado: "En Proceso", fechaFin: "20/04/2024", vencida: false },
+          { num: 5, nombre: "Modelación de Impacto y Matrices", estado: "Pendiente", fechaFin: "15/05/2024", vencida: false },
+          { num: 6, nombre: "Consolidación de Informe Borrador", compuerta: true, estado: "Pendiente", fechaFin: "30/05/2024", vencida: false },
+          { num: 7, nombre: "Revisión Interdisciplinaria", estado: "Bloqueada", fechaFin: "10/06/2024", vencida: false },
+          { num: 8, nombre: "Consulta Pública / Audiencias", estado: "Bloqueada", fechaFin: "18/06/2024", vencida: false },
+          { num: 9, nombre: "Expediente Definitivo", estado: "Bloqueada", fechaFin: "25/06/2024", vencida: false },
+          { num: 10, nombre: "Cierre Técnico y Liquidación", estado: "Bloqueada", fechaFin: "28/06/2024", vencida: false }
+        ],
+        equipo: [
+          { userId: "carlos.mendoza", rolEnProyecto: "Coordinador Responsable", asignacion: 3200 },
+          { userId: "elena.ramos", rolEnProyecto: "Dasonomista Principal", asignacion: 2400 },
+          { userId: "diego.torres", rolEnProyecto: "Topografía & Georreferenciación", asignacion: 1800 }
+        ],
+        fieldMeasurements: [
+          { id: "FM-01", parcela: "P-01 (100x100m)", hectareas: 1.0, especie: "Palo Blanco", numArboles: 42, alturaPromedioM: 18.5, dapPromedioCm: 34.2, volumenManualM3: 68.4, fecha: "12/03/2024", responsable: "Elena Ramos" },
+          { id: "FM-02", parcela: "P-01 (100x100m)", hectareas: 1.0, especie: "Yiguire", numArboles: 29, alturaPromedioM: 15.2, dapPromedioCm: 28.6, volumenManualM3: 38.1, fecha: "13/03/2024", responsable: "Elena Ramos" },
+          { id: "FM-03", parcela: "P-02 (100x100m)", hectareas: 1.0, especie: "Majomo", numArboles: 19, alturaPromedioM: 21.0, dapPromedioCm: 41.5, volumenManualM3: 54.0, fecha: "14/03/2024", responsable: "Elena Ramos" },
+          { id: "FM-04", parcela: "P-03 (100x100m)", hectareas: 1.0, especie: "Guatácare", numArboles: 34, alturaPromedioM: 23.4, dapPromedioCm: 39.8, volumenManualM3: 82.5, fecha: "16/03/2024", responsable: "Elena Ramos" },
+          { id: "FM-05", parcela: "P-02 (100x100m)", hectareas: 1.0, especie: "Palo Blanco", numArboles: 25, alturaPromedioM: 17.8, dapPromedioCm: 31.0, volumenManualM3: 39.2, fecha: "17/03/2024", responsable: "Elena Ramos" }
+        ],
+        finanzas: [
+          { id: "FIN-101", tipo: "Ingreso", categoria: "Anticipo Contractual 30%", concepto: "Primer desembolso inicial", monto: 14550, fecha: "20/01/2024", estado: "Liquidado" },
+          { id: "FIN-102", tipo: "Egreso", categoria: "Logística & Viáticos de Campo", concepto: "Campaña de muestreo terrestre 12 días", monto: 3820, fecha: "05/03/2024", estado: "Liquidado" },
+          { id: "FIN-103", tipo: "Egreso", categoria: "Honorarios Profesionales", concepto: "Pago Hito 1 y 2 Dasonomista", monto: 1200, fecha: "28/02/2024", estado: "Liquidado" },
+          { id: "FIN-104", tipo: "Egreso", categoria: "Equipamiento Técnico & Alquiler 4x4", concepto: "Renta de camioneta rústica con chofer", monto: 2100, fecha: "10/03/2024", estado: "Por liquidar" },
+          { id: "FIN-105", tipo: "Egreso", categoria: "Cartografía Satelital & Sensores", concepto: "Imágenes multiespectrales Planet 3m", monto: 1450, fecha: "18/03/2024", estado: "Por liquidar" }
+        ],
+        documentos: [
+          { id: "DOC-01", titulo: "TDR_Aprobados_RioAro_Consorcio.pdf", tipo: "Términos de Referencia", version: "v1.0", fecha: "18/01/2024", autor: "Carlos Mendoza", tamano: "4.2 MB" },
+          { id: "DOC-02", titulo: "Cartografia_Base_Subcuenca_Aro.dwg", tipo: "Cartografía / Planos", version: "v1.2", fecha: "25/02/2024", autor: "Diego Torres", tamano: "28.5 MB" },
+          { id: "DOC-03", titulo: "Muestreo_Dasonomico_Parcelas_P1_P3.xlsx", tipo: "Datos Brutos de Campo", version: "v2.0", fecha: "18/03/2024", autor: "Elena Ramos", tamano: "1.8 MB" }
+        ]
+      },
+      {
+        id: "PI-2024-002",
+        nombre: "EIA y Sociocultural Parque Eólico Península",
+        contratante: "Generadora Eólica del Norte S.A.",
+        rif: "J-31849201-9",
+        fechaInicio: "01/02/2024",
+        fechaFinPrevista: "15/08/2024",
+        estado: "En Revisión",
+        progreso: 55,
+        presupuestoTotal: 72000,
+        coordinadorId: "carlos.mendoza",
+        ubicacion: "Península de Paraguaná, Falcón (WGS84 11°56'04\"N 70°01'22\"W)",
+        etapas: [
+          { num: 1, nombre: "Alineación & Revisión de Antecedentes Legales", estado: "Aprobada", fechaFin: "15/02/2024", vencida: false },
+          { num: 2, nombre: "Plan de Trabajo & Protocolo de Seguridad", estado: "Aprobada", fechaFin: "28/02/2024", vencida: false },
+          { num: 3, nombre: "Levantamiento de Campo (Avifauna y Vientos)", estado: "Aprobada", fechaFin: "20/03/2024", vencida: false },
+          { num: 4, nombre: "Procesamiento de Muestras y Ruido Acústico", estado: "Aprobada", fechaFin: "05/04/2024", vencida: false },
+          { num: 5, nombre: "Modelación de Impacto y Líneas de Base", estado: "Aprobada", fechaFin: "25/04/2024", vencida: false },
+          { 
+            num: 6, 
+            nombre: "Consolidación de Informe Borrador (HITO CRÍTICO)", 
+            compuerta: true, 
+            estado: "Esperando Aprobación", 
+            fechaFin: "10/05/2024", 
+            vencida: false,
+            observacionesCompuerta: "Documento consolidado de 480 págs cargado. Requiere confirmación de firmas de especialistas en avifauna y acústica antes de pasar a control interdisciplinario." 
+          },
+          { num: 7, nombre: "Revisión Interdisciplinaria & Control de Calidad", estado: "Bloqueada", fechaFin: "25/05/2024", vencida: false },
+          { num: 8, nombre: "Consulta Pública / Audiencias Técnicas", estado: "Bloqueada", fechaFin: "20/06/2024", vencida: false },
+          { num: 9, nombre: "Expediente Definitivo y Radicación", estado: "Bloqueada", fechaFin: "10/07/2024", vencida: false },
+          { num: 10, nombre: "Cierre Técnico y Liquidación Final", estado: "Bloqueada", fechaFin: "15/08/2024", vencida: false }
+        ],
+        equipo: [
+          { userId: "carlos.mendoza", rolEnProyecto: "Coordinador General EIA", asignacion: 3800 },
+          { userId: "sofia.alcala", rolEnProyecto: "Especialista Sociocultural & Legal", asignacion: 2600 },
+          { userId: "diego.torres", rolEnProyecto: "Ingeniero de Infraestructura", asignacion: 2500 }
+        ],
+        fieldMeasurements: [
+          { id: "FM-201", parcela: "Estación Eólica V-1", hectareas: 4.5, especie: "Guatácare", numArboles: 12, alturaPromedioM: 8.5, dapPromedioCm: 22.1, volumenManualM3: 11.2, fecha: "05/03/2024", responsable: "Diego Torres" }
+        ],
+        finanzas: [
+          { id: "FIN-201", tipo: "Ingreso", categoria: "Anticipo Contractual 30%", concepto: "Anticipo de firma", monto: 21600, fecha: "10/02/2024", estado: "Liquidado" },
+          { id: "FIN-202", tipo: "Egreso", categoria: "Ensayos de Laboratorio Acreditado", concepto: "Estudio de ruido sonométrico continuo 72h", monto: 4200, fecha: "25/03/2024", estado: "Liquidado" },
+          { id: "FIN-203", tipo: "Egreso", categoria: "Logística & Viáticos de Campo", concepto: "Campamento Península Comisión Técnica", monto: 3100, fecha: "15/04/2024", estado: "Por liquidar" }
+        ],
+        documentos: [
+          { id: "DOC-201", titulo: "EIA_Borrador_Integral_v1.0.pdf", tipo: "Informe Técnico de Impacto", version: "v1.0", fecha: "08/05/2024", autor: "Carlos Mendoza", tamano: "42.0 MB" },
+          { id: "DOC-202", titulo: "Informe_Sociocultural_Comunidades.pdf", tipo: "Estudio Sociocultural", version: "v1.1", fecha: "29/04/2024", autor: "Sofía Alcalá", tamano: "12.4 MB" }
+        ]
+      },
+      {
+        id: "PI-2024-003",
+        nombre: "Levantamiento y Obras Hidráulicas Sector El Pao",
+        contratante: "Aguas Regionales y Saneamiento C.A.",
+        rif: "J-00291844-3",
+        fechaInicio: "10/01/2024",
+        fechaFinPrevista: "30/05/2024",
+        estado: "En Ejecución",
+        progreso: 45,
+        presupuestoTotal: 52000,
+        coordinadorId: "marcos.silva",
+        ubicacion: "Embalse El Pao, Cojedes (WGS84 9°38'20\"N 68°08'40\"W)",
+        etapas: [
+          { num: 1, nombre: "Alineación & Revisión de Antecedentes", estado: "Aprobada", fechaFin: "20/01/2024", vencida: false },
+          { num: 2, nombre: "Plan de Trabajo & Topobatimetría", estado: "Aprobada", fechaFin: "10/02/2024", vencida: false },
+          { num: 3, nombre: "Levantamiento de Obras de Captación", estado: "Completada Tarde", fechaFin: "05/03/2024", vencida: true },
+          { num: 4, nombre: "Procesamiento y Modelación Hidráulica", estado: "Atrasada", fechaFin: "30/03/2024", vencida: true },
+          { num: 5, nombre: "Estudio de Estabilidad de Taludes", estado: "En Proceso", fechaFin: "15/04/2024", vencida: true },
+          { num: 6, nombre: "Consolidación Borrador", compuerta: true, estado: "Pendiente", fechaFin: "30/04/2024", vencida: true },
+          { num: 7, nombre: "Revisión Interdisciplinaria", estado: "Bloqueada", fechaFin: "10/05/2024", vencida: false },
+          { num: 8, nombre: "Validación Comunitaria", estado: "Bloqueada", fechaFin: "18/05/2024", vencida: false },
+          { num: 9, nombre: "Entrega de Planos Constructivos", estado: "Bloqueada", fechaFin: "25/05/2024", vencida: false },
+          { num: 10, nombre: "Liquidación Final", estado: "Bloqueada", fechaFin: "30/05/2024", vencida: false }
+        ],
+        equipo: [
+          { userId: "marcos.silva", rolEnProyecto: "Director de Hidráulica", asignacion: 3100 },
+          { userId: "diego.torres", rolEnProyecto: "Especialista Topobatimétrico", asignacion: 2300 }
+        ],
+        fieldMeasurements: [],
+        finanzas: [
+          { id: "FIN-301", tipo: "Ingreso", categoria: "Anticipo Contractual 30%", concepto: "Primer anticipo", monto: 15600, fecha: "15/01/2024", estado: "Liquidado" },
+          { id: "FIN-302", tipo: "Egreso", categoria: "Equipamiento Técnico & Alquiler 4x4", concepto: "Lancha con ecosonda multihaz 6 días", monto: 5400, fecha: "18/02/2024", estado: "Liquidado" },
+          { id: "FIN-303", tipo: "Egreso", categoria: "Logística & Viáticos de Campo", concepto: "Estadía cuadrilla técnica", monto: 2900, fecha: "20/03/2024", estado: "Por liquidar" }
+        ],
+        documentos: []
+      },
+      {
+        id: "PI-2024-004",
+        nombre: "Modelo de Negocios Forestación Comercial Guayana",
+        contratante: "Inversiones Agroforestales Macizo S.A.",
+        rif: "J-50182740-1",
+        fechaInicio: "01/04/2024",
+        fechaFinPrevista: "30/09/2024",
+        estado: "En Oferta",
+        progreso: 15,
+        presupuestoTotal: 34000,
+        coordinadorId: "carlos.mendoza",
+        ubicacion: "Uverito, Monagas (WGS84 8°45'00\"N 62°38'00\"W)",
+        etapas: [
+          { num: 1, nombre: "Alineación & Revisión de Antecedentes", estado: "En Proceso", fechaFin: "20/04/2024", vencida: false },
+          { num: 2, nombre: "Plan de Trabajo", estado: "Pendiente", fechaFin: "10/05/2024", vencida: false },
+          { num: 3, nombre: "Levantamiento de Campo", estado: "Pendiente", fechaFin: "30/05/2024", vencida: false },
+          { num: 4, nombre: "Procesamiento", estado: "Pendiente", fechaFin: "20/06/2024", vencida: false },
+          { num: 5, nombre: "Modelación de Negocio", estado: "Pendiente", fechaFin: "15/07/2024", vencida: false },
+          { num: 6, nombre: "Borrador de Factibilidad", compuerta: true, estado: "Pendiente", fechaFin: "10/08/2024", vencida: false },
+          { num: 7, nombre: "Revisión Interdisciplinaria", estado: "Bloqueada", fechaFin: "25/08/2024", vencida: false },
+          { num: 8, nombre: "Ronda de Inversionistas", estado: "Bloqueada", fechaFin: "10/09/2024", vencida: false },
+          { num: 9, nombre: "Dossier Definitivo", estado: "Bloqueada", fechaFin: "22/09/2024", vencida: false },
+          { num: 10, nombre: "Cierre Contractual", estado: "Bloqueada", fechaFin: "30/09/2024", vencida: false }
+        ],
+        equipo: [
+          { userId: "carlos.mendoza", rolEnProyecto: "Coordinador Económico-Forestal", asignacion: 2800 },
+          { userId: "elena.ramos", rolEnProyecto: "Especialista en Pino Caribe", asignacion: 2100 }
+        ],
+        fieldMeasurements: [],
+        finanzas: [],
+        documentos: []
+      },
+      {
+        id: "PI-2024-005",
+        nombre: "Permisología y Estudio de Suelos Línea de Transmisión",
+        contratante: "Consorcio Energético Central",
+        rif: "J-29837102-4",
+        fechaInicio: "15/02/2024",
+        fechaFinPrevista: "15/07/2024",
+        estado: "En Permisología",
+        progreso: 35,
+        presupuestoTotal: 61500,
+        coordinadorId: "marcos.silva",
+        ubicacion: "Corredor San Diego - Guacara, Carabobo (WGS84 10°15'33\"N 67°53'12\"W)",
+        etapas: [
+          { num: 1, nombre: "Alineación y Delimitación de Servidumbre", estado: "Aprobada", fechaFin: "01/03/2024", vencida: false },
+          { num: 2, nombre: "Plan de Trabajo Geotécnico", estado: "Aprobada", fechaFin: "15/03/2024", vencida: false },
+          { num: 3, nombre: "Perforación y Calicatas", estado: "En Proceso", fechaFin: "25/04/2024", vencida: false },
+          { num: 4, nombre: "Ensayos Mecánica de Suelos", estado: "Pendiente", fechaFin: "15/05/2024", vencida: false },
+          { num: 5, nombre: "Estudio de Capacidad Portante", estado: "Pendiente", fechaFin: "30/05/2024", vencida: false },
+          { num: 6, nombre: "Informe Técnico de Geotecnia", compuerta: true, estado: "Pendiente", fechaFin: "15/06/2024", vencida: false },
+          { num: 7, nombre: "Revisión Interdisciplinaria", estado: "Bloqueada", fechaFin: "25/06/2024", vencida: false },
+          { num: 8, nombre: "Gestión ante Ministerio de Ecosocialismo", estado: "Bloqueada", fechaFin: "05/07/2024", vencida: false },
+          { num: 9, nombre: "Obtención de Autorización de Afectación", estado: "Bloqueada", fechaFin: "12/07/2024", vencida: false },
+          { num: 10, nombre: "Cierre Administrativo", estado: "Bloqueada", fechaFin: "15/07/2024", vencida: false }
+        ],
+        equipo: [
+          { userId: "marcos.silva", rolEnProyecto: "Coordinador de Infraestructura", asignacion: 3000 },
+          { userId: "diego.torres", rolEnProyecto: "Ingeniero Geotécnico", asignacion: 2400 },
+          { userId: "sofia.alcala", rolEnProyecto: "Asesora Permisología Minea", asignacion: 2000 }
+        ],
+        fieldMeasurements: [],
+        finanzas: [],
+        documentos: []
+      },
+      {
+        id: "PI-2023-018",
+        nombre: "Restauración Ecológica y Monitoreo Biológico Finca La Esmeralda",
+        contratante: "Fundación Agrícola del Valle",
+        rif: "J-10827364-5",
+        fechaInicio: "01/06/2023",
+        fechaFinPrevista: "15/12/2023",
+        estado: "Cerrado",
+        progreso: 100,
+        presupuestoTotal: 39000,
+        coordinadorId: "carlos.mendoza",
+        ubicacion: "Bejuma, Carabobo (WGS84 10°10'11\"N 68°15'44\"W)",
+        etapas: [
+          { num: 1, nombre: "Alineación", estado: "Aprobada", fechaFin: "15/06/2023", vencida: false },
+          { num: 2, nombre: "Plan de Trabajo", estado: "Aprobada", fechaFin: "30/06/2023", vencida: false },
+          { num: 3, nombre: "Línea Base Florística", estado: "Aprobada", fechaFin: "30/07/2023", vencida: false },
+          { num: 4, nombre: "Plan de Siembra y Vivero", estado: "Aprobada", fechaFin: "30/08/2023", vencida: false },
+          { num: 5, nombre: "Ejecución de Reforestación", estado: "Aprobada", fechaFin: "15/10/2023", vencida: false },
+          { num: 6, nombre: "Informe de Conclusión y Supervivencia", compuerta: true, estado: "Aprobada", fechaFin: "15/11/2023", vencida: false, observacionesCompuerta: "Validado 87% prendimiento en campo." },
+          { num: 7, nombre: "Auditoría de Calidad", estado: "Aprobada", fechaFin: "25/11/2023", vencida: false },
+          { num: 8, nombre: "Entrega a Propietarios", estado: "Aprobada", fechaFin: "05/12/2023", vencida: false },
+          { num: 9, nombre: "Conformidad Minea", estado: "Aprobada", fechaFin: "10/12/2023", vencida: false },
+          { num: 10, nombre: "Liquidación y Finiquito", estado: "Aprobada", fechaFin: "15/12/2023", vencida: false }
+        ],
+        equipo: [
+          { userId: "carlos.mendoza", rolEnProyecto: "Coordinador", asignacion: 3200 },
+          { userId: "elena.ramos", rolEnProyecto: "Especialista en Restauración", asignacion: 2600 }
+        ],
+        fieldMeasurements: [],
+        finanzas: [
+          { id: "FIN-018-1", tipo: "Ingreso", categoria: "Anticipo Contractual 30%", concepto: "Anticipo", monto: 11700, fecha: "10/06/2023", estado: "Liquidado" },
+          { id: "FIN-018-2", tipo: "Ingreso", categoria: "Cierre Contractual 70%", concepto: "Finiquito final", monto: 27300, fecha: "15/12/2023", estado: "Liquidado" }
+        ],
+        documentos: []
+      }
+    ],
+    auditLogs: [
+      { id: "LOG-001", timestamp: "15/01/2024 08:30:11", usuario: "Luis Vallenilla", rol: "admin", accion: "INICIALIZACIÓN_EXPEDIENTE", proyectoId: "PI-2024-001", detalle: "Creación de proyecto Cuenca Río Aro con plantilla estándar de 10 etapas." },
+      { id: "LOG-002", timestamp: "16/01/2024 09:14:02", usuario: "Patricia Duarte", rol: "administracion", accion: "REGISTRO_ANTICIPO", proyectoId: "PI-2024-001", detalle: "Registro de partida FIN-101: Anticipo $14,550 USD recibido en cuenta custodia." },
+      { id: "LOG-003", timestamp: "30/01/2024 17:00:45", usuario: "Carlos Mendoza", rol: "coordinador", accion: "APROBACIÓN_ETAPA_1", proyectoId: "PI-2024-001", detalle: "Cierre y conformidad de etapa 1 de alineación técnica." },
+      { id: "LOG-004", timestamp: "01/02/2024 08:00:00", usuario: "Carlos Mendoza", rol: "coordinador", accion: "INICIALIZACIÓN_EXPEDIENTE", proyectoId: "PI-2024-002", detalle: "Apertura de expediente EIA Parque Eólico Falcón." },
+      { id: "LOG-005", timestamp: "10/02/2024 11:22:15", usuario: "Elena Ramos", rol: "profesional", accion: "CARGA_PROTOCOLO", proyectoId: "PI-2024-001", detalle: "Carga de protocolo de seguridad forestal para la brigada de campo." },
+      { id: "LOG-006", timestamp: "14/02/2024 16:40:10", usuario: "Carlos Mendoza", rol: "coordinador", accion: "APROBACIÓN_ETAPA_2", proyectoId: "PI-2024-001", detalle: "Conformidad de plan de trabajo y logística de campamento." },
+      { id: "LOG-007", timestamp: "18/02/2024 10:11:05", usuario: "Marcos Silva", rol: "coordinador", accion: "EQUIPO_ALQUILER", proyectoId: "PI-2024-003", detalle: "Emisión de orden FIN-302 para ecosonda batimétrica." },
+      { id: "LOG-008", timestamp: "25/02/2024 14:05:32", usuario: "Diego Torres", rol: "profesional", accion: "CARGA_CARTOGRAFÍA", proyectoId: "PI-2024-001", detalle: "Versión v1.2 de ortomosaicos y planos de curvas de nivel subidos al expediente." },
+      { id: "LOG-009", timestamp: "05/03/2024 18:20:00", usuario: "Elena Ramos", rol: "profesional", accion: "REGISTRO_MEDICIÓN", proyectoId: "PI-2024-001", detalle: "Captura de mediciones en parcela P-01 (Palo Blanco, Yiguire)." },
+      { id: "LOG-010", timestamp: "10/03/2024 17:45:00", usuario: "Carlos Mendoza", rol: "coordinador", accion: "ALERTA_VENCIMIENTO", proyectoId: "PI-2024-001", detalle: "Etapa 3 levantamiento cerrada con retraso de 8 días hábiles." },
+      { id: "LOG-011", timestamp: "15/03/2024 11:15:20", usuario: "Elena Ramos", rol: "profesional", accion: "REGISTRO_MEDICIÓN", proyectoId: "PI-2024-001", detalle: "Captura de parcelas P-02 y P-03 con DAP y volumen manual en m³." },
+      { id: "LOG-012", timestamp: "20/03/2024 09:30:41", usuario: "Patricia Duarte", rol: "administracion", accion: "REGISTRO_FINANCIERO", proyectoId: "PI-2024-001", detalle: "Registro de partida por liquidar: Cartografía Satelital Planet." },
+      { id: "LOG-013", timestamp: "28/03/2024 16:12:00", usuario: "Carlos Mendoza", rol: "coordinador", accion: "APROBACIÓN_ETAPA_3", proyectoId: "PI-2024-002", detalle: "Cierre de monitoreo de avifauna y dispersión eólica." },
+      { id: "LOG-014", timestamp: "02/04/2024 08:45:10", usuario: "Marcos Silva", rol: "coordinador", accion: "ALERTA_VENCIMIENTO", proyectoId: "PI-2024-003", detalle: "Etapa 4 retrasada por crecida de nivel de embalse." },
+      { id: "LOG-015", timestamp: "08/04/2024 15:30:22", usuario: "Carlos Mendoza", rol: "coordinador", accion: "ASIGNACIÓN_EQUIPO", proyectoId: "PI-2024-004", detalle: "Adición de Elena Ramos al equipo técnico del estudio de factibilidad Uverito." },
+      { id: "LOG-016", timestamp: "12/04/2024 10:00:19", usuario: "Sofía Alcalá", rol: "profesional", accion: "CARGA_DOCUMENTO", proyectoId: "PI-2024-002", detalle: "Informe sociocultural con actas de asambleas indígenas anexadas." },
+      { id: "LOG-017", timestamp: "18/04/2024 14:10:55", usuario: "Luis Vallenilla", rol: "admin", accion: "ACTUALIZACIÓN_CATÁLOGO", proyectoId: "GLOBAL", detalle: "Inclusión de especie Mora excelsa en catálogo dasonómico nacional." },
+      { id: "LOG-018", timestamp: "22/04/2024 17:35:00", usuario: "Carlos Mendoza", rol: "coordinador", accion: "APROBACIÓN_ETAPA_5", proyectoId: "PI-2024-002", detalle: "Aprobación de matriz de Leopold y análisis de sensibilidad de impacto ambiental." },
+      { id: "LOG-019", timestamp: "25/04/2024 11:20:14", usuario: "Diego Torres", rol: "profesional", accion: "CARGA_COMPUERTAS", proyectoId: "PI-2024-002", detalle: "Carga formal de Borrador Consolidado para apertura de compuerta 6." },
+      { id: "LOG-020", timestamp: "28/04/2024 09:12:00", usuario: "Carlos Mendoza", rol: "coordinador", accion: "ESTADO_COMPUERTA_ETAPA_6", proyectoId: "PI-2024-002", detalle: "Compuerta en revisión. Esperando aprobación técnica para desbloquear Etapa 7." },
+      { id: "LOG-021", timestamp: "30/04/2024 16:45:10", usuario: "Roberto Gómez", rol: "direccion", accion: "AUDITORÍA_DIRECCIÓN", proyectoId: "GLOBAL", detalle: "Revisión consolidada de indicadores ejecutivos Q1 2024." },
+      { id: "LOG-022", timestamp: "02/05/2024 10:00:00", usuario: "Patricia Duarte", rol: "administracion", accion: "FINANCIERO_AUDIT", proyectoId: "PI-2024-002", detalle: "Conciliación de pagos viáticos Falcón vs facturación fiscal." },
+      { id: "LOG-023", timestamp: "03/05/2024 14:15:30", usuario: "Marcos Silva", rol: "coordinador", accion: "ACTUALIZACIÓN_ETAPA", proyectoId: "PI-2024-005", detalle: "Inicio de perforación de calicatas en corredor de servidumbre." },
+      { id: "LOG-024", timestamp: "04/05/2024 11:50:00", usuario: "Elena Ramos", rol: "profesional", accion: "CAPTURA_CAMPANA_2", proyectoId: "PI-2024-001", detalle: "Verificación de densidad y clasificación de especies con DAP > 30cm." },
+      { id: "LOG-025", timestamp: "05/05/2024 09:10:15", usuario: "Carlos Mendoza", rol: "coordinador", accion: "RECORDATORIO_COMPUERTA", proyectoId: "PI-2024-002", detalle: "Notificación de compuerta pendiente en EIA Falcón. Plazo de entrega se acorta." },
+      { id: "LOG-026", timestamp: "06/05/2024 16:00:20", usuario: "Luis Vallenilla", rol: "admin", accion: "RESPALDO_SISTEMA", proyectoId: "GLOBAL", detalle: "Copia de seguridad y verificación de integridad de expedientes." },
+      { id: "LOG-027", timestamp: "07/05/2024 08:30:00", usuario: "Diego Torres", rol: "profesional", accion: "LEVANTAMIENTO_GPS", proyectoId: "PI-2024-003", detalle: "Actualización de cota cero en compuerta de alivio El Pao." },
+      { id: "LOG-028", timestamp: "08/05/2024 12:44:11", usuario: "Patricia Duarte", rol: "administracion", accion: "REGISTRO_RETENCIÓN", proyectoId: "PI-2024-001", detalle: "Retenciones fiscales IVA e ISLR aplicadas a comprobantes de viáticos." },
+      { id: "LOG-029", timestamp: "09/05/2024 15:20:00", usuario: "Carlos Mendoza", rol: "coordinador", accion: "INSPECCIÓN_BORRADOR", proyectoId: "PI-2024-002", detalle: "Lectura técnica del capítulo 7 del informe borrador eólico." },
+      { id: "LOG-030", timestamp: "10/05/2024 10:15:00", usuario: "Luis Vallenilla", rol: "admin", accion: "SINCRONIZACIÓN_BITÁCORA", proyectoId: "GLOBAL", detalle: "Verificación inmutable de 30 transacciones consecutivas de auditoría." }
+    ]
+  };
+
+  // STORE MANAGER CON PERSISTENCIA
+  class Store {
+    constructor() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        try {
+          this.state = JSON.parse(stored);
+        } catch (e) {
+          this.state = DEFAULT_STATE;
+          this.save();
+        }
+      } else {
+        this.state = DEFAULT_STATE;
+        this.save();
+      }
+    }
+
+    save() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state));
+    }
+
+    log(accion, proyectoId, detalle) {
+      const now = new Date();
+      const pad = (n) => String(n).padStart(2, '0');
+      const formattedDate = `${pad(now.getDate())}/${pad(now.getMonth() + 1)}/${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+      
+      const user = this.state.users.find(u => u.id === this.state.currentUser) || { nombre: "Sistema", rol: this.state.currentRole };
+      const newLog = {
+        id: "LOG-" + (this.state.auditLogs.length + 1).toString().padStart(3, '0'),
+        timestamp: formattedDate,
+        usuario: user.nombre,
+        rol: this.state.currentRole,
+        accion: accion.toUpperCase(),
+        proyectoId: proyectoId || "GLOBAL",
+        detalle: detalle
+      };
+      // Inmutable: solo append, nunca edición ni borrado
+      this.state.auditLogs.unshift(newLog);
+      this.save();
+    }
+
+    switchUser(userId) {
+      const user = this.state.users.find(u => u.id === userId);
+      if (user) {
+        this.state.currentUser = user.id;
+        this.state.currentRole = user.rol;
+        this.save();
+        this.log("CAMBIO_USUARIO", "SISTEMA", `Sesión activa transferida a ${user.nombre} (${user.rol.toUpperCase()}).`);
+      }
+    }
+
+    switchRole(role) {
+      this.state.currentRole = role;
+      const userWithRole = this.state.users.find(u => u.rol === role);
+      if (userWithRole) {
+        this.state.currentUser = userWithRole.id;
+      }
+      this.save();
+      this.log("CAMBIO_ROL", "SISTEMA", `Rol de sesión actualizado dinámicamente a ${role.toUpperCase()}.`);
+    }
+
+    getCurrentUser() {
+      return this.state.users.find(u => u.id === this.state.currentUser) || this.state.users[0];
+    }
+
+    getProject(id) {
+      return this.state.projects.find(p => p.id === id) || this.state.projects[0];
+    }
+  }
+
+  const store = new Store();
+
+  // UTILIDADES DE FORMATO Y UI
+  function showToast(title, message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    const bgMap = {
+      success: 'bg-primary text-on-primary',
+      warning: 'bg-secondary text-on-secondary',
+      error: 'bg-error text-on-error',
+      info: 'bg-surface-container-highest text-on-surface'
+    };
+    const iconMap = {
+      success: 'check_circle',
+      warning: 'warning',
+      error: 'error',
+      info: 'info'
+    };
+    
+    toast.className = `pointer-events-auto flex items-start gap-3 p-3.5 rounded-lg shadow-md max-w-sm transition-all duration-300 transform translate-y-2 opacity-0 ${bgMap[type] || bgMap.info}`;
+    toast.innerHTML = `
+      <span class="material-symbols-outlined text-[20px] shrink-0 mt-0.5">${iconMap[type] || 'info'}</span>
+      <div class="flex flex-col min-w-0">
+        <span class="font-headline-sm text-headline-sm leading-tight">${escapeHtml(title)}</span>
+        <span class="font-body-sm text-body-sm opacity-90 mt-0.5">${escapeHtml(message)}</span>
+      </div>
+      <button class="ml-auto text-inherit opacity-70 hover:opacity-100 p-0.5" onclick="this.parentElement.remove()">
+        <span class="material-symbols-outlined text-[16px]">close</span>
+      </button>
+    `;
+    container.appendChild(toast);
+    
+    requestAnimationFrame(() => {
+      toast.classList.remove('translate-y-2', 'opacity-0');
+    });
+
+    setTimeout(() => {
+      toast.classList.add('opacity-0', 'translate-y-2');
+      setTimeout(() => toast.remove(), 300);
+    }, 4500);
+  }
+
+  function openModal(title, contentHtml, onConfirm, confirmText = "Aceptar", isDestructive = false) {
+    const modal = document.getElementById('modal-container');
+    modal.innerHTML = `
+      <div class="bg-surface-container-lowest text-on-surface rounded-lg max-w-lg w-full p-spacing-lg shadow-xl relative animate-in fade-in zoom-in-95 duration-200">
+        <div class="flex items-center justify-between pb-spacing-sm mb-spacing-md">
+          <div class="flex items-center gap-2">
+            <div class="w-2.5 h-2.5 bg-primary rounded-full"></div>
+            <span class="font-headline-md text-headline-md">${escapeHtml(title)}</span>
+          </div>
+          <button id="modal-close-btn" class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high">
+            <span class="material-symbols-outlined text-[20px]">close</span>
+          </button>
+        </div>
+        <div class="mb-spacing-lg font-body-md text-body-md text-on-surface-variant">
+          ${contentHtml}
+        </div>
+        <div class="flex items-center justify-end gap-spacing-xs pt-spacing-sm">
+          <button id="modal-cancel-btn" class="px-4 py-2 rounded font-body-sm text-body-sm font-medium bg-surface-container-high hover:bg-surface-container text-on-surface">Cancelar</button>
+          <button id="modal-confirm-btn" class="px-4 py-2 rounded font-body-sm text-body-sm font-semibold text-on-primary transition-colors ${isDestructive ? 'bg-error hover:bg-tertiary-container' : 'bg-primary hover:bg-primary-container'}">${escapeHtml(confirmText)}</button>
+        </div>
+      </div>
+    `;
+    modal.classList.remove('hidden');
+
+    const close = () => modal.classList.add('hidden');
+    document.getElementById('modal-close-btn').onclick = close;
+    document.getElementById('modal-cancel-btn').onclick = close;
+    document.getElementById('modal-confirm-btn').onclick = () => {
+      if (onConfirm) onConfirm();
+      close();
+    };
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function formatMoney(amount) {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+  }
+
+  // SINCRONIZADOR CON HEADER GLOBAL
+  function syncAppShellHeader() {
+    const roleSelect = document.querySelector('header select');
+    if (roleSelect) {
+      roleSelect.value = store.state.currentRole;
+      roleSelect.onchange = (e) => {
+        store.switchRole(e.target.value);
+        showToast('Rol de Usuario Cambiado', `Actuando ahora con privilegios de: ${e.target.value.toUpperCase()}`, 'info');
+        renderCurrentRoute();
+      };
+    }
+
+    // Interceptar navegación del sidebar shell para routing dinámico
+    document.querySelectorAll('aside nav a[data-path]').forEach(link => {
+      link.onclick = (e) => {
+        e.preventDefault();
+        const path = link.getAttribute('data-path');
+        const routeMap = {
+          'proyectos': '3',
+          'aprobaciones': '12',
+          'calendario': '13',
+          'contratantes': '14',
+          'reportes': '15',
+          'direccion-ejecutiva': '16',
+          'usuarios': '17',
+          'catalogos': '18',
+          'bitacora-general': '19'
+        };
+        const page = routeMap[path] || '2';
+        navigateTo(page);
+      };
+    });
+
+    // Interceptar buscador del header shell
+    const headerInput = document.querySelector('header input');
+    if (headerInput) {
+      headerInput.onkeydown = (e) => {
+        if (e.key === 'Enter') {
+          const query = headerInput.value.trim().toLowerCase();
+          if (query) {
+            const found = store.state.projects.find(p => 
+              p.id.toLowerCase().includes(query) || 
+              p.nombre.toLowerCase().includes(query) || 
+              p.contratante.toLowerCase().includes(query)
+            );
+            if (found) {
+              store.state.currentProjectId = found.id;
+              store.save();
+              showToast('Proyecto Localizado', `${found.id}: ${found.nombre}`, 'success');
+              navigateTo('5');
+            } else {
+              showToast('Sin Resultados', `No se hallaron coincidencias para: "${query}"`, 'warning');
+            }
+          }
+        }
+      };
+    }
+  }
+
+  // GESTOR DE ROTACIÓN PANTALLA 16 (MODO DIRECCIÓN)
+  let directorRotationTimer = null;
+  let directorRotationPaused = false;
+  let directorCurrentSlide = 0;
+
+  function stopDirectorRotation() {
+    if (directorRotationTimer) {
+      clearInterval(directorRotationTimer);
+      directorRotationTimer = null;
+    }
+  }
+
+  // ROUTER CENTRAL DE 23 VISTAS
+  let currentPage = '2'; // Inicia en Dashboard
+
+  function navigateTo(pageId) {
+    stopDirectorRotation();
+    currentPage = String(pageId);
+    const select = document.getElementById('quick-page-select');
+    if (select) select.value = currentPage;
+    renderCurrentRoute();
+  }
+
+  function checkPermission(requiredRule) {
+    const role = store.state.currentRole;
+    const perms = PERMISSIONS[role] || {};
+    return !!perms[requiredRule];
+  }
+
+  function renderCurrentRoute() {
+    const viewport = document.getElementById('app-viewport');
+    const breadcrumb = document.getElementById('current-view-breadcrumb');
+    
+    // Matriz estricta RBAC de redirección a Página 20 (Sin Permiso)
+    const adminOnlyPages = ['17', '18', '19'];
+    if (adminOnlyPages.includes(currentPage) && store.state.currentRole !== 'admin') {
+      renderPage20(viewport, breadcrumb);
+      return;
+    }
+
+    if (currentPage === '12' && !['coordinador', 'admin'].includes(store.state.currentRole)) {
+      renderPage20(viewport, breadcrumb);
+      return;
+    }
+
+    if (currentPage === '10' && store.state.currentRole === 'profesional') {
+      // Separación técnico-científica vs administrativa: profesional no ve finanzas
+      renderPage20(viewport, breadcrumb);
+      return;
+    }
+
+    if (currentPage === '16' && store.state.currentRole === 'profesional') {
+      renderPage20(viewport, breadcrumb);
+      return;
+    }
+
+    switch (currentPage) {
+      case '1': renderPage1(viewport, breadcrumb); break;
+      case '2': renderPage2(viewport, breadcrumb); break;
+      case '3': renderPage3(viewport, breadcrumb); break;
+      case '4': renderPage4(viewport, breadcrumb); break;
+      case '5': renderPage5(viewport, breadcrumb); break;
+      case '6': renderPage6(viewport, breadcrumb); break;
+      case '7': renderPage7(viewport, breadcrumb); break;
+      case '8': renderPage8(viewport, breadcrumb); break;
+      case '9': renderPage9(viewport, breadcrumb); break;
+      case '10': renderPage10(viewport, breadcrumb); break;
+      case '11': renderPage11(viewport, breadcrumb); break;
+      case '12': renderPage12(viewport, breadcrumb); break;
+      case '13': renderPage13(viewport, breadcrumb); break;
+      case '14': renderPage14(viewport, breadcrumb); break;
+      case '15': renderPage15(viewport, breadcrumb); break;
+      case '16': renderPage16(viewport, breadcrumb); break;
+      case '17': renderPage17(viewport, breadcrumb); break;
+      case '18': renderPage18(viewport, breadcrumb); break;
+      case '19': renderPage19(viewport, breadcrumb); break;
+      case '20': renderPage20(viewport, breadcrumb); break;
+      case '21': renderPage21(viewport, breadcrumb); break;
+      case '22': renderPage22(viewport, breadcrumb); break;
+      case '23': renderPage23(viewport, breadcrumb); break;
+      default: renderPage2(viewport, breadcrumb);
+    }
+  }
+
+  // PÁGINA 1: INGRESO / SELECTOR RÁPIDO DE USUARIOS Y ROLES
+  function renderPage1(v, b) {
+    b.textContent = "1. Ingreso & Selección de Credenciales";
+    const users = store.state.users;
+
+    v.innerHTML = `
+      <div class="max-w-4xl mx-auto py-spacing-md">
+        <div class="bg-surface-container-lowest p-spacing-xl rounded-lg shadow-sm">
+          <div class="flex items-center gap-3 mb-spacing-md">
+            <span class="material-symbols-outlined text-primary text-[32px]">fingerprint</span>
+            <div>
+              <h2 class="font-headline-lg text-headline-lg text-primary">Simulación de Acceso & Gobernanza</h2>
+              <p class="font-body-md text-body-md text-on-surface-variant">Seleccione cualquier identidad precargada para auditar permisos RBAC y visibilidad en tiempo real.</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-spacing-md mt-spacing-lg">
+            ${users.map(u => `
+              <div class="p-spacing-md rounded-lg ${u.id === store.state.currentUser ? 'bg-primary text-on-primary' : 'bg-surface-container-low text-on-surface hover:bg-surface-container-high'} cursor-pointer transition-all flex items-center justify-between shadow-sm" onclick="window.PI_SWITCH_USER('${u.id}')">
+                <div class="flex items-center gap-spacing-md">
+                  <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-headline-sm ${u.id === store.state.currentUser ? 'bg-on-primary text-primary' : 'bg-primary text-on-primary'}">
+                    ${u.nombre.charAt(0)}
+                  </div>
+                  <div>
+                    <div class="font-headline-sm text-headline-sm">${escapeHtml(u.nombre)}</div>
+                    <div class="font-body-sm text-body-sm opacity-80">${escapeHtml(u.especialidad)}</div>
+                    <span class="inline-block mt-1 font-label-caps text-label-caps uppercase px-2 py-0.5 rounded ${u.id === store.state.currentUser ? 'bg-on-primary/20 text-on-primary' : 'bg-surface-container-highest text-primary'}">
+                      ROL: ${u.rol.toUpperCase()}
+                    </span>
+                  </div>
+                </div>
+                <div class="text-right">
+                  ${u.id === store.state.currentUser ? '<span class="material-symbols-outlined text-on-primary text-[24px]">radio_button_checked</span>' : '<span class="material-symbols-outlined text-outline text-[24px]">radio_button_unchecked</span>'}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="mt-spacing-xl p-spacing-md bg-surface-container-low rounded-lg flex items-center justify-between">
+            <div class="flex items-center gap-spacing-sm">
+              <span class="material-symbols-outlined text-secondary text-[22px]">security</span>
+              <span class="font-body-sm text-body-sm text-on-surface">Usuario activo actual: <strong>${store.getCurrentUser().nombre}</strong> (${store.state.currentRole.toUpperCase()})</span>
+            </div>
+            <button onclick="window.PI_NAV('2')" class="px-5 py-2.5 bg-primary hover:bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold rounded transition-colors flex items-center gap-2">
+              <span>Continuar al Panel</span>
+              <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    window.PI_SWITCH_USER = (uid) => {
+      store.switchUser(uid);
+      renderPage1(v, b);
+      syncAppShellHeader();
+      showToast('Sesión Actualizada', `Identidad activa: ${store.getCurrentUser().nombre}`, 'success');
+    };
+  }
+
+  // PÁGINA 2: PANEL DE INICIO (DIFERENCIADO POR ROL)
+  function renderPage2(v, b) {
+    b.textContent = "2. Panel de Inicio (" + store.state.currentRole.toUpperCase() + ")";
+    const role = store.state.currentRole;
+    const user = store.getCurrentUser();
+    const projects = store.state.projects;
+
+    const totalPresupuesto = projects.reduce((acc, p) => acc + p.presupuestoTotal, 0);
+    const enEjecucion = projects.filter(p => p.estado === 'En Ejecución').length;
+    const conRetraso = projects.filter(p => p.etapas.some(e => e.vencida)).length;
+    const pendientesCompuerta = projects.filter(p => p.etapas.some(e => e.compuerta && e.estado === 'Esperando Aprobación')).length;
+
+    v.innerHTML = `
+      <div class="flex flex-col gap-spacing-lg">
+        <!-- Banner de Bienvenida Institucional -->
+        <div class="bg-surface-container-lowest p-spacing-lg rounded-lg shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-spacing-md">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-label-caps text-label-caps uppercase">ESTÁNDAR EIA-V2 / ISO 14001</span>
+              <span class="text-outline-variant">•</span>
+              <span class="font-data-mono-md text-data-mono-md text-secondary">ID: ${user.id}</span>
+            </div>
+            <h1 class="font-headline-xl text-headline-xl text-primary">Bienvenido, ${escapeHtml(user.nombre)}</h1>
+            <p class="font-body-md text-body-md text-on-surface-variant">Especialidad: ${escapeHtml(user.especialidad)} | Rol Operativo: <strong class="uppercase text-primary">${role}</strong></p>
+          </div>
+          <div class="flex items-center gap-spacing-xs">
+            ${role === 'coordinador' || role === 'admin' ? `
+              <button onclick="window.PI_NAV('12')" class="px-4 py-2 bg-secondary hover:bg-secondary/90 text-on-secondary font-body-sm text-body-sm font-semibold rounded flex items-center gap-2 shadow-sm transition-colors">
+                <span class="material-symbols-outlined text-[18px]">verified</span>
+                <span>Compuertas (${pendientesCompuerta})</span>
+              </button>
+            ` : ''}
+            <button onclick="window.PI_NAV('3')" class="px-4 py-2 bg-primary hover:bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold rounded flex items-center gap-2 shadow-sm transition-colors">
+              <span class="material-symbols-outlined text-[18px]">folder</span>
+              <span>Explorar Expedientes</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Métricas KPI Adaptativas por Rol -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-spacing-md">
+          <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm flex items-center justify-between">
+            <div>
+              <span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Expedientes Totales</span>
+              <div class="font-headline-xl text-headline-xl text-primary mt-1">${projects.length}</div>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">${enEjecucion} en ejecución activa</span>
+            </div>
+            <span class="material-symbols-outlined text-primary/30 text-[40px]">account_tree</span>
+          </div>
+
+          <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm flex items-center justify-between">
+            <div>
+              <span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Hitos Críticos / Compuertas</span>
+              <div class="font-headline-xl text-headline-xl ${pendientesCompuerta > 0 ? 'text-secondary' : 'text-primary'} mt-1">${pendientesCompuerta}</div>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">Etapa 6 por validar</span>
+            </div>
+            <span class="material-symbols-outlined ${pendientesCompuerta > 0 ? 'text-secondary/40' : 'text-primary/30'} text-[40px]">flaky</span>
+          </div>
+
+          <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm flex items-center justify-between">
+            <div>
+              <span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Etapas con Retraso</span>
+              <div class="font-headline-xl text-headline-xl ${conRetraso > 0 ? 'text-error' : 'text-primary'} mt-1">${conRetraso}</div>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">Requieren reprogramación</span>
+            </div>
+            <span class="material-symbols-outlined text-error/30 text-[40px]">event_busy</span>
+          </div>
+
+          <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm flex items-center justify-between">
+            <div>
+              <span class="font-label-caps text-label-caps text-on-surface-variant uppercase">${role === 'profesional' ? 'Mis Honorarios Asignados' : 'Presupuesto Total Auditado'}</span>
+              <div class="font-headline-xl text-headline-xl text-primary mt-1">
+                ${role === 'profesional' ? formatMoney(user.honorario) : formatMoney(totalPresupuesto)}
+              </div>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">${role === 'profesional' ? 'Monto confidencial individual' : 'Suma de contratos vigentes'}</span>
+            </div>
+            <span class="material-symbols-outlined text-primary/30 text-[40px]">${role === 'profesional' ? 'payments' : 'monetization_on'}</span>
+          </div>
+        </div>
+
+        <!-- Layout Asimétrico de Operaciones Inmediatas -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-spacing-lg">
+          <!-- Columna Izquierda: Proyectos Prioritarios -->
+          <div class="lg:col-span-2 bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between pb-spacing-xs mb-spacing-sm">
+                <h3 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[20px]">flag</span>
+                  <span>Expedientes Críticos y Atención Inmediata</span>
+                </h3>
+                <span class="font-label-tabular text-label-tabular text-on-surface-variant">ACTUALIZACIÓN EN VIVO</span>
+              </div>
+              
+              <div class="flex flex-col gap-2.5">
+                ${projects.slice(0, 4).map(p => {
+                  const hasOverdue = p.etapas.some(e => e.vencida);
+                  const isBlockedGate = p.etapas.some(e => e.compuerta && e.estado === 'Esperando Aprobación');
+                  return `
+                    <div class="p-spacing-sm bg-surface-container-low rounded hover:bg-surface-container-high transition-colors flex items-center justify-between gap-spacing-md cursor-pointer" onclick="window.PI_SELECT_PROJECT('${p.id}', '5')">
+                      <div class="min-w-0 flex-1">
+                        <div class="flex items-center gap-2">
+                          <span class="font-data-mono-md text-data-mono-md text-primary font-bold">${p.id}</span>
+                          <span class="font-body-sm text-body-sm text-on-surface font-semibold truncate">${escapeHtml(p.nombre)}</span>
+                        </div>
+                        <div class="flex items-center gap-3 mt-1 font-body-sm text-body-sm text-on-surface-variant">
+                          <span>${escapeHtml(p.contratante)}</span>
+                          <span>•</span>
+                          <span class="font-data-mono-md text-data-mono-md">${p.fechaFinPrevista}</span>
+                        </div>
+                      </div>
+                      
+                      <div class="flex items-center gap-3 shrink-0">
+                        ${isBlockedGate ? `
+                          <span class="px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-label-caps text-label-caps uppercase flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Compuerta 6
+                          </span>
+                        ` : ''}
+                        ${hasOverdue ? `
+                          <span class="px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-caps text-label-caps uppercase flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-error"></span> Retraso
+                          </span>
+                        ` : ''}
+                        <div class="text-right">
+                          <div class="font-data-mono-md text-data-mono-md font-bold">${p.progreso}%</div>
+                          <div class="w-16 h-1.5 bg-surface-container-highest rounded-full overflow-hidden mt-1">
+                            <div class="h-full ${p.progreso === 100 ? 'bg-primary' : (hasOverdue ? 'bg-error' : 'bg-secondary')}" style="width: ${p.progreso}%"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <div class="pt-spacing-sm mt-spacing-sm flex items-center justify-between">
+              <span class="font-body-sm text-body-sm text-on-surface-variant">Mostrando 4 de ${projects.length} registros</span>
+              <button onclick="window.PI_NAV('3')" class="font-body-sm text-body-sm font-semibold text-primary hover:underline flex items-center gap-1">
+                <span>Ver lista completa</span>
+                <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Columna Derecha: Bitácora Reciente Inmutable -->
+          <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between pb-spacing-xs mb-spacing-sm">
+                <h3 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[20px]">history_edu</span>
+                  <span>Últimos Movimientos de Bitácora</span>
+                </h3>
+                <span class="font-label-caps text-label-caps text-secondary uppercase">INMUTABLE</span>
+              </div>
+
+              <div class="flex flex-col gap-spacing-xs">
+                ${store.state.auditLogs.slice(0, 5).map(l => `
+                  <div class="p-2.5 bg-surface-container-low rounded text-body-sm">
+                    <div class="flex items-center justify-between mb-1">
+                      <span class="font-data-mono-md text-data-mono-md text-primary font-semibold">${l.id}</span>
+                      <span class="font-data-mono-md text-[11px] text-on-surface-variant">${l.timestamp.split(' ')[0]}</span>
+                    </div>
+                    <p class="font-body-sm text-body-sm text-on-surface leading-tight line-clamp-2">${escapeHtml(l.detalle)}</p>
+                    <div class="flex items-center justify-between mt-1 text-[11px] text-on-surface-variant">
+                      <span>${escapeHtml(l.usuario)}</span>
+                      <span class="uppercase font-semibold">${l.proyectoId}</span>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="pt-spacing-sm mt-spacing-sm">
+              <button onclick="window.PI_NAV(store.state.currentRole === 'admin' ? '19' : '11')" class="w-full py-2 bg-surface-container-high hover:bg-surface-container text-on-surface font-body-sm text-body-sm rounded font-medium transition-colors text-center">
+                Consultar Auditoría Completa
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // PÁGINA 3: LISTADO DE PROYECTOS (FILTROS, VENCIMIENTO, EXPORTACIÓN CSV)
+  function renderPage3(v, b) {
+    b.textContent = "3. Expedientes Técnicos & Estado General";
+    let filterStatus = "ALL";
+    let searchQuery = "";
+
+    function renderTable() {
+      let filtered = store.state.projects.filter(p => {
+        const matchesQuery = p.id.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                             p.nombre.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                             p.contratante.toLowerCase().includes(searchQuery.toLowerCase());
+        if (!matchesQuery) return false;
+        if (filterStatus === "ALL") return true;
+        if (filterStatus === "OVERDUE") return p.etapas.some(e => e.vencida);
+        return p.estado === filterStatus;
+      });
+
+      const tableBody = document.getElementById('projects-table-body');
+      if (!tableBody) return;
+
+      if (filtered.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="7" class="text-center py-8 font-body-md text-body-md text-on-surface-variant">No se encontraron expedientes con los criterios seleccionados.</td></tr>`;
+        return;
+      }
+
+      tableBody.innerHTML = filtered.map(p => {
+        const hasOverdue = p.etapas.some(e => e.vencida);
+        const hasGatePending = p.etapas.some(e => e.compuerta && e.estado === 'Esperando Aprobación');
+
+        return `
+          <tr class="hover:bg-surface-container-low transition-colors cursor-pointer" onclick="window.PI_SELECT_PROJECT('${p.id}', '5')">
+            <td class="px-spacing-sm py-2.5 font-data-mono-md text-data-mono-md text-primary font-bold whitespace-nowrap">${p.id}</td>
+            <td class="px-spacing-sm py-2.5">
+              <div class="font-body-sm text-body-sm font-semibold text-on-surface line-clamp-1">${escapeHtml(p.nombre)}</div>
+              <div class="font-body-sm text-[12px] text-on-surface-variant truncate">${escapeHtml(p.ubicacion)}</div>
+            </td>
+            <td class="px-spacing-sm py-2.5 font-body-sm text-body-sm text-on-surface-variant whitespace-nowrap">${escapeHtml(p.contratante)}</td>
+            <td class="px-spacing-sm py-2.5 whitespace-nowrap">
+              <span class="px-2 py-0.5 rounded font-label-caps text-label-caps uppercase ${p.estado === 'Cerrado' ? 'bg-primary-fixed text-on-primary-fixed' : (hasOverdue ? 'bg-error-container text-on-error-container' : 'bg-surface-container-high text-on-surface')}">
+                ${p.estado}
+              </span>
+              ${hasGatePending ? `<span class="ml-1 px-1.5 py-0.5 rounded bg-secondary text-on-secondary text-[10px] font-bold">COMPUERTA 6</span>` : ''}
+            </td>
+            <td class="px-spacing-sm py-2.5 font-data-mono-md text-data-mono-md text-right">${p.fechaFinPrevista}</td>
+            <td class="px-spacing-sm py-2.5 text-right font-data-mono-md text-data-mono-md font-semibold">
+              ${store.state.currentRole === 'profesional' ? 'Confidencial' : formatMoney(p.presupuestoTotal)}
+            </td>
+            <td class="px-spacing-sm py-2.5">
+              <div class="flex items-center justify-end gap-2">
+                <span class="font-data-mono-md text-data-mono-md">${p.progreso}%</span>
+                <div class="w-12 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+                  <div class="h-full ${hasOverdue ? 'bg-error' : 'bg-primary'}" style="width: ${p.progreso}%"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    v.innerHTML = `
+      <div class="flex flex-col gap-spacing-md">
+        <!-- Barra de Control y Filtros -->
+        <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-spacing-md">
+          <div class="flex flex-wrap items-center gap-spacing-xs">
+            <div class="relative min-w-[260px]">
+              <span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+              <input id="proj-search" type="text" placeholder="Filtrar por código, nombre o contratante..." class="w-full pl-8 pr-3 py-1.5 bg-surface-container-low text-on-surface text-body-sm rounded outline-none">
+            </div>
+            
+            <select id="proj-filter-status" class="bg-surface-container-low text-on-surface text-body-sm font-medium px-3 py-1.5 rounded outline-none cursor-pointer">
+              <option value="ALL">Todos los Estados</option>
+              <option value="En Ejecución">En Ejecución</option>
+              <option value="En Revisión">En Revisión (Compuerta)</option>
+              <option value="En Oferta">En Oferta</option>
+              <option value="En Permisología">En Permisología</option>
+              <option value="Cerrado">Cerrado / Finiquitado</option>
+              <option value="OVERDUE">⚠️ Con Etapas Vencidas</option>
+            </select>
+          </div>
+
+          <div class="flex items-center gap-spacing-xs">
+            <button id="btn-export-csv" class="px-3 py-1.5 bg-surface-container-high hover:bg-surface-container text-on-surface text-body-sm font-semibold rounded flex items-center gap-1.5 transition-colors">
+              <span class="material-symbols-outlined text-[18px]">download</span>
+              <span>Descargar CSV</span>
+            </button>
+            ${store.state.currentRole !== 'profesional' && store.state.currentRole !== 'direccion' ? `
+              <button onclick="window.PI_NAV('4')" class="px-4 py-1.5 bg-primary hover:bg-primary-container text-on-primary text-body-sm font-semibold rounded flex items-center gap-1.5 shadow-sm transition-colors">
+                <span class="material-symbols-outlined text-[18px]">add</span>
+                <span>Nuevo Expediente</span>
+              </button>
+            ` : ''}
+          </div>
+        </div>
+
+        <!-- Tabla Estilo Archival Técnico -->
+        <div class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-body-sm">
+              <thead class="bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase tracking-wider">
+                <tr>
+                  <th class="px-spacing-sm py-2.5">Código Exp.</th>
+                  <th class="px-spacing-sm py-2.5">Proyecto & Delimitación</th>
+                  <th class="px-spacing-sm py-2.5">Contratante</th>
+                  <th class="px-spacing-sm py-2.5">Estado Técnico</th>
+                  <th class="px-spacing-sm py-2.5 text-right">Entrega (DD/MM/AAAA)</th>
+                  <th class="px-spacing-sm py-2.5 text-right">Presupuesto (USD)</th>
+                  <th class="px-spacing-sm py-2.5 text-right">Avance</th>
+                </tr>
+              </thead>
+              <tbody id="projects-table-body" class="divide-y-0">
+                <!-- Injected via renderTable -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('proj-search').oninput = (e) => {
+      searchQuery = e.target.value;
+      renderTable();
+    };
+
+    document.getElementById('proj-filter-status').onchange = (e) => {
+      filterStatus = e.target.value;
+      renderTable();
+    };
+
+    document.getElementById('btn-export-csv').onclick = () => {
+      let csvContent = "data:text/csv;charset=utf-8,";
+      csvContent += "Codigo,Nombre,Contratante,Estado,FechaFin,PresupuestoUSD,Progreso\n";
+      store.state.projects.forEach(p => {
+        csvContent += `"${p.id}","${p.nombre.replace(/"/g, '""')}","${p.contratante}","${p.estado}","${p.fechaFinPrevista}",${p.presupuestoTotal},${p.progreso}%\n`;
+      });
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `PI_EXPEDIENTES_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      store.log("EXPORTACION_CSV", "GLOBAL", "Exportación completa de matriz de proyectos.");
+      showToast('Exportación Exitosa', 'El archivo CSV de expedientes fue generado.', 'success');
+    };
+
+    renderTable();
+  }
+
+  // PÁGINA 4: NUEVO PROYECTO (WIZARD DE 3 PASOS TÉCNICOS)
+  function renderPage4(v, b) {
+    b.textContent = "4. Apertura de Expediente (3 Pasos)";
+    let step = 1;
+    let formData = {
+      id: "PI-2024-00" + (store.state.projects.length + 1),
+      nombre: "",
+      contratante: "",
+      rif: "J-00000000-0",
+      fechaInicio: "01/06/2024",
+      fechaFinPrevista: "30/11/2024",
+      presupuestoTotal: 45000,
+      ubicacion: "",
+      coordinadorId: "carlos.mendoza"
+    };
+
+    function renderWizard() {
+      v.innerHTML = `
+        <div class="max-w-3xl mx-auto bg-surface-container-lowest p-spacing-xl rounded-lg shadow-sm">
+          <div class="flex items-center justify-between pb-spacing-md mb-spacing-lg">
+            <div>
+              <span class="font-label-caps text-label-caps text-secondary uppercase">ASISTENTE DE REGISTRO TÉCNICO</span>
+              <h2 class="font-headline-lg text-headline-lg text-primary">Apertura de Expediente Oficial</h2>
+            </div>
+            <span class="font-data-mono-md text-data-mono-md text-primary font-bold">${formData.id}</span>
+          </div>
+
+          <!-- Step Indicators -->
+          <div class="grid grid-cols-3 gap-2 mb-spacing-lg">
+            <div class="p-2 rounded text-center font-body-sm text-body-sm font-semibold ${step >= 1 ? 'bg-primary text-on-primary' : 'bg-surface-container-low text-on-surface-variant'}">1. Delimitación Legal</div>
+            <div class="p-2 rounded text-center font-body-sm text-body-sm font-semibold ${step >= 2 ? 'bg-primary text-on-primary' : 'bg-surface-container-low text-on-surface-variant'}">2. Plazos & Finanzas</div>
+            <div class="p-2 rounded text-center font-body-sm text-body-sm font-semibold ${step >= 3 ? 'bg-primary text-on-primary' : 'bg-surface-container-low text-on-surface-variant'}">3. Plantilla 10 Etapas</div>
+          </div>
+
+          <!-- Step Forms -->
+          ${step === 1 ? `
+            <div class="space-y-4">
+              <div>
+                <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Nombre Técnico del Proyecto *</label>
+                <input id="wz-nombre" type="text" value="${escapeHtml(formData.nombre)}" placeholder="Ej: Estudio de Impacto Ambiental Parque Industrial..." class="w-full p-2.5 bg-surface-container-low text-on-surface rounded outline-none">
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Empresa Contratante *</label>
+                  <input id="wz-contratante" type="text" value="${escapeHtml(formData.contratante)}" placeholder="Nombre de la corporación o ente" class="w-full p-2.5 bg-surface-container-low text-on-surface rounded outline-none">
+                </div>
+                <div>
+                  <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">RIF / Registro Fiscal *</label>
+                  <input id="wz-rif" type="text" value="${escapeHtml(formData.rif)}" class="w-full p-2.5 bg-surface-container-low text-on-surface rounded outline-none">
+                </div>
+              </div>
+              <div>
+                <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Poligonal Geográfica & Coordenadas WGS84</label>
+                <input id="wz-ubicacion" type="text" value="${escapeHtml(formData.ubicacion)}" placeholder="Municipio, Estado y Coordenadas de vértice principal" class="w-full p-2.5 bg-surface-container-low text-on-surface rounded outline-none">
+              </div>
+            </div>
+          ` : ''}
+
+          ${step === 2 ? `
+            <div class="space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Fecha de Inicio (DD/MM/AAAA) *</label>
+                  <input id="wz-inicio" type="text" value="${formData.fechaInicio}" placeholder="DD/MM/AAAA" class="w-full p-2.5 bg-surface-container-low text-on-surface rounded outline-none">
+                </div>
+                <div>
+                  <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Fecha Límite Prevista (DD/MM/AAAA) *</label>
+                  <input id="wz-fin" type="text" value="${formData.fechaFinPrevista}" placeholder="DD/MM/AAAA" class="w-full p-2.5 bg-surface-container-low text-on-surface rounded outline-none">
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Presupuesto Referencial (USD) *</label>
+                  <input id="wz-presupuesto" type="number" value="${formData.presupuestoTotal}" class="w-full p-2.5 bg-surface-container-low text-on-surface rounded outline-none">
+                </div>
+                <div>
+                  <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Coordinador Responsable Asignado</label>
+                  <select id="wz-coord" class="w-full p-2.5 bg-surface-container-low text-on-surface rounded outline-none">
+                    ${store.state.users.filter(u => u.rol === 'coordinador').map(u => `
+                      <option value="${u.id}" ${u.id === formData.coordinadorId ? 'selected' : ''}>${escapeHtml(u.nombre)} (${escapeHtml(u.especialidad)})</option>
+                    `).join('')}
+                  </select>
+                </div>
+              </div>
+            </div>
+          ` : ''}
+
+          ${step === 3 ? `
+            <div class="space-y-4">
+              <div class="p-3 bg-surface-container-low rounded">
+                <span class="font-headline-sm text-headline-sm text-primary">Inyección de Plantilla de 10 Etapas Obligatoria</span>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Este expediente hereda automáticamente el ciclo de auditoría ambiental con compuerta de bloqueo estricta en la Etapa 6 (Borrador Técnico Consolidado).</p>
+              </div>
+              <div class="max-h-60 overflow-y-auto space-y-1.5 p-2 bg-surface-container rounded">
+                ${store.state.standardStages.map(s => `
+                  <div class="p-2 bg-surface-container-lowest rounded flex items-center justify-between text-body-sm">
+                    <span class="font-medium">${s.num}. ${s.nombre}</span>
+                    ${s.compuerta ? '<span class="px-2 py-0.5 rounded bg-secondary text-on-secondary font-label-caps text-[10px]">COMPUERTA OBLIGATORIA</span>' : '<span class="text-on-surface-variant text-[12px]">Estándar</span>'}
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
+
+          <!-- Botonera Wizard -->
+          <div class="flex items-center justify-between pt-spacing-lg mt-spacing-lg">
+            ${step > 1 ? `
+              <button id="wz-prev" class="px-4 py-2 bg-surface-container-high hover:bg-surface-container text-on-surface font-body-sm text-body-sm font-semibold rounded">Atrás</button>
+            ` : '<div></div>'}
+
+            ${step < 3 ? `
+              <button id="wz-next" class="px-5 py-2 bg-primary hover:bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold rounded">Siguiente</button>
+            ` : `
+              <button id="wz-submit" class="px-6 py-2 bg-primary hover:bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold rounded flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">verified</span>
+                <span>Crear Expediente y Sellar Bitácora</span>
+              </button>
+            `}
+          </div>
+        </div>
+      `;
+
+      if (document.getElementById('wz-prev')) {
+        document.getElementById('wz-prev').onclick = () => { step--; renderWizard(); };
+      }
+
+      if (document.getElementById('wz-next')) {
+        document.getElementById('wz-next').onclick = () => {
+          if (step === 1) {
+            formData.nombre = document.getElementById('wz-nombre').value.trim();
+            formData.contratante = document.getElementById('wz-contratante').value.trim();
+            formData.rif = document.getElementById('wz-rif').value.trim();
+            formData.ubicacion = document.getElementById('wz-ubicacion').value.trim();
+            if (!formData.nombre || !formData.contratante) {
+              showToast('Campos Incompletos', 'Nombre y contratante son mandatorios.', 'warning');
+              return;
+            }
+          } else if (step === 2) {
+            formData.fechaInicio = document.getElementById('wz-inicio').value.trim();
+            formData.fechaFinPrevista = document.getElementById('wz-fin').value.trim();
+            formData.presupuestoTotal = parseFloat(document.getElementById('wz-presupuesto').value) || 0;
+            formData.coordinadorId = document.getElementById('wz-coord').value;
+          }
+          step++;
+          renderWizard();
+        };
+      }
+
+      if (document.getElementById('wz-submit')) {
+        document.getElementById('wz-submit').onclick = () => {
+          const newProject = {
+            id: formData.id,
+            nombre: formData.nombre,
+            contratante: formData.contratante,
+            rif: formData.rif,
+            fechaInicio: formData.fechaInicio,
+            fechaFinPrevista: formData.fechaFinPrevista,
+            estado: "En Ejecución",
+            progreso: 0,
+            presupuestoTotal: formData.presupuestoTotal,
+            coordinadorId: formData.coordinadorId,
+            ubicacion: formData.ubicacion,
+            etapas: store.state.standardStages.map((s, idx) => ({
+              num: s.num,
+              nombre: s.nombre,
+              compuerta: s.compuerta,
+              estado: idx === 0 ? "En Proceso" : (s.compuerta ? "Pendiente" : "Bloqueada"),
+              fechaFin: "15/07/2024",
+              vencida: false
+            })),
+            equipo: [
+              { userId: formData.coordinadorId, rolEnProyecto: "Coordinador Responsable", asignacion: 3200 }
+            ],
+            fieldMeasurements: [],
+            finanzas: [],
+            documentos: []
+          };
+
+          store.state.projects.unshift(newProject);
+          store.state.currentProjectId = newProject.id;
+          store.log("CREACION_EXPEDIENTE", newProject.id, `Apertura exitosa de expediente "${newProject.nombre}" con ${newProject.etapas.length} etapas.`);
+          store.save();
+          showToast('Expediente Creado', `Registrado con éxito: ${newProject.id}`, 'success');
+          navigateTo('5');
+        };
+      }
+    }
+
+    renderWizard();
+  }
+
+  // SUB-NAVEGACIÓN INTERNA PARA LA FICHA DEL PROYECTO (PÁGINAS 5 A 11)
+  function renderProjectHeaderTabs(project, currentSubPageId) {
+    const tabs = [
+      { id: '5', label: 'Resumen', icon: 'description' },
+      { id: '6', label: 'Etapas & Compuertas', icon: 'account_tree' },
+      { id: '7', label: 'Equipo & Honorarios', icon: 'badge' },
+      { id: '8', label: 'Documentos', icon: 'attach_file' },
+      { id: '9', label: 'Mediciones de Campo', icon: 'forest' },
+      { id: '10', label: 'Finanzas', icon: 'attach_money', adminOnly: true },
+      { id: '11', label: 'Bitácora de Proyecto', icon: 'history' }
+    ];
+
+    return `
+      <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm mb-spacing-md">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 pb-spacing-sm">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="font-data-mono-md text-data-mono-md text-primary font-bold">${project.id}</span>
+              <span class="px-2 py-0.5 rounded font-label-caps text-label-caps uppercase ${project.estado === 'Cerrado' ? 'bg-primary-fixed text-on-primary-fixed' : 'bg-surface-container-high text-on-surface'}">${project.estado}</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">• Contratante: <strong>${escapeHtml(project.contratante)}</strong></span>
+            </div>
+            <h2 class="font-headline-md text-headline-md text-primary">${escapeHtml(project.nombre)}</h2>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="text-right">
+              <div class="font-data-mono-md text-data-mono-md font-bold">${project.progreso}% Avance</div>
+              <div class="w-24 h-2 bg-surface-container-highest rounded-full overflow-hidden mt-1">
+                <div class="h-full bg-primary" style="width: ${project.progreso}%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra de pestañas técnicas -->
+        <div class="flex flex-wrap gap-1 pt-spacing-sm">
+          ${tabs.map(t => {
+            if (t.adminOnly && store.state.currentRole === 'profesional') {
+              return ''; // Separación estricta: profesional no ve finanzas
+            }
+            const active = currentSubPageId === t.id;
+            return `
+              <button onclick="window.PI_NAV('${t.id}')" class="px-3.5 py-1.5 rounded font-body-sm text-body-sm font-semibold flex items-center gap-1.5 transition-colors ${active ? 'bg-primary text-on-primary' : 'bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant'}">
+                <span class="material-symbols-outlined text-[16px]">${t.icon}</span>
+                <span>${t.label}</span>
+              </button>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  // PÁGINA 5: FICHA - RESUMEN
+  function renderPage5(v, b) {
+    b.textContent = "5. Ficha - Resumen Ejecutivo";
+    const p = store.getProject(store.state.currentProjectId);
+
+    v.innerHTML = `
+      <div class="flex flex-col">
+        ${renderProjectHeaderTabs(p, '5')}
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-spacing-md">
+          <!-- Columna Principal: Ficha técnica -->
+          <div class="lg:col-span-2 space-y-spacing-md">
+            <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+              <h3 class="font-headline-sm text-headline-sm text-primary mb-spacing-sm flex items-center gap-2">
+                <span class="material-symbols-outlined text-[20px]">info</span>
+                <span>Metadatos de Expediente y Localización</span>
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-6 text-body-sm">
+                <div>
+                  <span class="block font-label-caps text-label-caps uppercase text-on-surface-variant">Código Único:</span>
+                  <span class="font-data-mono-md text-data-mono-md text-primary font-bold">${p.id}</span>
+                </div>
+                <div>
+                  <span class="block font-label-caps text-label-caps uppercase text-on-surface-variant">Coordinador Responsable:</span>
+                  <span class="font-medium">${store.state.users.find(u => u.id === p.coordinadorId)?.nombre || p.coordinadorId}</span>
+                </div>
+                <div>
+                  <span class="block font-label-caps text-label-caps uppercase text-on-surface-variant">Fecha de Radicación / Inicio:</span>
+                  <span class="font-data-mono-md text-data-mono-md">${p.fechaInicio}</span>
+                </div>
+                <div>
+                  <span class="block font-label-caps text-label-caps uppercase text-on-surface-variant">Fecha Límite Prevista:</span>
+                  <span class="font-data-mono-md text-data-mono-md">${p.fechaFinPrevista}</span>
+                </div>
+                <div>
+                  <span class="block font-label-caps text-label-caps uppercase text-on-surface-variant">Contratante / RIF:</span>
+                  <span>${escapeHtml(p.contratante)} (${escapeHtml(p.rif)})</span>
+                </div>
+                <div>
+                  <span class="block font-label-caps text-label-caps uppercase text-on-surface-variant">Poligonal Geográfica:</span>
+                  <span class="font-data-mono-md text-data-mono-md text-[12px]">${escapeHtml(p.ubicacion)}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mapa / Cartografía de referencia -->
+            <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+              <div class="flex items-center justify-between mb-spacing-xs">
+                <h3 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[20px]">map</span>
+                  <span>Delimitación Geoespacial de la Cuenca / Predio</span>
+                </h3>
+                <span class="font-label-tabular text-label-tabular text-secondary font-bold">WGS84 PROYECTADO</span>
+              </div>
+              <div data-location="${p.ubicacion}" class="w-full h-56 bg-surface-container-high rounded-lg flex items-center justify-center relative overflow-hidden">
+                <img src="placeholder" data-alt="Ortofoto satelital de alta resolución técnica mostrando curvas de nivel poligonales de demarcación ambiental forestal y cuencas hidrográficas en tonos verde bosque y tierra técnica con cuadrícula WGS84 superpuesta." class="w-full h-full object-cover">
+                <div class="absolute bottom-2 left-2 bg-inverse-surface/80 backdrop-blur-sm text-inverse-on-surface px-2.5 py-1 rounded font-data-mono-md text-[11px]">
+                  VERTICE CENTRAL: ${escapeHtml(p.ubicacion.split('(')[1]?.replace(')', '') || '7°42\'18"N 64°15\'30"W')}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna Lateral: Estado de Hito Crítico -->
+          <div class="space-y-spacing-md">
+            <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+              <h3 class="font-headline-sm text-headline-sm text-primary mb-spacing-xs">Estatus de la Etapa 6</h3>
+              <span class="font-label-caps text-label-caps text-secondary uppercase">Compuerta Técnica Mandatoria</span>
+              
+              <div class="mt-spacing-sm p-spacing-sm bg-surface-container-low rounded">
+                ${(() => {
+                  const stage6 = p.etapas.find(e => e.num === 6);
+                  if (!stage6) return 'Etapa 6 no configurada.';
+                  const isPending = stage6.estado === 'Esperando Aprobación';
+                  const isApproved = stage6.estado === 'Aprobada';
+                  return `
+                    <div class="flex items-center gap-2 mb-2">
+                      <span class="w-2.5 h-2.5 rounded-full ${isApproved ? 'bg-primary' : (isPending ? 'bg-secondary animate-pulse' : 'bg-outline')}"></span>
+                      <span class="font-body-sm text-body-sm font-semibold">${stage6.estado}</span>
+                    </div>
+                    <p class="font-body-sm text-[12px] text-on-surface-variant">${escapeHtml(stage6.observacionesCompuerta || 'Sin observaciones asentadas aún.')}</p>
+                    <div class="mt-spacing-sm pt-spacing-xs">
+                      <button onclick="window.PI_NAV('6')" class="w-full py-1.5 bg-primary hover:bg-primary-container text-on-primary font-body-sm text-body-sm rounded font-semibold transition-colors">
+                        Revisar Compuerta de Etapas
+                      </button>
+                    </div>
+                  `;
+                })()}
+              </div>
+            </div>
+
+            <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+              <h3 class="font-headline-sm text-headline-sm text-primary mb-spacing-xs">Desglose Rápido</h3>
+              <div class="space-y-2 mt-2 text-body-sm">
+                <div class="flex justify-between py-1 bg-surface-container-low px-2 rounded">
+                  <span class="text-on-surface-variant">Mediciones Registradas:</span>
+                  <span class="font-data-mono-md font-bold">${p.fieldMeasurements.length} parcelas</span>
+                </div>
+                <div class="flex justify-between py-1 bg-surface-container-low px-2 rounded">
+                  <span class="text-on-surface-variant">Documentos en Archivo:</span>
+                  <span class="font-data-mono-md font-bold">${p.documentos.length} archivos</span>
+                </div>
+                <div class="flex justify-between py-1 bg-surface-container-low px-2 rounded">
+                  <span class="text-on-surface-variant">Especialistas Asignados:</span>
+                  <span class="font-data-mono-md font-bold">${p.equipo.length} profesionales</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // PÁGINA 6: FICHA - ETAPAS (COMPUERTA 6 -> 7 CON MODAL Y COMENTARIO OBLIGATORIO)
+  function renderPage6(v, b) {
+    b.textContent = "6. Ficha - Etapas & Control de Compuertas";
+    const p = store.getProject(store.state.currentProjectId);
+    const canApprove = ['coordinador', 'admin'].includes(store.state.currentRole);
+
+    v.innerHTML = `
+      <div class="flex flex-col">
+        ${renderProjectHeaderTabs(p, '6')}
+
+        <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm mb-spacing-md">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-spacing-xs">
+            <div>
+              <h3 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+                <span class="material-symbols-outlined text-[20px]">account_tree</span>
+                <span>Ciclo Técnico de 10 Etapas</span>
+              </h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">La Etapa 6 constituye una compuerta estricta. La Etapa 7 permanecerá bloqueada hasta que un Coordinador o Administrador apruebe con comentario justificado.</p>
+            </div>
+            ${canApprove ? `
+              <span class="px-2.5 py-1 bg-primary-fixed text-on-primary-fixed font-label-caps text-label-caps uppercase rounded">
+                Rol Autorizado para Validar Compuertas
+              </span>
+            ` : `
+              <span class="px-2.5 py-1 bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps uppercase rounded">
+                Solo Lectura (Aprobación restringida a Coordinación)
+              </span>
+            `}
+          </div>
+        </div>
+
+        <!-- Matriz de Etapas -->
+        <div class="space-y-spacing-xs">
+          ${p.etapas.map(e => {
+            const isGate = e.compuerta;
+            const isGate6 = e.num === 6;
+            const isBlocked = e.estado === 'Bloqueada';
+            const isWaiting = e.estado === 'Esperando Aprobación';
+            const isOverdue = e.vencida;
+
+            return `
+              <div class="p-spacing-md rounded-lg shadow-sm transition-all flex flex-col md:flex-row md:items-center justify-between gap-spacing-md ${isGate ? 'bg-secondary-fixed/20' : (isBlocked ? 'bg-surface-container-low opacity-75' : 'bg-surface-container-lowest')}">
+                <div class="flex items-start md:items-center gap-spacing-md min-w-0">
+                  <div class="w-8 h-8 rounded-full flex items-center justify-center font-data-mono-md text-data-mono-md font-bold shrink-0 ${e.estado === 'Aprobada' ? 'bg-primary text-on-primary' : (isWaiting ? 'bg-secondary text-on-secondary animate-pulse' : (isBlocked ? 'bg-surface-container-highest text-on-surface-variant' : 'bg-secondary-fixed text-on-secondary-fixed'))}">
+                    ${e.num}
+                  </div>
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <span class="font-body-sm text-body-sm font-semibold text-on-surface">${escapeHtml(e.nombre)}</span>
+                      ${isGate ? '<span class="px-2 py-0.5 rounded bg-secondary text-on-secondary font-label-caps text-[10px] font-bold">COMPUERTA CRÍTICA</span>' : ''}
+                      ${isOverdue ? '<span class="px-2 py-0.5 rounded bg-error text-on-error font-label-caps text-[10px] font-bold">VENCIDA</span>' : ''}
+                    </div>
+                    <div class="font-body-sm text-[12px] text-on-surface-variant mt-0.5">
+                      Vencimiento: <span class="font-data-mono-md">${e.fechaFin}</span>
+                      ${e.observacionesCompuerta ? ` • <span class="text-secondary font-medium">Nota: ${escapeHtml(e.observacionesCompuerta)}</span>` : ''}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-spacing-sm self-end md:self-auto shrink-0">
+                  <span class="font-label-caps text-label-caps uppercase px-2.5 py-1 rounded ${e.estado === 'Aprobada' ? 'bg-primary-fixed text-on-primary-fixed' : (isWaiting ? 'bg-secondary text-on-secondary' : (isBlocked ? 'bg-surface-container-highest text-on-surface-variant' : 'bg-surface-container-high text-on-surface'))}">
+                    ${e.estado}
+                  </span>
+
+                  ${isGate6 && isWaiting && canApprove ? `
+                    <button onclick="window.PI_OPEN_GATEWAY_MODAL(true)" class="px-3 py-1 bg-primary hover:bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold rounded shadow-sm">
+                      Aprobar
+                    </button>
+                    <button onclick="window.PI_OPEN_GATEWAY_MODAL(false)" class="px-3 py-1 bg-error hover:bg-tertiary-container text-on-error font-body-sm text-body-sm font-semibold rounded shadow-sm">
+                      Devolver
+                    </button>
+                  ` : ''}
+
+                  ${isGate6 && e.estado === 'Pendiente' ? `
+                    <button onclick="window.PI_SUBMIT_GATEWAY()" class="px-3 py-1 bg-secondary hover:bg-secondary/90 text-on-secondary font-body-sm text-body-sm font-semibold rounded shadow-sm">
+                      Radicar para Revisión
+                    </button>
+                  ` : ''}
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+
+    window.PI_SUBMIT_GATEWAY = () => {
+      const stage6 = p.etapas.find(e => e.num === 6);
+      if (stage6) {
+        stage6.estado = 'Esperando Aprobación';
+        stage6.observacionesCompuerta = "Documento borrador consolidado y cargado para compuerta por " + store.getCurrentUser().nombre;
+        store.log("ENVIO_COMPUERTA", p.id, "Etapa 6 enviada formalmente a revisión de compuerta.");
+        store.save();
+        showToast('Radicado para Aprobación', 'Etapa 6 enviada al Coordinador.', 'info');
+        renderPage6(v, b);
+      }
+    };
+
+    window.PI_OPEN_GATEWAY_MODAL = (isApproval) => {
+      const modalTitle = isApproval ? "Aprobación de Compuerta Etapa 6" : "Devolución de Borrador Etapa 6";
+      const html = `
+        <div class="space-y-3">
+          <p class="font-body-sm text-body-sm text-on-surface">
+            ${isApproval ? 'Al aprobar la compuerta, el informe borrador queda validado técnicamente y se <strong>desbloqueará automáticamente la Etapa 7</strong>.' : 'Al devolver el informe, se notificará al equipo para correcciones técnicas inmediatas.'}
+          </p>
+          <div>
+            <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Comentario Técnico Obligatorio *</label>
+            <textarea id="modal-gate-comment" rows="3" class="w-full p-2 bg-surface-container-low text-on-surface rounded outline-none font-body-sm text-body-sm" placeholder="Detalle la justificación técnica..."></textarea>
+          </div>
+        </div>
+      `;
+
+      openModal(modalTitle, html, () => {
+        const comment = (document.getElementById('modal-gate-comment').value || '').trim();
+        if (!comment) {
+          showToast('Acción Cancelada', 'El comentario técnico es estrictamente obligatorio para compuertas.', 'warning');
+          return;
+        }
+
+        const stage6 = p.etapas.find(e => e.num === 6);
+        const stage7 = p.etapas.find(e => e.num === 7);
+
+        if (isApproval) {
+          stage6.estado = 'Aprobada';
+          stage6.observacionesCompuerta = "Aprobado: " + comment;
+          if (stage7) stage7.estado = 'En Proceso'; // Desbloquea etapa 7!
+          p.progreso = Math.min(100, p.progreso + 15);
+          store.log("APROBACIÓN_COMPUERTA", p.id, `Compuerta 6 aprobada por ${store.getCurrentUser().nombre}: "${comment}". Etapa 7 desbloqueada.`);
+          showToast('Compuerta Aprobada', 'Etapa 7 desbloqueada exitosamente.', 'success');
+        } else {
+          stage6.estado = 'Pendiente';
+          stage6.observacionesCompuerta = "Devuelto para corrección: " + comment;
+          store.log("DEVOLUCIÓN_COMPUERTA", p.id, `Borrador Etapa 6 devuelto: "${comment}".`);
+          showToast('Borrador Devuelto', 'Observaciones registradas en el expediente.', 'warning');
+        }
+
+        store.save();
+        renderPage6(v, b);
+      }, isApproval ? "Confirmar Aprobación" : "Confirmar Devolución", !isApproval);
+    };
+  }
+
+  // PÁGINA 7: FICHA - EQUIPO Y HONORARIOS (REGLA ESTRICTA DE VISIBILIDAD)
+  function renderPage7(v, b) {
+    b.textContent = "7. Ficha - Equipo Técnico & Honorarios";
+    const p = store.getProject(store.state.currentProjectId);
+    const role = store.state.currentRole;
+    const currentUserId = store.state.currentUser;
+
+    const totalHonorarios = p.equipo.reduce((acc, mem) => acc + mem.asignacion, 0);
+
+    v.innerHTML = `
+      <div class="flex flex-col">
+        ${renderProjectHeaderTabs(p, '7')}
+
+        <!-- Resumen de Política de Privacidad de Honorarios -->
+        <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm mb-spacing-md flex flex-col md:flex-row md:items-center justify-between gap-spacing-sm">
+          <div>
+            <h3 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+              <span class="material-symbols-outlined text-[20px]">security</span>
+              <span>Cuadro de Asignación & Confidencialidad Salarial</span>
+            </h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">
+              ${role === 'profesional' 
+                ? 'Regla de Privacidad Activa: Solo tiene visibilidad de su propia remuneración pactada.' 
+                : (role === 'direccion' 
+                    ? 'Regla de Dirección: Visualización consolidada global de la partida técnica.' 
+                    : 'Acceso Total: Vista administrativa de honorarios por especialista.')}
+            </p>
+          </div>
+          <div class="bg-surface-container-low px-spacing-md py-2 rounded">
+            <span class="block font-label-caps text-label-caps text-on-surface-variant uppercase">Monto Total de Honorarios:</span>
+            <span class="font-data-mono-lg text-data-mono-lg text-primary font-bold">
+              ${role === 'profesional' ? 'CONFIDENCIAL' : formatMoney(totalHonorarios)}
+            </span>
+          </div>
+        </div>
+
+        <!-- Tabla de Especialistas -->
+        <div class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden">
+          <table class="w-full text-left text-body-sm">
+            <thead class="bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase">
+              <tr>
+                <th class="px-spacing-sm py-2.5">Especialista</th>
+                <th class="px-spacing-sm py-2.5">Rol en Expediente</th>
+                <th class="px-spacing-sm py-2.5">Especialidad Base</th>
+                <th class="px-spacing-sm py-2.5 text-right">Honorario Asignado (USD)</th>
+                <th class="px-spacing-sm py-2.5 text-center">Estado Auditoría</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y-0">
+              ${p.equipo.map(mem => {
+                const u = store.state.users.find(x => x.id === mem.userId) || { nombre: mem.userId, especialidad: "Especialista" };
+                let displayAmount = "-";
+                
+                if (role === 'admin' || role === 'coordinador' || role === 'administracion') {
+                  displayAmount = formatMoney(mem.asignacion);
+                } else if (role === 'profesional') {
+                  if (mem.userId === currentUserId) {
+                    displayAmount = formatMoney(mem.asignacion);
+                  } else {
+                    displayAmount = "-"; // REGLA ESTRICTA: Guión para otros
+                  }
+                } else if (role === 'direccion') {
+                  displayAmount = "-"; // Dirección ve solo el total consolidado en cabecera
+                }
+
+                return `
+                  <tr class="hover:bg-surface-container-low transition-colors">
+                    <td class="px-spacing-sm py-3 font-semibold text-on-surface">${escapeHtml(u.nombre)}</td>
+                    <td class="px-spacing-sm py-3 font-body-sm text-on-surface-variant">${escapeHtml(mem.rolEnProyecto)}</td>
+                    <td class="px-spacing-sm py-3 font-body-sm text-on-surface-variant">${escapeHtml(u.especialidad)}</td>
+                    <td class="px-spacing-sm py-3 text-right font-data-mono-md text-data-mono-md font-bold ${displayAmount === '-' ? 'text-outline font-normal' : 'text-primary'}">
+                      ${displayAmount}
+                    </td>
+                    <td class="px-spacing-sm py-3 text-center">
+                      <span class="px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-label-caps text-[10px]">CONTRATO VIGENTE</span>
+                    </td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  }
+
+  // PÁGINA 8: FICHA - DOCUMENTOS (VERSIONADO V1/V2, TIPOS CONTROLADOS)
+  function renderPage8(v, b) {
+    b.textContent = "8. Ficha - Documentos Técnicos & Versionado";
+    const p = store.getProject(store.state.currentProjectId);
+
+    v.innerHTML = `
+      <div class="flex flex-col">
+        ${renderProjectHeaderTabs(p, '8')}
+
+        <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm mb-spacing-md flex flex-col md:flex-row md:items-center justify-between gap-spacing-sm">
+          <div>
+            <h3 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+              <span class="material-symbols-outlined text-[20px]">folder_zip</span>
+              <span>Dossier de Archivos Técnicos Acreditados</span>
+            </h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Versionado controlado (v1.0, v1.1, v2.0) según el manual de aseguramiento de calidad.</p>
+          </div>
+          <button onclick="window.PI_UPLOAD_DOC_MODAL()" class="px-4 py-2 bg-primary hover:bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold rounded flex items-center gap-1.5 shadow-sm transition-colors">
+            <span class="material-symbols-outlined text-[18px]">upload_file</span>
+            <span>Cargar Nueva Versión</span>
+          </button>
+        </div>
+
+        <div class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden">
+          <table class="w-full text-left text-body-sm">
+            <thead class="bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase">
+              <tr>
+                <th class="px-spacing-sm py-2.5">Código / Nombre Archivo</th>
+                <th class="px-spacing-sm py-2.5">Tipo Técnico</th>
+                <th class="px-spacing-sm py-2.5 text-center">Versión</th>
+                <th class="px-spacing-sm py-2.5">Fecha Carga</th>
+                <th class="px-spacing-sm py-2.5">Autor / Revisor</th>
+                <th class="px-spacing-sm py-2.5 text-right">Tamaño</th>
+                <th class="px-spacing-sm py-2.5 text-right">Acción</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y-0">
+              ${p.documentos.length === 0 ? `
+                <tr><td colspan="7" class="py-8 text-center text-on-surface-variant font-body-md">No hay documentos cargados aún en este expediente.</td></tr>
+              ` : p.documentos.map(d => `
+                <tr class="hover:bg-surface-container-low transition-colors">
+                  <td class="px-spacing-sm py-3 font-medium text-on-surface flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-[20px]">draft</span>
+                    <span>${escapeHtml(d.titulo)}</span>
+                  </td>
+                  <td class="px-spacing-sm py-3 text-on-surface-variant">${escapeHtml(d.tipo)}</td>
+                  <td class="px-spacing-sm py-3 text-center">
+                    <span class="px-2 py-0.5 rounded bg-surface-container-highest font-data-mono-md text-[11px] font-bold text-primary">${d.version}</span>
+                  </td>
+                  <td class="px-spacing-sm py-3 font-data-mono-md text-data-mono-md">${d.fecha}</td>
+                  <td class="px-spacing-sm py-3 text-on-surface-variant">${escapeHtml(d.autor)}</td>
+                  <td class="px-spacing-sm py-3 font-data-mono-md text-data-mono-md text-right">${d.tamano}</td>
+                  <td class="px-spacing-sm py-3 text-right">
+                    <button onclick="window.PI_DOWNLOAD_MOCK('${d.titulo}')" class="text-primary hover:text-primary-container p-1" title="Descargar copia técnica">
+                      <span class="material-symbols-outlined text-[18px]">download</span>
+                    </button>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+
+    window.PI_DOWNLOAD_MOCK = (title) => {
+      showToast('Descarga Iniciada', `Generando réplica sellada de: ${title}`, 'info');
+      store.log("DESCARGA_DOC", p.id, `Descarga de documento oficial: ${title}.`);
+    };
+
+    window.PI_UPLOAD_DOC_MODAL = () => {
+      const html = `
+        <div class="space-y-3">
+          <div>
+            <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Nombre del Archivo / Memoria *</label>
+            <input id="modal-doc-title" type="text" placeholder="Ej: EIA_Fase2_Fauna_v2.0.pdf" class="w-full p-2 bg-surface-container-low text-on-surface rounded outline-none font-body-sm text-body-sm">
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Clasificación Técnica *</label>
+              <select id="modal-doc-type" class="w-full p-2 bg-surface-container-low text-on-surface rounded outline-none font-body-sm text-body-sm">
+                <option value="Informe Técnico de Impacto">Informe Técnico de Impacto</option>
+                <option value="Cartografía / Planos">Cartografía / Planos</option>
+                <option value="Datos Brutos de Campo">Datos Brutos de Campo</option>
+                <option value="Estudio Sociocultural">Estudio Sociocultural</option>
+                <option value="Términos de Referencia">Términos de Referencia</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Versión *</label>
+              <input id="modal-doc-ver" type="text" value="v1.0" class="w-full p-2 bg-surface-container-low text-on-surface rounded outline-none font-body-sm text-body-sm">
+            </div>
+          </div>
+        </div>
+      `;
+
+      openModal("Carga de Documento Técnico", html, () => {
+        const title = (document.getElementById('modal-doc-title').value || '').trim();
+        const type = document.getElementById('modal-doc-type').value;
+        const ver = document.getElementById('modal-doc-ver').value.trim() || 'v1.0';
+
+        if (!title) {
+          showToast('Campo Requerido', 'Debe indicar el nombre del archivo.', 'warning');
+          return;
+        }
+
+        p.documentos.unshift({
+          id: "DOC-" + (p.documentos.length + 1).toString().padStart(2, '0'),
+          titulo: title,
+          tipo: type,
+          version: ver,
+          fecha: "10/05/2024",
+          autor: store.getCurrentUser().nombre,
+          tamano: "3.4 MB"
+        });
+
+        store.log("CARGA_DOCUMENTO", p.id, `Cargado documento ${title} (${ver}) bajo categoría ${type}.`);
+        store.save();
+        showToast('Documento Anexado', 'El archivo fue incorporado al dossier.', 'success');
+        renderPage8(v, b);
+      }, "Incorporar al Expediente");
+    };
+  }
+
+  // PÁGINA 9: FICHA - MEDICIONES DE CAMPO (REGLA: NUNCA CALCULAR VOLUMEN, NOTA OBLIGATORIA)
+  function renderPage9(v, b) {
+    b.textContent = "9. Ficha - Mediciones de Campo & Dasonomía";
+    const p = store.getProject(store.state.currentProjectId);
+
+    // Sumar volúmenes manuales por especie
+    const speciesSummary = {};
+    p.fieldMeasurements.forEach(m => {
+      if (!speciesSummary[m.especie]) {
+        speciesSummary[m.especie] = { arboles: 0, volumenTotalM3: 0, parcelas: new Set() };
+      }
+      speciesSummary[m.especie].arboles += m.numArboles;
+      speciesSummary[m.especie].volumenTotalM3 += m.volumenManualM3;
+      speciesSummary[m.especie].parcelas.add(m.parcela);
+    });
+
+    v.innerHTML = `
+      <div class="flex flex-col">
+        ${renderProjectHeaderTabs(p, '9')}
+
+        <!-- NOTA DISCRETA OBLIGATORIA (REGLA NO NEGOCIABLE) -->
+        <div class="p-3 mb-spacing-md bg-surface-container-low text-on-surface-variant rounded flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-secondary text-[20px] shrink-0">info</span>
+          <span class="font-body-sm text-body-sm italic">
+            * Ecuación de volumen pendiente de definir por el equipo técnico. Captura estrictamente manual en m³.
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-spacing-md mb-spacing-md">
+          <!-- Formulario Móvil de Captura In Situ -->
+          <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+            <div class="flex items-center justify-between pb-spacing-xs mb-spacing-sm">
+              <h3 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+                <span class="material-symbols-outlined text-[20px]">add_box</span>
+                <span>Captura de Parcela</span>
+              </h3>
+              <span class="font-label-caps text-label-caps text-secondary uppercase">Muestreo</span>
+            </div>
+
+            <div class="space-y-3">
+              <div>
+                <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Identificador Parcela *</label>
+                <input id="field-parcela" type="text" placeholder="Ej: P-04 (100x100m)" value="P-04 (100x100m)" class="w-full p-2 bg-surface-container-low text-on-surface rounded outline-none font-body-sm">
+              </div>
+
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Hectáreas (ha) *</label>
+                  <input id="field-ha" type="number" step="0.1" value="1.0" class="w-full p-2 bg-surface-container-low text-on-surface rounded outline-none font-body-sm">
+                </div>
+                <div>
+                  <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Especie Controlada *</label>
+                  <select id="field-especie" class="w-full p-2 bg-surface-container-low text-on-surface rounded outline-none font-body-sm">
+                    ${store.state.catalogs.species.map(s => `
+                      <option value="${s.nombreComun}">${s.nombreComun} (${s.nombreCientifico})</option>
+                    `).join('')}
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">N° Árboles *</label>
+                  <input id="field-arboles" type="number" value="28" class="w-full p-2 bg-surface-container-low text-on-surface rounded outline-none font-body-sm">
+                </div>
+                <div>
+                  <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Altura Prom (m)</label>
+                  <input id="field-altura" type="number" step="0.1" value="19.2" class="w-full p-2 bg-surface-container-low text-on-surface rounded outline-none font-body-sm">
+                </div>
+                <div>
+                  <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">DAP Prom (cm)</label>
+                  <input id="field-dap" type="number" step="0.1" value="36.5" class="w-full p-2 bg-surface-container-low text-on-surface rounded outline-none font-body-sm">
+                </div>
+              </div>
+
+              <div>
+                <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">
+                  Volumen Manual Estimado (m³) *
+                </label>
+                <input id="field-volumen" type="number" step="0.1" placeholder="Ingrese m³ determinado en campo" value="45.0" class="w-full p-2 bg-surface-container-low text-on-surface rounded outline-none font-body-sm font-semibold text-primary">
+                <span class="font-body-sm text-[11px] text-on-surface-variant">Valor numérico capturado sin fórmula automática.</span>
+              </div>
+
+              <button id="btn-save-field" class="w-full py-2.5 bg-primary hover:bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold rounded flex items-center justify-center gap-1.5 shadow-sm transition-colors mt-2">
+                <span class="material-symbols-outlined text-[18px]">save</span>
+                <span>Asentar Medición de Campo</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Resumen Consolidado por Especie -->
+          <div class="lg:col-span-2 bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+            <div class="flex items-center justify-between pb-spacing-xs mb-spacing-sm">
+              <h3 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+                <span class="material-symbols-outlined text-[20px]">analytics</span>
+                <span>Resumen Dasonómico Consolidado por Especie</span>
+              </h3>
+              <span class="font-label-tabular text-label-tabular text-primary font-bold">TOTAL SUMADO</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-spacing-sm">
+              ${Object.keys(speciesSummary).length === 0 ? `
+                <div class="col-span-2 py-8 text-center text-on-surface-variant font-body-md">No hay mediciones asentadas en este proyecto.</div>
+              ` : Object.entries(speciesSummary).map(([sp, data]) => `
+                <div class="p-3 bg-surface-container-low rounded flex items-center justify-between">
+                  <div>
+                    <span class="font-headline-sm text-headline-sm text-primary">${escapeHtml(sp)}</span>
+                    <div class="font-body-sm text-[12px] text-on-surface-variant mt-0.5">
+                      ${data.arboles} árboles registrados • ${data.parcelas.size} parcelas
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <span class="font-data-mono-lg text-data-mono-lg text-secondary font-bold">${data.volumenTotalM3.toFixed(1)} m³</span>
+                    <span class="block font-label-caps text-[10px] text-on-surface-variant uppercase">Volumen Acumulado</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+
+        <!-- Libro de Campo / Registros -->
+        <div class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden">
+          <div class="p-spacing-sm bg-surface-container-high flex items-center justify-between">
+            <span class="font-label-caps text-label-caps text-on-surface uppercase font-bold">Libro de Mediciones de Campo</span>
+            <span class="font-data-mono-md text-data-mono-md">${p.fieldMeasurements.length} Registros</span>
+          </div>
+          <table class="w-full text-left text-body-sm">
+            <thead class="bg-surface-container-low text-on-surface font-label-caps text-label-caps uppercase">
+              <tr>
+                <th class="px-spacing-sm py-2">ID</th>
+                <th class="px-spacing-sm py-2">Parcela</th>
+                <th class="px-spacing-sm py-2">Especie</th>
+                <th class="px-spacing-sm py-2 text-right">Árboles</th>
+                <th class="px-spacing-sm py-2 text-right">Alt. (m)</th>
+                <th class="px-spacing-sm py-2 text-right">DAP (cm)</th>
+                <th class="px-spacing-sm py-2 text-right">Volumen Manual (m³)</th>
+                <th class="px-spacing-sm py-2">Responsable</th>
+                <th class="px-spacing-sm py-2 text-right">Fecha</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y-0">
+              ${p.fieldMeasurements.map(m => `
+                <tr class="hover:bg-surface-container-low transition-colors">
+                  <td class="px-spacing-sm py-2 font-data-mono-md text-primary font-semibold">${m.id}</td>
+                  <td class="px-spacing-sm py-2">${escapeHtml(m.parcela)}</td>
+                  <td class="px-spacing-sm py-2 font-medium">${escapeHtml(m.especie)}</td>
+                  <td class="px-spacing-sm py-2 text-right font-data-mono-md">${m.numArboles}</td>
+                  <td class="px-spacing-sm py-2 text-right font-data-mono-md">${m.alturaPromedioM}</td>
+                  <td class="px-spacing-sm py-2 text-right font-data-mono-md">${m.dapPromedioCm}</td>
+                  <td class="px-spacing-sm py-2 text-right font-data-mono-md font-bold text-secondary">${m.volumenManualM3.toFixed(1)} m³</td>
+                  <td class="px-spacing-sm py-2 text-on-surface-variant">${escapeHtml(m.responsable)}</td>
+                  <td class="px-spacing-sm py-2 text-right font-data-mono-md text-[12px]">${m.fecha}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('btn-save-field').onclick = () => {
+      const parcela = document.getElementById('field-parcela').value.trim();
+      const ha = parseFloat(document.getElementById('field-ha').value) || 1.0;
+      const especie = document.getElementById('field-especie').value;
+      const arboles = parseInt(document.getElementById('field-arboles').value, 10) || 0;
+      const altura = parseFloat(document.getElementById('field-altura').value) || 0;
+      const dap = parseFloat(document.getElementById('field-dap').value) || 0;
+      const volumen = parseFloat(document.getElementById('field-volumen').value);
+
+      if (!parcela || isNaN(volumen)) {
+        showToast('Validación Inválida', 'Identificador de parcela y volumen en m³ son obligatorios.', 'warning');
+        return;
+      }
+
+      const newFM = {
+        id: "FM-" + (p.fieldMeasurements.length + 1).toString().padStart(2, '0'),
+        parcela: parcela,
+        hectareas: ha,
+        especie: especie,
+        numArboles: arboles,
+        alturaPromedioM: altura,
+        dapPromedioCm: dap,
+        volumenManualM3: volumen,
+        fecha: "10/05/2024",
+        responsable: store.getCurrentUser().nombre
+      };
+
+      p.fieldMeasurements.push(newFM);
+      store.log("CAPTURA_CAMPO", p.id, `Medición de parcela ${parcela} ingresada: ${arboles} ind. ${especie}, Vol: ${volumen} m³.`);
+      store.save();
+      showToast('Medición Registrada', `Volumen manual de ${volumen} m³ asentado.`, 'success');
+      renderPage9(v, b);
+    };
+  }
+
+  // PÁGINA 10: FICHA - FINANZAS (PARTIDAS CONTROLADAS, FILTRO 'POR LIQUIDAR')
+  function renderPage10(v, b) {
+    b.textContent = "10. Ficha - Control Financiero & Partidas";
+    const p = store.getProject(store.state.currentProjectId);
+    let filterStatus = "ALL";
+
+    function renderFinTable() {
+      const filtered = p.finanzas.filter(f => {
+        if (filterStatus === "ALL") return true;
+        return f.estado === filterStatus;
+      });
+
+      const totalIngresos = p.finanzas.filter(f => f.tipo === 'Ingreso').reduce((a, c) => a + c.monto, 0);
+      const totalEgresos = p.finanzas.filter(f => f.tipo === 'Egreso').reduce((a, c) => a + c.monto, 0);
+      const porLiquidarMonto = p.finanzas.filter(f => f.estado === 'Por liquidar').reduce((a, c) => a + c.monto, 0);
+
+      document.getElementById('fin-total-ingresos').textContent = formatMoney(totalIngresos);
+      document.getElementById('fin-total-egresos').textContent = formatMoney(totalEgresos);
+      document.getElementById('fin-total-liquidar').textContent = formatMoney(porLiquidarMonto);
+
+      const tbody = document.getElementById('fin-table-body');
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="text-center py-6 text-on-surface-variant font-body-md">No hay registros con el filtro seleccionado.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(f => `
+        <tr class="hover:bg-surface-container-low transition-colors">
+          <td class="px-spacing-sm py-2.5 font-data-mono-md text-primary font-bold">${f.id}</td>
+          <td class="px-spacing-sm py-2.5">
+            <span class="px-2 py-0.5 rounded font-label-caps text-label-caps uppercase ${f.tipo === 'Ingreso' ? 'bg-primary-fixed text-on-primary-fixed' : 'bg-surface-container-highest text-on-surface'}">${f.tipo}</span>
+          </td>
+          <td class="px-spacing-sm py-2.5 font-medium">${escapeHtml(f.categoria)}</td>
+          <td class="px-spacing-sm py-2.5 text-on-surface-variant">${escapeHtml(f.concepto)}</td>
+          <td class="px-spacing-sm py-2.5 font-data-mono-md text-right">${f.fecha}</td>
+          <td class="px-spacing-sm py-2.5 font-data-mono-md text-right font-bold ${f.tipo === 'Ingreso' ? 'text-primary' : 'text-secondary'}">
+            ${formatMoney(f.monto)}
+          </td>
+          <td class="px-spacing-sm py-2.5 text-center">
+            <span class="px-2 py-0.5 rounded font-label-caps text-label-caps uppercase ${f.estado === 'Liquidado' ? 'bg-primary-fixed text-on-primary-fixed' : 'bg-secondary-fixed text-on-secondary-fixed font-bold'}">
+              ${f.estado}
+            </span>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    v.innerHTML = `
+      <div class="flex flex-col">
+        ${renderProjectHeaderTabs(p, '10')}
+
+        <!-- KPIs Financieros -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-spacing-md mb-spacing-md">
+          <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+            <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Ingresos Percibidos</span>
+            <div id="fin-total-ingresos" class="font-headline-lg text-headline-lg text-primary mt-1">$0.00</div>
+          </div>
+          <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+            <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Egresos Ejecutados</span>
+            <div id="fin-total-egresos" class="font-headline-lg text-headline-lg text-secondary mt-1">$0.00</div>
+          </div>
+          <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+            <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Partidas Por Liquidar</span>
+            <div id="fin-total-liquidar" class="font-headline-lg text-headline-lg text-secondary mt-1">$0.00</div>
+          </div>
+        </div>
+
+        <!-- Filtros y Formulario -->
+        <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm mb-spacing-md flex flex-col md:flex-row md:items-center justify-between gap-spacing-sm">
+          <div class="flex items-center gap-spacing-xs">
+            <span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Filtro Rápido:</span>
+            <select id="fin-filter-status" class="bg-surface-container-low text-on-surface text-body-sm px-3 py-1.5 rounded outline-none font-medium cursor-pointer">
+              <option value="ALL">Todas las Partidas</option>
+              <option value="Por liquidar">Solo 'Por Liquidar' (Pendientes)</option>
+              <option value="Liquidado">Solo 'Liquidadas'</option>
+            </select>
+          </div>
+
+          <button onclick="window.PI_ADD_FIN_RECORD()" class="px-4 py-1.5 bg-primary hover:bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold rounded flex items-center gap-1.5 shadow-sm transition-colors">
+            <span class="material-symbols-outlined text-[18px]">add_card</span>
+            <span>Registrar Movimiento Financiero</span>
+          </button>
+        </div>
+
+        <!-- Tabla de Partidas -->
+        <div class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden">
+          <table class="w-full text-left text-body-sm">
+            <thead class="bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase">
+              <tr>
+                <th class="px-spacing-sm py-2.5">ID</th>
+                <th class="px-spacing-sm py-2.5">Tipo</th>
+                <th class="px-spacing-sm py-2.5">Categoría Controlada</th>
+                <th class="px-spacing-sm py-2.5">Concepto Justificado</th>
+                <th class="px-spacing-sm py-2.5 text-right">Fecha</th>
+                <th class="px-spacing-sm py-2.5 text-right">Monto (USD)</th>
+                <th class="px-spacing-sm py-2.5 text-center">Estado Liquidación</th>
+              </tr>
+            </thead>
+            <tbody id="fin-table-body" class="divide-y-0">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('fin-filter-status').onchange = (e) => {
+      filterStatus = e.target.value;
+      renderFinTable();
+    };
+
+    window.PI_ADD_FIN_RECORD = () => {
+      const html = `
+        <div class="space-y-3">
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Tipo de Flujo *</label>
+              <select id="modal-fin-type" class="w-full p-2 bg-surface-container-low text-on-surface rounded outline-none font-body-sm">
+                <option value="Egreso">Egreso Técnico</option>
+                <option value="Ingreso">Ingreso Contractual</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Monto (USD) *</label>
+              <input id="modal-fin-amount" type="number" step="0.01" value="1500.00" class="w-full p-2 bg-surface-container-low text-on-surface rounded outline-none font-body-sm font-semibold">
+            </div>
+          </div>
+          <div>
+            <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Categoría Controlada *</label>
+            <select id="modal-fin-cat" class="w-full p-2 bg-surface-container-low text-on-surface rounded outline-none font-body-sm">
+              ${store.state.catalogs.financialCategories.map(c => `<option value="${c}">${c}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Concepto / Justificación Contable *</label>
+            <input id="modal-fin-concept" type="text" placeholder="Detalle de la erogación o factura" class="w-full p-2 bg-surface-container-low text-on-surface rounded outline-none font-body-sm">
+          </div>
+          <div>
+            <label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Estado Inmediato *</label>
+            <select id="modal-fin-status" class="w-full p-2 bg-surface-container-low text-on-surface rounded outline-none font-body-sm font-medium">
+              <option value="Por liquidar">Por liquidar (Pendiente)</option>
+              <option value="Liquidado">Liquidado (Pagado/Conciliado)</option>
+            </select>
+          </div>
+        </div>
+      `;
+
+      openModal("Nuevo Registro Financiero", html, () => {
+        const tipo = document.getElementById('modal-fin-type').value;
+        const monto = parseFloat(document.getElementById('modal-fin-amount').value) || 0;
+        const cat = document.getElementById('modal-fin-cat').value;
+        const concepto = (document.getElementById('modal-fin-concept').value || '').trim();
+        const estado = document.getElementById('modal-fin-status').value;
+
+        if (!concepto || monto <= 0) {
+          showToast('Validación Fallida', 'Debe suministrar un concepto y monto válido.', 'warning');
+          return;
+        }
+
+        const newRec = {
+          id: "FIN-" + (p.finanzas.length + 101),
+          tipo: tipo,
+          categoria: cat,
+          concepto: concepto,
+          monto: monto,
+          fecha: "10/05/2024",
+          estado: estado
+        };
+
+        p.finanzas.unshift(newRec);
+        store.log("REGISTRO_FINANCIERO", p.id, `Partida ${newRec.id} (${tipo} $${monto}) registrada bajo categoría ${cat} [${estado}].`);
+        store.save();
+        showToast('Partida Registrada', 'El movimiento fue asentado contablemente.', 'success');
+        renderFinTable();
+      }, "Guardar Registro");
+    };
+
+    renderFinTable();
+  }
+
+  // PÁGINA 11: FICHA - BITÁCORA DE PROYECTO (INMUTABLE)
+  function renderPage11(v, b) {
+    b.textContent = "11. Ficha - Bitácora Inmutable de Proyecto";
+    const p = store.getProject(store.state.currentProjectId);
+    const logs = store.state.auditLogs.filter(l => l.proyectoId === p.id);
+
+    v.innerHTML = `
+      <div class="flex flex-col">
+        ${renderProjectHeaderTabs(p, '11')}
+
+        <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm mb-spacing-md flex items-center justify-between">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-secondary text-[22px]">lock</span>
+              <h3 class="font-headline-sm text-headline-sm text-primary">Libro de Registro Inmutable</h3>
+            </div>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Por diseño del estándar de calidad, todo cambio técnico o financiero es de solo adición. No existen interfaces de edición o borrado.</p>
+          </div>
+          <span class="font-data-mono-md text-data-mono-md text-primary font-bold">${logs.length} ASIENTOS</span>
+        </div>
+
+        <div class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden">
+          <table class="w-full text-left text-body-sm">
+            <thead class="bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase">
+              <tr>
+                <th class="px-spacing-sm py-2.5">ID Log</th>
+                <th class="px-spacing-sm py-2.5">Marca Temporal</th>
+                <th class="px-spacing-sm py-2.5">Usuario & Rol</th>
+                <th class="px-spacing-sm py-2.5">Acción</th>
+                <th class="px-spacing-sm py-2.5">Detalle Auditado</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y-0">
+              ${logs.length === 0 ? `
+                <tr><td colspan="5" class="py-8 text-center text-on-surface-variant font-body-md">No hay registros de bitácora específicos para este expediente.</td></tr>
+              ` : logs.map(l => `
+                <tr class="hover:bg-surface-container-low transition-colors">
+                  <td class="px-spacing-sm py-3 font-data-mono-md text-primary font-bold">${l.id}</td>
+                  <td class="px-spacing-sm py-3 font-data-mono-md text-[12px] whitespace-nowrap">${l.timestamp}</td>
+                  <td class="px-spacing-sm py-3">
+                    <span class="font-medium">${escapeHtml(l.usuario)}</span>
+                    <span class="block font-label-caps text-[10px] text-on-surface-variant uppercase">${l.rol}</span>
+                  </td>
+                  <td class="px-spacing-sm py-3 font-label-caps text-[11px] font-bold text-secondary">${l.accion}</td>
+                  <td class="px-spacing-sm py-3 text-on-surface font-body-sm">${escapeHtml(l.detalle)}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  }
+
+  // PÁGINA 12: APROBACIONES PENDIENTES (COLA Y ANTIGÜEDAD)
+  function renderPage12(v, b) {
+    b.textContent = "12. Cola de Aprobaciones Pendientes";
+
+    const pendingGateways = [];
+    store.state.projects.forEach(proj => {
+      proj.etapas.forEach(stg => {
+        if (stg.compuerta && stg.estado === 'Esperando Aprobación') {
+          pendingGateways.push({
+            project: proj,
+            stage: stg,
+            antiguedadDias: 12
+          });
+        }
+      });
+    });
+
+    v.innerHTML = `
+      <div class="flex flex-col gap-spacing-md">
+        <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-spacing-sm">
+          <div>
+            <h2 class="font-headline-lg text-headline-lg text-primary flex items-center gap-2">
+              <span class="material-symbols-outlined text-[24px]">verified</span>
+              <span>Bandeja de Compuertas Técnicas Pendientes</span>
+            </h2>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Hitos de control obligatorio que condicionan el pase a etapas posteriores.</p>
+          </div>
+          <span class="px-3 py-1 rounded bg-secondary text-on-secondary font-label-caps text-label-caps uppercase font-bold">
+            ${pendingGateways.length} EN COLA DE ESPERA
+          </span>
+        </div>
+
+        <div class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden">
+          <table class="w-full text-left text-body-sm">
+            <thead class="bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase">
+              <tr>
+                <th class="px-spacing-sm py-2.5">Código / Proyecto</th>
+                <th class="px-spacing-sm py-2.5">Hito de Compuerta</th>
+                <th class="px-spacing-sm py-2.5">Fecha Límite</th>
+                <th class="px-spacing-sm py-2.5 text-center">Antigüedad en Cola</th>
+                <th class="px-spacing-sm py-2.5 text-right">Acción Técnica</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y-0">
+              ${pendingGateways.length === 0 ? `
+                <tr><td colspan="5" class="py-12 text-center text-on-surface-variant font-body-md">No hay compuertas en espera de aprobación. Todos los proyectos están al día.</td></tr>
+              ` : pendingGateways.map(item => `
+                <tr class="hover:bg-surface-container-low transition-colors">
+                  <td class="px-spacing-sm py-3.5">
+                    <div class="font-data-mono-md text-primary font-bold">${item.project.id}</div>
+                    <div class="font-semibold text-on-surface">${escapeHtml(item.project.nombre)}</div>
+                    <div class="text-[12px] text-on-surface-variant">${escapeHtml(item.project.contratante)}</div>
+                  </td>
+                  <td class="px-spacing-sm py-3.5">
+                    <span class="px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-label-caps text-[10px] font-bold">ETAPA ${item.stage.num}</span>
+                    <div class="font-medium mt-1">${escapeHtml(item.stage.nombre)}</div>
+                    <div class="text-[12px] text-secondary mt-0.5 italic">${escapeHtml(item.stage.observacionesCompuerta || '')}</div>
+                  </td>
+                  <td class="px-spacing-sm py-3.5 font-data-mono-md">${item.stage.fechaFin}</td>
+                  <td class="px-spacing-sm py-3.5 text-center">
+                    <span class="px-2 py-1 rounded bg-surface-container-highest font-data-mono-md text-data-mono-md font-bold text-error">
+                      ${item.antiguedadDias} DÍAS
+                    </span>
+                  </td>
+                  <td class="px-spacing-sm py-3.5 text-right">
+                    <button onclick="window.PI_SELECT_PROJECT('${item.project.id}', '6')" class="px-4 py-2 bg-primary hover:bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold rounded shadow-sm transition-colors">
+                      Inspeccionar & Decidir
+                    </button>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  }
+
+  // PÁGINA 13: CALENDARIO DE ENTREGAS (VISTA MENSUAL CON ESTADOS)
+  function renderPage13(v, b) {
+    b.textContent = "13. Calendario Técnico de Entregas";
+
+    v.innerHTML = `
+      <div class="flex flex-col gap-spacing-md">
+        <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-spacing-sm">
+          <div>
+            <h2 class="font-headline-lg text-headline-lg text-primary flex items-center gap-2">
+              <span class="material-symbols-outlined text-[24px]">event_note</span>
+              <span>Cronograma Consolidado de Hitos & Entregas</span>
+            </h2>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Monitoreo de vencimientos por mes calendario.</p>
+          </div>
+          <div class="flex items-center gap-2 font-data-mono-md text-data-mono-md font-bold text-primary">
+            MAYO - JUNIO 2024
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-spacing-md">
+          ${store.state.projects.map(p => {
+            const overdueCount = p.etapas.filter(e => e.vencida).length;
+            return `
+              <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm flex flex-col justify-between cursor-pointer hover:shadow-md transition-shadow" onclick="window.PI_SELECT_PROJECT('${p.id}', '6')">
+                <div>
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="font-data-mono-md text-data-mono-md text-primary font-bold">${p.id}</span>
+                    <span class="px-2 py-0.5 rounded font-label-caps text-label-caps uppercase ${overdueCount > 0 ? 'bg-error text-on-error' : 'bg-surface-container-high text-on-surface'}">
+                      ${overdueCount > 0 ? `${overdueCount} Hitos Vencidos` : 'Al Día'}
+                    </span>
+                  </div>
+                  <h4 class="font-headline-sm text-headline-sm text-on-surface line-clamp-2">${escapeHtml(p.nombre)}</h4>
+                  <div class="text-[12px] text-on-surface-variant mt-1">${escapeHtml(p.contratante)}</div>
+                  
+                  <div class="mt-3 pt-2 border-t-0 space-y-1.5">
+                    <div class="flex justify-between text-body-sm">
+                      <span class="text-on-surface-variant">Entrega Final:</span>
+                      <span class="font-data-mono-md font-bold">${p.fechaFinPrevista}</span>
+                    </div>
+                    <div class="flex justify-between text-body-sm">
+                      <span class="text-on-surface-variant">Próximo Hito:</span>
+                      <span class="font-medium text-secondary truncate max-w-[160px]">${p.etapas.find(e => e.estado === 'En Proceso' || e.estado === 'Esperando Aprobación')?.nombre || 'Concluído'}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4 pt-2">
+                  <div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+                    <div class="h-full ${overdueCount > 0 ? 'bg-error' : 'bg-primary'}" style="width: ${p.progreso}%"></div>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  // PÁGINA 14: CONTRATANTES (LISTADO Y DETALLE CON PROYECTOS)
+  function renderPage14(v, b) {
+    b.textContent = "14. Directorio de Entes & Contratantes";
+
+    const contractors = {};
+    store.state.projects.forEach(p => {
+      if (!contractors[p.contratante]) {
+        contractors[p.contratante] = {
+          nombre: p.contratante,
+          rif: p.rif,
+          proyectos: []
+        };
+      }
+      contractors[p.contratante].proyectos.push(p);
+    });
+
+    v.innerHTML = `
+      <div class="flex flex-col gap-spacing-md">
+        <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+          <h2 class="font-headline-lg text-headline-lg text-primary flex items-center gap-2">
+            <span class="material-symbols-outlined text-[24px]">domain</span>
+            <span>Contratantes & Clientes Institucionales</span>
+          </h2>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Expedientes asociados por razón social y RIF tributario.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-spacing-md">
+          ${Object.values(contractors).map(c => `
+            <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-headline-sm text-headline-sm text-primary font-bold">${escapeHtml(c.nombre)}</span>
+                  <span class="font-data-mono-md text-data-mono-md text-secondary">${escapeHtml(c.rif)}</span>
+                </div>
+                <div class="font-body-sm text-body-sm text-on-surface-variant mb-3">
+                  ${c.proyectos.length} expedientes contratados
+                </div>
+
+                <div class="space-y-2">
+                  ${c.proyectos.map(p => `
+                    <div class="p-2 bg-surface-container-low rounded flex items-center justify-between text-body-sm cursor-pointer hover:bg-surface-container-high" onclick="window.PI_SELECT_PROJECT('${p.id}', '5')">
+                      <div>
+                        <span class="font-data-mono-md text-primary font-bold">${p.id}</span>
+                        <div class="text-[12px] truncate max-w-[240px]">${escapeHtml(p.nombre)}</div>
+                      </div>
+                      <span class="font-data-mono-md font-semibold">${p.progreso}%</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  // PÁGINA 15: REPORTES (CIERRE DE MES, FILTROS, EXPORTACIÓN E IMPRESIÓN)
+  function renderPage15(v, b) {
+    b.textContent = "15. Generador de Reportes Técnicos";
+
+    v.innerHTML = `
+      <div class="flex flex-col gap-spacing-md">
+        <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-spacing-sm">
+          <div>
+            <h2 class="font-headline-lg text-headline-lg text-primary flex items-center gap-2">
+              <span class="material-symbols-outlined text-[24px]">analytics</span>
+              <span>Reporte Consolidado de Cierre Mensual</span>
+            </h2>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Conformidad técnica y financiera bajo estándar EIA-v2.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="window.print()" class="px-4 py-2 bg-surface-container-high hover:bg-surface-container text-on-surface font-body-sm text-body-sm font-semibold rounded flex items-center gap-1.5 transition-colors">
+              <span class="material-symbols-outlined text-[18px]">print</span>
+              <span>Imprimir / PDF</span>
+            </button>
+            <button id="btn-export-reports-csv" class="px-4 py-2 bg-primary hover:bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold rounded flex items-center gap-1.5 transition-colors">
+              <span class="material-symbols-outlined text-[18px]">download</span>
+              <span>Exportar CSV</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest p-spacing-lg rounded-lg shadow-sm space-y-6">
+          <div class="flex items-center justify-between pb-spacing-xs">
+            <div>
+              <span class="font-label-caps text-label-caps text-secondary uppercase">AUDITORÍA INTEGRAL DE OPERACIONES</span>
+              <h3 class="font-headline-md text-headline-md text-primary">Balance Q1-Q2 2024</h3>
+            </div>
+            <span class="font-data-mono-md text-data-mono-md text-on-surface-variant">FECHA REPORTE: 10/05/2024</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="p-3 bg-surface-container-low rounded">
+              <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Proyectos Evaluados</span>
+              <div class="font-headline-lg text-headline-lg text-primary">${store.state.projects.length}</div>
+            </div>
+            <div class="p-3 bg-surface-container-low rounded">
+              <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Muestras de Campo Totales</span>
+              <div class="font-headline-lg text-headline-lg text-primary">
+                ${store.state.projects.reduce((a, c) => a + c.fieldMeasurements.length, 0)} Parcelas
+              </div>
+            </div>
+            <div class="p-3 bg-surface-container-low rounded">
+              <span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Cumplimiento Hitos</span>
+              <div class="font-headline-lg text-headline-lg text-primary">82.4%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('btn-export-reports-csv').onclick = () => {
+      showToast('Reporte Generado', 'CSV técnico descargado correctamente.', 'success');
+      store.log("REPORTE_MENSUAL", "GLOBAL", "Generación y descarga de reporte consolidado de cierre.");
+    };
+  }
+
+  // PÁGINA 16: VISTA DE DIRECCIÓN (DARK THEME, MODO PRESENTACIÓN, ROTADOR 15S)
+  function renderPage16(v, b) {
+    b.textContent = "16. Sala de Situación de Dirección (Dark Theme Proyección)";
+
+    const slides = [
+      {
+        title: "PANEL 1: Cartera Global de Proyectos & Avance Físico",
+        content: `
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+            ${store.state.projects.map(p => `
+              <div class="p-4 bg-surface-container-lowest/10 rounded border border-outline/20">
+                <div class="font-data-mono-md text-inverse-primary font-bold">${p.id}</div>
+                <div class="font-semibold text-inverse-on-surface mt-1">${escapeHtml(p.nombre)}</div>
+                <div class="text-sm text-outline-variant mt-2">${p.progreso}% completado</div>
+              </div>
+            `).join('')}
+          </div>
+        `
+      },
+      {
+        title: "PANEL 2: Hitos Críticos & Compuertas Mandatorias",
+        content: `
+          <div class="p-6 bg-surface-container-lowest/10 rounded mt-4">
+            <h4 class="text-secondary-fixed text-lg font-bold">Compuerta Etapa 6 (Borradores Técnicos)</h4>
+            <p class="text-inverse-on-surface mt-2">PI-2024-002 Parque Eólico Falcón: Detenido en Etapa 6 esperando aprobación técnica de Coordinador para desbloquear Etapa 7.</p>
+          </div>
+        `
+      },
+      {
+        title: "PANEL 3: Salud Financiera Consolidada",
+        content: `
+          <div class="grid grid-cols-2 gap-6 mt-4">
+            <div class="p-6 bg-surface-container-lowest/10 rounded">
+              <span class="text-outline-variant uppercase text-xs">Total Contratado Cartera</span>
+              <div class="text-3xl font-data-mono-md text-primary-fixed mt-2">$274,500.00 USD</div>
+            </div>
+            <div class="p-6 bg-surface-container-lowest/10 rounded">
+              <span class="text-outline-variant uppercase text-xs">Margen Proyectado</span>
+              <div class="text-3xl font-data-mono-md text-secondary-fixed mt-2">34.8%</div>
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    function drawSlide() {
+      const current = slides[directorCurrentSlide];
+      v.innerHTML = `
+        <div class="min-h-[560px] bg-inverse-surface text-inverse-on-surface p-spacing-xl rounded-lg shadow-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-spacing-md border-b border-outline/20">
+              <div class="flex items-center gap-3">
+                <span class="w-3 h-3 rounded-full bg-secondary-fixed animate-ping"></span>
+                <span class="font-headline-md text-headline-md text-inverse-primary font-bold">PROYECCIÓN EJECUTIVA • SALA SITUACIONAL</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="font-data-mono-md text-data-mono-md text-outline-variant">Rotación: 15s</span>
+                <button id="btn-toggle-pause" class="px-3 py-1 bg-surface-container-highest/20 hover:bg-surface-container-highest/30 rounded text-inverse-on-surface font-body-sm text-body-sm font-semibold">
+                  ${directorRotationPaused ? 'Reanudar Rotación' : 'Pausar'}
+                </button>
+              </div>
+            </div>
+
+            <div class="mt-spacing-lg">
+              <h3 class="font-headline-lg text-headline-lg text-secondary-fixed">${current.title}</h3>
+              ${current.content}
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-spacing-lg border-t border-outline/20 mt-spacing-xl">
+            <div class="flex items-center gap-2">
+              ${slides.map((_, idx) => `
+                <div class="w-8 h-1.5 rounded-full ${idx === directorCurrentSlide ? 'bg-primary-fixed' : 'bg-outline/40'}"></div>
+              `).join('')}
+            </div>
+            <span class="font-data-mono-md text-data-mono-md text-outline-variant">Diapositiva ${directorCurrentSlide + 1} de ${slides.length}</span>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('btn-toggle-pause').onclick = () => {
+        directorRotationPaused = !directorRotationPaused;
+        drawSlide();
+        showToast(directorRotationPaused ? 'Rotación Pausada' : 'Rotación Reanudada', 'Control de presentación ejecutiva.', 'info');
+      };
+    }
+
+    drawSlide();
+
+    stopDirectorRotation();
+    directorRotationTimer = setInterval(() => {
+      if (!directorRotationPaused) {
+        directorCurrentSlide = (directorCurrentSlide + 1) % slides.length;
+        drawSlide();
+      }
+    }, 15000); // 15 segundos exactos
+  }
+
+  // PÁGINA 17: GESTIÓN DE USUARIOS Y ROLES (ADMIN EXCLUSIVO)
+  function renderPage17(v, b) {
+    b.textContent = "17. Gestión de Usuarios & Roles RBAC";
+
+    v.innerHTML = `
+      <div class="flex flex-col gap-spacing-md">
+        <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-spacing-sm">
+          <div>
+            <h2 class="font-headline-lg text-headline-lg text-primary flex items-center gap-2">
+              <span class="material-symbols-outlined text-[24px]">manage_accounts</span>
+              <span>Usuarios del Sistema & Permisos</span>
+            </h2>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Administración de credenciales, roles y honorarios contractuales.</p>
+          </div>
+          <button onclick="window.PI_ADD_USER()" class="px-4 py-2 bg-primary hover:bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold rounded flex items-center gap-1.5 shadow-sm transition-colors">
+            <span class="material-symbols-outlined text-[18px]">person_add</span>
+            <span>Nuevo Usuario</span>
+          </button>
+        </div>
+
+        <div class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden">
+          <table class="w-full text-left text-body-sm">
+            <thead class="bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase">
+              <tr>
+                <th class="px-spacing-sm py-2.5">ID / Nombre</th>
+                <th class="px-spacing-sm py-2.5">Especialidad</th>
+                <th class="px-spacing-sm py-2.5">Rol RBAC</th>
+                <th class="px-spacing-sm py-2.5 text-right">Honorario Base (USD)</th>
+                <th class="px-spacing-sm py-2.5 text-center">Estado</th>
+                <th class="px-spacing-sm py-2.5 text-right">Acciones</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y-0">
+              ${store.state.users.map(u => `
+                <tr class="hover:bg-surface-container-low transition-colors">
+                  <td class="px-spacing-sm py-3">
+                    <div class="font-semibold text-on-surface">${escapeHtml(u.nombre)}</div>
+                    <div class="font-data-mono-md text-[11px] text-on-surface-variant">${u.id}</div>
+                  </td>
+                  <td class="px-spacing-sm py-3 text-on-surface-variant">${escapeHtml(u.especialidad)}</td>
+                  <td class="px-spacing-sm py-3">
+                    <span class="px-2 py-0.5 rounded font-label-caps text-label-caps uppercase bg-primary-fixed text-on-primary-fixed font-bold">${u.rol}</span>
+                  </td>
+                  <td class="px-spacing-sm py-3 font-data-mono-md text-right font-bold">${formatMoney(u.honorario)}</td>
+                  <td class="px-spacing-sm py-3 text-center">
+                    <span class="px-2 py-0.5 rounded font-label-caps text-[10px] ${u.activo ? 'bg-primary-fixed text-on-primary-fixed' : 'bg-error-container text-on-error-container'}">
+                      ${u.activo ? 'ACTIVO' : 'DESACTIVADO'}
+                    </span>
+                  </td>
+                  <td class="px-spacing-sm py-3 text-right">
+                    <button onclick="window.PI_TOGGLE_USER('${u.id}')" class="text-xs font-semibold px-2 py-1 rounded ${u.activo ? 'bg-error-container text-on-error-container hover:bg-error hover:text-on-error' : 'bg-primary-fixed text-on-primary-fixed'}">
+                      ${u.activo ? 'Desactivar' : 'Reactivar'}
+                    </button>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+
+    window.PI_TOGGLE_USER = (uid) => {
+      const u = store.state.users.find(x => x.id === uid);
+      if (u) {
+        u.activo = !u.activo;
+        store.log("CAMBIO_ESTADO_USUARIO", "SISTEMA", `Usuario ${u.nombre} (${u.id}) pasó a estado ${u.activo ? 'ACTIVO' : 'DESACTIVADO'}.`);
+        store.save();
+        showToast('Usuario Modificado', `Estado actualizado para ${u.nombre}`, 'info');
+        renderPage17(v, b);
+      }
+    };
+
+    window.PI_ADD_USER = () => {
+      showToast('Función Administrativa', 'Módulo de enrolamiento directo activo en bitácora.', 'info');
+    };
+  }
+
+  // PÁGINA 18: CATÁLOGOS Y PLANTILLAS
+  function renderPage18(v, b) {
+    b.textContent = "18. Catálogos Técnicos & Plantillas Administrables";
+
+    v.innerHTML = `
+      <div class="flex flex-col gap-spacing-md">
+        <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+          <h2 class="font-headline-lg text-headline-lg text-primary flex items-center gap-2">
+            <span class="material-symbols-outlined text-[24px]">menu_book</span>
+            <span>Listas Controladas & Plantilla de 10 Etapas</span>
+          </h2>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Clasificaciones estrictamente estandarizadas para evitar discrepancias de campo.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-spacing-md">
+          <!-- Catálogo de Especies -->
+          <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+            <div class="flex items-center justify-between mb-spacing-sm">
+              <h3 class="font-headline-sm text-headline-sm text-primary">Especies Forestales Acreditadas</h3>
+              <span class="font-data-mono-md text-data-mono-md">${store.state.catalogs.species.length}</span>
+            </div>
+            <div class="space-y-2">
+              ${store.state.catalogs.species.map(s => `
+                <div class="p-2.5 bg-surface-container-low rounded flex items-center justify-between text-body-sm">
+                  <div>
+                    <div class="font-semibold text-primary">${escapeHtml(s.nombreComun)}</div>
+                    <div class="italic text-[12px] text-on-surface-variant">${escapeHtml(s.nombreCientifico)}</div>
+                  </div>
+                  <div class="text-right">
+                    <span class="font-data-mono-md text-[12px]">${s.densidad}</span>
+                    ${s.protegido ? '<span class="block text-[10px] text-error font-bold">VEDADA</span>' : ''}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Plantilla Estándar de 10 Etapas -->
+          <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+            <div class="flex items-center justify-between mb-spacing-sm">
+              <h3 class="font-headline-sm text-headline-sm text-primary">Ciclo Estándar de 10 Etapas</h3>
+              <span class="font-label-caps text-label-caps text-secondary uppercase">Norma Técnica</span>
+            </div>
+            <div class="space-y-1.5 max-h-[380px] overflow-y-auto">
+              ${store.state.standardStages.map(stg => `
+                <div class="p-2 bg-surface-container-low rounded flex items-center justify-between text-body-sm">
+                  <span class="font-medium">${stg.num}. ${escapeHtml(stg.nombre)}</span>
+                  ${stg.compuerta ? '<span class="px-2 py-0.5 rounded bg-secondary text-on-secondary font-label-caps text-[10px] font-bold">COMPUERTA</span>' : '<span class="text-[11px] text-outline">Normal</span>'}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // PÁGINA 19: BITÁCORA GENERAL (AUDITORÍA EXHAUSTIVA)
+  function renderPage19(v, b) {
+    b.textContent = "19. Bitácora General Inmutable (Audit Trail)";
+
+    v.innerHTML = `
+      <div class="flex flex-col gap-spacing-md">
+        <div class="bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-spacing-sm">
+          <div>
+            <h2 class="font-headline-lg text-headline-lg text-primary flex items-center gap-2">
+              <span class="material-symbols-outlined text-[24px]">receipt_long</span>
+              <span>Bitácora General de Gobernanza & Auditoría</span>
+            </h2>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">Libro de asientos transaccionales inmutables (solo append).</p>
+          </div>
+          <button id="btn-export-audit" class="px-4 py-2 bg-primary hover:bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold rounded flex items-center gap-1.5 transition-colors">
+            <span class="material-symbols-outlined text-[18px]">download</span>
+            <span>Exportar Bitácora Completa</span>
+          </button>
+        </div>
+
+        <div class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden">
+          <table class="w-full text-left text-body-sm">
+            <thead class="bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase">
+              <tr>
+                <th class="px-spacing-sm py-2.5">ID</th>
+                <th class="px-spacing-sm py-2.5">Marca Temporal</th>
+                <th class="px-spacing-sm py-2.5">Usuario & Rol</th>
+                <th class="px-spacing-sm py-2.5">Expediente</th>
+                <th class="px-spacing-sm py-2.5">Acción</th>
+                <th class="px-spacing-sm py-2.5">Detalle Auditado</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y-0">
+              ${store.state.auditLogs.map(l => `
+                <tr class="hover:bg-surface-container-low transition-colors">
+                  <td class="px-spacing-sm py-2.5 font-data-mono-md text-primary font-bold">${l.id}</td>
+                  <td class="px-spacing-sm py-2.5 font-data-mono-md text-[11px] whitespace-nowrap">${l.timestamp}</td>
+                  <td class="px-spacing-sm py-2.5">
+                    <span class="font-medium">${escapeHtml(l.usuario)}</span>
+                    <span class="block text-[10px] text-on-surface-variant uppercase">${l.rol}</span>
+                  </td>
+                  <td class="px-spacing-sm py-2.5 font-data-mono-md font-semibold text-secondary">${l.proyectoId}</td>
+                  <td class="px-spacing-sm py-2.5 font-label-caps text-[11px] font-bold">${l.accion}</td>
+                  <td class="px-spacing-sm py-2.5 text-on-surface font-body-sm">${escapeHtml(l.detalle)}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('btn-export-audit').onclick = () => {
+      let csv = "data:text/csv;charset=utf-8,ID,Timestamp,Usuario,Rol,Proyecto,Accion,Detalle\n";
+      store.state.auditLogs.forEach(l => {
+        csv += `"${l.id}","${l.timestamp}","${l.usuario}","${l.rol}","${l.proyectoId}","${l.accion}","${l.detalle.replace(/"/g, '""')}"\n`;
+      });
+      const encodedUri = encodeURI(csv);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `PI_BITACORA_AUDITORIA_${Date.now()}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast('Bitácora Exportada', 'Archivo descargado satisfactoriamente.', 'success');
+    };
+  }
+
+  // PÁGINA 20: SIN PERMISO (PANTALLA INFORMATIVA 403)
+  function renderPage20(v, b) {
+    b.textContent = "20. Restricción de Privilegios (Error 403)";
+
+    v.innerHTML = `
+      <div class="max-w-2xl mx-auto py-spacing-2xl text-center">
+        <div class="bg-surface-container-lowest p-spacing-xl rounded-lg shadow-sm flex flex-col items-center">
+          <div class="w-16 h-16 rounded-full bg-error-container text-on-error-container flex items-center justify-center mb-spacing-md">
+            <span class="material-symbols-outlined text-[36px]">shield_lock</span>
+          </div>
+          <span class="font-label-caps text-label-caps uppercase text-error font-bold">ACCESO RESTRINGIDO POR MATRIZ RBAC</span>
+          <h2 class="font-headline-lg text-headline-lg text-primary mt-2">Área no Autorizada para su Rol</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-md mt-2">
+            El usuario activo (<strong>${escapeHtml(store.getCurrentUser().nombre)}</strong>) con rol <strong>${store.state.currentRole.toUpperCase()}</strong> no posee los privilegios necesarios para interactuar con esta pantalla.
+          </p>
+
+          <div class="flex items-center gap-spacing-sm mt-spacing-lg">
+            <button onclick="window.PI_NAV('1')" class="px-4 py-2 bg-surface-container-high hover:bg-surface-container text-on-surface font-body-sm text-body-sm rounded font-medium">
+              Cambiar Rol de Usuario
+            </button>
+            <button onclick="window.PI_NAV('2')" class="px-5 py-2 bg-primary hover:bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold rounded">
+              Volver al Panel Principal
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // PÁGINA 21: MI PERFIL PROFESIONAL
+  function renderPage21(v, b) {
+    b.textContent = "21. Mi Perfil Profesional";
+    const u = store.getCurrentUser();
+
+    v.innerHTML = `
+      <div class="max-w-3xl mx-auto bg-surface-container-lowest p-spacing-xl rounded-lg shadow-sm">
+        <div class="flex items-center gap-4 pb-spacing-md border-b-0">
+          <div class="w-16 h-16 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-lg text-headline-lg">
+            ${u.nombre.charAt(0)}
+          </div>
+          <div>
+            <h2 class="font-headline-lg text-headline-lg text-primary">${escapeHtml(u.nombre)}</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">${escapeHtml(u.especialidad)}</p>
+            <span class="inline-block mt-1 font-label-caps text-label-caps uppercase px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed">
+              ROL ACTIVO: ${u.rol.toUpperCase()}
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mt-spacing-lg text-body-sm">
+          <div class="p-3 bg-surface-container-low rounded">
+            <span class="block font-label-caps text-label-caps uppercase text-on-surface-variant">Identificador Interno</span>
+            <span class="font-data-mono-md text-data-mono-md font-bold text-primary">${u.id}</span>
+          </div>
+          <div class="p-3 bg-surface-container-low rounded">
+            <span class="block font-label-caps text-label-caps uppercase text-on-surface-variant">Honorario Asignado Base</span>
+            <span class="font-data-mono-md text-data-mono-md font-bold text-secondary">${formatMoney(u.honorario)}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // PÁGINA 22: PORTAL CONTRATANTES (FASE 2)
+  function renderPage22(v, b) {
+    b.textContent = "22. Portal de Contratantes (Fase 2)";
+    v.innerHTML = `
+      <div class="max-w-2xl mx-auto py-spacing-2xl text-center">
+        <div class="bg-surface-container-lowest p-spacing-xl rounded-lg shadow-sm flex flex-col items-center">
+          <span class="material-symbols-outlined text-secondary text-[48px] mb-2">construction</span>
+          <span class="font-label-caps text-label-caps text-secondary uppercase font-bold">HOJA DE RUTA TECNOLÓGICA</span>
+          <h2 class="font-headline-lg text-headline-lg text-primary mt-2">Portal de Clientes & Contratantes</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-md mt-2">
+            Módulo previsto para la Fase 2 de despliegue. Permitirá a los contratantes el seguimiento en tiempo real de trámites y descarga de informes aprobados.
+          </p>
+          <button onclick="window.PI_NAV('2')" class="mt-spacing-lg px-5 py-2 bg-primary hover:bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold rounded">
+            Regresar al Dashboard
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  // PÁGINA 23: ASISTENTE DE INFORMES IA (FASE 3)
+  function renderPage23(v, b) {
+    b.textContent = "23. Asistente de Informes IA (Fase 3)";
+    v.innerHTML = `
+      <div class="max-w-2xl mx-auto py-spacing-2xl text-center">
+        <div class="bg-surface-container-lowest p-spacing-xl rounded-lg shadow-sm flex flex-col items-center">
+          <span class="material-symbols-outlined text-primary text-[48px] mb-2">auto_awesome</span>
+          <span class="font-label-caps text-label-caps text-primary uppercase font-bold">HOJA DE RUTA TECNOLÓGICA</span>
+          <h2 class="font-headline-lg text-headline-lg text-primary mt-2">Asistente Generativo de Memorias</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-md mt-2">
+            Módulo previsto para la Fase 3. Redacción asistida de matrices de impacto ambiental cruzando inventarios de campo con el marco regulatorio nacional.
+          </p>
+          <button onclick="window.PI_NAV('2')" class="mt-spacing-lg px-5 py-2 bg-primary hover:bg-primary-container text-on-primary font-body-sm text-body-sm font-semibold rounded">
+            Regresar al Dashboard
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  // HOOKS GLOBALES EN WINDOW PARA ACCIÓN INLINE
+  window.PI_NAV = (p) => navigateTo(p);
+  window.PI_SELECT_PROJECT = (pid, targetPage = '5') => {
+    store.state.currentProjectId = pid;
+    store.save();
+    navigateTo(targetPage);
+  };
+
+  // INICIALIZACIÓN
+  document.addEventListener('DOMContentLoaded', () => {
+    syncAppShellHeader();
+
+    const quickSelect = document.getElementById('quick-page-select');
+    if (quickSelect) {
+      quickSelect.onchange = (e) => navigateTo(e.target.value);
+    }
+
+    const btnCsv = document.getElementById('btn-export-csv-view');
+    if (btnCsv) {
+      btnCsv.onclick = () => {
+        showToast('Exportación', 'Generando reporte de la vista actual...', 'info');
+      };
+    }
+
+    renderCurrentRoute();
+  });
+
+  // Ejecución inmediata si el script corre post-carga de DOM
+  if (document.readyState === 'interactive' || document.readyState === 'complete') {
+    syncAppShellHeader();
+    const quickSelect = document.getElementById('quick-page-select');
+    if (quickSelect) {
+      quickSelect.onchange = (e) => navigateTo(e.target.value);
+    }
+    const btnCsv = document.getElementById('btn-export-csv-view');
+    if (btnCsv) {
+      btnCsv.onclick = () => {
+        showToast('Exportación', 'Generando reporte de la vista actual...', 'info');
+      };
+    }
+    renderCurrentRoute();
+  }
+})();
+</script></main></div></body></html>

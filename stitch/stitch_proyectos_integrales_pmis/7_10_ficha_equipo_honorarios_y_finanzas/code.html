@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-surface": "#191c1a",
+        "inverse-surface": "#2e312f",
+        "surface-container-low": "#f3f4f0",
+        "surface-container": "#edeeeb",
+        "primary": "#023627",
+        "tertiary-container": "#82220e",
+        "secondary-fixed-dim": "#f5bb88",
+        "primary-fixed": "#bcedd7",
+        "secondary": "#80552b",
+        "outline": "#717974",
+        "on-primary-fixed": "#002116",
+        "surface-bright": "#f8faf6",
+        "on-surface-variant": "#414944",
+        "inverse-primary": "#a1d1bc",
+        "secondary-container": "#fec390",
+        "tertiary-fixed-dim": "#ffb4a4",
+        "on-tertiary-fixed": "#3e0500",
+        "surface-dim": "#d9dad7",
+        "on-error-container": "#93000a",
+        "on-tertiary-fixed-variant": "#852410",
+        "surface-container-high": "#e7e9e5",
+        "on-error": "#ffffff",
+        "on-primary": "#ffffff",
+        "surface-variant": "#e1e3df",
+        "on-secondary-fixed": "#2d1600",
+        "on-primary-fixed-variant": "#214f3f",
+        "surface-container-lowest": "#ffffff",
+        "primary-container": "#1f4d3d",
+        "tertiary": "#610c00",
+        "on-secondary": "#ffffff",
+        "error-container": "#ffdad6",
+        "error": "#ba1a1a",
+        "inverse-on-surface": "#f0f1ed",
+        "surface": "#f8faf6",
+        "primary-fixed-dim": "#a1d1bc",
+        "on-secondary-container": "#794e25",
+        "surface-container-highest": "#e1e3df",
+        "on-tertiary-container": "#ff9680",
+        "background": "#f8faf6",
+        "secondary-fixed": "#ffdcc0",
+        "surface-tint": "#3a6756",
+        "on-secondary-fixed-variant": "#653e16",
+        "tertiary-fixed": "#ffdad3",
+        "on-tertiary": "#ffffff",
+        "on-primary-container": "#8dbda8",
+        "on-background": "#191c1a",
+        "outline-variant": "#c0c8c3"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "spacing-xl": "2rem",
+        "table-gutter": "0.75rem",
+        "spacing-md": "1rem",
+        "spacing-lg": "1.5rem",
+        "spacing-xs": "0.5rem",
+        "spacing-3xs": "0.125rem",
+        "spacing-2xl": "3rem",
+        "layout-margin-desktop": "2rem",
+        "spacing-3xl": "4rem",
+        "layout-margin-mobile": "1rem",
+        "spacing-2xs": "0.25rem",
+        "spacing-sm": "0.75rem",
+        "layout-margin-tablet": "1.5rem"
+      },
+      "fontFamily": {
+        "body-md": ["Hanken Grotesk"],
+        "headline-xl-mobile": ["Hanken Grotesk"],
+        "label-caps": ["Hanken Grotesk"],
+        "data-mono-lg": ["JetBrains Mono"],
+        "body-sm": ["Hanken Grotesk"],
+        "headline-xl": ["Hanken Grotesk"],
+        "headline-sm": ["Hanken Grotesk"],
+        "headline-lg": ["Hanken Grotesk"],
+        "headline-md": ["Hanken Grotesk"],
+        "data-mono-md": ["JetBrains Mono"],
+        "body-lg": ["Hanken Grotesk"],
+        "label-tabular": ["JetBrains Mono"]
+      },
+      "fontSize": {
+        "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+        "headline-xl-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+        "data-mono-lg": ["15px", {"lineHeight": "22px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+        "headline-sm": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600"}],
+        "headline-lg": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "data-mono-md": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+        "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+        "label-tabular": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+      }
+    }
+  }
+}</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-spacing-md flex items-center gap-spacing-xs bg-surface-container-low"><div class="flex items-center justify-center w-7 h-7 bg-primary rounded-lg text-on-primary font-headline-sm text-headline-sm">PI</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight">Proyectos Integrales</span><span class="font-label-caps text-label-caps text-secondary uppercase">Ingeniería &amp; Ambiente</span></div></div><div class="px-spacing-md py-spacing-xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operación Técnica</span></div><nav class="flex flex-col gap-spacing-3xs px-spacing-xs flex-1" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm"><a aria-current="page" class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded transition-colors bg-primary-container text-on-primary-container font-headline-sm" data-path="proyectos" href="#"><span class="material-symbols-outlined text-[20px]">folder_supervised</span><span class="font-body-sm text-body-sm">Proyectos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="aprobaciones" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span class="font-body-sm text-body-sm">Aprobaciones</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="calendario" href="#"><span class="material-symbols-outlined text-[20px]">event_note</span><span class="font-body-sm text-body-sm">Calendario</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contratantes" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-sm text-body-sm">Contratantes</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-body-sm text-body-sm">Reportes</span></a><div class="my-spacing-xs px-spacing-xs"><div class="h-[1px] bg-outline-variant/30"></div></div><div class="px-spacing-xs py-spacing-3xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Gobierno &amp; Control</span></div><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="direccion-ejecutiva" href="#"><span class="material-symbols-outlined text-[20px]">query_stats</span><span class="font-body-sm text-body-sm">Dirección</span><span class="ml-auto font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-inverse-surface text-inverse-on-surface">DARK</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="font-body-sm text-body-sm">Usuarios</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="catalogos" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-sm text-body-sm">Catálogos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="bitacora-general" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-body-sm text-body-sm">Bitácora General</span></a></nav></div><div class="p-spacing-md bg-surface-container-high"><div class="flex items-center justify-between"><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Estándar Técnico</span><span class="font-data-mono-md text-data-mono-md text-primary">ISO 14001 / EIA-v2</span></div><span class="material-symbols-outlined text-outline text-[18px]">format_image_left</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex items-center justify-between px-spacing-lg"><div class="flex items-center gap-spacing-md flex-1 max-w-2xl"><img alt="Logo Proyectos Integrales" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WWI3mVDk-K0VvmFiCvo8p33fqbfLEk7YLxC1GudbnlFUpaiGriHUaR624tyiQNmYunExODktoHOUwF3QL8qZ_IwSF5S_2YljkWvDXX_F70wU2BcAir0ZOTnqLI_71vsDpk6z_zbXASIS0ueLJ7tFBZNvfS6T8aTnTgjZaqsX3YPQTL3hOBf9ordXhPZXWaXrXj9-I0-5Fd6nraudX80Q_6v0_NI_5xzQXtCkGU4fxStFzd9olGwfezDU0"/><div class="relative w-full max-w-md"><span class="material-symbols-outlined absolute left-spacing-xs top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full pl-8 pr-spacing-sm py-spacing-2xs bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Buscar código de expediente, matriz ambiental, contratante o profesional..." type="text"/></div></div><div class="flex items-center gap-spacing-md"><div class="flex items-center gap-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded"><span class="font-label-caps text-label-caps text-secondary uppercase font-semibold">Entrar como:</span><select class="bg-transparent font-body-sm text-body-sm text-on-surface font-medium outline-none cursor-pointer"><option value="admin">Admin</option><option value="coordinador">Coordinador</option><option value="profesional">Profesional</option><option value="administracion">Administración</option><option value="direccion">Dirección</option></select></div><div class="flex items-center gap-spacing-2xs"><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">help</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-spacing-lg pb-spacing-xl flex-1 bg-background"><div class="flex flex-col w-full">
+<!-- Top Meta / Technical Dossier Header Bar -->
+<div class="flex flex-col gap-spacing-md mb-spacing-xl">
+<!-- Breadcrumb & Archival Stamp -->
+<div class="flex flex-wrap items-center justify-between gap-spacing-sm">
+<div class="flex items-center gap-spacing-xs">
+<a class="font-label-caps text-label-caps uppercase text-secondary hover:text-on-surface transition-colors flex items-center gap-spacing-3xs" href="#">
+<span class="material-symbols-outlined text-[14px]">arrow_back</span>
+          Proyectos Activos
+        </a>
+<span class="text-outline-variant font-data-mono-md">/</span>
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Dossier Técnico Auditoría</span>
+<span class="text-outline-variant font-data-mono-md">/</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">EXP: PI-2024-002</span>
+</div>
+<div class="flex items-center gap-spacing-xs bg-surface-container-high px-spacing-sm py-spacing-2xs rounded">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider">ESTADO:</span>
+<span class="font-label-tabular text-label-tabular text-primary font-bold">FASE DE CAMPO Y ANÁLISIS EIA</span>
+</div>
+</div>
+<!-- Main Dossier Banner -->
+<div class="bg-surface-container-lowest p-spacing-lg rounded shadow-sm flex flex-col xl:flex-row xl:items-center justify-between gap-spacing-lg">
+<div class="flex flex-col gap-spacing-xs max-w-3xl">
+<div class="flex flex-wrap items-center gap-spacing-xs">
+<span class="bg-primary text-on-primary font-label-tabular text-label-tabular px-spacing-xs py-spacing-3xs rounded tracking-widest uppercase">EXP-PI-2024-002</span>
+<span class="bg-surface-container text-on-surface-variant font-label-caps text-label-caps px-spacing-xs py-spacing-3xs rounded uppercase">SECTOR: ENERGÍA RENOVABLE</span>
+<span class="bg-surface-container text-secondary font-label-caps text-label-caps px-spacing-xs py-spacing-3xs rounded uppercase">NORMA: EIA-v2 / SEIA</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">
+          EIA y Estudio Sociocultural Parque Eólico Península
+        </h1>
+<div class="flex flex-wrap items-center gap-x-spacing-lg gap-y-spacing-xs pt-spacing-2xs text-on-surface-variant">
+<div class="flex items-center gap-spacing-2xs">
+<span class="material-symbols-outlined text-[17px] text-secondary">domain</span>
+<span class="font-body-sm text-body-sm font-medium">Contratante:</span>
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">Generadora Eólica del Norte S.A.</span>
+</div>
+<div class="flex items-center gap-spacing-2xs">
+<span class="material-symbols-outlined text-[17px] text-secondary">badge</span>
+<span class="font-body-sm text-body-sm font-medium">Coordinador:</span>
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">Ing. Carlos Mendoza</span>
+</div>
+<div class="flex items-center gap-spacing-2xs">
+<span class="material-symbols-outlined text-[17px] text-secondary">pin_drop</span>
+<span class="font-body-sm text-body-sm text-on-surface">Península de Macanao, Sector Este</span>
+</div>
+</div>
+</div>
+<!-- Quick Action Ledger Status -->
+<div class="flex flex-row xl:flex-col items-start xl:items-end justify-between gap-spacing-sm bg-surface-container-low p-spacing-md rounded">
+<div class="flex flex-col xl:items-end">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Presupuesto Asignado</span>
+<span class="font-data-mono-lg text-data-mono-lg text-primary font-bold tracking-tight">$64,000.00 USD</span>
+</div>
+<div class="flex items-center gap-spacing-xs">
+<button class="bg-surface text-on-surface hover:bg-surface-container px-spacing-sm py-spacing-2xs rounded font-body-sm text-body-sm font-medium transition-colors flex items-center gap-spacing-3xs shadow-sm">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+            Exportar Ficha
+          </button>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-spacing-sm py-spacing-2xs rounded font-body-sm text-body-sm font-semibold transition-colors flex items-center gap-spacing-3xs shadow-sm">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+            Validar Cierre
+          </button>
+</div>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<div class="bg-surface-container-high p-spacing-3xs rounded flex flex-wrap gap-spacing-3xs">
+<a class="px-spacing-md py-spacing-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center gap-spacing-2xs" href="#">
+<span class="material-symbols-outlined text-[17px]">dataset</span>
+        Resumen
+      </a>
+<a class="px-spacing-md py-spacing-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center gap-spacing-2xs" href="#">
+<span class="material-symbols-outlined text-[17px]">linear_scale</span>
+        Etapas
+      </a>
+<a class="px-spacing-md py-spacing-xs rounded font-headline-sm text-headline-sm bg-primary text-on-primary shadow-sm flex items-center gap-spacing-2xs" href="#">
+<span class="material-symbols-outlined text-[17px]">groups</span>
+        Equipo y Honorarios
+        <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed"></span>
+</a>
+<a class="px-spacing-md py-spacing-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center gap-spacing-2xs" href="#">
+<span class="material-symbols-outlined text-[17px]">folder_shared</span>
+        Documentos
+      </a>
+<a class="px-spacing-md py-spacing-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center gap-spacing-2xs" href="#">
+<span class="material-symbols-outlined text-[17px]">monitoring</span>
+        Mediciones de Campo
+      </a>
+<a class="px-spacing-md py-spacing-xs rounded font-headline-sm text-headline-sm bg-surface-container-highest text-primary hover:bg-surface-container-lowest transition-colors flex items-center gap-spacing-2xs" href="#modulo-finanzas">
+<span class="material-symbols-outlined text-[17px]">account_balance_wallet</span>
+        Finanzas del Proyecto
+        <span class="bg-secondary text-on-secondary font-label-tabular text-label-tabular px-spacing-3xs rounded">ACTIVO</span>
+</a>
+<a class="px-spacing-md py-spacing-xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors flex items-center gap-spacing-2xs" href="#">
+<span class="material-symbols-outlined text-[17px]">history_edu</span>
+        Bitácora
+      </a>
+</div>
+</div>
+<!-- SECTION 7: Equipo Profesional y Honorarios -->
+<section class="flex flex-col gap-spacing-md mb-spacing-2xl">
+<!-- Section Title & Context Banner -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-spacing-sm">
+<div class="flex items-center gap-spacing-sm">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary-container flex items-center justify-center font-data-mono-md text-data-mono-md font-bold">
+          07
+        </div>
+<div>
+<span class="font-label-caps text-label-caps uppercase text-secondary tracking-widest block">Recursos Técnicos &amp; Contratación</span>
+<h2 class="font-headline-md text-headline-md text-primary">Equipo Profesional y Honorarios Asignados</h2>
+</div>
+</div>
+<div class="flex items-center gap-spacing-xs">
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">4 ASIGNACIONES REGISTRADAS</span>
+<button class="bg-surface-container-low hover:bg-surface-container text-primary px-spacing-sm py-spacing-2xs rounded font-body-sm text-body-sm font-semibold flex items-center gap-spacing-3xs transition-colors">
+<span class="material-symbols-outlined text-[16px]">person_add</span>
+          Asignar Especialista
+        </button>
+</div>
+</div>
+<!-- Security & Clearance Banner -->
+<div class="bg-surface-container-low p-spacing-sm rounded flex items-start sm:items-center gap-spacing-sm">
+<span class="material-symbols-outlined text-secondary text-[22px] mt-0.5 sm:mt-0">admin_panel_settings</span>
+<div class="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-spacing-xs">
+<p class="font-body-sm text-body-sm text-on-surface">
+<span class="font-semibold text-primary">Vista con permisos de Coordinador General.</span>
+          Los profesionales asignados únicamente visualizan el monto de su propio honorario (los registros de terceros se presentan en guion ‘—’).
+        </p>
+<span class="bg-surface-container text-on-surface-variant font-label-tabular text-label-tabular px-spacing-xs py-spacing-3xs rounded whitespace-nowrap self-start sm:self-auto">
+          AUTH: COORD-EIA-MASTER
+        </span>
+</div>
+</div>
+<!-- Visual Team Overview Bento / Key Stats -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-spacing-md">
+<div class="bg-surface-container-lowest p-spacing-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant mb-spacing-xs">
+<span class="font-label-caps text-label-caps uppercase">Masa Salarial Comprometida</span>
+<span class="material-symbols-outlined text-[18px] text-primary">payments</span>
+</div>
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-primary">$34,700.00 USD</div>
+<span class="font-label-tabular text-label-tabular text-secondary mt-spacing-2xs">54.2% del monto contractual</span>
+</div>
+<div class="bg-surface-container-lowest p-spacing-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant mb-spacing-xs">
+<span class="font-label-caps text-label-caps uppercase">Honorarios Pagados</span>
+<span class="material-symbols-outlined text-[18px] text-primary">task_alt</span>
+</div>
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-primary">$15,500.00 USD</div>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant mt-spacing-2xs">Especialidad botánica liquidada</span>
+</div>
+<div class="bg-surface-container-lowest p-spacing-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant mb-spacing-xs">
+<span class="font-label-caps text-label-caps uppercase">Pendiente de Liquidación</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">pending_actions</span>
+</div>
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-secondary">$19,200.00 USD</div>
+<span class="font-label-tabular text-label-tabular text-secondary mt-spacing-2xs">Sujeto a hitos &amp; resoluciones</span>
+</div>
+<div class="bg-surface-container-lowest p-spacing-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant mb-spacing-xs">
+<span class="font-label-caps text-label-caps uppercase">Dispersión de Roles</span>
+<span class="material-symbols-outlined text-[18px] text-primary">work_history</span>
+</div>
+<div class="flex items-center gap-spacing-2xs">
+<div class="h-2 flex-1 bg-primary rounded"></div>
+<div class="h-2 flex-1 bg-secondary rounded"></div>
+<div class="h-2 flex-1 bg-secondary-fixed-dim rounded"></div>
+<div class="h-2 flex-1 bg-surface-container-highest rounded"></div>
+</div>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant mt-spacing-2xs">4 disciplinas activas en campo</span>
+</div>
+</div>
+<!-- Team Members Table / Ledger Card -->
+<div class="bg-surface-container-lowest rounded shadow-sm overflow-hidden">
+<div class="bg-surface-container-low px-spacing-md py-spacing-sm flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">table_chart</span>
+<span class="font-label-caps text-label-caps uppercase text-on-surface tracking-wider">Padrón de Contratos Técnicos de Proyecto</span>
+</div>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">AUDIT STAMP: ISO-14001 / REG-VE</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider">
+<th class="py-spacing-sm px-spacing-md">Profesional &amp; Especialidad</th>
+<th class="py-spacing-sm px-spacing-md">Rol en Proyecto</th>
+<th class="py-spacing-sm px-spacing-md text-right">Honorario Pactado</th>
+<th class="py-spacing-sm px-spacing-md">Forma de Pago</th>
+<th class="py-spacing-sm px-spacing-md text-center">Estado Financiero</th>
+<th class="py-spacing-sm px-spacing-md text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 font-body-sm text-body-sm">
+<!-- Row 1: Carlos Mendoza -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-lowest">
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-sm">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary font-data-mono-md text-data-mono-md font-bold flex items-center justify-center">
+                    CM
+                  </div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Ing. Carlos Mendoza</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">CIV-148.902 · Ing. Ambiental</span>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-body-sm text-body-sm font-semibold text-primary">Coordinador General</span>
+<span class="block font-label-tabular text-label-tabular text-on-surface-variant">Dirección de Estudio y Enlace</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md font-bold text-on-surface">
+                $14,000.00 <span class="font-label-tabular text-label-tabular text-on-surface-variant">USD</span>
+</td>
+<td class="py-spacing-sm px-spacing-md font-body-sm text-body-sm text-on-surface">
+<div class="flex items-center gap-spacing-2xs">
+<span class="material-symbols-outlined text-[15px] text-secondary">flag</span>
+                  4 hitos técnicos
+                </div>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">H1 y H2 liquidados (50%)</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<span class="inline-flex items-center gap-spacing-3xs bg-surface-container-high px-spacing-xs py-spacing-3xs rounded text-secondary font-label-caps text-label-caps uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Parcial ($7,000)
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<button class="bg-surface-container-low hover:bg-surface-container text-primary p-spacing-2xs rounded font-label-tabular text-label-tabular font-medium transition-colors" title="Detalle de Contrato">
+<span class="material-symbols-outlined text-[18px]">receipt</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Elena Ramos -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-low/40">
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-sm">
+<div class="w-8 h-8 rounded bg-surface-container-highest text-primary font-data-mono-md text-data-mono-md font-bold flex items-center justify-center">
+                    ER
+                  </div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Dra. Elena Ramos</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">COL-BOT-0891 · Botánica Cuantitativa</span>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-body-sm text-body-sm font-semibold text-primary">Especialista Forestal y Botánica</span>
+<span class="block font-label-tabular text-label-tabular text-on-surface-variant">Inventario Florístico y Densidad</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md font-bold text-on-surface">
+                $8,500.00 <span class="font-label-tabular text-label-tabular text-on-surface-variant">USD</span>
+</td>
+<td class="py-spacing-sm px-spacing-md font-body-sm text-body-sm text-on-surface">
+<div class="flex items-center gap-spacing-2xs">
+<span class="material-symbols-outlined text-[15px] text-primary">description</span>
+                  Por entregable
+                </div>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">Informe Final + Herbarios Validados</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<span class="inline-flex items-center gap-spacing-3xs bg-primary-fixed text-on-primary-fixed-variant px-spacing-xs py-spacing-3xs rounded font-label-caps text-label-caps uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Pagado (100%)
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<button class="bg-surface-container-low hover:bg-surface-container text-primary p-spacing-2xs rounded font-label-tabular text-label-tabular font-medium transition-colors" title="Detalle de Contrato">
+<span class="material-symbols-outlined text-[18px]">receipt</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Luis Vallenilla -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-lowest">
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-sm">
+<div class="w-8 h-8 rounded bg-surface-container-highest text-secondary font-data-mono-md text-data-mono-md font-bold flex items-center justify-center">
+                    LV
+                  </div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Ing. Luis Vallenilla</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">BIO-FAU-2340 · Ornitología Aplicada</span>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-body-sm text-body-sm font-semibold text-primary">Especialista en Fauna y Avifauna</span>
+<span class="block font-label-tabular text-label-tabular text-on-surface-variant">Rutas Migratorias y Quirópteros</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md font-bold text-on-surface">
+                $7,200.00 <span class="font-label-tabular text-label-tabular text-on-surface-variant">USD</span>
+</td>
+<td class="py-spacing-sm px-spacing-md font-body-sm text-body-sm text-on-surface">
+<div class="flex items-center gap-spacing-2xs">
+<span class="material-symbols-outlined text-[15px] text-secondary">calendar_month</span>
+                  Mensual
+                </div>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">Mes 1 de 3 en verificación acústica</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<span class="inline-flex items-center gap-spacing-3xs bg-secondary-fixed text-on-secondary-fixed-variant px-spacing-xs py-spacing-3xs rounded font-label-caps text-label-caps uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Pendiente
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<button class="bg-surface-container-low hover:bg-surface-container text-primary p-spacing-2xs rounded font-label-tabular text-label-tabular font-medium transition-colors" title="Detalle de Contrato">
+<span class="material-symbols-outlined text-[18px]">receipt</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Patricia Duarte -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-low/40">
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-sm">
+<div class="w-8 h-8 rounded bg-surface-container-highest text-on-surface font-data-mono-md text-data-mono-md font-bold flex items-center justify-center">
+                    PD
+                  </div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Abg. Patricia Duarte</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">INPREAB-88.310 · Marco Regulatorio</span>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-body-sm text-body-sm font-semibold text-primary">Asesor Legal Ambiental</span>
+<span class="block font-label-tabular text-label-tabular text-on-surface-variant">Audiencias y Consulta Pública Comunal</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md font-bold text-on-surface">
+                $5,000.00 <span class="font-label-tabular text-label-tabular text-on-surface-variant">USD</span>
+</td>
+<td class="py-spacing-sm px-spacing-md font-body-sm text-body-sm text-on-surface">
+<div class="flex items-center gap-spacing-2xs">
+<span class="material-symbols-outlined text-[15px] text-tertiary">gavel</span>
+                  Contra resolución
+                </div>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">Emisión de Declaratoria de Impacto</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<span class="inline-flex items-center gap-spacing-3xs bg-secondary-fixed text-on-secondary-fixed-variant px-spacing-xs py-spacing-3xs rounded font-label-caps text-label-caps uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Pendiente
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<button class="bg-surface-container-low hover:bg-surface-container text-primary p-spacing-2xs rounded font-label-tabular text-label-tabular font-medium transition-colors" title="Detalle de Contrato">
+<span class="material-symbols-outlined text-[18px]">receipt</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="bg-surface-container-low p-spacing-sm flex flex-wrap items-center justify-between gap-spacing-sm text-on-surface-variant">
+<div class="flex items-center gap-spacing-xs font-label-tabular text-label-tabular">
+<span class="material-symbols-outlined text-[16px] text-primary">lock_clock</span>
+          Retención de garantía técnica: 5% aplicado sobre cada corte de pago hasta aprobación ministerial.
+        </div>
+<div class="font-data-mono-md text-data-mono-md text-primary font-bold">
+          TOTAL HONORARIOS: $34,700.00 USD
+        </div>
+</div>
+</div>
+</section>
+<!-- SECTION 10: Finanzas del Proyecto -->
+<section class="flex flex-col gap-spacing-md scroll-mt-20" id="modulo-finanzas">
+<!-- Header of Section 10 -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-spacing-sm">
+<div class="flex items-center gap-spacing-sm">
+<div class="w-8 h-8 rounded bg-primary text-on-primary flex items-center justify-center font-data-mono-md text-data-mono-md font-bold">
+          10
+        </div>
+<div>
+<div class="flex items-center gap-spacing-xs">
+<span class="font-label-caps text-label-caps uppercase text-secondary tracking-widest block">Libro Mayor de Proyecto</span>
+<span class="bg-primary-fixed text-on-primary-fixed-variant font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded font-bold uppercase">Auditable</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary">Finanzas y Ejecución Presupuestaria</h2>
+</div>
+</div>
+<div class="flex items-center gap-spacing-sm">
+<button class="bg-primary hover:bg-primary-container text-on-primary px-spacing-md py-spacing-2xs rounded font-headline-sm text-headline-sm flex items-center gap-spacing-xs shadow-sm transition-all" id="btn-registrar-movimiento" onclick="document.getElementById('modal-registro-movimiento').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+          Registrar Movimiento
+        </button>
+</div>
+</div>
+<!-- Strict Non-Negotiable Rule Callout -->
+<div class="bg-secondary-container/30 p-spacing-sm rounded flex items-start gap-spacing-sm">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">policy</span>
+<div class="flex-1">
+<span class="font-label-caps text-label-caps uppercase text-on-secondary-container tracking-wider font-bold">Regla de Control Fiscal Interno:</span>
+<p class="font-body-sm text-body-sm text-on-surface mt-0.5">
+          Las partidas marcadas <strong class="text-secondary">“Por liquidar”</strong> se muestran aparte y <strong>no se suman al total ejecutado</strong> hasta contar con la conciliación física de factura fiscal y validación técnica del Coordinador.
+        </p>
+</div>
+</div>
+<!-- 4 KPI Cards (Total Contratado, Egresos Ejecutados, Saldo Disponible, Partidas Por Liquidar) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-spacing-md">
+<!-- KPI 1: Total Contratado -->
+<div class="bg-surface-container-lowest p-spacing-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps uppercase">Total Contratado</span>
+<span class="material-symbols-outlined text-primary text-[20px]">contract</span>
+</div>
+<div class="mt-spacing-sm">
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-primary tracking-tight">$64,000.00 <span class="text-body-sm font-normal text-on-surface-variant">USD</span></div>
+<p class="font-label-tabular text-label-tabular text-on-surface-variant mt-spacing-3xs">Monto aprobado contrato base</p>
+</div>
+<div class="mt-spacing-sm pt-spacing-2xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">FACTURADO CLIENTE:</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">$38,400 (60%)</span>
+</div>
+</div>
+<!-- KPI 2: Egresos Ejecutados -->
+<div class="bg-surface-container-lowest p-spacing-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps uppercase">Egresos Ejecutados</span>
+<span class="material-symbols-outlined text-tertiary-container text-[20px]">outbox</span>
+</div>
+<div class="mt-spacing-sm">
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-on-surface tracking-tight">$28,750.00 <span class="text-body-sm font-normal text-on-surface-variant">USD</span></div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden mt-spacing-xs">
+<div class="bg-primary h-full rounded-full" style="width: 44.92%"></div>
+</div>
+</div>
+<div class="mt-spacing-sm pt-spacing-2xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">% DE EJECUCIÓN:</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">44.92% REAL</span>
+</div>
+</div>
+<!-- KPI 3: Saldo Disponible -->
+<div class="bg-surface-container-lowest p-spacing-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-caps text-label-caps uppercase">Saldo Disponible</span>
+<span class="material-symbols-outlined text-primary text-[20px]">account_balance</span>
+</div>
+<div class="mt-spacing-sm">
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-primary tracking-tight">$35,250.00 <span class="text-body-sm font-normal text-on-surface-variant">USD</span></div>
+<p class="font-label-tabular text-label-tabular text-on-surface-variant mt-spacing-3xs">Liquidez proyectada remanente</p>
+</div>
+<div class="mt-spacing-sm pt-spacing-2xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">MARGEN MARGINAL:</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">55.08% TOTAL</span>
+</div>
+</div>
+<!-- KPI 4: Partidas Por Liquidar (En Custodia) -->
+<div class="bg-surface-container-lowest p-spacing-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-secondary">
+<span class="font-label-caps text-label-caps uppercase text-secondary font-bold">Partidas Por Liquidar</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">hourglass_top</span>
+</div>
+<div class="mt-spacing-sm">
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-secondary tracking-tight">$4,800.00 <span class="text-body-sm font-normal text-on-surface-variant">USD</span></div>
+<p class="font-label-tabular text-label-tabular text-secondary mt-spacing-3xs font-medium">En custodia temporal de campo</p>
+</div>
+<div class="mt-spacing-sm pt-spacing-2xs bg-secondary-fixed/50 px-spacing-xs py-spacing-3xs rounded flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-secondary-fixed-variant font-bold">ESTADO FISCAL:</span>
+<span class="font-data-mono-md text-data-mono-md text-secondary font-bold">NO SUMADO A EGRESOS</span>
+</div>
+</div>
+</div>
+<!-- Controlled Categories Badge Strip -->
+<div class="bg-surface-container-low p-spacing-sm rounded flex flex-wrap items-center justify-between gap-spacing-sm">
+<div class="flex flex-wrap items-center gap-spacing-xs">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant font-bold">Catálogo de Categorías Autorizadas:</span>
+<span class="bg-surface-container-highest text-primary font-label-tabular text-label-tabular px-spacing-xs py-spacing-3xs rounded font-medium">Honorarios profesionales</span>
+<span class="bg-surface-container-highest text-primary font-label-tabular text-label-tabular px-spacing-xs py-spacing-3xs rounded font-medium">Viáticos y logística</span>
+<span class="bg-surface-container-highest text-primary font-label-tabular text-label-tabular px-spacing-xs py-spacing-3xs rounded font-medium">Combustible</span>
+<span class="bg-surface-container-highest text-primary font-label-tabular text-label-tabular px-spacing-xs py-spacing-3xs rounded font-medium">Alimentación</span>
+<span class="bg-surface-container-highest text-primary font-label-tabular text-label-tabular px-spacing-xs py-spacing-3xs rounded font-medium">Permisología</span>
+</div>
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[16px] text-outline">tune</span>
+<span class="font-label-tabular text-label-tabular text-outline">LISTA FIJA v4.2</span>
+</div>
+</div>
+<!-- Financial Movements Ledger (Tabla de Movimientos Financieros) -->
+<div class="bg-surface-container-lowest rounded shadow-sm overflow-hidden">
+<!-- Filter Bar -->
+<div class="p-spacing-md bg-surface-container-lowest flex flex-wrap items-center justify-between gap-spacing-md">
+<div class="flex flex-wrap items-center gap-spacing-sm">
+<div class="flex items-center gap-spacing-xs bg-surface-container-low px-spacing-sm py-spacing-2xs rounded">
+<span class="material-symbols-outlined text-[16px] text-outline">filter_list</span>
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Filtrar Categoría:</span>
+<select class="bg-transparent font-body-sm text-body-sm text-on-surface outline-none cursor-pointer">
+<option value="todas">Todas las categorías</option>
+<option value="honorarios">Honorarios profesionales</option>
+<option value="viaticos">Viáticos y logística</option>
+<option value="combustible">Combustible</option>
+<option value="alimentacion">Alimentación</option>
+<option value="permisologia">Permisología</option>
+</select>
+</div>
+<div class="flex items-center gap-spacing-xs bg-surface-container-low px-spacing-sm py-spacing-2xs rounded">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Estado:</span>
+<select class="bg-transparent font-body-sm text-body-sm text-on-surface outline-none cursor-pointer">
+<option value="todos">Todos los estados</option>
+<option value="ejecutado">Ejecutado</option>
+<option value="por_liquidar">Por liquidar</option>
+</select>
+</div>
+</div>
+<div class="font-label-tabular text-label-tabular text-on-surface-variant">
+          MOSTRANDO 6 MOVIMIENTOS RECIENTES
+        </div>
+</div>
+<!-- Ledger Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider">
+<th class="py-spacing-sm px-spacing-md">Fecha</th>
+<th class="py-spacing-sm px-spacing-md">Tipo</th>
+<th class="py-spacing-sm px-spacing-md">Categoría Controlada</th>
+<th class="py-spacing-sm px-spacing-md">Concepto / Justificación Técnica</th>
+<th class="py-spacing-sm px-spacing-md">Responsable</th>
+<th class="py-spacing-sm px-spacing-md text-right">Monto USD</th>
+<th class="py-spacing-sm px-spacing-md text-center">Estado</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 font-body-sm text-body-sm">
+<!-- Movimiento 1 -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-lowest">
+<td class="py-spacing-sm px-spacing-md font-label-tabular text-label-tabular text-on-surface whitespace-nowrap">
+                2024-03-12
+              </td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-label-tabular text-label-tabular font-bold px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-primary">
+                  INGRESO
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="bg-surface-container-high text-on-surface px-spacing-2xs py-spacing-3xs rounded font-label-tabular text-label-tabular">
+                  Honorarios profesionales
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">Anticipo 30% Hito Inicial Aprobación de Términos de Referencia</span>
+<span class="font-label-tabular text-label-tabular text-outline">REF: FAC-GEN-2024-089</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-on-surface">
+                Administración General
+              </td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md font-bold text-primary whitespace-nowrap">
+                +$19,200.00
+              </td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<span class="inline-flex items-center gap-spacing-3xs bg-primary-fixed text-on-primary-fixed-variant px-spacing-xs py-spacing-3xs rounded font-label-caps text-label-caps uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Ejecutado
+                </span>
+</td>
+</tr>
+<!-- Movimiento 2 -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-low/40">
+<td class="py-spacing-sm px-spacing-md font-label-tabular text-label-tabular text-on-surface whitespace-nowrap">
+                2024-03-18
+              </td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-label-tabular text-label-tabular font-bold px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-tertiary-container">
+                  EGRESO
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="bg-surface-container-high text-on-surface px-spacing-2xs py-spacing-3xs rounded font-label-tabular text-label-tabular">
+                  Honorarios profesionales
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">Liquidación informe botánico integral y transectos vegetales</span>
+<span class="font-label-tabular text-label-tabular text-outline">REC-PROF: 004-Dra. Ramos</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-on-surface">
+                Dra. Elena Ramos
+              </td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md font-bold text-on-surface whitespace-nowrap">
+                -$8,500.00
+              </td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<span class="inline-flex items-center gap-spacing-3xs bg-primary-fixed text-on-primary-fixed-variant px-spacing-xs py-spacing-3xs rounded font-label-caps text-label-caps uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Ejecutado
+                </span>
+</td>
+</tr>
+<!-- Movimiento 3 -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-lowest">
+<td class="py-spacing-sm px-spacing-md font-label-tabular text-label-tabular text-on-surface whitespace-nowrap">
+                2024-03-22
+              </td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-label-tabular text-label-tabular font-bold px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-tertiary-container">
+                  EGRESO
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="bg-surface-container-high text-on-surface px-spacing-2xs py-spacing-3xs rounded font-label-tabular text-label-tabular">
+                  Viáticos y logística
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">Campamento base Península Macanao - Estancia técnicos y guía local</span>
+<span class="font-label-tabular text-label-tabular text-outline">COMP: V-99120 Campamento</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-on-surface">
+                Ing. Carlos Mendoza
+              </td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md font-bold text-on-surface whitespace-nowrap">
+                -$3,450.00
+              </td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<span class="inline-flex items-center gap-spacing-3xs bg-primary-fixed text-on-primary-fixed-variant px-spacing-xs py-spacing-3xs rounded font-label-caps text-label-caps uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Ejecutado
+                </span>
+</td>
+</tr>
+<!-- Movimiento 4: POR LIQUIDAR -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-lowest">
+<td class="py-spacing-sm px-spacing-md font-label-tabular text-label-tabular text-on-surface whitespace-nowrap">
+                2024-04-02
+              </td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-label-tabular text-label-tabular font-bold px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-tertiary-container">
+                  EGRESO
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant px-spacing-2xs py-spacing-3xs rounded font-label-tabular text-label-tabular font-semibold">
+                  Combustible
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">Abastecimiento unidades 4x4 (3 vehículos campo) recorridos quebradas</span>
+<span class="font-label-tabular text-label-tabular text-secondary font-medium">PLANILLA DE CONSUMO EN REVISIÓN FISCAL</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-on-surface">
+                Ing. Luis Vallenilla
+              </td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md font-bold text-secondary whitespace-nowrap">
+                $1,600.00
+              </td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<span class="inline-flex items-center gap-spacing-3xs bg-secondary-fixed text-on-secondary-fixed-variant px-spacing-xs py-spacing-3xs rounded font-label-caps text-label-caps uppercase font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Por liquidar
+                </span>
+</td>
+</tr>
+<!-- Movimiento 5: POR LIQUIDAR -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-low/40">
+<td class="py-spacing-sm px-spacing-md font-label-tabular text-label-tabular text-on-surface whitespace-nowrap">
+                2024-04-05
+              </td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-label-tabular text-label-tabular font-bold px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-tertiary-container">
+                  EGRESO
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant px-spacing-2xs py-spacing-3xs rounded font-label-tabular text-label-tabular font-semibold">
+                  Alimentación
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">Raciones y víveres para campaña ornitológica continua 14 días</span>
+<span class="font-label-tabular text-label-tabular text-secondary font-medium">FACTURA CONSOLIDADA PENDIENTE FIRMA PROVEEDOR</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-on-surface">
+                Ing. Luis Vallenilla
+              </td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md font-bold text-secondary whitespace-nowrap">
+                $3,200.00
+              </td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<span class="inline-flex items-center gap-spacing-3xs bg-secondary-fixed text-on-secondary-fixed-variant px-spacing-xs py-spacing-3xs rounded font-label-caps text-label-caps uppercase font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Por liquidar
+                </span>
+</td>
+</tr>
+<!-- Movimiento 6 -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-lowest">
+<td class="py-spacing-sm px-spacing-md font-label-tabular text-label-tabular text-on-surface whitespace-nowrap">
+                2024-04-09
+              </td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-label-tabular text-label-tabular font-bold px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-tertiary-container">
+                  EGRESO
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="bg-surface-container-high text-on-surface px-spacing-2xs py-spacing-3xs rounded font-label-tabular text-label-tabular">
+                  Permisología
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">Tasa arancelaria solicitud de autorización de deforestación exploratoria</span>
+<span class="font-label-tabular text-label-tabular text-outline">REC-MIN-00219-EIA</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-on-surface">
+                Abg. Patricia Duarte
+              </td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md font-bold text-on-surface whitespace-nowrap">
+                -$1,800.00
+              </td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<span class="inline-flex items-center gap-spacing-3xs bg-primary-fixed text-on-primary-fixed-variant px-spacing-xs py-spacing-3xs rounded font-label-caps text-label-caps uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Ejecutado
+                </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Ledger Summary Footnote -->
+<div class="bg-surface-container-low px-spacing-md py-spacing-sm flex flex-col md:flex-row md:items-center justify-between gap-spacing-sm">
+<div class="flex items-center gap-spacing-xs font-label-tabular text-label-tabular text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified</span>
+          Libro Mayor sincronizado con la cuenta custodia del Banco de Comercio Exterior (Fideicomiso Ambiental 409).
+        </div>
+<div class="flex items-center gap-spacing-lg">
+<div class="flex items-center gap-spacing-xs">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Por Liquidar (Aparte):</span>
+<span class="font-data-mono-md text-data-mono-md font-bold text-secondary">$4,800.00 USD</span>
+</div>
+<div class="flex items-center gap-spacing-xs">
+<span class="font-label-caps text-label-caps uppercase text-on-surface">Egresos Ejecutados Reales:</span>
+<span class="font-data-mono-md text-data-mono-md font-bold text-primary">$28,750.00 USD</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- MODAL / DRAWER: Registrar Movimiento (Control estricto de categorías) -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/60 backdrop-blur-sm p-spacing-md" id="modal-registro-movimiento">
+<div class="bg-surface-container-lowest w-full max-w-xl rounded shadow-xl overflow-hidden flex flex-col">
+<!-- Modal Header -->
+<div class="bg-surface-container-low px-spacing-md py-spacing-sm flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">add_card</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Registrar Movimiento Financiero</h3>
+</div>
+<button class="w-8 h-8 rounded text-outline hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors" onclick="document.getElementById('modal-registro-movimiento').classList.add('hidden')">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Modal Body -->
+<form class="p-spacing-md flex flex-col gap-spacing-md" id="form-movimiento" onsubmit="event.preventDefault(); document.getElementById('modal-registro-movimiento').classList.add('hidden');">
+<div class="bg-surface-container-low p-spacing-xs rounded font-label-tabular text-label-tabular text-on-surface-variant flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">lock</span>
+          EXP-PI-2024-002 · Imputación directa a Centro de Costo EIA Eólico
+        </div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-spacing-md">
+<!-- Tipo -->
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant font-semibold">Tipo de Movimiento</label>
+<select class="bg-surface border border-outline-variant px-spacing-sm py-spacing-xs rounded font-body-sm text-body-sm text-on-surface outline-none focus:border-primary">
+<option value="egreso">Egreso Presupuestario</option>
+<option value="ingreso">Ingreso / Hito Cliente</option>
+</select>
+</div>
+<!-- Categoría Estricta -->
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant font-semibold">Categoría Controlada *</label>
+<select class="bg-surface border border-outline-variant px-spacing-sm py-spacing-xs rounded font-body-sm text-body-sm text-on-surface outline-none focus:border-primary" required="">
+<option value="Honorarios profesionales">Honorarios profesionales</option>
+<option value="Viáticos y logística">Viáticos y logística</option>
+<option value="Combustible">Combustible</option>
+<option value="Alimentación">Alimentación</option>
+<option value="Permisología">Permisología</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-spacing-md">
+<!-- Monto USD -->
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant font-semibold">Monto en USD *</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 font-data-mono-md text-data-mono-md text-outline">$</span>
+<input class="w-full pl-8 pr-12 py-spacing-xs bg-surface border border-outline-variant rounded font-data-mono-md text-data-mono-md text-on-surface outline-none focus:border-primary" placeholder="0.00" required="" step="0.01" type="number"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 font-label-tabular text-label-tabular text-outline">USD</span>
+</div>
+</div>
+<!-- Estado Fiscal -->
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant font-semibold">Estado de Aplicación *</label>
+<select class="bg-surface border border-outline-variant px-spacing-sm py-spacing-xs rounded font-body-sm text-body-sm text-on-surface outline-none focus:border-primary">
+<option value="por_liquidar">Por liquidar (Custodia temporal, no suma)</option>
+<option value="ejecutado">Ejecutado (Facturado y validado)</option>
+</select>
+</div>
+</div>
+<!-- Responsable -->
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant font-semibold">Responsable de Custodia / Reclamante</label>
+<select class="bg-surface border border-outline-variant px-spacing-sm py-spacing-xs rounded font-body-sm text-body-sm text-on-surface outline-none focus:border-primary">
+<option value="Ing. Carlos Mendoza">Ing. Carlos Mendoza (Coordinador)</option>
+<option value="Dra. Elena Ramos">Dra. Elena Ramos (Forestal)</option>
+<option value="Ing. Luis Vallenilla">Ing. Luis Vallenilla (Fauna)</option>
+<option value="Abg. Patricia Duarte">Abg. Patricia Duarte (Legal)</option>
+<option value="Administración General">Administración General</option>
+</select>
+</div>
+<!-- Concepto -->
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant font-semibold">Concepto y Justificación Técnica *</label>
+<textarea class="w-full px-spacing-sm py-spacing-xs bg-surface border border-outline-variant rounded font-body-sm text-body-sm text-on-surface outline-none focus:border-primary" placeholder="Detalle técnico de la partida (ej: Guía de combustible N°...)" required="" rows="2"></textarea>
+</div>
+<!-- Footer / Actions -->
+<div class="mt-spacing-sm pt-spacing-sm bg-surface-container-low -mx-spacing-md -mb-spacing-md px-spacing-md py-spacing-sm flex items-center justify-end gap-spacing-sm">
+<button class="px-spacing-md py-spacing-xs rounded font-body-sm text-body-sm text-on-surface hover:bg-surface-container transition-colors" onclick="document.getElementById('modal-registro-movimiento').classList.add('hidden')" type="button">
+            Cancelar
+          </button>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-spacing-md py-spacing-xs rounded font-headline-sm text-headline-sm flex items-center gap-spacing-2xs shadow-sm transition-colors" type="submit">
+<span class="material-symbols-outlined text-[18px]">check</span>
+            Asentar en Libro Mayor
+          </button>
+</div>
+</form>
+</div>
+</div>
+<script>
+    // Client-side interactions & escape listener for modal
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        const modal = document.getElementById('modal-registro-movimiento');
+        if (modal) modal.classList.add('hidden');
+      }
+    });
+  </script>
+</div></main></div></body></html>

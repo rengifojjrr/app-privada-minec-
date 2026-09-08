@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-surface": "#191c1a",
+        "inverse-surface": "#2e312f",
+        "surface-container-low": "#f3f4f0",
+        "surface-container": "#edeeeb",
+        "primary": "#023627",
+        "tertiary-container": "#82220e",
+        "secondary-fixed-dim": "#f5bb88",
+        "primary-fixed": "#bcedd7",
+        "secondary": "#80552b",
+        "outline": "#717974",
+        "on-primary-fixed": "#002116",
+        "surface-bright": "#f8faf6",
+        "on-surface-variant": "#414944",
+        "inverse-primary": "#a1d1bc",
+        "secondary-container": "#fec390",
+        "tertiary-fixed-dim": "#ffb4a4",
+        "on-tertiary-fixed": "#3e0500",
+        "surface-dim": "#d9dad7",
+        "on-error-container": "#93000a",
+        "on-tertiary-fixed-variant": "#852410",
+        "surface-container-high": "#e7e9e5",
+        "on-error": "#ffffff",
+        "on-primary": "#ffffff",
+        "surface-variant": "#e1e3df",
+        "on-secondary-fixed": "#2d1600",
+        "on-primary-fixed-variant": "#214f3f",
+        "surface-container-lowest": "#ffffff",
+        "primary-container": "#1f4d3d",
+        "tertiary": "#610c00",
+        "on-secondary": "#ffffff",
+        "error-container": "#ffdad6",
+        "error": "#ba1a1a",
+        "inverse-on-surface": "#f0f1ed",
+        "surface": "#f8faf6",
+        "primary-fixed-dim": "#a1d1bc",
+        "on-secondary-container": "#794e25",
+        "surface-container-highest": "#e1e3df",
+        "on-tertiary-container": "#ff9680",
+        "background": "#f8faf6",
+        "secondary-fixed": "#ffdcc0",
+        "surface-tint": "#3a6756",
+        "on-secondary-fixed-variant": "#653e16",
+        "tertiary-fixed": "#ffdad3",
+        "on-tertiary": "#ffffff",
+        "on-primary-container": "#8dbda8",
+        "on-background": "#191c1a",
+        "outline-variant": "#c0c8c3"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "spacing-xl": "2rem",
+        "table-gutter": "0.75rem",
+        "spacing-md": "1rem",
+        "spacing-lg": "1.5rem",
+        "spacing-xs": "0.5rem",
+        "spacing-3xs": "0.125rem",
+        "spacing-2xl": "3rem",
+        "layout-margin-desktop": "2rem",
+        "spacing-3xl": "4rem",
+        "layout-margin-mobile": "1rem",
+        "spacing-2xs": "0.25rem",
+        "spacing-sm": "0.75rem",
+        "layout-margin-tablet": "1.5rem"
+      },
+      "fontFamily": {
+        "body-md": ["Hanken Grotesk"],
+        "headline-xl-mobile": ["Hanken Grotesk"],
+        "label-caps": ["Hanken Grotesk"],
+        "data-mono-lg": ["JetBrains Mono"],
+        "body-sm": ["Hanken Grotesk"],
+        "headline-xl": ["Hanken Grotesk"],
+        "headline-sm": ["Hanken Grotesk"],
+        "headline-lg": ["Hanken Grotesk"],
+        "headline-md": ["Hanken Grotesk"],
+        "data-mono-md": ["JetBrains Mono"],
+        "body-lg": ["Hanken Grotesk"],
+        "label-tabular": ["JetBrains Mono"]
+      },
+      "fontSize": {
+        "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+        "headline-xl-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+        "data-mono-lg": ["15px", {"lineHeight": "22px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+        "headline-sm": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600"}],
+        "headline-lg": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "data-mono-md": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+        "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+        "label-tabular": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+      }
+    }
+  }
+}</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-spacing-md flex items-center gap-spacing-xs bg-surface-container-low"><div class="flex items-center justify-center w-7 h-7 bg-primary rounded-lg text-on-primary font-headline-sm text-headline-sm">PI</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight">Proyectos Integrales</span><span class="font-label-caps text-label-caps text-secondary uppercase">Ingeniería &amp; Ambiente</span></div></div><div class="px-spacing-md py-spacing-xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operación Técnica</span></div><nav class="flex flex-col gap-spacing-3xs px-spacing-xs flex-1" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm"><a aria-current="page" class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded transition-colors bg-primary-container text-on-primary-container font-headline-sm" data-path="proyectos" href="#"><span class="material-symbols-outlined text-[20px]">folder_supervised</span><span class="font-body-sm text-body-sm">Proyectos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="aprobaciones" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span class="font-body-sm text-body-sm">Aprobaciones</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="calendario" href="#"><span class="material-symbols-outlined text-[20px]">event_note</span><span class="font-body-sm text-body-sm">Calendario</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contratantes" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-sm text-body-sm">Contratantes</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-body-sm text-body-sm">Reportes</span></a><div class="my-spacing-xs px-spacing-xs"><div class="h-[1px] bg-outline-variant/30"></div></div><div class="px-spacing-xs py-spacing-3xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Gobierno &amp; Control</span></div><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="direccion-ejecutiva" href="#"><span class="material-symbols-outlined text-[20px]">query_stats</span><span class="font-body-sm text-body-sm">Dirección</span><span class="ml-auto font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-inverse-surface text-inverse-on-surface">DARK</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="font-body-sm text-body-sm">Usuarios</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="catalogos" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-sm text-body-sm">Catálogos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="bitacora-general" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-body-sm text-body-sm">Bitácora General</span></a></nav></div><div class="p-spacing-md bg-surface-container-high"><div class="flex items-center justify-between"><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Estándar Técnico</span><span class="font-data-mono-md text-data-mono-md text-primary">ISO 14001 / EIA-v2</span></div><span class="material-symbols-outlined text-outline text-[18px]">format_image_left</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex items-center justify-between px-spacing-lg"><div class="flex items-center gap-spacing-md flex-1 max-w-2xl"><img alt="Logo Proyectos Integrales" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WWI3mVDk-K0VvmFiCvo8p33fqbfLEk7YLxC1GudbnlFUpaiGriHUaR624tyiQNmYunExODktoHOUwF3QL8qZ_IwSF5S_2YljkWvDXX_F70wU2BcAir0ZOTnqLI_71vsDpk6z_zbXASIS0ueLJ7tFBZNvfS6T8aTnTgjZaqsX3YPQTL3hOBf9ordXhPZXWaXrXj9-I0-5Fd6nraudX80Q_6v0_NI_5xzQXtCkGU4fxStFzd9olGwfezDU0"/><div class="relative w-full max-w-md"><span class="material-symbols-outlined absolute left-spacing-xs top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full pl-8 pr-spacing-sm py-spacing-2xs bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Buscar código de expediente, matriz ambiental, contratante o profesional..." type="text"/></div></div><div class="flex items-center gap-spacing-md"><div class="flex items-center gap-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded"><span class="font-label-caps text-label-caps text-secondary uppercase font-semibold">Entrar como:</span><select class="bg-transparent font-body-sm text-body-sm text-on-surface font-medium outline-none cursor-pointer"><option value="admin">Admin</option><option value="coordinador">Coordinador</option><option value="profesional">Profesional</option><option value="administracion">Administración</option><option value="direccion">Dirección</option></select></div><div class="flex items-center gap-spacing-2xs"><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">help</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-spacing-lg pb-spacing-xl flex-1 bg-background"><div class="flex flex-col w-full">
+<!-- Dynamic Ambient Decorative Elements -->
+<div class="relative w-full overflow-hidden py-spacing-md">
+<div class="absolute -top-24 -left-20 w-96 h-96 bg-primary-fixed/30 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute top-1/2 -right-24 w-80 h-80 bg-secondary-fixed/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="max-w-5xl mx-auto px-spacing-sm">
+<!-- Top Technical Badge Row -->
+<div class="flex flex-wrap items-center justify-between gap-spacing-xs mb-spacing-lg bg-surface-container-low px-spacing-md py-spacing-xs rounded-xl shadow-sm">
+<div class="flex items-center gap-spacing-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-primary tracking-wider uppercase">Plataforma Técnica Certificada</span>
+<span class="text-outline-variant font-data-mono-md">/</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant font-medium">SSL·SHA384·TLSv1.3</span>
+</div>
+<div class="flex items-center gap-spacing-md text-on-surface-variant">
+<div class="flex items-center gap-spacing-3xs">
+<span class="material-symbols-outlined text-[16px] text-primary">verified_user</span>
+<span class="font-label-tabular text-label-tabular uppercase">ISO 14001:2015</span>
+</div>
+<div class="flex items-center gap-spacing-3xs">
+<span class="material-symbols-outlined text-[16px] text-primary">rule_folder</span>
+<span class="font-label-tabular text-label-tabular uppercase">EIA-v2 COMPLIANT</span>
+</div>
+<div class="flex items-center gap-spacing-3xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">dns</span>
+<span class="font-label-tabular text-label-tabular">SRV-SCL-NODE04</span>
+</div>
+</div>
+</div>
+<!-- Main Login Layout: 12 Columns -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-spacing-lg items-start">
+<!-- Left Column: Context & Normative Archival Dossier (5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-spacing-md">
+<div class="bg-surface-container-lowest p-spacing-lg rounded-xl shadow-sm flex flex-col gap-spacing-md">
+<!-- Branding Micro-Dossier -->
+<div class="flex flex-col gap-spacing-3xs">
+<div class="flex items-center gap-spacing-xs">
+<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary font-headline-sm text-headline-sm">
+                  PI
+                </div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary tracking-tight">Proyectos Integrales</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase font-semibold">Ingeniería, Bosques &amp; Ambiente</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-spacing-xs leading-relaxed">
+                Sistema Centralizado de Auditoría Ambiental, Gestión de Huella Ecológica y Validación Cartográfica para Consultoría Estratégica.
+              </p>
+</div>
+<!-- Visual Asset Card with Rich Details -->
+<div class="relative overflow-hidden rounded-lg bg-surface-container-high h-44 group">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="Technical forest engineers surveying a pristine Andean temperate woodland with digital LIDAR tablets and geodesic mapping sensors under sharp crisp morning daylight, muted natural emerald pine tones, high corporate rigor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeJ1FlBFu8nWlN6ocvMrsJMTnNIcnMDIq_nwaON-L48pJifV-XGAZVnEdzEgq3esoULG1DHaZxewCT6k_6abbl8h7aV0KBWJGEvyf5B7RYMPnQChByL9m9taSe642HqE4NSk6BEBMVSMWQlriuftMslLIMhlWoji7Irnz0k2sG4X2lM3Q8kNaS7zZZEHE0-Z2EtASBusJCcY12MiK4cJOTZ8D0YbkUPH0855VmSiqISFavEVI2A3v0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent flex flex-col justify-end p-spacing-sm text-on-primary">
+<span class="font-label-caps text-label-caps tracking-widest uppercase text-primary-fixed">Monitoreo de Campo WGS84</span>
+<span class="font-headline-sm text-headline-sm text-on-primary">Campamento Central Biobío · Lote Sur</span>
+</div>
+</div>
+<!-- Cryptographic Ledger Status Module -->
+<div class="bg-surface-container-low p-spacing-sm rounded-lg flex flex-col gap-spacing-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase font-semibold">Integridad Criptográfica</span>
+<span class="font-label-tabular text-label-tabular text-primary font-semibold">ACTIVO / SHA-512</span>
+</div>
+<div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full w-[94%]"></div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">Firma Digital HSM #449</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-medium">99.98% uptime</span>
+</div>
+</div>
+<!-- Legal Warning Snippet -->
+<div class="flex items-start gap-spacing-xs p-spacing-xs bg-error-container/40 rounded-lg">
+<span class="material-symbols-outlined text-[20px] text-tertiary-container mt-0.5">gavel</span>
+<p class="font-body-sm text-body-sm text-on-surface leading-snug">
+                Acceso exclusivo para personal técnico autorizado. Todas las sesiones son auditadas conforme a la Ley N° 21.459 de Delitos Informáticos y protocolo ISO/IEC 27001.
+              </p>
+</div>
+</div>
+<!-- Network Environment Telemetry -->
+<div class="bg-surface-container-low px-spacing-md py-spacing-sm rounded-xl flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Nodo de Enrutamiento</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-semibold">gw-central.santiago.internal</span>
+</div>
+<div class="flex items-center gap-spacing-2xs bg-surface-container-lowest px-spacing-xs py-spacing-3xs rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">lock_clock</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-bold">RTT: 14ms</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Authentication Card & Sandbox Simulator (7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-spacing-md">
+<!-- Interactive Profile Simulator (Sandbox) Banner -->
+<div class="bg-secondary-container/20 rounded-xl p-spacing-md shadow-sm flex flex-col gap-spacing-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[20px] text-secondary">tune</span>
+<span class="font-headline-sm text-headline-sm text-on-secondary-container">Simulador de Perfiles Operativos</span>
+</div>
+<span class="font-label-tabular text-label-tabular px-spacing-xs py-spacing-3xs bg-secondary text-on-secondary rounded-full uppercase tracking-wider font-semibold">
+                SANDBOX DEMO
+              </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Seleccione un perfil del pliego técnico para pre-cargar credenciales institucionales, permisos de rol y token OTP correspondiente:
+            </p>
+<!-- Role Selector Dropdown Grid -->
+<div class="relative mt-spacing-2xs">
+<select class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md px-spacing-sm py-spacing-xs rounded-lg shadow-sm appearance-none cursor-pointer focus:bg-surface-bright outline-none transition-all" id="role-selector">
+<option selected="" value="coordinador">Coordinador General — Carlos Valenzuela (c.valenzuela@proyectosintegrales.cl)</option>
+<option value="admin">Administrador del Sistema — Ing. Rodrigo Gallardo M. (r.gallardo@proyectosintegrales.cl)</option>
+<option value="campo">Profesional de Campo / Terreno — Lic. Marcela Morales (m.morales@proyectosintegrales.cl)</option>
+<option value="auditor">Auditora de Calidad &amp; Normativa — Dra. Elena Valenzuela (e.valenzuela@proyectosintegrales.cl)</option>
+<option value="direccion">Dirección General Corporativa — Dr. Hernán Céspedes D. (h.cespedes@proyectosintegrales.cl)</option>
+</select>
+<span class="material-symbols-outlined absolute right-spacing-xs top-1/2 -translate-y-1/2 pointer-events-none text-secondary">
+                arrow_drop_down_circle
+              </span>
+</div>
+<!-- Dynamic Role Context Specs -->
+<div class="grid grid-cols-3 gap-spacing-xs mt-spacing-2xs bg-surface-container-lowest p-spacing-xs rounded-lg shadow-xs">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Rango de Firma</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-bold" id="role-rank">NIVEL 4 (EIA/DIA)</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Módulo Asignado</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-medium" id="role-scope">Coordinación Gral.</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Llave Cripto</span>
+<span class="font-data-mono-md text-data-mono-md text-secondary font-semibold" id="role-key">ED25519-AUTH</span>
+</div>
+</div>
+</div>
+<!-- Formal Credentials Form Card -->
+<div class="bg-surface-container-lowest p-spacing-lg rounded-xl shadow-md flex flex-col gap-spacing-md">
+<div class="flex items-center justify-between pb-spacing-xs">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase font-semibold">Acceso Centralizado</span>
+<span class="font-headline-md text-headline-md text-on-surface">Credenciales Corporativas</span>
+</div>
+<div class="flex items-center gap-spacing-3xs bg-primary-fixed/40 px-spacing-xs py-spacing-3xs rounded-full">
+<span class="material-symbols-outlined text-[16px] text-primary">encrypted</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">FIPS 140-3</span>
+</div>
+</div>
+<!-- Form -->
+<form class="flex flex-col gap-spacing-md" id="login-form" onsubmit="event.preventDefault(); simulateLogin();">
+<!-- User Field -->
+<div class="flex flex-col gap-spacing-3xs">
+<div class="flex items-center justify-between">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase font-semibold" for="input-email">
+                    Identificador / Correo Institucional
+                  </label>
+<span class="font-label-tabular text-label-tabular text-primary">DOMINIO VALIDADO</span>
+</div>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-spacing-xs text-outline text-[18px]">badge</span>
+<input class="w-full pl-9 pr-spacing-md py-spacing-xs bg-surface-container-low rounded-lg text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:shadow-sm outline-none transition-all" id="input-email" required="" type="email" value="c.valenzuela@proyectosintegrales.cl"/>
+<span class="material-symbols-outlined absolute right-spacing-xs text-primary text-[18px]">check_circle</span>
+</div>
+</div>
+<!-- Password Field -->
+<div class="flex flex-col gap-spacing-3xs">
+<div class="flex items-center justify-between">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase font-semibold" for="input-password">
+                    Clave de Acceso Cifrada
+                  </label>
+<a class="font-body-sm text-body-sm text-secondary hover:underline" href="#">¿Olvidó contraseña técnica?</a>
+</div>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-spacing-xs text-outline text-[18px]">password</span>
+<input class="w-full pl-9 pr-spacing-xl py-spacing-xs bg-surface-container-low rounded-lg text-on-surface font-data-mono-md text-data-mono-md focus:bg-surface-container-lowest focus:shadow-sm outline-none transition-all" id="input-password" required="" type="password" value="••••••••••••••••••••"/>
+<button class="absolute right-spacing-xs text-outline hover:text-on-surface" onclick="togglePassVisibility()" type="button">
+<span class="material-symbols-outlined text-[18px]" id="pass-toggle-icon">visibility</span>
+</button>
+</div>
+<!-- Password Strength Metric -->
+<div class="flex items-center gap-spacing-xs mt-spacing-3xs">
+<div class="flex-1 grid grid-cols-4 gap-1 h-1">
+<div class="bg-primary rounded-full"></div>
+<div class="bg-primary rounded-full"></div>
+<div class="bg-primary rounded-full"></div>
+<div class="bg-primary rounded-full"></div>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-primary font-bold">NIST-800: Robustez Alta (128-bit Entropía)</span>
+</div>
+</div>
+<!-- 2FA & OTP Hardware Token Module -->
+<div class="bg-surface-container-low p-spacing-sm rounded-xl flex flex-col gap-spacing-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[18px] text-primary">security</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Token OTP / Factor Físico FIDO2</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-spacing-xs py-spacing-3xs rounded-md shadow-xs">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-bold" id="timer-counter">24s</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-spacing-xs items-center">
+<!-- OTP Code Input -->
+<div class="md:col-span-7 flex items-center gap-spacing-2xs">
+<input class="w-full text-center tracking-[0.25em] bg-surface-container-lowest font-data-mono-lg text-data-mono-lg text-primary font-bold py-spacing-xs rounded-lg shadow-sm outline-none" id="otp-input" maxlength="7" type="text" value="924 810"/>
+<button class="p-spacing-xs bg-surface-container-high rounded-lg hover:bg-surface-variant text-on-surface-variant transition-colors" onclick="refreshOtp()" title="Sincronizar llave temporal" type="button">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+</button>
+</div>
+<!-- Hardware Dongle Status -->
+<div class="md:col-span-5 flex items-center gap-spacing-xs bg-surface-container-lowest px-spacing-xs py-spacing-xs rounded-lg shadow-xs">
+<span class="material-symbols-outlined text-[20px] text-primary">usb</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-caps text-label-caps text-on-surface uppercase font-bold truncate">YubiKey 5 NFC</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant truncate">SN #882410-OK</span>
+</div>
+</div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">
+                  * Hardware token detectado automáticamente vía WebAuthn / TLS Client Hello.
+                </span>
+</div>
+<!-- Main Submission Button -->
+<button class="w-full bg-primary-container hover:bg-primary text-on-primary py-spacing-sm px-spacing-md rounded-lg shadow-sm font-headline-sm text-headline-sm flex items-center justify-center gap-spacing-xs transition-all cursor-pointer" id="btn-login-submit" type="submit">
+<span class="material-symbols-outlined text-[22px]">login</span>
+<span>Iniciar Sesión Segura</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<!-- Authentication Feedback Area -->
+<div class="hidden p-spacing-sm rounded-lg bg-surface-container-high flex items-center gap-spacing-xs transition-all" id="auth-alert">
+<span class="material-symbols-outlined text-primary text-[20px]">task_alt</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary">Autenticación Exitosa</span>
+<span class="font-body-sm text-body-sm text-on-surface">Validando token criptográfico con la entidad certificadora... Redirigiendo a tablero central.</span>
+</div>
+</div>
+</form>
+<!-- Bottom Support & Disaster Recovery -->
+<div class="flex flex-wrap items-center justify-between gap-spacing-xs pt-spacing-xs text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-spacing-3xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">support_agent</span>
+<span>Mesa Técnica: <span class="font-data-mono-md text-data-mono-md font-semibold text-on-surface">soporte@proyectosintegrales.cl</span></span>
+</div>
+<div class="flex items-center gap-spacing-3xs">
+<span class="material-symbols-outlined text-[16px] text-outline">help_outline</span>
+<a class="hover:text-primary underline" href="#">Guía de Autenticación 2FA</a>
+</div>
+</div>
+</div>
+<!-- Secondary Micro Card: Active Session Fingerprint -->
+<div class="bg-surface-container-lowest p-spacing-md rounded-xl shadow-xs flex flex-wrap items-center justify-between gap-spacing-sm">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[22px] text-primary">fingerprint</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Huella Digital de Sesión</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-medium">SHA256: 7f8a9e20cb...99b2</span>
+</div>
+</div>
+<div class="flex items-center gap-spacing-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Protocolo:</span>
+<span class="font-data-mono-md text-data-mono-md px-spacing-xs py-spacing-3xs bg-surface-container rounded text-on-surface font-semibold">OIDC + SAML 2.0</span>
+</div>
+</div>
+</div>
+</div>
+<!-- System Footer & Archival Compliance Metadata -->
+<div class="mt-spacing-xl pt-spacing-md flex flex-wrap items-center justify-between gap-spacing-md text-on-surface-variant">
+<div class="flex flex-col gap-spacing-3xs">
+<span class="font-headline-sm text-headline-sm text-primary">Proyectos Integrales S.A. · División de Ingeniería Ambiental</span>
+<span class="font-body-sm text-body-sm">Casa Matriz: Av. Andrés Bello 2711, Las Condes, Santiago de Chile. Centro de Datos Auditado ISO 27001.</span>
+</div>
+<div class="flex items-center gap-spacing-md">
+<div class="flex flex-col text-right">
+<span class="font-label-caps text-label-caps uppercase">Versión de Kernel Técnico</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-semibold">v4.8.2-rev11_prod</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary shadow-xs">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Profile simulation data dictionary
+  const roleDatabase = {
+    coordinador: {
+      email: "c.valenzuela@proyectosintegrales.cl",
+      otp: "924 810",
+      rank: "NIVEL 4 (EIA/DIA)",
+      scope: "Coordinación Gral.",
+      key: "ED25519-AUTH",
+      tokenName: "YubiKey 5 NFC (SN #882410)"
+    },
+    admin: {
+      email: "r.gallardo@proyectosintegrales.cl",
+      otp: "518 042",
+      rank: "ROOT / SYSADMIN",
+      scope: "Gobierno & Infra",
+      key: "RSA-4096-HSM",
+      tokenName: "Nitrokey Pro 3 (SN #100941)"
+    },
+    campo: {
+      email: "m.morales@proyectosintegrales.cl",
+      otp: "331 764",
+      rank: "NIVEL 2 (CAMPO)",
+      scope: "Flora, Suelo & Agua",
+      key: "ECDSA-P384",
+      tokenName: "Mobile Authenticator App"
+    },
+    auditor: {
+      email: "e.valenzuela@proyectosintegrales.cl",
+      otp: "709 115",
+      rank: "AUDIT CALIDAD",
+      scope: "Cumplimiento Legal",
+      key: "ED25519-SIG",
+      tokenName: "FIDO2 Resident Key #401"
+    },
+    direccion: {
+      email: "h.cespedes@proyectosintegrales.cl",
+      otp: "880 293",
+      rank: "DIRECCIÓN EJECUTIVA",
+      scope: "Aprobación Final",
+      key: "HSM-SOVEREIGN",
+      tokenName: "YubiKey 5C Nano #9902"
+    }
+  };
+
+  const roleSelector = document.getElementById('role-selector');
+  const inputEmail = document.getElementById('input-email');
+  const otpInput = document.getElementById('otp-input');
+  const roleRank = document.getElementById('role-rank');
+  const roleScope = document.getElementById('role-scope');
+  const roleKey = document.getElementById('role-key');
+  const authAlert = document.getElementById('auth-alert');
+  const btnSubmit = document.getElementById('btn-login-submit');
+
+  roleSelector.addEventListener('change', (e) => {
+    const role = roleDatabase[e.target.value];
+    if (role) {
+      inputEmail.value = role.email;
+      otpInput.value = role.otp;
+      roleRank.textContent = role.rank;
+      roleScope.textContent = role.scope;
+      roleKey.textContent = role.key;
+      
+      // Visual feedback on role switch
+      inputEmail.classList.add('bg-primary-fixed/20');
+      setTimeout(() => inputEmail.classList.remove('bg-primary-fixed/20'), 400);
+    }
+  });
+
+  function togglePassVisibility() {
+    const passInput = document.getElementById('input-password');
+    const icon = document.getElementById('pass-toggle-icon');
+    if (passInput.type === 'password') {
+      passInput.type = 'text';
+      icon.textContent = 'visibility_off';
+    } else {
+      passInput.type = 'password';
+      icon.textContent = 'visibility';
+    }
+  }
+
+  function refreshOtp() {
+    const randomOtp = Math.floor(100000 + Math.random() * 900000);
+    const formatted = String(randomOtp).slice(0, 3) + ' ' + String(randomOtp).slice(3);
+    otpInput.value = formatted;
+    document.getElementById('timer-counter').textContent = '30s';
+  }
+
+  // Countdown timer simulation for OTP validity
+  let timeLeft = 24;
+  setInterval(() => {
+    timeLeft--;
+    if (timeLeft <= 0) {
+      timeLeft = 30;
+      refreshOtp();
+    }
+    const timerElem = document.getElementById('timer-counter');
+    if (timerElem) {
+      timerElem.textContent = timeLeft + 's';
+    }
+  }, 1000);
+
+  function simulateLogin() {
+    btnSubmit.disabled = true;
+    btnSubmit.classList.add('opacity-75');
+    btnSubmit.innerHTML = `
+      <span class="material-symbols-outlined text-[20px] animate-spin">progress_activity</span>
+      <span>Autenticando Firma Criptográfica...</span>
+    `;
+
+    setTimeout(() => {
+      authAlert.classList.remove('hidden');
+      btnSubmit.innerHTML = `
+        <span class="material-symbols-outlined text-[20px]">check</span>
+        <span>Acceso Autorizado</span>
+      `;
+      btnSubmit.classList.remove('bg-primary-container');
+      btnSubmit.classList.add('bg-primary');
+    }, 1200);
+  }
+</script></main></div></body></html>

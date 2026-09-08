@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-surface": "#191c1a",
+        "inverse-surface": "#2e312f",
+        "surface-container-low": "#f3f4f0",
+        "surface-container": "#edeeeb",
+        "primary": "#023627",
+        "tertiary-container": "#82220e",
+        "secondary-fixed-dim": "#f5bb88",
+        "primary-fixed": "#bcedd7",
+        "secondary": "#80552b",
+        "outline": "#717974",
+        "on-primary-fixed": "#002116",
+        "surface-bright": "#f8faf6",
+        "on-surface-variant": "#414944",
+        "inverse-primary": "#a1d1bc",
+        "secondary-container": "#fec390",
+        "tertiary-fixed-dim": "#ffb4a4",
+        "on-tertiary-fixed": "#3e0500",
+        "surface-dim": "#d9dad7",
+        "on-error-container": "#93000a",
+        "on-tertiary-fixed-variant": "#852410",
+        "surface-container-high": "#e7e9e5",
+        "on-error": "#ffffff",
+        "on-primary": "#ffffff",
+        "surface-variant": "#e1e3df",
+        "on-secondary-fixed": "#2d1600",
+        "on-primary-fixed-variant": "#214f3f",
+        "surface-container-lowest": "#ffffff",
+        "primary-container": "#1f4d3d",
+        "tertiary": "#610c00",
+        "on-secondary": "#ffffff",
+        "error-container": "#ffdad6",
+        "error": "#ba1a1a",
+        "inverse-on-surface": "#f0f1ed",
+        "surface": "#f8faf6",
+        "primary-fixed-dim": "#a1d1bc",
+        "on-secondary-container": "#794e25",
+        "surface-container-highest": "#e1e3df",
+        "on-tertiary-container": "#ff9680",
+        "background": "#f8faf6",
+        "secondary-fixed": "#ffdcc0",
+        "surface-tint": "#3a6756",
+        "on-secondary-fixed-variant": "#653e16",
+        "tertiary-fixed": "#ffdad3",
+        "on-tertiary": "#ffffff",
+        "on-primary-container": "#8dbda8",
+        "on-background": "#191c1a",
+        "outline-variant": "#c0c8c3"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "spacing-xl": "2rem",
+        "table-gutter": "0.75rem",
+        "spacing-md": "1rem",
+        "spacing-lg": "1.5rem",
+        "spacing-xs": "0.5rem",
+        "spacing-3xs": "0.125rem",
+        "spacing-2xl": "3rem",
+        "layout-margin-desktop": "2rem",
+        "spacing-3xl": "4rem",
+        "layout-margin-mobile": "1rem",
+        "spacing-2xs": "0.25rem",
+        "spacing-sm": "0.75rem",
+        "layout-margin-tablet": "1.5rem"
+      },
+      "fontFamily": {
+        "body-md": ["Hanken Grotesk"],
+        "headline-xl-mobile": ["Hanken Grotesk"],
+        "label-caps": ["Hanken Grotesk"],
+        "data-mono-lg": ["JetBrains Mono"],
+        "body-sm": ["Hanken Grotesk"],
+        "headline-xl": ["Hanken Grotesk"],
+        "headline-sm": ["Hanken Grotesk"],
+        "headline-lg": ["Hanken Grotesk"],
+        "headline-md": ["Hanken Grotesk"],
+        "data-mono-md": ["JetBrains Mono"],
+        "body-lg": ["Hanken Grotesk"],
+        "label-tabular": ["JetBrains Mono"]
+      },
+      "fontSize": {
+        "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+        "headline-xl-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+        "data-mono-lg": ["15px", {"lineHeight": "22px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+        "headline-sm": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600"}],
+        "headline-lg": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "data-mono-md": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+        "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+        "label-tabular": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+      }
+    }
+  }
+}</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-spacing-md flex items-center gap-spacing-xs bg-surface-container-low"><div class="flex items-center justify-center w-7 h-7 bg-primary rounded-lg text-on-primary font-headline-sm text-headline-sm">PI</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight">Proyectos Integrales</span><span class="font-label-caps text-label-caps text-secondary uppercase">Ingeniería &amp; Ambiente</span></div></div><div class="px-spacing-md py-spacing-xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operación Técnica</span></div><nav class="flex flex-col gap-spacing-3xs px-spacing-xs flex-1" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm"><a aria-current="page" class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded transition-colors bg-primary-container text-on-primary-container font-headline-sm" data-path="proyectos" href="#"><span class="material-symbols-outlined text-[20px]">folder_supervised</span><span class="font-body-sm text-body-sm">Proyectos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="aprobaciones" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span class="font-body-sm text-body-sm">Aprobaciones</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="calendario" href="#"><span class="material-symbols-outlined text-[20px]">event_note</span><span class="font-body-sm text-body-sm">Calendario</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contratantes" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-sm text-body-sm">Contratantes</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-body-sm text-body-sm">Reportes</span></a><div class="my-spacing-xs px-spacing-xs"><div class="h-[1px] bg-outline-variant/30"></div></div><div class="px-spacing-xs py-spacing-3xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Gobierno &amp; Control</span></div><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="direccion-ejecutiva" href="#"><span class="material-symbols-outlined text-[20px]">query_stats</span><span class="font-body-sm text-body-sm">Dirección</span><span class="ml-auto font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-inverse-surface text-inverse-on-surface">DARK</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="font-body-sm text-body-sm">Usuarios</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="catalogos" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-sm text-body-sm">Catálogos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="bitacora-general" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-body-sm text-body-sm">Bitácora General</span></a></nav></div><div class="p-spacing-md bg-surface-container-high"><div class="flex items-center justify-between"><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Estándar Técnico</span><span class="font-data-mono-md text-data-mono-md text-primary">ISO 14001 / EIA-v2</span></div><span class="material-symbols-outlined text-outline text-[18px]">format_image_left</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex items-center justify-between px-spacing-lg"><div class="flex items-center gap-spacing-md flex-1 max-w-2xl"><img alt="Logo Proyectos Integrales" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WWI3mVDk-K0VvmFiCvo8p33fqbfLEk7YLxC1GudbnlFUpaiGriHUaR624tyiQNmYunExODktoHOUwF3QL8qZ_IwSF5S_2YljkWvDXX_F70wU2BcAir0ZOTnqLI_71vsDpk6z_zbXASIS0ueLJ7tFBZNvfS6T8aTnTgjZaqsX3YPQTL3hOBf9ordXhPZXWaXrXj9-I0-5Fd6nraudX80Q_6v0_NI_5xzQXtCkGU4fxStFzd9olGwfezDU0"/><div class="relative w-full max-w-md"><span class="material-symbols-outlined absolute left-spacing-xs top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full pl-8 pr-spacing-sm py-spacing-2xs bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Buscar código de expediente, matriz ambiental, contratante o profesional..." type="text"/></div></div><div class="flex items-center gap-spacing-md"><div class="flex items-center gap-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded"><span class="font-label-caps text-label-caps text-secondary uppercase font-semibold">Entrar como:</span><select class="bg-transparent font-body-sm text-body-sm text-on-surface font-medium outline-none cursor-pointer"><option value="admin">Admin</option><option value="coordinador">Coordinador</option><option value="profesional">Profesional</option><option value="administracion">Administración</option><option value="direccion">Dirección</option></select></div><div class="flex items-center gap-spacing-2xs"><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">help</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-spacing-lg pb-spacing-xl flex-1 bg-background"><div class="flex flex-col w-full gap-spacing-xl">
+<!-- Dynamic State Bar: Toggle between Module 1 (Auth Modal) & Module 2 (Coordinator Dashboard) -->
+<div class="flex flex-wrap items-center justify-between gap-spacing-md bg-surface-container-high px-spacing-lg py-spacing-sm rounded shadow-sm">
+<div class="flex items-center gap-spacing-sm">
+<span class="flex h-2.5 w-2.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold tracking-tight">TERMINAL TÉCNICA // AMBIENTE OPERACIONAL</span>
+<span class="text-outline text-body-sm">|</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Protocolo de Acceso Criptográfico &amp; Auditoría Continua</span>
+</div>
+<div class="flex items-center gap-spacing-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Vista de Módulo:</span>
+<button class="px-spacing-sm py-spacing-2xs bg-surface-container text-on-surface hover:bg-surface-container-lowest font-body-sm text-body-sm rounded shadow-sm transition-all flex items-center gap-1" id="toggle-auth-btn">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>Acceso / Login Seguro</span>
+</button>
+<button class="px-spacing-sm py-spacing-2xs bg-primary text-on-primary font-body-sm text-body-sm rounded shadow-sm flex items-center gap-1" id="view-dash-btn">
+<span class="material-symbols-outlined text-[16px]">dashboard</span>
+<span>Dashboard Operativo</span>
+</button>
+</div>
+</div>
+<!-- MODAL / OVERLAY: MÓDULO 01 - INGRESO / LOGIN DEL SISTEMA TÉCNICO -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/60 backdrop-blur-sm p-spacing-md transition-opacity" id="auth-modal">
+<div class="relative w-full max-w-xl bg-surface-container-lowest rounded shadow-xl overflow-hidden flex flex-col">
+<!-- Top Dossier Header -->
+<div class="bg-primary px-spacing-lg py-spacing-md flex items-center justify-between text-on-primary">
+<div class="flex items-center gap-spacing-sm">
+<div class="w-8 h-8 rounded bg-primary-container flex items-center justify-center text-primary-fixed">
+<span class="material-symbols-outlined text-[20px]">encrypted</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-primary leading-tight">Proyectos Integrales · SIA</span>
+<span class="font-label-tabular text-label-tabular text-primary-fixed">GATEWAY DE AUTENTICACIÓN SEGURA 2FA</span>
+</div>
+</div>
+<button class="text-primary-fixed hover:text-on-primary p-spacing-2xs rounded hover:bg-primary-container transition-colors" id="close-auth-modal" title="Cerrar modal para inspeccionar Dashboard">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Compliance Notice Ribbon -->
+<div class="bg-surface-container-low px-spacing-lg py-spacing-xs flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">SHA-256 Audit Trail • Cert. ISO 14001:2015</span>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-secondary font-semibold">TLS_v1.3_ENCRYPTED</span>
+</div>
+<div class="p-spacing-lg flex flex-col gap-spacing-md">
+<!-- Sandbox Role Selector for perimeter testing -->
+<div class="bg-surface-container-low p-spacing-sm rounded flex flex-col gap-spacing-2xs">
+<div class="flex items-center justify-between">
+<label class="font-label-caps text-label-caps text-secondary uppercase font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">vpn_key</span>
+              Simulador de Perfiles (Sandbox de Prueba):
+            </label>
+<span class="font-label-tabular text-label-tabular text-outline">AUTO-FILL ACTIVO</span>
+</div>
+<select class="w-full bg-surface-container-lowest text-on-surface font-body-sm text-body-sm px-spacing-sm py-spacing-xs rounded outline-none cursor-pointer" id="role-selector">
+<option data-user="c.valenzuela@proyectosintegrales.cl" selected="" value="coordinador">Coordinador General (Carlos Valenzuela - Proyectos Zona Sur)</option>
+<option data-user="m.araya.eval@proyectosintegrales.cl" value="evaluador">Evaluador Ambiental Senior (Dra. Marcela Araya)</option>
+<option data-user="r.leiva.fin@proyectosintegrales.cl" value="finanzas">Control Financiero &amp; Presupuesto (Rodrigo Leiva)</option>
+<option data-user="e.montenegro.dir@proyectosintegrales.cl" value="direccion">Dirección Ejecutiva (Ing. Eduardo Montenegro)</option>
+<option data-user="sysadmin@proyectosintegrales.cl" value="admin">Administrador Maestro de Plataforma</option>
+</select>
+</div>
+<!-- Credentials Form -->
+<form class="flex flex-col gap-spacing-sm" id="login-form" onsubmit="event.preventDefault(); document.getElementById('auth-modal').classList.add('hidden');">
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Correo Electrónico Institucional</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline text-[18px]">badge</span>
+<input class="w-full pl-9 pr-spacing-sm py-spacing-xs bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded shadow-sm outline-none focus:bg-surface-bright" id="user-email" required="" type="email" value="c.valenzuela@proyectosintegrales.cl"/>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Contraseña Cifrada</label>
+<span class="font-label-tabular text-label-tabular text-outline">NIVEL: FIPS-140-2</span>
+</div>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline text-[18px]">lock</span>
+<input class="w-full pl-9 pr-spacing-sm py-spacing-xs bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded shadow-sm outline-none focus:bg-surface-bright" id="user-pass" required="" type="password" value="••••••••••••••••"/>
+</div>
+</div>
+<!-- 2FA Active Visual Token -->
+<div class="flex items-center justify-between bg-surface-container-high px-spacing-sm py-spacing-2xs rounded">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">security_update_good</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-primary uppercase">Autenticador 2FA Vinculado</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">TOKEN HARDWARE / TOTP VIGENTE</span>
+</div>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-primary bg-primary-fixed px-spacing-xs py-spacing-3xs rounded font-semibold">924 810</span>
+</div>
+<button class="w-full mt-spacing-xs bg-primary text-on-primary py-spacing-xs px-spacing-md rounded font-headline-sm text-headline-sm hover:bg-primary-container transition-all flex items-center justify-center gap-2 shadow-sm" type="submit">
+<span class="material-symbols-outlined text-[18px]">fingerprint</span>
+<span>Iniciar Sesión Segura</span>
+</button>
+</form>
+<!-- Mandatory Regulatory Notice -->
+<div class="bg-surface-container-low p-spacing-sm rounded flex items-start gap-spacing-xs">
+<span class="material-symbols-outlined text-[18px] text-outline mt-0.5">info</span>
+<div class="flex flex-col gap-0.5">
+<span class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+<strong class="text-on-surface font-semibold">Aviso Normativo:</strong> Para restablecer la contraseña corporativa o actualizar el generador OTP físico, contacte directamente a la Jefatura del Sistema en <span class="font-data-mono-md text-data-mono-md text-primary">soporte@proyectosintegrales.cl</span>. El ingreso no autorizado constituye infracción a la Ley 21.459 de Delitos Informáticos.
+            </span>
+</div>
+</div>
+</div>
+<!-- Footer Seals -->
+<div class="bg-surface-container px-spacing-lg py-spacing-xs flex items-center justify-between">
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">HOST: CL-SCL-PRD01 (LATAM)</span>
+<div class="flex items-center gap-spacing-sm">
+<span class="font-label-caps text-label-caps text-primary uppercase">EIA-v2 VALIDADO</span>
+<span class="text-outline text-label-tabular">•</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase">AUDIT RECORD #4092-B</span>
+</div>
+</div>
+</div>
+</div>
+<!-- MÓDULO 02: PANEL DE INICIO (DASHBOARD OPERATIVO contextual para Coordinador de Proyectos) -->
+<!-- Sub-header context strip -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-spacing-md bg-surface-container-lowest p-spacing-lg rounded shadow-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="px-spacing-xs py-spacing-3xs bg-primary-container text-on-primary-container font-label-caps text-label-caps rounded uppercase">ROL: COORDINADOR TÉCNICO REGIONAL</span>
+<span class="font-data-mono-md text-data-mono-md text-outline">ID: COORD-SUR-04</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary font-semibold tracking-tight">Panel Operativo de Expedientes &amp; Compuertas</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Supervisión en tiempo real de matrices ambientales, compromisos normativos y compuertas de aseguramiento de calidad.</p>
+</div>
+<!-- Quick Priority Actions -->
+<div class="flex flex-wrap items-center gap-spacing-xs">
+<button class="bg-primary text-on-primary px-spacing-md py-spacing-xs rounded font-body-sm text-body-sm font-semibold hover:bg-primary-container transition-all flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Revisar Compuerta Etapa 06</span>
+</button>
+<button class="bg-surface-container text-on-surface hover:bg-surface-container-high px-spacing-sm py-spacing-xs rounded font-body-sm text-body-sm font-medium transition-all flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add_box</span>
+<span>Nuevo Expediente</span>
+</button>
+<button class="bg-surface-container text-on-surface hover:bg-surface-container-high px-spacing-sm py-spacing-xs rounded font-body-sm text-body-sm font-medium transition-all flex items-center gap-1.5 shadow-sm" title="Descargar minuta en PDF/XLS">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Minuta Semanal</span>
+</button>
+</div>
+</div>
+<!-- KPI Cards Grid (4 Top Technical Metrics) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-spacing-md">
+<!-- KPI 1: Proyectos asignados -->
+<div class="bg-surface-container-lowest p-spacing-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Proyectos Supervisados</span>
+<span class="material-symbols-outlined text-[20px] text-primary">folder_open</span>
+</div>
+<div class="my-spacing-xs flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl text-primary font-semibold">4</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">EXPEDIENTES ACTIVOS</span>
+</div>
+<div class="flex items-center justify-between text-body-sm pt-spacing-2xs bg-surface-container-low px-spacing-xs rounded">
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">ZONA: Los Lagos &amp; Biobío</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">100% ASIGNADOS</span>
+</div>
+</div>
+<!-- KPI 2: Hitos en Riesgo / Vencidos -->
+<div class="bg-surface-container-lowest p-spacing-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-error uppercase tracking-wider">Hitos en Riesgo / Vencidos</span>
+<span class="material-symbols-outlined text-[20px] text-error">warning</span>
+</div>
+<div class="my-spacing-xs flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl text-error font-semibold">2</span>
+<span class="px-spacing-2xs py-spacing-3xs rounded bg-error-container text-on-error-container font-label-tabular text-label-tabular font-bold">ALERTA INMEDIATA</span>
+</div>
+<div class="flex items-center justify-between text-body-sm pt-spacing-2xs bg-surface-container-low px-spacing-xs rounded">
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">Dendrometría &amp; Observaciones</span>
+<span class="font-data-mono-md text-data-mono-md text-error font-semibold">+14 DÍAS ATRASO</span>
+</div>
+</div>
+<!-- KPI 3: Vistos Buenos & Compuertas Técnicas -->
+<div class="bg-surface-container-lowest p-spacing-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-wider">Compuertas Pendientes</span>
+<span class="material-symbols-outlined text-[20px] text-secondary">approval</span>
+</div>
+<div class="my-spacing-xs flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl text-secondary font-semibold">3</span>
+<span class="px-spacing-2xs py-spacing-3xs rounded bg-secondary-fixed text-on-secondary-fixed font-label-tabular text-label-tabular">FIRMA TÉCNICA</span>
+</div>
+<div class="flex items-center justify-between text-body-sm pt-spacing-2xs bg-surface-container-low px-spacing-xs rounded">
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">Próxima: Etapa 06 (Eólico)</span>
+<span class="font-data-mono-md text-data-mono-md text-secondary font-semibold">VENCE HOY 18:00</span>
+</div>
+</div>
+<!-- KPI 4: Cumplimiento de Plazos -->
+<div class="bg-surface-container-lowest p-spacing-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-wider">Tasa de Cumplimiento</span>
+<span class="material-symbols-outlined text-[20px] text-primary">data_saver_on</span>
+</div>
+<div class="my-spacing-xs flex items-center justify-between">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-xl text-headline-xl text-primary font-semibold">88.5</span>
+<span class="font-headline-md text-headline-md text-primary">%</span>
+</div>
+<!-- Compact SVG Radial Ring -->
+<div class="relative w-11 h-11">
+<svg class="w-11 h-11 transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-highest" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="88.5, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<span class="absolute inset-0 flex items-center justify-center font-label-tabular text-[9px] text-primary font-bold">Q3</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm pt-spacing-2xs bg-surface-container-low px-spacing-xs rounded">
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">META SLA: 90.0%</span>
+<span class="font-data-mono-md text-data-mono-md text-outline font-medium">DELTA: -1.5%</span>
+</div>
+</div>
+</div>
+<!-- Main Asymmetric Grid: Priority Attention List & Weekly Executive Agenda -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-spacing-md">
+<!-- Left Column (8 cols): Expedientes que Requieren Atención Hoy -->
+<div class="lg:col-span-8 flex flex-col gap-spacing-md">
+<div class="bg-surface-container-lowest rounded shadow-sm overflow-hidden flex flex-col">
+<!-- Section Header -->
+<div class="px-spacing-lg py-spacing-md bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[20px] text-primary">priority_high</span>
+<div class="flex flex-col">
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Expedientes que Requieren tu Atención Hoy</h2>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">3 ACCIONES BLOQUEANTES IDENTIFICADAS POR EL MOTOR DE CUMPLIMIENTO</span>
+</div>
+</div>
+<span class="font-label-tabular text-label-tabular px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-on-surface">ACTUALIZADO HACE 6 MIN</span>
+</div>
+<!-- Dossier Table Ledger -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">
+<th class="py-spacing-xs px-spacing-md">Expediente &amp; Proyecto</th>
+<th class="py-spacing-xs px-spacing-sm">Área Técnica</th>
+<th class="py-spacing-xs px-spacing-sm">Condición Crítica</th>
+<th class="py-spacing-xs px-spacing-sm text-right">Plazo Límite</th>
+<th class="py-spacing-xs px-spacing-md text-center">Acción</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-body-sm">
+<!-- Item 1: Forestal con Retraso Severo -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">PI-2024-001</span>
+<span class="px-spacing-2xs py-spacing-3xs rounded bg-error-container text-on-error-container font-label-tabular text-label-tabular font-bold">DEMORA CRÍTICA</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface mt-0.5">Plan de Manejo Forestal Fundo El Coihue</span>
+<span class="font-body-sm text-body-sm text-outline">Mandante: Celulosa Arauco y Constitución S.A.</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-sm">
+<span class="font-label-caps text-label-caps text-secondary uppercase bg-secondary-fixed/50 px-spacing-xs py-spacing-3xs rounded">FORESTAL // DENDRO</span>
+</td>
+<td class="py-spacing-sm px-spacing-sm">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-error font-medium">Retraso de 14 días en muestreo</span>
+<span class="font-label-tabular text-label-tabular text-outline">Brigada 03 reporta inaccesibilidad climática</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-sm text-right">
+<span class="font-data-mono-md text-data-mono-md text-error font-semibold">12-OCT-2024</span>
+<span class="block font-label-tabular text-label-tabular text-error">VENCIDO</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<button class="px-spacing-sm py-spacing-2xs bg-primary text-on-primary hover:bg-primary-container rounded font-body-sm text-body-sm font-semibold transition-all">
+                    Reasignar
+                  </button>
+</td>
+</tr>
+<!-- Item 2: EIA Parque Eolico - Compuerta 06 -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-lowest">
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">PI-2024-002</span>
+<span class="px-spacing-2xs py-spacing-3xs rounded bg-secondary-fixed text-on-secondary-fixed font-label-tabular text-label-tabular font-bold">COMPUERTA 06</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface mt-0.5">EIA Parque Eólico Península Grande</span>
+<span class="font-body-sm text-body-sm text-outline">Mandante: Energía Renovable del Pacífico SpA</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-sm">
+<span class="font-label-caps text-label-caps text-primary uppercase bg-primary-fixed px-spacing-xs py-spacing-3xs rounded">AMBIENTAL // FAUNA</span>
+</td>
+<td class="py-spacing-sm px-spacing-sm">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Compuerta 06 pendiente de dictamen</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">Línea de base avifauna migratoria lista</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-sm text-right">
+<span class="font-data-mono-md text-data-mono-md text-secondary font-semibold">HOY 18:00</span>
+<span class="block font-label-tabular text-label-tabular text-secondary">COMPROMISO SLA</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<button class="px-spacing-sm py-spacing-2xs bg-secondary text-on-secondary hover:bg-on-secondary-fixed-variant rounded font-body-sm text-body-sm font-semibold transition-all">
+                    Visar
+                  </button>
+</td>
+</tr>
+<!-- Item 3: Geotecnico Observaciones DOH -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">PI-2024-003</span>
+<span class="px-spacing-2xs py-spacing-3xs rounded bg-surface-container-high text-on-surface font-label-tabular text-label-tabular">OBSERVACIÓN ENTE</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface mt-0.5">Estudio Geotécnico &amp; Socavación Bocatoma Río Laja</span>
+<span class="font-body-sm text-body-sm text-outline">Mandante: Dirección de Obras Hidráulicas (MOP)</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase bg-surface-container-high px-spacing-xs py-spacing-3xs rounded">CIVIL // HIDRÁULICA</span>
+</td>
+<td class="py-spacing-sm px-spacing-sm">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Observaciones DOH por subsanar</span>
+<span class="font-label-tabular text-label-tabular text-outline">Oficio Ord. N° 842-DOH (Cálculo de socavación)</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-sm text-right">
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-semibold">28-OCT-2024</span>
+<span class="block font-label-tabular text-label-tabular text-on-surface-variant">3 DÍAS HÁBILES</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<button class="px-spacing-sm py-spacing-2xs bg-surface-container-high text-on-surface hover:bg-surface-container-highest rounded font-body-sm text-body-sm font-medium transition-all">
+                    Subsanar
+                  </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Dossier Table Footer / Quick Link -->
+<div class="bg-surface-container-low px-spacing-lg py-spacing-xs flex items-center justify-between text-body-sm">
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">MOSTRANDO 3 DE 12 COMPROMISOS TOTALES REGISTRADOS</span>
+<a class="text-primary hover:underline font-headline-sm text-headline-sm flex items-center gap-1" href="#">
+<span>Ver matriz completa de compromisos</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Live Operational Context / Map & Field Telemetry Strip -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-spacing-md">
+<!-- Field Station Map Telemetry -->
+<div class="bg-surface-container-lowest p-spacing-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">pin_drop</span>
+<span class="font-headline-sm text-headline-sm text-primary">Monitoreo Satelital de Cuadrillas</span>
+</div>
+<span class="font-label-tabular text-label-tabular text-secondary">GPS WGS84 // UTM 18S</span>
+</div>
+<div class="w-full h-36 bg-surface-container my-spacing-xs rounded relative overflow-hidden flex items-center justify-center" data-alt="Satellite cartographic view of Biobio river basin in Chile, overlaid with clean technical topographic elevation lines, green parcel boundaries, and orange telemetry points for environmental field stations in high definition." data-location="Los Angeles, Biobio, Chile" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAhuaBcLkZGORW5sVJqU6hiq-8nkvjHeRHKzICzEWBHjWdoM8FCYP8_GQ1XcL6YviQNjSNIKLhgcWPgj6Ql1SAhCyXzBzalE2_Ch12DDwl0Uyn2RbH7u4SPDyBcZxmDWU0PRH72brcH-2dOVB4vMBAK2JIBxx-vcJLpR3qV_soM-GFA0I2O03R-rLs-ie5YcA295XZEi4mofRvVxboPg6MQ9a94VOX5zMhb-qaZORvYG4ui0cqwU2kQ')">
+<div class="absolute top-2 left-2 bg-inverse-surface/80 text-inverse-on-surface px-spacing-2xs py-spacing-3xs rounded font-label-tabular text-[10px]">
+              STN-BIOBIO: 37°28'12"S 72°21'04"W
+            </div>
+<div class="absolute bottom-2 right-2 bg-surface-container-lowest/90 px-spacing-2xs py-spacing-3xs rounded font-label-caps text-label-caps text-primary">
+              PRECISIÓN RTK: ±0.03m
+            </div>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">CUADRILLAS EN CAMPO: 2 ACTIVAS</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">SYNC ACTIVA</span>
+</div>
+</div>
+<!-- Field Photo Visual Confirmation -->
+<div class="bg-surface-container-lowest p-spacing-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">photo_camera</span>
+<span class="font-headline-sm text-headline-sm text-primary">Último Registro Fotogramétrico</span>
+</div>
+<span class="font-label-tabular text-label-tabular text-outline">REG #DRONE-88</span>
+</div>
+<div class="w-full h-36 bg-surface-container my-spacing-xs rounded relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="High precision aerial drone photography of a dense native forest patch in southern Chile with forestry technicians in high visibility gear measuring specimen tree trunks using calipers and technical measurement rods under overcast soft natural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsDWSIRbhbEDwHZ1y5NNLP2n7y1NZI7nUxUiWgi5gNRWF9NWwczQ8TpZiexuAKvUQrqlvYz8Sk_8fTRhtZSn--Dk002cO6NnpQHQSonUtFrmx4HFAzhCmmRjropH_hDn6QE41N32tQKNC_3gu21L8vG4gJefWEZdIiLdx4wqH8MctghurjofRmgEhmU8Yjy-OzCS9GC_LlrtFhIG0pQoxF97uyqk3-ZwwI9jxhj4HQMckW1h-4IQkH"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent flex items-end p-spacing-xs">
+<span class="font-label-caps text-label-caps text-on-primary uppercase">Parcela P-04 · Calidad Dendrométrica Roble-Raulí</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm">
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">SUBIDO HOY 11:24 POR J. PÉREZ</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">FIRMADO SHA-256</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (4 cols): Próximos Vencimientos - Agenda Ejecutiva -->
+<div class="lg:col-span-4 flex flex-col gap-spacing-md">
+<!-- Executive Agenda Card -->
+<div class="bg-surface-container-lowest p-spacing-md rounded shadow-sm flex flex-col">
+<div class="flex items-center justify-between pb-spacing-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary">event_upcoming</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Agenda Ejecutiva Semanal</h3>
+</div>
+<span class="font-label-tabular text-label-tabular text-outline">SEM 43 // 2024</span>
+</div>
+<div class="flex flex-col gap-spacing-xs mt-spacing-xs">
+<!-- Timeline Item 1 -->
+<div class="flex items-start gap-spacing-sm p-spacing-xs rounded bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex flex-col items-center bg-surface-container-lowest px-2 py-1 rounded shadow-sm min-w-[52px]">
+<span class="font-label-caps text-label-caps text-secondary uppercase font-bold">LUN</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">28</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-label-tabular text-primary font-semibold">10:00 - 11:30</span>
+<span class="font-label-caps text-label-caps text-error bg-error-container text-on-error-container px-1 rounded uppercase">CRÍTICO</span>
+</div>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface truncate">Comité de Deficiencias DIA</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant truncate">Revisión de respuestas Adenda N° 1</span>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="flex items-start gap-spacing-sm p-spacing-xs rounded bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex flex-col items-center bg-surface-container-lowest px-2 py-1 rounded shadow-sm min-w-[52px]">
+<span class="font-label-caps text-label-caps text-secondary uppercase font-bold">MAR</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">29</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-label-tabular text-primary font-semibold">14:00 - 16:00</span>
+<span class="font-label-caps text-label-caps text-secondary bg-secondary-fixed text-on-secondary-fixed px-1 rounded uppercase">TERRENO</span>
+</div>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface truncate">Inspección de Cuñas de Muestreo</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant truncate">Fundo El Coihue con CONAF Provincial</span>
+</div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="flex items-start gap-spacing-sm p-spacing-xs rounded bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex flex-col items-center bg-surface-container-lowest px-2 py-1 rounded shadow-sm min-w-[52px]">
+<span class="font-label-caps text-label-caps text-secondary uppercase font-bold">MIÉ</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">30</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-label-tabular text-primary font-semibold">09:30 - 10:30</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant bg-surface-container-high text-on-surface px-1 rounded uppercase">INTERNO</span>
+</div>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface truncate">Entrega de Minuta Dirección</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant truncate">Revisión cartera Q4 con Gerencia Técnica</span>
+</div>
+</div>
+<!-- Timeline Item 4 -->
+<div class="flex items-start gap-spacing-sm p-spacing-xs rounded bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex flex-col items-center bg-surface-container-lowest px-2 py-1 rounded shadow-sm min-w-[52px]">
+<span class="font-label-caps text-label-caps text-secondary uppercase font-bold">JUE</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">31</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-label-tabular text-primary font-semibold">16:00 - 17:30</span>
+<span class="font-label-caps text-label-caps text-primary bg-primary-fixed text-on-primary-fixed px-1 rounded uppercase">COMPUERTA</span>
+</div>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface truncate">Cierre Etapa 07 Eólico</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant truncate">Aprobación final modelo acústico</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Technical Integrity & Verification Summary Card -->
+<div class="bg-surface-container-lowest p-spacing-md rounded shadow-sm flex flex-col gap-spacing-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">ESTADO DE CADENA DE CUSTODIA</span>
+<span class="material-symbols-outlined text-[18px] text-primary">policy</span>
+</div>
+<div class="flex flex-col gap-1 bg-surface-container-low p-spacing-xs rounded">
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-label-tabular text-on-surface">Último Hash SHA-256</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-medium">9a4f…88c2</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-label-tabular text-on-surface">Registros de Campo Válidos</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">1,248 / 1,248</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-label-tabular text-on-surface">Auditoría Externa SGC</span>
+<span class="font-data-mono-md text-data-mono-md text-secondary">PROGRAMADA NOV 2024</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-tabular text-[10px] text-outline">SISTEMA INTEGRADO DE GESTIÓN ISO 14001:2015</span>
+<span class="inline-flex items-center gap-1 font-label-tabular text-[10px] text-primary font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> CONFORME
+          </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Inline Vanilla Script for Simulated Perimetric Access & Interactive Modal -->
+<script>
+    (function() {
+      const roleSelector = document.getElementById('role-selector');
+      const emailInput = document.getElementById('user-email');
+      const authModal = document.getElementById('auth-modal');
+      const toggleAuthBtn = document.getElementById('toggle-auth-btn');
+      const closeAuthModal = document.getElementById('close-auth-modal');
+      const viewDashBtn = document.getElementById('view-dash-btn');
+
+      if (roleSelector && emailInput) {
+        roleSelector.addEventListener('change', function(e) {
+          const selectedOption = this.options[this.selectedIndex];
+          const userEmail = selectedOption.getAttribute('data-user');
+          if (userEmail) {
+            emailInput.value = userEmail;
+          }
+        });
+      }
+
+      if (toggleAuthBtn && authModal) {
+        toggleAuthBtn.addEventListener('click', function() {
+          authModal.classList.remove('hidden');
+        });
+      }
+
+      if (closeAuthModal && authModal) {
+        closeAuthModal.addEventListener('click', function() {
+          authModal.classList.add('hidden');
+        });
+      }
+
+      if (viewDashBtn && authModal) {
+        viewDashBtn.addEventListener('click', function() {
+          authModal.classList.add('hidden');
+        });
+      }
+    })();
+  </script>
+</div></main></div></body></html>

@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-surface": "#191c1a",
+        "inverse-surface": "#2e312f",
+        "surface-container-low": "#f3f4f0",
+        "surface-container": "#edeeeb",
+        "primary": "#023627",
+        "tertiary-container": "#82220e",
+        "secondary-fixed-dim": "#f5bb88",
+        "primary-fixed": "#bcedd7",
+        "secondary": "#80552b",
+        "outline": "#717974",
+        "on-primary-fixed": "#002116",
+        "surface-bright": "#f8faf6",
+        "on-surface-variant": "#414944",
+        "inverse-primary": "#a1d1bc",
+        "secondary-container": "#fec390",
+        "tertiary-fixed-dim": "#ffb4a4",
+        "on-tertiary-fixed": "#3e0500",
+        "surface-dim": "#d9dad7",
+        "on-error-container": "#93000a",
+        "on-tertiary-fixed-variant": "#852410",
+        "surface-container-high": "#e7e9e5",
+        "on-error": "#ffffff",
+        "on-primary": "#ffffff",
+        "surface-variant": "#e1e3df",
+        "on-secondary-fixed": "#2d1600",
+        "on-primary-fixed-variant": "#214f3f",
+        "surface-container-lowest": "#ffffff",
+        "primary-container": "#1f4d3d",
+        "tertiary": "#610c00",
+        "on-secondary": "#ffffff",
+        "error-container": "#ffdad6",
+        "error": "#ba1a1a",
+        "inverse-on-surface": "#f0f1ed",
+        "surface": "#f8faf6",
+        "primary-fixed-dim": "#a1d1bc",
+        "on-secondary-container": "#794e25",
+        "surface-container-highest": "#e1e3df",
+        "on-tertiary-container": "#ff9680",
+        "background": "#f8faf6",
+        "secondary-fixed": "#ffdcc0",
+        "surface-tint": "#3a6756",
+        "on-secondary-fixed-variant": "#653e16",
+        "tertiary-fixed": "#ffdad3",
+        "on-tertiary": "#ffffff",
+        "on-primary-container": "#8dbda8",
+        "on-background": "#191c1a",
+        "outline-variant": "#c0c8c3"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "spacing-xl": "2rem",
+        "table-gutter": "0.75rem",
+        "spacing-md": "1rem",
+        "spacing-lg": "1.5rem",
+        "spacing-xs": "0.5rem",
+        "spacing-3xs": "0.125rem",
+        "spacing-2xl": "3rem",
+        "layout-margin-desktop": "2rem",
+        "spacing-3xl": "4rem",
+        "layout-margin-mobile": "1rem",
+        "spacing-2xs": "0.25rem",
+        "spacing-sm": "0.75rem",
+        "layout-margin-tablet": "1.5rem"
+      },
+      "fontFamily": {
+        "body-md": ["Hanken Grotesk"],
+        "headline-xl-mobile": ["Hanken Grotesk"],
+        "label-caps": ["Hanken Grotesk"],
+        "data-mono-lg": ["JetBrains Mono"],
+        "body-sm": ["Hanken Grotesk"],
+        "headline-xl": ["Hanken Grotesk"],
+        "headline-sm": ["Hanken Grotesk"],
+        "headline-lg": ["Hanken Grotesk"],
+        "headline-md": ["Hanken Grotesk"],
+        "data-mono-md": ["JetBrains Mono"],
+        "body-lg": ["Hanken Grotesk"],
+        "label-tabular": ["JetBrains Mono"]
+      },
+      "fontSize": {
+        "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+        "headline-xl-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+        "data-mono-lg": ["15px", {"lineHeight": "22px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+        "headline-sm": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600"}],
+        "headline-lg": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "data-mono-md": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+        "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+        "label-tabular": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+      }
+    }
+  }
+}</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-spacing-md flex items-center gap-spacing-xs bg-surface-container-low"><div class="flex items-center justify-center w-7 h-7 bg-primary rounded-lg text-on-primary font-headline-sm text-headline-sm">PI</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight">Proyectos Integrales</span><span class="font-label-caps text-label-caps text-secondary uppercase">Ingeniería &amp; Ambiente</span></div></div><div class="px-spacing-md py-spacing-xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operación Técnica</span></div><nav class="flex flex-col gap-spacing-3xs px-spacing-xs flex-1" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm"><a aria-current="page" class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded transition-colors bg-primary-container text-on-primary-container font-headline-sm" data-path="proyectos" href="#"><span class="material-symbols-outlined text-[20px]">folder_supervised</span><span class="font-body-sm text-body-sm">Proyectos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="aprobaciones" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span class="font-body-sm text-body-sm">Aprobaciones</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="calendario" href="#"><span class="material-symbols-outlined text-[20px]">event_note</span><span class="font-body-sm text-body-sm">Calendario</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contratantes" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-sm text-body-sm">Contratantes</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-body-sm text-body-sm">Reportes</span></a><div class="my-spacing-xs px-spacing-xs"><div class="h-[1px] bg-outline-variant/30"></div></div><div class="px-spacing-xs py-spacing-3xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Gobierno &amp; Control</span></div><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="direccion-ejecutiva" href="#"><span class="material-symbols-outlined text-[20px]">query_stats</span><span class="font-body-sm text-body-sm">Dirección</span><span class="ml-auto font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-inverse-surface text-inverse-on-surface">DARK</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="font-body-sm text-body-sm">Usuarios</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="catalogos" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-sm text-body-sm">Catálogos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="bitacora-general" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-body-sm text-body-sm">Bitácora General</span></a></nav></div><div class="p-spacing-md bg-surface-container-high"><div class="flex items-center justify-between"><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Estándar Técnico</span><span class="font-data-mono-md text-data-mono-md text-primary">ISO 14001 / EIA-v2</span></div><span class="material-symbols-outlined text-outline text-[18px]">format_image_left</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex items-center justify-between px-spacing-lg"><div class="flex items-center gap-spacing-md flex-1 max-w-2xl"><img alt="Logo Proyectos Integrales" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WWI3mVDk-K0VvmFiCvo8p33fqbfLEk7YLxC1GudbnlFUpaiGriHUaR624tyiQNmYunExODktoHOUwF3QL8qZ_IwSF5S_2YljkWvDXX_F70wU2BcAir0ZOTnqLI_71vsDpk6z_zbXASIS0ueLJ7tFBZNvfS6T8aTnTgjZaqsX3YPQTL3hOBf9ordXhPZXWaXrXj9-I0-5Fd6nraudX80Q_6v0_NI_5xzQXtCkGU4fxStFzd9olGwfezDU0"/><div class="relative w-full max-w-md"><span class="material-symbols-outlined absolute left-spacing-xs top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full pl-8 pr-spacing-sm py-spacing-2xs bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Buscar código de expediente, matriz ambiental, contratante o profesional..." type="text"/></div></div><div class="flex items-center gap-spacing-md"><div class="flex items-center gap-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded"><span class="font-label-caps text-label-caps text-secondary uppercase font-semibold">Entrar como:</span><select class="bg-transparent font-body-sm text-body-sm text-on-surface font-medium outline-none cursor-pointer"><option value="admin">Admin</option><option value="coordinador">Coordinador</option><option value="profesional">Profesional</option><option value="administracion">Administración</option><option value="direccion">Dirección</option></select></div><div class="flex items-center gap-spacing-2xs"><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">help</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-spacing-lg pb-spacing-xl flex-1 bg-background"><div class="flex flex-col w-full gap-spacing-md">
+<!-- Encabezado de Sección y Navegación de Calendario -->
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-spacing-md bg-surface-container-lowest p-spacing-lg rounded-lg shadow-sm">
+<div class="flex flex-col gap-spacing-3xs">
+<div class="flex items-center gap-spacing-xs">
+<span class="font-label-caps text-label-caps px-spacing-xs py-spacing-3xs bg-primary-container text-on-primary-container rounded">MÓDULO TÉCNICO 13</span>
+<span class="font-label-tabular text-label-tabular text-outline">R.E. EXENTA N° 142/2024</span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">SISTEMA EVALUACIÓN AMBIENTAL (e-SEIA v3)</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Calendario Operativo y Control de Plazos Fatales</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-4xl">
+        Planificación de campañas de terreno, audiencias públicas comunitarias (PAC), hitos contractuales y control perentorio de plazos fatales ICSARA / SMA / SEA.
+      </p>
+</div>
+<!-- Controles de Vista y Acciones -->
+<div class="flex flex-wrap items-center gap-spacing-xs self-start xl:self-center">
+<!-- Selector de Vista -->
+<div class="flex items-center bg-surface-container-low p-spacing-3xs rounded">
+<button class="px-spacing-sm py-spacing-2xs font-headline-sm text-body-sm rounded bg-surface-container-lowest text-primary shadow-sm">Mes</button>
+<button class="px-spacing-sm py-spacing-2xs font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors">Semana</button>
+<button class="px-spacing-sm py-spacing-2xs font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors">Día</button>
+<button class="px-spacing-sm py-spacing-2xs font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-spacing-3xs">
+<span class="material-symbols-outlined text-[16px]">waterfall_chart</span>
+<span>Gantt Terreno</span>
+</button>
+</div>
+<!-- Selector de Mes -->
+<div class="flex items-center bg-surface-container-low px-spacing-xs py-spacing-3xs rounded">
+<button class="p-spacing-3xs text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold px-spacing-xs">OCTUBRE 2024</span>
+<button class="p-spacing-3xs text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+<!-- Sincronización y Filtros -->
+<button class="flex items-center gap-spacing-2xs px-spacing-sm py-spacing-2xs bg-surface-container-low hover:bg-surface-container text-on-surface rounded transition-colors font-body-sm text-body-sm" title="Sincronizar CalDAV / Microsoft Outlook">
+<span class="material-symbols-outlined text-[18px] text-secondary">sync</span>
+<span class="hidden sm:inline">CalDAV / 365</span>
+</button>
+<button class="flex items-center gap-spacing-2xs px-spacing-sm py-spacing-2xs bg-surface-container-low hover:bg-surface-container text-on-surface rounded transition-colors font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-outline">filter_list</span>
+<span class="hidden sm:inline">Filtros</span>
+</button>
+<!-- Botón Agendar Campaña -->
+<button class="flex items-center gap-spacing-xs px-spacing-md py-spacing-2xs bg-primary hover:bg-primary-container text-on-primary rounded font-headline-sm text-body-sm shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>+ Agendar Campaña</span>
+</button>
+</div>
+</div>
+<!-- Barra de Métricas y KPIs de Plazos del Mes -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-spacing-md">
+<!-- KPI 1: Plazos Fatales -->
+<div class="flex flex-col bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-tertiary">Control Perentorio</span>
+<span class="material-symbols-outlined text-tertiary text-[20px]">timer</span>
+</div>
+<div class="flex items-baseline gap-spacing-xs mt-spacing-xs">
+<span class="font-data-mono-lg text-headline-xl text-tertiary">03</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Plazos Fatales ICSARA</span>
+</div>
+<div class="mt-spacing-xs flex items-center gap-spacing-xs bg-error-container/30 px-spacing-xs py-spacing-3xs rounded">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-label-tabular text-label-tabular text-tertiary">&lt; 7 días para vencimiento Adenda</span>
+</div>
+</div>
+<!-- KPI 2: Campañas Activas -->
+<div class="flex flex-col bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-primary">Despliegue Operativo</span>
+<span class="material-symbols-outlined text-primary text-[20px]">forest</span>
+</div>
+<div class="flex items-baseline gap-spacing-xs mt-spacing-xs">
+<span class="font-data-mono-lg text-headline-xl text-primary">04</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Campañas de Terreno</span>
+</div>
+<div class="mt-spacing-xs flex items-center gap-spacing-xs bg-primary-fixed/40 px-spacing-xs py-spacing-3xs rounded">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-label-tabular text-label-tabular text-primary">2 Bióticas · 1 Geotécnica · 1 LiDAR</span>
+</div>
+</div>
+<!-- KPI 3: PAC y Relacionamiento -->
+<div class="flex flex-col bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Participación Ciudadana</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">groups</span>
+</div>
+<div class="flex items-baseline gap-spacing-xs mt-spacing-xs">
+<span class="font-data-mono-lg text-headline-xl text-secondary">02</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Audiencias PAC / OIT</span>
+</div>
+<div class="mt-spacing-xs flex items-center gap-spacing-xs bg-secondary-fixed/50 px-spacing-xs py-spacing-3xs rounded">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-tabular text-label-tabular text-secondary">Comunidades Costeras e Indígenas</span>
+</div>
+</div>
+<!-- KPI 4: SLA Cumplimiento -->
+<div class="flex flex-col bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">SLA Normativo SEA</span>
+<span class="material-symbols-outlined text-primary text-[20px]">verified</span>
+</div>
+<div class="flex items-baseline gap-spacing-xs mt-spacing-xs">
+<span class="font-data-mono-lg text-headline-xl text-on-surface">98.2%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Índice Puntualidad</span>
+</div>
+<div class="mt-spacing-xs flex items-center justify-between text-label-tabular font-label-tabular text-on-surface-variant bg-surface-container-low px-spacing-xs py-spacing-3xs rounded">
+<span>0 suspensiones extraordinarias</span>
+<span class="text-primary font-semibold">D.S. 40/2012</span>
+</div>
+</div>
+</div>
+<!-- Layout Principal: Grilla de Calendario (75%) + Sidebar de Despacho (25%) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-spacing-md items-start">
+<!-- Calendario Mensual Técnico (8 cols en XL) -->
+<div class="xl:col-span-8 flex flex-col bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden">
+<!-- Barra Superior de la Matriz: Días de la Semana -->
+<div class="grid grid-cols-7 bg-surface-container-high py-spacing-xs text-center font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">
+<div>Lun <span class="hidden sm:inline">30 Sep</span></div>
+<div>Mar <span class="hidden sm:inline">01 Oct</span></div>
+<div>Mié <span class="hidden sm:inline">02 Oct</span></div>
+<div>Jue <span class="hidden sm:inline">03 Oct</span></div>
+<div>Vie <span class="hidden sm:inline">04 Oct</span></div>
+<div class="text-secondary">Sáb <span class="hidden sm:inline">05 Oct</span></div>
+<div class="text-secondary">Dom <span class="hidden sm:inline">06 Oct</span></div>
+</div>
+<!-- Grilla de Días del Mes (Semanas) -->
+<div class="grid grid-cols-7 auto-rows-fr bg-surface-container-low gap-[1px]">
+<!-- SEMANA 1 -->
+<!-- 30 Sep (Mes Anterior) -->
+<div class="min-h-[108px] bg-surface-container p-spacing-xs opacity-50 flex flex-col justify-between">
+<span class="font-data-mono-md text-data-mono-md text-outline">30</span>
+<div class="text-label-tabular font-label-tabular text-outline">Cierre Mes</div>
+</div>
+<!-- 01 Oct -->
+<div class="min-h-[108px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface">01</span>
+<div class="p-spacing-2xs bg-surface-container-low rounded text-label-tabular font-label-tabular text-on-surface-variant truncate">
+<span class="font-semibold text-primary">KICK-OFF</span> Codelco N-14
+          </div>
+</div>
+<!-- 02 Oct -->
+<div class="min-h-[108px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface">02</span>
+</div>
+<!-- 03 Oct -->
+<div class="min-h-[108px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface">03</span>
+<div class="p-spacing-2xs bg-primary-fixed/40 text-primary rounded text-label-tabular font-label-tabular truncate">
+            Muestreo Limnología #1
+          </div>
+</div>
+<!-- 04 Oct -->
+<div class="min-h-[108px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface">04</span>
+<div class="p-spacing-2xs bg-surface-container-high rounded text-label-tabular font-label-tabular text-on-surface truncate">
+            Envío Borrador EIA Salar
+          </div>
+</div>
+<!-- 05 Oct (Fin de Semana) -->
+<div class="min-h-[108px] bg-surface-container-low/50 p-spacing-xs flex flex-col justify-between">
+<span class="font-data-mono-md text-data-mono-md text-outline">05</span>
+</div>
+<!-- 06 Oct (Fin de Semana) -->
+<div class="min-h-[108px] bg-surface-container-low/50 p-spacing-xs flex flex-col justify-between">
+<span class="font-data-mono-md text-data-mono-md text-outline">06</span>
+</div>
+<!-- SEMANA 2 -->
+<!-- 07 Oct -->
+<div class="min-h-[108px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface">07</span>
+<div class="p-spacing-2xs bg-tertiary-fixed/60 text-tertiary rounded text-label-tabular font-label-tabular font-semibold truncate">
+            Notif. Ord. SMA #883
+          </div>
+</div>
+<!-- 08 Oct -->
+<div class="min-h-[108px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface">08</span>
+</div>
+<!-- 09 Oct -->
+<div class="min-h-[108px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface">09</span>
+<div class="p-spacing-2xs bg-secondary-fixed/50 text-secondary rounded text-label-tabular font-label-tabular truncate">
+            Pre-PAC Muelle Barquito
+          </div>
+</div>
+<!-- 10 Oct -->
+<div class="min-h-[108px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface">10</span>
+<div class="p-spacing-2xs bg-primary-fixed/40 text-primary rounded text-label-tabular font-label-tabular truncate">
+            Vuelo Fotogramétrico L1
+          </div>
+</div>
+<!-- 11 Oct -->
+<div class="min-h-[108px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface">11</span>
+</div>
+<!-- 12 Oct (Feriado Encuentro dos Mundos) -->
+<div class="min-h-[108px] bg-surface-container-low/50 p-spacing-xs flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-secondary font-bold">12</span>
+<span class="font-label-caps text-[9px] text-secondary">FERIADO</span>
+</div>
+<div class="text-label-tabular font-label-tabular text-outline">Sin faena programada</div>
+</div>
+<!-- 13 Oct -->
+<div class="min-h-[108px] bg-surface-container-low/50 p-spacing-xs flex flex-col justify-between">
+<span class="font-data-mono-md text-data-mono-md text-outline">13</span>
+</div>
+<!-- SEMANA 3 (Semana Activa con Campaña Continua y Eventos Clave) -->
+<!-- 14 Oct: Inicio Campaña Flora y Fauna -->
+<div class="min-h-[116px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between relative hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-semibold">14</span>
+<div class="p-spacing-2xs bg-primary text-on-primary rounded text-[10px] font-label-tabular leading-tight shadow-sm">
+<span class="font-bold flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary-fixed"></span> INICIO CAMPAÑA</span>
+            Flora &amp; Mastología Lote Sur
+          </div>
+</div>
+<!-- 15 Oct: Hito Contractual Facturación -->
+<div class="min-h-[116px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between relative hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-semibold">15</span>
+<div class="flex flex-col gap-1">
+<div class="p-spacing-3xs bg-primary-container text-on-primary-container rounded text-[10px] font-label-tabular truncate">
+              Dia 2/5 Flora &amp; Fauna
+            </div>
+<div class="p-spacing-3xs bg-surface-container-highest text-on-surface rounded text-[10px] font-label-tabular font-semibold truncate flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-secondary">request_quote</span>
+              Hito 3 DTE #1165
+            </div>
+</div>
+</div>
+<!-- 16 Oct: Campaña Continua -->
+<div class="min-h-[116px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between relative hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-semibold">16</span>
+<div class="p-spacing-2xs bg-primary-container text-on-primary-container rounded text-[10px] font-label-tabular truncate">
+            Dia 3/5 Muestreo Nocturno
+          </div>
+</div>
+<!-- 17 Oct: DÍA DE HOY (Destacado sutil) -->
+<div class="min-h-[116px] bg-primary-fixed/20 p-spacing-xs flex flex-col justify-between relative ring-2 ring-primary rounded">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-primary font-bold">17</span>
+<span class="font-label-caps text-[9px] px-spacing-2xs py-[1px] bg-primary text-on-primary rounded font-semibold">HOY</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="p-spacing-3xs bg-primary text-on-primary rounded text-[10px] font-label-tabular truncate font-semibold">
+              Dia 4/5 Trampeo Sherman
+            </div>
+<div class="p-spacing-3xs bg-surface-container-lowest text-tertiary rounded text-[10px] font-label-tabular truncate shadow-2xs font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-tertiary">warning</span>
+              Revisión Adenda Parque
+            </div>
+</div>
+</div>
+<!-- 18 Oct: Cierre Campaña Terreno -->
+<div class="min-h-[116px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between relative hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-semibold">18</span>
+<div class="p-spacing-2xs bg-primary-fixed text-on-primary-fixed rounded text-[10px] font-label-tabular truncate font-semibold">
+            FIN CAMPAÑA Lote Sur (RTK)
+          </div>
+</div>
+<!-- 19 Oct: Taller PAC Indígena -->
+<div class="min-h-[116px] bg-surface-container-low/60 p-spacing-xs flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-on-surface">19</span>
+<span class="font-label-caps text-[9px] text-secondary font-bold">PAC</span>
+</div>
+<div class="p-spacing-2xs bg-secondary-fixed text-on-secondary-fixed rounded text-[10px] font-label-tabular leading-tight shadow-sm font-semibold">
+            Taller Comunidad Indígena Caleta Changa (10:00h)
+          </div>
+</div>
+<!-- 20 Oct -->
+<div class="min-h-[116px] bg-surface-container-low/50 p-spacing-xs flex flex-col justify-between">
+<span class="font-data-mono-md text-data-mono-md text-outline">20</span>
+<div class="text-label-tabular font-label-tabular text-outline">Descanso compensatorio</div>
+</div>
+<!-- SEMANA 4: PLAZO FATAL ICSARA -->
+<!-- 21 Oct -->
+<div class="min-h-[108px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface font-semibold">21</span>
+<div class="p-spacing-2xs bg-surface-container-high rounded text-label-tabular font-label-tabular text-on-surface truncate">
+            Consolidación Final Adenda
+          </div>
+</div>
+<!-- 22 Oct: PLAZO FATAL ICSARA CRÍTICO -->
+<div class="min-h-[108px] bg-error-container/40 p-spacing-xs flex flex-col justify-between relative hover:bg-error-container/60 transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-error font-bold">22</span>
+<span class="font-label-caps text-[9px] px-spacing-2xs py-[1px] bg-error text-on-error rounded font-bold tracking-wider">FATAL</span>
+</div>
+<div class="p-spacing-2xs bg-error text-on-error rounded text-[10px] font-label-tabular leading-tight font-semibold shadow-sm">
+            ICSARA N° 2 P. Eólico (23:59 e-SEIA)
+          </div>
+</div>
+<!-- 23 Oct -->
+<div class="min-h-[108px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface">23</span>
+<div class="p-spacing-2xs bg-surface-container-low text-on-surface-variant rounded text-label-tabular font-label-tabular truncate">
+            Descarga Certificado e-SEIA
+          </div>
+</div>
+<!-- 24 Oct -->
+<div class="min-h-[108px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface">24</span>
+<div class="p-spacing-2xs bg-primary-fixed/40 text-primary rounded text-label-tabular font-label-tabular truncate">
+            Inicio Campaña Ruido Minera
+          </div>
+</div>
+<!-- 25 Oct: Fiscalización SMA Quebrada Honda -->
+<div class="min-h-[108px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between hover:bg-surface transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-tertiary font-bold">25</span>
+<span class="font-label-caps text-[9px] text-tertiary font-bold">INSPECCIÓN</span>
+</div>
+<div class="p-spacing-2xs bg-tertiary-container text-on-tertiary-container rounded text-[10px] font-label-tabular leading-tight font-semibold">
+            Fiscalización SMA Quebrada Honda
+          </div>
+</div>
+<!-- 26 Oct -->
+<div class="min-h-[108px] bg-surface-container-low/50 p-spacing-xs flex flex-col justify-between">
+<span class="font-data-mono-md text-data-mono-md text-outline">26</span>
+</div>
+<!-- 27 Oct -->
+<div class="min-h-[108px] bg-surface-container-low/50 p-spacing-xs flex flex-col justify-between">
+<span class="font-data-mono-md text-data-mono-md text-outline">27</span>
+</div>
+<!-- SEMANA 5 -->
+<!-- 28 Oct -->
+<div class="min-h-[108px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface">28</span>
+<div class="p-spacing-2xs bg-surface-container-high rounded text-label-tabular font-label-tabular text-on-surface truncate">
+            Comité Técnico Interno Q4
+          </div>
+</div>
+<!-- 29 Oct -->
+<div class="min-h-[108px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface">29</span>
+<div class="p-spacing-2xs bg-tertiary-fixed/60 text-tertiary rounded text-label-tabular font-label-tabular truncate">
+            Resolución Calificación RCA
+          </div>
+</div>
+<!-- 30 Oct -->
+<div class="min-h-[108px] bg-surface-container-lowest p-spacing-xs flex flex-col justify-between hover:bg-surface transition-colors">
+<span class="font-data-mono-md text-data-mono-md text-on-surface">30</span>
+</div>
+<!-- 31 Oct (Feriado Iglesias Evangélicas) -->
+<div class="min-h-[108px] bg-surface-container-low/50 p-spacing-xs flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-secondary font-bold">31</span>
+<span class="font-label-caps text-[9px] text-secondary">FERIADO</span>
+</div>
+<div class="text-label-tabular font-label-tabular text-outline">Guardia pasiva</div>
+</div>
+<!-- 01 Nov (Mes Siguiente) -->
+<div class="min-h-[108px] bg-surface-container p-spacing-xs opacity-50 flex flex-col justify-between">
+<span class="font-data-mono-md text-data-mono-md text-outline">01</span>
+</div>
+<!-- 02 Nov (Mes Siguiente) -->
+<div class="min-h-[108px] bg-surface-container p-spacing-xs opacity-50 flex flex-col justify-between">
+<span class="font-data-mono-md text-data-mono-md text-outline">02</span>
+</div>
+<!-- 03 Nov (Mes Siguiente) -->
+<div class="min-h-[108px] bg-surface-container p-spacing-xs opacity-50 flex flex-col justify-between">
+<span class="font-data-mono-md text-data-mono-md text-outline">03</span>
+</div>
+</div>
+<!-- Leyenda Técnica Inferior -->
+<div class="p-spacing-md bg-surface-container-low flex flex-wrap items-center justify-between gap-spacing-sm">
+<div class="flex flex-wrap items-center gap-spacing-md text-label-tabular font-label-tabular">
+<div class="flex items-center gap-spacing-2xs">
+<span class="w-3 h-3 rounded-full bg-error"></span>
+<span class="text-on-surface">Plazo Fatal ICSARA / SMA</span>
+</div>
+<div class="flex items-center gap-spacing-2xs">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-on-surface">Campaña de Terreno Biótica/Física</span>
+</div>
+<div class="flex items-center gap-spacing-2xs">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="text-on-surface">PAC / Consulta Indígena OIT</span>
+</div>
+<div class="flex items-center gap-spacing-2xs">
+<span class="w-3 h-3 rounded-full bg-tertiary"></span>
+<span class="text-on-surface">Inspección de Autoridad / SMA</span>
+</div>
+<div class="flex items-center gap-spacing-2xs">
+<span class="w-3 h-3 rounded-full bg-outline"></span>
+<span class="text-on-surface">Hito Facturación / Contractual</span>
+</div>
+</div>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant font-mono">TZ: America/Santiago (UTC-3)</span>
+</div>
+</div>
+<!-- Sidebar Lateral de Agenda, Cuadrillas y Despacho (4 cols en XL) -->
+<div class="xl:col-span-4 flex flex-col gap-spacing-md">
+<!-- Bloque 1: Próximos Vencimientos Inmediatos (< 48 hrs) -->
+<div class="flex flex-col bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+<div class="flex items-center justify-between pb-spacing-xs">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-tertiary text-[20px]">notification_important</span>
+<h2 class="font-headline-sm text-headline-sm text-tertiary">Vencimientos &lt; 48 Horas</h2>
+</div>
+<span class="font-label-caps text-label-caps px-spacing-xs py-spacing-3xs bg-error-container text-tertiary rounded font-bold">ALERTA ALTA</span>
+</div>
+<div class="flex flex-col gap-spacing-sm mt-spacing-xs">
+<!-- Item 1: Adenda Parque Eólico -->
+<div class="p-spacing-sm bg-surface-container-low rounded-lg flex flex-col gap-spacing-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-label-tabular text-primary font-bold">EXPEDIENTE PI-2024-002</span>
+<span class="font-label-tabular text-label-tabular text-error font-bold">Quedan 5 días</span>
+</div>
+<div class="font-headline-sm text-body-sm text-on-surface">Plazo Fatal Adenda N° 2 Parque Eólico Los Vientos</div>
+<div class="text-label-tabular font-label-tabular text-on-surface-variant">
+              Requerimiento: Aclaración modelo acústico según D.S. 38/11 MMA.
+            </div>
+<div class="flex items-center justify-between pt-spacing-2xs mt-spacing-3xs">
+<span class="font-label-tabular text-[11px] text-outline">Vence: 22-OCT-2024 23:59 hrs</span>
+<button class="px-spacing-xs py-spacing-3xs bg-tertiary hover:bg-tertiary-container text-on-tertiary rounded text-label-tabular font-label-tabular font-semibold transition-colors">
+                Cargar Adenda
+              </button>
+</div>
+</div>
+<!-- Item 2: Entrega Informe de Aguas -->
+<div class="p-spacing-sm bg-surface-container-low rounded-lg flex flex-col gap-spacing-2xs">
+<div class="flex items-center justify-between">
+<span class="font-label-tabular text-label-tabular text-secondary font-bold">DGA ORD. #441</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant font-bold">En 36 horas</span>
+</div>
+<div class="font-headline-sm text-body-sm text-on-surface">Pronunciamiento DGA Aforos Quebrada San Juan</div>
+<div class="text-label-tabular font-label-tabular text-on-surface-variant">
+              Responsable: Ing. Hidráulico Felipe Carmona
+            </div>
+<div class="flex items-center justify-between pt-spacing-2xs mt-spacing-3xs">
+<span class="font-label-tabular text-[11px] text-outline">Vence: 18-OCT-2024 17:00 hrs</span>
+<button class="px-spacing-xs py-spacing-3xs bg-surface-container-highest hover:bg-surface-dim text-on-surface rounded text-label-tabular font-label-tabular font-semibold transition-colors">
+                Confirmar Logística
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bloque 2: Cuadrillas en Tránsito / Terreno Activo -->
+<div class="flex flex-col bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+<div class="flex items-center justify-between pb-spacing-xs">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">share_location</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Cuadrillas en Terreno</h2>
+</div>
+<span class="font-label-tabular text-label-tabular px-spacing-xs py-spacing-3xs bg-primary-fixed/50 text-primary rounded font-semibold">4 ACTIVAS</span>
+</div>
+<div class="flex flex-col gap-spacing-sm mt-spacing-xs">
+<!-- Cuadrilla 1 -->
+<div class="p-spacing-sm bg-surface-container-low rounded-lg flex flex-col gap-spacing-2xs">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-body-sm text-primary flex items-center gap-spacing-2xs">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                Cuadrilla Alfa (Biótica)
+              </span>
+<span class="font-label-tabular text-[11px] px-spacing-2xs py-[1px] bg-surface-container-highest text-on-surface rounded font-mono">RTK TRIMBLE R12</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface">
+              Dra. Marcela Morales (Jefa Biología) + 2 Técnicos
+            </div>
+<div class="font-label-tabular text-label-tabular text-on-surface-variant flex items-center justify-between">
+<span>Sector: Taltal, Región de Antofagasta</span>
+<span class="text-secondary font-semibold">Móvil 4x4 B-99</span>
+</div>
+<div class="flex items-center gap-spacing-xs pt-spacing-2xs text-[11px] font-label-tabular text-outline">
+<span>WGS84: 25°24'12"S 70°28'54"W</span>
+<span class="text-primary font-semibold">· Check-in Satelital OK</span>
+</div>
+</div>
+<!-- Cuadrilla 2 -->
+<div class="p-spacing-sm bg-surface-container-low rounded-lg flex flex-col gap-spacing-2xs">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-body-sm text-primary flex items-center gap-spacing-2xs">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                Cuadrilla Beta (Topografía &amp; Geotecnia)
+              </span>
+<span class="font-label-tabular text-[11px] px-spacing-2xs py-[1px] bg-surface-container-highest text-on-surface rounded font-mono">DJI MATRICE 350</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface">
+              Top. Roberto Valenzuela + Geólogo Asistente
+            </div>
+<div class="font-label-tabular text-label-tabular text-on-surface-variant flex items-center justify-between">
+<span>Sector: Chañaral Alto, Atacama</span>
+<span class="text-secondary font-semibold">Móvil 4x4 C-12</span>
+</div>
+<div class="flex items-center gap-spacing-xs pt-spacing-2xs text-[11px] font-label-tabular text-outline">
+<span>WGS84: 26°20'45"S 70°37'10"W</span>
+<span class="text-primary font-semibold">· Telemetría Activa</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bloque 3: Vínculo Normativo y Plazos Suspendidos -->
+<div class="flex flex-col bg-surface-container-lowest p-spacing-md rounded-lg shadow-sm">
+<div class="flex items-center gap-spacing-xs pb-spacing-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">gavel</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Marco Normativo &amp; R.E. Oficial</h2>
+</div>
+<div class="flex flex-col gap-spacing-xs mt-spacing-xs text-body-sm text-body-sm text-on-surface-variant">
+<div class="flex items-start gap-spacing-xs p-spacing-xs bg-surface-container-low rounded">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">policy</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-[13px] text-on-surface">D.S. 40/2012 MMA</span>
+<span class="text-label-tabular font-label-tabular text-[11px]">Cómputo en días hábiles administrativos (Lunes a Viernes). No aplica cómputo sábados, domingos ni festivos.</span>
+</div>
+</div>
+<div class="flex items-start gap-spacing-xs p-spacing-xs bg-surface-container-low rounded">
+<span class="material-symbols-outlined text-secondary text-[18px] mt-0.5">pause_circle</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-[13px] text-on-surface">Suspensión de Plazo Aprobada</span>
+<span class="text-label-tabular font-label-tabular text-[11px]">R.E. SEA N° 849/2024: 15 días adicionales otorgados para PI-2024-004 Planta Fotovoltaica. Reactivación: 04-Nov-2024.</span>
+</div>
+</div>
+</div>
+<div class="mt-spacing-sm pt-spacing-xs flex items-center justify-between text-label-tabular font-label-tabular text-outline">
+<span>Última sincro e-SEIA: 17/10 08:30:12</span>
+<span class="text-primary font-semibold hover:underline cursor-pointer">Ver Bitácora SMA</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Micro-interacción: Resaltado y clic de eventos del calendario
+  document.querySelectorAll('[data-path="calendario"]').forEach(el => {
+    el.classList.add('bg-primary-container', 'text-on-primary-container');
+  });
+</script></main></div></body></html>

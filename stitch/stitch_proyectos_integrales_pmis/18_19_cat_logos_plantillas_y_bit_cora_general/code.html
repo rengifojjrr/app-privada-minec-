@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-surface": "#191c1a",
+        "inverse-surface": "#2e312f",
+        "surface-container-low": "#f3f4f0",
+        "surface-container": "#edeeeb",
+        "primary": "#023627",
+        "tertiary-container": "#82220e",
+        "secondary-fixed-dim": "#f5bb88",
+        "primary-fixed": "#bcedd7",
+        "secondary": "#80552b",
+        "outline": "#717974",
+        "on-primary-fixed": "#002116",
+        "surface-bright": "#f8faf6",
+        "on-surface-variant": "#414944",
+        "inverse-primary": "#a1d1bc",
+        "secondary-container": "#fec390",
+        "tertiary-fixed-dim": "#ffb4a4",
+        "on-tertiary-fixed": "#3e0500",
+        "surface-dim": "#d9dad7",
+        "on-error-container": "#93000a",
+        "on-tertiary-fixed-variant": "#852410",
+        "surface-container-high": "#e7e9e5",
+        "on-error": "#ffffff",
+        "on-primary": "#ffffff",
+        "surface-variant": "#e1e3df",
+        "on-secondary-fixed": "#2d1600",
+        "on-primary-fixed-variant": "#214f3f",
+        "surface-container-lowest": "#ffffff",
+        "primary-container": "#1f4d3d",
+        "tertiary": "#610c00",
+        "on-secondary": "#ffffff",
+        "error-container": "#ffdad6",
+        "error": "#ba1a1a",
+        "inverse-on-surface": "#f0f1ed",
+        "surface": "#f8faf6",
+        "primary-fixed-dim": "#a1d1bc",
+        "on-secondary-container": "#794e25",
+        "surface-container-highest": "#e1e3df",
+        "on-tertiary-container": "#ff9680",
+        "background": "#f8faf6",
+        "secondary-fixed": "#ffdcc0",
+        "surface-tint": "#3a6756",
+        "on-secondary-fixed-variant": "#653e16",
+        "tertiary-fixed": "#ffdad3",
+        "on-tertiary": "#ffffff",
+        "on-primary-container": "#8dbda8",
+        "on-background": "#191c1a",
+        "outline-variant": "#c0c8c3"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "spacing-xl": "2rem",
+        "table-gutter": "0.75rem",
+        "spacing-md": "1rem",
+        "spacing-lg": "1.5rem",
+        "spacing-xs": "0.5rem",
+        "spacing-3xs": "0.125rem",
+        "spacing-2xl": "3rem",
+        "layout-margin-desktop": "2rem",
+        "spacing-3xl": "4rem",
+        "layout-margin-mobile": "1rem",
+        "spacing-2xs": "0.25rem",
+        "spacing-sm": "0.75rem",
+        "layout-margin-tablet": "1.5rem"
+      },
+      "fontFamily": {
+        "body-md": ["Hanken Grotesk"],
+        "headline-xl-mobile": ["Hanken Grotesk"],
+        "label-caps": ["Hanken Grotesk"],
+        "data-mono-lg": ["JetBrains Mono"],
+        "body-sm": ["Hanken Grotesk"],
+        "headline-xl": ["Hanken Grotesk"],
+        "headline-sm": ["Hanken Grotesk"],
+        "headline-lg": ["Hanken Grotesk"],
+        "headline-md": ["Hanken Grotesk"],
+        "data-mono-md": ["JetBrains Mono"],
+        "body-lg": ["Hanken Grotesk"],
+        "label-tabular": ["JetBrains Mono"]
+      },
+      "fontSize": {
+        "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+        "headline-xl-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+        "data-mono-lg": ["15px", {"lineHeight": "22px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+        "headline-sm": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600"}],
+        "headline-lg": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "data-mono-md": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+        "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+        "label-tabular": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+      }
+    }
+  }
+}</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-spacing-md flex items-center gap-spacing-xs bg-surface-container-low"><div class="flex items-center justify-center w-7 h-7 bg-primary rounded-lg text-on-primary font-headline-sm text-headline-sm">PI</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight">Proyectos Integrales</span><span class="font-label-caps text-label-caps text-secondary uppercase">Ingeniería &amp; Ambiente</span></div></div><div class="px-spacing-md py-spacing-xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operación Técnica</span></div><nav class="flex flex-col gap-spacing-3xs px-spacing-xs flex-1" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm"><a aria-current="page" class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded transition-colors bg-primary-container text-on-primary-container font-headline-sm" data-path="proyectos" href="#"><span class="material-symbols-outlined text-[20px]">folder_supervised</span><span class="font-body-sm text-body-sm">Proyectos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="aprobaciones" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span class="font-body-sm text-body-sm">Aprobaciones</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="calendario" href="#"><span class="material-symbols-outlined text-[20px]">event_note</span><span class="font-body-sm text-body-sm">Calendario</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contratantes" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-sm text-body-sm">Contratantes</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-body-sm text-body-sm">Reportes</span></a><div class="my-spacing-xs px-spacing-xs"><div class="h-[1px] bg-outline-variant/30"></div></div><div class="px-spacing-xs py-spacing-3xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Gobierno &amp; Control</span></div><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="direccion-ejecutiva" href="#"><span class="material-symbols-outlined text-[20px]">query_stats</span><span class="font-body-sm text-body-sm">Dirección</span><span class="ml-auto font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-inverse-surface text-inverse-on-surface">DARK</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="font-body-sm text-body-sm">Usuarios</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="catalogos" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-sm text-body-sm">Catálogos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="bitacora-general" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-body-sm text-body-sm">Bitácora General</span></a></nav></div><div class="p-spacing-md bg-surface-container-high"><div class="flex items-center justify-between"><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Estándar Técnico</span><span class="font-data-mono-md text-data-mono-md text-primary">ISO 14001 / EIA-v2</span></div><span class="material-symbols-outlined text-outline text-[18px]">format_image_left</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex items-center justify-between px-spacing-lg"><div class="flex items-center gap-spacing-md flex-1 max-w-2xl"><img alt="Logo Proyectos Integrales" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WWI3mVDk-K0VvmFiCvo8p33fqbfLEk7YLxC1GudbnlFUpaiGriHUaR624tyiQNmYunExODktoHOUwF3QL8qZ_IwSF5S_2YljkWvDXX_F70wU2BcAir0ZOTnqLI_71vsDpk6z_zbXASIS0ueLJ7tFBZNvfS6T8aTnTgjZaqsX3YPQTL3hOBf9ordXhPZXWaXrXj9-I0-5Fd6nraudX80Q_6v0_NI_5xzQXtCkGU4fxStFzd9olGwfezDU0"/><div class="relative w-full max-w-md"><span class="material-symbols-outlined absolute left-spacing-xs top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full pl-8 pr-spacing-sm py-spacing-2xs bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Buscar código de expediente, matriz ambiental, contratante o profesional..." type="text"/></div></div><div class="flex items-center gap-spacing-md"><div class="flex items-center gap-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded"><span class="font-label-caps text-label-caps text-secondary uppercase font-semibold">Entrar como:</span><select class="bg-transparent font-body-sm text-body-sm text-on-surface font-medium outline-none cursor-pointer"><option value="admin">Admin</option><option value="coordinador">Coordinador</option><option value="profesional">Profesional</option><option value="administracion">Administración</option><option value="direccion">Dirección</option></select></div><div class="flex items-center gap-spacing-2xs"><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">help</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-spacing-lg pb-spacing-xl flex-1 bg-background"><div class="flex flex-col w-full gap-spacing-xl">
+<!-- Cabecera de Gobierno & Control -->
+<header class="relative overflow-hidden bg-surface-container-low rounded-xl p-spacing-lg shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-spacing-md relative z-10">
+<div class="flex flex-col gap-spacing-2xs">
+<div class="flex items-center gap-spacing-xs">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">MOD-GOV // 18-19</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Módulo de Seguridad Normativa</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+          Gobierno del Sistema · Catálogos Maestros y Bitácora Criptográfica General
+        </h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-3xl">
+          Estandarización taxonómica ambiental, parámetros de flujo de trabajo normativo bajo ISO 14001/EIA-v2 y registro transaccional no repudiable con encadenamiento criptográfico.
+        </p>
+</div>
+<div class="flex items-center gap-spacing-sm shrink-0">
+<div class="flex items-center gap-spacing-xs px-spacing-sm py-spacing-xs bg-tertiary-container/10 rounded">
+<span class="material-symbols-outlined text-[18px] text-tertiary">lock</span>
+<span class="font-label-caps text-label-caps text-tertiary font-bold tracking-wider">SOLO ACCESO ADMINISTRADOR</span>
+</div>
+<div class="h-8 w-px bg-surface-container-high hidden md:block"></div>
+<div class="font-data-mono-md text-data-mono-md text-on-surface-variant flex items-center gap-spacing-2xs">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+          SHA-256 ENFORCE
+        </div>
+</div>
+</div>
+</header>
+<!-- SECCIÓN 18: Catálogos y Plantillas -->
+<section class="flex flex-col gap-spacing-md">
+<div class="flex items-center justify-between flex-wrap gap-spacing-sm">
+<div class="flex items-baseline gap-spacing-xs">
+<span class="font-data-mono-lg text-data-mono-lg text-primary">18.0</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">
+          Administración de Listas Controladas y Plantillas de Etapas
+        </h2>
+</div>
+<span class="font-label-caps text-label-caps text-secondary uppercase bg-secondary-fixed/40 px-spacing-xs py-spacing-3xs rounded">
+        Estructura Taxonómica Inmutable
+      </span>
+</div>
+<!-- Nota Técnica de Integridad -->
+<div class="flex items-start gap-spacing-sm p-spacing-md bg-surface-container rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">policy</span>
+<div class="flex flex-col gap-spacing-3xs">
+<span class="font-headline-sm text-headline-sm text-primary">Regla de Preservación Histórica</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Todos los campos de clasificación se rigen por listas controladas. Los valores se pueden desactivar pero nunca borrar para preservar la integridad histórica de expedientes forestales, matrices EIA y ejecuciones presupuestarias previas.
+        </p>
+</div>
+</div>
+<!-- Grid de Catálogos Maestros (4 Bloques) -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-spacing-md">
+<!-- Catálogo 1: Especies Forestales -->
+<div class="flex flex-col justify-between bg-surface-container-lowest rounded-lg p-spacing-md shadow-sm">
+<div class="flex flex-col gap-spacing-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[18px] text-primary">forest</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Especies Forestales</span>
+</div>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant bg-surface-container px-1.5 py-0.5 rounded">CAT-01</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Inventario taxonómico dasonómico y maderable autorizado.</span>
+<ul class="flex flex-col gap-spacing-xs my-spacing-xs">
+<li class="flex items-center justify-between p-spacing-xs bg-surface-container-low rounded">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Palo Blanco</span>
+<span class="font-label-caps text-label-caps text-primary bg-primary-fixed/30 px-spacing-2xs py-spacing-3xs rounded flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Activo
+              </span>
+</li>
+<li class="flex items-center justify-between p-spacing-xs bg-surface-container-low rounded">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Yiguire</span>
+<span class="font-label-caps text-label-caps text-primary bg-primary-fixed/30 px-spacing-2xs py-spacing-3xs rounded flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Activo
+              </span>
+</li>
+<li class="flex items-center justify-between p-spacing-xs bg-surface-container-low rounded">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Majomo</span>
+<span class="font-label-caps text-label-caps text-primary bg-primary-fixed/30 px-spacing-2xs py-spacing-3xs rounded flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Activo
+              </span>
+</li>
+<li class="flex items-center justify-between p-spacing-xs bg-surface-container-low rounded">
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Guatácare</span>
+<span class="font-label-caps text-label-caps text-primary bg-primary-fixed/30 px-spacing-2xs py-spacing-3xs rounded flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Activo
+              </span>
+</li>
+</ul>
+</div>
+<button class="mt-spacing-sm w-full py-spacing-xs px-spacing-sm bg-primary text-on-primary rounded font-body-sm text-body-sm font-medium flex items-center justify-center gap-spacing-xs hover:bg-primary-container transition-colors shadow-sm" onclick="document.getElementById('modal-especie').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+          + Agregar especie
+        </button>
+</div>
+<!-- Catálogo 2: Tipos de Proyecto -->
+<div class="flex flex-col justify-between bg-surface-container-lowest rounded-lg p-spacing-md shadow-sm">
+<div class="flex flex-col gap-spacing-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[18px] text-primary">account_tree</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Tipos de Proyecto</span>
+</div>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant bg-surface-container px-1.5 py-0.5 rounded">CAT-02</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Clases de expedientes e instrumentos regulatorios reconocidos.</span>
+<div class="flex flex-col gap-spacing-xs my-spacing-xs">
+<div class="p-spacing-xs bg-surface-container-low rounded flex items-start justify-between">
+<span class="font-body-sm text-body-sm text-on-surface">Informe Técnico Forestal-Ambiental</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">ITFA</span>
+</div>
+<div class="p-spacing-xs bg-surface-container-low rounded flex items-start justify-between">
+<span class="font-body-sm text-body-sm text-on-surface">Estudio de Impacto Ambiental y Sociocultural</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">EIA/DIA</span>
+</div>
+<div class="p-spacing-xs bg-surface-container-low rounded flex items-start justify-between">
+<span class="font-body-sm text-body-sm text-on-surface">Modelo de Negocios</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">MDN</span>
+</div>
+<div class="p-spacing-xs bg-surface-container-low rounded flex items-start justify-between">
+<span class="font-body-sm text-body-sm text-on-surface">Obra de Infraestructura</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">OBR</span>
+</div>
+</div>
+</div>
+<div class="mt-spacing-sm py-spacing-xs px-spacing-sm bg-surface-container text-on-surface-variant rounded font-label-caps text-label-caps text-center">
+          4 CATEGORÍAS BASALES BLOQUEADAS
+        </div>
+</div>
+<!-- Catálogo 3: Categorías Financieras -->
+<div class="flex flex-col justify-between bg-surface-container-lowest rounded-lg p-spacing-md shadow-sm">
+<div class="flex flex-col gap-spacing-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[18px] text-primary">payments</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Categorías Financieras</span>
+</div>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant bg-surface-container px-1.5 py-0.5 rounded">CAT-03</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Partidas presupuestarias e imputación de gastos técnicos.</span>
+<div class="flex flex-wrap gap-spacing-2xs my-spacing-xs">
+<span class="px-2 py-1 bg-surface-container-low text-on-surface text-body-sm font-body-sm rounded">Honorarios profesionales</span>
+<span class="px-2 py-1 bg-surface-container-low text-on-surface text-body-sm font-body-sm rounded">Viáticos y logística</span>
+<span class="px-2 py-1 bg-surface-container-low text-on-surface text-body-sm font-body-sm rounded">Combustible</span>
+<span class="px-2 py-1 bg-surface-container-low text-on-surface text-body-sm font-body-sm rounded">Alimentación</span>
+<span class="px-2 py-1 bg-surface-container-low text-on-surface text-body-sm font-body-sm rounded">Insumos operativos</span>
+<span class="px-2 py-1 bg-surface-container-low text-on-surface text-body-sm font-body-sm rounded">Permisología</span>
+<span class="px-2 py-1 bg-surface-container-low text-on-surface text-body-sm font-body-sm rounded">Mantenimiento y repuestos</span>
+</div>
+</div>
+<div class="mt-spacing-sm flex items-center justify-between text-on-surface-variant font-data-mono-md text-data-mono-md">
+<span>Total partidas: 7</span>
+<span class="text-primary font-semibold">100% Auditables</span>
+</div>
+</div>
+<!-- Catálogo 4: Unidades de Medición -->
+<div class="flex flex-col justify-between bg-surface-container-lowest rounded-lg p-spacing-md shadow-sm">
+<div class="flex flex-col gap-spacing-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[18px] text-primary">square_foot</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Unidades de Medición</span>
+</div>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant bg-surface-container px-1.5 py-0.5 rounded">CAT-04</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Magnitudes físicas conformes al Sistema Internacional y práctica forestal.</span>
+<div class="flex flex-col gap-spacing-2xs my-spacing-xs">
+<div class="flex items-center justify-between py-1 px-spacing-xs bg-surface-container-low rounded">
+<span class="font-body-sm text-body-sm font-medium">hectárea</span>
+<span class="font-data-mono-md text-data-mono-md text-primary bg-primary-fixed/20 px-1.5 py-0.5 rounded">ha</span>
+</div>
+<div class="flex items-center justify-between py-1 px-spacing-xs bg-surface-container-low rounded">
+<span class="font-body-sm text-body-sm font-medium">metro</span>
+<span class="font-data-mono-md text-data-mono-md text-primary bg-primary-fixed/20 px-1.5 py-0.5 rounded">m</span>
+</div>
+<div class="flex items-center justify-between py-1 px-spacing-xs bg-surface-container-low rounded">
+<span class="font-body-sm text-body-sm font-medium">centímetro</span>
+<span class="font-data-mono-md text-data-mono-md text-primary bg-primary-fixed/20 px-1.5 py-0.5 rounded">cm</span>
+</div>
+<div class="flex items-center justify-between py-1 px-spacing-xs bg-surface-container-low rounded">
+<span class="font-body-sm text-body-sm font-medium">metro cúbico</span>
+<span class="font-data-mono-md text-data-mono-md text-primary bg-primary-fixed/20 px-1.5 py-0.5 rounded">m³</span>
+</div>
+<div class="flex items-center justify-between py-1 px-spacing-xs bg-surface-container-low rounded">
+<span class="font-body-sm text-body-sm font-medium">número de árboles</span>
+<span class="font-data-mono-md text-data-mono-md text-primary bg-primary-fixed/20 px-1.5 py-0.5 rounded">ind</span>
+</div>
+</div>
+</div>
+<div class="mt-spacing-sm font-label-caps text-label-caps text-on-surface-variant">
+          Precisión estándar: Tabular ±0.001
+        </div>
+</div>
+</div>
+<!-- Editor de Plantilla de Etapas Estándar -->
+<div class="bg-surface-container-lowest rounded-lg p-spacing-lg shadow-sm flex flex-col gap-spacing-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-spacing-sm pb-spacing-xs">
+<div class="flex flex-col">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[20px] text-primary">linear_scale</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">
+              Editor de Plantilla de Etapas Estándar (Workflow 10 Fases)
+            </h3>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+            Configuración de compuertas de aprobación y prelaciones lógicas para el ciclo de vida del proyecto.
+          </span>
+</div>
+<div class="flex items-center gap-spacing-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant">COMPUERTA CRÍTICA:</span>
+<span class="px-spacing-xs py-spacing-3xs bg-primary text-on-primary font-data-mono-md text-data-mono-md rounded">ETAPA 06 ACTIVE</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase">
+<th class="py-spacing-xs px-spacing-sm"># FASE</th>
+<th class="py-spacing-xs px-spacing-sm">Denominación Técnica de Etapa</th>
+<th class="py-spacing-xs px-spacing-sm">Rol Responsable</th>
+<th class="py-spacing-xs px-spacing-sm">Entregable Obligatorio</th>
+<th class="py-spacing-xs px-spacing-sm text-center">Requiere Aprobación Obligatoria</th>
+<th class="py-spacing-xs px-spacing-sm text-right">Estado Registro</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 font-body-sm text-body-sm">
+<!-- 01 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors">
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-primary font-semibold">01</td>
+<td class="py-spacing-xs px-spacing-sm font-medium text-on-surface">Reunión de Arranque y Alcance</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Coordinador de Proyecto</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Minuta formal de compromisos</td>
+<td class="py-spacing-xs px-spacing-sm text-center">
+<span class="inline-block w-8 h-4 bg-surface-container-high rounded-full relative cursor-not-allowed opacity-60">
+<span class="w-3.5 h-3.5 bg-surface-container-lowest rounded-full absolute left-0.5 top-0.25"></span>
+</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-label-caps text-label-caps text-primary">BLOQUEADO</td>
+</tr>
+<!-- 02 -->
+<tr class="bg-surface-container-low/40 hover:bg-surface-container-low transition-colors">
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-primary font-semibold">02</td>
+<td class="py-spacing-xs px-spacing-sm font-medium text-on-surface">Levantamiento Cartográfico y Topográfico</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Ingeniero Geomático</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Poligonal cerrada WGS84 (.shp/.kml)</td>
+<td class="py-spacing-xs px-spacing-sm text-center">
+<span class="inline-block w-8 h-4 bg-surface-container-high rounded-full relative cursor-not-allowed opacity-60">
+<span class="w-3.5 h-3.5 bg-surface-container-lowest rounded-full absolute left-0.5 top-0.25"></span>
+</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-label-caps text-label-caps text-primary">BLOQUEADO</td>
+</tr>
+<!-- 03 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors">
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-primary font-semibold">03</td>
+<td class="py-spacing-xs px-spacing-sm font-medium text-on-surface">Inventario Forestal y Muestreo Diamétrico</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Ingeniero Forestal</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Planillas dasométricas consolidadas</td>
+<td class="py-spacing-xs px-spacing-sm text-center">
+<span class="inline-block w-8 h-4 bg-surface-container-high rounded-full relative cursor-not-allowed opacity-60">
+<span class="w-3.5 h-3.5 bg-surface-container-lowest rounded-full absolute left-0.5 top-0.25"></span>
+</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-label-caps text-label-caps text-primary">BLOQUEADO</td>
+</tr>
+<!-- 04 -->
+<tr class="bg-surface-container-low/40 hover:bg-surface-container-low transition-colors">
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-primary font-semibold">04</td>
+<td class="py-spacing-xs px-spacing-sm font-medium text-on-surface">Evaluación de Línea Base Físico-Biológica</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Biólogo / Ecólogo</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Capítulo de caracterización eco-ambiental</td>
+<td class="py-spacing-xs px-spacing-sm text-center">
+<span class="inline-block w-8 h-4 bg-surface-container-high rounded-full relative cursor-not-allowed opacity-60">
+<span class="w-3.5 h-3.5 bg-surface-container-lowest rounded-full absolute left-0.5 top-0.25"></span>
+</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-label-caps text-label-caps text-primary">BLOQUEADO</td>
+</tr>
+<!-- 05 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors">
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-primary font-semibold">05</td>
+<td class="py-spacing-xs px-spacing-sm font-medium text-on-surface">Redacción y Matriz Leopold/Conesa</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Equipo Técnico Especialista</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Borrador preliminar consolidado</td>
+<td class="py-spacing-xs px-spacing-sm text-center">
+<span class="inline-block w-8 h-4 bg-surface-container-high rounded-full relative cursor-not-allowed opacity-60">
+<span class="w-3.5 h-3.5 bg-surface-container-lowest rounded-full absolute left-0.5 top-0.25"></span>
+</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-label-caps text-label-caps text-primary">BLOQUEADO</td>
+</tr>
+<!-- 06: GATEWAY OBLIGATORIO -->
+<tr class="bg-primary/10 font-semibold">
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-primary">06</td>
+<td class="py-spacing-xs px-spacing-sm text-primary flex items-center gap-spacing-2xs">
+<span>Revisión Coordinador y Dictamen de Calidad</span>
+<span class="material-symbols-outlined text-[18px] text-primary">verified_user</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface">Coordinador Principal</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface">Acta de Conformidad Técnica</td>
+<td class="py-spacing-xs px-spacing-sm text-center">
+<!-- Switch ACTIVO EXCLUSIVAMENTE EN ETAPA 06 -->
+<div class="inline-flex items-center gap-spacing-2xs">
+<div class="w-9 h-5 bg-primary rounded-full relative cursor-pointer flex items-center p-0.5 shadow-sm">
+<span class="w-4 h-4 bg-on-primary rounded-full shadow-md ml-auto"></span>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-primary">SI</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-label-caps text-label-caps text-secondary font-bold">COMPUERTA CRÍTICA</td>
+</tr>
+<!-- 07 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors">
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-primary font-semibold">07</td>
+<td class="py-spacing-xs px-spacing-sm font-medium text-on-surface">Subsanación de Observaciones Internas</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Profesionales Asignados</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Matriz de respuesta y ajustes</td>
+<td class="py-spacing-xs px-spacing-sm text-center">
+<span class="inline-block w-8 h-4 bg-surface-container-high rounded-full relative cursor-not-allowed opacity-60">
+<span class="w-3.5 h-3.5 bg-surface-container-lowest rounded-full absolute left-0.5 top-0.25"></span>
+</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-label-caps text-label-caps text-primary">BLOQUEADO</td>
+</tr>
+<!-- 08 -->
+<tr class="bg-surface-container-low/40 hover:bg-surface-container-low transition-colors">
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-primary font-semibold">08</td>
+<td class="py-spacing-xs px-spacing-sm font-medium text-on-surface">Presentación y Aceptación Contratante</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Dirección Ejecutiva</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Constancia firmada de recepción</td>
+<td class="py-spacing-xs px-spacing-sm text-center">
+<span class="inline-block w-8 h-4 bg-surface-container-high rounded-full relative cursor-not-allowed opacity-60">
+<span class="w-3.5 h-3.5 bg-surface-container-lowest rounded-full absolute left-0.5 top-0.25"></span>
+</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-label-caps text-label-caps text-primary">BLOQUEADO</td>
+</tr>
+<!-- 09 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors">
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-primary font-semibold">09</td>
+<td class="py-spacing-xs px-spacing-sm font-medium text-on-surface">Ingreso a Autoridad Ambiental (MINEC / Ente Competente)</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Gestor Legal-Ambiental</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Comprobante de radicación oficial</td>
+<td class="py-spacing-xs px-spacing-sm text-center">
+<span class="inline-block w-8 h-4 bg-surface-container-high rounded-full relative cursor-not-allowed opacity-60">
+<span class="w-3.5 h-3.5 bg-surface-container-lowest rounded-full absolute left-0.5 top-0.25"></span>
+</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-label-caps text-label-caps text-primary">BLOQUEADO</td>
+</tr>
+<!-- 10 -->
+<tr class="bg-surface-container-low/40 hover:bg-surface-container-low transition-colors">
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-primary font-semibold">10</td>
+<td class="py-spacing-xs px-spacing-sm font-medium text-on-surface">Liquidación Administrativa y Archivo Físico</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Administración / Archivero</td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">Cierre contable de centro de costos</td>
+<td class="py-spacing-xs px-spacing-sm text-center">
+<span class="inline-block w-8 h-4 bg-surface-container-high rounded-full relative cursor-not-allowed opacity-60">
+<span class="w-3.5 h-3.5 bg-surface-container-lowest rounded-full absolute left-0.5 top-0.25"></span>
+</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-label-caps text-label-caps text-primary">BLOQUEADO</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- SECCIÓN 19: Bitácora General Inmutable -->
+<section class="flex flex-col gap-spacing-md">
+<div class="flex items-center justify-between flex-wrap gap-spacing-sm">
+<div class="flex items-baseline gap-spacing-xs">
+<span class="font-data-mono-lg text-data-mono-lg text-primary">19.0</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">
+          Bitácora General Inmutable (Auditoría Transaccional SHA-256)
+        </h2>
+</div>
+<button class="py-spacing-xs px-spacing-md bg-surface-container-lowest text-on-surface rounded font-body-sm text-body-sm font-medium flex items-center gap-spacing-xs shadow-sm hover:bg-surface-container-high transition-colors" onclick="exportarBitacoraCSV()">
+<span class="material-symbols-outlined text-[18px] text-primary">download</span>
+        Exportar Bitácora Auditoría CSV
+      </button>
+</div>
+<!-- Aviso Inviolable de Auditoría -->
+<div class="bg-surface-container-highest/60 rounded-lg p-spacing-md flex items-start gap-spacing-sm shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[22px] mt-0.5">gavel</span>
+<div class="flex flex-col gap-spacing-3xs">
+<div class="flex items-center gap-spacing-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Aviso de No Modificabilidad Registral</span>
+<span class="font-data-mono-md text-data-mono-md text-secondary uppercase bg-secondary-fixed/50 px-1.5 py-0.5 rounded">WORM ARCHIVE</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          La bitácora no se edita ni se borra. Cada registro almacena usuario, fecha/hora exacta, entidad afectada, acción y valor previo bajo firma criptográfica SHA-256 vinculada al bloque anterior. Cualquier inconsistencia invalida el ledger local.
+        </p>
+</div>
+</div>
+<!-- Buscador y Barra de Filtros -->
+<div class="bg-surface-container-lowest rounded-lg p-spacing-md shadow-sm flex flex-col md:flex-row items-center gap-spacing-md">
+<div class="relative flex-1 w-full">
+<span class="material-symbols-outlined absolute left-spacing-xs top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full pl-8 pr-spacing-sm py-spacing-xs bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded outline-none focus:bg-surface-container-lowest transition-colors" id="filtro-texto" placeholder="Filtrar por usuario, ID de entidad o valor afectado..." type="text"/>
+</div>
+<div class="flex items-center gap-spacing-xs w-full md:w-auto">
+<span class="font-label-caps text-label-caps text-on-surface-variant whitespace-nowrap">ACCIÓN:</span>
+<select class="bg-surface-container-low text-on-surface font-body-sm text-body-sm py-spacing-xs px-spacing-sm rounded outline-none cursor-pointer" id="filtro-accion">
+<option value="">Todas las transacciones</option>
+<option value="CREACION">Creación</option>
+<option value="MODIFICACION">Modificación</option>
+<option value="APROBACION">Aprobación</option>
+<option value="DESACTIVACION">Desactivación</option>
+<option value="PAGO">Pago</option>
+</select>
+</div>
+<div class="flex items-center gap-spacing-xs w-full md:w-auto">
+<span class="font-label-caps text-label-caps text-on-surface-variant whitespace-nowrap">RANGO:</span>
+<input class="bg-surface-container-low text-on-surface font-body-sm text-body-sm py-spacing-xs px-spacing-xs rounded outline-none" type="date" value="2025-05-01"/>
+<span class="text-outline">–</span>
+<input class="bg-surface-container-low text-on-surface font-body-sm text-body-sm py-spacing-xs px-spacing-xs rounded outline-none" type="date" value="2025-05-24"/>
+</div>
+<button class="py-spacing-xs px-spacing-md bg-primary text-on-primary rounded font-body-sm text-body-sm font-medium hover:bg-primary-container transition-colors shadow-sm shrink-0" onclick="filtrarBitacora()">
+        Aplicar Filtros
+      </button>
+</div>
+<!-- Tabla de Auditoría Inmutable (>= 8 Registros) -->
+<div class="bg-surface-container-lowest rounded-lg shadow-sm overflow-x-auto">
+<table class="w-full text-left" id="tabla-bitacora">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase">
+<th class="py-spacing-xs px-spacing-sm">Hash Criptográfico / Timestamp</th>
+<th class="py-spacing-xs px-spacing-sm">Usuario Operador</th>
+<th class="py-spacing-xs px-spacing-sm">Entidad Afectada</th>
+<th class="py-spacing-xs px-spacing-sm">Tipo Acción</th>
+<th class="py-spacing-xs px-spacing-sm">Valor Previo / Parámetro Inicial</th>
+<th class="py-spacing-xs px-spacing-sm">Nuevo Valor Consolidado</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 font-body-sm text-body-sm" id="tbody-bitacora">
+<!-- Reg 01: Desactivación de Usuario -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors" data-accion="DESACTIVACION">
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex flex-col">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">a8f94d21...bc90</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">2025-05-24 16:42:19 UTC</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[16px] text-outline">admin_panel_settings</span>
+<span class="font-medium text-on-surface">m.hernandez@pi.ingenieria</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md">USR-0042 (J. Rivas)</td>
+<td class="py-spacing-xs px-spacing-sm">
+<span class="px-2 py-0.5 rounded bg-tertiary-container/10 text-tertiary font-label-caps text-label-caps font-bold">DESACTIVACIÓN</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-on-surface-variant">status: "ACTIVO_CAMPO"</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-tertiary font-medium">status: "INACTIVO_REVOCADO"</td>
+</tr>
+<!-- Reg 02: Registro de pago por liquidar -->
+<tr class="bg-surface-container-low/40 hover:bg-surface-container-low transition-colors" data-accion="PAGO">
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex flex-col">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">17cc39ea...54e1</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">2025-05-24 15:10:04 UTC</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[16px] text-outline">account_balance</span>
+<span class="font-medium text-on-surface">c.vargas@pi.finanzas</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md">PAG-2025-089</td>
+<td class="py-spacing-xs px-spacing-sm">
+<span class="px-2 py-0.5 rounded bg-secondary-fixed/50 text-secondary font-label-caps text-label-caps font-bold">PAGO</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-on-surface-variant">monto_disp: null (PENDIENTE)</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-on-surface font-medium">USD 4,250.00 (POR LIQUIDAR)</td>
+</tr>
+<!-- Reg 03: Firma digital de compuerta -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors" data-accion="APROBACION">
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex flex-col">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">9e43b17c...aa12</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">2025-05-24 14:02:45 UTC</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+<span class="font-medium text-on-surface">d.montilla@pi.coordinacion</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md">PRJ-EIA-2025-014</td>
+<td class="py-spacing-xs px-spacing-sm">
+<span class="px-2 py-0.5 rounded bg-primary-fixed/30 text-primary font-label-caps text-label-caps font-bold">APROBACIÓN</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-on-surface-variant">etapa_06_gate: "PENDIENTE_FIRMA"</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-primary font-medium">etapa_06_gate: "DICTAMEN_VALIDADO"</td>
+</tr>
+<!-- Reg 04: Cambio de estado de etapa -->
+<tr class="bg-surface-container-low/40 hover:bg-surface-container-low transition-colors" data-accion="MODIFICACION">
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex flex-col">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">3b0921dc...88ef</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">2025-05-24 11:30:11 UTC</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[16px] text-outline">engineering</span>
+<span class="font-medium text-on-surface">a.sucre@pi.forestal</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md">PRJ-ITFA-2025-003</td>
+<td class="py-spacing-xs px-spacing-sm">
+<span class="px-2 py-0.5 rounded bg-secondary-container/40 text-on-secondary-container font-label-caps text-label-caps font-bold">MODIFICACIÓN</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-on-surface-variant">fase_actual: "03_INVENTARIO"</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-on-surface font-medium">fase_actual: "04_LINEA_BASE"</td>
+</tr>
+<!-- Reg 05: Creación de nuevo contratante -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors" data-accion="CREACION">
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex flex-col">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">fe88102a...4432</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">2025-05-23 18:14:50 UTC</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[16px] text-outline">business</span>
+<span class="font-medium text-on-surface">l.blanco@pi.legal</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md">CTR-AGRO-2025-09</td>
+<td class="py-spacing-xs px-spacing-sm">
+<span class="px-2 py-0.5 rounded bg-primary-fixed/20 text-primary font-label-caps text-label-caps font-bold">CREACIÓN</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-on-surface-variant">null (NUEVO REGISTRO)</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-on-surface font-medium">Consorcio Agroforestal del Llano, C.A.</td>
+</tr>
+<!-- Reg 06: Modificación de polígono cartográfico -->
+<tr class="bg-surface-container-low/40 hover:bg-surface-container-low transition-colors" data-accion="MODIFICACION">
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex flex-col">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">5a2399ef...01cd</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">2025-05-23 12:45:00 UTC</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[16px] text-outline">layers</span>
+<span class="font-medium text-on-surface">r.castillo@pi.geomatica</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md">GEO-POL-0422</td>
+<td class="py-spacing-xs px-spacing-sm">
+<span class="px-2 py-0.5 rounded bg-secondary-container/40 text-on-secondary-container font-label-caps text-label-caps font-bold">MODIFICACIÓN</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-on-surface-variant">área_ha: 1,420.50</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-on-surface font-medium">área_ha: 1,418.15 (-2.35 ha amortig.)</td>
+</tr>
+<!-- Reg 07: Desactivación de Especie Taxonómica (Desactivada no borrada) -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors" data-accion="DESACTIVACION">
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex flex-col">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">0084efbc...cc91</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">2025-05-22 09:20:18 UTC</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[16px] text-outline">admin_panel_settings</span>
+<span class="font-medium text-on-surface">m.hernandez@pi.ingenieria</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md">CAT-ESP-0089 (Caoba Sp.)</td>
+<td class="py-spacing-xs px-spacing-sm">
+<span class="px-2 py-0.5 rounded bg-tertiary-container/10 text-tertiary font-label-caps text-label-caps font-bold">DESACTIVACIÓN</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-on-surface-variant">catalogo_status: "ENABLED"</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-tertiary font-medium">catalogo_status: "DISABLED_VEDA_NACIONAL"</td>
+</tr>
+<!-- Reg 08: Modificación de par de claves API de integración -->
+<tr class="bg-surface-container-low/40 hover:bg-surface-container-low transition-colors" data-accion="MODIFICACION">
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex flex-col">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">d1223908...67ff</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">2025-05-21 17:05:44 UTC</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[16px] text-outline">dns</span>
+<span class="font-medium text-on-surface">sys.daemon@pi.seguridad</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md">SEC-KEY-ROTATION</td>
+<td class="py-spacing-xs px-spacing-sm">
+<span class="px-2 py-0.5 rounded bg-secondary-container/40 text-on-secondary-container font-label-caps text-label-caps font-bold">MODIFICACIÓN</span>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-on-surface-variant">hash_id: "sha256_2024_v1"</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-on-surface font-medium">hash_id: "sha256_2025_v2" (ROTADA AUTO)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pie de Seguridad e Integridad Criptográfica -->
+<div class="flex flex-col sm:flex-row items-center justify-between p-spacing-sm bg-surface-container rounded-lg text-on-surface-variant font-label-tabular text-label-tabular gap-spacing-xs">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">fingerprint</span>
+<span>ROOT MERKLE HASH: 84a9ff01cd20e1189ac72b881efac981014e7a83d340</span>
+</div>
+<div class="flex items-center gap-spacing-md">
+<span>BLOQUES: 1,842 REGISTROS</span>
+<span class="text-primary font-semibold">• INTEGRIDAD VALIDADA</span>
+</div>
+</div>
+</section>
+<!-- Modal / Drawer para Agregar Especie (JS Interactivo) -->
+<div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-50 flex items-center justify-center p-spacing-md hidden" id="modal-especie">
+<div class="bg-surface-container-lowest rounded-xl max-w-lg w-full p-spacing-lg shadow-xl flex flex-col gap-spacing-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">add_circle</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Agregar Especie Forestal</h3>
+</div>
+<button class="text-outline hover:text-on-surface" onclick="document.getElementById('modal-especie').classList.add('hidden')">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-spacing-sm">
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Nombre Común</label>
+<input class="p-spacing-xs bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded outline-none focus:bg-surface-container-lowest" id="input-nombre-comun" placeholder="Ej. Samán" type="text"/>
+</div>
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Nombre Científico (Género y Especie)</label>
+<input class="p-spacing-xs bg-surface-container-low text-on-surface font-body-sm text-body-sm italic rounded outline-none focus:bg-surface-container-lowest" id="input-nombre-cientifico" placeholder="Ej. Samanea saman" type="text"/>
+</div>
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Familia Botánica</label>
+<input class="p-spacing-xs bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded outline-none focus:bg-surface-container-lowest" id="input-familia" placeholder="Ej. Fabaceae" type="text"/>
+</div>
+<p class="font-label-caps text-label-caps text-secondary">
+          * AVISO: El nuevo taxón se vinculará de forma permanente al catálogo oficial y no podrá eliminarse.
+        </p>
+</div>
+<div class="flex items-center justify-end gap-spacing-sm mt-spacing-xs">
+<button class="py-spacing-xs px-spacing-md bg-surface-container text-on-surface rounded font-body-sm text-body-sm hover:bg-surface-container-high transition-colors" onclick="document.getElementById('modal-especie').classList.add('hidden')">
+          Cancelar
+        </button>
+<button class="py-spacing-xs px-spacing-md bg-primary text-on-primary rounded font-body-sm text-body-sm font-medium hover:bg-primary-container transition-colors shadow-sm" onclick="guardarEspecie()">
+          Incorporar Especie
+        </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Filtro de bitácora interactivo
+  function filtrarBitacora() {
+    const accion = document.getElementById('filtro-accion').value.toUpperCase();
+    const texto = document.getElementById('filtro-texto').value.toLowerCase();
+    const filas = document.querySelectorAll('#tbody-bitacora tr');
+
+    filas.forEach(fila => {
+      const dataAccion = fila.getAttribute('data-accion') || '';
+      const textoFila = fila.innerText.toLowerCase();
+
+      const coincideAccion = !accion || dataAccion === accion;
+      const coincideTexto = !texto || textoFila.includes(texto);
+
+      if (coincideAccion && coincideTexto) {
+        fila.style.display = '';
+      } else {
+        fila.style.display = 'none';
+      }
+    });
+  }
+
+  // Exportación a CSV
+  function exportarBitacoraCSV() {
+    let csv = "Hash,Timestamp,Usuario,Entidad,Accion,Valor_Previo,Valor_Nuevo\n";
+    const filas = document.querySelectorAll('#tbody-bitacora tr');
+    
+    filas.forEach(fila => {
+      const celdas = fila.querySelectorAll('td');
+      if (celdas.length >= 6) {
+        const hash = celdas[0].querySelector('.font-data-mono-md')?.innerText.trim() || '';
+        const timestamp = celdas[0].querySelector('.font-label-tabular')?.innerText.trim() || '';
+        const usuario = celdas[1].innerText.trim();
+        const entidad = celdas[2].innerText.trim();
+        const accion = celdas[3].innerText.trim();
+        const prev = celdas[4].innerText.trim().replace(/"/g, '""');
+        const nuevo = celdas[5].innerText.trim().replace(/"/g, '""');
+
+        csv += `"${hash}","${timestamp}","${usuario}","${entidad}","${accion}","${prev}","${nuevo}"\n`;
+      }
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'bitacora_auditoria_inmutable_sha256.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  // Agregar especie
+  function guardarEspecie() {
+    const comun = document.getElementById('input-nombre-comun').value.trim();
+    if (!comun) {
+      alert('Por favor ingrese el nombre de la especie');
+      return;
+    }
+    alert(`Especie "${comun}" agregada exitosamente al catálogo oficial y registrada en el Ledger de Gobierno.`);
+    document.getElementById('modal-especie').classList.add('hidden');
+    document.getElementById('input-nombre-comun').value = '';
+    document.getElementById('input-nombre-cientifico').value = '';
+    document.getElementById('input-familia').value = '';
+  }
+</script></main></div></body></html>

@@ -1,0 +1,574 @@
+{
+ "descripcion_general": "Prototipo SPA de una sola página (code.html, 3089 líneas) generado por Stitch para \"Proyectos Integrales · Ingeniería & Ambiente\", un sistema de gestión de proyectos (PMIS) para una consultora ambiental/forestal. El shell (aside con sidebar de 9 enlaces, header con buscador, select \"Entrar como:\" de 5 roles, campana de notificaciones, ayuda y avatar) es HTML estático con clases Tailwind (cdn.tailwindcss.com + tailwind.config inline con paleta Material-like verde bosque/terracota, fuentes Hanken Grotesk y JetBrains Mono, iconos Material Symbols desde Google Fonts, logo desde lh3.googleusercontent.com). Un único <script> IIFE (~169K caracteres) implementa: STORAGE_KEY, matriz PERMISSIONS (5 roles), DEFAULT_STATE (semilla venezolana), clase Store con persistencia en localStorage y bitácora append-only, utilidades (showToast, openModal, escapeHtml, formatMoney en USD), sincronización del header, router central de 23 vistas (navigateTo/renderCurrentRoute con un switch a renderPage1..renderPage23), gating RBAC hardcodeado (adminOnlyPages 17/18/19; página 12 solo coordinador/admin; páginas 10 y 16 bloqueadas a profesional) y un selector \"Vista Rápida\" (quick-page-select) con las 23 páginas para QA. La ficha de proyecto (páginas 5-11) comparte cabecera con pestañas (renderProjectHeaderTabs; la pestaña Finanzas se oculta al profesional). Funcionalidad real: cambio de usuario/rol, filtros y CSV de proyectos, wizard de 3 pasos que crea proyectos con plantilla de 10 etapas, compuerta de la etapa 6 (radicar / aprobar / devolver con comentario obligatorio; al aprobar la etapa 7 pasa a \"En Proceso\" y progreso +15), carga de documentos solo por nombre, captura de mediciones con volumen manual (sin fórmula), registro de movimientos financieros con categoría controlada, bitácoras por proyecto y global (CSV real), activar/desactivar usuarios, rotador oscuro de Dirección (15 s). Varias acciones son simuladas con toast (CSV de reportes, CSV global de vista, nuevo usuario, descarga de documento). La captura screen.png muestra solo el shell (sidebar + header + breadcrumb \"Panel de Inicio\" + Vista Rápida) con el viewport vacío, porque el contenido se inyecta por JS. Todo lo funcional aquí es interpretación de Stitch, no la especificación.",
+ "paginas": [
+  {
+   "numero": 1,
+   "titulo": "1. Ingreso & Selección de Credenciales (Vista Rápida: '1. Ingreso / Switch de Rol')",
+   "que_renderiza": "Tarjeta 'Simulación de Acceso & Gobernanza' con grilla de los 8 usuarios precargados (nombre, especialidad, badge ROL), el activo resaltado; pie con 'Usuario activo actual' y botón 'Continuar al Panel'. No hay contraseña ni registro.",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "profesional",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "Click en tarjeta → window.PI_SWITCH_USER → store.switchUser (cambia currentUser y currentRole, persiste, log CAMBIO_USUARIO)",
+    "Continuar al Panel → navigateTo('2')"
+   ]
+  },
+  {
+   "numero": 2,
+   "titulo": "2. Panel de Inicio (ROL) (Vista Rápida: '2. Panel de Inicio (Dashboard)')",
+   "que_renderiza": "Banner de bienvenida (ESTÁNDAR EIA-V2 / ISO 14001, ID usuario, nombre, especialidad, rol); 4 KPIs: Expedientes Totales, Hitos Críticos/Compuertas (etapas compuerta 'Esperando Aprobación'), Etapas con Retraso (proyectos con alguna etapa vencida), y Presupuesto Total Auditado (o 'Mis Honorarios Asignados' = user.honorario si rol profesional); lista de 4 proyectos críticos con badges Compuerta 6 / Retraso y barra de avance; 5 últimos asientos de bitácora.",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "profesional",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "Botón Compuertas(n) → página 12 (solo coordinador/admin)",
+    "Explorar Expedientes → página 3",
+    "Click en proyecto → PI_SELECT_PROJECT(id,'5')",
+    "Ver lista completa → página 3",
+    "Consultar Auditoría Completa → página 19 si admin, si no página 11"
+   ]
+  },
+  {
+   "numero": 3,
+   "titulo": "3. Expedientes Técnicos & Estado General (Vista Rápida: '3. Proyectos (Filtros & Estados)')",
+   "que_renderiza": "Barra con buscador (código/nombre/contratante), select de estado (Todos, En Ejecución, En Revisión (Compuerta), En Oferta, En Permisología, Cerrado / Finiquitado, ⚠️ Con Etapas Vencidas), botón Descargar CSV y botón Nuevo Expediente (oculto a profesional y direccion). Tabla: Código Exp., Proyecto & Delimitación (ubicación), Contratante, Estado Técnico (+badge COMPUERTA 6), Entrega (DD/MM/AAAA), Presupuesto (USD) ('Confidencial' para profesional), Avance.",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "profesional",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "Filtro por texto y estado en vivo (renderTable)",
+    "Exportar CSV real vía data:text/csv (todos los proyectos, ignora el filtro), log EXPORTACION_CSV",
+    "Click fila → PI_SELECT_PROJECT(id,'5')",
+    "Nuevo Expediente → página 4"
+   ]
+  },
+  {
+   "numero": 4,
+   "titulo": "4. Apertura de Expediente (3 Pasos) (Vista Rápida: '4. Nuevo Proyecto (3 Pasos)')",
+   "que_renderiza": "Wizard de 3 pasos: 1. Delimitación Legal (nombre*, empresa contratante* texto libre, RIF*, poligonal/coordenadas WGS84); 2. Plazos & Finanzas (fecha inicio y fin como texto DD/MM/AAAA, presupuesto USD number, select coordinador responsable entre usuarios rol coordinador); 3. Plantilla 10 Etapas (lista solo lectura de standardStages con badge COMPUERTA OBLIGATORIA en la 6). Botones Atrás/Siguiente/'Crear Expediente y Sellar Bitácora'.",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "profesional",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "Validación de nombre y contratante obligatorios",
+    "Crear proyecto real: id 'PI-2024-00'+(n+1), estado fijo 'En Ejecución', progreso 0, etapas clonadas de standardStages (etapa 1 'En Proceso', etapa 6 'Pendiente', resto 'Bloqueada', fechaFin fija '15/07/2024'), equipo con el coordinador (asignación fija 3200)",
+    "store.log CREACION_EXPEDIENTE, save y navega a página 5",
+    "No hay bloqueo de ruta: cualquier rol llega por Vista Rápida; solo se oculta el botón en página 3 a profesional/direccion"
+   ]
+  },
+  {
+   "numero": 5,
+   "titulo": "5. Ficha - Resumen Ejecutivo (Vista Rápida: '5. Ficha - Resumen')",
+   "que_renderiza": "Cabecera de proyecto con pestañas (Resumen, Etapas & Compuertas, Equipo & Honorarios, Documentos, Mediciones de Campo, Finanzas [oculta a profesional], Bitácora de Proyecto). Metadatos: código, coordinador, fecha inicio, fecha límite, contratante/RIF, poligonal. Bloque mapa con <img src=\"placeholder\"> y vértice central. Lateral: Estatus de la Etapa 6 (estado, observacionesCompuerta) y Desglose Rápido (n mediciones, documentos, especialistas).",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "profesional",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "Navegación entre pestañas (PI_NAV 5-11)",
+    "Revisar Compuerta de Etapas → página 6"
+   ]
+  },
+  {
+   "numero": 6,
+   "titulo": "6. Ficha - Etapas & Control de Compuertas (Vista Rápida: '6. Ficha - Etapas (Compuerta 6 a 7)')",
+   "que_renderiza": "Texto: 'La Etapa 6 constituye una compuerta estricta. La Etapa 7 permanecerá bloqueada hasta que un Coordinador o Administrador apruebe con comentario justificado'. Badge 'Rol Autorizado para Validar Compuertas' o 'Solo Lectura'. Lista de las 10 etapas con número, nombre, badges COMPUERTA CRÍTICA / VENCIDA, vencimiento, nota observacionesCompuerta y chip de estado.",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "profesional",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "'Radicar para Revisión' (solo etapa 6 en 'Pendiente', visible a CUALQUIER rol) → estado 'Esperando Aprobación', log ENVIO_COMPUERTA",
+    "'Aprobar' (etapa 6 en 'Esperando Aprobación', coordinador/admin) → modal con comentario obligatorio → etapa 6 'Aprobada', etapa 7 'En Proceso', progreso +15, log APROBACIÓN_COMPUERTA",
+    "'Devolver' (misma condición) → modal comentario obligatorio → etapa 6 vuelve a 'Pendiente' con observacionesCompuerta 'Devuelto para corrección: ...', log DEVOLUCIÓN_COMPUERTA",
+    "No existe acción 'completar' para etapas 1-5 ni 7-10; solo la etapa 6 tiene flujo"
+   ]
+  },
+  {
+   "numero": 7,
+   "titulo": "7. Ficha - Equipo Técnico & Honorarios (Vista Rápida: '7. Ficha - Equipo & Honorarios (Privacidad)')",
+   "que_renderiza": "Bloque 'Cuadro de Asignación & Confidencialidad Salarial' con texto de regla según rol y 'Monto Total de Honorarios' (CONFIDENCIAL para profesional; suma de asignaciones para el resto). Tabla: Especialista, Rol en Expediente, Especialidad Base, Honorario Asignado (USD) según displayAmount, Estado Auditoría (chip fijo CONTRATO VIGENTE).",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "profesional",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "Solo lectura; no hay alta/baja de miembros ni edición de asignaciones"
+   ]
+  },
+  {
+   "numero": 8,
+   "titulo": "8. Ficha - Documentos Técnicos & Versionado (Vista Rápida: '8. Ficha - Documentos (Versionado)')",
+   "que_renderiza": "Cabecera 'Dossier de Archivos Técnicos Acreditados' con botón 'Cargar Nueva Versión'. Tabla: Código/Nombre Archivo, Tipo Técnico, Versión, Fecha Carga, Autor/Revisor, Tamaño, Acción (icono descarga).",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "profesional",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "Cargar Nueva Versión → modal (nombre* texto, select tipo de 5 opciones hardcodeadas, versión texto libre) → registra solo el nombre con fecha fija '10/05/2024', autor usuario actual, tamaño ficticio '3.4 MB'; log CARGA_DOCUMENTO",
+    "Descargar → PI_DOWNLOAD_MOCK: solo toast 'Generando réplica sellada' + log DESCARGA_DOC (no descarga nada)",
+    "Sin gating por rol"
+   ]
+  },
+  {
+   "numero": 9,
+   "titulo": "9. Ficha - Mediciones de Campo & Dasonomía (Vista Rápida: '9. Ficha - Mediciones de Campo (Sin Ec.)')",
+   "que_renderiza": "Nota obligatoria en cursiva: '* Ecuación de volumen pendiente de definir por el equipo técnico. Captura estrictamente manual en m³.' Formulario 'Captura de Parcela': identificador parcela (texto), hectáreas, especie (select del catálogo), N° árboles, altura prom (m), DAP prom (cm), Volumen Manual Estimado (m³) con leyenda 'Valor numérico capturado sin fórmula automática'. Panel 'Resumen Dasonómico Consolidado por Especie' (árboles, parcelas, volumen acumulado = suma). Tabla 'Libro de Mediciones de Campo'.",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "profesional",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "'Asentar Medición de Campo' → valida parcela y volumen numérico → push a fieldMeasurements con fecha fija '10/05/2024' y responsable = usuario actual; log CAPTURA_CAMPO",
+    "No aplica canCaptureField: administracion y direccion también pueden registrar"
+   ]
+  },
+  {
+   "numero": 10,
+   "titulo": "10. Ficha - Control Financiero & Partidas (Vista Rápida: '10. Ficha - Finanzas (Partidas / Por Liquidar)')",
+   "que_renderiza": "3 KPIs: Ingresos Percibidos, Egresos Ejecutados, Partidas Por Liquidar (sumas). Filtro rápido (Todas / Solo 'Por Liquidar' / Solo 'Liquidadas') y botón 'Registrar Movimiento Financiero'. Tabla: ID, Tipo, Categoría Controlada, Concepto Justificado, Fecha, Monto (USD), Estado Liquidación.",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "Filtro por estado",
+    "Registrar movimiento → modal (tipo Egreso/Ingreso select, monto USD, categoría select desde catalogs.financialCategories, concepto texto, estado Por liquidar/Liquidado select) → unshift con id 'FIN-'+(n+101), fecha fija '10/05/2024'; log REGISTRO_FINANCIERO",
+    "Profesional redirigido a página 20 por renderCurrentRoute"
+   ]
+  },
+  {
+   "numero": 11,
+   "titulo": "11. Ficha - Bitácora Inmutable de Proyecto (Vista Rápida: '11. Ficha - Bitácora Inmutable de Proyecto')",
+   "que_renderiza": "Cabecera 'Libro de Registro Inmutable' ('solo adición. No existen interfaces de edición o borrado') con contador de asientos. Tabla de auditLogs filtrados por proyectoId: ID Log, Marca Temporal, Usuario & Rol, Acción, Detalle Auditado.",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "profesional",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "Solo lectura"
+   ]
+  },
+  {
+   "numero": 12,
+   "titulo": "12. Cola de Aprobaciones Pendientes (Vista Rápida: '12. Aprobaciones Pendientes (Cola)')",
+   "que_renderiza": "'Bandeja de Compuertas Técnicas Pendientes' con contador 'n EN COLA DE ESPERA'. Tabla de etapas compuerta en 'Esperando Aprobación' de todos los proyectos: Código/Proyecto, Hito de Compuerta (ETAPA n, nombre, observaciones), Fecha Límite, Antigüedad en Cola (valor fijo antiguedadDias: 12), Acción 'Inspeccionar & Decidir'.",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador"
+   ],
+   "acciones_funcionales": [
+    "Inspeccionar & Decidir → PI_SELECT_PROJECT(id,'6') (la aprobación se hace en la página 6)",
+    "Otros roles redirigidos a página 20"
+   ]
+  },
+  {
+   "numero": 13,
+   "titulo": "13. Calendario Técnico de Entregas (Vista Rápida: '13. Calendario de Entregas')",
+   "que_renderiza": "Cabecera 'Cronograma Consolidado de Hitos & Entregas' con rótulo fijo 'MAYO - JUNIO 2024'. Grilla de tarjetas por proyecto: id, badge 'n Hitos Vencidos' / 'Al Día', nombre, contratante, Entrega Final, Próximo Hito (primera etapa En Proceso o Esperando Aprobación, o 'Concluído'), barra de progreso. No hay grilla mensual real.",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "profesional",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "Click tarjeta → PI_SELECT_PROJECT(id,'6')"
+   ]
+  },
+  {
+   "numero": 14,
+   "titulo": "14. Directorio de Entes & Contratantes (Vista Rápida: '14. Contratantes & Dossiers')",
+   "que_renderiza": "'Contratantes & Clientes Institucionales' agrupando proyectos por p.contratante (nombre, RIF, n expedientes, lista de proyectos con avance). No existe entidad contratantes en el estado; se deriva de projects.",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "profesional",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "Click en proyecto → PI_SELECT_PROJECT(id,'5')",
+    "Sin alta ni edición de contratantes"
+   ]
+  },
+  {
+   "numero": 15,
+   "titulo": "15. Generador de Reportes Técnicos (Vista Rápida: '15. Reportes Técnicos / Financieros')",
+   "que_renderiza": "'Reporte Consolidado de Cierre Mensual' con botones 'Imprimir / PDF' y 'Exportar CSV'; bloque 'Balance Q1-Q2 2024' (FECHA REPORTE fija 10/05/2024) con 3 cifras: Proyectos Evaluados (n), Muestras de Campo Totales (suma de parcelas), Cumplimiento Hitos '82.4%' (fijo).",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "profesional",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "Imprimir / PDF → window.print()",
+    "Exportar CSV → SOLO toast 'CSV técnico descargado correctamente' + log REPORTE_MENSUAL (no genera archivo)"
+   ]
+  },
+  {
+   "numero": 16,
+   "titulo": "16. Sala de Situación de Dirección (Dark Theme Proyección) (Vista Rápida: '16. Dirección Ejecutiva (Modo Dark / Rotador 15s)')",
+   "que_renderiza": "Contenedor oscuro (bg-inverse-surface) 'PROYECCIÓN EJECUTIVA • SALA SITUACIONAL' con 3 diapositivas rotando cada 15 s: Panel 1 cartera de proyectos con % avance; Panel 2 hitos críticos (texto fijo sobre PI-2024-002); Panel 3 salud financiera con cifras fijas '$274,500.00 USD' y 'Margen Proyectado 34.8%'. Indicadores de diapositiva y botón Pausar/Reanudar. El shell (sidebar/header) sigue en claro.",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "setInterval 15000 ms rota diapositivas; navigateTo llama stopDirectorRotation",
+    "Pausar / Reanudar Rotación",
+    "Profesional redirigido a página 20"
+   ]
+  },
+  {
+   "numero": 17,
+   "titulo": "17. Gestión de Usuarios & Roles RBAC (Vista Rápida: '17. Gestión de Usuarios & Roles')",
+   "que_renderiza": "Tabla de usuarios: ID/Nombre, Especialidad, Rol RBAC, Honorario Base (USD) de todos, Estado ACTIVO/DESACTIVADO, Acciones. Botón 'Nuevo Usuario'.",
+   "roles_con_acceso": [
+    "admin"
+   ],
+   "acciones_funcionales": [
+    "Desactivar/Reactivar → PI_TOGGLE_USER cambia u.activo, log CAMBIO_ESTADO_USUARIO",
+    "Nuevo Usuario → PI_ADD_USER: SOLO toast, no crea nada",
+    "Rol distinto de admin → página 20 (adminOnlyPages)"
+   ]
+  },
+  {
+   "numero": 18,
+   "titulo": "18. Catálogos Técnicos & Plantillas Administrables (Vista Rápida: '18. Catálogos & Plantillas de 10 Etapas')",
+   "que_renderiza": "'Listas Controladas & Plantilla de 10 Etapas': tarjeta 'Especies Forestales Acreditadas' (nombre común, científico, densidad g/cm³, badge VEDADA si protegido) y tarjeta 'Ciclo Estándar de 10 Etapas' (standardStages con badge COMPUERTA en la 6). No muestra categorías financieras ni tipos de documento.",
+   "roles_con_acceso": [
+    "admin"
+   ],
+   "acciones_funcionales": [
+    "Solo lectura; no hay alta/edición pese al título 'Administrables' y a canEditCatalogs"
+   ]
+  },
+  {
+   "numero": 19,
+   "titulo": "19. Bitácora General Inmutable (Audit Trail) (Vista Rápida: '19. Bitácora General (Audit Trail)')",
+   "que_renderiza": "'Bitácora General de Gobernanza & Auditoría' (solo append) con botón 'Exportar Bitácora Completa'. Tabla de todos los auditLogs: ID, Marca Temporal, Usuario & Rol, Expediente, Acción, Detalle.",
+   "roles_con_acceso": [
+    "admin"
+   ],
+   "acciones_funcionales": [
+    "Exportar CSV real (data:text/csv, nombre PI_BITACORA_AUDITORIA_<Date.now()>.csv)"
+   ]
+  },
+  {
+   "numero": 20,
+   "titulo": "20. Restricción de Privilegios (Error 403) (Vista Rápida: '20. Sin Permiso (Error 403 Informativo)')",
+   "que_renderiza": "Tarjeta centrada 'ACCESO RESTRINGIDO POR MATRIZ RBAC / Área no Autorizada para su Rol' con nombre del usuario activo y rol.",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "profesional",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "Cambiar Rol de Usuario → página 1",
+    "Volver al Panel Principal → página 2"
+   ]
+  },
+  {
+   "numero": 21,
+   "titulo": "21. Mi Perfil Profesional (Vista Rápida: '21. Mi Perfil Profesional')",
+   "que_renderiza": "Tarjeta con inicial, nombre, especialidad, badge ROL ACTIVO, Identificador Interno y 'Honorario Asignado Base' (u.honorario del usuario actual).",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "profesional",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "Solo lectura; sin edición de perfil"
+   ]
+  },
+  {
+   "numero": 22,
+   "titulo": "22. Portal de Contratantes (Fase 2) (Vista Rápida: '22. Portal de Contratantes (Fase 2)')",
+   "que_renderiza": "Maqueta 'HOJA DE RUTA TECNOLÓGICA / Portal de Clientes & Contratantes': texto 'Módulo previsto para la Fase 2... seguimiento en tiempo real de trámites y descarga de informes aprobados'.",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "profesional",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "Regresar al Dashboard → página 2"
+   ]
+  },
+  {
+   "numero": 23,
+   "titulo": "23. Asistente de Informes IA (Fase 3) (Vista Rápida: '23. Asistente de Informes IA (Fase 3)')",
+   "que_renderiza": "Maqueta 'HOJA DE RUTA TECNOLÓGICA / Asistente Generativo de Memorias': 'Módulo previsto para la Fase 3. Redacción asistida de matrices de impacto ambiental...'.",
+   "roles_con_acceso": [
+    "admin",
+    "coordinador",
+    "profesional",
+    "administracion",
+    "direccion"
+   ],
+   "acciones_funcionales": [
+    "Regresar al Dashboard → página 2"
+   ]
+  }
+ ],
+ "roles": [
+  "admin",
+  "coordinador",
+  "profesional",
+  "administracion",
+  "direccion"
+ ],
+ "matriz_permisos": "const PERMISSIONS = {\n  admin: { canManageUsers: true, canEditCatalogs: true, canViewAuditTrail: true, canApproveGateways: true, canViewAllFees: true, canViewFinances: true, canCreateProjects: true, canCaptureField: true, canViewDirectorDark: true },\n  coordinador: { canManageUsers: false, canEditCatalogs: false, canViewAuditTrail: false, canApproveGateways: true /* Responsable técnico de compuerta Etapa 6 */, canViewAllFees: true, canViewFinances: true, canCreateProjects: true, canCaptureField: true, canViewDirectorDark: true },\n  profesional: { canManageUsers: false, canEditCatalogs: false, canViewAuditTrail: false, canApproveGateways: false, canViewAllFees: false /* Solo ve su monto personal */, canViewFinances: false /* No ve sección administrativa ni finanzas */, canCreateProjects: false, canCaptureField: true, canViewDirectorDark: false },\n  administracion: { canManageUsers: false, canEditCatalogs: false, canViewAuditTrail: false, canApproveGateways: false, canViewAllFees: true, canViewFinances: true, canCreateProjects: true, canCaptureField: false, canViewDirectorDark: true },\n  direccion: { canManageUsers: false, canEditCatalogs: false, canViewAuditTrail: false, canApproveGateways: false, canViewAllFees: 'TOTAL_ONLY' /* Solo ve consolidado general */, canViewFinances: true, canCreateProjects: false, canCaptureField: false, canViewDirectorDark: true }\n};\n\nIMPORTANTE: esta matriz es código muerto. Solo la lee `function checkPermission(requiredRule){ const perms = PERMISSIONS[role] || {}; return !!perms[requiredRule]; }` (línea 796) y checkPermission NUNCA se invoca. El gating real está hardcodeado en renderCurrentRoute: `const adminOnlyPages = ['17','18','19']` → página 20 si rol !== 'admin'; página '12' → 20 si rol no está en ['coordinador','admin']; página '10' → 20 si rol === 'profesional'; página '16' → 20 si rol === 'profesional'. Más chequeos inline: página 3 oculta 'Nuevo Expediente' a profesional y direccion; página 6 `canApprove = ['coordinador','admin'].includes(rol)`; renderProjectHeaderTabs oculta la pestaña Finanzas (adminOnly) al profesional; página 2 muestra botón Compuertas a coordinador/admin; página 7 usa el rol para displayAmount. Nota: `canViewAllFees: 'TOTAL_ONLY'` es un string (truthy), no booleano.",
+ "etapas": [
+  "1. Alineación & Revisión de Antecedentes Legales (compuerta: false)",
+  "2. Plan de Trabajo & Protocolo de Seguridad de Campo (compuerta: false)",
+  "3. Levantamiento de Información Primaria y Cartografía (compuerta: false)",
+  "4. Procesamiento de Muestras y Análisis Dasonómico (compuerta: false)",
+  "5. Modelación de Impacto y Matrices de Valoración (compuerta: false)",
+  "6. Consolidación de Informe Borrador (HITO CRÍTICO) (compuerta: TRUE — única compuerta obligatoria; al aprobarse desbloquea la 7)",
+  "7. Revisión Interdisciplinaria & Control de Calidad (compuerta: false)",
+  "8. Consulta Pública / Audiencias Técnicas (compuerta: false)",
+  "9. Expediente Definitivo y Radicación ante Autoridad (compuerta: false)",
+  "10. Cierre Técnico, Auditoría y Liquidación Final (compuerta: false)",
+  "NOTA: en Stitch SOLO la etapa 6 es compuerta de aprobación; las demás no tienen acción de completar/aprobar/devolver. Cada proyecto de la semilla renombra las etapas libremente (p. ej. 'Plan de Trabajo & Topobatimetría', 'Ronda de Inversionistas', 'Gestión ante Ministerio de Ecosocialismo')."
+ ],
+ "estados_proyecto": [
+  "En Ejecución",
+  "En Revisión",
+  "En Oferta",
+  "En Permisología",
+  "Cerrado",
+  "(pseudo-filtro 'OVERDUE' = '⚠️ Con Etapas Vencidas', no es estado)",
+  "NOTA: no existe lista controlada en el estado; son strings sueltos en la semilla y en el <select id=\"proj-filter-status\">; al crear un proyecto el estado se fija en 'En Ejecución' y nunca se actualiza por eventos de compuerta"
+ ],
+ "estados_etapa": [
+  "Aprobada",
+  "En Proceso",
+  "Pendiente",
+  "Bloqueada",
+  "Esperando Aprobación",
+  "Completada Tarde",
+  "Atrasada",
+  "(flag booleano aparte: vencida true/false, fijo en semilla, nunca calculado con fechas)",
+  "NOTA: no hay estado 'Devuelta' ni 'Completada'; al devolver, la etapa 6 vuelve a 'Pendiente' con observacionesCompuerta 'Devuelto para corrección: ...'. No existe constante de lista controlada; son strings sueltos"
+ ],
+ "categorias_financieras": [
+  "Honorarios Profesionales",
+  "Logística & Viáticos de Campo",
+  "Ensayos de Laboratorio Acreditado",
+  "Cartografía Satelital & Sensores",
+  "Tasas de Radicación y Notaría",
+  "Equipamiento Técnico & Alquiler 4x4",
+  "Seguridad Industrial & EPP",
+  "(solo en semilla, FUERA del catálogo) Anticipo Contractual 30%",
+  "(solo en semilla, FUERA del catálogo) Cierre Contractual 70%",
+  "Tipo de flujo (select aparte): Ingreso / Egreso"
+ ],
+ "estados_movimiento": [
+  "Liquidado",
+  "Por liquidar"
+ ],
+ "tipos_documento": [
+  "Informe Técnico de Impacto",
+  "Cartografía / Planos",
+  "Datos Brutos de Campo",
+  "Estudio Sociocultural",
+  "Términos de Referencia",
+  "NOTA: hardcodeados en el <select id=\"modal-doc-type\"> de renderPage8, no viven en state.catalogs; la versión (v1.0...) es un input de texto libre"
+ ],
+ "especies": [
+  "Palo Blanco (Calycophyllum candidissimum) — densidad 0.78 g/cm³, protegido: false",
+  "Yiguire (Trichilia trifolia) — 0.64 g/cm³, protegido: false",
+  "Majomo (Lonchocarpus sericeus) — 0.71 g/cm³, protegido: TRUE (badge VEDADA)",
+  "Guatácare (Eschweilera tenax) — 0.85 g/cm³, protegido: false",
+  "Mora de Guayana (Mora excelsa) — 0.92 g/cm³, protegido: false"
+ ],
+ "tipos_proyecto": [
+  "NO EXISTE lista de tipos de proyecto en Stitch: el wizard (renderPage4) no pide tipo y el modelo project no tiene campo tipo",
+  "Tipos implícitos por los nombres de la semilla: Inventario forestal / Plan de manejo",
+  "Estudio de Impacto Ambiental (EIA) y sociocultural",
+  "Levantamiento y obras hidráulicas",
+  "Modelo de negocios / factibilidad forestal",
+  "Permisología y estudio de suelos",
+  "Restauración ecológica y monitoreo biológico"
+ ],
+ "modelo_datos": "DEFAULT_STATE (objeto raíz persistido íntegro en localStorage):\n- currentUser (string id, \"carlos.mendoza\"), currentRole (\"coordinador\"), currentProjectId (\"PI-2024-002\").\n- users[]: { id, nombre, rol (admin|coordinador|profesional|administracion|direccion), especialidad, activo (bool), honorario (number USD, honorario base) }.\n- standardStages[]: { num (1..10), nombre, compuerta (bool; solo num 6 true) } — plantilla clonada al crear proyecto.\n- catalogs: { species[]: { id, nombreComun, nombreCientifico, densidad (string \"0.78 g/cm³\"), protegido (bool) }, financialCategories[]: string[7] }.\n- projects[]: { id (\"PI-AAAA-NNN\"), nombre, contratante (string libre), rif (\"J-XXXXXXXX-X\"), fechaInicio, fechaFinPrevista (strings DD/MM/AAAA), estado, progreso (0-100), presupuestoTotal (USD), coordinadorId, ubicacion (texto con estado venezolano y coordenadas WGS84),\n   etapas[10]: { num, nombre, compuerta? (bool), estado, fechaFin (DD/MM/AAAA), vencida (bool), observacionesCompuerta? (string) },\n   equipo[]: { userId, rolEnProyecto (string libre), asignacion (USD, honorario en el proyecto) },\n   fieldMeasurements[]: { id (\"FM-NN\"), parcela (string), hectareas, especie (nombreComun del catálogo), numArboles, alturaPromedioM, dapPromedioCm, volumenManualM3, fecha, responsable (nombre) },\n   finanzas[]: { id (\"FIN-NNN\"), tipo (Ingreso|Egreso), categoria, concepto, monto (USD), fecha, estado (Liquidado|Por liquidar) },\n   documentos[]: { id (\"DOC-NN\"), titulo (nombre de archivo), tipo, version (\"v1.0\"), fecha, autor, tamano (string \"4.2 MB\") } }.\n- auditLogs[]: { id (\"LOG-NNN\"), timestamp (\"DD/MM/AAAA HH:MM:SS\"), usuario (nombre), rol, accion (MAYÚSCULAS_CON_GUIONES), proyectoId (id | \"GLOBAL\" | \"SISTEMA\"), detalle } — append-only vía store.log (unshift, nuevos primero).\n- NO existen entidades: contratantes (se derivan de projects en renderPage14), tipos de documento (hardcodeados en HTML), tipos de proyecto, estados como catálogo, calendario, notificaciones.\n- Store: constructor lee STORAGE_KEY o asigna DEFAULT_STATE (por referencia) y guarda; save(); log(accion, proyectoId, detalle); switchUser(id); switchRole(role) (toma el primer usuario con ese rol); getCurrentUser(); getProject(id) (fallback al primer proyecto).",
+ "semilla_resumen": "País aparente: VENEZUELA (RIF con formato J-40918231-0; ubicaciones en Bolívar, Falcón/Paraguaná, Cojedes/Embalse El Pao, Monagas/Uverito, Carabobo/Bejuma y corredor San Diego-Guacara; 'Ministerio de Ecosocialismo', 'Conformidad Minea', 'Asesora Permisología Minea', retenciones 'IVA e ISLR'; apellido Vallenilla). 8 usuarios: Carlos Mendoza (coordinador, 3200), Elena Ramos (profesional, 2400), Marcos Silva (coordinador, 3100), Patricia Duarte (administracion, 2100), Roberto Gómez (direccion, 4500), Sofía Alcalá (profesional, 2200), Diego Torres (profesional, 2300), Luis Vallenilla (admin, 2800). 6 proyectos: PI-2024-001 Inventario Forestal y Plan de Manejo Cuenca Río Aro (Consorcio Maderero del Sur C.A., En Ejecución, 60%, $48,500); PI-2024-002 EIA y Sociocultural Parque Eólico Península (Generadora Eólica del Norte S.A., En Revisión, 55%, $72,000, etapa 6 'Esperando Aprobación'); PI-2024-003 Levantamiento y Obras Hidráulicas Sector El Pao (Aguas Regionales y Saneamiento C.A., En Ejecución, 45%, $52,000, etapas 3-6 vencidas); PI-2024-004 Modelo de Negocios Forestación Comercial Guayana (Inversiones Agroforestales Macizo S.A., En Oferta, 15%, $34,000); PI-2024-005 Permisología y Estudio de Suelos Línea de Transmisión (Consorcio Energético Central, En Permisología, 35%, $61,500); PI-2023-018 Restauración Ecológica y Monitoreo Biológico Finca La Esmeralda (Fundación Agrícola del Valle, Cerrado, 100%, $39,000). Suma presupuestos: $307,000. 6 contratantes (uno por proyecto). 6 mediciones de campo (5 en PI-2024-001 parcelas P-01..P-03, 1 en PI-2024-002). 13 movimientos financieros (5+3+3+0+0+2). 5 documentos (3+2). 30 asientos de bitácora (LOG-001..LOG-030, fechados 15/01/2024 a 10/05/2024). 5 especies, 7 categorías financieras, 10 etapas estándar. Fecha 'actual' implícita de la semilla: 10/05/2024 (usada como fecha fija en altas y en el reporte).",
+ "calculo_volumen": "NO hay ninguna fórmula de cubicación ni factor de conversión en todo el archivo. grep de `Math.PI`, `0.7854`, `factor de forma`, `fórmula`, `ecuaci`, `cubica` solo devuelve la nota textual de la página 9. El volumen se captura a mano y renderPage9 solo lo SUMA por especie:\n\n```js\n// Sumar volúmenes manuales por especie\nconst speciesSummary = {};\np.fieldMeasurements.forEach(m => {\n  if (!speciesSummary[m.especie]) {\n    speciesSummary[m.especie] = { arboles: 0, volumenTotalM3: 0, parcelas: new Set() };\n  }\n  speciesSummary[m.especie].arboles += m.numArboles;\n  speciesSummary[m.especie].volumenTotalM3 += m.volumenManualM3;\n  speciesSummary[m.especie].parcelas.add(m.parcela);\n});\n```\ny al guardar:\n```js\nconst altura = parseFloat(document.getElementById('field-altura').value) || 0;\nconst dap = parseFloat(document.getElementById('field-dap').value) || 0;\nconst volumen = parseFloat(document.getElementById('field-volumen').value);\nif (!parcela || isNaN(volumen)) { showToast('Validación Inválida', 'Identificador de parcela y volumen en m³ son obligatorios.', 'warning'); return; }\nconst newFM = { id: \"FM-\"+..., parcela, hectareas: ha, especie, numArboles: arboles, alturaPromedioM: altura, dapPromedioCm: dap, volumenManualM3: volumen, fecha: \"10/05/2024\", responsable: store.getCurrentUser().nombre };\n```\nAltura y DAP se guardan y se muestran en la tabla pero nunca entran en un cálculo. El input dice \"Volumen Manual Estimado (m³) *\" con leyenda \"Valor numérico capturado sin fórmula automática.\" y la tabla muestra `${m.volumenManualM3.toFixed(1)} m³`. La página 15 solo cuenta parcelas (`reduce((a,c)=>a+c.fieldMeasurements.length,0)`). Dos matices a vigilar: (1) la nota visible dice \"* Ecuación de volumen pendiente de definir por el equipo técnico. Captura estrictamente manual en m³.\" — implica que se definirá una ecuación en el futuro, lo que choca con la regla \"NUNCA calcular\"; (2) el catálogo de especies incluye `densidad: \"0.78 g/cm³\"` (atributo dasométrico que invita a conversiones), aunque no se usa en ningún cálculo.",
+ "campos_texto_libre_en_clasificacion": [
+  "renderPage4 → <input id=\"wz-contratante\" type=\"text\"> 'Empresa Contratante *' (contratante como texto libre; no hay catálogo/entidad de contratantes)",
+  "renderPage4 → <input id=\"wz-rif\" type=\"text\"> y <input id=\"wz-ubicacion\" type=\"text\"> (datos, no clasificación; aceptable)",
+  "renderPage4 → fechas <input id=\"wz-inicio\"/\"wz-fin\" type=\"text\" placeholder=\"DD/MM/AAAA\"> sin validación",
+  "renderPage4 → no existe campo 'tipo de proyecto'; estado del proyecto fijado por código a 'En Ejecución'",
+  "renderPage8 → <input id=\"modal-doc-ver\" type=\"text\" value=\"v1.0\"> versión de documento libre",
+  "renderPage8 → tipos de documento en select pero hardcodeados en HTML, no en catálogo",
+  "renderPage9 → <input id=\"field-parcela\" type=\"text\"> identificador de parcela libre (aceptable, es identificador)",
+  "renderPage10 → <input id=\"modal-fin-concept\" type=\"text\"> concepto libre (descripción, aceptable); categoría/tipo/estado sí son select",
+  "Semilla → project.etapas[].nombre renombradas libremente por proyecto y equipo[].rolEnProyecto texto libre (sin UI de alta)",
+  "Semilla → project.estado y etapa.estado son strings sin constante/lista controlada ('Completada Tarde', 'Atrasada', 'En Permisología'...)",
+  "Semilla → finanzas.categoria 'Anticipo Contractual 30%' y 'Cierre Contractual 70%' no pertenecen a catalogs.financialCategories"
+ ],
+ "honorario_visible_por_rol": "renderPage7 calcula displayAmount por fila así (cita textual):\n\n```js\nconst role = store.state.currentRole;\nconst currentUserId = store.state.currentUser;\nconst totalHonorarios = p.equipo.reduce((acc, mem) => acc + mem.asignacion, 0);\n...\n${role === 'profesional' ? 'CONFIDENCIAL' : formatMoney(totalHonorarios)}   // cabecera 'Monto Total de Honorarios'\n...\n${p.equipo.map(mem => {\n  const u = store.state.users.find(x => x.id === mem.userId) || { nombre: mem.userId, especialidad: \"Especialista\" };\n  let displayAmount = \"-\";\n  if (role === 'admin' || role === 'coordinador' || role === 'administracion') {\n    displayAmount = formatMoney(mem.asignacion);\n  } else if (role === 'profesional') {\n    if (mem.userId === currentUserId) {\n      displayAmount = formatMoney(mem.asignacion);\n    } else {\n      displayAmount = \"-\"; // REGLA ESTRICTA: Guión para otros\n    }\n  } else if (role === 'direccion') {\n    displayAmount = \"-\"; // Dirección ve solo el total consolidado en cabecera\n  }\n```\nResultado: admin/coordinador/administracion ven todos los montos y el total; profesional ve el equipo completo (nombres, rol en expediente, especialidad) pero solo su propio monto (guión en los demás) y 'CONFIDENCIAL' en el total; direccion ve guiones por fila y solo el total consolidado en la cabecera. El texto explicativo cambia por rol ('Regla de Privacidad Activa: Solo tiene visibilidad de su propia remuneración pactada.'). Coherencia en otras páginas: página 2 muestra al profesional 'Mis Honorarios Asignados' = user.honorario (honorario base del usuario, no la asignación del proyecto); página 3 muestra 'Confidencial' en Presupuesto para profesional; página 21 muestra el honorario base propio a cualquier rol; página 17 (solo admin) lista el honorario base de todos. No se usa PERMISSIONS.canViewAllFees en ningún sitio.",
+ "persistencia": "STORAGE_KEY = 'PI_ENTERPRISE_CORE_DATA_V2'. La clase Store, en el constructor, hace `localStorage.getItem(STORAGE_KEY)`; si existe y parsea, `this.state = JSON.parse(stored)`; si falla el parse o no existe, `this.state = DEFAULT_STATE` (asignación por referencia, muta la constante) y `this.save()`. `save()` = `localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state))` y se llama tras cada mutación (log, switchUser, switchRole, crear proyecto, compuerta, documento, medición, movimiento, toggle usuario, selección de proyecto, búsqueda del header). Se guarda TODO el estado: currentUser, currentRole, currentProjectId, users, standardStages, catalogs, projects (con etapas, equipo, mediciones, finanzas, documentos) y auditLogs; por tanto el rol activo y el proyecto seleccionado persisten entre recargas, pero la página actual no (`let currentPage = '2'` siempre arranca en el Panel). Reinicio: NO existe botón ni función de 'reiniciar datos de ejemplo'; la única forma de volver a la semilla es borrar la clave en localStorage (o que el JSON esté corrupto). Cambiar STORAGE_KEY (sufijo _V2) es el mecanismo implícito de invalidar datos viejos.",
+ "exportaciones": [
+  "Página 3 'Descargar CSV': REAL — construye data:text/csv con cabecera Codigo,Nombre,Contratante,Estado,FechaFin,PresupuestoUSD,Progreso de TODOS los proyectos (ignora filtros), descarga PI_EXPEDIENTES_<AAAA-MM-DD ISO>.csv vía <a download>, log EXPORTACION_CSV",
+  "Página 19 'Exportar Bitácora Completa': REAL — data:text/csv con ID,Timestamp,Usuario,Rol,Proyecto,Accion,Detalle, archivo PI_BITACORA_AUDITORIA_<Date.now()>.csv",
+  "Página 15 'Exportar CSV': SIMULADA — solo showToast('Reporte Generado', 'CSV técnico descargado correctamente') + log REPORTE_MENSUAL, no genera archivo",
+  "Página 15 'Imprimir / PDF': window.print()",
+  "Botón global 'CSV' del breadcrumb (#btn-export-csv-view): SIMULADO — solo toast 'Generando reporte de la vista actual...'",
+  "Página 8 descarga de documento (PI_DOWNLOAD_MOCK): SIMULADA — toast 'Generando réplica sellada de: <título>' + log DESCARGA_DOC"
+ ],
+ "dependencias_externas": [
+  "<script src=\"https://cdn.tailwindcss.com\"></script> (Tailwind Play CDN, requiere internet; todo el marcado usa clases utilitarias + tailwind.config inline)",
+  "<link href=\"https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap\" rel=\"stylesheet\"/> (tipografías remotas)",
+  "<link href=\"https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0\" rel=\"stylesheet\"/> y una segunda <link> Material+Symbols+Outlined:wght,FILL@100..700,0..1 (todos los iconos son ligaduras de esta fuente remota)",
+  "<link href=\"https://fonts.googleapis.com\" rel=\"preconnect\"/> y <link crossorigin href=\"https://fonts.gstatic.com\" rel=\"preconnect\"/>",
+  "<img alt=\"Logo Proyectos Integrales\" src=\"https://lh3.googleusercontent.com/aida/AEtjO1W...\"> (logo del header alojado en Google)",
+  "<img src=\"placeholder\" ...> en renderPage5 (mapa; imagen rota, sin recurso)",
+  "APIs del navegador: localStorage, Intl.NumberFormat('en-US', USD), window.print(), setInterval; NO hay fetch/XMLHttpRequest ni librerías JS externas"
+ ],
+ "hallazgos_sospechosos": [
+  {
+   "descripcion": "Dependencias remotas: Tailwind por CDN, Google Fonts (Hanken Grotesk, JetBrains Mono) e iconos Material Symbols como fuente remota, logo alojado en googleusercontent. Sin internet la página pierde estilos, iconos y logo.",
+   "evidencia": "<script src=\"https://cdn.tailwindcss.com\"></script> ; <link href=\"https://fonts.googleapis.com/css2?family=Hanken+Grotesk...\" rel=\"stylesheet\"/> ; <link href=\"https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined...\" rel=\"stylesheet\"/> ; <img alt=\"Logo Proyectos Integrales\" ... src=\"https://lh3.googleusercontent.com/aida/AEtjO1W...\">",
+   "regla_afectada": "Regla 1 (todo offline) y Regla 2 (sin Tailwind/compilación; CSS propio con variables)"
+  },
+  {
+   "descripcion": "Todo el marcado depende de clases utilitarias Tailwind y de un tailwind.config inline con tokens (colores, spacing, fontSize). El look debe reimplementarse con CSS propio y variables.",
+   "evidencia": "<script id=\"tailwind-config\">tailwind.config = { darkMode: \"class\", theme: { extend: { \"colors\": { \"on-surface\": \"#191c1a\", \"primary\": \"#023627\", ... }, \"spacing\": { \"spacing-xl\": \"2rem\", ... } } } }</script> y clases como class=\"px-spacing-sm py-2.5 font-data-mono-md text-data-mono-md text-primary\"",
+   "regla_afectada": "Regla 2 (sin Tailwind)"
+  },
+  {
+   "descripcion": "No existe la marca 'BETA · datos de ejemplo' en la barra superior. El header muestra logo, buscador, 'Entrar como:', campana y ayuda; el sidebar muestra un estándar inventado.",
+   "evidencia": "grep -i 'BETA' y 'datos de ejemplo' en code.html: 0 resultados. Header: <span class=\"font-label-caps ... uppercase font-semibold\">Entrar como:</span>. Pie del sidebar: <span ...>Estándar Técnico</span><span ...>ISO 14001 / EIA-v2</span>",
+   "regla_afectada": "Regla 5 (marca visible BETA · datos de ejemplo)"
+  },
+  {
+   "descripcion": "La nota visible de mediciones anuncia una ecuación de volumen 'pendiente de definir', lo que sugiere que en el futuro sí se calculará; además el catálogo de especies incluye densidad de madera (g/cm³), un atributo que invita a conversiones aunque no se use.",
+   "evidencia": "<span class=\"font-body-sm text-body-sm italic\">* Ecuación de volumen pendiente de definir por el equipo técnico. Captura estrictamente manual en m³.</span> ; species: { id: \"sp-1\", nombreComun: \"Palo Blanco\", nombreCientifico: \"Calycophyllum candidissimum\", densidad: \"0.78 g/cm³\", protegido: false }",
+   "regla_afectada": "Regla 3 (NUNCA calcular volumen; sin ecuación ni factor de conversión) — el código cumple (solo suma), el texto y el dato de densidad son ambiguos"
+  },
+  {
+   "descripcion": "La matriz PERMISSIONS y checkPermission son código muerto: nunca se invocan. El gating real está hardcodeado por número de página y rol, y varias reglas de la matriz no se aplican (p. ej. canCaptureField:false para administracion/direccion, pero pueden asentar mediciones; canEditCatalogs true para admin pero la página 18 es solo lectura; canManageUsers pero 'Nuevo Usuario' es solo un toast).",
+   "evidencia": "function checkPermission(requiredRule) { const role = store.state.currentRole; const perms = PERMISSIONS[role] || {}; return !!perms[requiredRule]; } — grep 'checkPermission' solo aparece en su definición (línea 796). Gating real: const adminOnlyPages = ['17', '18', '19']; if (adminOnlyPages.includes(currentPage) && store.state.currentRole !== 'admin') { renderPage20(...) } ; if (currentPage === '12' && !['coordinador', 'admin'].includes(...)) ; if (currentPage === '10' && store.state.currentRole === 'profesional') ; if (currentPage === '16' && store.state.currentRole === 'profesional')",
+   "regla_afectada": "Regla 8 (cinco roles con matriz de permisos coherente)"
+  },
+  {
+   "descripcion": "Solo la etapa 6 es compuerta. No existe flujo 'completar → aprobar/devolver → desbloquear siguiente' para las 10 etapas: las etapas 1-5 y 7-10 no tienen ningún botón. 'vencida' es un booleano fijo de la semilla, nunca se calcula con fechas. No hay estado 'Devuelta': devolver regresa a 'Pendiente'. Al crear un proyecto, las etapas 2-5 quedan 'Bloqueada' pero la 6 queda 'Pendiente' (incoherente) y todas con fechaFin fija.",
+   "evidencia": "standardStages: solo { num: 6, ..., compuerta: true }. renderPage6: ${isGate6 && isWaiting && canApprove ? `<button onclick=\"window.PI_OPEN_GATEWAY_MODAL(true)\">Aprobar</button><button onclick=\"window.PI_OPEN_GATEWAY_MODAL(false)\">Devolver</button>` : ''} ; devolver: stage6.estado = 'Pendiente'; stage6.observacionesCompuerta = \"Devuelto para corrección: \" + comment ; aprobar: if (stage7) stage7.estado = 'En Proceso'; p.progreso = Math.min(100, p.progreso + 15) ; wizard: estado: idx === 0 ? \"En Proceso\" : (s.compuerta ? \"Pendiente\" : \"Bloqueada\"), fechaFin: \"15/07/2024\"",
+   "regla_afectada": "Regla 9 (10 etapas; cada etapa se completa, se aprueba o se devuelve con comentario; al aprobarse se desbloquea la siguiente; etapas vencidas)"
+  },
+  {
+   "descripcion": "El botón 'Radicar para Revisión' de la etapa 6 se muestra a cualquier rol (incluida Dirección y Administración), sin chequeo de permiso.",
+   "evidencia": "${isGate6 && e.estado === 'Pendiente' ? `<button onclick=\"window.PI_SUBMIT_GATEWAY()\" ...>Radicar para Revisión</button>` : ''} (no usa canApprove ni PERMISSIONS)",
+   "regla_afectada": "Regla 8 (matriz de permisos)"
+  },
+  {
+   "descripcion": "Estados de proyecto y de etapa no provienen de ninguna lista controlada: son strings sueltos en la semilla ('Completada Tarde', 'Atrasada', 'En Permisología', 'En Oferta') y en un <select> hardcodeado; los tipos de documento están hardcodeados en el modal y no en catalogs; no existe 'tipo de proyecto' y el estado al crear se fija por código.",
+   "evidencia": "{ num: 3, nombre: \"Levantamiento de Obras de Captación\", estado: \"Completada Tarde\", fechaFin: \"05/03/2024\", vencida: true } ; { num: 4, ..., estado: \"Atrasada\", ... } ; <select id=\"modal-doc-type\"><option value=\"Informe Técnico de Impacto\">... (5 opciones fijas) ; newProject: estado: \"En Ejecución\" ; catalogs solo contiene species y financialCategories",
+   "regla_afectada": "Regla 4 (categorías, tipos, estados, especies desde listas controladas)"
+  },
+  {
+   "descripcion": "La semilla financiera usa categorías que NO están en el catálogo de categorías controladas.",
+   "evidencia": "{ id: \"FIN-101\", tipo: \"Ingreso\", categoria: \"Anticipo Contractual 30%\", ... } y { id: \"FIN-018-2\", tipo: \"Ingreso\", categoria: \"Cierre Contractual 70%\", ... } vs financialCategories: [\"Honorarios Profesionales\", \"Logística & Viáticos de Campo\", \"Ensayos de Laboratorio Acreditado\", \"Cartografía Satelital & Sensores\", \"Tasas de Radicación y Notaría\", \"Equipamiento Técnico & Alquiler 4x4\", \"Seguridad Industrial & EPP\"]",
+   "regla_afectada": "Regla 4 (listas controladas)"
+  },
+  {
+   "descripcion": "Contratante como texto libre en el wizard y sin entidad propia; la página 14 los deriva de los proyectos; versión de documento como texto libre.",
+   "evidencia": "<input id=\"wz-contratante\" type=\"text\" value=\"...\" placeholder=\"Nombre de la corporación o ente\"> ; renderPage14: store.state.projects.forEach(p => { if (!contractors[p.contratante]) { contractors[p.contratante] = { nombre: p.contratante, rif: p.rif, proyectos: [] }; } ... }) ; <input id=\"modal-doc-ver\" type=\"text\" value=\"v1.0\">",
+   "regla_afectada": "Regla 4 (listas controladas) y modelo de datos de la especificación (contratantes como entidad)"
+  },
+  {
+   "descripcion": "Fechas inconsistentes: las altas (documento, medición, movimiento) usan una fecha fija '10/05/2024' mientras la bitácora usa new Date() real; los nombres de CSV usan ISO AAAA-MM-DD y Date.now(); el wizard captura fechas en <input type=\"text\"> sin validar; el calendario tiene rótulo fijo 'MAYO - JUNIO 2024' y no es una vista mensual.",
+   "evidencia": "p.documentos.unshift({ ..., fecha: \"10/05/2024\", ... }) ; newFM = { ..., fecha: \"10/05/2024\", ... } ; newRec = { ..., fecha: \"10/05/2024\", ... } ; link.setAttribute(\"download\", `PI_EXPEDIENTES_${new Date().toISOString().slice(0,10)}.csv`) ; <div class=\"flex items-center gap-2 font-data-mono-md ...\">MAYO - JUNIO 2024</div>",
+   "regla_afectada": "Regla 6 (fechas DD/MM/AAAA) y coherencia de datos de ejemplo"
+  },
+  {
+   "descripcion": "Montos: USD correcto pero con formato en-US (Intl 'en-US'); cifras ejecutivas y KPIs hardcodeados que no cuadran con la semilla (total contratado real = $307,000; el rotador dice $274,500).",
+   "evidencia": "function formatMoney(amount) { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount); } ; renderPage16: <div class=\"text-3xl ...\">$274,500.00 USD</div> ... <div ...>34.8%</div> ; renderPage15: <div ...>82.4%</div> ; renderPage12: antiguedadDias: 12",
+   "regla_afectada": "Regla 6 (montos en USD) y criterio de datos de ejemplo verosímiles/coherentes"
+  },
+  {
+   "descripcion": "Elementos fuera de alcance o simulados: campana de notificaciones en el header, textos que prometen notificar al equipo, descarga simulada 'réplica sellada', tamaños de archivo inventados, 'Bitácora Criptográfica Simulada', alta de usuario y CSV de reportes que solo muestran toast, búsqueda global que promete buscar 'matriz ambiental ... o profesional' pero solo busca proyectos.",
+   "evidencia": "<button ...><span class=\"material-symbols-outlined text-[20px]\">notifications</span></button> ; 'Al devolver el informe, se notificará al equipo para correcciones técnicas inmediatas.' ; window.PI_DOWNLOAD_MOCK = (title) => { showToast('Descarga Iniciada', `Generando réplica sellada de: ${title}`, 'info'); ... } ; tamano: \"3.4 MB\" ; /* Bitácora Criptográfica Simulada Inmutable */ ; window.PI_ADD_USER = () => { showToast('Función Administrativa', 'Módulo de enrolamiento directo activo en bitácora.', 'info'); } ; btn-export-reports-csv → showToast('Reporte Generado', 'CSV técnico descargado correctamente.', 'success') ; placeholder=\"Buscar código de expediente, matriz ambiental, contratante o profesional...\"",
+   "regla_afectada": "Regla 10 (sin servidor, correo, notificaciones externas, chat ni integraciones; documentos solo por nombre)"
+  },
+  {
+   "descripcion": "Rutas sin bloqueo: la página 4 (nuevo proyecto) es accesible a cualquier rol por Vista Rápida (solo se oculta el botón); la página 10 permite a Dirección y Administración registrar movimientos; la página 16 (Dirección) es accesible a admin, coordinador y administracion; la página 9 permite capturar a Dirección/Administración.",
+   "evidencia": "renderCurrentRoute solo bloquea: adminOnlyPages ['17','18','19'], '12' (coordinador/admin), '10' y '16' (profesional). Página 3: ${store.state.currentRole !== 'profesional' && store.state.currentRole !== 'direccion' ? `<button onclick=\"window.PI_NAV('4')\">Nuevo Expediente</button>` : ''} — pero navigateTo('4') no valida rol",
+   "regla_afectada": "Regla 8 (matriz de permisos) y Regla 12 (página de Dirección)"
+  },
+  {
+   "descripcion": "Arquitectura SPA monolítica: una sola code.html con router por número y selector 'Vista Rápida' de 23 opciones; el sidebar no enlaza Panel (2), Nuevo Proyecto (4), Perfil (21) ni Fases 2/3; el arranque es siempre la página 2 (no el selector de rol) y el rol se persiste en localStorage; el cambio de rol vive en el header ('Entrar como:') además de la página 1.",
+   "evidencia": "let currentPage = '2'; // Inicia en Dashboard ; <select id=\"quick-page-select\"> con <option value=\"1\">1. Ingreso / Switch de Rol</option> ... <option value=\"23\">...</option> ; routeMap = { 'proyectos': '3', 'aprobaciones': '12', 'calendario': '13', 'contratantes': '14', 'reportes': '15', 'direccion-ejecutiva': '16', 'usuarios': '17', 'catalogos': '18', 'bitacora-general': '19' } ; header: <select ...><option value=\"admin\">Admin</option>...</select> → store.switchRole",
+   "regla_afectada": "Regla 13 (17 archivos HTML) y Regla 7 (index.html es el selector de rol)"
+  },
+  {
+   "descripcion": "Página 1 usa lenguaje de 'credenciales' y 'simulación de acceso' aunque no pide contraseña; conviene renombrar a selector de rol.",
+   "evidencia": "b.textContent = \"1. Ingreso & Selección de Credenciales\"; <h2 ...>Simulación de Acceso & Gobernanza</h2><p ...>Seleccione cualquier identidad precargada para auditar permisos RBAC y visibilidad en tiempo real.</p>",
+   "regla_afectada": "Regla 7 (selector de rol, sin login con contraseña)"
+  },
+  {
+   "descripcion": "La página 16 solo oscurece el contenedor del viewport (bg-inverse-surface); sidebar y header permanecen claros. El sidebar lleva un badge 'DARK' junto a Dirección.",
+   "evidencia": "<div class=\"min-h-[560px] bg-inverse-surface text-inverse-on-surface p-spacing-xl rounded-lg shadow-2xl ...\"> ; sidebar: <span class=\"ml-auto ... bg-inverse-surface text-inverse-on-surface\">DARK</span>",
+   "regla_afectada": "Regla 12 (la página de Dirección es la única en oscuro) — cumple parcialmente; decidir si direccion.html va oscura completa"
+  },
+  {
+   "descripcion": "País: la semilla es coherente con Venezuela (RIF J-, estados, Minea, Ecosocialismo, IVA/ISLR). Sin rastros de Chile (RUT, SAG, DGA, SEIA, ICSARA: 0 coincidencias). Dos detalles menores a revisar: mención de una empresa real de imágenes satelitales ('Planet') y referencia a 'asambleas indígenas'. Etiquetas de estándar inventadas 'EIA-v2 / ISO 14001'.",
+   "evidencia": "{ id: \"FIN-105\", ..., concepto: \"Imágenes multiespectrales Planet 3m\", ... } ; LOG-016 detalle: \"Informe sociocultural con actas de asambleas indígenas anexadas.\" ; <span class=\"px-2 py-0.5 rounded bg-primary-fixed ...\">ESTÁNDAR EIA-V2 / ISO 14001</span>",
+   "regla_afectada": "Regla 11 (nombres inventados y verosímiles para Venezuela) — cumple; solo observaciones menores"
+  },
+  {
+   "descripcion": "Detalles de datos: generación de id de proyecto que se rompe al llegar a 10 ('PI-2024-0010'); progreso +15 arbitrario al aprobar; el estado del proyecto nunca cambia tras aprobar la compuerta (PI-2024-002 queda 'En Revisión' con etapa 6 'Aprobada'); Store asigna DEFAULT_STATE por referencia y no hay botón de reinicio de datos; sin <title>; imagen de mapa rota.",
+   "evidencia": "id: \"PI-2024-00\" + (store.state.projects.length + 1) ; p.progreso = Math.min(100, p.progreso + 15); ; this.state = DEFAULT_STATE; ; grep '<title' = 0 ; <img src=\"placeholder\" data-alt=\"Ortofoto satelital...\" class=\"w-full h-full object-cover\">",
+   "regla_afectada": "Criterio de aceptación / datos de ejemplo coherentes; persistencia reiniciable"
+  }
+ ]
+}

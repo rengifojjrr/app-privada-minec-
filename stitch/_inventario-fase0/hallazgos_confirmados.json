@@ -1,0 +1,1314 @@
+[
+ {
+  "id": "H-01",
+  "categoria": "dependencia_remota",
+  "titulo": "Tailwind por CDN en las 27 pantallas: rompe la regla 1 y la regla 2 a la vez",
+  "descripcion": "Todas las pantallas del export y el prototipo SPA cargan Tailwind desde cdn.tailwindcss.com con un bloque tailwind.config inline. Sin internet no queda ni una clase aplicada: la maqueta se ve como HTML sin estilos. Además el encargo prohíbe Tailwind explícitamente y exige CSS propio con variables. Consecuencia práctica: el export NO es reutilizable como código, solo como referencia visual; hay que reescribir el 100% del CSS.",
+  "evidencia": "3_proyectos_expedientes/code.html:4 — '<script src=\"https://cdn.tailwindcss.com\"></script><script id=\"tailwind-config\">tailwind.config = {\\n  darkMode: \"class\",\\n  theme: { extend: { \"colors\": { \"on-surface\": \"#191c1a\", ...' (verificado; idéntico en las 27 carpetas con code.html y en sistema_de_gesti_n_de_proyectos_integrales/code.html)",
+  "regla_o_seccion_afectada": "Regla 1 (todo offline, sin CDN) y Regla 2 (sin compilación ni Tailwind; CSS propio con variables)",
+  "decision_propuesta": "Seguir la regla: descartar todo el HTML de Stitch como código y reconstruir con CSS propio, volcando los tokens del tailwind.config a un tokens.css con variables (:root). Stitch queda solo como referencia de layout y color.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-01",
+    "refutado": false,
+    "motivo": "La cita existe literalmente y la sustancia (Tailwind por CDN + config inline) se confirma. Único error: son 26 archivos code.html, no 27; el que falta es logo_proyectos_integrales/code.html, que es un SVG suelto sin <head> (el propio H-69 lo reconoce).",
+    "evidencia_verificada": "3_proyectos_expedientes/code.html línea 4: '<script src=\"https://cdn.tailwindcss.com\"></script><script id=\"tailwind-config\">tailwind.config = { darkMode: \"class\", theme: { extend: { \"colors\": { \"on-surface\": \"#191c1a\", ...'. grep -rl 'cdn.tailwindcss.com' --include=code.html = 26 archivos (27 carpetas con code.html; la excepción es logo_proyectos_integrales, SVG puro).",
+    "correccion": "Corregir el conteo: Tailwind CDN en 26 de 27 code.html (las 26 pantallas reales). El archivo del logo no carga Tailwind porque es un SVG independiente. La conclusión y la decisión propuesta no cambian."
+   },
+   {
+    "id": "H-01",
+    "refutado": false,
+    "motivo": "Contradicción real y doble (regla 1 y regla 2). No es exagerado ni redundante: fija la decisión de construcción más cara del proyecto (reescribir el 100% del CSS y tratar el export como referencia visual, no como código). Único matiz: el conteo.",
+    "evidencia_verificada": "grep -l 'cdn.tailwindcss.com' */code.html = 26 archivos (los 27 code.html menos logo_proyectos_integrales/code.html). 3_proyectos_expedientes/code.html:4 carga el CDN con bloque tailwind.config inline (darkMode class, colors on-surface #191c1a...).",
+    "correccion": "Son 26 pantallas, no 27: logo_proyectos_integrales/code.html no carga Tailwind (es un SVG suelto y por eso es el único activo portable tal cual, ver H-69)."
+   }
+  ]
+ },
+ {
+  "id": "H-02",
+  "categoria": "dependencia_remota",
+  "titulo": "Tipografías Hanken Grotesk y JetBrains Mono e iconos Material Symbols servidos desde Google Fonts",
+  "descripcion": "Cada pantalla trae 3-4 <link> a fonts.googleapis.com más preconnect a fonts.gstatic.com. Los iconos NO son SVG: son ligaduras de la fuente Material Symbols Outlined (unos 120 glifos distintos en el export). Sin internet se pierde toda la tipografía y TODOS los iconos quedan como texto ('notifications', 'folder_open'...). En el export no hay ningún .woff2 local.",
+  "evidencia": "3_proyectos_expedientes/code.html:3 — '<link href=\"https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0\" rel=\"stylesheet\"/>' y '<link href=\"https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap\" rel=\"stylesheet\"/>' (verificado)",
+  "regla_o_seccion_afectada": "Regla 1 (nada de tipografías remotas)",
+  "decision_propuesta": "Seguir la regla: pilas de sistema (sans: system-ui, 'Segoe UI', Roboto, Arial; mono: ui-monospace, Consolas, Menlo) y sustituir los iconos por un sprite SVG inline propio manteniendo los mismos nombres de glifo para trazabilidad. Preguntar al usuario solo si quiere empaquetar los .woff2 localmente.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-02",
+    "refutado": false,
+    "motivo": "Ambas citas son literales y verificables; no hay ningún .woff2 local en el export (find = 0). El único exceso es la estimación de glifos.",
+    "evidencia_verificada": "3_proyectos_expedientes/code.html línea 3 contiene los <link> a fonts.googleapis.com para 'Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0' y para 'Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap', más preconnect a fonts.gstatic.com. 26 archivos cargan fonts.googleapis.com. find . -name '*.woff2' = 0.",
+    "correccion": "Los nombres de glifo distintos usados como ligadura de Material Symbols son ~232, no ~120 (grep de los <span class=\"material-symbols-outlined\">). El resto del hallazgo se sostiene."
+   },
+   {
+    "id": "H-02",
+    "refutado": false,
+    "motivo": "Contradicción real de la regla 1 y NO redundante con H-01: la decisión que abre es distinta (los iconos son ligaduras de fuente, no SVG, así que hay que construir un sprite propio de ~120 glifos; eso es trabajo aparte de reescribir el CSS).",
+    "evidencia_verificada": "grep -l 'fonts.googleapis.com' */code.html = 26 archivos. 3_proyectos_expedientes/code.html:3 enlaza Material+Symbols+Outlined y Hanken+Grotesk/JetBrains+Mono. No hay ningún .woff2 en el árbol del export.",
+    "correccion": "26 pantallas, no 27 (misma excepción del logo)."
+   }
+  ]
+ },
+ {
+  "id": "H-03",
+  "categoria": "dependencia_remota",
+  "titulo": "Logo y todas las fotos/mapas alojados en lh3.googleusercontent.com",
+  "descripcion": "El logo de la barra superior es un <img> remoto en las 27 pantallas. Además hay fotos de terreno, ortofotos y mapas satelitales como <img> o background-image remotos (dron sobre bosque, técnicos con forcípula, ortofoto, mapa de Ancud, mapa de Antofagasta, desierto de Atacama). Todas fallan offline, y varias además geolocalizan el proyecto en Chile.",
+  "evidencia": "4_nuevo_proyecto_asistente_en_3_pasos/code.html:282 — '<div class=\"absolute inset-0 bg-cover bg-center\" data-location=\"Atacama Desert, Chile\" style=\"background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDOp50...)\">' (verificado); 9_ficha_de_proyecto_mediciones_de_campo_1/code.html:394 — 'data-location=\"Península de Lacuy, Ancud, Chile\"' (verificado)",
+  "regla_o_seccion_afectada": "Regla 1 (sin imágenes remotas ni fetch externo) y Regla 11 (país)",
+  "decision_propuesta": "Seguir la regla: eliminar todas las imágenes remotas. Usar el SVG inline de logo_proyectos_integrales/code.html como logo y sustituir mapas/fotos por bloques con leyenda (o un SVG esquemático sin topónimos reales).",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-03",
+    "refutado": false,
+    "motivo": "Las dos citas con data-location existen literalmente, incluida la URL lh3 en el style. El logo del header es efectivamente un <img> remoto a lh3.googleusercontent.com.",
+    "evidencia_verificada": "4_nuevo_proyecto_asistente_en_3_pasos/code.html:282 'data-location=\"Atacama Desert, Chile\" style=\"background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDOp50...)'. 9_ficha_de_proyecto_mediciones_de_campo_1/code.html:394 'data-location=\"Península de Lacuy, Ancud, Chile\"'. 3_proyectos_expedientes: '<img alt=\"Logo Proyectos Integrales\" ... src=\"https://lh3.googleusercontent.com/aida/...\">'. 26 archivos con lh3.googleusercontent.com.",
+    "correccion": "Son 26 pantallas (no 27); logo_proyectos_integrales/code.html no tiene imágenes remotas."
+   },
+   {
+    "id": "H-03",
+    "refutado": false,
+    "motivo": "Contradicción real de la regla 1 (recursos remotos) con decisión propia distinta de H-01/H-02: qué se pone en lugar de logo, fotos y mapas. La parte de país es redundante con H-08, pero la parte offline se sostiene sola.",
+    "evidencia_verificada": "grep -l 'lh3.googleusercontent.com' */code.html = 26 archivos; verificado el <img> remoto del logo en la cabecera de 16_vista_de_direcci_n_modo_sala/code.html.",
+    "correccion": "Separar los dos motivos: el remoto (regla 1) obliga a eliminar; el topónimo chileno del data-location ya está cubierto por H-08."
+   }
+  ]
+ },
+ {
+  "id": "H-04",
+  "categoria": "otro",
+  "titulo": "La marca obligatoria 'BETA · datos de ejemplo' no existe en ninguna pantalla",
+  "descripcion": "Un grep de 'BETA' sobre las 27 pantallas devuelve UNA sola coincidencia y es el nombre de una cuadrilla de campo ('Cuadrilla Beta'), no la marca del encargo. Peor: donde debería ir la marca, Stitch pone sellos que afirman lo contrario ('Plataforma Técnica Certificada', 'TERMINAL TÉCNICA // AMBIENTE OPERACIONAL', 'DOCUMENTO TÉCNICO OFICIAL', 'ISO 14001:2015 Conforme'). Hay que diseñar el chip desde cero.",
+  "evidencia": "grep -ril 'BETA' --include=code.html . → solo ./13_calendario_de_campa_as_y_plazos_fatales/code.html, que contiene 'Cuadrilla Beta (Topografía &amp; Geotecnia)' (verificado). 1_ingreso_y_autenticaci_n_segura_login/code.html:118 — 'Plataforma Técnica Certificada'",
+  "regla_o_seccion_afectada": "Regla 5 (marca visible 'BETA · datos de ejemplo' en la barra superior)",
+  "decision_propuesta": "Seguir la regla: añadir el chip 'BETA · datos de ejemplo' en la barra superior de los 17 archivos y eliminar todos los sellos de certificación/producción (ISO, EIA-v2, 'certificado', 'auditado', 'conforme') que contradicen que son datos de ejemplo.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-04",
+    "refutado": false,
+    "motivo": "Verificado exactamente: 'BETA' aparece en un solo archivo y es 'Cuadrilla Beta'; los sellos que afirman lo contrario existen literalmente.",
+    "evidencia_verificada": "grep -ril 'BETA' --include=code.html devuelve solo ./13_calendario_de_campa_as_y_plazos_fatales/code.html, con 'Cuadrilla Beta (Topografía &amp; Geotecnia)'. 1_ingreso.../code.html:118 'Plataforma Técnica Certificada'. También existen 'TERMINAL TÉCNICA // AMBIENTE OPERACIONAL', 'DOCUMENTO TÉCNICO OFICIAL' e 'ISO 14001:2015 Conforme'."
+   },
+   {
+    "id": "H-04",
+    "refutado": false,
+    "motivo": "La ausencia de la marca obligatoria sí cambia una decisión de construcción (hay que diseñar el chip desde cero en los 17 archivos) y, sobre todo, los sellos de 'certificado/ISO/oficial' afirman lo contrario de 'datos de ejemplo': eso es contradicción real con la regla 5.",
+    "evidencia_verificada": "grep -ril 'beta' --include=code.html devuelve un único archivo, 13_calendario_de_campa_as_y_plazos_fatales/code.html, y su coincidencia es 'Cuadrilla Beta'. Ningún header trae marca BETA.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-05",
+  "categoria": "pais_incorrecto",
+  "titulo": "RUT chileno como identificador fiscal de contratantes en 12 pantallas (incluido el placeholder del formulario de alta)",
+  "descripcion": "El identificador de empresa en todo el export es el RUT chileno con dígito verificador, no el RIF venezolano. No es solo dato de ejemplo: el buscador y el modal de alta enseñan el formato al usuario, y el JS de la pantalla 14 lo lleva embebido. Solo el prototipo SPA y 6_9 usan RIF/contexto venezolano.",
+  "evidencia": "4_nuevo_proyecto_asistente_en_3_pasos/code.html:196-198 — '<option selected=\"\" value=\"gen-norte\">Generadora Eléctrica del Norte S.A. (RUT 76.842.190-2)</option><option value=\"minera-andes\">Minera Los Andes SpA (RUT 96.341.002-K)</option>'; 14_15_contratantes_y_reportes_de_cierre/code.html:776 — '<label>RUT Corporativo (con guión)</label><input placeholder=\"Ej: 76.890.123-4\"/>'; 14_directorio_de_contratantes_y_mandantes/code.html:624 — \"rut: 'RUT: 76.842.190-K · Santiago, Chile'\" (verificado)",
+  "regla_o_seccion_afectada": "Regla 11 (nombres y empresas inventados y verosímiles para Venezuela; nada de RUT chileno)",
+  "decision_propuesta": "Seguir la regla: RIF venezolano (J-XXXXXXXX-X) en todo el modelo y en la semilla, como ya hace el prototipo SPA.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-05",
+    "refutado": false,
+    "motivo": "Las tres citas son literales (con el matiz de que el RUT del asistente es '76.842.190-2' y el del directorio '76.842.190-K', tal como se transcribe). El error está en los conteos de la descripción.",
+    "evidencia_verificada": "4_nuevo_proyecto.../code.html:196-198 opciones con 'RUT 76.842.190-2', 'RUT 96.341.002-K', 'RUT 81.209.430-1'. 14_15.../code.html:776 label 'RUT Corporativo (con guión)' + input placeholder 'Ej: 76.890.123-4'. 14_directorio.../code.html:624 \"rut: 'RUT: 76.842.190-K · Santiago, Chile'\".",
+    "correccion": "'RUT' aparece en 8 archivos, no en 12 (5_ficha, 5_8_11, 4_asistente, 2_panel, 10_finanzas, 14_directorio, 14_15 y el prototipo SPA). Y 'RIF' solo aparece literalmente en 3-4 sitios; 6_9 NO usa RIF (su contexto venezolano viene de Decreto 1257 y Paraguaná, no del identificador fiscal)."
+   },
+   {
+    "id": "H-05",
+    "refutado": false,
+    "motivo": "Contradicción explícita de la regla 11 ('nada de RUT chileno') y no es solo dato de ejemplo: el placeholder del formulario de alta enseña el formato, o sea contamina el diseño del campo, no solo la semilla.",
+    "evidencia_verificada": "grep -ril 'RUT' = 12 archivos. grep -l 'RIF[ :-]' (sensible a mayúsculas) = solo sistema_de_gesti_n_de_proyectos_integrales/code.html, que trae rif: 'J-40918231-0' y seis RIF más.",
+    "correccion": "Precisión: 6_9 NO usa RIF (el grep insensible da falsos positivos por 'tarifa'/'verificado'). El único archivo con RIF venezolano es el prototipo SPA."
+   }
+  ]
+ },
+ {
+  "id": "H-06",
+  "categoria": "pais_incorrecto",
+  "titulo": "Organismos chilenos como columna vertebral del flujo: SEA, SEIA/e-SEIA, ICSARA, SMA, CONAF, DGA, SAG, DGC, MOP/DOH, SERNAGEOMIN, CMN, SII",
+  "descripcion": "No son adornos: son estados de proyecto ('Aprobado SEA', 'En Observación ICSARA'), etapas del ciclo ('Ingreso al e-SEIA', 'Consolidado Adenda ICSARA'), KPIs completos ('Ventanilla Única / SEA', 'Vencimiento Legal SEA', 'SLA Normativo SEA'), categorías de documento ('Certificados Sectoriales (SAG, DGA, DGC)'), pestañas ('Facturas y DTE Hitos') y destinos de exportación ('Auditoría SMA / CMN'). Portar esto sin limpiarlo dejaría el sistema funcionalmente chileno.",
+  "evidencia": "3_proyectos_expedientes/code.html:502 — 'Revisión final ICSARA 1 • Modelación acústica completada'; 5_8_11.../code.html:559 — '<option value=\"certificado\">Certificados Sectoriales (SAG, DGA, DGC)</option>'; 5_ficha_de_proyecto_resumen_ejecutivo/code.html:469 — 'Respuesta obligatoria a 42 aclaraciones de servicios públicos (CONAF, SAG, DGA).'; 16_vista_de_direcci_n_modo_sala/code.html:145 — 'EXP-2024-004 (Permisología Forestal SMA)'. (ICSARA presente en 9 archivos y CONAF en 13, verificado por grep)",
+  "regla_o_seccion_afectada": "Regla 11 (nada de SAG, DGA, SEA, SEIA, ICSARA, CONAF, consulta indígena chilena)",
+  "decision_propuesta": "Seguir la regla: sustituir por el marco venezolano genérico (Autoridad Ambiental / Ministerio de Ecosocialismo) y, cuando el nombre del organismo forme parte de un estado o de una etapa, rediseñar ese estado/etapa con vocabulario neutro. Los estados y etapas definitivos los fija la especificación.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-06",
+    "refutado": false,
+    "motivo": "Todas las citas existen y los organismos chilenos están efectivamente incrustados como estados, etapas, KPIs, categorías de documento y destinos de exportación. Los conteos por grep coinciden.",
+    "evidencia_verificada": "3_proyectos.../code.html:502 'Revisión final ICSARA 1 • Modelación acústica completada'. 5_8_11.../code.html:559 '<option value=\"certificado\">Certificados Sectoriales (SAG, DGA, DGC)</option>'. 5_ficha.../code.html:468 'Respuesta obligatoria a 42 aclaraciones de servicios públicos (CONAF, SAG, DGA).' (línea 468, no 469). 16_vista.../code.html:145 'EXP-2024-004 (Permisología Forestal SMA)'. ICSARA en 9 archivos, CONAF en 13. Además verificados: 'Ventanilla Única / SEA' (3:183), 'Vencimiento Legal SEA' (5_ficha:206), 'SLA Normativo SEA' (13:211), 'Aprobado SEA' (8_normado:360/421/482), 'Facturas y DTE Hitos' (12:255), 'Auditoría SMA / CMN' (11:558), 'Consolidado Adenda ICSARA' (5_8_11:550)."
+   },
+   {
+    "id": "H-06",
+    "refutado": false,
+    "motivo": "No es ambientación: los organismos están incrustados en estados, etapas y categorías de lista controlada, así que portarlos contaminaría el modelo de datos, no solo el texto. Contradice regla 11 y arrastra a la regla 4.",
+    "evidencia_verificada": "grep -ril 'ICSARA' = 9 archivos; 'CONAF' = 13 archivos. Verificado 9_ficha_de_proyecto_mediciones_de_campo_1/code.html:145 'Resolución Exenta N° 418/CONAF'.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-07",
+  "categoria": "pais_incorrecto",
+  "titulo": "Leyes y decretos chilenos citados como base legal del sistema (19.799 de firma electrónica, 21.459, 19.300, DS 40, DS 38, D.S. 181, NCh 411, NCh-ISO 17025)",
+  "descripcion": "Stitch no solo ambienta: apoya funcionalidad en normativa chilena. La bitácora WORM afirma validez probatoria ante los Tribunales Ambientales de Chile y la SMA; el aviso de login amenaza con la Ley 21.459; el consentimiento del formulario de asiento obliga a aceptar 'el sellado WORM bajo Ley 19.799'.",
+  "evidencia": "11_ficha_de_proyecto_bit_cora_de_proyecto_ledger_worm/code.html:631 — 'Los folios generados bajo esta bitácora tienen validez probatoria ante los Tribunales Ambientales de la República de Chile y la Superintendencia del Medio Ambiente (SMA) según lo consagrado en la Norma Técnica NCh-ISO 17025.' (verificado); 1_2_ingreso_y_panel_de_inicio_dashboard/code.html:213 — 'El ingreso no autorizado constituye infracción a la Ley 21.459 de Delitos Informáticos.'",
+  "regla_o_seccion_afectada": "Regla 11 (país) y Regla 10 (una beta sin servidor no puede afirmar validez probatoria)",
+  "decision_propuesta": "Seguir la regla: eliminar toda referencia legal. La beta no debe citar normativa de ningún país ni afirmar valor probatorio.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-07",
+    "refutado": false,
+    "motivo": "Las dos citas son literales, incluida la de la Ley 21.459 que sí está en la línea 213 de 1_2 (al final de la línea, tras el aviso de soporte). El resto de la normativa citada también existe.",
+    "evidencia_verificada": "11_...worm/code.html:631 'Los folios generados bajo esta bitácora tienen validez probatoria ante los Tribunales Ambientales de la República de Chile y la Superintendencia del Medio Ambiente (SMA) según lo consagrado en la Norma Técnica NCh-ISO 17025.' 1_2.../code.html:213 termina con 'El ingreso no autorizado constituye infracción a la Ley 21.459 de Delitos Informáticos.' Verificados también: Ley 19.799 (8_normado:294, 12:815, 11:199 y 11:615 'Comprendo el sellado WORM bajo Ley 19.799'), 21.459 (1_ingreso:183), D.S. 38/11 MMA (13:525), D.S. N°181 (6_ficha:470), NCh 411 (9_2:231), 19.300 (6_ficha)."
+   },
+   {
+    "id": "H-07",
+    "refutado": false,
+    "motivo": "Se sostiene por el segundo motivo, no por el primero: citar leyes chilenas es limpieza de texto (parcialmente redundante con H-06), pero afirmar 'validez probatoria ante los Tribunales Ambientales' en una beta sin servidor es una promesa funcional falsa que contradice la regla 10.",
+    "evidencia_verificada": "Cadenas de ley chilena presentes en el export (Ley 19.799, 21.459, NCh-ISO 17025) y ligadas a funciones (sellado WORM, aviso de ingreso).",
+    "correccion": "Reformular como una sola regla de contenido: la beta no cita normativa de ningún país ni afirma valor probatorio. La eliminación de organismos ya la cubre H-06."
+   }
+  ]
+ },
+ {
+  "id": "H-08",
+  "categoria": "pais_incorrecto",
+  "titulo": "Topónimos, correos .cl, teléfonos +56 y domicilio en Santiago en toda la semilla",
+  "descripcion": "Regiones y lugares chilenos en nombres de proyecto, mapas y campañas (Biobío, Los Lagos, Maule, Atacama, Antofagasta, Coquimbo, Llanquihue, Chiloé/Ancud, Alto Loa, Salar de Atacama, Cuenca Maipo, Río Laja, Punta Arenas, Taltal, Chañaral, Til Til, Mejillones, Macanao es la única excepción venezolana). Todos los correos de ejemplo usan dominio .cl, los teléfonos llevan prefijo +56 y la 'Casa Matriz' está en Las Condes, Santiago.",
+  "evidencia": "1_ingreso_y_autenticaci_n_segura_login/code.html:378 — 'Casa Matriz: Av. Andrés Bello 2711, Las Condes, Santiago de Chile. Centro de Datos Auditado ISO 27001.' (verificado); 14_15_contratantes_y_reportes_de_cierre/code.html:573 — '+56 9 8412 9043' y ':572 — rcarmona@generadoraeolica.cl'; 16_vista_de_direcci_n_modo_sala/code.html:378 — 'Auditoría Acuífero Salar de Atacama F1'",
+  "regla_o_seccion_afectada": "Regla 11 (lugares, empresas y personas verosímiles para Venezuela)",
+  "decision_propuesta": "Seguir la regla: reescribir la semilla completa con lugares, empresas (C.A./S.A.), nombres y correos venezolanos. Tomar como base la semilla del prototipo SPA (única coherente con Venezuela) y la de 6_9 (Paraguaná, Falcón).",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-08",
+    "refutado": false,
+    "motivo": "Las tres citas son literales y el patrón es general: todos los correos de ejemplo terminan en .cl y todos los teléfonos empiezan por +56.",
+    "evidencia_verificada": "1_ingreso.../code.html:378 'Casa Matriz: Av. Andrés Bello 2711, Las Condes, Santiago de Chile. Centro de Datos Auditado ISO 27001.' 14_15.../code.html:572 'rcarmona@generadoraeolica.cl' y :573 '+56 9 8412 9043'. 16_vista.../code.html:378 'Auditoría Acuífero Salar de Atacama F1'. Dominios .cl: proyectosintegrales.cl, generadoraeolica.cl, consorciovial.cl, celulosabiobio.cl, eolicadelnorte.cl, bosqueycuenca.cl, estudios.cl. Teléfonos: +56 9 6430 7712, +56 9 7780 1209, +56 9 8412 9043, +56 9 9122 3401. 'Macanao' solo en 7_10."
+   },
+   {
+    "id": "H-08",
+    "refutado": false,
+    "motivo": "Contradicción central de la regla 11 y es la que fija la decisión de mayor alcance en contenido: reescribir la semilla completa. No es redundante; es el hallazgo raíz al que se subordinan H-09, H-10 y H-14.",
+    "evidencia_verificada": "Verificados topónimos, dominios .cl y prefijos +56 en el export; la única semilla venezolana coherente es la del prototipo SPA (RIF J-, estados venezolanos).",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-11",
+  "categoria": "pais_incorrecto",
+  "titulo": "Especies del bosque templado chileno y del desierto de Atacama en el catálogo de especies",
+  "descripcion": "El único catálogo de especies real del export (pantalla 6_9) lista Nothofagus obliqua, N. alpina, N. dombeyi y Caldcluvia paniculata, es decir Roble-Raulí-Coihue-Palo Blanco chilenos; en otras pantallas aparecen Copiapoa solaris/atacamensis, cactáceas endémicas y 'Fundo El Boldo'. Es la lista controlada más sensible del sistema y está poblada con el país equivocado. La 6_9 sí trae la lista venezolana correcta (Cují yaque, Guayacán negro, Araguaney, Palo santo, Roble montañero) y la 18_19 también (Palo Blanco, Yiguire, Majomo, Guatácare).",
+  "evidencia": "9_ficha_de_proyecto_mediciones_de_campo_1/code.html:305-312 — 'Roble (Nothofagus obliqua)', 'Raulí (Nothofagus alpina)', 'Coihue (Nothofagus dombeyi)', 'Palo Blanco (Caldcluvia paniculata)'; 6_9_ficha_de_proyecto_etapas_y_mediciones/code.html:413-415 — 'Prosopis juliflora (Cují yaque)', 'Handroanthus chrysanthus (Araguaney)'",
+  "regla_o_seccion_afectada": "Regla 11 (país) y Regla 4 (especies desde lista controlada)",
+  "decision_propuesta": "Seguir la regla y tomar de Stitch solo las dos listas venezolanas (6_9 y 18_19); descartar la de 9_ficha_..._1. La lista definitiva la fija la especificación.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-11",
+    "refutado": false,
+    "motivo": "Ambas listas existen literalmente y la contraposición es exacta: el catálogo de 9_1 es del bosque templado chileno y el de 6_9 es venezolano.",
+    "evidencia_verificada": "9_ficha_..._mediciones_de_campo_1/code.html:305-308: '<option>Roble (Nothofagus obliqua)</option>', 'Raulí (Nothofagus alpina)', 'Coihue (Nothofagus dombeyi)', 'Palo Blanco (Caldcluvia paniculata)'. 6_9.../code.html:412-416: 'Prosopis juliflora (Cují yaque)', 'Guaiacum officinale (Guayacán negro)', 'Handroanthus chrysanthus (Araguaney)', 'Bursera graveolens (Palo santo)', 'Platymiscium pinnatum (Roble montañero)', bajo el label 'Especie (Lista Controlada)'. 18_19 líneas 176-194: Palo Blanco, Yiguire, Majomo, Guatácare. Copiapoa solaris en 9_2:294. 'Fundo El Boldo' en 3_proyectos:282/292."
+   },
+   {
+    "id": "H-11",
+    "refutado": false,
+    "motivo": "Aunque es país (regla 11), sí abre una decisión propia y crítica: la lista controlada de especies es el catálogo más sensible del sistema forestal y el hallazgo identifica cuáles de las tres listas del export son utilizables y cuál hay que descartar. Eso no lo cubre H-08.",
+    "evidencia_verificada": "Verificado el catálogo venezolano del prototipo (Palo Blanco/Calycophyllum candidissimum, Yiguire, Majomo, Guatácare, Mora de Guayana) frente a las Nothofagus de 9_ficha_de_proyecto_mediciones_de_campo_1.",
+    "correccion": "Ojo: el catálogo del prototipo trae además el campo 'densidad' por especie, que es justo lo que H-26 discute."
+   }
+  ]
+ },
+ {
+  "id": "H-12",
+  "categoria": "pais_incorrecto",
+  "titulo": "Consulta indígena chilena (Convenio 169, pueblo Changa, PAC) como etapa del proyecto en cinco pantallas",
+  "descripcion": "La 'Consulta Comunitaria Indígena (Convenio 169)' aparece como etapa 06 del ciclo, como categoría de filtro de documentos, como evento de calendario y como taller con una comunidad concreta del norte de Chile. El encargo la prohíbe expresamente.",
+  "evidencia": "5_ficha_de_proyecto_resumen_ejecutivo/code.html:426 — '06 · Consulta Comunitaria Indígena (Convenio 169)' y :496 — 'Tercera mesa de diálogo vinculante con la Comunidad Changa de Caleta Angosta'; 5_8_11.../code.html:336 — '06. Consulta Comunitaria Indígena'; 13_calendario.../code.html:380 — 'Taller Comunidad Indígena Caleta Changa (10:00h)'",
+  "regla_o_seccion_afectada": "Regla 11 (nada de consulta indígena chilena)",
+  "decision_propuesta": "Seguir la regla: eliminar. La etapa 06 real es 'Revisión final del Coordinador' según la propia plantilla que Stitch usa en la 4 y la 6_9.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-12",
+    "refutado": false,
+    "motivo": "Las tres citas son literales y la consulta indígena chilena aparece como etapa 06, como categoría de filtro y como evento de calendario.",
+    "evidencia_verificada": "5_ficha.../code.html:426 '06 · Consulta Comunitaria Indígena (Convenio 169)' y :496 'Tercera mesa de diálogo vinculante con la Comunidad Changa de Caleta Angosta...'. 5_8_11.../code.html:336 '06. Consulta Comunitaria Indígena' y :548 el mismo texto como <option value=\"06\">. 13_calendario.../code.html:380 'Taller Comunidad Indígena Caleta Changa (10:00h)'. 'Consulta Comunitaria'/'Indígena' presente en 6 archivos (5_ficha, 6_ficha, 13, 8_normado, 7_ficha, 5_8_11), es decir cinco pantallas de proyecto más el calendario."
+   },
+   {
+    "id": "H-12",
+    "refutado": false,
+    "motivo": "La regla 11 prohíbe la consulta indígena chilena por su nombre, y aquí no es decorado: ocupa la etapa 06 del ciclo, o sea el eslabón que además concentra el flujo de aprobación (H-46). Contradicción directa con consecuencia estructural.",
+    "evidencia_verificada": "La etapa '06 · Consulta Comunitaria Indígena (Convenio 169)' aparece como etapa, como filtro de documentos y como evento de calendario en varias pantallas.",
+    "correccion": "El nombre sustituto de la etapa 06 lo fija la especificación, no Stitch; hasta entonces vale la plantilla del asistente (ver H-48/H-69)."
+   }
+  ]
+ },
+ {
+  "id": "H-13",
+  "categoria": "pais_incorrecto",
+  "titulo": "Monedas chilenas: CLP como moneda base del reporte financiero y UF en pólizas",
+  "descripcion": "La pantalla 14_15 declara literalmente 'Moneda Base: CLP' y muestra todos los montos en pesos con separador de miles por punto ($2.147.900.000 CLP); la 7_10 ofrece un select con CLP y UF junto a USD; la 7_ficha convierte el total a pesos con tipo de cambio; la 14 expresa las boletas de garantía en UF. El encargo exige montos en dólares.",
+  "evidencia": "14_15_contratantes_y_reportes_de_cierre/code.html:419 — 'Moneda Base: CLP (Pesos Chilenos)' (verificado); 7_ficha_de_proyecto_equipo_y_honorarios/code.html:657 — '<option value=\"CLP\">Pesos Chilenos (CLP)</option>' (verificado) y :279 — '≈ $36,864,000 CLP (T.C. Referencial $960)'; 14_directorio.../code.html:544 — '1,200 UF'",
+  "regla_o_seccion_afectada": "Regla 6 (montos en dólares USD) y Regla 11 (país)",
+  "decision_propuesta": "Seguir la regla: USD único, sin selector de moneda, sin conversión y sin tipo de cambio.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-13",
+    "refutado": false,
+    "motivo": "Las cuatro citas existen literalmente; solo hay desfase de línea en una.",
+    "evidencia_verificada": "14_15.../code.html:419 'Moneda Base: CLP (Pesos Chilenos)'. 7_ficha.../code.html:657 '<option value=\"CLP\">Pesos Chilenos (CLP)</option>' y :237 '≈ $36,864,000 CLP (T.C. Referencial $960)' (la cita decía :279). 14_directorio.../code.html:544 '1,200 UF'. 14_15:747 contiene el 'Volumen Contratado Acumulado' con $2.147.900.000."
+   },
+   {
+    "id": "H-13",
+    "refutado": false,
+    "motivo": "Contradicción literal de la regla 6 ('montos en dólares'). Verificado y no exagerado: hay declaración explícita de moneda base CLP y un selector de moneda, que es una decisión de diseño de formulario, no un dato de ejemplo.",
+    "evidencia_verificada": "grep 'CLP' = 3 archivos (7_ficha, 10_finanzas, 14_15). 14_15_contratantes_y_reportes_de_cierre/code.html:419 'Moneda Base: CLP (Pesos Chilenos)'. 14_directorio.../code.html:544 '1,200 UF'.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-15",
+  "categoria": "login_vs_selector_rol",
+  "titulo": "Las dos versiones de la página 1 son un login con contraseña, no un selector de rol",
+  "descripcion": "Tanto 1_ingreso (pantalla completa) como 1_2 (modal) traen correo institucional y contraseña obligatorios (inputs required), botón 'Iniciar Sesión Segura', medidor de robustez de contraseña con política NIST y enlace de recuperación. El encargo dice que index.html es un selector de rol sin contraseña. La consecuencia es que la página 1 NO tiene diseño reutilizable: hay que diseñarla desde cero (lo más cercano es el 'Simulador de Perfiles', que sí es una rejilla de roles).",
+  "evidencia": "1_ingreso_y_autenticaci_n_segura_login/code.html:257 — 'Credenciales Corporativas' y :282 — '<input id=\"input-password\" required=\"\" type=\"password\" value=\"••••••••••••••••••••\"/>'; :278 — '<a href=\"#\">¿Olvidó contraseña técnica?</a>'",
+  "regla_o_seccion_afectada": "Regla 7 (index.html es SELECTOR DE ROL, sin login, sin registro, sin recuperación de contraseña)",
+  "decision_propuesta": "Seguir la regla: index.html como rejilla de 5 tarjetas de rol sin ningún campo de credencial. Reutilizar solo la maqueta del 'Simulador de Perfiles' de 1_ingreso como referencia visual.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-15",
+    "refutado": false,
+    "motivo": "Las citas del login son literales y la página 1 es efectivamente un login con contraseña obligatoria, recuperación y medidor NIST. Pero la descripción se equivoca al calificar el 'Simulador de Perfiles' como rejilla.",
+    "evidencia_verificada": "1_ingreso.../code.html:249 'Credenciales Corporativas' (la cita decía :257, que es el <form>), :282 '<input id=\"input-password\" required=\"\" type=\"password\" value=\"••••••••••••••••••••\"/>', :278 '<a ... href=\"#\">¿Olvidó contraseña técnica?</a>', :334 'Iniciar Sesión Segura', :295 'NIST-800: Robustez Alta (128-bit Entropía)'. 1_2.../code.html:189 input id=\"user-pass\" required type=\"password\" y :205 'Iniciar Sesión Segura'.",
+    "correccion": "El 'Simulador de Perfiles Operativos' de 1_ingreso (líneas 203-232) NO es una rejilla de roles: es un <select> desplegable de 5 opciones más un panel de tres especificaciones ('Rango de Firma', 'Módulo Asignado', ...) con badge 'SANDBOX DEMO'. Por tanto para index.html no hay ni siquiera una maqueta de rejilla reutilizable; hay que diseñarla íntegra desde cero."
+   },
+   {
+    "id": "H-15",
+    "refutado": false,
+    "motivo": "Contradicción frontal de la regla 7 y con la consecuencia más cara de todo el bloque de acceso: la página 1 no tiene diseño reutilizable, hay que crearla. No es redundante con H-16/H-17 (esos son funciones añadidas; este es que la página entera es otra cosa).",
+    "evidencia_verificada": "1_ingreso_y_autenticaci_n_segura_login/code.html contiene 'Credenciales Corporativas', input type=password required y enlace de recuperación; el mismo patrón en modal en 1_2.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-16",
+  "categoria": "login_vs_selector_rol",
+  "titulo": "Segundo factor completo (2FA, TOTP, FIDO2, YubiKey, PIN, token e-ID) incrustado en el ingreso y en la aprobación de etapas",
+  "descripcion": "Stitch modela autenticación fuerte con hardware: 'Gateway de autenticación segura 2FA' con código de 6 dígitos y temporizador vivo, estado del dongle (YubiKey 5 NFC SN #882410-OK), detección por WebAuthn, y —más grave— el formulario de dictamen de la etapa 06 exige un PIN de seguridad y un 'Certificado Criptográfico de Identidad (Token e-ID)' para poder aprobar. En una beta sin servidor no existe nada de esto, y la aprobación de etapa quedaría bloqueada por un campo imposible.",
+  "evidencia": "1_ingreso_y_autenticaci_n_segura_login/code.html:303-328 — 'Token OTP / Factor Físico FIDO2' y '* Hardware token detectado automáticamente vía WebAuthn / TLS Client Hello.'; 6_ficha_de_proyecto_etapas_y_compuertas/code.html:456-460 — 'Certificado Criptográfico de Identidad (Token e-ID)' value=\"eID-CL-COORDINADOR-M-GODOY-49821-SEC\" y 'Código de Transacción Autorizada' placeholder=\"Ingrese PIN de Seguridad de la Entidad\"; 12_aprobaciones.../code.html:139 — 'DISPOSITIVO CRIPTOGRÁFICO FIDO2 CONECTADO: [YUBIKEY 5 NFC - SLOT 01]'",
+  "regla_o_seccion_afectada": "Regla 7 (sin login) y Regla 10 (sin servidor ni integraciones)",
+  "decision_propuesta": "Seguir la regla: eliminar 2FA, tokens y PIN. La aprobación de etapa se hace con un comentario obligatorio y nada más.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-16",
+    "refutado": false,
+    "motivo": "Las tres citas existen literalmente, incluido el PIN y el token e-ID en el formulario de dictamen de la etapa 06.",
+    "evidencia_verificada": "1_ingreso.../code.html:303 'Token OTP / Factor Físico FIDO2' y :328 '* Hardware token detectado automáticamente vía WebAuthn / TLS Client Hello.'; :322 'YubiKey 5 NFC'; :402 tokenName: \"YubiKey 5 NFC (SN #882410)\". 6_ficha.../code.html:455 'Certificado Criptográfico de Identidad (Token e-ID)', :456 input readonly value=\"eID-CL-COORDINADOR-M-GODOY-49821-SEC\", :460 placeholder=\"Ingrese PIN de Seguridad de la Entidad\". 12_aprobaciones.../code.html:139 'DISPOSITIVO CRIPTOGRÁFICO FIDO2 CONECTADO: [YUBIKEY 5 NFC - SLOT 01]'."
+   },
+   {
+    "id": "H-16",
+    "refutado": false,
+    "motivo": "Se sostiene por el segundo tramo, que es funcional y bloqueante: si se porta el formulario de dictamen, aprobar una etapa exige PIN y token e-ID, campos imposibles en una beta sin servidor. Contradice reglas 7, 9 y 10 a la vez.",
+    "evidencia_verificada": "6_ficha_de_proyecto_etapas_y_compuertas/code.html incluye 'Certificado Criptográfico de Identidad (Token e-ID)' y 'Ingrese PIN de Seguridad' en el formulario de aprobación de la etapa 06.",
+    "correccion": "El 2FA del login es en rigor redundante con H-15 (la página se rehace entera); lo que hay que retener es la limpieza del formulario de aprobación."
+   }
+  ]
+ },
+ {
+  "id": "H-17",
+  "categoria": "login_vs_selector_rol",
+  "titulo": "Recuperación y cambio de contraseña por correo y formulario de perfil",
+  "descripcion": "Además del login hay dos flujos prohibidos: un 'Aviso Normativo' que manda escribir a soporte@ para restablecer la contraseña, y en 'Mi Perfil Profesional' un formulario de cambio de credenciales con contraseña actual, nueva contraseña y política de complejidad. La página 20 (sin permiso) incluye además un enlace mailto real con asunto prellenado.",
+  "evidencia": "1_2.../code.html:213 — 'Para restablecer la contraseña corporativa o actualizar el generador OTP físico, contacte directamente a la Jefatura del Sistema en soporte@proyectosintegrales.cl'; 17_20_23.../code.html:556-566 — '<label>Contraseña Actual</label><input type=\"password\"/>' y '<label>Nueva Contraseña de Acceso</label><input placeholder=\"Mínimo 12 caracteres + números + símbolos\"/>'; :496 — 'href=\"mailto:r.gallardo@proyectosintegrales.cl?subject=Solicitud de Privilegios MOD-17...\"'",
+  "regla_o_seccion_afectada": "Regla 7 (sin recuperación de contraseña) y Regla 10 (sin correo)",
+  "decision_propuesta": "Seguir la regla: perfil.html solo muestra datos del usuario activo (nombre, rol, especialidad, su honorario) en modo lectura; sin credenciales ni mailto.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-17",
+    "refutado": false,
+    "motivo": "Las tres citas existen literalmente: recuperación por correo, formulario de cambio de contraseña y mailto real con asunto prellenado.",
+    "evidencia_verificada": "1_2.../code.html:213 'Aviso Normativo: Para restablecer la contraseña corporativa o actualizar el generador OTP físico, contacte directamente a la Jefatura del Sistema en soporte@proyectosintegrales.cl'. 17_20_23.../code.html:557 label 'Contraseña Actual', :561-562 label 'Nueva Contraseña de Acceso' con placeholder 'Mínimo 12 caracteres + números + símbolos', :496 href='mailto:r.gallardo@proyectosintegrales.cl?subject=Solicitud de Privilegios MOD-17 - Marcela Morales'."
+   },
+   {
+    "id": "H-17",
+    "refutado": false,
+    "motivo": "La regla 7 prohíbe la recuperación de contraseña por su nombre y la regla 10 prohíbe el correo. Abre una decisión propia y distinta de H-15: qué contiene perfil.html (uno de los 17 archivos), que en el export trae formulario de cambio de credenciales y un mailto real.",
+    "evidencia_verificada": "17_20_23_usuarios_acceso_perfil_y_fases_futuras/code.html trae 'Contraseña Actual'/'Nueva Contraseña de Acceso' y un href mailto con asunto prellenado.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-19",
+  "categoria": "contradiccion_interna_stitch",
+  "titulo": "Los cinco roles se renombran de forma distinta en cada pantalla (Coordinador General, Evaluador Ambiental Senior, Auditor ISO, Jefe de Disciplina, Nivel 1-4)",
+  "descripcion": "El header siempre lista los 5 roles correctos, pero dentro de las pantallas Stitch inventa otras nomenclaturas incompatibles: el 'Simulador de Perfiles' cambia 'Administración' por 'Auditora de Calidad & Normativa'; el panel 2 ofrece 4 'Vistas' (Coord. Técnico, Especialista Forestal/EIA, Auditor ISO 14001, Dirección de Operaciones) sin Admin ni Profesional; la 12 introduce una jerarquía de 4 niveles con 'Jefe de Disciplina'; la 17 usa 'Coordinador General' y 'Administrador Central'; la 7_ficha inventa un 'Rol Tercero'. Si se porta cualquiera de estas listas se rompe la matriz de permisos.",
+  "evidencia": "1_ingreso_y_autenticaci_n_segura_login/code.html:221 — '<option value=\"auditor\">Auditora de Calidad &amp; Normativa — Dra. Elena Valenzuela</option>'; 2_panel_de_inicio_dashboard_t_cnico/code.html:141-144 — '<option value=\"coordinador\">Vista: Coord. Técnico Proyectos</option>...<option value=\"director\">Vista: Dirección de Operaciones</option>'; 12_aprobaciones.../code.html:~287 — 'Nivel 2 — Jefe de Disciplina / Especialidad'",
+  "regla_o_seccion_afectada": "Regla 8 (cinco roles: Admin, Coordinador, Profesional, Administración, Dirección)",
+  "decision_propuesta": "Seguir la regla: cinco nombres fijos en toda la beta. Cualquier título de cargo (p. ej. 'Especialista Forestal') es un campo 'especialidad' del usuario, nunca un rol del sistema.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-19",
+    "refutado": false,
+    "motivo": "Las tres citas son literales y las nomenclaturas alternativas de rol están confirmadas en cada pantalla.",
+    "evidencia_verificada": "1_ingreso.../code.html:221 '<option value=\"auditor\">Auditora de Calidad &amp; Normativa — Dra. Elena Valenzuela (e.valenzuela@proyectosintegrales.cl)</option>'. 2_panel.../code.html:141-144 '<option value=\"coordinador\">Vista: Coord. Técnico Proyectos</option>', 'Vista: Especialista Forestal / EIA', 'Vista: Auditor ISO 14001', 'Vista: Dirección de Operaciones'. 12_aprobaciones.../code.html:286 '<option value=\"nv2\">Nivel 2 — Jefe de Disciplina / Especialidad</option>'. 17_20_23:238 'Coordinador General' y :470 'nivel Administrador Central'. 7_ficha:306 'Ocultar Tarifas (Rol Tercero)'."
+   },
+   {
+    "id": "H-19",
+    "refutado": false,
+    "motivo": "Contradicción real de la regla 8 con riesgo de arrastre: si se porta cualquiera de esas listas, la matriz de permisos deja de tener cinco entradas y no se puede implementar el gating. La distinción rol vs especialidad que propone es exactamente la decisión que hay que tomar antes de construir.",
+    "evidencia_verificada": "Verificadas nomenclaturas incompatibles en 1_ingreso (Auditora de Calidad & Normativa), 2_panel (4 'Vistas') y 12 (Nivel 2 — Jefe de Disciplina), frente al select de 5 roles del header.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-20",
+  "categoria": "contradiccion_interna_stitch",
+  "titulo": "La pantalla 7 enuncia la regla de honorarios AL REVÉS: el profesional no vería ningún monto, ni el suyo",
+  "descripcion": "El banner de permisos de 7_ficha dice que las tarifas son visibles 'únicamente para Administrador y Coordinador General' y que 'terceros y profesionales ven guion (-) en tarifas'. El encargo dice que el Profesional ve el equipo pero SÍ ve el monto de su propio honorario. El toggle 'Ocultar Tarifas (Rol Tercero)' implementado en JS enmascara todas las tarifas a la vez, incluido el total. La 7_10 tampoco diseña la variante del profesional: solo la describe en texto. El prototipo SPA sí implementa la regla correcta.",
+  "evidencia": "7_ficha_de_proyecto_equipo_y_honorarios/code.html:248 — 'Tarifas y honorarios visibles únicamente para Administrador y Coordinador General. Terceros y profesionales ven guion (-) en tarifas según política de confidencialidad laboral.' (verificado); sistema_de_gesti_n_de_proyectos_integrales/code.html — \"if (mem.userId === currentUserId) { displayAmount = formatMoney(mem.asignacion); } else { displayAmount = '-'; // REGLA ESTRICTA: Guión para otros }\"",
+  "regla_o_seccion_afectada": "Regla 8 (el Profesional ve el equipo del proyecto pero SOLO el monto de su propio honorario)",
+  "decision_propuesta": "Seguir la regla y tomar como referencia la implementación del prototipo SPA (no la 7_ficha): el Profesional ve su fila con monto y guion en las demás; el total se oculta ('—'). Eliminar el toggle 'Rol Tercero'.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-20",
+    "refutado": false,
+    "motivo": "El banner de 7_ficha dice exactamente lo contrario de la regla del encargo, y el prototipo SPA implementa la regla correcta. Ambas citas son literales.",
+    "evidencia_verificada": "7_ficha.../code.html:248 'Control de visibilidad de honorarios por rol: Tarifas y honorarios visibles únicamente para Administrador y Coordinador General. Terceros y profesionales ven guion (-) en tarifas según política de confidencialidad laboral.' sistema_de_gesti_n_de_proyectos_integrales/code.html:1804-1807 'if (mem.userId === currentUserId) { displayAmount = formatMoney(mem.asignacion); } else { displayAmount = \"-\"; // REGLA ESTRICTA: Guión para otros }', bajo el comentario de la línea 1748 'PÁGINA 7: FICHA - EQUIPO Y HONORARIOS (REGLA ESTRICTA DE VISIBILIDAD)'. Además :1810 'direccion' también recibe '-'. El toggle 'Rol Tercero' existe en 7_ficha:306 y :835."
+   },
+   {
+    "id": "H-20",
+    "refutado": false,
+    "motivo": "Verificado literalmente y es la contradicción más precisa del lote: la regla 8 dice que el Profesional ve SU honorario; la pantalla 7 dice que no ve ninguno. Determina qué versión se porta y qué se descarta.",
+    "evidencia_verificada": "7_ficha_de_proyecto_equipo_y_honorarios/code.html:248 'Tarifas y honorarios visibles únicamente para Administrador y Coordinador General. Terceros y profesionales ven guion (-)...'. Frente a sistema_de_gesti_n.../code.html:1804-1807 'if (mem.userId === currentUserId) ... else displayAmount = \"-\"; // REGLA ESTRICTA'.",
+    "correccion": "El total del equipo oculto para el Profesional es interpretación razonable, no dato de la especificación: marcarlo como decisión, no como regla."
+   }
+  ]
+ },
+ {
+  "id": "H-21",
+  "categoria": "funcion_fuera_de_alcance",
+  "titulo": "Hash SHA-256 por documento, por medición, por asiento y como 'sello raíz' del expediente en 14 pantallas",
+  "descripcion": "Es la función inventada más extendida del export: columna 'Checksum SHA-256' con hashes completos de 64 caracteres en atributos title, 'Sello WORM Inmutable', ROOT-HASH del expediente, 'Firma Criptográfica de Matriz', 'El cálculo de SHA-256 se ejecutará en el cliente', 'WebCrypto SHA-256 Ready', botón 'Calcular Hash & Comprometer al Ledger'. Nada de esto es realizable ni está previsto: los documentos se registran solo por nombre.",
+  "evidencia": "8_ficha_de_proyecto_documentos_y_repositorio_normado/code.html:305 — '<th>Checksum SHA-256</th>' y :578 — 'El cálculo de SHA-256 se ejecutará en el cliente'; 8_ficha_de_proyecto_repositorio_documental/code.html:590 — 'ROOT-HASH: a4f8e9102c9183bc...'; 18_19.../code.html:133 — 'SHA-256 ENFORCE'",
+  "regla_o_seccion_afectada": "Regla 10 (sin servidor; documentos solo por nombre)",
+  "decision_propuesta": "Seguir la regla: eliminar toda la columna y todo el lenguaje criptográfico. Un documento en la beta es nombre + tipo (lista controlada) + fecha + autor.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-21",
+    "refutado": false,
+    "motivo": "La sustancia se confirma con creces (columna Checksum, ROOT-HASH, SHA-256 ENFORCE, cálculo en cliente), pero una de las tres citas está atribuida al archivo equivocado.",
+    "evidencia_verificada": "8_ficha_..._documentos_y_repositorio_normado/code.html:310 '<th ...>Checksum SHA-256</th>' (la cita decía :305) y :870 alert('Archivo detectado. Calculando Checksum SHA-256 en cliente...') y :805 'WebCrypto SHA-256 Ready'. 8_ficha_..._repositorio_documental/code.html:587 'ROOT-HASH: a4f8e9102c9183bc...' (la cita decía :590). 18_19.../code.html:133 'SHA-256 ENFORCE'. 'SHA-256' aparece en 16 archivos.",
+    "correccion": "La frase exacta 'El cálculo de SHA-256 se ejecutará en el cliente' está en 5_8_11.../code.html:578, no en 8_ficha_..._documentos_y_repositorio_normado:578; en ese archivo los equivalentes son 'WebCrypto SHA-256 Ready' (:805) y el alert de :870. Además son 16 archivos con SHA-256, no 14 (el hallazgo se queda corto, no largo)."
+   },
+   {
+    "id": "H-21",
+    "refutado": false,
+    "motivo": "Contradicción real de la regla 10 ('documentos solo por nombre') y de alcance: es la función inventada más extendida, con columna propia en la tabla de documentos. Define la estructura de la pestaña Documentos.",
+    "evidencia_verificada": "grep -ril 'SHA-256' = 16 archivos, incluida la columna '<th>Checksum SHA-256</th>' en 8_ficha_de_proyecto_documentos_y_repositorio_normado.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-22",
+  "categoria": "funcion_fuera_de_alcance",
+  "titulo": "La bitácora se modela como cadena WORM / blockchain con árbol de Merkle, bloque génesis y nodos P2P",
+  "descripcion": "La pestaña 11 y la página 19 no son una bitácora: son un ledger inmutable con 'Bloque Génesis', 'ROOT MERKLE HASH', 'Hojas Criptográficas: 184 Nodos', 'Profundidad del Árbol: 8 Niveles Binarios', 'Consistencia: 0 colisiones', 'Sincronización P2P: Activa', 'Nodo: CL-SCL-01', 'bitácora blockchain interna', botón 'Auditar Cadena Criptográfica' y badge 'Live'. Es la contradicción de alcance más grande del export.",
+  "evidencia": "18_19.../code.html:722 — 'ROOT MERKLE HASH: 84a9ff01cd20e1189ac72b881efac981014e7a83d340' y :502 — 'Cada registro almacena usuario, fecha/hora exacta, entidad afectada, acción y valor previo bajo firma criptográfica SHA-256 vinculada al bloque anterior. Cualquier inconsistencia invalida el ledger local.'; 8_ficha_de_proyecto_repositorio_documental/code.html:700 — 'El checksum coincide exactamente con el sello de depósito emitido en la bitácora blockchain interna.'; 11_...worm/code.html:288 — 'Sincronización P2P: Activa'",
+  "regla_o_seccion_afectada": "Regla 10 (sin servidor ni integraciones) y Regla 13 (la pestaña 7 se llama 'Bitácora', no 'Bitácora WORM')",
+  "decision_propuesta": "Seguir la regla: bitácora = tabla simple de solo-adición (fecha, usuario, rol, acción, detalle), sin hash, sin Merkle, sin nodos y sin la etiqueta WORM. El prototipo SPA ya la implementa así.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-22",
+    "refutado": false,
+    "motivo": "Las tres citas son literales y todos los elementos del ledger (bloque génesis, Merkle, P2P, nodo) están confirmados.",
+    "evidencia_verificada": "18_19.../code.html:722 'ROOT MERKLE HASH: 84a9ff01cd20e1189ac72b881efac981014e7a83d340' y :502 'La bitácora no se edita ni se borra. Cada registro almacena usuario, fecha/hora exacta, entidad afectada, acción y valor previo bajo firma criptográfica SHA-256 vinculada al bloque anterior. Cualquier inconsistencia invalida el ledger local.' 8_ficha_..._repositorio_documental/code.html:689 'El checksum coincide exactamente con el sello de depósito emitido en la bitácora blockchain interna.' (la cita decía :700). 11_worm/code.html:286 'Sincronización P2P: Activa', :206 'Bloque Génesis:', :541 'Hojas Criptográficas:', :549 'Profundidad del Árbol:'. 5_8_11:606 'Auditar Cadena Criptográfica' y :633/658/683/708 'Prev: #... • Nodo: CL-SCL-01'. La pestaña se llama 'Bitácora WORM' con badge 'Live' (5_8_11:169)."
+   },
+   {
+    "id": "H-22",
+    "refutado": false,
+    "motivo": "Comparte familia con H-21 pero abre una decisión distinta y sobre otra página: qué es la bitácora (pestaña 7 y página 19). Sin este hallazgo se podría portar el ledger creyendo que solo hay que quitar la columna de hash.",
+    "evidencia_verificada": "Verificado el bloque de Merkle/bloque génesis/sincronización P2P en 18_19 y 11_..._ledger_worm.",
+    "correccion": "Retirar también el nombre de la pestaña: 'Bitácora', no 'Bitácora WORM'."
+   }
+  ]
+ },
+ {
+  "id": "H-24",
+  "categoria": "funcion_fuera_de_alcance",
+  "titulo": "WebGIS completo: capas conmutables, visor satelital, carga de SHP/KML/GeoTIFF, EPSG y escala cartográfica",
+  "descripcion": "Seis pantallas ofrecen funcionalidad geoespacial real: botón 'Cargar SHP / KML', 'Abrir WebGIS', panel 'Capas GIS Activas' con checkboxes, 'KML / SHP VERIFICADO', overlay SVG de estaciones sobre imagen satelital, 'Importar Lote GPS/KML', formatos admitidos '.shp.zip, .gpkg, .tif.zip (LiDAR)' y 'Capas WFS sincronizadas'. Es servidor + internet + librería, todo prohibido.",
+  "evidencia": "4_nuevo_proyecto_asistente_en_3_pasos/code.html:289 — '<button>Cargar SHP / KML</button>'; 5_8_11.../code.html:288 — '<button>Abrir WebGIS</button>'; 9_ficha_de_proyecto_mediciones_de_campo_2/code.html:~330 — 'Capas GIS Activas' / 'SIG SEA v3'; 3_proyectos_expedientes/code.html:708 — 'Capas WFS y polígonos geoespaciales sincronizados con datum SIRGAS / WGS84 Huso 18S y 19S'",
+  "regla_o_seccion_afectada": "Regla 10 (sin integraciones; nada de WebGIS ni SHP/KML) y Regla 1 (offline)",
+  "decision_propuesta": "Seguir la regla: sin visor ni carga geoespacial. Si la especificación pide ubicación, es un campo de texto o un par de coordenadas de captura manual, sin mapa.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-24",
+    "refutado": false,
+    "motivo": "Las cuatro citas existen literalmente y la funcionalidad geoespacial es real en el diseño (botones de carga, capas, formatos, EPSG).",
+    "evidencia_verificada": "4_nuevo_proyecto.../code.html:290 botón 'Cargar SHP / KML' (la cita decía :289). 5_8_11.../code.html:288 botón 'Abrir WebGIS'. 9_..._mediciones_de_campo_2/code.html:326 'Capas GIS Activas' y :327 'SIG SEA v3'; :131 'Importar Lote GPS/KML'; :314 'Constelación GNSS'. 3_proyectos.../code.html:708 'Capas WFS y polígonos geoespaciales sincronizados con datum SIRGAS / WGS84 Huso 18S y 19S'. 5_ficha:299 'KML / SHP VERIFICADO'. 8_normado:792 'Formatos admitidos: .shp.zip, .gpkg, .pdf ... .tif.zip (LiDAR)'."
+   },
+   {
+    "id": "H-24",
+    "refutado": false,
+    "motivo": "Contradicción real y doble (reglas 10 y 1): un visor de capas y la carga de SHP/KML/GeoTIFF exigen librería, servidor y procesamiento de archivos. Es la decisión que elimina bloques enteros de seis pantallas, no texto.",
+    "evidencia_verificada": "Verificados botones 'Cargar SHP / KML' (4_nuevo_proyecto), 'Abrir WebGIS' (5_8_11) y el panel de capas GIS en 9_..._2.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-25",
+  "categoria": "volumen_calculado",
+  "titulo": "El diseño anuncia que SÍ habrá ecuación de volumen: 'cubicaje final automatizado', 'parámetros alométricos en calibración', 'criterio de cubicador acreditado'",
+  "descripcion": "Confirmo que en NINGÚN archivo hay una fórmula de cubicación, factor de conversión ni Math.PI: el volumen se captura a mano y como máximo se suma. PERO tres textos visibles prometen automatización futura, lo que contradice frontalmente 'NUNCA calcular volumen: ninguna ecuación de cubicación ni factor de conversión'. Si esos textos pasan a la beta, el sistema promete lo que la regla prohíbe.",
+  "evidencia": "6_9_ficha_de_proyecto_etapas_y_mediciones/code.html:451 — '* El cubicaje final automatizado se recalculará al parametrizar la ecuación alométrica correspondiente.' (verificado); 9_ficha_de_proyecto_mediciones_de_campo_1/code.html:145 — 'Resolución Exenta N° 418/CONAF • Parámetros alométricos en calibración por Ing. Forestal Auditor.' (verificado) y :617 — '* Volumen estimado de fuste sin corteza según criterio de cubicador acreditado.' (verificado)",
+  "regla_o_seccion_afectada": "Regla 3 (NUNCA calcular volumen; captura manual; ninguna ecuación ni factor de conversión)",
+  "decision_propuesta": "Seguir la regla: conservar solo la nota neutra que ya usa el prototipo ('Volumen en m³ de captura manual, sin fórmula automática') y borrar toda mención a ecuación alométrica, cubicaje automatizado y cubicador acreditado.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-25",
+    "refutado": false,
+    "motivo": "Las tres citas son literales y confirmo también la afirmación negativa: no hay ninguna fórmula de cubicación (grep de Math.PI, 0.7854 y 'factor de forma' = 0 coincidencias en todo el export y el prototipo).",
+    "evidencia_verificada": "6_9.../code.html:451 '* El cubicaje final automatizado se recalculará al parametrizar la ecuación alométrica correspondiente.' 9_..._mediciones_de_campo_1/code.html:145 'Resolución Exenta N° 418/CONAF • Parámetros alométricos en calibración por Ing. Forestal Auditor.' y :617 '* Volumen estimado de fuste sin corteza según criterio de cubicador acreditado.' grep 'Math.PI|0.7854|factor de forma' --include=code.html = 0."
+   },
+   {
+    "id": "H-25",
+    "refutado": false,
+    "motivo": "Es el hallazgo que protege la regla más delicada del encargo. Confirmo su premisa negativa (no hay fórmula en ningún archivo) y su premisa positiva (hay tres textos que prometen exactamente lo prohibido). Un texto que anuncia cubicaje automatizado es incompatible con 'NUNCA calcular volumen'.",
+    "evidencia_verificada": "grep 'alométric|cubicaj|cubicador' devuelve exactamente 3 coincidencias: 6_9/code.html:451 ('cubicaje final automatizado se recalculará al parametrizar la ecuación alométrica'), 9_..._1/code.html:145 ('Parámetros alométricos en calibración') y 9_..._1/code.html:617 ('según criterio de cubicador acreditado'). Ninguna fórmula ni Math.PI en el árbol.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-29",
+  "categoria": "texto_libre_en_clasificacion",
+  "titulo": "Alta de especie forestal con tres inputs de texto libre (nombre común, científico y familia)",
+  "descripcion": "El modal de catálogos permite crear una especie escribiendo libremente los tres campos, y avisa que el taxón queda permanente e ineliminable. Es la violación más directa de la regla 4: la especie es el campo de clasificación más crítico del sistema forestal.",
+  "evidencia": "18_19_cat_logos_plantillas_y_bit_cora_general/code.html:744-756 — '<label>Nombre Común</label><input placeholder=\"Ej. Samán\" type=\"text\"/>' , '<label>Nombre Científico (Género y Especie)</label><input placeholder=\"Ej. Samanea saman\"/>' , '<label>Familia Botánica</label><input placeholder=\"Ej. Fabaceae\"/>' , '* AVISO: El nuevo taxón se vinculará de forma permanente al catálogo oficial y no podrá eliminarse.'",
+  "regla_o_seccion_afectada": "Regla 4 (ningún campo de clasificación es texto libre; especies desde lista controlada)",
+  "decision_propuesta": "Seguir la regla: en la beta, catalogos.html administra el catálogo de especies en modo lectura (o con activar/desactivar), y la captura de mediciones toma la especie de un <select>. El alta libre no debe existir en la beta.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-29",
+    "refutado": false,
+    "motivo": "Los tres inputs de texto libre y el aviso de permanencia existen literalmente en el modal de alta de especie.",
+    "evidencia_verificada": "18_19.../code.html:744-757: label 'Nombre Común' + '<input id=\"input-nombre-comun\" placeholder=\"Ej. Samán\" type=\"text\"/>'; label 'Nombre Científico (Género y Especie)' + '<input id=\"input-nombre-cientifico\" placeholder=\"Ej. Samanea saman\"/>'; label 'Familia Botánica' + '<input id=\"input-familia\" placeholder=\"Ej. Fabaceae\"/>'; y '* AVISO: El nuevo taxón se vinculará de forma permanente al catálogo oficial y no podrá eliminarse.'"
+   },
+   {
+    "id": "H-29",
+    "refutado": false,
+    "motivo": "Contradicción directa y verificada de la regla 4, en el campo de clasificación más crítico del sistema. Cambia el diseño de catalogos.html (alta libre fuera; especie desde select en mediciones).",
+    "evidencia_verificada": "18_19_cat_logos_plantillas_y_bit_cora_general/code.html: tres <input type=text> ('Nombre Común', 'Nombre Científico (Género y Especie)', 'Familia Botánica') más el aviso de taxón permanente e ineliminable.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-30",
+  "categoria": "texto_libre_en_clasificacion",
+  "titulo": "Contratante, rol técnico, autor de documento, versión, región y observaciones como inputs de texto libre",
+  "descripcion": "Campos que son clasificaciones o referencias a otras entidades se capturan escribiendo: 'Empresa Contratante' (no hay entidad contratantes; la página 14 los deriva de los proyectos), 'Rol Técnico Asignado' (placeholder 'Ej. Modelador Acústico'), 'Autor / Especialista Responsable' (debería venir del equipo del proyecto), 'Versión Formal' / 'Versión Inicial' (v1.0 libre), 'Región / Jurisdicción' y 'Dirección Tributaria y Observaciones de Facturación'.",
+  "evidencia": "7_ficha_de_proyecto_equipo_y_honorarios/code.html:645 — '<label>Rol Técnico Asignado</label><input placeholder=\"Ej. Modelador Acústico\" type=\"text\"/>'; 5_8_11.../code.html:570 — '<label>Autor / Especialista Responsable</label><input type=\"text\" value=\"Ing. Carlos Mendoza\"/>'; 8_ficha_de_proyecto_repositorio_documental/code.html:736 — '<label>Profesional Responsable (Autor) *</label><input placeholder=\"Nombre completo y registro colegiado\"/>'; 14_15.../code.html:788 — '<label>Región / Jurisdicción SMA</label><input type=\"text\"/>'",
+  "regla_o_seccion_afectada": "Regla 4 (listas controladas) y Regla 8 (el autor debe ser un usuario del equipo)",
+  "decision_propuesta": "Seguir la regla: contratante y autor desde <select> alimentado por las entidades del sistema; rol en proyecto desde catálogo; versión con formato controlado o autoincremental.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-30",
+    "refutado": false,
+    "motivo": "Las cuatro citas existen literalmente y todas son <input type=\"text\", no <select>.",
+    "evidencia_verificada": "7_ficha.../code.html:633-634 label 'Rol Técnico Asignado' + input placeholder='Ej. Modelador Acústico' (la cita decía :645). 5_8_11.../code.html:570-571 label 'Autor / Especialista Responsable' + input value='Ing. Carlos Mendoza'. 8_ficha_..._repositorio_documental/code.html:735-736 label 'Profesional Responsable (Autor) *' + input placeholder='Nombre completo y registro colegiado' required. 14_15.../code.html:788-789 label 'Región / Jurisdicción SMA' + input placeholder='Ej: Región de Antofagasta'. Además 8_repo:730 'Versión Inicial / Revisión *', 5_8_11:566 'Versión Formal', y en el prototipo :1292-1293 'Empresa Contratante *' como input de texto libre."
+   },
+   {
+    "id": "H-30",
+    "refutado": false,
+    "motivo": "Se sostiene en su núcleo: contratante, autor y rol en proyecto son referencias a entidades del sistema y capturarlas escribiendo rompe la regla 4 y la integridad de la semilla. Pero está inflado con campos que sí son texto libre legítimo.",
+    "evidencia_verificada": "Verificados inputs de texto para 'Rol Técnico Asignado', 'Autor / Especialista Responsable' y 'Profesional Responsable (Autor)'.",
+    "correccion": "Recortar el hallazgo a cuatro campos: contratante, autor, rol en proyecto y tipo de documento (todos <select>). 'Observaciones' y 'Dirección tributaria' NO son clasificaciones: pueden ser texto libre sin infringir la regla 4. 'Región/Jurisdicción' se resuelve con la semilla venezolana (H-08)."
+   }
+  ]
+ },
+ {
+  "id": "H-31",
+  "categoria": "texto_libre_en_clasificacion",
+  "titulo": "Estados, tipos y etapas existen como cadenas sueltas, sin catálogo, y con nombres distintos según la pantalla",
+  "descripcion": "No hay ninguna lista controlada real de estados ni de tipos en el export: son strings escritos a mano en cada pantalla, y se contradicen. La misma etapa 05 se llama 'Modelación Acústica ISO', 'Línea Base', 'Línea Base Acústica' y 'Modelación Acústica e Impacto' dentro de un mismo archivo; la etapa 01 es 'Línea Base Flora/Fauna', 'Fauna Costera' y 'Fauna Costera y Aves'. Los tipos de proyecto tienen etiqueta y valor distintos ('Inf. Técnico Forestal' → value 'Informe Técnico Forestal'). En el prototipo, la semilla financiera usa dos categorías que no están en el catálogo ('Anticipo Contractual 30%', 'Cierre Contractual 70%').",
+  "evidencia": "5_8_11.../code.html:329 vs :371 vs :436 vs :547 — '05. Modelación Acústica ISO' / 'Etapa 05: Línea Base Acústica' / '05. Línea Base' / '05. Modelación Acústica e Impacto'; 3_proyectos_expedientes/code.html:219 — '<option value=\"Informe Técnico Forestal\">Inf. Técnico Forestal</option>'; sistema_de_gesti_n_de_proyectos_integrales/code.html — 'categoria: \"Anticipo Contractual 30%\"' fuera de financialCategories",
+  "regla_o_seccion_afectada": "Regla 4 (categorías, tipos, estados y especies desde listas controladas únicas)",
+  "decision_propuesta": "Seguir la especificación: definir en un único módulo de catálogos las listas de estados de proyecto, estados de etapa, tipos de proyecto, tipos de documento y categorías financieras, y que TODA la interfaz lea de ahí. Descartar las listas de Stitch como contenido.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-31",
+    "refutado": false,
+    "motivo": "Las tres citas son literales y la contradicción de nombres dentro de un mismo archivo se confirma línea a línea. También confirmo que las dos categorías financieras del prototipo están fuera del catálogo.",
+    "evidencia_verificada": "5_8_11.../code.html:329 '05. Modelación Acústica ISO', :371 '<option>Etapa 05: Línea Base Acústica</option>', :436 '05. Línea Base', :547 '<option value=\"05\">05. Modelación Acústica e Impacto</option>'. Etapa 01: 8_normado:250 '01 Línea Base Flora/Fauna' vs :766 '01. Fauna Costera y Aves' vs 5_8_11:301 '01. Línea Base Fauna Costera'. 3_proyectos:222 '<option value=\"Informe Técnico Forestal\">Inf. Técnico Forestal</option>'. Prototipo :274-282 financialCategories = [Honorarios Profesionales, Logística & Viáticos de Campo, Ensayos de Laboratorio Acreditado, Cartografía Satelital & Sensores, Tasas de Radicación y Notaría, Equipamiento Técnico & Alquiler 4x4, Seguridad Industrial & EPP] — y en :322/375/414/515/516 se usan 'Anticipo Contractual 30%' y 'Cierre Contractual 70%', que NO están en esa lista."
+   },
+   {
+    "id": "H-31",
+    "refutado": false,
+    "motivo": "Contradicción real de la regla 4 en su forma más costosa: no hay ninguna lista controlada de verdad en el export, y las cadenas sueltas se contradicen dentro de un mismo archivo. Fija la existencia de un módulo único de catálogos del que lee toda la interfaz.",
+    "evidencia_verificada": "Verificado el desajuste etiqueta/valor en 3_proyectos_expedientes (option value 'Informe Técnico Forestal' con etiqueta 'Inf. Técnico Forestal') y nombres distintos para la misma etapa dentro de 5_8_11.",
+    "correccion": "La incoherencia de nombres de etapa se solapa con H-48; aquí lo load-bearing es la arquitectura (un solo módulo de listas), no el contenido."
+   }
+  ]
+ },
+ {
+  "id": "H-33",
+  "categoria": "formato_fecha_moneda",
+  "titulo": "Ocho formatos de fecha distintos en el export y casi ninguno es DD/MM/AAAA",
+  "descripcion": "Conviven: DD-MMM-AAAA en mayúsculas ('12-OCT-2024'), DD/Mmm/AAAA ('12/Ene/2024'), 'D Mon AAAA' ('28 Nov 2024'), mes completo ('22 Marzo 2024'), ISO ('2024-10-24 16:42:19 UTC', '2024-03-12'), DD-MM-AAAA con guiones ('14-01-2022'), mes-año ('REV. OCT-2024', 'Q2 Nov 2024', 'Vigente Dic 2025') y relativas ('Hoy, 10:44', 'Ayer, 18:40'). Solo tres pantallas usan DD/MM/AAAA correctamente (3, 5_8_11 y 8_normado). En el prototipo, además, las altas usan una fecha fija '10/05/2024' mientras la bitácora usa la fecha real.",
+  "evidencia": "1_2.../code.html:380 — '12-OCT-2024'; 6_9.../code.html:209 — 'Validado: 12/Ene/2024'; 7_10.../code.html:636 — '2024-03-12'; 17_20_23.../code.html:215 — '14-01-2022'; 8_ficha_de_proyecto_repositorio_documental/code.html:128 — '2024-10-24 14:32:08 UTC'; 3_proyectos_expedientes — '15/10/2024' (correcto)",
+  "regla_o_seccion_afectada": "Regla 6 (fechas DD/MM/AAAA)",
+  "decision_propuesta": "Seguir la regla: DD/MM/AAAA en toda la beta (con HH:MM cuando aporte), sin zona horaria, sin fechas relativas y sin formato ISO visible. Tomar como referencia la pantalla 3.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-33",
+    "refutado": false,
+    "motivo": "Las citas del inventario de formatos son literales y la mezcla de formatos es real. Se corrigen dos detalles de la descripción.",
+    "evidencia_verificada": "1_2.../code.html:380 '12-OCT-2024'. 6_9.../code.html:209 'Validado: 12/Ene/2024'. 7_10.../code.html:636 '2024-03-12'. 17_20_23.../code.html:215 '14-01-2022'. 8_ficha_..._repositorio_documental/code.html:129 '2024-10-24 14:32:08 UTC' (la cita decía :128). 3_proyectos usa '15/10/2024'. Prototipo: '10/05/2024' aparece 8 veces.",
+    "correccion": "Dos imprecisiones: (a) el sello '2024-10-24 16:42:19 UTC' que menciona la descripción no existe en ningún archivo (el real es '2024-10-24 14:32:08 UTC'); (b) el patrón DD/MM/AAAA aparece en 8 archivos del export (3, 5_ficha, 5_8_11, 8_normado, 10_finanzas, 11_worm, 14_directorio, 14_15) más el prototipo, no en 'solo tres pantallas' — lo correcto es decir que solo tres lo usan de forma consistente."
+   },
+   {
+    "id": "H-33",
+    "refutado": false,
+    "motivo": "Contradicción real de la regla 6 y con impacto transversal: obliga a normalizar toda la semilla y todas las tablas. No es cosmético porque las fechas relativas ('Hoy', 'Ayer') además exigen una fecha de referencia fija para la beta.",
+    "evidencia_verificada": "Verificada la coexistencia de formatos ('12-OCT-2024', '12/Ene/2024', '2024-10-24 ... UTC', '14-01-2022') frente al correcto '15/10/2024' de 3_proyectos_expedientes y '24/10/2024 16:30' de 5_8_11.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-35",
+  "categoria": "campo_extra_en_diseno",
+  "titulo": "Avance ponderado y 'Personalizar Pesos' por etapa: métrica que el modelo de 10 etapas no soporta",
+  "descripcion": "Ocho pantallas muestran 'Avance Global Ponderado', 'Avance Físico Ponderado', '% Avance Ponderado', barras de progreso con decimales y un botón 'Personalizar Pesos' sobre la 'Estructura de Desglose de Trabajo (WBS)'. Además los números no cuadran: 55% con '5 / 10 Etapas cerradas' (que sería 50%), 58.4% con la línea de tiempo al 53%, '6/10' junto a '05 / 10 compuertas superadas'. El modelo del encargo es discreto (etapa completada / aprobada / devuelta), no ponderado.",
+  "evidencia": "4_nuevo_proyecto_asistente_en_3_pasos/code.html:319-321 — '<button><span>tune</span> Personalizar Pesos</button>' y :318 — 'Estructura de Desglose de Trabajo (WBS)'; 6_9.../code.html:143-160 — '<span>55%</span>' junto a '<span>5 de 10 etapas cerradas</span>'; 6_ficha_de_proyecto_etapas_y_compuertas/code.html:184 vs :243 — '58.4%' vs style=\"width: 53%\"",
+  "regla_o_seccion_afectada": "Regla 9 (10 etapas que se completan/aprueban/devuelven; sin avance ponderado ni pesos)",
+  "decision_propuesta": "Seguir la regla: el avance de un proyecto se expresa como 'n de 10 etapas aprobadas' (y su porcentaje exacto n×10%), sin pesos y sin botón para personalizarlos.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-35",
+    "refutado": false,
+    "motivo": "Las tres citas son literales y las incoherencias numéricas se confirman. Solo se corrige el conteo de pantallas.",
+    "evidencia_verificada": "4_nuevo_proyecto.../code.html:318 'Estructura de Desglose de Trabajo (WBS)' y :319-320 botón con icono 'tune' + 'Personalizar Pesos'. 6_9.../code.html:147 '55%' junto a :155 '5 de 10 etapas cerradas'. 6_ficha.../code.html:184 '58.4%' con barra :188 style=\"width: 58.4%\" pero línea de tiempo :243 style=\"width: 53%\".",
+    "correccion": "'Ponderado' aparece en 5 archivos (3, 5_ficha, 5_8_11, 14_15, 16), no en ocho pantallas."
+   },
+   {
+    "id": "H-35",
+    "refutado": false,
+    "motivo": "Contradicción real de la regla 9: el avance ponderado y el botón de personalizar pesos presuponen un modelo continuo que el encargo no tiene, y 'Personalizar Pesos' es una función completa que habría que inventar. Los números descuadrados son además evidencia de que ni Stitch lo sostiene.",
+    "evidencia_verificada": "Verificado 'Personalizar Pesos' sobre 'Estructura de Desglose de Trabajo (WBS)' en 4_nuevo_proyecto y el desajuste 55% con 5 de 10 etapas en 6_9.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-36",
+  "categoria": "campo_extra_en_diseno",
+  "titulo": "Los documentos se diseñan con tamaño en MB, páginas, descarga real, dossier PDF/A y drag&drop con límite de 250 MB",
+  "descripcion": "El encargo dice que los documentos subidos se registran solo por nombre. Stitch diseña un repositorio real: columna 'Formato / Peso' (18.4 MB, 48.9 MB, 92.5 MB), 'Expediente Foliado 1,842 pp.', 'Volumen Registrado 142.8 MB', zonas de arrastre con formatos admitidos y límite de tamaño, botón de descarga por fila, 'Dossier Completo (PDF/A)' y 'Exportar Manifiesto Hash (.CSV)'.",
+  "evidencia": "8_ficha_de_proyecto_repositorio_documental/code.html:743 — 'Admite PDF/A, ZIP con shapefiles, GeoTIFF, XLSX (Máx. 250 MB)'; 8_ficha_de_proyecto_documentos_y_repositorio_normado/code.html:791 — 'Formatos admitidos: .shp.zip, .gpkg, .pdf (norma ISO 19005-1), .xlsx, .tif.zip (LiDAR). Límite por archivo: 250 MB.'; 5_8_11.../code.html:123 — 'Dossier Completo (PDF/A)'",
+  "regla_o_seccion_afectada": "Regla 10 (documentos se registran solo por nombre; no hay servidor)",
+  "decision_propuesta": "Seguir la regla: la pestaña Documentos registra nombre + tipo (lista controlada) + etapa + fecha + autor, sin peso, sin páginas, sin drag&drop y sin descarga. Tomar como referencia el modal simple del prototipo SPA.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-36",
+    "refutado": false,
+    "motivo": "Las tres citas son literales y el resto del inventario (peso, páginas, manifiesto) también se confirma.",
+    "evidencia_verificada": "8_ficha_..._repositorio_documental/code.html:742 'Admite PDF/A, ZIP con shapefiles, GeoTIFF, XLSX (Máx. 250 MB)' (la cita decía :743), :186 '1,842 pp.', :280 '18.4 MB', :578 '142.8 MB', :594 'Exportar Manifiesto Hash (.CSV)'. 8_ficha_..._documentos_y_repositorio_normado/code.html:792 'Formatos admitidos: .shp.zip, .gpkg, .pdf (norma ISO 19005-1), .xlsx, .tif.zip (LiDAR). Límite por archivo: 250 MB.' y :304 '<th>Formato / Peso</th>'. 5_8_11.../code.html:123 'Dossier Completo (PDF/A)'."
+   },
+   {
+    "id": "H-36",
+    "refutado": false,
+    "motivo": "Contradicción real de la regla 10 ('solo por nombre') y determina la estructura de columnas de la pestaña Documentos, que es una de las siete pestañas obligatorias. Distinto de H-21: aquí el problema no es el hash sino peso, páginas, descarga y carga de archivos.",
+    "evidencia_verificada": "Verificados el límite de 250 MB y la lista de formatos admitidos (.shp.zip, .gpkg, .tif.zip) en las dos versiones de la página 8.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-37",
+  "categoria": "funcion_fuera_de_alcance",
+  "titulo": "Facturación electrónica, conciliación bancaria y nómina de pagos (DTE/SII, fideicomiso, 'Generar Nómina Santander')",
+  "descripcion": "Las pantallas financieras modelan un ciclo de cobranza real: pestaña 'Facturas y DTE Hitos', columna 'DTE / Factura', estados 'Conciliada Banco' y 'En Cobranza (14d)', 'Libro Mayor sincronizado con la cuenta custodia del Banco de Comercio Exterior (Fideicomiso Ambiental 409)', botón 'Emitir Estado de Pago', 'Aprobar Pago' y 'Generar Nómina Santander' con validación de RUT y cuentas bancarias. El encargo excluye procesamiento de pagos e integraciones.",
+  "evidencia": "7_10_ficha_equipo_honorarios_y_finanzas/code.html:844 — 'Libro Mayor sincronizado con la cuenta custodia del Banco de Comercio Exterior (Fideicomiso Ambiental 409).'; 10_ficha_de_proyecto_finanzas_y_facturaci_n/code.html:597 — 'Generar Nómina Santander'; 12_aprobaciones.../code.html:534 — 'Conciliación Hito 3: Factura DTE #1165 ($12,800 USD)'",
+  "regla_o_seccion_afectada": "Regla 10 (sin procesamiento de pagos ni integraciones) y Regla 11 (DTE/SII y bancos chilenos)",
+  "decision_propuesta": "Seguir la regla: finanzas del proyecto = movimientos (tipo, categoría controlada, concepto, monto USD, fecha, estado liquidado/por liquidar), como en el prototipo SPA. Sin facturas electrónicas, sin bancos y sin nóminas.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-37",
+    "refutado": false,
+    "motivo": "Las tres citas son literales y el resto del ciclo de cobranza también existe.",
+    "evidencia_verificada": "7_10.../code.html:844 'Libro Mayor sincronizado con la cuenta custodia del Banco de Comercio Exterior (Fideicomiso Ambiental 409).' 10_finanzas/code.html:594 'Generar Nómina Santander' (la cita decía :597) y :301 '<th>DTE / Factura</th>'. 12_aprobaciones.../code.html:534 'Conciliación Hito 3: Factura DTE #1165 ($12,800 USD)' y :564 'Aprobar Pago'. 14_directorio:577 'Conciliada Banco', :590 'En Cobranza (14d)', :598 'Emitir Estado de Pago'. 12:255 'Facturas y DTE Hitos'."
+   },
+   {
+    "id": "H-37",
+    "refutado": false,
+    "motivo": "Contradicción real de la regla 10 ('sin procesamiento de pagos ni integraciones'). No es retórica: son pestañas, columnas y estados de un ciclo de cobranza que habría que modelar. Define qué es la pestaña Finanzas.",
+    "evidencia_verificada": "Verificados 'Generar Nómina Santander' (10_finanzas), la referencia a cuenta custodia/fideicomiso (7_10) y los estados de conciliación bancaria.",
+    "correccion": "La parte chilena (DTE/SII, bancos) es redundante con H-08; lo load-bearing es la exclusión de facturación y pagos."
+   }
+  ]
+ },
+ {
+  "id": "H-38",
+  "categoria": "funcion_fuera_de_alcance",
+  "titulo": "Notificaciones y avisos automáticos: campana en las 27 pantallas, aviso telemático, notificar a inversionistas y a auditores",
+  "descripcion": "Todas las barras superiores llevan un botón de campana sin destino. Peor: hay textos que prometen envío automático ('los hitos vencidos detonan aviso telemático automático a la Dirección Técnica tras 48 horas', 'el sistema notificará a los auditores ambientales acreditados', 'Al devolver el informe, se notificará al equipo'), y el botón principal de aprobación de una pantalla es 'Aprobar Etapa 06 & Notificar Inversionistas'.",
+  "evidencia": "3_proyectos_expedientes/code.html:699 — 'Los hitos vencidos detonan aviso telemático automático a la Dirección Técnica tras 48 horas sin actualización de descargo.'; 4_nuevo_proyecto_asistente_en_3_pasos/code.html:300 — 'el sistema notificará a los auditores ambientales acreditados e iniciará la bitácora criptográfica con hash SHA-256 inmutable'; 12_13.../code.html:~256 — 'Aprobar Etapa 06 &amp; Notificar Inversionistas'",
+  "regla_o_seccion_afectada": "Regla 10 (sin correo, notificaciones externas ni chat)",
+  "decision_propuesta": "Seguir la regla: quitar la campana de la barra superior y todos los textos que prometen notificación. El aviso de etapa vencida es un badge en pantalla, nada más.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-38",
+    "refutado": false,
+    "motivo": "Las tres citas son literales y las promesas de notificación automática existen tal cual.",
+    "evidencia_verificada": "3_proyectos.../code.html:699 'Los hitos vencidos detonan aviso telemático automático a la Dirección Técnica tras 48 horas sin actualización de descargo.' 4_nuevo_proyecto.../code.html:300 'Al confirmar la plantilla de etapas, el sistema notificará a los auditores ambientales acreditados e iniciará la bitácora criptográfica con hash SHA-256 inmutable para control fiscalizatorio.' 12_13.../code.html:253 'Aprobar Etapa 06 &amp; Notificar Inversionistas'. Prototipo :1709 '...se notificará al equipo para correcciones técnicas inmediatas.' Icono 'notifications' presente en 26 archivos."
+   },
+   {
+    "id": "H-38",
+    "refutado": false,
+    "motivo": "Contradicción real de la regla 10: los textos no describen un adorno, prometen envío automático a terceros, y un botón principal de aprobación que 'notifica inversionistas' es una función inexistente. La campana sola sería trivial; el conjunto no lo es.",
+    "evidencia_verificada": "Verificados el aviso telemático automático tras 48 horas (3_proyectos_expedientes) y la promesa de notificación a auditores en el asistente.",
+    "correccion": "La campana en sí es trivial y cae sola al rehacer el header (H-04/H-54); lo que hay que retener es la eliminación de toda promesa de notificación."
+   }
+  ]
+ },
+ {
+  "id": "H-39",
+  "categoria": "funcion_fuera_de_alcance",
+  "titulo": "Telemetría en vivo: GPS/RTK de cuadrillas, drones, satélites rastreados, cadena de frío y 'EN VIVO'",
+  "descripcion": "Cinco pantallas muestran datos que solo existirían con hardware y backend: 'Monitoreo Satelital de Cuadrillas' con precisión RTK ±0.03m y 'SYNC ACTIVA', 'Constelación GNSS: 19 satélites rastreados', 'PDOP: 1.18 · HRMS: 0.018m', botón 'Sincronizar GNSS (Trimble/Garmin)' vía Bluetooth/NMEA, 'Check-in Satelital OK', 'Telemetría Activa', 'Última Captura Cruda IMG_0894_RAW.DNG', y una recepción de muestras con 'Preservación Térmica 4.2 °C'.",
+  "evidencia": "1_2.../code.html:479-484 — 'PRECISIÓN RTK: ±0.03m' / 'CUADRILLAS EN CAMPO: 2 ACTIVAS' / 'SYNC ACTIVA'; 9_ficha_de_proyecto_mediciones_de_campo_1/code.html:~758 — toast 'Conectando con receptor Trimble R12i vía Bluetooth/NMEA...'; 9_..._2/code.html:~200 — 'Constelación GNSS: 19 satélites rastreados (GPS + Galileo + GLONASS)'",
+  "regla_o_seccion_afectada": "Regla 10 (sin servidor, integraciones ni datos en vivo)",
+  "decision_propuesta": "Seguir la regla: eliminar toda la telemetría. La captura de mediciones es un formulario manual.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-39",
+    "refutado": false,
+    "motivo": "Las tres citas son literales y la telemetría descrita existe en el diseño.",
+    "evidencia_verificada": "1_2.../code.html:479 'PRECISIÓN RTK: ±0.03m', :483 'CUADRILLAS EN CAMPO: 2 ACTIVAS', :484 'SYNC ACTIVA', :470 'Monitoreo Satelital de Cuadrillas', :492 'Último Registro Fotogramétrico'. 9_..._1/code.html:759 \"window.mostrarToast('Sincronización GPS Iniciada', 'Conectando con receptor Trimble R12i vía Bluetooth/NMEA...', 'sync');\" y :643 'Trimble R12i GNSS'. 9_..._2/code.html:314 'Constelación GNSS: 19 satélites rastreados (GPS + Galileo + GLONASS)', :316 'PDOP: 1.18 · HRMS: 0.018m', :608 'Preservación Térmica'. 2_panel:469 'IMG_0894_RAW.DNG'."
+   },
+   {
+    "id": "H-39",
+    "refutado": false,
+    "motivo": "Contradicción real de la regla 10 y no redundante con H-24: allí se trata de capas y archivos; aquí de hardware y datos en vivo (RTK, GNSS, Bluetooth/NMEA, cadena de frío), que además ocupan bloques enteros del panel y de mediciones.",
+    "evidencia_verificada": "Verificados los bloques de monitoreo satelital de cuadrillas en 1_2 y el flujo de sincronización con receptor Trimble en 9_..._1.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-45",
+  "categoria": "funcion_fuera_de_alcance",
+  "titulo": "Integraciones y datos de servidor: sincronización con e-SEIA/SIAIA, CalDAV/Outlook, IP y nodo de producción, uptime, latencia, versión de kernel",
+  "descripcion": "Stitch presenta la beta como un sistema en producción: 'Última sincro e-SEIA: 17/10 08:30:12', 'Sincronización SIAIA: Al día', botón 'Sincronizar CalDAV / Microsoft Outlook', 'HOST: CL-SCL-PRD01 (LATAM)', 'IP INTERNA: 10.14.8.102 (VPN SEGURA SANTIAGO)', 'SESIÓN AUDITADA: ID-SRV-9092', '99.98% uptime', 'RTT: 14ms', 'Versión de Kernel Técnico v4.8.2-rev11_prod', 'Servidor Regional Santiago-01', 'Integridad Verificada en Servidor', 'DATOS CIFRADOS EN TRÁNSITO'.",
+  "evidencia": "13_calendario.../code.html:~146 — '<button title=\"Sincronizar CalDAV / Microsoft Outlook\">CalDAV / 365</button>'; 1_ingreso_y_autenticaci_n_segura_login/code.html:382-383 — 'Versión de Kernel Técnico / v4.8.2-rev11_prod'; 12_aprobaciones.../code.html:814 — 'IP INTERNA: 10.14.8.102 (VPN SEGURA SANTIAGO)'; 16_vista_de_direcci_n_modo_sala/code.html:485 — 'DATOS CIFRADOS EN TRÁNSITO / SOLO LECTURA EJECUTIVA'",
+  "regla_o_seccion_afectada": "Regla 10 (no hay servidor) y Regla 5 (es una beta con datos de ejemplo)",
+  "decision_propuesta": "Seguir la regla: eliminar toda la retórica de infraestructura. En su lugar, la marca 'BETA · datos de ejemplo'.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-45",
+    "refutado": false,
+    "motivo": "Las cuatro citas son literales y el resto de la retórica de infraestructura también se confirma.",
+    "evidencia_verificada": "13_calendario.../code.html:146 '<button ... title=\"Sincronizar CalDAV / Microsoft Outlook\">' con :148 'CalDAV / 365'; :630 'Última sincro e-SEIA: 17/10 08:30:12'. 1_ingreso.../code.html:382-383 'Versión de Kernel Técnico' / 'v4.8.2-rev11_prod'; :176 '99.98% uptime'; :195 'RTT: 14ms'. 12_aprobaciones.../code.html:814 'IP INTERNA: 10.14.8.102 (VPN SEGURA SANTIAGO)'. 16_vista.../code.html:486 'DATOS CIFRADOS EN TRÁNSITO / SOLO LECTURA EJECUTIVA' (la cita decía :485). 1_2:220 'HOST: CL-SCL-PRD01 (LATAM)'. 14_15:122 'Sincronización SIAIA:' y :496 'Servidor Regional Santiago-01'."
+   },
+   {
+    "id": "H-45",
+    "refutado": false,
+    "motivo": "Se sostiene por dos motivos que no cubren otros hallazgos: (a) hay botones de integración real (CalDAV/Outlook, sincronización con e-SEIA/SIAIA), prohibidos por la regla 10; y (b) presentar la maqueta como sistema en producción auditado choca de frente con la regla 5, que exige declararla beta con datos de ejemplo.",
+    "evidencia_verificada": "Verificados el botón de sincronización CalDAV/365 en 13_calendario y la retórica de host/IP/kernel en 1_ingreso y 12_aprobaciones.",
+    "correccion": "Los sellos de certificación (ISO, 'certificado', 'conforme') son el mismo problema que H-04: tratarlos allí para no duplicar la limpieza."
+   }
+  ]
+ },
+ {
+  "id": "H-46",
+  "categoria": "contradiccion_interna_stitch",
+  "titulo": "Solo la etapa 06 tiene flujo de aprobación; las otras nueve no tienen ninguna acción y aparecen 'BLOQUEADO'",
+  "descripcion": "En todas las versiones (incluido el prototipo SPA) solo la etapa 6 se puede radicar, aprobar o devolver. En el editor de plantilla de la 18_19 los interruptores de 'Requiere Aprobación Obligatoria' están apagados, deshabilitados y con estado 'BLOQUEADO' en 9 de las 10 filas. En el asistente, la etapa 06 es la única con badge 'Compuerta de aprobación obligatoria'. El encargo dice que CADA etapa se completa, se aprueba o se devuelve, y que al aprobarse se desbloquea la siguiente.",
+  "evidencia": "18_19.../code.html:320-321 — 'COMPUERTA CRÍTICA: ETAPA 06 ACTIVE' y :414-421 — '<!-- Switch ACTIVO EXCLUSIVAMENTE EN ETAPA 06 -->' con 'SI'; 4_nuevo_proyecto_asistente_en_3_pasos/code.html:374-388 — badge 'Compuerta de aprobación obligatoria' solo en la etapa 06; sistema_de_gesti_n_de_proyectos_integrales/code.html — standardStages con '{ num: 6, ..., compuerta: true }' como única compuerta",
+  "regla_o_seccion_afectada": "Regla 9 (una etapa se completa, se aprueba o se devuelve con comentario; al aprobarse se desbloquea la siguiente)",
+  "decision_propuesta": "Seguir la regla: las 10 etapas tienen el mismo ciclo (completar → aprobar/devolver → desbloquear la siguiente). Descartar el modelo de 'compuerta única' de Stitch.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-46",
+    "refutado": false,
+    "motivo": "Las tres citas son literales: 9 de 10 filas con 'BLOQUEADO' y una sola compuerta activa; badge único en la etapa 06; y en el prototipo compuerta:true solo en num 6.",
+    "evidencia_verificada": "18_19.../code.html:320-321 'COMPUERTA CRÍTICA:' + 'ETAPA 06 ACTIVE'; :412 '<!-- Switch ACTIVO EXCLUSIVAMENTE EN ETAPA 06 -->'; :420 'COMPUERTA CRÍTICA' y 'BLOQUEADO' en las líneas 348, 361, 374, 387, 400, 433, 446, 459, 472 (nueve filas). 4_nuevo_proyecto.../code.html:384 'Compuerta de aprobación obligatoria' (única aparición en el archivo). sistema_de_gesti_n_de_proyectos_integrales/code.html:255-264 standardStages con compuerta:false en 1-5 y 7-10 y '{ num: 6, nombre: \"Consolidación de Informe Borrador (HITO CRÍTICO)\", compuerta: true }'."
+   },
+   {
+    "id": "H-46",
+    "refutado": false,
+    "motivo": "Contradicción estructural de la regla 9, verificada, y probablemente el hallazgo con más consecuencias sobre la lógica: si se porta el modelo de compuerta única, nueve de las diez etapas quedan sin ciclo y el desbloqueo secuencial no existe.",
+    "evidencia_verificada": "18_19/code.html contiene 9 ocurrencias de 'BLOQUEADO' (una por etapa distinta de la 06) y el prototipo define compuerta:true únicamente en { num: 6 } en las seis semillas de proyecto.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-47",
+  "categoria": "contradiccion_interna_stitch",
+  "titulo": "Falta el estado 'Devuelta' y aparecen resultados extra ('Con Salvedad', 'Rechazar', 'Suspensión de Plazo')",
+  "descripcion": "Ninguna pantalla tiene el estado 'devuelta con comentario': al devolver, la etapa vuelve a 'Pendiente'. En cambio Stitch añade un tercer resultado ('Aprobación con Salvedades' / 'Con Salvedad / Condicionante') y un 'Rechazar / Nueva Iteración' que no es lo mismo que devolver; la 13 añade 'Suspensión de Plazo Aprobada'. Los estados que sí usa ('BLOQUEADA', 'Esperando Aprobación', 'Completada Tarde', 'Atrasada', 'En Visación', 'PENDIENTE FEEDBACK MANDANTE') tampoco son los del encargo.",
+  "evidencia": "6_ficha_de_proyecto_etapas_y_compuertas/code.html:440-449 — radios 'Aprobar y Desbloquear' / 'Aprobación con Salvedades' / 'Rechazar / Nueva Iteración'; sistema_de_gesti_n_de_proyectos_integrales/code.html — \"stage6.estado = 'Pendiente'; stage6.observacionesCompuerta = 'Devuelto para corrección: ' + comment\"; 13_calendario.../code.html:~616 — 'Suspensión de Plazo Aprobada'",
+  "regla_o_seccion_afectada": "Regla 9 (completar / aprobar / devolver con comentario; etapas vencidas; proyectos detenidos esperando aprobación) y Regla 4 (estados de lista controlada)",
+  "decision_propuesta": "Seguir la regla: exactamente los estados del encargo (pendiente/bloqueada, en curso, completada esperando aprobación, aprobada, devuelta con comentario, vencida) y solo dos acciones de decisión (aprobar, devolver con comentario obligatorio).",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-47",
+    "refutado": false,
+    "motivo": "Las tres citas son literales y confirmo la afirmación negativa clave: 'Devuelta' no aparece en ningún archivo del export ni del prototipo.",
+    "evidencia_verificada": "6_ficha.../code.html:441/445/449 radios 'Aprobar y Desbloquear' / 'Aprobación con Salvedades' / 'Rechazar / Nueva Iteración'. sistema_de_gesti_n_de_proyectos_integrales/code.html:1736-1737 \"stage6.estado = 'Pendiente'; stage6.observacionesCompuerta = \\\"Devuelto para corrección: \\\" + comment;\". 13_calendario.../code.html:624 'Suspensión de Plazo Aprobada'. grep -rc 'Devuelta' --include=code.html = 0 en todos los archivos. Estados alternativos confirmados: 6_ficha:416 'PENDIENTE FEEDBACK MANDANTE', prototipo :300/399 'Completada Tarde' y :356/927/1013/1127/1565 'Esperando Aprobación'."
+   },
+   {
+    "id": "H-47",
+    "refutado": false,
+    "motivo": "Contradicción real de la regla 9 y complementaria de H-46, no redundante: aquel trata de a qué etapas se aplica el ciclo; este, de cuáles son los estados y los desenlaces válidos. Añadir 'Con salvedad' o perder 'Devuelta' cambia el modelo de datos y la lista controlada de estados.",
+    "evidencia_verificada": "Verificado en el prototipo que devolver reasigna estado 'Pendiente' (no existe 'Devuelta') y en 6_ficha los tres radios de desenlace, incluido 'Aprobación con Salvedades'.",
+    "correccion": "La lista exacta de estados la fija la especificación; hasta entonces, exactamente los del encargo y solo dos acciones de decisión."
+   }
+  ]
+ },
+ {
+  "id": "H-48",
+  "categoria": "contradiccion_interna_stitch",
+  "titulo": "Los nombres de las 10 etapas son distintos en cada pantalla y modelan un trámite estatal chileno",
+  "descripcion": "Hay al menos cinco plantillas de 10 etapas incompatibles entre sí: la del asistente (Oferta → Cierre y liquidación, coherente con una consultora), la de 6_9 (Reunión de alineación → Resolución de licencia), la de 6_ficha (que incluye 'Ingreso al e-SEIA & Test de Admisibilidad' y 'Votación Coeva Coquimbo', es decir etapas que ejecuta un organismo, no la consultora), la de 5_8_11 (fauna costera, arqueología, ruido, consulta indígena) y la de 18_19. Además el prototipo permite que cada proyecto renombre libremente sus etapas.",
+  "evidencia": "4_nuevo_proyecto_asistente_en_3_pasos/code.html:329-427 — '01 Oferta de contrato y contratación ... 10 Cierre y liquidación'; 6_ficha_de_proyecto_etapas_y_compuertas/code.html:687 — 'Ingreso al e-SEIA & Test de Admisibilidad' y :~823 — 'Pre-requisito: Votación Coeva Coquimbo'; 6_9.../code.html:339 — 'Radicación ante Autoridad Ambiental'",
+  "regla_o_seccion_afectada": "Regla 9 (10 etapas definidas por la especificación)",
+  "decision_propuesta": "Seguir la especificación. Mientras no esté, usar como referencia únicamente la plantilla del asistente (4) porque es la única que describe el ciclo interno de la consultora; descartar la de 6_ficha por modelar el trámite del organismo.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-48",
+    "refutado": false,
+    "motivo": "Las tres citas son literales y verifiqué además la plantilla completa de 6_9, que efectivamente va de 'Reunión de Alineación' a 'Resolución de Licencia y Cierre de Expediente'.",
+    "evidencia_verificada": "4_nuevo_proyecto.../code.html:328 'Oferta de contrato y contratación' ... :423 'Cierre y liquidación'. 6_ficha.../code.html:687 'Ingreso al e-SEIA &amp; Test de Admisibilidad' y :815 'Votación Coeva Coquimbo'. 6_9.../code.html: etapas 'Reunión de Alineación & Términos de Referencia', 'Delimitación del Polígono e Identificación Predial', 'Levantamiento Forestal & Muestreo Dendrológico', 'Evaluación Sociocultural & Comunidades Aledañas', 'Modelación de Impacto Acústico y Sombras de Aerogeneradores', 'Entrega del informe final', :339 'Radicación ante Autoridad Ambiental', 'Inspección Técnica de Verificación In Situ', :359 'Resolución de Licencia y Cierre de Expediente'."
+   },
+   {
+    "id": "H-48",
+    "refutado": false,
+    "motivo": "Contradicción real de la regla 9 y decisión inmediata: hay cinco plantillas incompatibles y hay que elegir una referencia mientras no llegue la especificación. El criterio que propone (descartar la que modela el trámite del organismo) es sustantivo, no estilístico.",
+    "evidencia_verificada": "Verificadas las plantillas divergentes del asistente (Oferta → Cierre y liquidación), de 6_9 y de 6_ficha (que incluye ingreso al e-SEIA y votación de comisión regional).",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-49",
+  "categoria": "contradiccion_interna_stitch",
+  "titulo": "Terminología 'compuerta/visación/expediente/mandante' en lugar de 'etapa/aprobación/proyecto/contratante'",
+  "descripcion": "Stitch renombra sistemáticamente el vocabulario del encargo: las etapas son 'compuertas' (C01-C08, 'Compuerta 06 Activa', 'Estatus de Compuertas', 'Protocolo QA/QC GATE-6-V3'), aprobar es 'visar/visación/dictamen vinculante', el proyecto es 'expediente' ('Nuevo Expediente', 'Código Exp.', 'Ver Expediente Técnico') y el contratante es 'mandante' o 'titular'. El sidebar y el encargo dicen Proyectos y Contratantes. Si se porta el vocabulario, la beta no coincide con la especificación ni consigo misma.",
+  "evidencia": "5_8_11.../code.html:294 — 'Estatus de Compuertas' y :116 — 'COMPUERTA 06 ACTIVA'; 3_proyectos_expedientes/code.html:117 — h1 'Expedientes Técnicos y Estudios' y :131 — 'Nuevo Expediente' frente al sidebar 'Proyectos'; 3_...:230 vs :270 — filtro 'Titular:' vs columna '<th>Contratante</th>'",
+  "regla_o_seccion_afectada": "Regla 6 (todo en español, consistente) y Regla 13 (páginas 'proyectos', 'contratantes')",
+  "decision_propuesta": "Seguir la regla: 'proyecto', 'etapa', 'aprobar', 'devolver', 'contratante' en toda la beta. Un solo término por concepto.",
+  "severidad": "media",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-49",
+    "refutado": false,
+    "motivo": "Las citas son literales y la contradicción sidebar/h1 y 'Titular:'/'Contratante' se confirma dentro del mismo archivo 3.",
+    "evidencia_verificada": "5_8_11.../code.html:294 'Estatus de Compuertas' y :116 'COMPUERTA 06 ACTIVA'. 3_proyectos.../code.html:118 '<h1 ...>Expedientes Técnicos y Estudios</h1>' (la cita decía :117), :131 'Nuevo Expediente', :230 filtro 'Titular:' frente a :270 '<th ...>Contratante</th>', mientras el sidebar (línea 108) enlaza 'Proyectos' (data-path=\"proyectos\")."
+   },
+   {
+    "id": "H-49",
+    "refutado": false,
+    "motivo": "No es purismo: el encargo nombra explícitamente 'etapa', 'aprobar', 'devolver', 'contratante' y 'proyecto' en las reglas 8, 9 y 13, así que renombrarlos rompe la trazabilidad con la especificación. Y hay incoherencia interna verificable (filtro 'Titular' sobre columna 'Contratante') que confundiría al usuario de la beta.",
+    "evidencia_verificada": "Verificados el h1 'Expedientes Técnicos y Estudios' y el botón 'Nuevo Expediente' de 3_proyectos_expedientes frente al ítem de menú 'Proyectos' en el mismo archivo.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-50",
+  "categoria": "contradiccion_interna_stitch",
+  "titulo": "DESIGN.md tiene DOS paletas incompatibles y la que se ve en los PNG es la del config, no la de la prosa",
+  "descripcion": "Verificado: el frontmatter YAML de field_dossier_technical_workspace/DESIGN.md y el tailwind.config de las 27 pantallas son idénticos (primary #023627, secondary #80552b, canvas #f8faf6, oscuro #2e312f), pero la prosa del mismo DESIGN.md describe a mano otra paleta 'papel de archivo' (primary #1F4D3D, secondary #9A6B3F, tertiary #B4462F, canvas #F7F6F2, wells #EFECE6/#E5E0D8, hairline #DDD8CE, oscuro #141715). Ningún hex de la prosa aparece en el HTML salvo dentro del SVG del logo. La prosa además pide bordes hairline de 1px en todo (el HTML casi no usa bordes: la profundidad es por capas tonales + shadow-sm) y 'fully rounded pills are prohibited' cuando su propio YAML declara full: 9999px.",
+  "evidencia": "field_dossier_technical_workspace/DESIGN.md (frontmatter) — \"primary: '#023627'\" vs (prosa) — '**Primary (`#1F4D3D` - Deep Institutional Pine)**' y '**Base Canvas (`#F7F6F2` - Archival Stock)**' y 'All cards, panels, and input fields use a consistent 1px solid hairline (`#DDD8CE`...)' (verificado leyendo el archivo completo)",
+  "regla_o_seccion_afectada": "Regla 2 (CSS propio con variables: hay que elegir una sola paleta) — contradicción interna de Stitch",
+  "decision_propuesta": "Seguir el config + los PNG (es lo que el usuario ha visto y aprobado visualmente) y tratar la prosa solo como intención narrativa. Preguntar al usuario únicamente si prefiere la paleta cálida de la prosa; si dice sí, hay que rehacer todos los tokens.",
+  "severidad": "media",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-50",
+    "refutado": false,
+    "motivo": "La contradicción central es real y la cita del DESIGN.md es literal (frontmatter primary '#023627' vs prosa '#1F4D3D'; canvas '#f8faf6' vs '#F7F6F2'; hairline #DDD8CE; 'fully rounded pills are prohibited' con full: 9999px en su propio YAML). Solo una afirmación colateral es falsa.",
+    "evidencia_verificada": "field_dossier_technical_workspace/DESIGN.md frontmatter: primary '#023627', secondary '#80552b', background/surface '#f8faf6', inverse-surface '#2e312f', rounded.full 9999px. Prosa: '**Primary (`#1F4D3D` - Deep Institutional Pine)**', '**Secondary (`#9A6B3F` - Loam Earth)**', '**Tertiary (`#B4462F`...)**', '**Base Canvas (`#F7F6F2` - Archival Stock)**', 'Muted Surfaces (`#EFECE6` / `#E5E0D8`)', 'All cards, panels, and input fields use a consistent 1px solid hairline (`#DDD8CE`...)', dark '#141715', y 'fully rounded pills are prohibited'. El tailwind.config de 3_proyectos coincide con el frontmatter: primary #023627, secondary #80552b, background #f8faf6, inverse-surface #2e312f.",
+    "correccion": "Es falso que 'ningún hex de la prosa aparece en el HTML salvo dentro del SVG del logo': #1f4d3d (el Primary de la prosa) está en el tailwind.config de TODAS las pantallas como \"primary-container\": \"#1f4d3d\". Es decir, la paleta de la prosa no está ausente del config, está degradada a un rol secundario. La decisión propuesta (seguir config + PNG) no cambia."
+   },
+   {
+    "id": "H-50",
+    "refutado": false,
+    "motivo": "Contradicción interna verificada y obliga a una decisión previa a escribir una sola línea de CSS: qué paleta se vuelca a tokens.css. Sin resolverlo, la beta no puede parecerse a lo que el usuario ya vio.",
+    "evidencia_verificada": "DESIGN.md frontmatter: primary '#023627', background '#f8faf6', inverse-surface '#2e312f'. Prosa del mismo archivo, líneas 158-167: primary #1F4D3D, secondary #9A6B3F, tertiary #B4462F, canvas #F7F6F2, hairline #DDD8CE, oscuro #141715. Ningún hex de la prosa aparece en el HTML.",
+    "correccion": "Matiz: el #1F4D3D de la prosa sí existe en el config, pero como 'primary-container', no como primary; la contradicción es de rol de color, no de existencia."
+   }
+  ]
+ },
+ {
+  "id": "H-53",
+  "categoria": "contradiccion_interna_stitch",
+  "titulo": "La pantalla 16 (Dirección) tiene el sidebar y la barra superior en CLARO: el oscuro es solo el panel de contenido",
+  "descripcion": "Verificado: el <body> de la 16 sigue con bg-background (#f8faf6) y el <aside> con bg-surface-container-low (#f3f4f0); lo único oscuro es un div rounded-xl con bg-inverse-surface (#2e312f) dentro del main. Además el ítem activo del sidebar es 'Proyectos', no 'Dirección', y 'Dirección' lleva un badge 'DARK' en inglés. Hay que decidir si direccion.html va íntegramente oscura o solo su contenido.",
+  "evidencia": "16_vista_de_direcci_n_modo_sala/code.html:108 — '<body class=\"bg-background ...\"><aside class=\"fixed left-0 top-0 h-full w-64 bg-surface-container-low ...\"' (verificado) frente a :109-110 — '<!-- Projection Mode Dark Surface Container --> <div class=\"relative w-full rounded-xl bg-inverse-surface text-inverse-on-surface ...\">'",
+  "regla_o_seccion_afectada": "Regla 12 (la página de Dirección es la ÚNICA en oscuro; el resto en claro)",
+  "decision_propuesta": "Preguntar al usuario. Recomendación: direccion.html íntegramente oscura (body, sidebar y header incluidos) para que la regla 12 se lea sin ambigüedad; y traducir el badge 'DARK' a 'Oscuro' o quitarlo.",
+  "severidad": "media",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-53",
+    "refutado": false,
+    "motivo": "Verificado exactamente: el body y el aside siguen en claro y solo el contenedor del main es oscuro; el ítem activo del sidebar es 'Proyectos' y el badge 'DARK' existe.",
+    "evidencia_verificada": "16_vista_de_direcci_n_modo_sala/code.html:108 '<body class=\"bg-background ...\"><aside class=\"fixed left-0 top-0 h-full w-64 bg-surface-container-low ...\"' y, dentro de la misma línea, el ítem 'Dirección</span><span ... bg-inverse-surface text-inverse-on-surface\">DARK</span>'. Líneas 109-110: '<!-- Projection Mode Dark Surface Container --> <div class=\"relative w-full rounded-xl bg-inverse-surface text-inverse-on-surface shadow-2xl ...\">'. El aria-current=\"page\" está en data-path=\"proyectos\"."
+   },
+   {
+    "id": "H-53",
+    "refutado": false,
+    "motivo": "Contradicción real con la regla 12: 'la página de Dirección es la única en oscuro' no se cumple si el body, el sidebar y el header siguen claros. Y obliga a una decisión concreta sobre uno de los 17 archivos.",
+    "evidencia_verificada": "16_vista_de_direcci_n_modo_sala/code.html: <body class='bg-background'> y <aside class='... bg-surface-container-low'>; lo oscuro es solo un div rounded-xl con bg-inverse-surface dentro del main. Verificado también el ítem activo 'Proyectos' y el badge 'DARK' en inglés.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-54",
+  "categoria": "contradiccion_interna_stitch",
+  "titulo": "El sidebar de las 27 pantallas no coincide con los 17 archivos: falta Panel y Perfil, y las rutas se llaman distinto",
+  "descripcion": "Todas las pantallas repiten el mismo sidebar de 9 enlaces (Proyectos, Aprobaciones, Calendario, Contratantes, Reportes, Dirección, Usuarios, Catálogos, Bitácora General) con href='#'. No hay entrada a Panel/Inicio ni a Perfil, ni acceso a proyecto-nuevo, sin-permiso, fase2 ni fase3. Los data-path usan 'direccion-ejecutiva' y 'bitacora-general' en lugar de direccion.html y bitacora.html. Y el ítem marcado como activo es siempre 'Proyectos', incluso en el login, en el panel, en el calendario y en Dirección (en la 12 y la 13 hay scripts que lo corrigen por JS, y en la 13 el resultado es que quedan dos ítems resaltados a la vez).",
+  "evidencia": "16_vista_de_direcci_n_modo_sala/code.html:108 — '<a aria-current=\"page\" ... data-path=\"proyectos\" href=\"#\">...Proyectos</a> ... data-path=\"direccion-ejecutiva\" ... data-path=\"bitacora-general\"'; 13_calendario.../code.html:~637 — \"document.querySelectorAll('[data-path=\\\"calendario\\\"]').forEach(el => { el.classList.add('bg-primary-container', 'text-on-primary-container'); });\" (sin quitar el activo anterior)",
+  "regla_o_seccion_afectada": "Regla 13 (las 23 páginas se cubren con 17 archivos: index, panel, ..., perfil, sin-permiso, fase2-portal, fase3-asistente)",
+  "decision_propuesta": "Seguir la regla: sidebar con Panel, Proyectos, Aprobaciones, Calendario, Contratantes, Reportes, Dirección, Usuarios, Catálogos, Bitácora, Perfil y accesos a las maquetas Fase 2/3, con href reales a los 17 archivos y un único ítem activo por página.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-54",
+    "refutado": false,
+    "motivo": "Ambas citas son literales y el sidebar de 9 enlaces con href='#' se repite igual en todas las pantallas, sin Panel ni Perfil.",
+    "evidencia_verificada": "En 16 y en 3, el sidebar (línea 108) tiene exactamente estos data-path: proyectos, aprobaciones, calendario, contratantes, reportes, direccion-ejecutiva, usuarios, catalogos, bitacora-general; el aria-current=\"page\" está siempre en 'proyectos'; grep de 'Panel' y 'Perfil' en esa línea = 0. 13_calendario.../code.html:639-641 \"document.querySelectorAll('[data-path=\\\"calendario\\\"]').forEach(el => { el.classList.add('bg-primary-container', 'text-on-primary-container'); });\" sin quitar la clase del ítem previo."
+   },
+   {
+    "id": "H-54",
+    "refutado": false,
+    "motivo": "Contradicción real con la regla 13 y transversal: la navegación es lo único que existe en los 17 archivos, y la del export no lleva a Panel ni a Perfil, usa rutas con otro nombre y marca siempre el mismo ítem activo. Hay que rehacerla, no adaptarla.",
+    "evidencia_verificada": "Verificado en 16_vista_de_direcci_n_modo_sala/code.html: nueve enlaces con href='#', data-path 'direccion-ejecutiva' y 'bitacora-general', y aria-current='page' sobre 'Proyectos' pese a ser la página de Dirección.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-55",
+  "categoria": "contradiccion_interna_stitch",
+  "titulo": "El mismo proyecto PI-2024-002 tiene nombre, titular y región distintos en cada pantalla",
+  "descripcion": "Verificado en los archivos: PI-2024-002 es 'EIA y Estudio Sociocultural Parque Eólico Península' con titular 'Generadora Eólica del Norte S.A.' en Atacama (5), pero 'Consorcio Eólico del Sur S.A.' en Coquimbo (6), 'Generadora Eólica del Norte S.A.' en Antofagasta (7, 9_2, 11), 'Parque Eólico Cordillera Costera — Tramo Sur' de 'Consorcio Energías del Pacífico S.A.' en Biobío (8_repositorio), Punta Arenas (5_8_11), Península de Macanao/Venezuela (7_10), Paraguaná/Falcón (6_9) y Chiloé (9_1). También cambian los hashes del mismo documento y la responsable de acústica ('Dra. Elena Ramos' vs 'Dra. Elena Valenzuela'). No hay una sola semilla.",
+  "evidencia": "5_ficha_de_proyecto_resumen_ejecutivo/code.html:123 — 'Titular Legal: Generadora Eólica del Norte S.A. · RUT: 76.842.190-K · Región de Atacama'; 6_ficha_de_proyecto_etapas_y_compuertas/code.html:116 — 'Titular: Consorcio Eólico del Sur S.A. · Matriz: Costa Norte / Coquimbo'; 8_ficha_de_proyecto_repositorio_documental/code.html:121-122 — 'Parque Eólico Cordillera Costera — Tramo Sur' / 'Titular: Consorcio Energías del Pacífico S.A. • Región de Biobío' (los tres verificados)",
+  "regla_o_seccion_afectada": "Semilla y criterio de aceptación (un proyecto = un nombre, un contratante, una ubicación)",
+  "decision_propuesta": "Seguir la regla: definir UNA semilla venezolana única (base: la del prototipo SPA, que ya es coherente: 8 usuarios, 6 proyectos, RIF, estados venezolanos) y usarla en las 17 páginas. Descartar todas las semillas de Stitch.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-55",
+    "refutado": false,
+    "motivo": "Las tres citas son literales y el mismo código PI-2024-002 aparece en 20 archivos con titulares y regiones distintos.",
+    "evidencia_verificada": "5_ficha.../code.html:123 'Titular Legal: Generadora Eólica del Norte S.A. · RUT: 76.842.190-K · Región de Atacama'. 6_ficha.../code.html:116 'Titular: Consorcio Eólico del Sur S.A. · Matriz: Costa Norte / Coquimbo · Estándar ISO 14001'. 8_ficha_..._repositorio_documental/code.html:121-122 'Parque Eólico Cordillera Costera — Tramo Sur' / 'Titular: Consorcio Energías del Pacífico S.A. • Región de Biobío'. 8_ficha_..._normado:129 'Titular Mandante: Generadora Eólica del Norte S.A.'. 'Dra. Elena Ramos' en 7_10 (:352, :689, :923) frente a 'Dra. Elena Valenzuela' en 1_ingreso:221. PI-2024-002 aparece en 20 archivos."
+   },
+   {
+    "id": "H-55",
+    "refutado": false,
+    "motivo": "Contradicción real con el criterio de aceptación: un mismo código de proyecto con tres contratantes y siete ubicaciones distintas hace imposible verificar la beta a mano. Fija la decisión de semilla única, que es previa a poblar las 17 páginas.",
+    "evidencia_verificada": "Verificado que PI-2024-002 aparece con titulares y regiones distintas en 5_ficha, 6_ficha y 8_..._repositorio_documental.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-56",
+  "categoria": "contradiccion_interna_stitch",
+  "titulo": "Contadores y KPIs que no cuadran con las filas visibles, y paginación que no lleva a ninguna parte",
+  "descripcion": "'Mostrando 3 de 12 compromisos', '7 de 38 expedientes' con páginas 1-2-3 sin JS, '1 - 6 de 24 registros normados' con 4 páginas y 6 filas, 'Todas (24)' sobre 5 filas, '148 muestras' con 4 filas, 'BLOQUES: 1,842 REGISTROS' con 8 filas, 'Mostrando 5 de 20 compuertas' con 5 filas, 'Cargar 38 Eventos Precedentes'. En Dirección, la cartera dice $274.500 cuando la suma real de la semilla del prototipo es $307.000. Y los egresos visibles de la 7_10 (13.750) no cuadran con su KPI de $28.750.",
+  "evidencia": "3_proyectos_expedientes/code.html:656 — 'Mostrando <span id=\"count-visible\">7</span> de <span>38</span> expedientes cargados' con botones '2' y '3' sin listeners; 18_19.../code.html:725 — 'BLOQUES: 1,842 REGISTROS'; sistema_de_gesti_n_de_proyectos_integrales/code.html — '<div class=\"text-3xl ...\">$274,500.00 USD</div>' frente a presupuestos de semilla que suman 307.000",
+  "regla_o_seccion_afectada": "Criterio de aceptación (la beta no debe prometer datos que no existen)",
+  "decision_propuesta": "Seguir la regla: todo contador se calcula de la semilla y la paginación solo existe si funciona. Datos de ejemplo consistentes y verificables a mano.",
+  "severidad": "media",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-56",
+    "refutado": false,
+    "motivo": "Las tres citas son literales, y comprobé la aritmética: la semilla del prototipo suma exactamente 307.000 frente a los 274.500 hardcodeados en Dirección.",
+    "evidencia_verificada": "3_proyectos.../code.html:656 'Mostrando <span ... id=\"count-visible\">7</span> de <span ...>38</span> expedientes cargados'. 18_19.../code.html:725 'BLOQUES: 1,842 REGISTROS'. sistema_de_gesti_n_de_proyectos_integrales/code.html:2677 '<div class=\"text-3xl ...\">$274,500.00 USD</div>' bajo 'Total Contratado Cartera', frente a presupuestoTotal en :294=48500, :343=72000, :393=52000, :429=34000, :461=61500, :494=39000 → suma 307.000. 12_aprobaciones:642 'Mostrando 5 de 20 compuertas activas'. 1_2:456 'MOSTRANDO 3 DE 12 COMPROMISOS'. 7_10:532 KPI '$28,750.00 USD'."
+   },
+   {
+    "id": "H-56",
+    "refutado": false,
+    "motivo": "Contradicción real con el criterio de aceptación y con la regla 5 (datos de ejemplo): contadores y paginación que prometen datos inexistentes son exactamente lo que una beta navegable no debe hacer. Absorbe además a H-42.",
+    "evidencia_verificada": "Verificado el contador '7 de 38 expedientes' con botones de página sin listeners en 3_proyectos_expedientes y el KPI de cartera $274,500.00 USD hardcodeado en el prototipo (línea 2677).",
+    "correccion": "Ampliar su alcance para incluir los KPIs de gestión de H-42: todo número visible se deriva de la semilla o no se muestra."
+   }
+  ]
+ },
+ {
+  "id": "H-57",
+  "categoria": "contradiccion_interna_stitch",
+  "titulo": "Incoherencias funcionales concretas: mínimo de caracteres contradictorio, aprobación que no se refleja en pantalla, tres pestañas activas a la vez, matriz de permisos que es código muerto",
+  "descripcion": "Cuatro defectos que hay que no replicar: (a) en 6_9 la etiqueta exige 'mín. 20 caracteres' pero el JS valida 10; (b) tras aprobar la etapa 06 un alert anuncia que se desbloquea la 07, pero la tarjeta 07 no cambia de estado en pantalla; (c) en 5_8_11 tres pestañas aparecen destacadas simultáneamente porque la pantalla apila tres páginas; (d) en el prototipo SPA la matriz PERMISSIONS de los 5 roles nunca se usa: checkPermission solo aparece en su definición y el gating real está hardcodeado por número de página, con reglas que contradicen la matriz (administracion/direccion tienen canCaptureField:false pero pueden registrar mediciones; admin tiene canEditCatalogs:true pero la página 18 es solo lectura).",
+  "evidencia": "6_9.../code.html:297 — 'Obligatorio (mín. 20 caracteres)' vs :598-599 — \"if (comentario.length < 10) { alert('...(mínimo 10 caracteres)...') }\" (verificado); sistema_de_gesti_n_de_proyectos_integrales/code.html:796 — 'function checkPermission(requiredRule) {' es la ÚNICA aparición de checkPermission en 3089 líneas (verificado con grep -c) y :807 — \"const adminOnlyPages = ['17', '18', '19'];\"",
+  "regla_o_seccion_afectada": "Regla 8 (matriz de permisos coherente) y Regla 9 (al aprobarse se desbloquea la siguiente, y debe verse)",
+  "decision_propuesta": "Seguir la regla: una única función de permisos leída desde una tabla de roles, aplicada en cada página y en cada acción; y que el desbloqueo de la etapa siguiente se refleje en la UI, no en un alert.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-57",
+    "refutado": false,
+    "motivo": "Los cuatro defectos se confirman uno a uno, incluida la afirmación más fuerte: checkPermission aparece una sola vez en 3.089 líneas.",
+    "evidencia_verificada": "(a) 6_9.../code.html:297 'Obligatorio (mín. 20 caracteres)' frente a :598-599 \"if (comentario.length < 10) { alert('Por favor ingrese un dictamen técnico formal (mínimo 10 caracteres)...') }\". (b) 6_9:609-611: el setTimeout solo cambia innerHTML y className del propio botón y lanza alert('Etapa 06 Aprobada formalmente. Se ha desbloqueado la Etapa 07...'), sin tocar la tarjeta 07. (c) 5_8_11 líneas 144/156/169: 'Resumen Técnico' con bg-primary y 'Documentos' y 'Bitácora WORM' con bg-surface-container-high...shadow-sm, mientras las otras cuatro pestañas son text-on-surface-variant sin fondo. (d) prototipo: grep -c 'checkPermission' = 1 (su definición en :798) en 3089 líneas; :807-808 'const adminOnlyPages = [\"17\",\"18\",\"19\"]'; PERMISSIONS (:181-237) da administracion.canCaptureField:false y direccion.canCaptureField:false, y admin.canEditCatalogs:true."
+   },
+   {
+    "id": "H-57",
+    "refutado": false,
+    "motivo": "Cuatro defectos verificados, y al menos dos son de diseño (no de código desechable): el desbloqueo que solo ocurre en un alert incumple la regla 9 ('al aprobarse se desbloquea la siguiente' tiene que verse) y la matriz de permisos muerta incumple la regla 8. Son advertencias de 'no replicar' con consecuencia directa.",
+    "evidencia_verificada": "6_9/code.html:297 'Obligatorio (mín. 20 caracteres)' frente a :598 'if (comentario.length < 10)'. En el prototipo, grep -c 'checkPermission' = 1 en 3089 líneas (solo su definición) y el gating real es adminOnlyPages = ['17','18','19'] en la línea 807.",
+    "correccion": "El punto (c), tres pestañas activas a la vez, es artefacto de la pantalla apilada y ya se resuelve al separarla (H-62)."
+   }
+  ]
+ },
+ {
+  "id": "H-59",
+  "categoria": "pantalla_extra",
+  "titulo": "Pantallas y bloques que Stitch trae y el encargo no pide: telemetría, cadena de custodia, sala de proyección 4K con rotador, timesheet, laboratorio",
+  "descripcion": "Además de las 23 páginas, el export añade módulos completos no solicitados: 'Monitoreo Satelital de Cuadrillas' y 'Último Registro Fotogramétrico' (panel 1_2), 'Estado de Cadena de Custodia' y 'Cadena de Custodia & Calidad' (1_2 y 2), 'modo sala / proyección' con badge 'DISP: 4K UHD LED' y rotación automática cada 15 s con botón Pausar (16 y prototipo), 'Timesheet Técnico' (7_ficha), 'Recepción y Protocolo de Cadena de Custodia (NCh 411 / ISO 17025)' con cadena de frío (9_2), 'Pólizas y Boletas de Garantía' (14) y 'Campañas & Auditorías en Terreno EN VIVO' (16).",
+  "evidencia": "16_vista_de_direcci_n_modo_sala/code.html:120 — 'DISP: 4K UHD LED' y :128-134 — 'Rotación automática activa: <span id=\"countdown-timer\">15s</span>' con '<button onclick=\"toggleRotation()\">Pausar rotación</button>' y :502 — '// Loop rotation visual trigger (in real system triggers carousel/tab slide)'; 1_2.../code.html:586-606 — 'ESTADO DE CADENA DE CUSTODIA'",
+  "regla_o_seccion_afectada": "Alcance del encargo (23 páginas / 17 archivos) — interpretación de Stitch",
+  "decision_propuesta": "Preguntar al usuario cuáles quiere conservar. Recomendación: descartar todos. El único con valor es la idea de 'modo sala' para direccion.html, pero sin rotador automático, sin badge de hardware y sin datos en vivo.",
+  "severidad": "media",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-59",
+    "refutado": false,
+    "motivo": "Todos los módulos citados existen literalmente, incluidos el rotador con temporizador y el comentario de código que lo delata.",
+    "evidencia_verificada": "16_vista_de_direcci_n_modo_sala/code.html:120 'DISP: 4K UHD LED', :128 'Rotación automática activa: <span ... id=\"countdown-timer\">15s</span>', :131-133 botón con id/label 'Pausar rotación' y :517 'function toggleRotation()', :502 '// Loop rotation visual trigger (in real system triggers carousel/tab slide)', :440 'Campañas &amp; Auditorías en Terreno' con :442 'EN VIVO'. 1_2.../code.html:470 'Monitoreo Satelital de Cuadrillas', :492 'Último Registro Fotogramétrico', :586 'ESTADO DE CADENA DE CUSTODIA'. 2_panel:480 'Cadena de Custodia &amp; Calidad'. 9_2:587 'Recepción y Protocolo de Cadena de Custodia' y :608 'Preservación Térmica'. 7_ficha:690 'Timesheet Técnico'. 14_directorio:524 'Pólizas y Boletas de Garantía'."
+   },
+   {
+    "id": "H-59",
+    "refutado": false,
+    "motivo": "Se sostiene como hallazgo paraguas de alcance: la beta tiene 23 páginas definidas y estos módulos no están en ellas, así que construirlos consumiría el presupuesto de la maqueta. Absorbe a H-40, H-41 y H-43, lo que lo hace más útil, no menos.",
+    "evidencia_verificada": "Verificados en 16_vista_de_direcci_n_modo_sala el badge 'DISP: 4K UHD LED', la rotación automática con contador y botón de pausa, y el bloque de cadena de custodia en 1_2.",
+    "correccion": "Ampliar su lista con horas-hombre/timesheet (H-40), pólizas y garantías (H-41) y las entidades inventadas de H-43."
+   }
+  ]
+ },
+ {
+  "id": "H-60",
+  "categoria": "pagina_sin_cobertura",
+  "titulo": "Cobertura real 1-23: las 23 tienen algún diseño, pero 5 páginas solo existen como fragmento dentro de pantallas combinadas y la 1 tiene diseño de la cosa equivocada",
+  "descripcion": "Tras el segundo export ninguna página queda literalmente sin diseño, pero la cobertura es desigual. Con diseño propio y completo: 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16. Solo como fragmento dentro de una pantalla combinada: 15 (única versión, dentro de 14_15), 17, 20, 21 (dentro de 17_20_23), 18 y 19 (dentro de 18_19). Con diseño meramente indicativo: 22 y 23, que no son páginas sino dos tarjetas de 'hoja de ruta' con un botón 'Próximamente' deshabilitado. Y la página 1 tiene DOS diseños, pero ambos son un login con contraseña: para el selector de rol que pide el encargo no hay diseño (lo más aprovechable es la rejilla del 'Simulador de Perfiles'). También conviene saber que field_dossier_technical_workspace no es una pantalla: solo contiene DESIGN.md.",
+  "evidencia": "Verificado por listado del directorio (28 carpetas, 27 con code.html) y por los h1/secciones de cada archivo: 14_15_contratantes_y_reportes_de_cierre/code.html:113 — 'Módulo Dual 15/14'; 17_20_23.../code.html:120 — 'Módulos 17, 20, 21, 22 y 23: ...'; 17_20_23.../code.html — 'FASE 2 — NO HABILITADO' con botón 'Próximamente' deshabilitado; field_dossier_technical_workspace/ contiene solo DESIGN.md (verificado con ls)",
+  "regla_o_seccion_afectada": "Regla 13 (23 páginas en 17 archivos) y Regla 7 (index = selector de rol)",
+  "decision_propuesta": "Decisión: diseñar de cero index.html (selector de rol) y las maquetas fase2-portal.html y fase3-asistente.html; extraer 15, 17, 18, 19, 20 y 21 de sus pantallas combinadas como páginas independientes. El resto se porta desde su pantalla dedicada.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-60",
+    "refutado": false,
+    "motivo": "El inventario se confirma por listado y por los encabezados de cada archivo; field_dossier_technical_workspace contiene solo DESIGN.md.",
+    "evidencia_verificada": "ls: 29 entradas, 28 carpetas de pantalla + 27 code.html (la 28ª es field_dossier_technical_workspace, que con ls contiene únicamente DESIGN.md). 14_15.../code.html:113 'Módulo Dual 15/14'. 17_20_23.../code.html:119 'Módulos 17, 20, 21, 22 y 23: Gobernanza de credenciales activas, delimitación perimetral de facultades según rol, expediente de especialista y cronograma de despliegue de fases técnicas.' (la cita decía :120) y :657 'FASE 2 — NO HABILITADO' con :687-688 '<button ... cursor-not-allowed\" disabled=\"\">Próximamente</button>' (dos veces, :688 y :728). Las dos versiones de la página 1 son login (ver H-15)."
+   },
+   {
+    "id": "H-60",
+    "refutado": false,
+    "motivo": "No es una contradicción sino un mapa de cobertura, pero cambia decisiones de construcción de primer orden: qué páginas hay que diseñar desde cero, cuáles hay que extraer de pantallas combinadas y cuáles se portan. Es el hallazgo que ordena el trabajo.",
+    "evidencia_verificada": "Verificado: 28 carpetas, 27 con code.html; field_dossier_technical_workspace contiene solo DESIGN.md; ninguna pantalla del export tiene <title> (grep '<title' */code.html = 0 archivos).",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-61",
+  "categoria": "otro",
+  "titulo": "DUPLICADO 1_2 vs 1 y 2: seguir el par separado (1_ingreso solo como referencia visual del selector; 2_panel como base del panel)",
+  "descripcion": "1_2 fusiona login+dashboard con un toggle (H-52) y su dashboard es de Coordinador con KPIs de compuertas, mapa satelital y cadena de custodia. La 2 es un panel más rico (cinta de contexto de usuario, 4 KPIs, tabla de expedientes críticos, cronograma semanal, telemetría, cadena de custodia, franja de envío oficial) pero con selector de 4 'Vistas' incompatibles y sin ningún monto en USD. Las dos son chilenas.",
+  "evidencia": "1_2.../code.html:237 — h1 'Panel Operativo de Expedientes & Compuertas' con toggle 'Vista de Módulo'; 2_panel_de_inicio_dashboard_t_cnico/code.html:141-144 — '<option value=\"coordinador\">Vista: Coord. Técnico Proyectos</option>...' y grep 'USD'/'$' = 0 en ese archivo",
+  "regla_o_seccion_afectada": "Regla 13 (index y panel separados) y Regla 8",
+  "decision_propuesta": "Decisión: para panel.html seguir el LAYOUT de 2_panel (cinta de contexto + 4 KPIs + tabla de acción + agenda), tomando los KPIs del prototipo SPA (proyectos totales, etapas vencidas, etapas esperando aprobación, presupuesto o honorario propio). Descartar 1_2 por completo.",
+  "severidad": "media",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-61",
+    "refutado": false,
+    "motivo": "Ambas citas son literales, incluida la afirmación negativa comprobable de que 2_panel no tiene ningún monto.",
+    "evidencia_verificada": "1_2.../code.html:237 '<h1 ...>Panel Operativo de Expedientes &amp; Compuertas</h1>' con el toggle 'Vista de Módulo' en :118. 2_panel_de_inicio_dashboard_t_cnico/code.html:141-144 '<option selected value=\"coordinador\">Vista: Coord. Técnico Proyectos</option>', 'Vista: Especialista Forestal / EIA', 'Vista: Auditor ISO 14001', 'Vista: Dirección de Operaciones'; grep -c 'USD' = 0 y grep -c '$' = 0 en ese archivo."
+   },
+   {
+    "id": "H-61",
+    "refutado": false,
+    "motivo": "Decisión de construcción real y no trivial: elige el layout base de panel.html, uno de los 17 archivos, y descarta explícitamente la pantalla combinada. Absorbe además a H-52.",
+    "evidencia_verificada": "Verificado el selector de cuatro 'Vistas' incompatibles en 2_panel_de_inicio_dashboard_t_cnico (que cae por H-19) y el toggle de módulo en 1_2.",
+    "correccion": "Al portar 2_panel hay que sustituir su selector de vistas por el rol activo (H-19) y añadir montos en USD, que esa pantalla no tiene."
+   }
+  ]
+ },
+ {
+  "id": "H-62",
+  "categoria": "otro",
+  "titulo": "DUPLICADO 5_8_11 vs 5, 8 y 11: seguir las tres pantallas dedicadas, no la apilada",
+  "descripcion": "5_8_11 apila las páginas 5, 8 y 11 en un solo HTML con tres pestañas destacadas a la vez, y es la más contaminada de las cuatro (Punta Arenas, DS 40, ICSARA, consulta indígena, SAG/DGA/DGC, CIP, nodo CL-SCL-01, GMT-3). A cambio es la única con fechas en DD/MM/AAAA correctas en la tabla de documentos. Las dedicadas son más completas: 5_ficha aporta la cartela geodésica y las compuertas; 11_worm aporta la bitácora con filtros por evento/severidad/periodo (aunque toda envuelta en WORM).",
+  "evidencia": "5_8_11.../code.html:144 vs :156 y :169 — pestaña 'Resumen Técnico' con 'bg-primary' y a la vez 'Documentos' y 'Bitácora WORM' con 'bg-surface-container-high ... shadow-sm'; :410 — '24/10/2024 16:30' (formato correcto)",
+  "regla_o_seccion_afectada": "Regla 13 (proyecto.html con 7 pestañas = páginas 5 a 11)",
+  "decision_propuesta": "Decisión: seguir 5_ficha (resumen, sin cartela geodésica ni WebGIS), 8_ficha_..._repositorio (documentos, por tener la estructura de tabla más limpia y el historial de versiones) y 11_worm (bitácora, quitando todo lo criptográfico y conservando su barra de filtros). Tomar de 5_8_11 solo el formato de fecha.",
+  "severidad": "media",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-62",
+    "refutado": false,
+    "motivo": "Ambas citas son literales: las tres pestañas destacadas simultáneamente y el formato de fecha correcto en la tabla de documentos.",
+    "evidencia_verificada": "5_8_11.../code.html:144 pestaña 'Resumen Técnico' con class '...bg-primary text-on-primary shadow-sm...', :156 'Documentos' y :169 'Bitácora WORM' con '...bg-surface-container-high text-primary ... shadow-sm', frente a 'Etapas (10)', 'Equipo & Honorarios', 'Mediciones de Campo' y 'Finanzas' con 'text-on-surface-variant hover:bg-surface-container-high'. :410 '24/10/2024 16:30'. Contaminación confirmada en el mismo archivo: 'Punta Arenas', DS 40, ICSARA (:550), consulta indígena (:336), SAG/DGA/DGC (:559), Nodo CL-SCL-01 (:633ss), GMT-3 (:183). 11_worm tiene filtros por Severidad (:254-256) y Periodo (:263)."
+   },
+   {
+    "id": "H-62",
+    "refutado": false,
+    "motivo": "Decisión real: define de qué pantalla sale cada una de tres de las siete pestañas obligatorias de proyecto.html. Y su criterio (la apilada es la más contaminada) está verificado.",
+    "evidencia_verificada": "5_8_11 concentra ICSARA, SAG/DGA/DGC, consulta indígena y GMT-3, y a la vez es de las pocas con fechas correctas DD/MM/AAAA.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-64",
+  "categoria": "otro",
+  "titulo": "DUPLICADO 7_10 vs 7 y 10: 7_10 es la mejor base (Venezuela, USD, 'Por liquidar no suma') pese a apilar dos páginas",
+  "descripcion": "7_10 apila equipo/honorarios y finanzas con un ancla (#modulo-finanzas), pero es la más alineada con el encargo: CIV-148.902, Inpreabogado, Península de Macanao, todo en USD, catálogo de 5 categorías financieras controladas ('LISTA FIJA v4.2') y la regla explícita 'Por liquidar no suma al total ejecutado'. Sus defectos: 'NORMA: EIA-v2 / SEIA', fechas ISO, y solo describe (no diseña) la vista del profesional. 7_ficha en cambio invierte la regla de honorarios (H-20), ofrece CLP/UF y añade horas-hombre; 10_finanzas añade DTE/SII, RUT, CLP y WORM.",
+  "evidencia": "7_10.../code.html:314 — 'CIV-148.902 · Ing. Ambiental' y :431 — 'INPREAB-88.310'; :153 — 'Península de Macanao, Sector Este'; :~490 — 'Regla de Control Fiscal Interno' / 'Por liquidar no suma'; :135 — 'NORMA: EIA-v2 / SEIA'",
+  "regla_o_seccion_afectada": "Regla 13 (pestañas separadas), Regla 6 y Regla 8",
+  "decision_propuesta": "Decisión: separar 7_10 en dos pestañas y usarla como base de contenido y de reglas financieras. Descartar 7_ficha (regla de honorarios invertida) y 10_finanzas (DTE/CLP/WORM); de la 10 conservar solo la idea de KPIs de ingresos/egresos/saldo/por liquidar.",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-64",
+    "refutado": false,
+    "motivo": "Las citas son literales (la de la regla fiscal es paráfrasis fiel del texto real) y la afirmación clave —7_10 no usa CLP ni UF— se confirma por conteo.",
+    "evidencia_verificada": "7_10.../code.html:314 'CIV-148.902 · Ing. Ambiental', :431 'INPREAB-88.310 · Marco Regulatorio', :153 'Península de Macanao, Sector Este', :135 'NORMA: EIA-v2 / SEIA', :585 'LISTA FIJA v4.2', :502-503 'Regla de Control Fiscal Interno: Las partidas marcadas \"Por liquidar\" se muestran aparte y no se suman al total ejecutado hasta contar con la conciliación física de factura fiscal y validación técnica del Coordinador.' grep -c 'CLP|UF' en 7_10 = 0. Fechas ISO confirmadas en :636 '2024-03-12'.",
+    "correccion": "Detalle menor: la frase literal es 'no se suman al total ejecutado', no 'Por liquidar no suma' (el hallazgo ya la marcaba con ~). Y la 'Regla de Control Fiscal Interno' está en la línea 502, no ~490."
+   },
+   {
+    "id": "H-64",
+    "refutado": false,
+    "motivo": "Decisión real y bien fundada: elige la base de dos pestañas obligatorias y descarta expresamente la pantalla que invierte la regla de honorarios (H-20). El criterio 'Por liquidar no suma' es además una regla de negocio utilizable.",
+    "evidencia_verificada": "7_10 usa CIV e INPREAB, Península de Macanao y USD; 7_ficha ofrece CLP/UF (verificado por grep) y 10_finanzas concentra DTE y nómina bancaria.",
+    "correccion": "De 7_10 hay que quitar 'NORMA: EIA-v2 / SEIA' y normalizar sus fechas ISO (H-33)."
+   }
+  ]
+ },
+ {
+  "id": "H-65",
+  "categoria": "otro",
+  "titulo": "DUPLICADO: TRES versiones de la página 8 con datos contradictorios entre sí",
+  "descripcion": "La página 8 aparece en 5_8_11, en 8_..._documentos_y_repositorio_normado (10 columnas, 'Foliado Oficial SEA', 'Firma Digital Avanzada Ley 19.799', modal con 'WebCrypto SHA-256 Ready') y en 8_..._repositorio_documental (7 columnas, cajón de historial de versiones, modal de verificación de hash, toast en vez de alert). Verificado: son proyectos distintos con el mismo código, hashes distintos para el mismo documento y responsables con apellido distinto.",
+  "evidencia": "8_ficha_de_proyecto_documentos_y_repositorio_normado/code.html:129 — 'Titular Mandante: Generadora Eólica del Norte S.A.' vs 8_ficha_de_proyecto_repositorio_documental/code.html:122 — 'Titular: Consorcio Energías del Pacífico S.A. • Región de Biobío' (ambos verificados, mismo expediente PI-2024-002)",
+  "regla_o_seccion_afectada": "Regla 13 (una sola página 8) y coherencia de semilla",
+  "decision_propuesta": "Decisión: seguir 8_..._repositorio_documental por tener la tabla más ligera (7 columnas) y el historial de versiones, quitándole hash/FEA/GeoTIFF/MB. Descartar las otras dos versiones.",
+  "severidad": "media",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-65",
+    "refutado": false,
+    "motivo": "La cita es literal y confirma que las dos versiones de la página 8 describen proyectos distintos bajo el mismo código.",
+    "evidencia_verificada": "8_ficha_..._documentos_y_repositorio_normado/code.html:129 'Titular Mandante: Generadora Eólica del Norte S.A.' frente a 8_ficha_..._repositorio_documental/code.html:121-122 'Parque Eólico Cordillera Costera — Tramo Sur' / 'Titular: Consorcio Energías del Pacífico S.A. • Región de Biobío', ambos con expediente PI-2024-002. En 8_normado :291 'Foliado Oficial SEA', :294 'Firma Digital Avanzada Ley 19.799', :805 'WebCrypto SHA-256 Ready'. En 8_repo hay openVersionDrawer (:306, :367, :428) para el historial de versiones.",
+    "correccion": "Conteo de columnas: <th> = 11 en 8_normado y 8 en 8_repositorio (el hallazgo decía 10 y 7); la diferencia relativa y la conclusión se mantienen."
+   },
+   {
+    "id": "H-65",
+    "refutado": false,
+    "motivo": "Decisión real: hay tres versiones de una misma página obligatoria con semillas contradictorias, y hay que elegir una antes de construir. El criterio (la tabla más ligera, con historial de versiones) es operativo.",
+    "evidencia_verificada": "Verificado que ambas versiones de la página 8 usan el mismo código PI-2024-002 con titulares y regiones distintos.",
+    "correccion": "Al portarla hay que quitarle hash (H-21), FEA (H-23/H-16) y peso/formatos (H-36); lo que queda es una tabla de nombre, tipo, etapa, fecha y autor."
+   }
+  ]
+ },
+ {
+  "id": "H-66",
+  "categoria": "otro",
+  "titulo": "DUPLICADO: DOS versiones de la página 9 con enfoques incompatibles (dasometría vs línea base multicomponente)",
+  "descripcion": "9_..._1 es forestal-dasométrica: formulario árbol por árbol (parcela, especie, DAP, altura, volumen manual), resumen por especie y libro de campo; pero su catálogo de especies es chileno (Nothofagus) y promete parámetros alométricos. 9_..._2 no captura nada de lo que pide el encargo: es un visor GIS con matriz de 148 muestras de fauna/flora/ruido/arqueología, sin hectáreas, sin árboles, sin altura, sin DAP y sin volumen; su único formulario es de cadena de custodia hacia laboratorio.",
+  "evidencia": "9_ficha_de_proyecto_mediciones_de_campo_1/code.html:~290-400 — formulario con 'DAP', 'Altura Total', 'Volumen Manual Estimado'; 9_..._2/code.html — el único <form> es 'Recepción y Protocolo de Cadena de Custodia (NCh 411 / ISO 17025)'; grep 'DAP' en 9_..._2 = 0 salvo 'Parcela dasométrica (10x10m)' como texto de celda",
+  "regla_o_seccion_afectada": "Regla 3 (se capturan hectáreas, nº de árboles, altura, DAP y volumen) y Regla 13",
+  "decision_propuesta": "Decisión: descartar 9_..._2 por completo (no cubre la página 9) y usar la estructura de 9_..._1, pero con el contenido y la nota de volumen de 6_9 (especies venezolanas, sin alometría).",
+  "severidad": "alta",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-66",
+    "refutado": false,
+    "motivo": "Verificado, incluida la afirmación negativa: 9_2 no captura nada de lo que pide la regla 3 y su único formulario es de cadena de custodia.",
+    "evidencia_verificada": "9_..._mediciones_de_campo_1/code.html:315-333: labels 'DAP' (campo-dap), 'Altura Total' (campo-altura) y 'Volumen Manual Estimado' (campo-volumen), más el catálogo Nothofagus en :305-308 y la promesa alométrica en :145. 9_..._mediciones_de_campo_2/code.html: grep -c 'DAP' = 0; hay un único <form> (línea 593) cuyo onsubmit lanza 'Lote de terreno validado y bloqueado criptográficamente...', bajo el encabezado :587 'Recepción y Protocolo de Cadena de Custodia'.",
+    "correccion": "Precisión: 'DAP' no aparece 'salvo como texto de celda' en 9_2 — no aparece en absoluto (0 coincidencias). El hallazgo es más fuerte de lo que afirma."
+   },
+   {
+    "id": "H-66",
+    "refutado": false,
+    "motivo": "Decisión real con impacto en la regla 3: una de las dos versiones de la página 9 no captura nada de lo que el encargo manda capturar, así que elegirla dejaría la beta sin la pestaña de mediciones. Verificado con grep, no es impresión.",
+    "evidencia_verificada": "En 9_..._2 no hay campos de DAP, altura ni volumen; su único formulario es de recepción de muestras a laboratorio. En 9_..._1 sí existe el formulario árbol por árbol.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-67",
+  "categoria": "otro",
+  "titulo": "DUPLICADO 12 vs 12_13 y 13 vs 12_13: los calendarios están en meses distintos y las bandejas tienen tamaños opuestos",
+  "descripcion": "La 12 dedicada es una bandeja real (KPIs, pestañas por tipo, filtros, tabla de 9 columnas con 5 de 20 solicitudes, selección en lote, paginación, drawer de dictamen); la 12 de 12_13 tiene solo DOS solicitudes y ningún filtro, pero es la ÚNICA que implementa el flujo correcto del encargo: 'Devolver a En curso con comentario de subsanación' + 'Aprobar Etapa 06'. Para la 13: la dedicada es Octubre 2024 con 'HOY' el 17 y la de 12_13 es Noviembre 2024 con 'HOY' el 08, con eventos distintos.",
+  "evidencia": "12_13_aprobaciones_pendientes_y_calendario/code.html:~128 — chip '1 CRÍTICA · 1 ORDINARIA' y botón \"Devolver a 'En curso' con comentario de subsanación\"; :~355 — 'Noviembre 2024 (Sem 45 - 48)' frente a 13_calendario.../code.html:~136 — 'OCTUBRE 2024' con celda 17 marcada 'HOY'",
+  "regla_o_seccion_afectada": "Regla 13 (páginas 12 y 13 separadas), Regla 9 y coherencia de semilla",
+  "decision_propuesta": "Decisión: para aprobaciones.html seguir el LAYOUT de la 12 dedicada (bandeja con filtros y tabla) pero con las ACCIONES de 12_13 (aprobar / devolver con comentario). Para calendario.html seguir la 13 dedicada (grilla mensual con leyenda) y fijar una única fecha de referencia para toda la beta.",
+  "severidad": "media",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-67",
+    "refutado": false,
+    "motivo": "Las citas son literales y la divergencia de meses y de tamaño de bandeja entre las versiones se confirma.",
+    "evidencia_verificada": "12_13.../code.html:129 '1 CRÍTICA · 1 ORDINARIA', :249 \"Devolver a 'En curso' con comentario de subsanación\", :253 'Aprobar Etapa 06 &amp; Notificar Inversionistas', :347-348 'Noviembre 2024' + '(Sem 45 - 48)', :405 '<!-- Grilla del Calendario Mensual (Noviembre 2024) -->'. 13_calendario.../code.html:140 'OCTUBRE 2024', :350 '<!-- 17 Oct: DÍA DE HOY (Destacado sutil) -->' y :354 badge 'HOY'. 12_aprobaciones.../code.html:642 'Mostrando 5 de 20 compuertas activas'."
+   },
+   {
+    "id": "H-67",
+    "refutado": false,
+    "motivo": "Decisión real y matizada: separa correctamente 'de dónde sale el layout' de 'de dónde salen las acciones', y detecta que solo la pantalla combinada implementa el flujo que exige la regla 9. La fecha de referencia única es además un requisito derivado de H-33.",
+    "evidencia_verificada": "Verificados los dos calendarios en meses distintos (octubre con HOY el 17 frente a noviembre con HOY el 08) y la acción de devolver con comentario de subsanación solo en 12_13.",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-68",
+  "categoria": "otro",
+  "titulo": "DUPLICADO 14 vs 14_15: semillas incompatibles y la página 15 solo existe dentro de la combinada",
+  "descripcion": "La 14 dedicada es maestro-detalle (5 tarjetas + dossier lateral con contrapartes, expedientes, pólizas y facturación) y usa USD; la 14 de 14_15 es una tabla ledger de 7 columnas con contacto técnico y fiscal, y usa CLP. Verificado: el mismo contratante tiene RUT y sede distintos entre ambas (76.842.190-K / Santiago vs 76.419.820-K / Antofagasta) y cambia toda la lista de empresas. La página 15 no tiene versión dedicada: solo existe como sección de 14_15, y el orden de la carpeta está invertido respecto de su nombre ('Módulo Dual 15/14').",
+  "evidencia": "14_directorio_de_contratantes_y_mandantes/code.html:444 — 'RUT: 76.842.190-K · Santiago, Chile' vs 14_15.../code.html:551 — 'RUT: 76.419.820-K · Casa Matriz Antofagasta' (ambos verificados); 14_15.../code.html:113 — 'Módulo Dual 15/14'",
+  "regla_o_seccion_afectada": "Regla 13 (páginas 14 y 15 separadas), Regla 6 y coherencia de semilla",
+  "decision_propuesta": "Decisión: para contratantes.html seguir el layout maestro-detalle de la 14 dedicada (más legible), recortado a datos de contacto + RIF + proyectos vinculados. Para reportes.html extraer la sección 15 de 14_15, en USD y sin DTE ni firma digital.",
+  "severidad": "media",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-68",
+    "refutado": false,
+    "motivo": "Las tres citas son literales y la incompatibilidad de semillas y de moneda entre las dos versiones de la página 14 se confirma.",
+    "evidencia_verificada": "14_directorio_de_contratantes_y_mandantes/code.html:444 'RUT: 76.842.190-K · Santiago, Chile' (id=\"detailRut\") y :624 el mismo dato en el objeto JS; grep -c 'USD' = 12. 14_15_contratantes_y_reportes_de_cierre/code.html:551 'RUT: 76.419.820-K · Casa Matriz Antofagasta', :113 'Módulo Dual 15/14', :419 'Moneda Base: CLP (Pesos Chilenos)'; grep -c 'CLP' = 8."
+   },
+   {
+    "id": "H-68",
+    "refutado": false,
+    "motivo": "Decisión real: la página 15 solo existe dentro de la combinada, así que hay que extraerla, y las dos versiones de la 14 tienen semillas incompatibles. Ambas cosas condicionan dos de los 17 archivos.",
+    "evidencia_verificada": "Verificado el mismo contratante con identificador y sede distintos entre 14_directorio y 14_15, y la declaración 'Moneda Base: CLP' en 14_15 (línea 419).",
+    "correccion": ""
+   }
+  ]
+ },
+ {
+  "id": "H-69",
+  "categoria": "otro",
+  "titulo": "Aprovechable de Stitch pese a todo: los tokens del config, el logo SVG, la 18_19 y la plantilla de 10 etapas del asistente",
+  "descripcion": "Para no descartar todo: (a) el tailwind.config es una paleta Material-3 coherente que se traduce directamente a variables CSS y coincide con las capturas; (b) logo_proyectos_integrales/code.html contiene el logo como SVG inline (sin dependencia remota); (c) la 18_19 es la única pantalla con semilla venezolana en catálogos (MINEC, C.A., especies locales) y con las unidades correctas (ha, m, cm, m³, nº de árboles) sin ningún factor de conversión; (d) la plantilla de 10 etapas del asistente (Oferta → Cierre y liquidación) es la única que describe el ciclo interno de una consultora.",
+  "evidencia": "18_19.../code.html:451 — 'Ingreso a Autoridad Ambiental (MINEC / Ente Competente)' y :650 — 'Consorcio Agroforestal del Llano, C.A.' y :283-299 — catálogo CAT-04 'hectárea / ha', 'metro cúbico / m³', 'número de árboles / ind'; 4_nuevo_proyecto_asistente_en_3_pasos/code.html:329-427 — las 10 etapas; logo_proyectos_integrales/code.html (SVG 100x100, sin recursos remotos)",
+  "regla_o_seccion_afectada": "Regla 2 (tokens propios), Regla 4 (listas controladas), Regla 9 (10 etapas) y Regla 1 (logo offline)",
+  "decision_propuesta": "Decisión: portar estos cuatro activos. Volcar el config a tokens.css, usar el SVG del logo, tomar la 18_19 como base de catalogos.html y la plantilla del asistente como referencia de las 10 etapas hasta que llegue la especificación.",
+  "severidad": "baja",
+  "sobrevive": true,
+  "veredictos": [
+   {
+    "id": "H-69",
+    "refutado": false,
+    "motivo": "Los cuatro activos existen y son aprovechables tal como se describe; el logo es SVG puro sin ningún recurso remoto.",
+    "evidencia_verificada": "18_19.../code.html:451 'Ingreso a Autoridad Ambiental (MINEC / Ente Competente)', :650 'Consorcio Agroforestal del Llano, C.A.', :274-299 catálogo CAT-04 con 'hectárea', 'metro', 'centímetro / cm', 'metro cúbico / m³', 'número de árboles / ind', y especies Palo Blanco/Yiguire/Majomo/Guatácare (:176-194). 4_nuevo_proyecto.../code.html:328-423 las 10 etapas de 'Oferta de contrato y contratación' a 'Cierre y liquidación'. logo_proyectos_integrales/code.html: SVG 100x100 de 811 bytes, sin ningún http salvo el xmlns; usa #1F4D3D, #9A6B3F y #F7F6F2. El tailwind.config coincide con el frontmatter del DESIGN.md."
+   },
+   {
+    "id": "H-69",
+    "refutado": false,
+    "motivo": "Es el contrapeso necesario del lote: identifica los cuatro únicos activos portables y evita que el equipo concluya que hay que tirarlo todo. Verificado: el logo es el único archivo del export sin dependencias remotas.",
+    "evidencia_verificada": "logo_proyectos_integrales/code.html es el único de los 27 sin cdn.tailwindcss.com, sin fonts.googleapis.com y sin lh3.googleusercontent.com. Verificado también el catálogo de unidades y la semilla venezolana de 18_19.",
+    "correccion": "Matiz sobre el punto (c): 18_19 es buena base de catálogos pero contiene el alta libre de especies (H-29) y el ledger Merkle (H-22); se porta su semilla y sus unidades, no sus formularios."
+   }
+  ]
+ }
+]

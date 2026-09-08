@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-surface": "#191c1a",
+        "inverse-surface": "#2e312f",
+        "surface-container-low": "#f3f4f0",
+        "surface-container": "#edeeeb",
+        "primary": "#023627",
+        "tertiary-container": "#82220e",
+        "secondary-fixed-dim": "#f5bb88",
+        "primary-fixed": "#bcedd7",
+        "secondary": "#80552b",
+        "outline": "#717974",
+        "on-primary-fixed": "#002116",
+        "surface-bright": "#f8faf6",
+        "on-surface-variant": "#414944",
+        "inverse-primary": "#a1d1bc",
+        "secondary-container": "#fec390",
+        "tertiary-fixed-dim": "#ffb4a4",
+        "on-tertiary-fixed": "#3e0500",
+        "surface-dim": "#d9dad7",
+        "on-error-container": "#93000a",
+        "on-tertiary-fixed-variant": "#852410",
+        "surface-container-high": "#e7e9e5",
+        "on-error": "#ffffff",
+        "on-primary": "#ffffff",
+        "surface-variant": "#e1e3df",
+        "on-secondary-fixed": "#2d1600",
+        "on-primary-fixed-variant": "#214f3f",
+        "surface-container-lowest": "#ffffff",
+        "primary-container": "#1f4d3d",
+        "tertiary": "#610c00",
+        "on-secondary": "#ffffff",
+        "error-container": "#ffdad6",
+        "error": "#ba1a1a",
+        "inverse-on-surface": "#f0f1ed",
+        "surface": "#f8faf6",
+        "primary-fixed-dim": "#a1d1bc",
+        "on-secondary-container": "#794e25",
+        "surface-container-highest": "#e1e3df",
+        "on-tertiary-container": "#ff9680",
+        "background": "#f8faf6",
+        "secondary-fixed": "#ffdcc0",
+        "surface-tint": "#3a6756",
+        "on-secondary-fixed-variant": "#653e16",
+        "tertiary-fixed": "#ffdad3",
+        "on-tertiary": "#ffffff",
+        "on-primary-container": "#8dbda8",
+        "on-background": "#191c1a",
+        "outline-variant": "#c0c8c3"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "spacing-xl": "2rem",
+        "table-gutter": "0.75rem",
+        "spacing-md": "1rem",
+        "spacing-lg": "1.5rem",
+        "spacing-xs": "0.5rem",
+        "spacing-3xs": "0.125rem",
+        "spacing-2xl": "3rem",
+        "layout-margin-desktop": "2rem",
+        "spacing-3xl": "4rem",
+        "layout-margin-mobile": "1rem",
+        "spacing-2xs": "0.25rem",
+        "spacing-sm": "0.75rem",
+        "layout-margin-tablet": "1.5rem"
+      },
+      "fontFamily": {
+        "body-md": ["Hanken Grotesk"],
+        "headline-xl-mobile": ["Hanken Grotesk"],
+        "label-caps": ["Hanken Grotesk"],
+        "data-mono-lg": ["JetBrains Mono"],
+        "body-sm": ["Hanken Grotesk"],
+        "headline-xl": ["Hanken Grotesk"],
+        "headline-sm": ["Hanken Grotesk"],
+        "headline-lg": ["Hanken Grotesk"],
+        "headline-md": ["Hanken Grotesk"],
+        "data-mono-md": ["JetBrains Mono"],
+        "body-lg": ["Hanken Grotesk"],
+        "label-tabular": ["JetBrains Mono"]
+      },
+      "fontSize": {
+        "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+        "headline-xl-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+        "data-mono-lg": ["15px", {"lineHeight": "22px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+        "headline-sm": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600"}],
+        "headline-lg": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "data-mono-md": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+        "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+        "label-tabular": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+      }
+    }
+  }
+}</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-spacing-md flex items-center gap-spacing-xs bg-surface-container-low"><div class="flex items-center justify-center w-7 h-7 bg-primary rounded-lg text-on-primary font-headline-sm text-headline-sm">PI</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight">Proyectos Integrales</span><span class="font-label-caps text-label-caps text-secondary uppercase">Ingeniería &amp; Ambiente</span></div></div><div class="px-spacing-md py-spacing-xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operación Técnica</span></div><nav class="flex flex-col gap-spacing-3xs px-spacing-xs flex-1" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm"><a aria-current="page" class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded transition-colors bg-primary-container text-on-primary-container font-headline-sm" data-path="proyectos" href="#"><span class="material-symbols-outlined text-[20px]">folder_supervised</span><span class="font-body-sm text-body-sm">Proyectos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="aprobaciones" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span class="font-body-sm text-body-sm">Aprobaciones</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="calendario" href="#"><span class="material-symbols-outlined text-[20px]">event_note</span><span class="font-body-sm text-body-sm">Calendario</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contratantes" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-sm text-body-sm">Contratantes</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-body-sm text-body-sm">Reportes</span></a><div class="my-spacing-xs px-spacing-xs"><div class="h-[1px] bg-outline-variant/30"></div></div><div class="px-spacing-xs py-spacing-3xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Gobierno &amp; Control</span></div><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="direccion-ejecutiva" href="#"><span class="material-symbols-outlined text-[20px]">query_stats</span><span class="font-body-sm text-body-sm">Dirección</span><span class="ml-auto font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-inverse-surface text-inverse-on-surface">DARK</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="font-body-sm text-body-sm">Usuarios</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="catalogos" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-sm text-body-sm">Catálogos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="bitacora-general" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-body-sm text-body-sm">Bitácora General</span></a></nav></div><div class="p-spacing-md bg-surface-container-high"><div class="flex items-center justify-between"><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Estándar Técnico</span><span class="font-data-mono-md text-data-mono-md text-primary">ISO 14001 / EIA-v2</span></div><span class="material-symbols-outlined text-outline text-[18px]">format_image_left</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex items-center justify-between px-spacing-lg"><div class="flex items-center gap-spacing-md flex-1 max-w-2xl"><img alt="Logo Proyectos Integrales" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WWI3mVDk-K0VvmFiCvo8p33fqbfLEk7YLxC1GudbnlFUpaiGriHUaR624tyiQNmYunExODktoHOUwF3QL8qZ_IwSF5S_2YljkWvDXX_F70wU2BcAir0ZOTnqLI_71vsDpk6z_zbXASIS0ueLJ7tFBZNvfS6T8aTnTgjZaqsX3YPQTL3hOBf9ordXhPZXWaXrXj9-I0-5Fd6nraudX80Q_6v0_NI_5xzQXtCkGU4fxStFzd9olGwfezDU0"/><div class="relative w-full max-w-md"><span class="material-symbols-outlined absolute left-spacing-xs top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full pl-8 pr-spacing-sm py-spacing-2xs bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Buscar código de expediente, matriz ambiental, contratante o profesional..." type="text"/></div></div><div class="flex items-center gap-spacing-md"><div class="flex items-center gap-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded"><span class="font-label-caps text-label-caps text-secondary uppercase font-semibold">Entrar como:</span><select class="bg-transparent font-body-sm text-body-sm text-on-surface font-medium outline-none cursor-pointer"><option value="admin">Admin</option><option value="coordinador">Coordinador</option><option value="profesional">Profesional</option><option value="administracion">Administración</option><option value="direccion">Dirección</option></select></div><div class="flex items-center gap-spacing-2xs"><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">help</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-spacing-lg pb-spacing-xl flex-1 bg-background"><div class="flex flex-col w-full">
+<!-- Top Technical Dossier Header & Fast Metrics -->
+<div class="flex flex-col gap-spacing-md mb-spacing-lg">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-spacing-md">
+<div>
+<div class="flex items-center gap-spacing-xs mb-spacing-3xs">
+<span class="font-label-caps text-label-caps text-secondary tracking-widest uppercase">REGISTRO MAESTRO • EIA / FOR-024</span>
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">REV. OCT-2024</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary font-semibold tracking-tight">Expedientes Técnicos y Estudios</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl mt-spacing-3xs">
+          Consolidado oficial de fiscalización técnica, consultoría ambiental, planes de manejo forestal y tramitaciones regulatorias activas.
+        </p>
+</div>
+<!-- Action Button Group -->
+<div class="flex items-center gap-spacing-xs shrink-0">
+<button class="flex items-center gap-spacing-xs px-spacing-md py-spacing-xs bg-surface-container-lowest text-on-surface hover:bg-surface-container shadow-sm transition-all cursor-pointer rounded" id="btn-export-csv">
+<span class="material-symbols-outlined text-[18px] text-secondary">file_download</span>
+<span class="font-body-sm text-body-sm font-semibold">Exportar CSV</span>
+</button>
+<button class="flex items-center gap-spacing-xs px-spacing-md py-spacing-xs bg-primary text-on-primary hover:bg-primary-container shadow-sm transition-all cursor-pointer rounded" id="btn-nuevo-proyecto">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span class="font-body-sm text-body-sm font-semibold">Nuevo Expediente</span>
+</button>
+</div>
+</div>
+<!-- Analytical KPI Tiles (Archival engineering balance) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-spacing-sm">
+<div class="bg-surface-container-lowest p-spacing-md shadow-sm flex flex-col justify-between rounded relative overflow-hidden">
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Total Expedientes</span>
+<span class="material-symbols-outlined text-outline text-[18px]">inventory_2</span>
+</div>
+<div class="mt-spacing-xs flex items-baseline gap-spacing-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface">38</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">Activos en ciclo</span>
+</div>
+<div class="mt-spacing-2xs flex items-center gap-spacing-3xs text-primary font-label-tabular text-label-tabular">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+<span>+4 este trimestre fiscal</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-spacing-md shadow-sm flex flex-col justify-between rounded relative overflow-hidden">
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-error"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-error uppercase tracking-wider">Etapas Vencidas</span>
+<span class="material-symbols-outlined text-error text-[18px]">warning</span>
+</div>
+<div class="mt-spacing-xs flex items-baseline gap-spacing-xs">
+<span class="font-headline-lg text-headline-lg text-error" id="kpi-vencidos">2</span>
+<span class="font-label-tabular text-label-tabular text-error">Intervención Urgente</span>
+</div>
+<div class="mt-spacing-2xs flex items-center gap-spacing-3xs text-on-surface-variant font-label-tabular text-label-tabular">
+<span>PI-2024-001 • PI-2024-003</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-spacing-md shadow-sm flex flex-col justify-between rounded relative overflow-hidden">
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Avance Global Ponderado</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">stacked_bar_chart</span>
+</div>
+<div class="mt-spacing-xs flex items-baseline gap-spacing-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface">64.8<span class="font-data-mono-md text-data-mono-md text-secondary">%</span></span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">Cronograma legal</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden mt-spacing-2xs">
+<div class="bg-secondary h-full rounded-full" style="width: 64.8%;"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-spacing-md shadow-sm flex flex-col justify-between rounded relative overflow-hidden">
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-surface-tint"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Ventanilla Única / SEA</span>
+<span class="material-symbols-outlined text-outline text-[18px]">gavel</span>
+</div>
+<div class="mt-spacing-xs flex items-baseline gap-spacing-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface">11</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">En evaluación</span>
+</div>
+<div class="mt-spacing-2xs flex items-center gap-spacing-3xs text-on-surface-variant font-label-tabular text-label-tabular">
+<span>Tasa de admisión: 98.2%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Multi-Criteria Filtering Controls -->
+<div class="bg-surface-container-lowest p-spacing-md rounded shadow-sm mb-spacing-md">
+<div class="flex flex-col lg:flex-row gap-spacing-sm items-stretch lg:items-center justify-between">
+<!-- Live Search Input -->
+<div class="relative flex-1 max-w-lg">
+<span class="material-symbols-outlined absolute left-spacing-sm top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full pl-10 pr-spacing-sm py-spacing-xs bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded focus:bg-surface-container-lowest outline-none transition-colors" id="search-input" placeholder="Filtrar por código, expediente, proyecto, titular o coordinador..." type="text"/>
+</div>
+<!-- Filters Row -->
+<div class="flex flex-wrap sm:flex-nowrap items-center gap-spacing-xs">
+<!-- Filter: Estado -->
+<div class="flex items-center gap-spacing-2xs bg-surface-container-low px-spacing-sm py-spacing-2xs rounded">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Estado:</span>
+<select class="bg-transparent font-body-sm text-body-sm text-on-surface font-medium outline-none cursor-pointer" id="filter-estado">
+<option value="todos">Todos los estados</option>
+<option value="En ejecución">En ejecución</option>
+<option value="En revisión">En revisión</option>
+<option value="En permisología">En permisología</option>
+<option value="Aprobado">Aprobado</option>
+</select>
+</div>
+<!-- Filter: Tipo de Proyecto -->
+<div class="flex items-center gap-spacing-2xs bg-surface-container-low px-spacing-sm py-spacing-2xs rounded">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Tipo:</span>
+<select class="bg-transparent font-body-sm text-body-sm text-on-surface font-medium outline-none cursor-pointer" id="filter-tipo">
+<option value="todos">Todos los tipos</option>
+<option value="Informe Técnico Forestal">Inf. Técnico Forestal</option>
+<option value="EIA">Estudio EIA</option>
+<option value="Modelo de Negocios">Modelo de Negocios</option>
+<option value="Obras">Obras Civiles</option>
+</select>
+</div>
+<!-- Filter: Contratante -->
+<div class="flex items-center gap-spacing-2xs bg-surface-container-low px-spacing-sm py-spacing-2xs rounded">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Titular:</span>
+<select class="bg-transparent font-body-sm text-body-sm text-on-surface font-medium outline-none cursor-pointer max-w-[130px] truncate" id="filter-contratante">
+<option value="todos">Todos</option>
+<option value="Forestal del Sur S.A.">Forestal del Sur</option>
+<option value="Minera Los Andes SpA">Minera Los Andes</option>
+<option value="Consorcio Vial Andino">Consorcio Vial</option>
+<option value="Agroindustrial Maipo">Agroind. Maipo</option>
+<option value="Energías del Maipo S.A.">Energías del Maipo</option>
+<option value="Celulosa Biobío Corp">Celulosa Biobío</option>
+<option value="Parques Eólicos Austral">Parques Austral</option>
+</select>
+</div>
+<!-- Filter: Coordinador -->
+<div class="flex items-center gap-spacing-2xs bg-surface-container-low px-spacing-sm py-spacing-2xs rounded">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Coord:</span>
+<select class="bg-transparent font-body-sm text-body-sm text-on-surface font-medium outline-none cursor-pointer max-w-[120px] truncate" id="filter-coordinador">
+<option value="todos">Todos</option>
+<option value="Ing. C. Morales">Ing. C. Morales</option>
+<option value="Dra. E. Valenzuela">Dra. E. Valenzuela</option>
+<option value="Ing. R. Figueroa">Ing. R. Figueroa</option>
+<option value="MSc. A. Sepúlveda">MSc. A. Sepúlveda</option>
+<option value="Ing. P. Carranza">Ing. P. Carranza</option>
+</select>
+</div>
+<!-- Reset Button -->
+<button class="p-spacing-2xs text-on-surface-variant hover:text-error transition-colors rounded" id="btn-reset-filters" title="Limpiar filtros">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Main Technical Ledger Data Table -->
+<div class="bg-surface-container-lowest rounded shadow-sm overflow-hidden mb-spacing-md">
+<div class="overflow-x-auto">
+<table class="w-full border-collapse text-left" id="proyectos-table">
+<!-- Table Head -->
+<thead>
+<tr class="bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider">
+<th class="py-spacing-sm px-spacing-md w-36">Código Exp.</th>
+<th class="py-spacing-sm px-spacing-md min-w-[280px]">Nombre del Proyecto</th>
+<th class="py-spacing-sm px-spacing-md min-w-[180px]">Contratante</th>
+<th class="py-spacing-sm px-spacing-md min-w-[180px]">Tipo de Proyecto</th>
+<th class="py-spacing-sm px-spacing-md min-w-[160px]">Coordinador Asignado</th>
+<th class="py-spacing-sm px-spacing-md min-w-[150px]">Estado Operativo</th>
+<th class="py-spacing-sm px-spacing-md text-right min-w-[140px]">Avance Ponderado</th>
+<th class="py-spacing-sm px-spacing-md text-right min-w-[130px]">Entrega Est.</th>
+<th class="py-spacing-sm px-spacing-md text-center w-16">Acción</th>
+</tr>
+</thead>
+<!-- Table Body -->
+<tbody class="divide-y divide-surface-container-high/40 text-on-surface font-body-sm text-body-sm" id="proyectos-tbody">
+<!-- ROW 1 (VENCIDO / ALERTA) -->
+<tr class="project-row bg-error-container/30 hover:bg-error-container/50 transition-colors" data-codigo="PI-2024-001" data-contratante="Forestal del Sur S.A." data-coordinador="Ing. C. Morales" data-estado="En ejecución" data-expired="true" data-nombre="Plan de Manejo y Corta de Bosque Nativo Fundo El Boldo" data-tipo="Informe Técnico Forestal">
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-2xs">
+<span class="w-2 h-2 rounded-full bg-error shrink-0 animate-pulse" title="Etapa Vencida: Término de Inspección Terrestre"></span>
+<span class="font-label-tabular text-label-tabular text-error font-semibold tracking-tight">PI-2024-001</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-spacing-2xs">
+<span class="font-headline-sm text-headline-sm text-error font-medium truncate">Plan de Manejo y Corta de Bosque Nativo Fundo El Boldo</span>
+<span class="px-spacing-2xs py-spacing-3xs bg-error text-on-error font-label-tabular text-[10px] rounded uppercase font-bold tracking-wider shrink-0">Etapa Vencida</span>
+</div>
+<span class="font-label-tabular text-[11px] text-error/80 mt-spacing-3xs">
+                  Retraso de 14 días • Muestreo dendrométrico incompleto (Cuenca Sur)
+                </span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-body-sm text-body-sm text-on-surface">Forestal del Sur S.A.</span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container text-on-surface-variant font-label-caps text-label-caps">
+                Informe Técnico Forestal
+              </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-2xs">
+<div class="w-5 h-5 rounded-full bg-error/20 text-error flex items-center justify-center font-label-tabular text-[10px] font-bold">CM</div>
+<span class="font-body-sm text-body-sm text-on-surface">Ing. C. Morales</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="inline-flex items-center gap-spacing-2xs px-spacing-xs py-spacing-3xs rounded bg-secondary-fixed text-on-secondary-fixed-variant font-label-caps text-label-caps">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>En ejecución</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<div class="flex flex-col items-end">
+<span class="font-label-tabular text-data-mono-md text-error font-bold">42.0%</span>
+<div class="w-20 bg-error/20 h-1 rounded-full mt-spacing-3xs overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 42%;"></div>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<span class="font-label-tabular text-data-mono-md text-error font-semibold">15/10/2024</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<button class="p-spacing-2xs rounded hover:bg-error/20 text-error transition-colors" title="Ver Expediente Técnico">
+<span class="material-symbols-outlined text-[18px]">folder_open</span>
+</button>
+</td>
+</tr>
+<!-- ROW 2 (NORMAL) -->
+<tr class="project-row hover:bg-surface-container-low transition-colors" data-codigo="PI-2024-002" data-contratante="Minera Los Andes SpA" data-coordinador="Dra. E. Valenzuela" data-estado="En permisología" data-expired="false" data-nombre="Estudio de Impacto Ambiental Proyecto Fotovoltaico Atacama Solar II" data-tipo="EIA">
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-label-tabular text-label-tabular text-primary font-semibold">PI-2024-002</span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium truncate">Estudio de Impacto Ambiental Proyecto Fotovoltaico Atacama Solar II</span>
+<span class="font-label-tabular text-[11px] text-on-surface-variant mt-spacing-3xs">
+                  Expediente SEA e-DOC #98214 • Línea de base avifauna cerrada
+                </span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-body-sm text-body-sm text-on-surface">Minera Los Andes SpA</span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container text-on-surface-variant font-label-caps text-label-caps">
+                EIA
+              </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-2xs">
+<div class="w-5 h-5 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-label-tabular text-[10px] font-bold">EV</div>
+<span class="font-body-sm text-body-sm text-on-surface">Dra. E. Valenzuela</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="inline-flex items-center gap-spacing-2xs px-spacing-xs py-spacing-3xs rounded bg-surface-variant text-on-surface-variant font-label-caps text-label-caps">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span>En permisología</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<div class="flex flex-col items-end">
+<span class="font-label-tabular text-data-mono-md text-primary font-bold">88.5%</span>
+<div class="w-20 bg-surface-container h-1 rounded-full mt-spacing-3xs overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 88.5%;"></div>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<span class="font-label-tabular text-data-mono-md text-on-surface">12/12/2024</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<button class="p-spacing-2xs rounded hover:bg-surface-container text-on-surface-variant transition-colors" title="Ver Expediente Técnico">
+<span class="material-symbols-outlined text-[18px]">folder_open</span>
+</button>
+</td>
+</tr>
+<!-- ROW 3 (VENCIDO / ALERTA) -->
+<tr class="project-row bg-error-container/30 hover:bg-error-container/50 transition-colors" data-codigo="PI-2024-003" data-contratante="Consorcio Vial Andino" data-coordinador="Ing. R. Figueroa" data-estado="En revisión" data-expired="true" data-nombre="Estudio Geotécnico y Mitigación Hidráulica Quebrada Blanca" data-tipo="Obras">
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-2xs">
+<span class="w-2 h-2 rounded-full bg-error shrink-0 animate-pulse" title="Etapa Vencida: Aprobación Memoria de Cálculo"></span>
+<span class="font-label-tabular text-label-tabular text-error font-semibold tracking-tight">PI-2024-003</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-spacing-2xs">
+<span class="font-headline-sm text-headline-sm text-error font-medium truncate">Estudio Geotécnico y Mitigación Hidráulica Quebrada Blanca</span>
+<span class="px-spacing-2xs py-spacing-3xs bg-error text-on-error font-label-tabular text-[10px] rounded uppercase font-bold tracking-wider shrink-0">Etapa Vencida</span>
+</div>
+<span class="font-label-tabular text-[11px] text-error/80 mt-spacing-3xs">
+                  Retraso de 22 días • Observaciones DOH no subsanadas en plazo
+                </span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-body-sm text-body-sm text-on-surface">Consorcio Vial Andino</span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container text-on-surface-variant font-label-caps text-label-caps">
+                Obras
+              </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-2xs">
+<div class="w-5 h-5 rounded-full bg-error/20 text-error flex items-center justify-center font-label-tabular text-[10px] font-bold">RF</div>
+<span class="font-body-sm text-body-sm text-on-surface">Ing. R. Figueroa</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="inline-flex items-center gap-spacing-2xs px-spacing-xs py-spacing-3xs rounded bg-error-container text-on-error-container font-label-caps text-label-caps">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span>En revisión</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<div class="flex flex-col items-end">
+<span class="font-label-tabular text-data-mono-md text-error font-bold">35.0%</span>
+<div class="w-20 bg-error/20 h-1 rounded-full mt-spacing-3xs overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 35%;"></div>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<span class="font-label-tabular text-data-mono-md text-error font-semibold">28/09/2024</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<button class="p-spacing-2xs rounded hover:bg-error/20 text-error transition-colors" title="Ver Expediente Técnico">
+<span class="material-symbols-outlined text-[18px]">folder_open</span>
+</button>
+</td>
+</tr>
+<!-- ROW 4 (NORMAL) -->
+<tr class="project-row hover:bg-surface-container-low transition-colors" data-codigo="PI-2024-004" data-contratante="Agroindustrial Maipo" data-coordinador="MSc. A. Sepúlveda" data-estado="En ejecución" data-expired="false" data-nombre="Modelo de Negocios y Factibilidad Hídrica Agrícola San Ignacio" data-tipo="Modelo de Negocios">
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-label-tabular text-label-tabular text-primary font-semibold">PI-2024-004</span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium truncate">Modelo de Negocios y Factibilidad Hídrica Agrícola San Ignacio</span>
+<span class="font-label-tabular text-[11px] text-on-surface-variant mt-spacing-3xs">
+                  Evaluación de caudaes DGA • Aforo superficial completado
+                </span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-body-sm text-body-sm text-on-surface">Agroindustrial Maipo</span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container text-on-surface-variant font-label-caps text-label-caps">
+                Modelo de Negocios
+              </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-2xs">
+<div class="w-5 h-5 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-label-tabular text-[10px] font-bold">AS</div>
+<span class="font-body-sm text-body-sm text-on-surface">MSc. A. Sepúlveda</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="inline-flex items-center gap-spacing-2xs px-spacing-xs py-spacing-3xs rounded bg-secondary-fixed text-on-secondary-fixed-variant font-label-caps text-label-caps">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>En ejecución</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<div class="flex flex-col items-end">
+<span class="font-label-tabular text-data-mono-md text-primary font-bold">71.0%</span>
+<div class="w-20 bg-surface-container h-1 rounded-full mt-spacing-3xs overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 71%;"></div>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<span class="font-label-tabular text-data-mono-md text-on-surface">30/11/2024</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<button class="p-spacing-2xs rounded hover:bg-surface-container text-on-surface-variant transition-colors" title="Ver Expediente Técnico">
+<span class="material-symbols-outlined text-[18px]">folder_open</span>
+</button>
+</td>
+</tr>
+<!-- ROW 5 (NORMAL) -->
+<tr class="project-row hover:bg-surface-container-low transition-colors" data-codigo="PI-2024-005" data-contratante="Parques Eólicos Austral" data-coordinador="Ing. P. Carranza" data-estado="En revisión" data-expired="false" data-nombre="Declaración de Impacto Ambiental Parque Eólico Llanquihue" data-tipo="EIA">
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-label-tabular text-label-tabular text-primary font-semibold">PI-2024-005</span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium truncate">Declaración de Impacto Ambiental Parque Eólico Llanquihue</span>
+<span class="font-label-tabular text-[11px] text-on-surface-variant mt-spacing-3xs">
+                  Revisión final ICSARA 1 • Modelación acústica completada
+                </span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-body-sm text-body-sm text-on-surface">Parques Eólicos Austral</span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container text-on-surface-variant font-label-caps text-label-caps">
+                EIA
+              </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-2xs">
+<div class="w-5 h-5 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-label-tabular text-[10px] font-bold">PC</div>
+<span class="font-body-sm text-body-sm text-on-surface">Ing. P. Carranza</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="inline-flex items-center gap-spacing-2xs px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span>En revisión</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<div class="flex flex-col items-end">
+<span class="font-label-tabular text-data-mono-md text-primary font-bold">60.0%</span>
+<div class="w-20 bg-surface-container h-1 rounded-full mt-spacing-3xs overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 60%;"></div>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<span class="font-label-tabular text-data-mono-md text-on-surface">18/01/2025</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<button class="p-spacing-2xs rounded hover:bg-surface-container text-on-surface-variant transition-colors" title="Ver Expediente Técnico">
+<span class="material-symbols-outlined text-[18px]">folder_open</span>
+</button>
+</td>
+</tr>
+<!-- ROW 6 (NORMAL) -->
+<tr class="project-row hover:bg-surface-container-low transition-colors" data-codigo="PI-2024-006" data-contratante="Celulosa Biobío Corp" data-coordinador="Ing. C. Morales" data-estado="Aprobado" data-expired="false" data-nombre="Plan de Reforestación y Compensación Biológica Cuenca Laja" data-tipo="Informe Técnico Forestal">
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-label-tabular text-label-tabular text-primary font-semibold">PI-2024-006</span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium truncate">Plan de Reforestación y Compensación Biológica Cuenca Laja</span>
+<span class="font-label-tabular text-[11px] text-on-surface-variant mt-spacing-3xs">
+                  Resolución Exenta CONAF #4521/24 • Fiscalización aprobada
+                </span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-body-sm text-body-sm text-on-surface">Celulosa Biobío Corp</span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container text-on-surface-variant font-label-caps text-label-caps">
+                Informe Técnico Forestal
+              </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-2xs">
+<div class="w-5 h-5 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-label-tabular text-[10px] font-bold">CM</div>
+<span class="font-body-sm text-body-sm text-on-surface">Ing. C. Morales</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="inline-flex items-center gap-spacing-2xs px-spacing-xs py-spacing-3xs rounded bg-primary-fixed text-on-primary-fixed font-label-caps text-label-caps">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>Aprobado</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<div class="flex flex-col items-end">
+<span class="font-label-tabular text-data-mono-md text-primary font-bold">100.0%</span>
+<div class="w-20 bg-surface-container h-1 rounded-full mt-spacing-3xs overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 100%;"></div>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<span class="font-label-tabular text-data-mono-md text-on-surface">05/09/2024</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<button class="p-spacing-2xs rounded hover:bg-surface-container text-on-surface-variant transition-colors" title="Ver Expediente Técnico">
+<span class="material-symbols-outlined text-[18px]">folder_open</span>
+</button>
+</td>
+</tr>
+<!-- ROW 7 (NORMAL) -->
+<tr class="project-row hover:bg-surface-container-low transition-colors" data-codigo="PI-2024-007" data-contratante="Energías del Maipo S.A." data-coordinador="Ing. R. Figueroa" data-estado="En ejecución" data-expired="false" data-nombre="Subestación Elevadora y Línea de Transmisión Cordillera" data-tipo="Obras">
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-label-tabular text-label-tabular text-primary font-semibold">PI-2024-007</span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium truncate">Subestación Elevadora y Línea de Transmisión Cordillera</span>
+<span class="font-label-tabular text-[11px] text-on-surface-variant mt-spacing-3xs">
+                  Obras preliminares y canalización de quebradas
+                </span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="font-body-sm text-body-sm text-on-surface">Energías del Maipo S.A.</span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container text-on-surface-variant font-label-caps text-label-caps">
+                Obras
+              </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-2xs">
+<div class="w-5 h-5 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-label-tabular text-[10px] font-bold">RF</div>
+<span class="font-body-sm text-body-sm text-on-surface">Ing. R. Figueroa</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="inline-flex items-center gap-spacing-2xs px-spacing-xs py-spacing-3xs rounded bg-secondary-fixed text-on-secondary-fixed-variant font-label-caps text-label-caps">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>En ejecución</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<div class="flex flex-col items-end">
+<span class="font-label-tabular text-data-mono-md text-primary font-bold">54.0%</span>
+<div class="w-20 bg-surface-container h-1 rounded-full mt-spacing-3xs overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 54%;"></div>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right">
+<span class="font-label-tabular text-data-mono-md text-on-surface">14/02/2025</span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<button class="p-spacing-2xs rounded hover:bg-surface-container text-on-surface-variant transition-colors" title="Ver Expediente Técnico">
+<span class="material-symbols-outlined text-[18px]">folder_open</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Empty State (hidden by default) -->
+<div class="hidden p-spacing-2xl text-center flex-col items-center justify-center bg-surface-container-lowest" id="no-results">
+<span class="material-symbols-outlined text-outline text-[48px] mb-spacing-xs">filter_alt_off</span>
+<p class="font-headline-sm text-headline-sm text-on-surface font-medium">No se encontraron expedientes con los criterios seleccionados</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-spacing-3xs">Prueba ajustando el término de búsqueda o restableciendo los filtros de estado y tipo.</p>
+</div>
+<!-- Table Footer / Technical Audit Trail & Pagination -->
+<div class="bg-surface-container-low px-spacing-md py-spacing-sm flex flex-col sm:flex-row items-center justify-between gap-spacing-sm text-on-surface-variant">
+<div class="flex items-center gap-spacing-md">
+<span class="font-label-tabular text-label-tabular">
+          Mostrando <span class="font-bold text-on-surface" id="count-visible">7</span> de <span class="font-bold text-on-surface">38</span> expedientes cargados
+        </span>
+<div class="hidden md:flex items-center gap-spacing-2xs">
+<span class="inline-block w-2 h-2 rounded-full bg-error"></span>
+<span class="font-label-tabular text-label-tabular text-error">2 Alertas de Vencimiento</span>
+</div>
+</div>
+<div class="flex items-center gap-spacing-xs">
+<span class="font-label-caps text-label-caps uppercase">Página:</span>
+<div class="flex items-center gap-spacing-3xs">
+<button class="px-spacing-xs py-spacing-3xs rounded bg-surface-container-highest text-on-surface font-label-tabular text-label-tabular disabled:opacity-50" disabled="">
+            « Ant
+          </button>
+<span class="px-spacing-sm py-spacing-3xs bg-primary text-on-primary font-label-tabular text-label-tabular rounded">1</span>
+<button class="px-spacing-xs py-spacing-3xs rounded bg-surface-container-highest text-on-surface hover:bg-surface-container font-label-tabular text-label-tabular">
+            2
+          </button>
+<button class="px-spacing-xs py-spacing-3xs rounded bg-surface-container-highest text-on-surface hover:bg-surface-container font-label-tabular text-label-tabular">
+            3
+          </button>
+<button class="px-spacing-xs py-spacing-3xs rounded bg-surface-container-highest text-on-surface hover:bg-surface-container font-label-tabular text-label-tabular">
+            Sig »
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Technical Audit & Legal Reference Callout -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-spacing-md">
+<div class="bg-surface-container-low p-spacing-md rounded flex items-start gap-spacing-sm">
+<span class="material-symbols-outlined text-secondary text-[22px] shrink-0 mt-0.5">verified_user</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Garantía de Trazabilidad</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-spacing-3xs">
+          Cada modificación en estados y avances ponderados queda estampada bajo protocolo SHA-256 en la Bitácora General.
+        </p>
+</div>
+</div>
+<div class="bg-surface-container-low p-spacing-md rounded flex items-start gap-spacing-sm">
+<span class="material-symbols-outlined text-primary text-[22px] shrink-0 mt-0.5">notification_important</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Protocolo de Alerta Roja</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-spacing-3xs">
+          Los hitos vencidos detonan aviso telemático automático a la Dirección Técnica tras 48 horas sin actualización de descargo.
+        </p>
+</div>
+</div>
+<div class="bg-surface-container-low p-spacing-md rounded flex items-start gap-spacing-sm">
+<span class="material-symbols-outlined text-outline text-[22px] shrink-0 mt-0.5">dataset</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Integración SIG y Cartográfica</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-spacing-3xs">
+          Capas WFS y polígonos geoespaciales sincronizados con datum SIRGAS / WGS84 Huso 18S y 19S para inspecciones de terreno.
+        </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Realtime Filter & Interaction Logic -->
+<script>
+  (function() {
+    const searchInput = document.getElementById('search-input');
+    const filterEstado = document.getElementById('filter-estado');
+    const filterTipo = document.getElementById('filter-tipo');
+    const filterContratante = document.getElementById('filter-contratante');
+    const filterCoordinador = document.getElementById('filter-coordinador');
+    const resetBtn = document.getElementById('btn-reset-filters');
+    const rows = document.querySelectorAll('.project-row');
+    const countVisible = document.getElementById('count-visible');
+    const noResults = document.getElementById('no-results');
+    const btnExport = document.getElementById('btn-export-csv');
+    const btnNuevo = document.getElementById('btn-nuevo-proyecto');
+
+    function applyFilters() {
+      const query = (searchInput.value || '').toLowerCase().trim();
+      const estado = filterEstado.value;
+      const tipo = filterTipo.value;
+      const contratante = filterContratante.value;
+      const coordinador = filterCoordinador.value;
+
+      let visible = 0;
+
+      rows.forEach(row => {
+        const rCodigo = (row.getAttribute('data-codigo') || '').toLowerCase();
+        const rNombre = (row.getAttribute('data-nombre') || '').toLowerCase();
+        const rContratante = row.getAttribute('data-contratante') || '';
+        const rTipo = row.getAttribute('data-tipo') || '';
+        const rCoordinador = row.getAttribute('data-coordinador') || '';
+        const rEstado = row.getAttribute('data-estado') || '';
+
+        const matchesSearch = !query || 
+          rCodigo.includes(query) || 
+          rNombre.includes(query) || 
+          rContratante.toLowerCase().includes(query) || 
+          rCoordinador.toLowerCase().includes(query);
+
+        const matchesEstado = (estado === 'todos') || (rEstado === estado);
+        const matchesTipo = (tipo === 'todos') || (rTipo === tipo);
+        const matchesContratante = (contratante === 'todos') || (rContratante === contratante);
+        const matchesCoordinador = (coordinador === 'todos') || (rCoordinador === coordinador);
+
+        if (matchesSearch && matchesEstado && matchesTipo && matchesContratante && matchesCoordinador) {
+          row.style.display = '';
+          visible++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      if (countVisible) countVisible.textContent = visible;
+      if (noResults) {
+        if (visible === 0) {
+          noResults.classList.remove('hidden');
+          noResults.classList.add('flex');
+        } else {
+          noResults.classList.add('hidden');
+          noResults.classList.remove('flex');
+        }
+      }
+    }
+
+    // Attach listeners
+    searchInput.addEventListener('input', applyFilters);
+    filterEstado.addEventListener('change', applyFilters);
+    filterTipo.addEventListener('change', applyFilters);
+    filterContratante.addEventListener('change', applyFilters);
+    filterCoordinador.addEventListener('change', applyFilters);
+
+    resetBtn.addEventListener('click', function() {
+      searchInput.value = '';
+      filterEstado.value = 'todos';
+      filterTipo.value = 'todos';
+      filterContratante.value = 'todos';
+      filterCoordinador.value = 'todos';
+      applyFilters();
+    });
+
+    // CSV Export Simulation
+    btnExport.addEventListener('click', function() {
+      const csvRows = [
+        ['Codigo', 'Proyecto', 'Contratante', 'Tipo', 'Coordinador', 'Estado', 'Avance', 'FechaEntrega']
+      ];
+
+      rows.forEach(r => {
+        if (r.style.display !== 'none') {
+          const cells = Array.from(r.querySelectorAll('td'));
+          const codigo = r.getAttribute('data-codigo');
+          const nombre = r.getAttribute('data-nombre');
+          const contratante = r.getAttribute('data-contratante');
+          const tipo = r.getAttribute('data-tipo');
+          const coordinador = r.getAttribute('data-coordinador');
+          const estado = r.getAttribute('data-estado');
+          const avance = cells[6] ? cells[6].innerText.trim() : '';
+          const entrega = cells[7] ? cells[7].innerText.trim() : '';
+          csvRows.push([codigo, `"${nombre}"`, `"${contratante}"`, `"${tipo}"`, `"${coordinador}"`, `"${estado}"`, avance, entrega]);
+        }
+      });
+
+      const csvContent = 'data:text/csv;charset=utf-8,' + csvRows.map(e => e.join(',')).join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'expedientes_tecnicos_pi.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+
+    // New Project Action Feedback
+    btnNuevo.addEventListener('click', function() {
+      alert('Iniciando asistente de apertura para nuevo expediente técnico (Protocolo EIA / Forestal)');
+    });
+  })();
+</script></main></div></body></html>

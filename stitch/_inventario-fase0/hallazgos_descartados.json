@@ -1,0 +1,142 @@
+[
+ {
+  "id": "H-09",
+  "titulo": "Coordenadas y husos UTM del hemisferio sur (18S/19S, northing ~6.3 millones), imposibles en Venezuela",
+  "motivos": [
+   "Redundante y sin efecto en ninguna decisión. Si se aplica H-24 (sin WebGIS) y H-08 (semilla venezolana nueva), no queda ninguna cartela geodésica que corregir: el huso UTM desaparece con el bloque que lo contiene. El propio hallazgo se autoanula ('aunque la beta no debe llevar WebGIS'). Además su decisión es 'preguntar', no una regla incumplida distinta de la 11."
+  ]
+ },
+ {
+  "id": "H-10",
+  "titulo": "Zona horaria chilena en todas las marcas de tiempo (CLT, GMT-3, UTC-3, America/Santiago)",
+  "motivos": [
+   "Trivial y redundante por partida doble: el país lo resuelve H-08 (reescritura de semilla) y el formato de fecha/hora lo resuelve H-33 (DD/MM/AAAA sin zona horaria). No abre ninguna decisión propia; es una cadena de texto dentro de bloques que ya se eliminan."
+  ]
+ },
+ {
+  "id": "H-14",
+  "titulo": "Registros profesionales de otros países (CIP peruano) y feriados chilenos codificados en el calendario",
+  "motivos": [
+   "Bolsa de detalles menores sin decisión propia: CIP y feriados son semilla (los borra H-08 al reescribirla) y 'Mandante'/'Radicación' es vocabulario (lo resuelve H-49). Ninguno de los tres cambia una decisión de construcción por separado."
+  ]
+ },
+ {
+  "id": "H-18",
+  "titulo": "El selector 'Entrar como:' vive en la barra superior de TODAS las páginas internas, además de la 1",
+  "motivos": [
+   "El propio hallazgo admite que no hay contradicción de regla, y es correcto: la regla 7 dice dónde se elige el rol, no prohíbe mostrar o cambiar el rol activo desde la cabecera. Es una preferencia de producto, y además el header se reconstruye entero por H-04 (chip BETA) y H-54 (navegación), donde la decisión se toma sin necesidad de un hallazgo aparte."
+  ]
+ },
+ {
+  "id": "H-23",
+  "titulo": "Firma electrónica avanzada (FEA), PKI, ECDSA, HSM y notarización como requisito para aprobar y para cargar",
+  "motivos": [
+   "Redundante: su parte funcional (no se puede exigir firma para aprobar) ya está en H-16, que además aporta la evidencia bloqueante (PIN y token e-ID en el formulario de dictamen); y su parte de vocabulario criptográfico ya está en H-21 y H-22. No añade ninguna decisión de construcción nueva."
+  ]
+ },
+ {
+  "id": "H-26",
+  "titulo": "Datos que invitan a calcular volumen: densidad de madera en el catálogo de especies y 'balance de biomasa arbórea'",
+  "motivos": [
+   "No hay contradicción: la regla 3 prohíbe calcular volumen, no guardar un atributo descriptivo de la especie. Verifico que 'densidad' es solo un dato mostrado en la ficha de la especie y no entra en ninguna operación. El riesgo es hipotético y la decisión propuesta es 'preguntar'. Ante la duda, refutado."
+  ]
+ },
+ {
+  "id": "H-27",
+  "titulo": "Superficie total del polígono mostrada como valor derivado del SHP/KML, no como captura",
+  "motivos": [
+   "Trivial y redundante. Ese campo de solo lectura existe únicamente como salida del botón 'Cargar SHP / KML', que ya se elimina por H-24; una vez fuera el cargador, nadie construiría una superficie derivada. La regla 3 basta por sí sola para que hectáreas sea un input."
+  ]
+ },
+ {
+  "id": "H-28",
+  "titulo": "Agregados de volumen por especie y 'Total Polígono': confirmar que la suma está permitida",
+  "motivos": [
+   "No es contradicción: sumar volúmenes capturados no es cubicar. La regla 3 prohíbe ecuaciones de cubicación y factores de conversión, y una suma no introduce ninguno de los dos. El propio hallazgo lo reconoce y se limita a pedir confirmación; severidad baja y sin impacto en el diseño."
+  ]
+ },
+ {
+  "id": "H-32",
+  "titulo": "'Estado Fitosanitario / Notas' como textarea libre en la captura de mediciones",
+  "motivos": [
+   "Exagerado. Un campo de notas es texto libre legítimo y no infringe la regla 4; y 'estado fitosanitario' ni siquiera está en el conjunto que el encargo manda capturar (hectáreas, árboles, altura, DAP, volumen), así que lo más probable es que el campo no exista en la beta. El propio hallazgo se limita a preguntar. Ante la duda, refutado."
+  ]
+ },
+ {
+  "id": "H-34",
+  "titulo": "Montos sin USD explícito, con doble símbolo 'USD $' y con formato numérico anglosajón",
+  "motivos": [
+   "No hay contradicción con la regla 6: '$35,200' ya es un monto en dólares. Lo que describe es una preferencia de convención tipográfica que el encargo no fija, y el propio hallazgo se limita a preguntar. La parte que sí incumple (CLP y UF) es H-13. Ante la duda, refutado."
+  ]
+ },
+ {
+  "id": "H-40",
+  "titulo": "Horas-hombre y timesheet quincenal con aprobación por lote: entidad completa que el encargo no menciona",
+  "motivos": [
+   "No contradice ninguna regla del encargo (el propio hallazgo lo admite: 'especificación no entregada') y su decisión es la misma que la del hallazgo paraguas H-59: descartar módulos que Stitch inventó. Sin especificación no hay nada que decidir salvo 'no construirlo', que es el defecto por omisión."
+  ]
+ },
+ {
+  "id": "H-41",
+  "titulo": "Pólizas, boletas de garantía, retenciones y compliance de seguros como sección propia",
+  "motivos": [
+   "Mismo caso que H-40: entidad inventada por Stitch, sin regla incumplida, con decisión idéntica a H-59 ('descartar'). Su única parte con regla es la moneda UF, que ya está en H-13. No añade decisión propia."
+  ]
+ },
+ {
+  "id": "H-42",
+  "titulo": "Métricas de gestión que ningún dato de la beta puede sostener (SLA, tasa de cumplimiento, conformidad, no-conformidades, margen, índice de puntualidad)",
+  "motivos": [
+   "Redundante con H-56, que formula la misma decisión con mejor evidencia (todo contador se calcula de la semilla). Además su categoría es la misma incoherencia numérica; separar 'KPIs inventados' de 'contadores que no cuadran' no cambia ninguna decisión de construcción."
+  ]
+ },
+ {
+  "id": "H-43",
+  "titulo": "Entidades y campos inventados que hay que decidir antes de construir: cartela geodésica, 'compromisos', 'matriz ambiental', centro de costo, contrato marco, hitos de pago",
+  "motivos": [
+   "Sin especificación no es un hallazgo accionable sino una lista de preguntas ('campo por campo'), y la respuesta por defecto —no inventar entidades— ya está en H-59. No hay regla contradicha; el modelo de datos lo fija la especificación, que es precisamente lo que falta."
+  ]
+ },
+ {
+  "id": "H-44",
+  "titulo": "Exportaciones y generación de archivos (CSV, XLS, PDF/A, VCF, manifiesto de hashes, JSON de auditoría)",
+  "motivos": [
+   "No hay contradicción con la regla 10: generar un CSV con data: URI o llamar a window.print() funciona sin servidor, sin internet y sin integraciones, y la lista de prohibiciones del encargo no incluye exportar. El propio hallazgo se limita a preguntar; y el manifiesto de hashes ya cae por H-21. Ante la duda, refutado."
+  ]
+ },
+ {
+  "id": "H-51",
+  "titulo": "Los radios del DESIGN.md no son los del HTML: 'rounded-full' vale 12px, no un círculo",
+  "motivos": [
+   "Redundante con H-50: es la misma contradicción (DESIGN.md prosa vs config) y la misma decisión (mandan el config y los PNG). Verificado, pero no abre una decisión distinta; es un detalle de ejecución dentro de H-50."
+  ]
+ },
+ {
+  "id": "H-52",
+  "titulo": "La pantalla 1_2 muestra el login y el dashboard a la vez, con un toggle 'Vista de Módulo'",
+  "motivos": [
+   "Redundante y sin decisión propia: la pantalla es un comparador de revisión, como el propio hallazgo reconoce, no una afirmación de producto. Que index y panel vayan separados lo dicta la regla 13 sin necesidad de hallazgo, el login se descarta por H-15 y qué se porta de esta carpeta lo decide H-61."
+  ]
+ },
+ {
+  "id": "H-58",
+  "titulo": "Rutas sin protección en el prototipo: la página 4, la 9, la 10 y la 16 son accesibles a roles que no deberían",
+  "motivos": [
+   "Redundante: su causa raíz es el punto (d) de H-57 (matriz de permisos muerta, gating hardcodeado por número de página) y su remedio es la aplicación literal de la regla 8, que se implementa una sola vez. Además se apoya en defectos del prototipo, que por H-01 no se porta como código, así que no describe un riesgo adicional."
+  ]
+ },
+ {
+  "id": "H-63",
+  "titulo": "DUPLICADO 6_9 vs 6 y 9: 6_9 es la ÚNICA pantalla venezolana del export y hay que preservarla",
+  "motivos": [
+   "Refuto por dos afirmaciones falsas en la descripción, ambas comprobables y ambas materiales para la decisión. Primera: la etiqueta 'SIN FÓRMULA AUTOMÁTICA' NO está en 6_9; está únicamente en 9_ficha_de_proyecto_mediciones_de_campo_1/code.html:333 — precisamente la pantalla que el hallazgo propone descartar. En 6_9 el campo dice 'Volumen m³ (Captura Manual)' con la sub-etiqueta 'Estimado de Campo'. Segunda: es falso que 6_9 sea 'la ÚNICA pantalla venezolana del export'; el propio conjunto de hallazgos lo desmiente en H-64 (7_10: CIV-148.902, INPREAB-88.310, Península de Macanao, cero CLP/UF) y en H-69 (18_19: MINEC, 'Consorcio Agroforestal del Llano, C.A.', catálogo CAT-04 con hectárea/m³/número de árboles y especies venezolanas)."
+  ]
+ },
+ {
+  "id": "H-70",
+  "titulo": "Detalles de calidad que no deben copiarse: falta <title>, scrollbars ocultas, comentarios y data-alt en inglés, erratas",
+  "motivos": [
+   "Trivial y redundante. Nada de esto se puede 'copiar' porque el CSS se reescribe entero (H-01) y el HTML no se porta como código; los comentarios en inglés y las erratas viven en textos que la semilla venezolana sustituye (H-08). Poner <title> y no ocultar las barras de scroll es higiene básica de construcción, no un hallazgo que cambie una decisión."
+  ]
+ }
+]

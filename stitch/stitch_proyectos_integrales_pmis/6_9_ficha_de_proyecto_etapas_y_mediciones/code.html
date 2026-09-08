@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-surface": "#191c1a",
+        "inverse-surface": "#2e312f",
+        "surface-container-low": "#f3f4f0",
+        "surface-container": "#edeeeb",
+        "primary": "#023627",
+        "tertiary-container": "#82220e",
+        "secondary-fixed-dim": "#f5bb88",
+        "primary-fixed": "#bcedd7",
+        "secondary": "#80552b",
+        "outline": "#717974",
+        "on-primary-fixed": "#002116",
+        "surface-bright": "#f8faf6",
+        "on-surface-variant": "#414944",
+        "inverse-primary": "#a1d1bc",
+        "secondary-container": "#fec390",
+        "tertiary-fixed-dim": "#ffb4a4",
+        "on-tertiary-fixed": "#3e0500",
+        "surface-dim": "#d9dad7",
+        "on-error-container": "#93000a",
+        "on-tertiary-fixed-variant": "#852410",
+        "surface-container-high": "#e7e9e5",
+        "on-error": "#ffffff",
+        "on-primary": "#ffffff",
+        "surface-variant": "#e1e3df",
+        "on-secondary-fixed": "#2d1600",
+        "on-primary-fixed-variant": "#214f3f",
+        "surface-container-lowest": "#ffffff",
+        "primary-container": "#1f4d3d",
+        "tertiary": "#610c00",
+        "on-secondary": "#ffffff",
+        "error-container": "#ffdad6",
+        "error": "#ba1a1a",
+        "inverse-on-surface": "#f0f1ed",
+        "surface": "#f8faf6",
+        "primary-fixed-dim": "#a1d1bc",
+        "on-secondary-container": "#794e25",
+        "surface-container-highest": "#e1e3df",
+        "on-tertiary-container": "#ff9680",
+        "background": "#f8faf6",
+        "secondary-fixed": "#ffdcc0",
+        "surface-tint": "#3a6756",
+        "on-secondary-fixed-variant": "#653e16",
+        "tertiary-fixed": "#ffdad3",
+        "on-tertiary": "#ffffff",
+        "on-primary-container": "#8dbda8",
+        "on-background": "#191c1a",
+        "outline-variant": "#c0c8c3"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "spacing-xl": "2rem",
+        "table-gutter": "0.75rem",
+        "spacing-md": "1rem",
+        "spacing-lg": "1.5rem",
+        "spacing-xs": "0.5rem",
+        "spacing-3xs": "0.125rem",
+        "spacing-2xl": "3rem",
+        "layout-margin-desktop": "2rem",
+        "spacing-3xl": "4rem",
+        "layout-margin-mobile": "1rem",
+        "spacing-2xs": "0.25rem",
+        "spacing-sm": "0.75rem",
+        "layout-margin-tablet": "1.5rem"
+      },
+      "fontFamily": {
+        "body-md": ["Hanken Grotesk"],
+        "headline-xl-mobile": ["Hanken Grotesk"],
+        "label-caps": ["Hanken Grotesk"],
+        "data-mono-lg": ["JetBrains Mono"],
+        "body-sm": ["Hanken Grotesk"],
+        "headline-xl": ["Hanken Grotesk"],
+        "headline-sm": ["Hanken Grotesk"],
+        "headline-lg": ["Hanken Grotesk"],
+        "headline-md": ["Hanken Grotesk"],
+        "data-mono-md": ["JetBrains Mono"],
+        "body-lg": ["Hanken Grotesk"],
+        "label-tabular": ["JetBrains Mono"]
+      },
+      "fontSize": {
+        "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+        "headline-xl-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+        "data-mono-lg": ["15px", {"lineHeight": "22px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+        "headline-sm": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600"}],
+        "headline-lg": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "data-mono-md": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+        "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+        "label-tabular": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+      }
+    }
+  }
+}</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-spacing-md flex items-center gap-spacing-xs bg-surface-container-low"><div class="flex items-center justify-center w-7 h-7 bg-primary rounded-lg text-on-primary font-headline-sm text-headline-sm">PI</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight">Proyectos Integrales</span><span class="font-label-caps text-label-caps text-secondary uppercase">Ingeniería &amp; Ambiente</span></div></div><div class="px-spacing-md py-spacing-xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operación Técnica</span></div><nav class="flex flex-col gap-spacing-3xs px-spacing-xs flex-1" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm"><a aria-current="page" class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded transition-colors bg-primary-container text-on-primary-container font-headline-sm" data-path="proyectos" href="#"><span class="material-symbols-outlined text-[20px]">folder_supervised</span><span class="font-body-sm text-body-sm">Proyectos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="aprobaciones" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span class="font-body-sm text-body-sm">Aprobaciones</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="calendario" href="#"><span class="material-symbols-outlined text-[20px]">event_note</span><span class="font-body-sm text-body-sm">Calendario</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contratantes" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-sm text-body-sm">Contratantes</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-body-sm text-body-sm">Reportes</span></a><div class="my-spacing-xs px-spacing-xs"><div class="h-[1px] bg-outline-variant/30"></div></div><div class="px-spacing-xs py-spacing-3xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Gobierno &amp; Control</span></div><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="direccion-ejecutiva" href="#"><span class="material-symbols-outlined text-[20px]">query_stats</span><span class="font-body-sm text-body-sm">Dirección</span><span class="ml-auto font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-inverse-surface text-inverse-on-surface">DARK</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="font-body-sm text-body-sm">Usuarios</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="catalogos" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-sm text-body-sm">Catálogos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="bitacora-general" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-body-sm text-body-sm">Bitácora General</span></a></nav></div><div class="p-spacing-md bg-surface-container-high"><div class="flex items-center justify-between"><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Estándar Técnico</span><span class="font-data-mono-md text-data-mono-md text-primary">ISO 14001 / EIA-v2</span></div><span class="material-symbols-outlined text-outline text-[18px]">format_image_left</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex items-center justify-between px-spacing-lg"><div class="flex items-center gap-spacing-md flex-1 max-w-2xl"><img alt="Logo Proyectos Integrales" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WWI3mVDk-K0VvmFiCvo8p33fqbfLEk7YLxC1GudbnlFUpaiGriHUaR624tyiQNmYunExODktoHOUwF3QL8qZ_IwSF5S_2YljkWvDXX_F70wU2BcAir0ZOTnqLI_71vsDpk6z_zbXASIS0ueLJ7tFBZNvfS6T8aTnTgjZaqsX3YPQTL3hOBf9ordXhPZXWaXrXj9-I0-5Fd6nraudX80Q_6v0_NI_5xzQXtCkGU4fxStFzd9olGwfezDU0"/><div class="relative w-full max-w-md"><span class="material-symbols-outlined absolute left-spacing-xs top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full pl-8 pr-spacing-sm py-spacing-2xs bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Buscar código de expediente, matriz ambiental, contratante o profesional..." type="text"/></div></div><div class="flex items-center gap-spacing-md"><div class="flex items-center gap-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded"><span class="font-label-caps text-label-caps text-secondary uppercase font-semibold">Entrar como:</span><select class="bg-transparent font-body-sm text-body-sm text-on-surface font-medium outline-none cursor-pointer"><option value="admin">Admin</option><option value="coordinador">Coordinador</option><option value="profesional">Profesional</option><option value="administracion">Administración</option><option value="direccion">Dirección</option></select></div><div class="flex items-center gap-spacing-2xs"><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">help</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-spacing-lg pb-spacing-xl flex-1 bg-background"><div class="flex flex-col w-full gap-spacing-lg">
+<!-- Encabezado Integral de Proyecto -->
+<section class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-spacing-lg shadow-sm">
+<div class="absolute -right-16 -top-16 w-96 h-96 rounded-full bg-primary-fixed/20 blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-spacing-md">
+<div class="flex flex-col gap-spacing-2xs">
+<div class="flex flex-wrap items-center gap-spacing-xs">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-primary text-on-primary font-data-mono-md text-data-mono-md uppercase tracking-wider">EXP: PI-2024-002</span>
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps uppercase">EIA / Sector Energía &amp; Silvicultura</span>
+<span class="flex items-center gap-spacing-3xs px-spacing-xs py-spacing-3xs rounded bg-surface-container text-on-surface-variant font-data-mono-md text-data-mono-md">
+<span class="material-symbols-outlined text-[16px] text-secondary">explore</span>
+            UTM: 11°58'N 70°12'W (WGS84)
+          </span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary tracking-tight mt-spacing-2xs">
+          PI-2024-002 EIA y Sociocultural Parque Eólico Península
+        </h1>
+<div class="flex flex-wrap items-center gap-spacing-lg text-on-surface-variant mt-spacing-2xs">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary">domain</span>
+<span class="font-body-sm text-body-sm"><strong class="text-on-surface font-headline-sm">Contratante:</strong> Generadora Eólica del Norte S.A.</span>
+</div>
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary">assignment_ind</span>
+<span class="font-body-sm text-body-sm"><strong class="text-on-surface font-headline-sm">Coordinador:</strong> Ing. Carlos Mendoza</span>
+</div>
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[18px] text-primary">verified_user</span>
+<span class="font-body-sm text-body-sm text-primary">Norma Ambiental: Decreto 1257 / EIA Vigente</span>
+</div>
+</div>
+</div>
+<!-- Métricas sintéticas de avance -->
+<div class="flex items-center gap-spacing-md self-start lg:self-center p-spacing-sm rounded-lg bg-surface-container-low">
+<div class="relative w-14 h-14 flex items-center justify-center">
+<svg class="w-14 h-14 -rotate-90" viewbox="0 0 48 48">
+<circle class="text-surface-variant fill-none" cx="24" cy="24" r="20" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-primary fill-none transition-all duration-700" cx="24" cy="24" r="20" stroke="currentColor" stroke-dasharray="125.6" stroke-dashoffset="56.5" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<span class="absolute font-data-mono-md text-data-mono-md font-semibold text-primary">55%</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Estado Operativo</span>
+<span class="font-headline-sm text-headline-sm text-tertiary font-semibold flex items-center gap-spacing-3xs">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+            Compuerta 06 Activa
+          </span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">5 de 10 etapas cerradas</span>
+</div>
+</div>
+</div>
+<!-- Barra de Pestañas de la Ficha Integral -->
+<div class="mt-spacing-lg pt-spacing-sm overflow-x-auto flex items-center gap-spacing-xs">
+<button class="px-spacing-md py-spacing-xs rounded font-headline-sm text-headline-sm text-on-surface-variant hover:bg-surface-container transition-colors whitespace-nowrap">
+        Resumen
+      </button>
+<button class="px-spacing-md py-spacing-xs rounded font-headline-sm text-headline-sm bg-primary text-on-primary shadow-sm whitespace-nowrap flex items-center gap-spacing-2xs">
+<span class="material-symbols-outlined text-[18px]">account_tree</span>
+        Etapas (Activa)
+      </button>
+<button class="px-spacing-md py-spacing-xs rounded font-headline-sm text-headline-sm text-on-surface-variant hover:bg-surface-container transition-colors whitespace-nowrap">
+        Equipo y Honorarios
+      </button>
+<button class="px-spacing-md py-spacing-xs rounded font-headline-sm text-headline-sm text-on-surface-variant hover:bg-surface-container transition-colors whitespace-nowrap">
+        Documentos
+      </button>
+<button class="px-spacing-md py-spacing-xs rounded font-headline-sm text-headline-sm text-on-surface-variant hover:bg-surface-container transition-colors whitespace-nowrap flex items-center gap-spacing-2xs">
+<span class="material-symbols-outlined text-[18px]">forest</span>
+        Mediciones de Campo
+      </button>
+<button class="px-spacing-md py-spacing-xs rounded font-headline-sm text-headline-sm text-on-surface-variant hover:bg-surface-container transition-colors whitespace-nowrap">
+        Finanzas
+      </button>
+<button class="px-spacing-md py-spacing-xs rounded font-headline-sm text-headline-sm text-on-surface-variant hover:bg-surface-container transition-colors whitespace-nowrap">
+        Bitácora
+      </button>
+</div>
+</section>
+<!-- SECCIÓN 1: MATRIZ DE ETAPAS EN SECUENCIA (1 A 10) -->
+<section class="flex flex-col gap-spacing-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-spacing-xs">
+<div>
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-wider">Secuencia de Aprobación Regulatoria</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Flujo de Control Técnico (10 Etapas)</h2>
+</div>
+<div class="flex items-center gap-spacing-xs text-on-surface-variant font-label-tabular text-label-tabular bg-surface-container-lowest px-spacing-sm py-spacing-2xs rounded shadow-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span> Completada
+        <span class="w-2.5 h-2.5 rounded-full bg-tertiary ml-spacing-xs"></span> Compuerta Crítica
+        <span class="w-2.5 h-2.5 rounded-full bg-outline-variant ml-spacing-xs"></span> Bloqueada
+      </div>
+</div>
+<!-- Grid / Cadena de Etapas -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-spacing-sm">
+<!-- Etapa 1 -->
+<div class="p-spacing-md rounded-lg bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">01</span>
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+</div>
+<div class="mt-spacing-sm">
+<p class="font-headline-sm text-headline-sm text-on-surface">Reunión de Alineación &amp; Términos de Referencia</p>
+<p class="font-label-tabular text-label-tabular text-on-surface-variant mt-spacing-2xs">Validado: 12/Ene/2024</p>
+</div>
+<div class="mt-spacing-sm pt-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded text-primary font-label-caps text-label-caps uppercase">
+          Completada
+        </div>
+</div>
+<!-- Etapa 2 -->
+<div class="p-spacing-md rounded-lg bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">02</span>
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+</div>
+<div class="mt-spacing-sm">
+<p class="font-headline-sm text-headline-sm text-on-surface">Delimitación del Polígono e Identificación Predial</p>
+<p class="font-label-tabular text-label-tabular text-on-surface-variant mt-spacing-2xs">Validado: 28/Ene/2024</p>
+</div>
+<div class="mt-spacing-sm pt-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded text-primary font-label-caps text-label-caps uppercase">
+          Completada
+        </div>
+</div>
+<!-- Etapa 3 -->
+<div class="p-spacing-md rounded-lg bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">03</span>
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+</div>
+<div class="mt-spacing-sm">
+<p class="font-headline-sm text-headline-sm text-on-surface">Levantamiento Forestal &amp; Muestreo Dendrológico</p>
+<p class="font-label-tabular text-label-tabular text-on-surface-variant mt-spacing-2xs">Validado: 14/Feb/2024</p>
+</div>
+<div class="mt-spacing-sm pt-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded text-primary font-label-caps text-label-caps uppercase">
+          Completada
+        </div>
+</div>
+<!-- Etapa 4 -->
+<div class="p-spacing-md rounded-lg bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">04</span>
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+</div>
+<div class="mt-spacing-sm">
+<p class="font-headline-sm text-headline-sm text-on-surface">Evaluación Sociocultural &amp; Comunidades Aledañas</p>
+<p class="font-label-tabular text-label-tabular text-on-surface-variant mt-spacing-2xs">Validado: 02/Mar/2024</p>
+</div>
+<div class="mt-spacing-sm pt-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded text-primary font-label-caps text-label-caps uppercase">
+          Completada
+        </div>
+</div>
+<!-- Etapa 5 -->
+<div class="p-spacing-md rounded-lg bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">05</span>
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+</div>
+<div class="mt-spacing-sm">
+<p class="font-headline-sm text-headline-sm text-on-surface">Modelación de Impacto Acústico y Sombras de Aerogeneradores</p>
+<p class="font-label-tabular text-label-tabular text-on-surface-variant mt-spacing-2xs">Validado: 19/Mar/2024</p>
+</div>
+<div class="mt-spacing-sm pt-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded text-primary font-label-caps text-label-caps uppercase">
+          Completada
+        </div>
+</div>
+<!-- Etapa 6: COMPUERTA OBLIGATORIA PENDIENTE (DESTACADA) -->
+<div class="col-span-1 md:col-span-2 xl:col-span-3 p-spacing-lg rounded-xl bg-surface-container-lowest shadow-md flex flex-col gap-spacing-md relative overflow-hidden">
+<div class="flex flex-wrap items-center justify-between gap-spacing-sm">
+<div class="flex items-center gap-spacing-xs">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-tertiary text-on-tertiary font-data-mono-lg text-data-mono-lg font-semibold">
+              ETAPA 06
+            </span>
+<span class="flex items-center gap-spacing-3xs px-spacing-sm py-spacing-2xs rounded bg-error-container text-on-error-container font-label-caps text-label-caps uppercase tracking-wider font-semibold animate-pulse">
+<span class="material-symbols-outlined text-[16px]">priority_high</span>
+              Compuerta Obligatoria Pendiente
+            </span>
+</div>
+<span class="font-label-tabular text-label-tabular text-secondary uppercase font-semibold">Requerimiento Crítico de Bloqueo</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">
+            Revisión final del Coordinador e inversionistas
+          </h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-spacing-3xs">
+            Hito vinculante de verificación de compromisos de compensación de biomasa y salvaguardas ambientales. Requiere firma y comentario de validación por parte del Coordinador de Proyecto antes de habilitar la remisión oficial.
+          </p>
+</div>
+<!-- Formulario de Aprobación de Compuerta -->
+<div class="p-spacing-md rounded-lg bg-surface-container-low flex flex-col gap-spacing-sm">
+<label class="font-headline-sm text-headline-sm text-on-surface flex items-center justify-between" for="comentario-aprobacion">
+<span>Comentario de Aprobación / Dictamen Técnico</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Obligatorio (mín. 20 caracteres)</span>
+</label>
+<textarea class="w-full p-spacing-sm bg-surface-container-lowest text-on-surface rounded font-body-sm text-body-sm placeholder:text-outline outline-none focus:bg-surface transition-colors" id="comentario-aprobacion" placeholder="Ingrese el dictamen formal de conformidad técnica, verificación de coordenadas y visto bueno de inversionistas..." rows="2"></textarea>
+<div class="flex flex-col sm:flex-row items-center justify-between gap-spacing-sm pt-spacing-2xs">
+<div class="flex items-center gap-spacing-xs text-secondary font-label-tabular text-label-tabular">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+              Firmante autorizado: Ing. Carlos Mendoza (Coordinador)
+            </div>
+<button class="w-full sm:w-auto px-spacing-lg py-spacing-xs rounded font-headline-sm text-headline-sm bg-primary text-on-primary hover:bg-primary-container transition-all flex items-center justify-center gap-spacing-xs shadow-sm" id="btn-aprobar-etapa" onclick="aprobarEtapa6()">
+<span class="material-symbols-outlined text-[18px]">task_alt</span>
+              Aprobar etapa
+            </button>
+</div>
+</div>
+</div>
+<!-- Etapa 7: BLOQUEADA -->
+<div class="col-span-1 md:col-span-2 xl:col-span-2 p-spacing-md rounded-lg bg-surface-container-high/60 shadow-none flex flex-col justify-between opacity-85">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="font-data-mono-md text-data-mono-md text-outline font-semibold">07</span>
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-dim text-on-surface-variant font-label-caps text-label-caps uppercase">Bloqueada</span>
+</div>
+<span class="material-symbols-outlined text-tertiary text-[22px]">lock</span>
+</div>
+<div class="my-spacing-sm">
+<p class="font-headline-sm text-headline-sm text-on-surface">Entrega del informe final</p>
+<div class="mt-spacing-xs p-spacing-xs rounded bg-error-container/40 text-on-surface font-body-sm text-body-sm flex items-start gap-spacing-xs">
+<span class="material-symbols-outlined text-error text-[18px] shrink-0">info</span>
+<span class="font-semibold text-error">Bloqueada hasta la aprobación formal de la Etapa 6.</span>
+</div>
+</div>
+<div class="font-label-tabular text-label-tabular text-on-surface-variant pt-spacing-xs">
+          Trámite subsiguiente: Consolidación física y digital con sellos oficiales.
+        </div>
+</div>
+<!-- Etapas 8, 9, 10 en fila subordinada -->
+<div class="p-spacing-md rounded-lg bg-surface-container-low shadow-sm opacity-60 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-outline">08</span>
+<span class="material-symbols-outlined text-outline text-[18px]">lock_clock</span>
+</div>
+<div class="my-spacing-xs">
+<p class="font-headline-sm text-headline-sm text-on-surface-variant">Radicación ante Autoridad Ambiental</p>
+</div>
+<span class="font-label-tabular text-label-tabular text-outline">Pendiente secuencial</span>
+</div>
+<div class="p-spacing-md rounded-lg bg-surface-container-low shadow-sm opacity-60 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-outline">09</span>
+<span class="material-symbols-outlined text-outline text-[18px]">lock_clock</span>
+</div>
+<div class="my-spacing-xs">
+<p class="font-headline-sm text-headline-sm text-on-surface-variant">Inspección Técnica de Verificación In Situ</p>
+</div>
+<span class="font-label-tabular text-label-tabular text-outline">Pendiente secuencial</span>
+</div>
+<div class="p-spacing-md rounded-lg bg-surface-container-low shadow-sm opacity-60 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-outline">10</span>
+<span class="material-symbols-outlined text-outline text-[18px]">lock_clock</span>
+</div>
+<div class="my-spacing-xs">
+<p class="font-headline-sm text-headline-sm text-on-surface-variant">Resolución de Licencia y Cierre de Expediente</p>
+</div>
+<span class="font-label-tabular text-label-tabular text-outline">Cierre definitivo</span>
+</div>
+</div>
+</section>
+<!-- SECCIÓN 2: SUBPANEL DE MEDICIONES DE CAMPO Y CAPTURA TÉCNICA -->
+<section class="flex flex-col gap-spacing-md mt-spacing-xs">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-spacing-xs">
+<div>
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">nature_people</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-wider">Subpanel Forestal &amp; Dendrología</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Mediciones de Campo y Censo de Biomasa</h2>
+</div>
+<!-- NOTA TÉCNICA NO NEGOCIABLE -->
+<div class="flex items-center gap-spacing-xs px-spacing-md py-spacing-xs rounded-lg bg-surface-container-high text-on-surface shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">architecture</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-secondary uppercase">Aviso Metodológico</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Ecuación de volumen pendiente de definir por el equipo técnico</span>
+</div>
+</div>
+</div>
+<!-- Layout 2 Columnas Asimétricas: Formulario + Mosaico Resumen -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-spacing-md items-start">
+<!-- Columna Izquierda: Formulario de Captura Rápida (5 cols) -->
+<div class="lg:col-span-5 rounded-xl bg-surface-container-lowest p-spacing-lg shadow-sm flex flex-col gap-spacing-md">
+<div class="flex items-center justify-between pb-spacing-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">add_box</span>
+            Captura Rápida de Muestra
+          </h3>
+<span class="font-data-mono-md text-data-mono-md text-secondary">MODO: REGISTRO DIRECTO</span>
+</div>
+<form class="flex flex-col gap-spacing-sm" id="form-medicion" onsubmit="agregarMedicion(event)">
+<div class="grid grid-cols-2 gap-spacing-sm">
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase" for="campo-finca">Finca / Parcela</label>
+<input class="px-spacing-sm py-spacing-2xs rounded bg-surface-container-low text-on-surface font-body-sm text-body-sm outline-none focus:bg-surface-container-lowest" id="campo-finca" placeholder="Ej. Parcela A-12" required="" type="text" value="Parcela 4 - Península Norte"/>
+</div>
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase" for="campo-superficie">Superficie (ha)</label>
+<div class="relative flex items-center">
+<input class="w-full px-spacing-sm py-spacing-2xs rounded bg-surface-container-low text-on-surface font-data-mono-md text-data-mono-md outline-none focus:bg-surface-container-lowest pr-10" id="campo-superficie" placeholder="0.00" required="" step="0.01" type="number" value="4.50"/>
+<span class="absolute right-3 font-label-tabular text-label-tabular text-outline">ha</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase" for="campo-especie">Especie (Lista Controlada)</label>
+<select class="px-spacing-sm py-spacing-2xs rounded bg-surface-container-low text-on-surface font-body-sm text-body-sm outline-none focus:bg-surface-container-lowest cursor-pointer" id="campo-especie" required="">
+<option value="Prosopis juliflora">Prosopis juliflora (Cují yaque)</option>
+<option value="Guaiacum officinale">Guaiacum officinale (Guayacán negro)</option>
+<option value="Handroanthus chrysanthus">Handroanthus chrysanthus (Araguaney)</option>
+<option value="Bursera graveolens">Bursera graveolens (Palo santo)</option>
+<option value="Platymiscium pinnatum">Platymiscium pinnatum (Roble montañero)</option>
+</select>
+</div>
+<div class="grid grid-cols-3 gap-spacing-xs">
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase" for="campo-arboles">N° Árboles</label>
+<input class="px-spacing-sm py-spacing-2xs rounded bg-surface-container-low text-on-surface font-data-mono-md text-data-mono-md outline-none focus:bg-surface-container-lowest" id="campo-arboles" min="1" placeholder="Und" required="" type="number" value="14"/>
+</div>
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase" for="campo-altura">Altura (m)</label>
+<div class="relative flex items-center">
+<input class="w-full px-spacing-sm py-spacing-2xs rounded bg-surface-container-low text-on-surface font-data-mono-md text-data-mono-md outline-none focus:bg-surface-container-lowest pr-8" id="campo-altura" placeholder="m" required="" step="0.1" type="number" value="6.8"/>
+<span class="absolute right-2 font-label-tabular text-label-tabular text-outline">m</span>
+</div>
+</div>
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase" for="campo-dap">DAP (cm)</label>
+<div class="relative flex items-center">
+<input class="w-full px-spacing-sm py-spacing-2xs rounded bg-surface-container-low text-on-surface font-data-mono-md text-data-mono-md outline-none focus:bg-surface-container-lowest pr-8" id="campo-dap" placeholder="cm" required="" step="0.1" type="number" value="24.5"/>
+<span class="absolute right-2 font-label-tabular text-label-tabular text-outline">cm</span>
+</div>
+</div>
+</div>
+<div class="p-spacing-sm rounded-lg bg-surface-container-high/70 flex flex-col gap-spacing-3xs">
+<div class="flex items-center justify-between">
+<label class="font-label-caps text-label-caps text-tertiary uppercase font-semibold" for="campo-volumen">
+                Volumen m³ (Captura Manual)
+              </label>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">Estimado de Campo</span>
+</div>
+<div class="relative flex items-center">
+<input class="w-full px-spacing-sm py-spacing-2xs rounded bg-surface-container-lowest text-tertiary font-data-mono-lg text-data-mono-lg font-bold outline-none pr-12" id="campo-volumen" placeholder="0.000" required="" step="0.001" type="number" value="2.840"/>
+<span class="absolute right-3 font-label-tabular text-label-tabular font-semibold text-tertiary">m³</span>
+</div>
+<p class="font-label-tabular text-label-tabular text-outline mt-spacing-3xs">
+              * El cubicaje final automatizado se recalculará al parametrizar la ecuación alométrica correspondiente.
+            </p>
+</div>
+<button class="mt-spacing-xs w-full py-spacing-xs px-spacing-md rounded bg-primary text-on-primary font-headline-sm text-headline-sm hover:bg-primary-container transition-all flex items-center justify-center gap-spacing-xs shadow-sm" type="submit">
+<span class="material-symbols-outlined text-[18px]">save</span>
+            Registrar e Indexar Medición
+          </button>
+</form>
+<!-- Banner de Foto In-Situ Registrada -->
+<div class="relative rounded-lg overflow-hidden h-28 mt-spacing-2xs group">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close up photograph of a forestry inspector using a caliper on a native tree trunk in an arid coastal wind farm landscape under bright daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLOfhumIDLLahs11Afor63FergM2jGKfwclTjoUZFuzmDJI-bwcbtUHntHMINTkBrh9lx7BJiS6Mhay6SncRhivGUOqD1mr-T4Vpns34IQsm2I0eipIFgXblDYyUOL7gH-8mRwqiNcu7lgAq0iDbVBpcilryqaX-2KQH7ugn7CzL_W_SRZpW-p-mavOPiEFUT9-6-F0BSZvsvhvK1QXDOXOx5xW3ZNvFIV-IrXrk6cg-av7vftKJyg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/40 to-transparent flex items-end p-spacing-sm">
+<div class="flex items-center justify-between w-full">
+<span class="text-inverse-on-surface font-headline-sm text-headline-sm">Península Norte - Hito Forestal #09</span>
+<span class="text-secondary-fixed font-data-mono-md text-data-mono-md">11°58'14"N</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Columna Derecha: Ledger de Registros + Mosaico de Totales por Especie (7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-spacing-md">
+<!-- Mosaico / Resumen por especie sumando volúmenes capturados -->
+<div class="rounded-xl bg-surface-container-lowest p-spacing-md shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-spacing-xs mb-spacing-md">
+<div>
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-wider">Consolidado Dendrológico</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Resumen por Especie (Volumen Manual)</h3>
+</div>
+<div class="px-spacing-sm py-spacing-3xs rounded bg-surface-container-low text-primary font-data-mono-md text-data-mono-md font-semibold">
+              Total Polígono: <span id="volumen-total-display">29.410</span> m³
+            </div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-spacing-sm" id="resumen-especies-cards">
+<!-- Card Especie 1 -->
+<div class="p-spacing-sm rounded-lg bg-surface-container-low flex flex-col justify-between gap-spacing-2xs">
+<div class="flex items-center justify-between">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">54 árboles</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface truncate">Prosopis juliflora</p>
+<p class="font-label-caps text-label-caps text-outline italic">Cují yaque</p>
+</div>
+<div class="pt-spacing-2xs flex items-baseline justify-between">
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">Volumen acum.</span>
+<span class="font-data-mono-lg text-data-mono-lg text-primary font-semibold">14.620 m³</span>
+</div>
+</div>
+<!-- Card Especie 2 -->
+<div class="p-spacing-sm rounded-lg bg-surface-container-low flex flex-col justify-between gap-spacing-2xs">
+<div class="flex items-center justify-between">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">28 árboles</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface truncate">Guaiacum officinale</p>
+<p class="font-label-caps text-label-caps text-outline italic">Guayacán negro</p>
+</div>
+<div class="pt-spacing-2xs flex items-baseline justify-between">
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">Volumen acum.</span>
+<span class="font-data-mono-lg text-data-mono-lg text-secondary font-semibold">8.940 m³</span>
+</div>
+</div>
+<!-- Card Especie 3 -->
+<div class="p-spacing-sm rounded-lg bg-surface-container-low flex flex-col justify-between gap-spacing-2xs">
+<div class="flex items-center justify-between">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">19 árboles</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface truncate">Handroanthus chrys.</p>
+<p class="font-label-caps text-label-caps text-outline italic">Araguaney</p>
+</div>
+<div class="pt-spacing-2xs flex items-baseline justify-between">
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">Volumen acum.</span>
+<span class="font-data-mono-lg text-data-mono-lg text-tertiary font-semibold">5.850 m³</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Tabla Técnica de Registros de Campo Recientes -->
+<div class="rounded-xl bg-surface-container-lowest p-spacing-md shadow-sm overflow-hidden flex flex-col">
+<div class="flex items-center justify-between pb-spacing-sm">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Libro de Campo Reciente (Últimos Registros)</h4>
+<span class="font-label-tabular text-label-tabular text-outline">Formato Oficial IGN / CONAF</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase">
+<th class="py-spacing-2xs px-spacing-sm">Finca / Parcela</th>
+<th class="py-spacing-2xs px-spacing-sm">Sup (ha)</th>
+<th class="py-spacing-2xs px-spacing-sm">Especie</th>
+<th class="py-spacing-2xs px-spacing-sm text-right">Árboles</th>
+<th class="py-spacing-2xs px-spacing-sm text-right">H (m)</th>
+<th class="py-spacing-2xs px-spacing-sm text-right">DAP (cm)</th>
+<th class="py-spacing-2xs px-spacing-sm text-right">Vol (m³)</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm text-on-surface divide-y divide-transparent" id="tabla-mediciones-body">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-spacing-xs px-spacing-sm font-medium">Parcela 1 - Molino WT-01</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md">3.20</td>
+<td class="py-spacing-xs px-spacing-sm italic text-secondary">Prosopis juliflora</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md">22</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md">7.2</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md">26.0</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md font-semibold text-primary">6.120</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-lowest">
+<td class="py-spacing-xs px-spacing-sm font-medium">Parcela 2 - Línea Alta Tensión</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md">5.10</td>
+<td class="py-spacing-xs px-spacing-sm italic text-secondary">Guaiacum officinale</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md">18</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md">5.4</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md">31.2</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md font-semibold text-primary">5.840</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-spacing-xs px-spacing-sm font-medium">Parcela 3 - Subestación</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md">2.80</td>
+<td class="py-spacing-xs px-spacing-sm italic text-secondary">Handroanthus chrysanthus</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md">12</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md">8.1</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md">22.8</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md font-semibold text-primary">3.950</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-lowest">
+<td class="py-spacing-xs px-spacing-sm font-medium">Parcela 4 - Vía de Acceso</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md">6.40</td>
+<td class="py-spacing-xs px-spacing-sm italic text-secondary">Prosopis juliflora</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md">32</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md">6.5</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md">21.0</td>
+<td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md font-semibold text-primary">8.500</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<script>
+  function aprobarEtapa6() {
+    const comentario = document.getElementById('comentario-aprobacion').value.trim();
+    if (comentario.length < 10) {
+      alert('Por favor ingrese un dictamen técnico formal (mínimo 10 caracteres) para proceder con la aprobación de la compuerta.');
+      document.getElementById('comentario-aprobacion').focus();
+      return;
+    }
+
+    const btn = document.getElementById('btn-aprobar-etapa');
+    btn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span> Validando firma...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span> Aprobada con éxito';
+      btn.className = 'w-full sm:w-auto px-spacing-lg py-spacing-xs rounded font-headline-sm text-headline-sm bg-surface-container-high text-primary font-semibold flex items-center justify-center gap-spacing-xs';
+      alert('Etapa 06 Aprobada formalmente. Se ha desbloqueado la Etapa 07 ("Entrega del informe final") para el flujo de trabajo.');
+    }, 900);
+  }
+
+  function agregarMedicion(e) {
+    e.preventDefault();
+    const finca = document.getElementById('campo-finca').value;
+    const sup = parseFloat(document.getElementById('campo-superficie').value).toFixed(2);
+    const especie = document.getElementById('campo-especie').value;
+    const arboles = document.getElementById('campo-arboles').value;
+    const altura = parseFloat(document.getElementById('campo-altura').value).toFixed(1);
+    const dap = parseFloat(document.getElementById('campo-dap').value).toFixed(1);
+    const volumen = parseFloat(document.getElementById('campo-volumen').value);
+
+    const tbody = document.getElementById('tabla-mediciones-body');
+    const newRow = document.createElement('tr');
+    newRow.className = 'hover:bg-surface-container-low transition-colors bg-primary-fixed/20';
+    newRow.innerHTML = `
+      <td class="py-spacing-xs px-spacing-sm font-medium">${finca}</td>
+      <td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md">${sup}</td>
+      <td class="py-spacing-xs px-spacing-sm italic text-secondary">${especie}</td>
+      <td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md">${arboles}</td>
+      <td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md">${altura}</td>
+      <td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md">${dap}</td>
+      <td class="py-spacing-xs px-spacing-sm text-right font-data-mono-md text-data-mono-md font-semibold text-primary">${volumen.toFixed(3)}</td>
+    `;
+    tbody.prepend(newRow);
+
+    const totalDisp = document.getElementById('volumen-total-display');
+    const currentTotal = parseFloat(totalDisp.innerText);
+    totalDisp.innerText = (currentTotal + volumen).toFixed(3);
+
+    alert('Medición técnica registrada con éxito en el cuaderno de campo.');
+  }
+</script></main></div></body></html>

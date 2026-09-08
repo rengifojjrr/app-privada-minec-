@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-surface": "#191c1a",
+        "inverse-surface": "#2e312f",
+        "surface-container-low": "#f3f4f0",
+        "surface-container": "#edeeeb",
+        "primary": "#023627",
+        "tertiary-container": "#82220e",
+        "secondary-fixed-dim": "#f5bb88",
+        "primary-fixed": "#bcedd7",
+        "secondary": "#80552b",
+        "outline": "#717974",
+        "on-primary-fixed": "#002116",
+        "surface-bright": "#f8faf6",
+        "on-surface-variant": "#414944",
+        "inverse-primary": "#a1d1bc",
+        "secondary-container": "#fec390",
+        "tertiary-fixed-dim": "#ffb4a4",
+        "on-tertiary-fixed": "#3e0500",
+        "surface-dim": "#d9dad7",
+        "on-error-container": "#93000a",
+        "on-tertiary-fixed-variant": "#852410",
+        "surface-container-high": "#e7e9e5",
+        "on-error": "#ffffff",
+        "on-primary": "#ffffff",
+        "surface-variant": "#e1e3df",
+        "on-secondary-fixed": "#2d1600",
+        "on-primary-fixed-variant": "#214f3f",
+        "surface-container-lowest": "#ffffff",
+        "primary-container": "#1f4d3d",
+        "tertiary": "#610c00",
+        "on-secondary": "#ffffff",
+        "error-container": "#ffdad6",
+        "error": "#ba1a1a",
+        "inverse-on-surface": "#f0f1ed",
+        "surface": "#f8faf6",
+        "primary-fixed-dim": "#a1d1bc",
+        "on-secondary-container": "#794e25",
+        "surface-container-highest": "#e1e3df",
+        "on-tertiary-container": "#ff9680",
+        "background": "#f8faf6",
+        "secondary-fixed": "#ffdcc0",
+        "surface-tint": "#3a6756",
+        "on-secondary-fixed-variant": "#653e16",
+        "tertiary-fixed": "#ffdad3",
+        "on-tertiary": "#ffffff",
+        "on-primary-container": "#8dbda8",
+        "on-background": "#191c1a",
+        "outline-variant": "#c0c8c3"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "spacing-xl": "2rem",
+        "table-gutter": "0.75rem",
+        "spacing-md": "1rem",
+        "spacing-lg": "1.5rem",
+        "spacing-xs": "0.5rem",
+        "spacing-3xs": "0.125rem",
+        "spacing-2xl": "3rem",
+        "layout-margin-desktop": "2rem",
+        "spacing-3xl": "4rem",
+        "layout-margin-mobile": "1rem",
+        "spacing-2xs": "0.25rem",
+        "spacing-sm": "0.75rem",
+        "layout-margin-tablet": "1.5rem"
+      },
+      "fontFamily": {
+        "body-md": ["Hanken Grotesk"],
+        "headline-xl-mobile": ["Hanken Grotesk"],
+        "label-caps": ["Hanken Grotesk"],
+        "data-mono-lg": ["JetBrains Mono"],
+        "body-sm": ["Hanken Grotesk"],
+        "headline-xl": ["Hanken Grotesk"],
+        "headline-sm": ["Hanken Grotesk"],
+        "headline-lg": ["Hanken Grotesk"],
+        "headline-md": ["Hanken Grotesk"],
+        "data-mono-md": ["JetBrains Mono"],
+        "body-lg": ["Hanken Grotesk"],
+        "label-tabular": ["JetBrains Mono"]
+      },
+      "fontSize": {
+        "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+        "headline-xl-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+        "data-mono-lg": ["15px", {"lineHeight": "22px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+        "headline-sm": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600"}],
+        "headline-lg": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "data-mono-md": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+        "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+        "label-tabular": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+      }
+    }
+  }
+}</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-spacing-md flex items-center gap-spacing-xs bg-surface-container-low"><div class="flex items-center justify-center w-7 h-7 bg-primary rounded-lg text-on-primary font-headline-sm text-headline-sm">PI</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight">Proyectos Integrales</span><span class="font-label-caps text-label-caps text-secondary uppercase">Ingeniería &amp; Ambiente</span></div></div><div class="px-spacing-md py-spacing-xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operación Técnica</span></div><nav class="flex flex-col gap-spacing-3xs px-spacing-xs flex-1" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm"><a aria-current="page" class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded transition-colors bg-primary-container text-on-primary-container font-headline-sm" data-path="proyectos" href="#"><span class="material-symbols-outlined text-[20px]">folder_supervised</span><span class="font-body-sm text-body-sm">Proyectos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="aprobaciones" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span class="font-body-sm text-body-sm">Aprobaciones</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="calendario" href="#"><span class="material-symbols-outlined text-[20px]">event_note</span><span class="font-body-sm text-body-sm">Calendario</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contratantes" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-sm text-body-sm">Contratantes</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-body-sm text-body-sm">Reportes</span></a><div class="my-spacing-xs px-spacing-xs"><div class="h-[1px] bg-outline-variant/30"></div></div><div class="px-spacing-xs py-spacing-3xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Gobierno &amp; Control</span></div><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="direccion-ejecutiva" href="#"><span class="material-symbols-outlined text-[20px]">query_stats</span><span class="font-body-sm text-body-sm">Dirección</span><span class="ml-auto font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-inverse-surface text-inverse-on-surface">DARK</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="font-body-sm text-body-sm">Usuarios</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="catalogos" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-sm text-body-sm">Catálogos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="bitacora-general" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-body-sm text-body-sm">Bitácora General</span></a></nav></div><div class="p-spacing-md bg-surface-container-high"><div class="flex items-center justify-between"><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Estándar Técnico</span><span class="font-data-mono-md text-data-mono-md text-primary">ISO 14001 / EIA-v2</span></div><span class="material-symbols-outlined text-outline text-[18px]">format_image_left</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex items-center justify-between px-spacing-lg"><div class="flex items-center gap-spacing-md flex-1 max-w-2xl"><img alt="Logo Proyectos Integrales" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WWI3mVDk-K0VvmFiCvo8p33fqbfLEk7YLxC1GudbnlFUpaiGriHUaR624tyiQNmYunExODktoHOUwF3QL8qZ_IwSF5S_2YljkWvDXX_F70wU2BcAir0ZOTnqLI_71vsDpk6z_zbXASIS0ueLJ7tFBZNvfS6T8aTnTgjZaqsX3YPQTL3hOBf9ordXhPZXWaXrXj9-I0-5Fd6nraudX80Q_6v0_NI_5xzQXtCkGU4fxStFzd9olGwfezDU0"/><div class="relative w-full max-w-md"><span class="material-symbols-outlined absolute left-spacing-xs top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full pl-8 pr-spacing-sm py-spacing-2xs bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Buscar código de expediente, matriz ambiental, contratante o profesional..." type="text"/></div></div><div class="flex items-center gap-spacing-md"><div class="flex items-center gap-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded"><span class="font-label-caps text-label-caps text-secondary uppercase font-semibold">Entrar como:</span><select class="bg-transparent font-body-sm text-body-sm text-on-surface font-medium outline-none cursor-pointer"><option value="admin">Admin</option><option value="coordinador">Coordinador</option><option value="profesional">Profesional</option><option value="administracion">Administración</option><option value="direccion">Dirección</option></select></div><div class="flex items-center gap-spacing-2xs"><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">help</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-spacing-lg pb-spacing-xl flex-1 bg-background"><div class="flex flex-col w-full">
+<!-- Submenú de Navegación de la Ficha Técnica -->
+<header class="w-full bg-surface-container-low/80 backdrop-blur rounded-xl p-spacing-sm mb-spacing-lg shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-spacing-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-spacing-xs">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold px-spacing-2xs py-spacing-3xs bg-primary-fixed/40 rounded">PI-2024-002</span>
+<span class="font-label-caps text-label-caps uppercase text-secondary font-bold tracking-wider">EIA • Vínculo Territorial</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface font-semibold tracking-tight">EIA y Estudio Sociocultural Parque Eólico Península</h1>
+</div>
+<!-- Navegación por Pestañas Técnicas -->
+<nav class="flex items-center gap-spacing-3xs overflow-x-auto pb-spacing-3xs md:pb-0">
+<a class="px-spacing-sm py-spacing-2xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap" href="#">Resumen</a>
+<a class="px-spacing-sm py-spacing-2xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap" href="#">Etapas</a>
+<a class="px-spacing-sm py-spacing-2xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap" href="#">Equipo &amp; Honorarios</a>
+<a class="px-spacing-sm py-spacing-2xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap" href="#">Documentos</a>
+<a class="px-spacing-sm py-spacing-2xs rounded font-headline-sm text-headline-sm bg-primary text-on-primary shadow-sm whitespace-nowrap flex items-center gap-spacing-2xs" href="#">
+<span class="material-symbols-outlined text-[16px]">nature</span>
+        Mediciones de Campo
+      </a>
+<a class="px-spacing-sm py-spacing-2xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap" href="#">Finanzas</a>
+<a class="px-spacing-sm py-spacing-2xs rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap" href="#">Bitácora</a>
+</nav>
+</header>
+<!-- Aviso Técnico Destacado Obligatorio -->
+<div class="w-full bg-secondary-fixed/40 rounded-lg p-spacing-md mb-spacing-lg flex items-start gap-spacing-md shadow-sm">
+<div class="w-9 h-9 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[22px]">rule_folder</span>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex items-center gap-spacing-xs">
+<span class="font-label-caps text-label-caps uppercase text-secondary font-bold tracking-wider">Protocolo Dasométrico Provisorio</span>
+<span class="font-data-mono-md text-data-mono-md px-spacing-2xs py-spacing-3xs bg-secondary-container text-on-secondary-container rounded font-bold">REQ-VOL-08</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface mt-spacing-3xs font-medium">
+        Ecuación de volumen pendiente de definir por el equipo técnico. Captura manual de volumen en m³ sin fórmulas automatizadas.
+      </p>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant mt-spacing-3xs">Resolución Exenta N° 418/CONAF • Parámetros alométricos en calibración por Ing. Forestal Auditor.</span>
+</div>
+<span class="material-symbols-outlined text-secondary text-[20px] hidden sm:block">lock</span>
+</div>
+<!-- Barra de Herramientas Superior y Sincronización Externa -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-spacing-sm mb-spacing-md">
+<div class="flex items-center gap-spacing-xs">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant font-semibold tracking-wider">Módulo de Terreno:</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Captura Dendrológica y Cuantificación de Masa Arbórea</span>
+</div>
+<div class="flex items-center gap-spacing-xs flex-wrap">
+<button class="px-spacing-sm py-spacing-xs bg-surface-container-lowest text-on-surface rounded-lg shadow-sm hover:bg-surface-container-high transition-colors flex items-center gap-spacing-2xs font-body-sm text-body-sm font-semibold" id="btn-sync-gps">
+<span class="material-symbols-outlined text-[18px] text-primary">satellite_alt</span>
+<span>Sincronizar GNSS (Trimble/Garmin)</span>
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse ml-1"></span>
+</button>
+<button class="px-spacing-sm py-spacing-xs bg-surface-container-lowest text-on-surface rounded-lg shadow-sm hover:bg-surface-container-high transition-colors flex items-center gap-spacing-2xs font-body-sm text-body-sm font-semibold" id="btn-export-csv">
+<span class="material-symbols-outlined text-[18px] text-secondary">file_download</span>
+<span>Exportar Datos Crudos (.CSV)</span>
+</button>
+</div>
+</div>
+<!-- Panel Resumen Acumulado por Especie (Tarjetas y Gráficos Dasométricos) -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-spacing-md mb-spacing-lg">
+<!-- Card Roble -->
+<div class="bg-surface-container-lowest rounded-xl p-spacing-md shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Nothofagus obliqua</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Roble Pellín</h3>
+</div>
+<span class="px-spacing-2xs py-spacing-3xs rounded bg-surface-container-high font-data-mono-md text-data-mono-md text-on-surface font-semibold">ROB</span>
+</div>
+<div class="my-spacing-sm flex items-baseline justify-between">
+<div>
+<div class="font-headline-xl text-headline-xl text-primary font-bold tracking-tight">48.35</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Metros Cúbicos (m³)</span>
+</div>
+<div class="text-right">
+<div class="font-headline-md text-headline-md text-on-surface font-semibold">28</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Individuos</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 44%;"></div>
+</div>
+<div class="flex justify-between items-center mt-spacing-2xs font-label-tabular text-label-tabular text-on-surface-variant">
+<span>Part. Volumen: 44.1%</span>
+<span>DAP Prom: 42.6 cm</span>
+</div>
+</div>
+<!-- Card Raulí -->
+<div class="bg-surface-container-lowest rounded-xl p-spacing-md shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Nothofagus alpina</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Raulí</h3>
+</div>
+<span class="px-spacing-2xs py-spacing-3xs rounded bg-surface-container-high font-data-mono-md text-data-mono-md text-on-surface font-semibold">RAU</span>
+</div>
+<div class="my-spacing-sm flex items-baseline justify-between">
+<div>
+<div class="font-headline-xl text-headline-xl text-primary font-bold tracking-tight">32.18</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Metros Cúbicos (m³)</span>
+</div>
+<div class="text-right">
+<div class="font-headline-md text-headline-md text-on-surface font-semibold">19</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Individuos</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 29%;"></div>
+</div>
+<div class="flex justify-between items-center mt-spacing-2xs font-label-tabular text-label-tabular text-on-surface-variant">
+<span>Part. Volumen: 29.3%</span>
+<span>DAP Prom: 38.1 cm</span>
+</div>
+</div>
+<!-- Card Coihue -->
+<div class="bg-surface-container-lowest rounded-xl p-spacing-md shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Nothofagus dombeyi</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Coihue</h3>
+</div>
+<span class="px-spacing-2xs py-spacing-3xs rounded bg-surface-container-high font-data-mono-md text-data-mono-md text-on-surface font-semibold">COI</span>
+</div>
+<div class="my-spacing-sm flex items-baseline justify-between">
+<div>
+<div class="font-headline-xl text-headline-xl text-primary font-bold tracking-tight">21.84</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Metros Cúbicos (m³)</span>
+</div>
+<div class="text-right">
+<div class="font-headline-md text-headline-md text-on-surface font-semibold">14</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Individuos</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-1.5 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 20%;"></div>
+</div>
+<div class="flex justify-between items-center mt-spacing-2xs font-label-tabular text-label-tabular text-on-surface-variant">
+<span>Part. Volumen: 19.9%</span>
+<span>DAP Prom: 34.7 cm</span>
+</div>
+</div>
+<!-- Card Palo Blanco -->
+<div class="bg-surface-container-lowest rounded-xl p-spacing-md shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Caldcluvia paniculata</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Palo Blanco</h3>
+</div>
+<span class="px-spacing-2xs py-spacing-3xs rounded bg-surface-container-high font-data-mono-md text-data-mono-md text-on-surface font-semibold">PBL</span>
+</div>
+<div class="my-spacing-sm flex items-baseline justify-between">
+<div>
+<div class="font-headline-xl text-headline-xl text-primary font-bold tracking-tight">7.26</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Metros Cúbicos (m³)</span>
+</div>
+<div class="text-right">
+<div class="font-headline-md text-headline-md text-on-surface font-semibold">6</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Individuos</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-1.5 overflow-hidden">
+<div class="bg-surface-tint h-full rounded-full" style="width: 7%;"></div>
+</div>
+<div class="flex justify-between items-center mt-spacing-2xs font-label-tabular text-label-tabular text-on-surface-variant">
+<span>Part. Volumen: 6.7%</span>
+<span>DAP Prom: 28.2 cm</span>
+</div>
+</div>
+</section>
+<!-- Layout Principal: Formulario de Registro + Panel Visual y Tabla -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-spacing-lg items-start">
+<!-- Formulario de Captura Rápida Dasométrica -->
+<section class="xl:col-span-4 bg-surface-container-lowest rounded-xl p-spacing-lg shadow-sm flex flex-col gap-spacing-md">
+<div class="flex items-center justify-between pb-spacing-xs border-b-0">
+<div class="flex items-center gap-spacing-2xs">
+<span class="material-symbols-outlined text-primary text-[20px]">add_location_alt</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Registro de Medición de Campo</h2>
+</div>
+<span class="font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs bg-surface-container-high text-on-surface-variant rounded">GPS-FIX-3D</span>
+</div>
+<form class="flex flex-col gap-spacing-sm" id="form-dasometrico" onsubmit="event.preventDefault(); window.registrarMedicion();">
+<!-- Parcela / Transecto -->
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant font-semibold" for="campo-parcela">Parcela / Transecto</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-spacing-xs top-1/2 -translate-y-1/2 text-outline text-[18px]">grid_view</span>
+<input class="w-full pl-8 pr-spacing-sm py-spacing-2xs bg-surface-container-low text-on-surface rounded font-body-sm text-body-sm outline-none focus:bg-surface-container-lowest transition-colors" id="campo-parcela" placeholder="Ej. P-04 Sector Costero" required="" type="text" value="P-04 Sector Costero"/>
+</div>
+</div>
+<!-- Especie Forestal -->
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant font-semibold" for="campo-especie">Especie (Catálogo Taxonómico)</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-spacing-xs top-1/2 -translate-y-1/2 text-outline text-[18px]">forest</span>
+<select class="w-full pl-8 pr-spacing-sm py-spacing-2xs bg-surface-container-low text-on-surface rounded font-body-sm text-body-sm outline-none focus:bg-surface-container-lowest transition-colors cursor-pointer appearance-none" id="campo-especie" required="">
+<option value="Roble (Nothofagus obliqua)">Roble (Nothofagus obliqua)</option>
+<option value="Raulí (Nothofagus alpina)">Raulí (Nothofagus alpina)</option>
+<option value="Coihue (Nothofagus dombeyi)">Coihue (Nothofagus dombeyi)</option>
+<option value="Palo Blanco (Caldcluvia paniculata)">Palo Blanco (Caldcluvia paniculata)</option>
+</select>
+<span class="material-symbols-outlined absolute right-spacing-xs top-1/2 -translate-y-1/2 text-outline text-[16px] pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- DAP y Altura en Fila Dupla -->
+<div class="grid grid-cols-2 gap-spacing-sm">
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant font-semibold" for="campo-dap">DAP</label>
+<div class="relative">
+<input class="w-full pl-spacing-xs pr-9 py-spacing-2xs bg-surface-container-low text-on-surface rounded font-data-mono-md text-data-mono-md outline-none focus:bg-surface-container-lowest transition-colors text-right" id="campo-dap" placeholder="0.0" required="" step="0.1" type="number" value="44.8"/>
+<span class="absolute right-spacing-2xs top-1/2 -translate-y-1/2 font-label-tabular text-label-tabular text-on-surface-variant">cm</span>
+</div>
+</div>
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant font-semibold" for="campo-altura">Altura Total</label>
+<div class="relative">
+<input class="w-full pl-spacing-xs pr-8 py-spacing-2xs bg-surface-container-low text-on-surface rounded font-data-mono-md text-data-mono-md outline-none focus:bg-surface-container-lowest transition-colors text-right" id="campo-altura" placeholder="0.0" required="" step="0.1" type="number" value="21.5"/>
+<span class="absolute right-spacing-2xs top-1/2 -translate-y-1/2 font-label-tabular text-label-tabular text-on-surface-variant">m</span>
+</div>
+</div>
+</div>
+<!-- Volumen Manual Estimado (Respetando el Aviso Técnico) -->
+<div class="flex flex-col gap-spacing-3xs p-spacing-xs bg-surface-container-low rounded-lg">
+<div class="flex items-center justify-between">
+<label class="font-label-caps text-label-caps uppercase text-secondary font-bold" for="campo-volumen">Volumen Manual Estimado</label>
+<span class="font-label-tabular text-label-tabular text-secondary font-semibold">SIN FÓRMULA AUTOMÁTICA</span>
+</div>
+<div class="relative mt-spacing-3xs">
+<span class="material-symbols-outlined absolute left-spacing-xs top-1/2 -translate-y-1/2 text-secondary text-[18px]">straighten</span>
+<input class="w-full pl-8 pr-10 py-spacing-2xs bg-surface-container-lowest text-on-surface rounded font-data-mono-md text-data-mono-md outline-none focus:bg-surface-bright transition-colors text-right font-bold" id="campo-volumen" placeholder="0.00" required="" step="0.01" type="number" value="1.82"/>
+<span class="absolute right-spacing-2xs top-1/2 -translate-y-1/2 font-label-tabular text-label-tabular text-on-surface-variant">m³</span>
+</div>
+<p class="font-label-tabular text-label-tabular text-on-surface-variant mt-1">Cálculo empírico ingresado in-situ según tabla de rodal local.</p>
+</div>
+<!-- Coordenadas GNSS WGS84 -->
+<div class="flex flex-col gap-spacing-3xs">
+<div class="flex items-center justify-between">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant font-semibold">Coordenadas GNSS (WGS84)</label>
+<button class="font-label-tabular text-label-tabular text-primary font-semibold flex items-center gap-1 hover:underline" onclick="window.obtenerGNSS()" type="button">
+<span class="material-symbols-outlined text-[14px]">my_location</span> Actualizar Sensor
+            </button>
+</div>
+<div class="grid grid-cols-2 gap-spacing-xs">
+<div class="relative">
+<input class="w-full px-spacing-xs py-spacing-2xs bg-surface-container-high text-on-surface rounded font-label-tabular text-label-tabular text-center outline-none" id="campo-lat" readonly="" type="text" value="-41.847291"/>
+<span class="absolute left-1.5 top-1/2 -translate-y-1/2 font-label-caps text-label-caps text-outline text-[9px]">LAT</span>
+</div>
+<div class="relative">
+<input class="w-full px-spacing-xs py-spacing-2xs bg-surface-container-high text-on-surface rounded font-label-tabular text-label-tabular text-center outline-none" id="campo-lon" readonly="" type="text" value="-73.819445"/>
+<span class="absolute left-1.5 top-1/2 -translate-y-1/2 font-label-caps text-label-caps text-outline text-[9px]">LON</span>
+</div>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant font-label-tabular text-label-tabular px-1">
+<span>Precisión H: ±0.8m (DGPS)</span>
+<span>Alt: 142.4 msnm</span>
+</div>
+</div>
+<!-- Observaciones de Terreno -->
+<div class="flex flex-col gap-spacing-3xs">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant font-semibold" for="campo-obs">Estado Fitosanitario / Notas</label>
+<textarea class="w-full p-spacing-xs bg-surface-container-low text-on-surface rounded font-body-sm text-body-sm outline-none focus:bg-surface-container-lowest transition-colors" id="campo-obs" placeholder="Fuste recto, sin presencia visible de hongos xilófagos..." rows="2"></textarea>
+</div>
+<!-- Botón de Registro con Hash Criptográfico -->
+<button class="mt-spacing-xs w-full py-spacing-sm px-spacing-md bg-primary hover:bg-primary-container text-on-primary rounded font-headline-sm text-headline-sm flex items-center justify-center gap-spacing-xs shadow-md active:translate-y-0.5 transition-all" type="submit">
+<span class="material-symbols-outlined text-[20px]">fingerprint</span>
+<span>Registrar Medición con Sello Temporal y Hash</span>
+</button>
+<div class="flex items-center justify-center gap-spacing-xs text-on-surface-variant font-label-tabular text-label-tabular mt-1">
+<span class="material-symbols-outlined text-[14px] text-primary">verified_user</span>
+<span>Firma SHA-256 inmutable • Operador: M. Valenzuela (ICF-8842)</span>
+</div>
+</form>
+</section>
+<!-- Columna Derecha: Vista Cartográfica de Parcelas + Tabla de Mediciones Validadas -->
+<div class="xl:col-span-8 flex flex-col gap-spacing-lg">
+<!-- Panel de Mapa / Levantamiento en Terreno -->
+<div class="bg-surface-container-lowest rounded-xl p-spacing-md shadow-sm flex flex-col">
+<div class="flex items-center justify-between mb-spacing-xs">
+<div class="flex items-center gap-spacing-2xs">
+<span class="material-symbols-outlined text-primary text-[20px]">map</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Levantamiento Georreferenciado de Fustales</span>
+</div>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">Polígono P-04 (10,000 m²) • Datum WGS84 Huso 18S</span>
+</div>
+<div class="relative w-full h-48 rounded-lg overflow-hidden shadow-inner bg-surface-container-high">
+<!-- Componente de Mapa de Ubicación con data-location -->
+<div class="w-full h-full bg-cover bg-center" data-location="Península de Lacuy, Ancud, Chile" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDIbt0ps-NojtfmnSkuSoMlYwiNWE1OJflK3c71kIO11abq9fJ1O9NuX2h0R6i3UGeTCJDlICfBoc4Y1SN5MkGioxH0eBgGAaXbW6V0qtO7lD2Ije1CECBJWaWwOLwlvYbYbCgpojBQrJ8khmOvdBDdLVnnZOyt2aOfbvT2oMBGfxbqxSQ1pfmkc-s1g3ar8S7P5cs4ZmR51j76_fRf8Cnln6ru6SzDcWvsagHFVY3iAve2KlRevsXJ')">
+<div class="w-full h-full bg-gradient-to-t from-inverse-surface/80 via-inverse-surface/20 to-transparent flex flex-col justify-between p-spacing-md">
+<div class="flex justify-between items-start">
+<span class="px-spacing-xs py-spacing-3xs bg-inverse-surface/90 text-inverse-on-surface rounded font-data-mono-md text-data-mono-md">
+                  Vértice NO: 41°50'50.2"S 73°49'10.0"W
+                </span>
+<span class="px-spacing-xs py-spacing-3xs bg-primary text-on-primary rounded font-label-caps text-label-caps uppercase font-bold">
+                  Sector Activo
+                </span>
+</div>
+<div class="flex items-center justify-between text-inverse-on-surface">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">location_on</span>
+<span class="font-body-sm text-body-sm font-medium">67 fustales marcados en transecto costero • 6 validados hoy</span>
+</div>
+<span class="font-label-tabular text-label-tabular text-primary-fixed">GPS RTK Fix Rate: 99.4%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Tabla de Registros Dasométricos Recientes Validados en Terreno -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="px-spacing-md py-spacing-sm bg-surface-container-low flex flex-col sm:flex-row sm:items-center justify-between gap-spacing-xs">
+<div class="flex items-center gap-spacing-2xs">
+<span class="material-symbols-outlined text-primary text-[18px]">table_rows</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Mediciones Recientes Validadas en Terreno</h3>
+</div>
+<div class="flex items-center gap-spacing-xs">
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">Mostrando 6 fustales certificados</span>
+<span class="px-spacing-2xs py-spacing-3xs rounded bg-surface-container font-label-tabular text-label-tabular text-primary font-bold">HASH VERIFICADO</span>
+</div>
+</div>
+<!-- Tabla técnica de alta densidad -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider">
+<th class="py-spacing-xs px-spacing-sm font-semibold">ID / Hash</th>
+<th class="py-spacing-xs px-spacing-sm font-semibold">Parcela</th>
+<th class="py-spacing-xs px-spacing-sm font-semibold">Especie</th>
+<th class="py-spacing-xs px-spacing-sm font-semibold text-right">DAP (cm)</th>
+<th class="py-spacing-xs px-spacing-sm font-semibold text-right">Alt (m)</th>
+<th class="py-spacing-xs px-spacing-sm font-semibold text-right bg-secondary-fixed/20 text-secondary">Vol (m³) *</th>
+<th class="py-spacing-xs px-spacing-sm font-semibold">Georreferenciación WGS84</th>
+<th class="py-spacing-xs px-spacing-sm font-semibold">Operador</th>
+<th class="py-spacing-xs px-spacing-sm font-semibold text-center">Acción</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 font-body-sm text-body-sm text-on-surface" id="tabla-mediciones">
+<!-- Registro 1 -->
+<tr class="hover:bg-surface-container transition-colors bg-surface-container-lowest">
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex flex-col">
+<span class="font-data-mono-md text-data-mono-md font-bold text-primary">DND-0891</span>
+<span class="font-label-tabular text-label-tabular text-outline text-[10px]">#7f3a2c..</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-medium">P-04 Sector Costero</td>
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary flex-shrink-0"></span>
+<span class="font-medium">Roble</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right">46.2</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right">22.4</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right font-bold text-secondary bg-secondary-fixed/10">1.94</td>
+<td class="py-spacing-xs px-spacing-sm font-label-tabular text-label-tabular text-on-surface-variant">
+                  -41.84711, -73.81930
+                </td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">M. Valenzuela</td>
+<td class="py-spacing-xs px-spacing-sm text-center">
+<button class="w-7 h-7 inline-flex items-center justify-center rounded hover:bg-surface-container-high text-outline hover:text-primary transition-colors" title="Ver Certificado de Campo">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</button>
+</td>
+</tr>
+<!-- Registro 2 -->
+<tr class="hover:bg-surface-container transition-colors bg-surface-container-low/40">
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex flex-col">
+<span class="font-data-mono-md text-data-mono-md font-bold text-primary">DND-0890</span>
+<span class="font-label-tabular text-label-tabular text-outline text-[10px]">#91d0e4..</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-medium">P-04 Sector Costero</td>
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-container flex-shrink-0"></span>
+<span class="font-medium">Raulí</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right">39.5</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right">19.8</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right font-bold text-secondary bg-secondary-fixed/10">1.45</td>
+<td class="py-spacing-xs px-spacing-sm font-label-tabular text-label-tabular text-on-surface-variant">
+                  -41.84718, -73.81938
+                </td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">M. Valenzuela</td>
+<td class="py-spacing-xs px-spacing-sm text-center">
+<button class="w-7 h-7 inline-flex items-center justify-center rounded hover:bg-surface-container-high text-outline hover:text-primary transition-colors" title="Ver Certificado de Campo">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</button>
+</td>
+</tr>
+<!-- Registro 3 -->
+<tr class="hover:bg-surface-container transition-colors bg-surface-container-lowest">
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex flex-col">
+<span class="font-data-mono-md text-data-mono-md font-bold text-primary">DND-0889</span>
+<span class="font-label-tabular text-label-tabular text-outline text-[10px]">#44a8b1..</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-medium">P-04 Sector Costero</td>
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary flex-shrink-0"></span>
+<span class="font-medium">Coihue</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right">51.0</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right">24.1</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right font-bold text-secondary bg-secondary-fixed/10">2.38</td>
+<td class="py-spacing-xs px-spacing-sm font-label-tabular text-label-tabular text-on-surface-variant">
+                  -41.84724, -73.81942
+                </td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">F. Aravena</td>
+<td class="py-spacing-xs px-spacing-sm text-center">
+<button class="w-7 h-7 inline-flex items-center justify-center rounded hover:bg-surface-container-high text-outline hover:text-primary transition-colors" title="Ver Certificado de Campo">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</button>
+</td>
+</tr>
+<!-- Registro 4 -->
+<tr class="hover:bg-surface-container transition-colors bg-surface-container-low/40">
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex flex-col">
+<span class="font-data-mono-md text-data-mono-md font-bold text-primary">DND-0888</span>
+<span class="font-label-tabular text-label-tabular text-outline text-[10px]">#32fc8e..</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-medium">P-04 Sector Costero</td>
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-surface-tint flex-shrink-0"></span>
+<span class="font-medium">Palo Blanco</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right">29.4</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right">15.2</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right font-bold text-secondary bg-secondary-fixed/10">0.72</td>
+<td class="py-spacing-xs px-spacing-sm font-label-tabular text-label-tabular text-on-surface-variant">
+                  -41.84730, -73.81951
+                </td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">F. Aravena</td>
+<td class="py-spacing-xs px-spacing-sm text-center">
+<button class="w-7 h-7 inline-flex items-center justify-center rounded hover:bg-surface-container-high text-outline hover:text-primary transition-colors" title="Ver Certificado de Campo">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</button>
+</td>
+</tr>
+<!-- Registro 5 -->
+<tr class="hover:bg-surface-container transition-colors bg-surface-container-lowest">
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex flex-col">
+<span class="font-data-mono-md text-data-mono-md font-bold text-primary">DND-0887</span>
+<span class="font-label-tabular text-label-tabular text-outline text-[10px]">#88b39a..</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-medium">P-04 Sector Costero</td>
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary flex-shrink-0"></span>
+<span class="font-medium">Roble</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right">41.8</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right">20.6</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right font-bold text-secondary bg-secondary-fixed/10">1.66</td>
+<td class="py-spacing-xs px-spacing-sm font-label-tabular text-label-tabular text-on-surface-variant">
+                  -41.84735, -73.81960
+                </td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">M. Valenzuela</td>
+<td class="py-spacing-xs px-spacing-sm text-center">
+<button class="w-7 h-7 inline-flex items-center justify-center rounded hover:bg-surface-container-high text-outline hover:text-primary transition-colors" title="Ver Certificado de Campo">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</button>
+</td>
+</tr>
+<!-- Registro 6 -->
+<tr class="hover:bg-surface-container transition-colors bg-surface-container-low/40">
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex flex-col">
+<span class="font-data-mono-md text-data-mono-md font-bold text-primary">DND-0886</span>
+<span class="font-label-tabular text-label-tabular text-outline text-[10px]">#61e5f0..</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-medium">P-04 Sector Costero</td>
+<td class="py-spacing-xs px-spacing-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-container flex-shrink-0"></span>
+<span class="font-medium">Raulí</span>
+</div>
+</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right">37.2</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right">18.5</td>
+<td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right font-bold text-secondary bg-secondary-fixed/10">1.31</td>
+<td class="py-spacing-xs px-spacing-sm font-label-tabular text-label-tabular text-on-surface-variant">
+                  -41.84742, -73.81966
+                </td>
+<td class="py-spacing-xs px-spacing-sm text-on-surface-variant">F. Aravena</td>
+<td class="py-spacing-xs px-spacing-sm text-center">
+<button class="w-7 h-7 inline-flex items-center justify-center rounded hover:bg-surface-container-high text-outline hover:text-primary transition-colors" title="Ver Certificado de Campo">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-spacing-sm bg-surface-container flex flex-col sm:flex-row sm:items-center justify-between gap-spacing-xs">
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">
+            * Volumen estimado de fuste sin corteza según criterio de cubicador acreditado.
+          </span>
+<div class="flex items-center gap-spacing-xs">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Volumen Lote Muestreado:</span>
+<span class="font-data-mono-md text-data-mono-md font-bold text-primary">9.46 m³</span>
+</div>
+</div>
+</div>
+<!-- Métricas y Control de Calibración Dendrométrica -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-spacing-md">
+<div class="bg-surface-container-lowest p-spacing-sm rounded-xl shadow-sm flex items-center gap-spacing-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">hardware</span>
+</div>
+<div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Instrumento Calibrado</span>
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold">Haglöf Vertex 5</div>
+<span class="font-label-tabular text-label-tabular text-outline">Hipsómetro Ultrasonido</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-spacing-sm rounded-xl shadow-sm flex items-center gap-spacing-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[24px]">gps_fixed</span>
+</div>
+<div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Receptor Antena</span>
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold">Trimble R12i GNSS</div>
+<span class="font-label-tabular text-label-tabular text-outline">Precisión Submétrica RTK</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-spacing-sm rounded-xl shadow-sm flex items-center gap-spacing-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">security</span>
+</div>
+<div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Cadena de Custodia</span>
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold">Auditoría Criptográfica</div>
+<span class="font-label-tabular text-label-tabular text-outline">Logs sellados en servidor</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Toast Notificación Dinámica -->
+<div class="fixed bottom-6 right-6 bg-inverse-surface text-inverse-on-surface px-spacing-md py-spacing-sm rounded-xl shadow-xl flex items-center gap-spacing-sm translate-y-24 opacity-0 transition-all duration-300 z-50" id="toast-notificacion">
+<span class="material-symbols-outlined text-primary-fixed" id="toast-icon">check_circle</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-[14px]" id="toast-title">Registro Dasométrico Guardado</span>
+<span class="font-label-tabular text-label-tabular text-inverse-on-surface/70" id="toast-desc">Hash SHA-256 verificado e incorporado al ledger técnico.</span>
+</div>
+</div>
+</div>
+<script>
+  // Funciones interactivas dasométricas de campo
+  window.obtenerGNSS = function() {
+    const latInput = document.getElementById('campo-lat');
+    const lonInput = document.getElementById('campo-lon');
+    const delta = (Math.random() - 0.5) * 0.0002;
+    const baseLat = -41.847300 + delta;
+    const baseLon = -73.819450 + delta;
+    
+    latInput.value = baseLat.toFixed(6);
+    lonInput.value = baseLon.toFixed(6);
+    
+    window.mostrarToast('GNSS Sincronizado', 'Antena Trimble RTK enganchó 18 satélites GPS/GLONASS.', 'satellite_alt');
+  };
+
+  window.registrarMedicion = function() {
+    const form = document.getElementById('form-dasometrico');
+    const parcela = document.getElementById('campo-parcela').value;
+    const especieFull = document.getElementById('campo-especie').value;
+    const especieNombre = especieFull.split(' ')[0];
+    const dap = document.getElementById('campo-dap').value;
+    const altura = document.getElementById('campo-altura').value;
+    const volumen = document.getElementById('campo-volumen').value;
+    const lat = document.getElementById('campo-lat').value;
+    const lon = document.getElementById('campo-lon').value;
+
+    const tbody = document.getElementById('tabla-mediciones');
+    const newId = 'DND-08' + (Math.floor(Math.random() * 80) + 92);
+    const hash = '#' + Math.random().toString(16).substring(2, 8) + '..';
+
+    let colorDot = 'bg-primary';
+    if (especieNombre === 'Raulí') colorDot = 'bg-primary-container';
+    if (especieNombre === 'Coihue') colorDot = 'bg-secondary';
+    if (especieNombre === 'Palo') colorDot = 'bg-surface-tint';
+
+    const tr = document.createElement('tr');
+    tr.className = 'hover:bg-surface-container transition-colors bg-primary-fixed/20 animate-pulse';
+    tr.innerHTML = `
+      <td class="py-spacing-xs px-spacing-sm">
+        <div class="flex flex-col">
+          <span class="font-data-mono-md text-data-mono-md font-bold text-primary">${newId}</span>
+          <span class="font-label-tabular text-label-tabular text-outline text-[10px]">${hash}</span>
+        </div>
+      </td>
+      <td class="py-spacing-xs px-spacing-sm font-medium">${parcela}</td>
+      <td class="py-spacing-xs px-spacing-sm">
+        <div class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full ${colorDot} flex-shrink-0"></span>
+          <span class="font-medium">${especieNombre}</span>
+        </div>
+      </td>
+      <td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right">${parseFloat(dap).toFixed(1)}</td>
+      <td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right">${parseFloat(altura).toFixed(1)}</td>
+      <td class="py-spacing-xs px-spacing-sm font-data-mono-md text-data-mono-md text-right font-bold text-secondary bg-secondary-fixed/10">${parseFloat(volumen).toFixed(2)}</td>
+      <td class="py-spacing-xs px-spacing-sm font-label-tabular text-label-tabular text-on-surface-variant">
+        ${lat}, ${lon}
+      </td>
+      <td class="py-spacing-xs px-spacing-sm text-on-surface-variant">M. Valenzuela</td>
+      <td class="py-spacing-xs px-spacing-sm text-center">
+        <button class="w-7 h-7 inline-flex items-center justify-center rounded hover:bg-surface-container-high text-outline hover:text-primary transition-colors" title="Ver Certificado de Campo">
+          <span class="material-symbols-outlined text-[18px]">verified</span>
+        </button>
+      </td>
+    `;
+
+    tbody.insertBefore(tr, tbody.firstChild);
+    setTimeout(() => {
+      tr.classList.remove('animate-pulse', 'bg-primary-fixed/20');
+    }, 1200);
+
+    window.mostrarToast('Medición Inmutable Registrada', `Fustal ${newId} guardado con volumen manual de ${volumen} m³.`, 'fingerprint');
+  };
+
+  window.mostrarToast = function(titulo, desc, icono = 'check_circle') {
+    const toast = document.getElementById('toast-notificacion');
+    document.getElementById('toast-title').textContent = titulo;
+    document.getElementById('toast-desc').textContent = desc;
+    document.getElementById('toast-icon').textContent = icono;
+
+    toast.classList.remove('translate-y-24', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+      toast.classList.add('translate-y-24', 'opacity-0');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }, 3800);
+  };
+
+  // Listeners de los botones de sincronización y exportación
+  document.getElementById('btn-sync-gps').addEventListener('click', function() {
+    window.mostrarToast('Sincronización GPS Iniciada', 'Conectando con receptor Trimble R12i vía Bluetooth/NMEA...', 'sync');
+    setTimeout(() => {
+      window.obtenerGNSS();
+    }, 1000);
+  });
+
+  document.getElementById('btn-export-csv').addEventListener('click', function() {
+    const csvContent = "data:text/csv;charset=utf-8,ID,PARCELA,ESPECIE,DAP_CM,ALTURA_M,VOLUMEN_M3,LATITUD,LONGITUD,OPERADOR\n"
+      + "DND-0891,P-04 Sector Costero,Roble,46.2,22.4,1.94,-41.84711,-73.81930,M. Valenzuela\n"
+      + "DND-0890,P-04 Sector Costero,Raulí,39.5,19.8,1.45,-41.84718,-73.81938,M. Valenzuela\n"
+      + "DND-0889,P-04 Sector Costero,Coihue,51.0,24.1,2.38,-41.84724,-73.81942,F. Aravena\n"
+      + "DND-0888,P-04 Sector Costero,Palo Blanco,29.4,15.2,0.72,-41.84730,-73.81951,F. Aravena\n"
+      + "DND-0887,P-04 Sector Costero,Roble,41.8,20.6,1.66,-41.84735,-73.81960,M. Valenzuela\n"
+      + "DND-0886,P-04 Sector Costero,Raulí,37.2,18.5,1.31,-41.84742,-73.81966,F. Aravena";
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "PI-2024-002_mediciones_dasometricas_crudo.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    window.mostrarToast('Descarga Exitosa', 'El archivo CSV de datos crudos dasométricos ha sido generado.', 'download_done');
+  });
+</script></main></div></body></html>

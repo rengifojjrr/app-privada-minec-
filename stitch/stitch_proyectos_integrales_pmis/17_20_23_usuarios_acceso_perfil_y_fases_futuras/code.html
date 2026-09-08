@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-surface": "#191c1a",
+        "inverse-surface": "#2e312f",
+        "surface-container-low": "#f3f4f0",
+        "surface-container": "#edeeeb",
+        "primary": "#023627",
+        "tertiary-container": "#82220e",
+        "secondary-fixed-dim": "#f5bb88",
+        "primary-fixed": "#bcedd7",
+        "secondary": "#80552b",
+        "outline": "#717974",
+        "on-primary-fixed": "#002116",
+        "surface-bright": "#f8faf6",
+        "on-surface-variant": "#414944",
+        "inverse-primary": "#a1d1bc",
+        "secondary-container": "#fec390",
+        "tertiary-fixed-dim": "#ffb4a4",
+        "on-tertiary-fixed": "#3e0500",
+        "surface-dim": "#d9dad7",
+        "on-error-container": "#93000a",
+        "on-tertiary-fixed-variant": "#852410",
+        "surface-container-high": "#e7e9e5",
+        "on-error": "#ffffff",
+        "on-primary": "#ffffff",
+        "surface-variant": "#e1e3df",
+        "on-secondary-fixed": "#2d1600",
+        "on-primary-fixed-variant": "#214f3f",
+        "surface-container-lowest": "#ffffff",
+        "primary-container": "#1f4d3d",
+        "tertiary": "#610c00",
+        "on-secondary": "#ffffff",
+        "error-container": "#ffdad6",
+        "error": "#ba1a1a",
+        "inverse-on-surface": "#f0f1ed",
+        "surface": "#f8faf6",
+        "primary-fixed-dim": "#a1d1bc",
+        "on-secondary-container": "#794e25",
+        "surface-container-highest": "#e1e3df",
+        "on-tertiary-container": "#ff9680",
+        "background": "#f8faf6",
+        "secondary-fixed": "#ffdcc0",
+        "surface-tint": "#3a6756",
+        "on-secondary-fixed-variant": "#653e16",
+        "tertiary-fixed": "#ffdad3",
+        "on-tertiary": "#ffffff",
+        "on-primary-container": "#8dbda8",
+        "on-background": "#191c1a",
+        "outline-variant": "#c0c8c3"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "spacing-xl": "2rem",
+        "table-gutter": "0.75rem",
+        "spacing-md": "1rem",
+        "spacing-lg": "1.5rem",
+        "spacing-xs": "0.5rem",
+        "spacing-3xs": "0.125rem",
+        "spacing-2xl": "3rem",
+        "layout-margin-desktop": "2rem",
+        "spacing-3xl": "4rem",
+        "layout-margin-mobile": "1rem",
+        "spacing-2xs": "0.25rem",
+        "spacing-sm": "0.75rem",
+        "layout-margin-tablet": "1.5rem"
+      },
+      "fontFamily": {
+        "body-md": ["Hanken Grotesk"],
+        "headline-xl-mobile": ["Hanken Grotesk"],
+        "label-caps": ["Hanken Grotesk"],
+        "data-mono-lg": ["JetBrains Mono"],
+        "body-sm": ["Hanken Grotesk"],
+        "headline-xl": ["Hanken Grotesk"],
+        "headline-sm": ["Hanken Grotesk"],
+        "headline-lg": ["Hanken Grotesk"],
+        "headline-md": ["Hanken Grotesk"],
+        "data-mono-md": ["JetBrains Mono"],
+        "body-lg": ["Hanken Grotesk"],
+        "label-tabular": ["JetBrains Mono"]
+      },
+      "fontSize": {
+        "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+        "headline-xl-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+        "data-mono-lg": ["15px", {"lineHeight": "22px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+        "headline-sm": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600"}],
+        "headline-lg": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "data-mono-md": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+        "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+        "label-tabular": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+      }
+    }
+  }
+}</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-spacing-md flex items-center gap-spacing-xs bg-surface-container-low"><div class="flex items-center justify-center w-7 h-7 bg-primary rounded-lg text-on-primary font-headline-sm text-headline-sm">PI</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight">Proyectos Integrales</span><span class="font-label-caps text-label-caps text-secondary uppercase">Ingeniería &amp; Ambiente</span></div></div><div class="px-spacing-md py-spacing-xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operación Técnica</span></div><nav class="flex flex-col gap-spacing-3xs px-spacing-xs flex-1" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm"><a aria-current="page" class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded transition-colors bg-primary-container text-on-primary-container font-headline-sm" data-path="proyectos" href="#"><span class="material-symbols-outlined text-[20px]">folder_supervised</span><span class="font-body-sm text-body-sm">Proyectos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="aprobaciones" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span class="font-body-sm text-body-sm">Aprobaciones</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="calendario" href="#"><span class="material-symbols-outlined text-[20px]">event_note</span><span class="font-body-sm text-body-sm">Calendario</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contratantes" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-sm text-body-sm">Contratantes</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-body-sm text-body-sm">Reportes</span></a><div class="my-spacing-xs px-spacing-xs"><div class="h-[1px] bg-outline-variant/30"></div></div><div class="px-spacing-xs py-spacing-3xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Gobierno &amp; Control</span></div><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="direccion-ejecutiva" href="#"><span class="material-symbols-outlined text-[20px]">query_stats</span><span class="font-body-sm text-body-sm">Dirección</span><span class="ml-auto font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-inverse-surface text-inverse-on-surface">DARK</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="font-body-sm text-body-sm">Usuarios</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="catalogos" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-sm text-body-sm">Catálogos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="bitacora-general" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-body-sm text-body-sm">Bitácora General</span></a></nav></div><div class="p-spacing-md bg-surface-container-high"><div class="flex items-center justify-between"><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Estándar Técnico</span><span class="font-data-mono-md text-data-mono-md text-primary">ISO 14001 / EIA-v2</span></div><span class="material-symbols-outlined text-outline text-[18px]">format_image_left</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex items-center justify-between px-spacing-lg"><div class="flex items-center gap-spacing-md flex-1 max-w-2xl"><img alt="Logo Proyectos Integrales" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WWI3mVDk-K0VvmFiCvo8p33fqbfLEk7YLxC1GudbnlFUpaiGriHUaR624tyiQNmYunExODktoHOUwF3QL8qZ_IwSF5S_2YljkWvDXX_F70wU2BcAir0ZOTnqLI_71vsDpk6z_zbXASIS0ueLJ7tFBZNvfS6T8aTnTgjZaqsX3YPQTL3hOBf9ordXhPZXWaXrXj9-I0-5Fd6nraudX80Q_6v0_NI_5xzQXtCkGU4fxStFzd9olGwfezDU0"/><div class="relative w-full max-w-md"><span class="material-symbols-outlined absolute left-spacing-xs top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full pl-8 pr-spacing-sm py-spacing-2xs bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Buscar código de expediente, matriz ambiental, contratante o profesional..." type="text"/></div></div><div class="flex items-center gap-spacing-md"><div class="flex items-center gap-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded"><span class="font-label-caps text-label-caps text-secondary uppercase font-semibold">Entrar como:</span><select class="bg-transparent font-body-sm text-body-sm text-on-surface font-medium outline-none cursor-pointer"><option value="admin">Admin</option><option value="coordinador">Coordinador</option><option value="profesional">Profesional</option><option value="administracion">Administración</option><option value="direccion">Dirección</option></select></div><div class="flex items-center gap-spacing-2xs"><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">help</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-spacing-lg pb-spacing-xl flex-1 bg-background"><div class="flex flex-col w-full gap-spacing-xl">
+<!-- Top Navigation Ribbon / Page Header Context -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-spacing-md bg-surface-container-lowest p-spacing-lg rounded-xl shadow-sm">
+<div class="flex flex-col gap-spacing-3xs">
+<div class="flex items-center gap-spacing-xs">
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-wider">Protocolo de Seguridad &amp; Identidad Técnica</span>
+<span class="h-1.5 w-1.5 rounded-full bg-outline-variant"></span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">SEC-ACC-2024-V4</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary tracking-tight">Control de Identidades, Accesos y Hoja de Ruta</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+        Módulos 17, 20, 21, 22 y 23: Gobernanza de credenciales activas, delimitación perimetral de facultades según rol, expediente de especialista y cronograma de despliegue de fases técnicas.
+      </p>
+</div>
+<div class="flex items-center gap-spacing-xs self-start md:self-auto">
+<button class="px-spacing-md py-spacing-xs bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-headline-sm text-headline-sm rounded transition-colors flex items-center gap-spacing-xs shadow-sm" onclick="document.getElementById('modal-desactivacion').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[18px] text-tertiary">person_off</span>
+<span>Simular Desactivación</span>
+</button>
+<button class="px-spacing-md py-spacing-xs bg-primary hover:bg-primary-container text-on-primary font-headline-sm text-headline-sm rounded transition-colors flex items-center gap-spacing-xs shadow-sm">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span>Alta de Credencial</span>
+</button>
+</div>
+</div>
+<!-- SECCIÓN 17: Gestión de Usuarios y Matriz de Acceso -->
+<div class="flex flex-col gap-spacing-md">
+<!-- Header of Section 17 -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-spacing-xs">
+<div class="flex items-center gap-spacing-xs">
+<span class="px-spacing-xs py-spacing-3xs bg-primary text-on-primary font-label-tabular text-label-tabular rounded">MOD-17</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Gestión de Usuarios y Matriz de Acceso</h2>
+</div>
+<div class="flex items-center gap-spacing-sm font-label-tabular text-label-tabular text-on-surface-variant">
+<span>8 REGISTROS INDEXADOS</span>
+<span>•</span>
+<span class="text-primary font-semibold">5 ROLES OPERATIVOS VIGENTES</span>
+</div>
+</div>
+<!-- Banner de Regla Inviolable: Preservación de Trazabilidad -->
+<div class="bg-surface-container-high rounded-lg p-spacing-md flex items-start gap-spacing-md shadow-sm">
+<div class="p-spacing-xs rounded bg-surface-container-lowest text-primary mt-spacing-3xs">
+<span class="material-symbols-outlined text-[24px]">verified_user</span>
+</div>
+<div class="flex flex-col gap-spacing-3xs">
+<span class="font-headline-sm text-headline-sm text-primary uppercase tracking-wide">Regla de Persistencia Inviolable — Sin Borrado Físico</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Para salvaguardar la trazabilidad jurídica y técnica de la <strong>Bitácora General (ISO 14001 / EIA-v2)</strong>, ningún usuario registrado puede ser eliminado físicamente de la base de datos. Toda rescisión o suspensión se efectúa mediante <strong>desactivación lógica con sellado de fecha/hora</strong> e inhabilitación inmediata del token de sesión, conservando intacta su autoría en matrices, aprobaciones y expedientes históricos.
+        </p>
+</div>
+</div>
+<!-- Data Ledger / Users Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="p-spacing-md bg-surface-container-low flex flex-col md:flex-row md:items-center justify-between gap-spacing-sm">
+<div class="flex items-center gap-spacing-sm flex-1 max-w-lg">
+<span class="material-symbols-outlined text-outline text-[18px]">filter_list</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Filtrar Matriz:</span>
+<div class="flex gap-spacing-2xs">
+<button class="px-spacing-xs py-spacing-3xs rounded bg-primary text-on-primary font-label-tabular text-label-tabular">TODOS (8)</button>
+<button class="px-spacing-xs py-spacing-3xs rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-tabular text-label-tabular">ACTIVOS (7)</button>
+<button class="px-spacing-xs py-spacing-3xs rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-tabular text-label-tabular">INACTIVOS (1)</button>
+</div>
+</div>
+<div class="flex items-center gap-spacing-xs font-label-tabular text-label-tabular text-outline">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span>Sincronizado con Directorio Central</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase">
+<th class="py-spacing-sm px-spacing-md">Código / Nombre Técnico</th>
+<th class="py-spacing-sm px-spacing-md">Cargo Especializado</th>
+<th class="py-spacing-sm px-spacing-md">Correo Institucional</th>
+<th class="py-spacing-sm px-spacing-md">Rol Jerárquico</th>
+<th class="py-spacing-sm px-spacing-md">Estado</th>
+<th class="py-spacing-sm px-spacing-md text-right">Fecha Alta</th>
+<th class="py-spacing-sm px-spacing-md text-center">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-none font-body-sm text-body-sm text-on-surface">
+<!-- Row 1: Admin -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-lowest">
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-xs">
+<div class="w-7 h-7 rounded bg-primary-container text-on-primary-container font-data-mono-md text-data-mono-md flex items-center justify-center font-semibold">RG</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Ing. Rodrigo Gallardo M.</span>
+<span class="font-data-mono-md text-data-mono-md text-outline">USR-001</span>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-on-surface-variant font-medium">Jefe de Tecnologías &amp; Seguridad</td>
+<td class="py-spacing-sm px-spacing-md font-data-mono-md text-data-mono-md text-primary">r.gallardo@proyectosintegrales.cl</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-primary font-headline-sm text-headline-sm inline-flex items-center gap-spacing-3xs">
+<span class="material-symbols-outlined text-[14px]">admin_panel_settings</span>
+                  Administrador
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="inline-flex items-center gap-spacing-2xs px-spacing-xs py-spacing-3xs rounded bg-primary-fixed text-on-primary-fixed font-label-tabular text-label-tabular">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Activo
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md text-on-surface-variant">14-01-2022</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<button class="p-spacing-2xs text-outline hover:text-primary transition-colors" title="Editar credencial">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Coordinador General -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-low/40">
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-xs">
+<div class="w-7 h-7 rounded bg-surface-container-high text-on-surface font-data-mono-md text-data-mono-md flex items-center justify-center font-semibold">CA</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Dra. Camila Albarracín S.</span>
+<span class="font-data-mono-md text-data-mono-md text-outline">USR-002</span>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-on-surface-variant font-medium">Coordinadora Central de Proyectos</td>
+<td class="py-spacing-sm px-spacing-md font-data-mono-md text-data-mono-md text-primary">c.albarracin@proyectosintegrales.cl</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-on-surface font-headline-sm text-headline-sm inline-flex items-center gap-spacing-3xs">
+<span class="material-symbols-outlined text-[14px]">account_tree</span>
+                  Coordinador General
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="inline-flex items-center gap-spacing-2xs px-spacing-xs py-spacing-3xs rounded bg-primary-fixed text-on-primary-fixed font-label-tabular text-label-tabular">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Activo
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md text-on-surface-variant">02-03-2022</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<button class="p-spacing-2xs text-outline hover:text-primary transition-colors" title="Editar credencial">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Profesional 1 -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-lowest">
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-xs">
+<div class="w-7 h-7 rounded bg-secondary-fixed text-on-secondary-fixed font-data-mono-md text-data-mono-md flex items-center justify-center font-semibold">EP</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Ing. Esteban Pavez V.</span>
+<span class="font-data-mono-md text-data-mono-md text-outline">USR-003</span>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-on-surface-variant font-medium">Especialista Hidráulico &amp; Cuencas</td>
+<td class="py-spacing-sm px-spacing-md font-data-mono-md text-data-mono-md text-primary">e.pavez@proyectosintegrales.cl</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-on-surface font-headline-sm text-headline-sm inline-flex items-center gap-spacing-3xs">
+<span class="material-symbols-outlined text-[14px]">engineering</span>
+                  Profesional
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="inline-flex items-center gap-spacing-2xs px-spacing-xs py-spacing-3xs rounded bg-primary-fixed text-on-primary-fixed font-label-tabular text-label-tabular">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Activo
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md text-on-surface-variant">19-05-2022</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<button class="p-spacing-2xs text-outline hover:text-primary transition-colors" title="Editar credencial">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Profesional 2 (Mi Perfil Subject) -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-low/40">
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-xs">
+<div class="w-7 h-7 rounded bg-primary-fixed text-on-primary-fixed font-data-mono-md text-data-mono-md flex items-center justify-center font-semibold">MM</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Lic. Marcela Morales U.</span>
+<span class="font-data-mono-md text-data-mono-md text-outline">USR-004 (Sesión Actual)</span>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-on-surface-variant font-medium">Bióloga Senior / Auditora EIA</td>
+<td class="py-spacing-sm px-spacing-md font-data-mono-md text-data-mono-md text-primary">m.morales@proyectosintegrales.cl</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-on-surface font-headline-sm text-headline-sm inline-flex items-center gap-spacing-3xs">
+<span class="material-symbols-outlined text-[14px]">engineering</span>
+                  Profesional
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="inline-flex items-center gap-spacing-2xs px-spacing-xs py-spacing-3xs rounded bg-primary-fixed text-on-primary-fixed font-label-tabular text-label-tabular">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Activo
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md text-on-surface-variant">11-08-2022</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<button class="p-spacing-2xs text-outline hover:text-primary transition-colors" title="Editar credencial">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</button>
+</td>
+</tr>
+<!-- Row 5: Profesional 3 -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-lowest">
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-xs">
+<div class="w-7 h-7 rounded bg-surface-container-high text-on-surface font-data-mono-md text-data-mono-md flex items-center justify-center font-semibold">FS</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Ing. Fernando Soto K.</span>
+<span class="font-data-mono-md text-data-mono-md text-outline">USR-005</span>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-on-surface-variant font-medium">Ingeniero Forestal &amp; Suelos</td>
+<td class="py-spacing-sm px-spacing-md font-data-mono-md text-data-mono-md text-primary">f.soto@proyectosintegrales.cl</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-on-surface font-headline-sm text-headline-sm inline-flex items-center gap-spacing-3xs">
+<span class="material-symbols-outlined text-[14px]">engineering</span>
+                  Profesional
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="inline-flex items-center gap-spacing-2xs px-spacing-xs py-spacing-3xs rounded bg-primary-fixed text-on-primary-fixed font-label-tabular text-label-tabular">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Activo
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md text-on-surface-variant">03-10-2022</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<button class="p-spacing-2xs text-outline hover:text-primary transition-colors" title="Editar credencial">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</button>
+</td>
+</tr>
+<!-- Row 6: Administración -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-low/40">
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-xs">
+<div class="w-7 h-7 rounded bg-secondary-container text-on-secondary-container font-data-mono-md text-data-mono-md flex items-center justify-center font-semibold">BR</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Beatriz Ramos G.</span>
+<span class="font-data-mono-md text-data-mono-md text-outline">USR-006</span>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-on-surface-variant font-medium">Jefatura Contable &amp; Finanzas</td>
+<td class="py-spacing-sm px-spacing-md font-data-mono-md text-data-mono-md text-primary">b.ramos@proyectosintegrales.cl</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-on-surface font-headline-sm text-headline-sm inline-flex items-center gap-spacing-3xs">
+<span class="material-symbols-outlined text-[14px]">account_balance_wallet</span>
+                  Administración
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="inline-flex items-center gap-spacing-2xs px-spacing-xs py-spacing-3xs rounded bg-primary-fixed text-on-primary-fixed font-label-tabular text-label-tabular">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Activo
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md text-on-surface-variant">15-02-2023</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<button class="p-spacing-2xs text-outline hover:text-primary transition-colors" title="Editar credencial">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</button>
+</td>
+</tr>
+<!-- Row 7: Dirección -->
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-lowest">
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-xs">
+<div class="w-7 h-7 rounded bg-inverse-surface text-inverse-on-surface font-data-mono-md text-data-mono-md flex items-center justify-center font-semibold">HC</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Dr. Hernán Céspedes D.</span>
+<span class="font-data-mono-md text-data-mono-md text-outline">USR-007</span>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-on-surface-variant font-medium">Director General Ejecutivo</td>
+<td class="py-spacing-sm px-spacing-md font-data-mono-md text-data-mono-md text-primary">h.cespedes@proyectosintegrales.cl</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-inverse-surface text-inverse-on-surface font-headline-sm text-headline-sm inline-flex items-center gap-spacing-3xs">
+<span class="material-symbols-outlined text-[14px]">query_stats</span>
+                  Dirección
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<span class="inline-flex items-center gap-spacing-2xs px-spacing-xs py-spacing-3xs rounded bg-primary-fixed text-on-primary-fixed font-label-tabular text-label-tabular">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Activo
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md text-on-surface-variant">05-01-2021</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<button class="p-spacing-2xs text-outline hover:text-primary transition-colors" title="Editar credencial">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</button>
+</td>
+</tr>
+<!-- Row 8: Usuario Desactivado Lógicamente -->
+<tr class="bg-error-container/30 hover:bg-error-container/40 transition-colors">
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex items-center gap-spacing-xs opacity-75">
+<div class="w-7 h-7 rounded bg-surface-container-highest text-outline font-data-mono-md text-data-mono-md flex items-center justify-center font-semibold">JV</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface line-through decoration-tertiary">Ing. Javier Valenzuela N.</span>
+<span class="font-data-mono-md text-data-mono-md text-outline">USR-008</span>
+</div>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-on-surface-variant opacity-75">Ex-Consultor Geotécnico</td>
+<td class="py-spacing-sm px-spacing-md font-data-mono-md text-data-mono-md text-outline opacity-75">j.valenzuela@proyectosintegrales.cl</td>
+<td class="py-spacing-sm px-spacing-md opacity-75">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-outline font-headline-sm text-headline-sm">
+                  Profesional
+                </span>
+</td>
+<td class="py-spacing-sm px-spacing-md">
+<div class="flex flex-col gap-spacing-3xs">
+<span class="inline-flex items-center gap-spacing-2xs px-spacing-xs py-spacing-3xs rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-tabular text-label-tabular font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                    Desactivado Lógico
+                  </span>
+<span class="font-label-tabular text-[10px] text-tertiary">Baja: 18-09-2023 (AUD-9821)</span>
+</div>
+</td>
+<td class="py-spacing-sm px-spacing-md text-right font-data-mono-md text-data-mono-md text-on-surface-variant opacity-75">10-06-2022</td>
+<td class="py-spacing-sm px-spacing-md text-center">
+<span class="px-spacing-xs py-spacing-3xs text-outline font-label-tabular text-label-tabular bg-surface-container rounded" title="Historial preservado en auditoría">PRESERVADO</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Footer metadata for Table 17 -->
+<div class="p-spacing-sm bg-surface-container-low flex flex-col sm:flex-row items-center justify-between text-on-surface-variant font-data-mono-md text-data-mono-md">
+<span>ÚLTIMA AUDITORÍA DE ACCESOS: 24-10-2024 08:30:12 GMT-3</span>
+<span class="text-primary font-medium">FIRMA CRIPTOGRÁFICA DE MATRIZ: SHA-256 #8a7f920bc</span>
+</div>
+</div>
+</div>
+<!-- SECCIÓN 20: Pantalla de Control de Acceso (Sin Permiso) -->
+<div class="flex flex-col gap-spacing-md">
+<div class="flex items-center gap-spacing-xs">
+<span class="px-spacing-xs py-spacing-3xs bg-tertiary text-on-tertiary font-label-tabular text-label-tabular rounded">MOD-20</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Pantalla de Control de Acceso Perimetral (Regla 20)</h2>
+</div>
+<!-- Exact Component from Rule 20 -->
+<div class="bg-surface-container-lowest rounded-xl p-spacing-xl shadow-sm flex flex-col items-center text-center max-w-3xl mx-auto w-full">
+<div class="w-16 h-16 rounded-full bg-error-container text-tertiary flex items-center justify-center mb-spacing-md">
+<span class="material-symbols-outlined text-[36px]">shield_lock</span>
+</div>
+<span class="font-label-caps text-label-caps text-tertiary uppercase tracking-widest mb-spacing-2xs">CÓDIGO DE RESTRICCIÓN: HTTP 403 · ACCESO NO AUTORIZADO</span>
+<h3 class="font-headline-xl text-headline-xl text-primary mb-spacing-xs">Privilegios Insuficientes para Este Módulo</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl mb-spacing-lg">
+        Ha intentado acceder a la consola restringida de <strong>Administración de Usuarios y Políticas de Seguridad</strong>. Este recurso está reservado exclusivamente para credenciales con nivel <strong>Administrador Central</strong>.
+      </p>
+<!-- Technical Context Box -->
+<div class="w-full bg-surface-container-low rounded-lg p-spacing-md mb-spacing-lg text-left flex flex-col gap-spacing-xs font-data-mono-md text-data-mono-md">
+<div class="flex items-center justify-between pb-spacing-xs bg-surface-container-high/40 p-spacing-xs rounded">
+<span class="text-on-surface-variant">Módulo Solicitado:</span>
+<span class="text-on-surface font-semibold">MOD-17 // /admin/usuarios-seguridad</span>
+</div>
+<div class="flex items-center justify-between pb-spacing-xs bg-surface-container-high/40 p-spacing-xs rounded">
+<span class="text-on-surface-variant">Identidad Activa:</span>
+<span class="text-on-surface font-semibold">Marcela Morales U. (USR-004)</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-high/40 p-spacing-xs rounded">
+<span class="text-on-surface-variant">Rol Asignado Actual:</span>
+<span class="text-tertiary font-semibold inline-flex items-center gap-spacing-3xs">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+            Profesional / Especialista Ambiental
+          </span>
+</div>
+</div>
+<!-- Action & Contact -->
+<div class="flex flex-col sm:flex-row items-center gap-spacing-md w-full justify-center">
+<a class="w-full sm:w-auto px-spacing-lg py-spacing-xs bg-primary text-on-primary font-headline-sm text-headline-sm rounded hover:bg-primary-container transition-colors shadow-sm flex items-center justify-center gap-spacing-xs" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Regresar al Panel Principal</span>
+</a>
+<a class="w-full sm:w-auto px-spacing-md py-spacing-xs bg-surface-container-high text-on-surface font-headline-sm text-headline-sm rounded hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-spacing-xs" href="mailto:r.gallardo@proyectosintegrales.cl?subject=Solicitud de Privilegios MOD-17 - Marcela Morales">
+<span class="material-symbols-outlined text-[18px]">contact_mail</span>
+<span>Contactar al Administrador</span>
+</a>
+</div>
+<div class="mt-spacing-lg font-data-mono-md text-[11px] text-outline">
+        INCIDENTE DE ACCESO REGISTRADO EN EVENT-LOG #SEC-403-99128 · MARCA DE TIEMPO REGULATORIA APLICADA
+      </div>
+</div>
+</div>
+<!-- SECCIÓN 21: Mi Perfil Profesional -->
+<div class="flex flex-col gap-spacing-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="px-spacing-xs py-spacing-3xs bg-primary text-on-primary font-label-tabular text-label-tabular rounded">MOD-21</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Mi Perfil Profesional</h2>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-outline">EXP-ESP-MM-2024</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-spacing-lg">
+<!-- Columna Izquierda: Datos Personales, Cargo Acreditado y Credenciales (5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-spacing-md">
+<!-- Ficha de Datos Personales -->
+<div class="bg-surface-container-lowest rounded-xl p-spacing-lg shadow-sm flex flex-col gap-spacing-md">
+<div class="flex items-start gap-spacing-md">
+<img class="w-20 h-20 rounded-lg object-cover shadow-sm" data-alt="Fotografía técnica formal de Marcela Morales, bióloga y auditora ambiental con indumentaria de terreno institucional y credencial de certificación" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAJ1daWX3O_yXno4quZ9JW1i2MOwKzTm8fmr_kutsiWv3M8pX34o7Fk4g7jiE8ncqk1iuPuErJDQjQLsxAIBP2lFJGH6LLLCmAjoaFs5eNYyD1y7-zizqm3ftFGx1ep3hrRlzHVxK6LKgcciwQeSK_I6HBOM7Qj_9AL38t-mkkR_MtKN8wRUyQpWx2SXMfLm_RvIX26zxifDCyZeeJaNEz4A0G8gKvYMXLtkszX33O9cUYHgvVKmSV"/>
+<div class="flex flex-col gap-spacing-3xs flex-1">
+<span class="font-headline-md text-headline-md text-primary">Marcela Morales U.</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Bióloga Senior / Evaluadora de Impacto Ambiental</span>
+<div class="flex items-center gap-spacing-2xs mt-spacing-3xs">
+<span class="px-spacing-xs py-spacing-3xs rounded bg-primary-fixed text-on-primary-fixed font-label-tabular text-label-tabular">ROL: PROFESIONAL</span>
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container-high text-on-surface font-label-tabular text-label-tabular">ID: USR-004</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-spacing-xs pt-spacing-xs bg-surface-container-low p-spacing-md rounded-lg">
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-surface-variant font-body-sm">Acreditación Técnica:</span>
+<span class="font-data-mono-md text-data-mono-md font-semibold text-on-surface">REG-SEIA #BIO-8831</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-surface-variant font-body-sm">Registro Nacional Consultores:</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface">MIN-AMB Cat. 1</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-surface-variant font-body-sm">Especialidad Primaria:</span>
+<span class="font-headline-sm text-headline-sm text-primary">Flora, Fauna &amp; Biodiversidad</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-surface-variant font-body-sm">Vigencia Certificado:</span>
+<span class="font-data-mono-md text-data-mono-md text-secondary">31-12-2025</span>
+</div>
+</div>
+<!-- Modificar Credenciales -->
+<div class="flex flex-col gap-spacing-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-spacing-2xs">
+<span class="material-symbols-outlined text-[18px] text-primary">key</span>
+              Actualización de Credenciales
+            </span>
+<div class="flex flex-col gap-spacing-xs">
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-spacing-3xs block">Contraseña Actual</label>
+<input class="w-full px-spacing-sm py-spacing-xs bg-surface-container-low text-on-surface font-data-mono-md text-data-mono-md rounded outline-none focus:bg-surface-container-lowest" type="password" value="••••••••••••"/>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-spacing-3xs block">Nueva Contraseña de Acceso</label>
+<input class="w-full px-spacing-sm py-spacing-xs bg-surface-container-low text-on-surface font-data-mono-md text-data-mono-md rounded outline-none focus:bg-surface-container-lowest" placeholder="Mínimo 12 caracteres + números + símbolos" type="password"/>
+</div>
+<button class="mt-spacing-xs px-spacing-md py-spacing-xs bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-headline-sm text-headline-sm rounded transition-colors self-start shadow-sm">
+                Guardar Nuevas Credenciales
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Columna Derecha: Expedientes y Etapas Asignadas (7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-spacing-md">
+<div class="bg-surface-container-lowest rounded-xl p-spacing-lg shadow-sm flex flex-col gap-spacing-md h-full">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">assignment_turned_in</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Expedientes Técnicos y Etapas en Curso</h3>
+</div>
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container text-on-surface-variant font-label-tabular text-label-tabular">3 ACTIVOS / 1 FINALIZADO</span>
+</div>
+<!-- Task Card 1 -->
+<div class="p-spacing-md rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col gap-spacing-xs">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">EXP-2024-041 // EIA Parque Fotovoltaico Sol de Atacama</span>
+<span class="px-spacing-xs py-spacing-3xs rounded bg-primary-fixed text-on-primary-fixed font-label-tabular text-label-tabular">EN CURSO</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-medium">Etapa 03: Levantamiento de Línea de Base en Terreno &amp; Muestreo Botánico</span>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm mt-spacing-2xs">
+<span>Contratante: <strong>Energías del Norte S.A.</strong></span>
+<span class="font-data-mono-md text-data-mono-md">Entrega informe: 15-11-2024</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden mt-spacing-3xs">
+<div class="bg-primary h-full rounded-full" style="width: 72%;"></div>
+</div>
+</div>
+<!-- Task Card 2 -->
+<div class="p-spacing-md rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col gap-spacing-xs">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">EXP-2024-019 // DIA Ampliación Embalse Quillayes</span>
+<span class="px-spacing-xs py-spacing-3xs rounded bg-secondary-fixed text-on-secondary-fixed font-label-tabular text-label-tabular">REVISIÓN FINAL</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-medium">Etapa 04: Elaboración de Respuestas a Observaciones del SAG (Adenda 1)</span>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm mt-spacing-2xs">
+<span>Contratante: <strong>Consorcio Hídrico Austral</strong></span>
+<span class="font-data-mono-md text-data-mono-md">Vencimiento legal: 04-11-2024</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden mt-spacing-3xs">
+<div class="bg-secondary h-full rounded-full" style="width: 90%;"></div>
+</div>
+</div>
+<!-- Task Card 3 -->
+<div class="p-spacing-md rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col gap-spacing-xs">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-primary font-semibold">EXP-2024-055 // Plan de Manejo Forestal Fundo El Roble</span>
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container-highest text-on-surface font-label-tabular text-label-tabular">INICIO</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-medium">Etapa 01: Cartografía de Cobertura Vegetal y Plan de Corta</span>
+<div class="flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm mt-spacing-2xs">
+<span>Contratante: <strong>Maderera Cordillera Ltda.</strong></span>
+<span class="font-data-mono-md text-data-mono-md">Inicio en terreno: 28-10-2024</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden mt-spacing-3xs">
+<div class="bg-outline h-full rounded-full" style="width: 15%;"></div>
+</div>
+</div>
+<div class="mt-auto pt-spacing-sm flex items-center justify-between font-label-tabular text-label-tabular text-outline">
+<span>REGISTRO DE HORAS TÉCNICAS: 142.5 HRS ESTE MES</span>
+<a class="text-primary hover:underline font-semibold flex items-center gap-spacing-3xs" href="#">
+              Ver Historial Completo
+              <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- SECCIONES 22 & 23: Vistas Previas de Fases Siguientes (No habilitadas) -->
+<div class="flex flex-col gap-spacing-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="px-spacing-xs py-spacing-3xs bg-surface-container-high text-on-surface-variant font-label-tabular text-label-tabular rounded">ROADMAP</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Vistas Previas de Fases Siguientes (En Desarrollo)</h2>
+</div>
+<span class="font-data-mono-md text-data-mono-md text-outline">DESPLIEGUE SECUENCIAL 2025</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-spacing-lg">
+<!-- Tarjeta 22: Portal de Contratantes (Fase 2) -->
+<div class="relative bg-surface-container-lowest rounded-xl p-spacing-xl shadow-sm flex flex-col justify-between overflow-hidden group">
+<!-- Watermark / Background Accent -->
+<div class="absolute -right-8 -bottom-8 opacity-5 text-primary pointer-events-none">
+<span class="material-symbols-outlined text-[160px]">domain_add</span>
+</div>
+<div class="flex flex-col gap-spacing-md relative z-10">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-secondary font-semibold">MÓDULO 22</span>
+<span class="px-spacing-xs py-spacing-3xs rounded bg-secondary-fixed text-on-secondary-fixed font-label-tabular text-label-tabular font-semibold">
+              FASE 2 — NO HABILITADO
+            </span>
+</div>
+<div class="flex flex-col gap-spacing-xs">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-primary text-[26px]">domain</span>
+<h3 class="font-headline-lg text-headline-lg text-primary">Portal de Contratantes Externos</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Entorno seguro de acceso perimetral donde clientes y titulares de proyectos podrán ingresar autónomamente para consultar el estado de avance de sus expedientes y <strong>cargar antecedentes técnicos, cartografías DWG/KML, certificados de dominio vigente y escrituras</strong>.
+            </p>
+</div>
+<!-- Feature Breakdown -->
+<div class="bg-surface-container-low rounded-lg p-spacing-md flex flex-col gap-spacing-2xs text-body-sm text-on-surface-variant">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+<span>Carga directa de documentación pesada con hash de integridad.</span>
+</div>
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+<span>Visualización de porcentaje de cumplimiento en hitos de entrega.</span>
+</div>
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+<span>Recepción de observaciones oficiales del SEIA / CONAF / DGA.</span>
+</div>
+</div>
+</div>
+<div class="pt-spacing-md relative z-10 flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-outline">ESTADO: EN PLANIFICACIÓN ARQUITECTÓNICA</span>
+<button class="px-spacing-md py-spacing-xs bg-surface-container-high text-outline font-headline-sm text-headline-sm rounded cursor-not-allowed" disabled="">
+            Próximamente
+          </button>
+</div>
+</div>
+<!-- Tarjeta 23: Asistente de Informes Técnicos (Fase 3) -->
+<div class="relative bg-surface-container-lowest rounded-xl p-spacing-xl shadow-sm flex flex-col justify-between overflow-hidden group">
+<!-- Watermark / Background Accent -->
+<div class="absolute -right-8 -bottom-8 opacity-5 text-primary pointer-events-none">
+<span class="material-symbols-outlined text-[160px]">smart_toy</span>
+</div>
+<div class="flex flex-col gap-spacing-md relative z-10">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-secondary font-semibold">MÓDULO 23</span>
+<span class="px-spacing-xs py-spacing-3xs rounded bg-surface-container-highest text-on-surface font-label-tabular text-label-tabular font-semibold">
+              FASE 3 — NO HABILITADO
+            </span>
+</div>
+<div class="flex flex-col gap-spacing-xs">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-primary text-[26px]">psychology</span>
+<h3 class="font-headline-lg text-headline-lg text-primary">Asistente de Informes Técnicos</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Motor de síntesis asistida que procesa datos brutos de monitoreo, mediciones freatimétricas y parámetros químicos para generar <strong>estructuras preliminares y borradores de informe</strong>.
+            </p>
+</div>
+<!-- Mandatory Legal Disclaimer according to requirements -->
+<div class="bg-surface-container-high rounded-lg p-spacing-md flex flex-col gap-spacing-2xs">
+<div class="flex items-center gap-spacing-xs text-primary font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+<span>Condición Operativa Ineludible:</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              El motor de asistencia <strong>únicamente produce borradores para revisión</strong>. El informe final definitivo requiere de forma obligatoria la <strong>validación experta y firma de responsabilidad profesional colegiada</strong> (Ingeniero / Auditor acreditado) previa remisión a la autoridad reguladora.
+            </p>
+</div>
+</div>
+<div class="pt-spacing-md relative z-10 flex items-center justify-between">
+<span class="font-data-mono-md text-data-mono-md text-outline">ESTADO: EN INVESTIGACIÓN Y CALIBRACIÓN</span>
+<button class="px-spacing-md py-spacing-xs bg-surface-container-high text-outline font-headline-sm text-headline-sm rounded cursor-not-allowed" disabled="">
+            Próximamente
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Diálogo / Modal de Confirmación Técnica: Desactivación Lógica (Simulación) -->
+<div class="hidden fixed inset-0 z-50 bg-inverse-surface/60 backdrop-blur-sm flex items-center justify-center p-spacing-md" id="modal-desactivacion">
+<div class="bg-surface-container-lowest max-w-lg w-full rounded-xl p-spacing-xl shadow-xl flex flex-col gap-spacing-md">
+<div class="flex items-start gap-spacing-md">
+<div class="w-12 h-12 rounded-full bg-error-container text-tertiary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[26px]">warning</span>
+</div>
+<div class="flex flex-col gap-spacing-3xs">
+<span class="font-label-caps text-label-caps text-tertiary uppercase tracking-wider">Protocolo de Desactivación Lógica</span>
+<h3 class="font-headline-md text-headline-md text-primary">¿Confirmar Desactivación de Credencial?</h3>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-spacing-md flex flex-col gap-spacing-xs font-body-sm text-body-sm">
+<p class="text-on-surface leading-relaxed">
+          Esta acción solicitará confirmación y <strong>registrará automáticamente la fecha y hora de baja sin borrar al usuario de la base de datos</strong>.
+        </p>
+<div class="p-spacing-xs bg-surface-container-high rounded font-data-mono-md text-data-mono-md text-on-surface-variant">
+<div>Usuario Afectado: <strong class="text-on-surface">Ing. Fernando Soto K. (USR-005)</strong></div>
+<div>Impacto: Revocación de sesiones activas y pase a estado histórico.</div>
+<div>Garantía: Preservación integral de su autoría en Bitácora General.</div>
+</div>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-spacing-3xs block">Motivo Técnico de la Baja</label>
+<select class="w-full px-spacing-sm py-spacing-xs bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded outline-none">
+<option>Término de Contrato de Asesoría Especializada</option>
+<option>Traslado de Área Técnica sin requerimiento de sistema</option>
+<option>Licencia Médica Prolongada (Suspensión Temporal)</option>
+<option>Resolución Administrativa Interna</option>
+</select>
+</div>
+<div class="flex items-center justify-end gap-spacing-sm pt-spacing-sm">
+<button class="px-spacing-md py-spacing-xs bg-surface-container-high text-on-surface hover:bg-surface-container-highest font-headline-sm text-headline-sm rounded transition-colors" onclick="document.getElementById('modal-desactivacion').classList.add('hidden')">
+          Cancelar
+        </button>
+<button class="px-spacing-md py-spacing-xs bg-tertiary text-on-tertiary hover:opacity-90 font-headline-sm text-headline-sm rounded transition-colors flex items-center gap-spacing-3xs shadow-sm" onclick="document.getElementById('modal-desactivacion').classList.add('hidden')">
+<span class="material-symbols-outlined text-[18px]">archive</span>
+          Confirmar Desactivación Lógica
+        </button>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-surface": "#191c1a",
+        "inverse-surface": "#2e312f",
+        "surface-container-low": "#f3f4f0",
+        "surface-container": "#edeeeb",
+        "primary": "#023627",
+        "tertiary-container": "#82220e",
+        "secondary-fixed-dim": "#f5bb88",
+        "primary-fixed": "#bcedd7",
+        "secondary": "#80552b",
+        "outline": "#717974",
+        "on-primary-fixed": "#002116",
+        "surface-bright": "#f8faf6",
+        "on-surface-variant": "#414944",
+        "inverse-primary": "#a1d1bc",
+        "secondary-container": "#fec390",
+        "tertiary-fixed-dim": "#ffb4a4",
+        "on-tertiary-fixed": "#3e0500",
+        "surface-dim": "#d9dad7",
+        "on-error-container": "#93000a",
+        "on-tertiary-fixed-variant": "#852410",
+        "surface-container-high": "#e7e9e5",
+        "on-error": "#ffffff",
+        "on-primary": "#ffffff",
+        "surface-variant": "#e1e3df",
+        "on-secondary-fixed": "#2d1600",
+        "on-primary-fixed-variant": "#214f3f",
+        "surface-container-lowest": "#ffffff",
+        "primary-container": "#1f4d3d",
+        "tertiary": "#610c00",
+        "on-secondary": "#ffffff",
+        "error-container": "#ffdad6",
+        "error": "#ba1a1a",
+        "inverse-on-surface": "#f0f1ed",
+        "surface": "#f8faf6",
+        "primary-fixed-dim": "#a1d1bc",
+        "on-secondary-container": "#794e25",
+        "surface-container-highest": "#e1e3df",
+        "on-tertiary-container": "#ff9680",
+        "background": "#f8faf6",
+        "secondary-fixed": "#ffdcc0",
+        "surface-tint": "#3a6756",
+        "on-secondary-fixed-variant": "#653e16",
+        "tertiary-fixed": "#ffdad3",
+        "on-tertiary": "#ffffff",
+        "on-primary-container": "#8dbda8",
+        "on-background": "#191c1a",
+        "outline-variant": "#c0c8c3"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "spacing-xl": "2rem",
+        "table-gutter": "0.75rem",
+        "spacing-md": "1rem",
+        "spacing-lg": "1.5rem",
+        "spacing-xs": "0.5rem",
+        "spacing-3xs": "0.125rem",
+        "spacing-2xl": "3rem",
+        "layout-margin-desktop": "2rem",
+        "spacing-3xl": "4rem",
+        "layout-margin-mobile": "1rem",
+        "spacing-2xs": "0.25rem",
+        "spacing-sm": "0.75rem",
+        "layout-margin-tablet": "1.5rem"
+      },
+      "fontFamily": {
+        "body-md": ["Hanken Grotesk"],
+        "headline-xl-mobile": ["Hanken Grotesk"],
+        "label-caps": ["Hanken Grotesk"],
+        "data-mono-lg": ["JetBrains Mono"],
+        "body-sm": ["Hanken Grotesk"],
+        "headline-xl": ["Hanken Grotesk"],
+        "headline-sm": ["Hanken Grotesk"],
+        "headline-lg": ["Hanken Grotesk"],
+        "headline-md": ["Hanken Grotesk"],
+        "data-mono-md": ["JetBrains Mono"],
+        "body-lg": ["Hanken Grotesk"],
+        "label-tabular": ["JetBrains Mono"]
+      },
+      "fontSize": {
+        "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+        "headline-xl-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+        "data-mono-lg": ["15px", {"lineHeight": "22px", "letterSpacing": "-0.02em", "fontWeight": "500"}],
+        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+        "headline-sm": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600"}],
+        "headline-lg": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "data-mono-md": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+        "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+        "label-tabular": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+      }
+    }
+  }
+}</script></head><body class="bg-background font-body-md text-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-spacing-md flex items-center gap-spacing-xs bg-surface-container-low"><div class="flex items-center justify-center w-7 h-7 bg-primary rounded-lg text-on-primary font-headline-sm text-headline-sm">PI</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-tight">Proyectos Integrales</span><span class="font-label-caps text-label-caps text-secondary uppercase">Ingeniería &amp; Ambiente</span></div></div><div class="px-spacing-md py-spacing-xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Operación Técnica</span></div><nav class="flex flex-col gap-spacing-3xs px-spacing-xs flex-1" data-active-classes="bg-primary-container text-on-primary-container font-headline-sm"><a aria-current="page" class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded transition-colors bg-primary-container text-on-primary-container font-headline-sm" data-path="proyectos" href="#"><span class="material-symbols-outlined text-[20px]">folder_supervised</span><span class="font-body-sm text-body-sm">Proyectos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="aprobaciones" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span class="font-body-sm text-body-sm">Aprobaciones</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="calendario" href="#"><span class="material-symbols-outlined text-[20px]">event_note</span><span class="font-body-sm text-body-sm">Calendario</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contratantes" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-sm text-body-sm">Contratantes</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-body-sm text-body-sm">Reportes</span></a><div class="my-spacing-xs px-spacing-xs"><div class="h-[1px] bg-outline-variant/30"></div></div><div class="px-spacing-xs py-spacing-3xs"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Gobierno &amp; Control</span></div><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="direccion-ejecutiva" href="#"><span class="material-symbols-outlined text-[20px]">query_stats</span><span class="font-body-sm text-body-sm">Dirección</span><span class="ml-auto font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs rounded bg-inverse-surface text-inverse-on-surface">DARK</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">manage_accounts</span><span class="font-body-sm text-body-sm">Usuarios</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="catalogos" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-sm text-body-sm">Catálogos</span></a><a class="flex items-center gap-spacing-sm px-spacing-sm py-spacing-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="bitacora-general" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-body-sm text-body-sm">Bitácora General</span></a></nav></div><div class="p-spacing-md bg-surface-container-high"><div class="flex items-center justify-between"><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Estándar Técnico</span><span class="font-data-mono-md text-data-mono-md text-primary">ISO 14001 / EIA-v2</span></div><span class="material-symbols-outlined text-outline text-[18px]">format_image_left</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex items-center justify-between px-spacing-lg"><div class="flex items-center gap-spacing-md flex-1 max-w-2xl"><img alt="Logo Proyectos Integrales" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WWI3mVDk-K0VvmFiCvo8p33fqbfLEk7YLxC1GudbnlFUpaiGriHUaR624tyiQNmYunExODktoHOUwF3QL8qZ_IwSF5S_2YljkWvDXX_F70wU2BcAir0ZOTnqLI_71vsDpk6z_zbXASIS0ueLJ7tFBZNvfS6T8aTnTgjZaqsX3YPQTL3hOBf9ordXhPZXWaXrXj9-I0-5Fd6nraudX80Q_6v0_NI_5xzQXtCkGU4fxStFzd9olGwfezDU0"/><div class="relative w-full max-w-md"><span class="material-symbols-outlined absolute left-spacing-xs top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full pl-8 pr-spacing-sm py-spacing-2xs bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm rounded outline-none focus:bg-surface-container-lowest transition-colors" placeholder="Buscar código de expediente, matriz ambiental, contratante o profesional..." type="text"/></div></div><div class="flex items-center gap-spacing-md"><div class="flex items-center gap-spacing-xs bg-surface-container-low px-spacing-xs py-spacing-3xs rounded"><span class="font-label-caps text-label-caps text-secondary uppercase font-semibold">Entrar como:</span><select class="bg-transparent font-body-sm text-body-sm text-on-surface font-medium outline-none cursor-pointer"><option value="admin">Admin</option><option value="coordinador">Coordinador</option><option value="profesional">Profesional</option><option value="administracion">Administración</option><option value="direccion">Dirección</option></select></div><div class="flex items-center gap-spacing-2xs"><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">help</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 px-spacing-lg pb-spacing-xl flex-1 bg-background"><div class="flex flex-col w-full">
+<div class="flex flex-col gap-spacing-md mb-spacing-xl">
+<div class="flex items-center justify-between">
+<nav class="flex items-center gap-spacing-2xs font-data-mono-md text-data-mono-md text-on-surface-variant">
+<span class="hover:text-primary transition-colors cursor-pointer">Proyectos Integrales</span>
+<span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span>
+<span class="hover:text-primary transition-colors cursor-pointer">Expedientes</span>
+<span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span>
+<span class="text-primary font-semibold">Nuevo Expediente Técnico</span>
+</nav>
+<div class="flex items-center gap-spacing-xs bg-surface-container px-spacing-sm py-spacing-3xs rounded">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">PROTOCOLO REGULATORIO:</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-medium">DIA / EIA-04-REV2024</span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-spacing-sm">
+<div>
+<div class="flex items-center gap-spacing-xs mb-spacing-3xs">
+<span class="px-spacing-2xs py-spacing-3xs bg-primary text-on-primary font-label-caps text-label-caps uppercase rounded">SISTEMA S-02</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">WS-INIT-2024.08</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary tracking-tight">Alta y Parametrización de Expediente</h1>
+</div>
+<div class="flex items-center gap-spacing-xs bg-surface-container-high p-spacing-2xs rounded">
+<span class="material-symbols-outlined text-[18px] text-outline">verified_user</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Validación criptográfica local activa</span>
+</div>
+</div>
+</div>
+<div class="w-full bg-surface-container-low p-spacing-md rounded-lg shadow-sm mb-spacing-xl">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-spacing-md relative">
+<div class="flex items-start gap-spacing-sm p-spacing-sm rounded bg-surface-container-lowest shadow-sm">
+<div class="w-8 h-8 rounded bg-primary-fixed-dim text-on-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-wider">Paso 01 · Validado</span>
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Datos &amp; Contratante</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant text-[11px]">Empresa, Titularidad, Marco Legal</span>
+</div>
+</div>
+<div class="flex items-start gap-spacing-sm p-spacing-sm rounded bg-primary text-on-primary shadow-md">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary flex items-center justify-center font-data-mono-lg text-data-mono-lg shrink-0">
+          02
+        </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-caps text-label-caps text-primary-fixed uppercase tracking-wider">Paso 02 · En Configuración</span>
+<span class="font-headline-sm text-headline-sm text-on-primary truncate">Alcance, Sitio y Etapas</span>
+<span class="font-data-mono-md text-data-mono-md text-on-primary-container text-[11px]">Georreferenciación y WBS Técnico</span>
+</div>
+</div>
+<div class="flex items-start gap-spacing-sm p-spacing-sm rounded bg-surface-container opacity-60">
+<div class="w-8 h-8 rounded bg-surface-variant text-on-surface-variant flex items-center justify-center font-data-mono-lg text-data-mono-lg shrink-0">
+          03
+        </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Paso 03 · Pendiente</span>
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Equipo &amp; Presupuesto</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant text-[11px]">Especialistas, Honorarios, Flujo</span>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-spacing-xl">
+<div class="xl:col-span-7 flex flex-col gap-spacing-lg">
+<div class="bg-surface-container-lowest p-spacing-lg rounded-lg shadow-sm">
+<div class="flex items-center justify-between pb-spacing-sm mb-spacing-md">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">assignment_turned_in</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Parámetros Maestros del Proyecto</h2>
+</div>
+<span class="font-label-tabular text-label-tabular px-spacing-2xs py-spacing-3xs bg-surface-container-high rounded text-on-surface-variant">EXP-FIELD-REC</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-spacing-md">
+<div class="flex flex-col gap-spacing-2xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Código de Expediente Sugerido</label>
+<div class="flex items-center bg-surface-container-low rounded px-spacing-sm py-spacing-xs">
+<span class="material-symbols-outlined text-outline text-[18px] mr-spacing-xs">tag</span>
+<input class="bg-transparent w-full font-data-mono-lg text-data-mono-lg text-primary font-semibold outline-none" spellcheck="false" type="text" value="PI-2024-007"/>
+<span class="font-label-caps text-label-caps text-secondary uppercase bg-secondary-fixed/50 px-spacing-2xs py-spacing-3xs rounded">AUTO</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Siguiente correlativo según serie anual forestal/ambiental.</span>
+</div>
+<div class="flex flex-col gap-spacing-2xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Contratante / Mandante</label>
+<div class="relative">
+<select class="w-full bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded px-spacing-sm py-spacing-xs outline-none cursor-pointer appearance-none">
+<option selected="" value="gen-norte">Generadora Eléctrica del Norte S.A. (RUT 76.842.190-2)</option>
+<option value="minera-andes">Minera Los Andes SpA (RUT 96.341.002-K)</option>
+<option value="agro-sur">Consorcio Agroforestal del Valle (RUT 81.209.430-1)</option>
+<option value="vial-chile">Infraestructura &amp; Concesiones Viales S.A.</option>
+</select>
+<span class="material-symbols-outlined absolute right-spacing-xs top-1/2 -translate-y-1/2 pointer-events-none text-outline text-[18px]">arrow_drop_down</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Contrato marco vigente hasta Diciembre 2026.</span>
+</div>
+<div class="md:col-span-2 flex flex-col gap-spacing-2xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Nombre Oficial del Proyecto</label>
+<div class="flex items-center bg-surface-container-low rounded px-spacing-sm py-spacing-xs focus-within:bg-surface-container-lowest">
+<span class="material-symbols-outlined text-outline text-[18px] mr-spacing-xs">folder_open</span>
+<input class="bg-transparent w-full font-body-lg text-body-lg text-on-surface font-medium outline-none" type="text" value="Estudio de Impacto Ambiental Parque Solar El Guayacán"/>
+</div>
+</div>
+<div class="md:col-span-2 flex flex-col gap-spacing-2xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Tipo de Instrumento / Proyecto</label>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-spacing-xs">
+<label class="flex items-center gap-spacing-xs p-spacing-xs bg-surface-container rounded cursor-pointer hover:bg-surface-container-high transition-colors">
+<input class="text-primary accent-primary" name="proj_type" type="radio"/>
+<span class="font-body-sm text-body-sm text-on-surface">Informe Técnico Forestal</span>
+</label>
+<label class="flex items-center gap-spacing-xs p-spacing-xs bg-primary-container text-on-primary-container rounded cursor-pointer">
+<input checked="" class="text-primary accent-primary" name="proj_type" type="radio"/>
+<span class="font-body-sm text-body-sm font-semibold text-on-primary">Estudio de Impacto (EIA/DIA)</span>
+</label>
+<label class="flex items-center gap-spacing-xs p-spacing-xs bg-surface-container rounded cursor-pointer hover:bg-surface-container-high transition-colors">
+<input class="text-primary accent-primary" name="proj_type" type="radio"/>
+<span class="font-body-sm text-body-sm text-on-surface">Obra Infraestructura</span>
+</label>
+</div>
+</div>
+<div class="flex flex-col gap-spacing-2xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Coordinador Técnico Asignado</label>
+<div class="flex items-center gap-spacing-xs bg-surface-container-low rounded px-spacing-sm py-spacing-xs">
+<div class="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-on-secondary font-headline-sm text-[11px]">CM</div>
+<select class="bg-transparent w-full font-body-sm text-body-sm text-on-surface outline-none cursor-pointer">
+<option selected="">Ing. Carlos Mendoza (Forestal - Senior)</option>
+<option>Dra. Elena Valenzuela (Biodiversidad)</option>
+<option>Ing. Marco Antonio Rebolledo (Civil/Hidrología)</option>
+</select>
+</div>
+</div>
+<div class="flex flex-col gap-spacing-2xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Presupuesto Contratado</label>
+<div class="flex items-center bg-surface-container-low rounded px-spacing-sm py-spacing-xs">
+<span class="font-data-mono-md text-data-mono-md text-secondary font-semibold mr-spacing-xs">USD $</span>
+<input class="bg-transparent w-full font-data-mono-lg text-data-mono-lg text-on-surface font-semibold text-right outline-none" type="text" value="184,500.00"/>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-spacing-lg rounded-lg shadow-sm">
+<div class="flex items-center justify-between pb-spacing-xs mb-spacing-md">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-secondary text-[22px]">explore</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Georreferenciación y Polígono de Emplazamiento</h2>
+</div>
+<div class="flex items-center gap-spacing-xs">
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant">DATUM:</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-bold">WGS84 / SIRGAS</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-spacing-sm mb-spacing-md">
+<div class="flex flex-col gap-spacing-3xs bg-surface-container-low p-spacing-xs rounded">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Huso UTM</span>
+<input class="font-data-mono-md text-data-mono-md text-on-surface font-semibold bg-transparent outline-none" type="text" value="19 SUR"/>
+</div>
+<div class="flex flex-col gap-spacing-3xs bg-surface-container-low p-spacing-xs rounded">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Coordenada Este (X)</span>
+<input class="font-data-mono-md text-data-mono-md text-on-surface font-semibold bg-transparent outline-none text-right" type="text" value="345210.82 m E"/>
+</div>
+<div class="flex flex-col gap-spacing-3xs bg-surface-container-low p-spacing-xs rounded">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Coordenada Norte (Y)</span>
+<input class="font-data-mono-md text-data-mono-md text-on-surface font-semibold bg-transparent outline-none text-right" type="text" value="6289410.14 m S"/>
+</div>
+<div class="flex flex-col gap-spacing-3xs bg-surface-container-low p-spacing-xs rounded">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Superficie Total</span>
+<div class="flex items-baseline justify-between">
+<span class="font-data-mono-md text-data-mono-md text-primary font-bold">428.60</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">HA</span>
+</div>
+</div>
+</div>
+<div class="relative w-full h-44 rounded overflow-hidden shadow-inner bg-surface-container-high flex flex-col justify-end p-spacing-sm">
+<div class="absolute inset-0 bg-cover bg-center" data-location="Atacama Desert, Chile" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDOp50YG88Wfs6uZ0bnHqZSCSMk5Ad9uxudw4TmgvMI1px8tOz0DV1yvLGZSrOwSFT4861V9zgS8B2VUSX1ov9PVd3pDP1SpD3nu_is__XgyvN6rBwZeOWP15j7XS8ZkFwSADx1dsevkAEROMI433-mUil82e29am2fo16mc0yBxTCxkVS9CG1JJ4kUP8ZDxHpyY3eWZGJPxQeXgL8YasIx_S7_4sTF1Za9QPwqL8oSnpigAffvMt-6')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-inverse-surface/20 to-transparent"></div>
+<div class="relative z-10 flex items-center justify-between text-surface">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed">satellite_alt</span>
+<span class="font-data-mono-md text-data-mono-md text-surface-bright">Sentinel-2 MSI · Cobertura 0% nubosidad</span>
+</div>
+<button class="bg-surface/90 hover:bg-surface text-primary px-spacing-sm py-spacing-3xs rounded font-label-caps text-label-caps uppercase transition-colors shadow-sm">
+              Cargar SHP / KML
+            </button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-high/60 p-spacing-md rounded-lg flex items-start gap-spacing-md">
+<span class="material-symbols-outlined text-secondary text-[24px] shrink-0 mt-spacing-3xs">inventory_2</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Validación de Gabinete Previo al Despliegue</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Al confirmar la plantilla de etapas, el sistema notificará a los auditores ambientales acreditados e iniciará la bitácora criptográfica con hash SHA-256 inmutable para control fiscalizatorio.
+          </p>
+</div>
+</div>
+</div>
+<div class="xl:col-span-5 flex flex-col gap-spacing-md">
+<div class="bg-surface-container-lowest p-spacing-lg rounded-lg shadow-sm flex flex-col h-full">
+<div class="flex items-center justify-between pb-spacing-xs mb-spacing-xs">
+<div class="flex flex-col">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">account_tree</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Plantilla de Etapas del Ciclo</h2>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">10 fases técnicas estándar ISO 14001 / EIA</span>
+</div>
+<span class="px-spacing-xs py-spacing-3xs bg-surface-container-high rounded font-data-mono-md text-data-mono-md text-primary font-bold">10 / 10 FASES</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-low px-spacing-sm py-spacing-xs rounded mb-spacing-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Estructura de Desglose de Trabajo (WBS)</span>
+<button class="font-label-caps text-label-caps text-primary hover:text-secondary uppercase flex items-center gap-spacing-3xs font-semibold">
+<span class="material-symbols-outlined text-[14px]">tune</span> Personalizar Pesos
+          </button>
+</div>
+<div class="flex flex-col gap-spacing-2xs overflow-y-auto max-h-[640px] pr-spacing-2xs">
+<div class="flex items-center justify-between p-spacing-xs bg-surface-container-low/70 rounded hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-spacing-sm">
+<span class="font-data-mono-md text-data-mono-md text-secondary font-bold w-6">01</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface text-[14px]">Oferta de contrato y contratación</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant text-[11px]">Duración estimada: 5 días hábiles</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary text-[18px]">drag_indicator</span>
+</div>
+<div class="flex items-center justify-between p-spacing-xs bg-surface-container-low/70 rounded hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-spacing-sm">
+<span class="font-data-mono-md text-data-mono-md text-secondary font-bold w-6">02</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface text-[14px]">Definición del equipo profesional y honorarios</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant text-[11px]">Asignación de perfiles acreditados</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary text-[18px]">drag_indicator</span>
+</div>
+<div class="flex items-center justify-between p-spacing-xs bg-surface-container-low/70 rounded hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-spacing-sm">
+<span class="font-data-mono-md text-data-mono-md text-secondary font-bold w-6">03</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface text-[14px]">Diseño y elaboración: visita e inventario</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant text-[11px]">Campañas de terreno botánicas/fauna</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary text-[18px]">drag_indicator</span>
+</div>
+<div class="flex items-center justify-between p-spacing-xs bg-surface-container-low/70 rounded hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-spacing-sm">
+<span class="font-data-mono-md text-data-mono-md text-secondary font-bold w-6">04</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface text-[14px]">Revisión hemero-bibliográfica</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant text-[11px]">Línea base preexistente y normativa regional</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary text-[18px]">drag_indicator</span>
+</div>
+<div class="flex items-center justify-between p-spacing-xs bg-surface-container-low/70 rounded hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-spacing-sm">
+<span class="font-data-mono-md text-data-mono-md text-secondary font-bold w-6">05</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface text-[14px]">Redacción del informe final</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant text-[11px]">Consolidación cartográfica y matrices EIA</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary text-[18px]">drag_indicator</span>
+</div>
+<div class="flex flex-col p-spacing-sm bg-secondary-fixed/30 rounded shadow-sm gap-spacing-2xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-spacing-sm">
+<span class="font-data-mono-md text-data-mono-md text-tertiary font-bold w-6">06</span>
+<span class="font-headline-sm text-headline-sm text-on-surface text-[14px]">Revisión final Coordinador e inversionistas</span>
+</div>
+<span class="material-symbols-outlined text-secondary text-[20px]">lock_clock</span>
+</div>
+<div class="flex items-center justify-between ml-8">
+<span class="inline-flex items-center gap-spacing-3xs px-spacing-xs py-spacing-3xs bg-tertiary text-on-tertiary font-label-caps text-label-caps uppercase rounded">
+<span class="material-symbols-outlined text-[13px]">gavel</span> Compuerta de aprobación obligatoria
+              </span>
+<span class="font-data-mono-md text-data-mono-md text-secondary font-medium">Requisito QA/QC</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-spacing-xs bg-surface-container-low/70 rounded hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-spacing-sm">
+<span class="font-data-mono-md text-data-mono-md text-secondary font-bold w-6">07</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface text-[14px]">Entrega del informe final</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant text-[11px]">Dossier digital firmado e impreso fiscal</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary text-[18px]">drag_indicator</span>
+</div>
+<div class="flex items-center justify-between p-spacing-xs bg-surface-container-low/70 rounded hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-spacing-sm">
+<span class="font-data-mono-md text-data-mono-md text-secondary font-bold w-6">08</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface text-[14px]">Acompañamiento en permisología ambiental</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant text-[11px]">Respuesta a Adendas e ICSARA</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary text-[18px]">drag_indicator</span>
+</div>
+<div class="flex items-center justify-between p-spacing-xs bg-surface-container-low/70 rounded hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-spacing-sm">
+<span class="font-data-mono-md text-data-mono-md text-secondary font-bold w-6">09</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface text-[14px]">Seguimiento y control</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant text-[11px]">Monitoreo de compromisos RCA</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary text-[18px]">drag_indicator</span>
+</div>
+<div class="flex items-center justify-between p-spacing-xs bg-surface-container-low/70 rounded hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-spacing-sm">
+<span class="font-data-mono-md text-data-mono-md text-secondary font-bold w-6">10</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface text-[14px]">Cierre y liquidación</span>
+<span class="font-data-mono-md text-data-mono-md text-on-surface-variant text-[11px]">Finiquito de honorarios y archivo técnico</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary text-[18px]">drag_indicator</span>
+</div>
+</div>
+<div class="mt-spacing-md pt-spacing-sm bg-surface-container-low p-spacing-sm rounded flex items-center justify-between">
+<div class="flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">info</span>
+<span class="font-body-sm text-body-sm text-on-surface">Las 10 etapas heredarán las matrices sectoriales.</span>
+</div>
+<button class="font-label-caps text-label-caps text-secondary uppercase hover:underline">Restablecer</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-spacing-xl pt-spacing-md mb-spacing-lg bg-surface-container-low p-spacing-md rounded-lg shadow-sm flex flex-col md:flex-row items-center justify-between gap-spacing-md">
+<div class="flex items-center gap-spacing-md">
+<button class="px-spacing-md py-spacing-xs rounded bg-surface-container-high hover:bg-surface-variant text-on-surface font-headline-sm text-headline-sm text-[13px] transition-colors flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[16px]">close</span>
+        Cancelar
+      </button>
+<button class="px-spacing-md py-spacing-xs rounded bg-surface-container-lowest hover:bg-surface-container text-primary font-headline-sm text-headline-sm text-[13px] shadow-sm transition-colors flex items-center gap-spacing-xs">
+<span class="material-symbols-outlined text-[16px]">save</span>
+        Guardar borrador
+      </button>
+</div>
+<div class="flex items-center gap-spacing-md w-full md:w-auto justify-end">
+<div class="hidden lg:flex flex-col text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Siguiente requerimiento</span>
+<span class="font-data-mono-md text-data-mono-md text-primary font-medium">Asignación de 4 Profesionales</span>
+</div>
+<button class="w-full md:w-auto px-spacing-xl py-spacing-sm rounded bg-primary hover:bg-primary-container text-on-primary font-headline-sm text-headline-sm text-[14px] shadow-md transition-all flex items-center justify-center gap-spacing-xs">
+<span>Continuar a Equipo y Honorarios</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    const codeInput = document.querySelector('input[value="PI-2024-007"]');
+    if (codeInput) {
+      codeInput.addEventListener('focus', function() {
+        this.select();
+      });
+    }
+  })();
+</script></main></div></body></html>
