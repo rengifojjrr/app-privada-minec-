@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mi perfil &middot; Beta &middot; Proyectos Integrales</title>
+<meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/app.css">
+<!-- seed, store y auth van en el head: la guarda de permisos debe correr
+     ANTES de pintar. Si el rol no puede ver esta pagina, auth.js redirige. -->
+<script src="assets/seed.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/auth.js"></script>
+</head>
+<body class="pi-verificando">
+<main class="pi-lienzo">
+  <div id="pi-cabecera"></div>
+  <div class="rejilla rejilla-lateral">
+    <div id="pi-izq"></div>
+    <div id="pi-der"></div>
+  </div>
+</main>
+<script src="assets/icons.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/demo.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+
+PI.listo(function () {
+  var S = PI.store, U = PI.ui, A = PI.auth, F = PI.fmt;
+  var yo = S.usuario(), rol = A.rol();
+
+  document.getElementById('pi-cabecera').innerHTML = PI.shell.cabecera({
+    kicker: 'Cuenta',
+    titulo: 'Mi perfil',
+    texto: 'Tus datos, tus proyectos y lo que tu rol puede hacer en el sistema.'
+  });
+
+  /* --- Columna izquierda: identidad y permisos --------------------------- */
+  var mios = S.proyectosVisibles(yo.id, rol);
+  var miHonorario = 0, misEtapas = 0;
+  mios.forEach(function (p) {
+    (p.equipo || []).forEach(function (m) { if (m.usuarioId === yo.id) miHonorario += m.honorario; });
+    (p.etapas || []).forEach(function (e) {
+      if (e.responsableId === yo.id && e.estado !== 'Aprobada' && e.estado !== 'Bloqueada') misEtapas++;
+    });
+  });
+
+  var html = '<div class="tarjeta"><div class="tarjeta-cuerpo" style="text-align:center">' +
+    '<span class="pi-avatar" style="width:72px;height:72px;font-size:24px;margin:0 auto 12px">' +
+    U.esc(F.iniciales(yo.nombre)) + '</span>' +
+    '<h2>' + U.esc(yo.nombre) + '</h2>' +
+    '<p class="sm suave">' + U.esc(yo.especialidad) + '</p>' +
+    '<div style="margin-top:10px"><span class="badge badge-info sin-punto">' + U.esc(A.nombreRol()) + '</span> ' +
+    U.badge(yo.activo ? 'Activo' : 'Inactivo') + '</div></div>' +
+    '<div class="tarjeta-cuerpo pila-sm" style="border-top:1px solid var(--borde-fino)">';
+  [['Código', yo.id], ['Correo', yo.correo], ['Teléfono', yo.telefono || '—'], ['Fecha de alta', yo.fechaAlta]].forEach(function (f) {
+    html += '<div class="fila" style="gap:12px;align-items:baseline">' +
+      '<span class="eti" style="min-width:110px">' + U.esc(f[0]) + '</span>' +
+      '<span class="sm" style="flex:1;word-break:break-all">' + U.esc(f[1]) + '</span></div>';
+  });
+  html += '</div></div>';
+
+  html += '<div style="height:16px"></div><div class="tarjeta"><div class="tarjeta-cab"><h3>Lo que puedes hacer</h3></div>' +
+    '<div class="tarjeta-cuerpo pila-sm">';
+  var etiquetas = {
+    crearProyecto: 'Crear proyectos', aprobarEtapa: 'Aprobar y devolver etapas',
+    completarEtapa: 'Completar etapas asignadas', capturarCampo: 'Capturar mediciones de campo',
+    subirDocumento: 'Registrar documentos', verFinanzas: 'Consultar finanzas',
+    registrarFinanzas: 'Registrar y liquidar movimientos', verHonorariosDeTodos: 'Ver los honorarios de todo el equipo',
+    asignarEquipo: 'Asignar equipo a los proyectos', gestionarUsuarios: 'Gestionar usuarios',
+    editarCatalogos: 'Editar catálogos', verBitacoraGeneral: 'Consultar la bitácora general',
+    verDireccion: 'Abrir la vista de Dirección', exportar: 'Exportar reportes'
+  };
+  Object.keys(etiquetas).forEach(function (c) {
+    var si = A.puede(c);
+    html += '<div class="fila" style="gap:8px">' +
+      (si ? '<span style="color:var(--primario)">' + U.icono('check_circle', 'icono-sm') + '</span>'
+          : '<span class="tenue">' + U.icono('block', 'icono-sm') + '</span>') +
+      '<span class="sm' + (si ? '' : ' tenue') + '">' + U.esc(etiquetas[c]) + '</span></div>';
+  });
+  html += '</div></div>';
+
+  document.getElementById('pi-izq').innerHTML = html;
+
+  /* --- Columna derecha: proyectos, actividad y utilidades de demo -------- */
+  var d = '<div class="kpis kpis-3">' +
+    U.kpi({ titulo: 'Mis proyectos', icono: 'folder_open', valor: F.numero(mios.length), pie: 'visibles para tu rol' }) +
+    U.kpi({ titulo: 'Etapas a mi nombre', icono: 'task_alt', tono: misEtapas ? 'aviso' : '',
+      valor: F.numero(misEtapas), pie: 'abiertas' }) +
+    U.kpi({ titulo: 'Mis honorarios', icono: 'badge', valor: F.dineroCorto(miHonorario), pie: 'solo tu propio monto' }) +
+    '</div><div style="height:24px"></div>';
+
+  d += '<div class="tarjeta"><div class="tarjeta-cab"><h2>Mis proyectos</h2></div>';
+  if (!mios.length) {
+    d += U.vacio({ icono: 'folder_open', titulo: 'Sin proyectos', texto: 'Todavía no participas en ningún proyecto.' });
+  } else {
+    d += '<div class="tabla-envoltura"><table class="tabla responsiva"><thead><tr>' +
+      '<th>Código</th><th>Proyecto</th><th>Mi rol</th><th>Etapa actual</th><th class="num">Avance</th>' +
+      '</tr></thead><tbody>';
+    mios.forEach(function (p) {
+      var m = (p.equipo || []).filter(function (x) { return x.usuarioId === yo.id; })[0];
+      var e = S.etapaActual(p);
+      d += '<tr' + (S.etapasVencidas(p).length ? ' class="alerta"' : '') + '>' +
+        '<td data-eti="Código" class="mono">' + U.esc(p.id) + '</td>' +
+        '<td data-eti="Proyecto"><a class="principal" href="proyecto.html?id=' + encodeURIComponent(p.id) + '">' + U.esc(p.nombre) + '</a></td>' +
+        '<td data-eti="Mi rol" class="sm">' + U.esc(m ? m.rolProyecto : 'etapa asignada') + '</td>' +
+        '<td data-eti="Etapa actual" class="sm">' + (e ? String(e.num).padStart(2, '0') + ' · ' + U.esc(e.nombre) : 'cerrado') + '</td>' +
+        '<td data-eti="Avance" class="num">' + S.avance(p) + '%</td></tr>';
+    });
+    d += '</tbody></table></div>';
+  }
+  d += '</div>';
+
+  var mia = S.estado.bitacora.filter(function (b) { return b.usuarioId === yo.id; }).slice(0, 8);
+  d += '<div style="height:24px"></div><div class="tarjeta"><div class="tarjeta-cab"><h2>Mi actividad reciente</h2></div>';
+  if (!mia.length) {
+    d += U.vacio({ icono: 'history_edu', titulo: 'Sin actividad', texto: 'Todavía no hay registros tuyos en la bitácora.' });
+  } else {
+    d += '<div class="tarjeta-cuerpo"><div class="bitacora-lista">';
+    mia.forEach(function (b) {
+      d += '<div class="bitacora-item"><div class="cuando">' + U.esc(b.fechaHora) + '</div>' +
+        '<div><div class="accion">' + U.esc(S.etiquetaAccion(b.accion)) + '</div>' +
+        '<div class="sm suave">' + U.esc(b.detalle) + '</div></div></div>';
+    });
+    d += '</div></div>';
+  }
+  d += '</div>';
+
+  /* Utilidades de la demostración. Se van junto con la barra de demo. */
+  d += '<div style="height:24px"></div>' +
+    '<div class="tarjeta" style="border-left:3px solid var(--secundario)"><div class="tarjeta-cab">' +
+    U.icono('restart_alt') + '<h2 style="flex:1">Datos de ejemplo</h2>' +
+    '<span class="badge badge-aviso sin-punto pi-acciones">solo demostración</span></div>' +
+    '<div class="tarjeta-cuerpo">' +
+    '<p class="sm suave">Los datos viven en el almacenamiento local de este navegador. No hay servidor: no se comparten con otros equipos ' +
+    'ni con otros navegadores del mismo equipo. Reiniciar borra todo lo que hayas creado durante la demostración y vuelve a cargar la semilla original.</p>' +
+    '<div class="pozo" style="margin-top:12px">' +
+    '<div class="fila" style="gap:24px;flex-wrap:wrap">' +
+    '<div><span class="eti">Proyectos</span><div class="mono">' + S.estado.proyectos.length + '</div></div>' +
+    '<div><span class="eti">Usuarios</span><div class="mono">' + S.estado.usuarios.length + '</div></div>' +
+    '<div><span class="eti">Registros de bitácora</span><div class="mono">' + S.estado.bitacora.length + '</div></div>' +
+    '<div><span class="eti">Sembrado</span><div class="mono">' + U.esc(S.estado.sembradoEn) + '</div></div>' +
+    '</div></div></div>' +
+    '<div class="pi-modal-pie">' +
+    '<button type="button" class="btn btn-peligro" id="b-reiniciar">' + U.icono('restart_alt') + ' Reiniciar datos de ejemplo</button>' +
+    '</div></div>';
+
+  document.getElementById('pi-der').innerHTML = d;
+
+  document.getElementById('b-reiniciar').addEventListener('click', function () {
+    U.confirmar({
+      titulo: 'Reiniciar datos de ejemplo',
+      texto: 'Se borra el almacenamiento local y se vuelve a cargar la semilla original. Se pierden los proyectos, etapas, ' +
+             'documentos, mediciones y movimientos que hayas creado durante la demostración. Úsalo entre ensayos.',
+      confirmar: 'Reiniciar ahora', peligro: true,
+      alConfirmar: function () {
+        S.reiniciar();
+        window.location.href = 'panel.html';
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+/* ============================================================================
+   tokens.css — Variables visuales del sistema.
+
+   Valores extraidos del export de Stitch: la configuracion de Tailwind
+   embebida (identica en las 26 pantallas) verificada por muestreo de pixeles
+   sobre las capturas renderizadas.
+
+   La prosa de stitch/.../field_dossier_technical_workspace/DESIGN.md declara
+   una SEGUNDA paleta (#1F4D3D, #F7F6F2, #9A6B3F, #B4462F) que no se renderiza
+   en ninguna pantalla. Manda la que se ve. Ver PROGRESO.md, hallazgo H-50.
+
+   Nada de esto depende de internet.
+   ========================================================================= */
+
+/* --- Tipografias locales. Ambas son fuentes variables: un archivo por
+       familia cubre todos los pesos. Licencia OFL. ------------------------ */
+@font-face {
+  font-family: 'Hanken Grotesk';
+  src: url('fonts/hanken-grotesk-var.woff2') format('woff2-variations'),
+       url('fonts/hanken-grotesk-var.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('fonts/jetbrains-mono-var.woff2') format('woff2-variations'),
+       url('fonts/jetbrains-mono-var.woff2') format('woff2');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: block;
+}
+
+:root {
+  /* --- Color: verde institucional ---------------------------------------- */
+  --primario: #023627;
+  --primario-hover: #1f4d3d;
+  --primario-contenedor: #1f4d3d;
+  --sobre-primario: #ffffff;
+  --primario-tenue: #bcedd7;
+  --sobre-primario-tenue: #002116;
+  --primario-claro: #a1d1bc;
+  --primario-borde: #8dbda8;
+
+  /* --- Color: ambar (en proceso, por liquidar, atencion) ---------------- */
+  --secundario: #80552b;
+  --secundario-hover: #653e16;
+  --sobre-secundario: #ffffff;
+  --secundario-tenue: #ffdcc0;
+  --sobre-secundario-tenue: #2d1600;
+  --secundario-contenedor: #fec390;
+  --secundario-borde: #f5bb88;
+
+  /* --- Color: rojo (vencido, devuelto, error) --------------------------- */
+  --terciario: #610c00;
+  --terciario-tenue: #ffdad3;
+  --sobre-terciario-tenue: #3e0500;
+  --error: #ba1a1a;
+  --sobre-error: #ffffff;
+  --error-tenue: #ffdad6;
+  --sobre-error-tenue: #93000a;
+  --error-borde: #ffb4a4;
+  --fila-alerta: #fff4f3;
+
+  /* --- Superficies ------------------------------------------------------- */
+  --fondo: #f8faf6;
+  --superficie: #ffffff;
+  --superficie-baja: #f3f4f0;
+  --superficie-media: #edeeeb;
+  --superficie-alta: #e7e9e5;
+  --superficie-maxima: #e1e3df;
+  --superficie-inversa: #2e312f;
+  --sobre-superficie-inversa: #f0f1ed;
+
+  /* --- Texto y bordes ---------------------------------------------------- */
+  --texto: #191c1a;
+  --texto-suave: #414944;
+  --texto-tenue: #717974;
+  --borde: #c0c8c3;
+  --borde-suave: rgba(192, 200, 195, 0.45);
+  --borde-fino: rgba(192, 200, 195, 0.28);
+
+  /* --- Tipografia -------------------------------------------------------- */
+  --fuente: 'Hanken Grotesk', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --fuente-mono: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+
+  --t-xl: 36px;      --lh-xl: 44px;
+  --t-lg: 26px;      --lh-lg: 34px;
+  --t-md: 20px;      --lh-md: 28px;
+  --t-sm: 16px;      --lh-sm: 24px;
+  --c-lg: 16px;      --lh-clg: 26px;
+  --c-md: 14px;      --lh-cmd: 22px;
+  --c-sm: 13px;      --lh-csm: 18px;
+  --etiqueta: 11px;  --lh-etiqueta: 16px;
+  --mono-lg: 15px;
+  --mono-md: 13px;
+  --mono-sm: 11px;
+
+  /* --- Espaciado --------------------------------------------------------- */
+  --e-3xs: 2px;
+  --e-2xs: 4px;
+  --e-xs: 8px;
+  --e-sm: 12px;
+  --e-md: 16px;
+  --e-lg: 24px;
+  --e-xl: 32px;
+  --e-2xl: 48px;
+  --e-3xl: 64px;
+
+  /* --- Radios. La configuracion de Stitch redefine el radio maximo a 12px:
+         no hay circulos ni pildoras en este sistema. --------------------- */
+  --r-xs: 2px;
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+
+  /* --- Medidas ----------------------------------------------------------- */
+  --menu-ancho: 256px;
+  --barra-alto: 64px;
+  --demo-alto: 44px;
+  --fila-alto: 44px;
+  --control-alto: 36px;
+  --ancho-max: 1680px;
+
+  /* --- Sombras ----------------------------------------------------------- */
+  --sombra-sm: 0 1px 8px rgba(25, 28, 26, 0.04);
+  --sombra-md: 0 4px 16px -2px rgba(25, 28, 26, 0.08);
+  --sombra-lg: 0 12px 32px -8px rgba(25, 28, 26, 0.18);
+}
+
+/* ============================================================================
+   Tema oscuro. Se aplica con la clase .oscuro en <html>.
+
+   Lo usa UNICAMENTE direccion.html, que se proyecta en pantalla grande. Los
+   valores se derivan de los mismos tokens: superficie-inversa como lienzo y
+   los acentos claros que ya existen en la paleta. No hay una paleta nueva.
+   ========================================================================= */
+html.oscuro {
+  --primario: #a1d1bc;
+  --primario-hover: #bcedd7;
+  --primario-contenedor: #1f4d3d;
+  --sobre-primario: #002116;
+  --primario-tenue: rgba(161, 209, 188, 0.16);
+  --sobre-primario-tenue: #a1d1bc;
+  --primario-claro: #a1d1bc;
+  --primario-borde: rgba(161, 209, 188, 0.4);
+
+  --secundario: #f5bb88;
+  --secundario-hover: #fec390;
+  --sobre-secundario: #2d1600;
+  --secundario-tenue: rgba(245, 187, 136, 0.16);
+  --sobre-secundario-tenue: #f5bb88;
+  --secundario-contenedor: rgba(245, 187, 136, 0.3);
+  --secundario-borde: rgba(245, 187, 136, 0.4);
+
+  --terciario: #ffb4a4;
+  --terciario-tenue: rgba(255, 180, 164, 0.16);
+  --sobre-terciario-tenue: #ffb4a4;
+  --error: #ffb4a4;
+  --sobre-error: #3e0500;
+  --error-tenue: rgba(255, 150, 128, 0.16);
+  --sobre-error-tenue: #ff9680;
+  --error-borde: rgba(255, 150, 128, 0.42);
+  --fila-alerta: rgba(255, 150, 128, 0.07);
+
+  --fondo: #232624;
+  --superficie: #2e312f;
+  --superficie-baja: #292c2a;
+  --superficie-media: #363a37;
+  --superficie-alta: #404341;
+  --superficie-maxima: #4a4e4b;
+  --superficie-inversa: #f0f1ed;
+  --sobre-superficie-inversa: #191c1a;
+
+  --texto: #f0f1ed;
+  --texto-suave: #c0c8c3;
+  --texto-tenue: #8f9793;
+  --borde: #4a4e4b;
+  --borde-suave: rgba(120, 128, 124, 0.4);
+  --borde-fino: rgba(120, 128, 124, 0.24);
+
+  --sombra-sm: 0 1px 8px rgba(0, 0, 0, 0.3);
+  --sombra-md: 0 4px 16px -2px rgba(0, 0, 0, 0.4);
+  --sombra-lg: 0 12px 32px -8px rgba(0, 0, 0, 0.5);
+}

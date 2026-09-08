@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portal de contratantes &middot; Beta &middot; Proyectos Integrales</title>
+<meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/app.css">
+<!-- seed, store y auth van en el head: la guarda de permisos debe correr
+     ANTES de pintar. Si el rol no puede ver esta pagina, auth.js redirige. -->
+<script src="assets/seed.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/auth.js"></script>
+</head>
+<body class="pi-verificando">
+<main class="pi-lienzo">
+  <div id="pi-cabecera"></div>
+  <div id="pi-aviso"></div>
+  <div id="pi-contenido"></div>
+</main>
+<script src="assets/icons.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/demo.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+
+PI.listo(function () {
+  var U = PI.ui;
+  document.getElementById('pi-cabecera').innerHTML = PI.shell.cabecera({
+    kicker: 'Fase 2 · hoja de ruta',
+    titulo: 'Portal de contratantes',
+    texto: 'Lo que verían los contratantes si tuvieran acceso propio al sistema. Aquí solo se muestra la forma que tendría.',
+    acciones: '<span class="badge badge-aviso sin-punto">Maqueta sin funcionamiento</span>'
+  });
+
+  document.getElementById('pi-aviso').innerHTML =
+    '<div class="aviso aviso-aviso" style="margin-bottom:24px">' + U.icono('warning') +
+    '<div><strong>Esta pantalla no funciona y es a propósito</strong>Es la maqueta de una fase futura: muestra la forma que tendría el portal, no su funcionamiento. Los botones están deshabilitados y no hay datos reales detrás. Construirla de verdad exige acceso desde fuera de la consultora, y eso necesita servidor.</div></div>';
+
+  var BLOQUES = [
+      { icono: 'domain', titulo: 'Acceso del contratante', accion: 'Invitar contratante',
+        texto: 'Cada contratante entraría con su propio acceso y vería únicamente sus expedientes.',
+        puntos: ['Un acceso por empresa, no por persona', 'Solo lectura sobre sus propios proyectos',
+                 'Sin ver honorarios ni movimientos internos'] },
+      { icono: 'trending_up', titulo: 'Avance de sus proyectos', accion: 'Ver avance',
+        texto: 'El contratante seguiría el avance por etapas sin necesidad de pedirlo por teléfono.',
+        puntos: ['Estado de cada etapa y su plazo', 'Fecha de entrega prevista',
+                 'Aviso cuando una etapa se cierra'], marcador: 'Gráfico de avance por etapas' },
+      { icono: 'folder', titulo: 'Documentos compartidos', accion: 'Descargar dossier',
+        texto: 'Los informes que la consultora decida publicar quedarían disponibles para el contratante.',
+        puntos: ['La consultora elige qué documento se publica', 'Versionado visible',
+                 'Requiere almacenamiento real de archivos'] },
+      { icono: 'receipt_long', titulo: 'Estado de cuenta', accion: 'Ver estado de cuenta',
+        texto: 'Ingresos facturados y saldo pendiente, sin exponer los costos internos del proyecto.',
+        puntos: ['Solo la relación contractual', 'Nunca los egresos ni los honorarios',
+                 'Requiere integración contable'] }
+    ];
+
+  document.getElementById('pi-contenido').innerHTML =
+    '<div class="rejilla rejilla-2">' + BLOQUES.map(function (b) {
+      return '<div class="tarjeta maqueta"><div class="tarjeta-cab">' + U.icono(b.icono) +
+        '<h3 style="flex:1">' + U.esc(b.titulo) + '</h3></div>' +
+        '<div class="tarjeta-cuerpo maqueta-cuerpo">' +
+        '<p class="sm suave">' + U.esc(b.texto) + '</p>' +
+        '<ul class="sm suave" style="margin:10px 0 0;padding-left:18px">' +
+        b.puntos.map(function (p) { return '<li>' + U.esc(p) + '</li>'; }).join('') + '</ul>' +
+        (b.marcador ? '<div style="margin-top:12px">' + U.marcador(b.marcador, 110) + '</div>' : '') +
+        '</div><div class="pi-modal-pie">' +
+        '<button type="button" class="btn" disabled>' + U.esc(b.accion) + '</button></div></div>';
+    }).join('') + '</div>';
+});
+</script>
+</body>
+</html>

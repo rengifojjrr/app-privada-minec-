@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel de inicio &middot; Beta &middot; Proyectos Integrales</title>
+<meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/app.css">
+<!-- seed, store y auth van en el head: la guarda de permisos debe correr
+     ANTES de pintar. Si el rol no puede ver esta página, auth.js redirige. -->
+<script src="assets/seed.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/auth.js"></script>
+</head>
+<body class="pi-verificando">
+<main class="pi-lienzo">
+  <div id="pi-contenido"></div>
+</main>
+<script src="assets/icons.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/demo.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+
+PI.listo(function () {
+  var S = PI.store, U = PI.ui, A = PI.auth, F = PI.fmt;
+  var cont = document.getElementById('pi-contenido');
+  var rol = A.rol(), yo = S.usuario();
+  var proyectos = S.proyectosVisibles(yo.id, rol);
+
+  /* --- Cifras comunes ---------------------------------------------------- */
+  var vencidas = [], enEspera = [], porLiquidar = [], misEtapas = [];
+  var presupuesto = 0, ingresos = 0, egresos = 0, pendiente = 0;
+
+  proyectos.forEach(function (p) {
+    presupuesto += p.presupuesto;
+    var t = S.totalesFinancieros(p);
+    ingresos += t.ingresos; egresos += t.egresos; pendiente += t.porLiquidar;
+    S.etapasVencidas(p).forEach(function (e) { vencidas.push({ p: p, e: e }); });
+    S.esperandoAprobacion(p).forEach(function (e) { enEspera.push({ p: p, e: e }); });
+    (p.finanzas || []).forEach(function (m) {
+      if (m.estado === 'Por liquidar') porLiquidar.push({ p: p, m: m });
+    });
+    p.etapas.forEach(function (e) {
+      if (e.responsableId === yo.id && e.estado !== 'Aprobada' && e.estado !== 'Bloqueada') {
+        misEtapas.push({ p: p, e: e });
+      }
+    });
+  });
+
+  var activos = proyectos.filter(function (p) { return p.estado !== 'Cerrado'; });
+  var miHonorario = 0;
+  proyectos.forEach(function (p) {
+    (p.equipo || []).forEach(function (m) { if (m.usuarioId === yo.id) miHonorario += m.honorario; });
+  });
+
+  /* --- KPIs por rol ------------------------------------------------------- */
+  function kpis() {
+    var k = [];
+    k.push(U.kpi({
+      titulo: rol === 'profesional' ? 'Mis proyectos' : 'Proyectos activos',
+      icono: 'folder_open', tono: 'ok',
+      valor: F.numero(activos.length),
+      pie: proyectos.length + ' en total, ' + (proyectos.length - activos.length) + ' cerrados'
+    }));
+    k.push(U.kpi({
+      titulo: 'Etapas vencidas', icono: 'event_busy',
+      tono: vencidas.length ? 'alerta' : '',
+      valor: F.numero(vencidas.length),
+      pie: vencidas.length ? 'Requieren intervención' : 'Todo dentro de plazo'
+    }));
+
+    if (rol === 'administracion') {
+      k.push(U.kpi({ titulo: 'Por liquidar', icono: 'payments', tono: porLiquidar.length ? 'aviso' : '',
+        valor: F.dineroCorto(pendiente), pie: porLiquidar.length + ' partidas pendientes de liquidar' }));
+      k.push(U.kpi({ titulo: 'Saldo ejecutado', icono: 'account_balance_wallet',
+        valor: F.dineroCorto(ingresos - egresos), pie: 'Ingresos ' + F.dineroCorto(ingresos) + ' / Egresos ' + F.dineroCorto(egresos) }));
+    } else if (rol === 'profesional') {
+      k.push(U.kpi({ titulo: 'Mis etapas abiertas', icono: 'task_alt', tono: misEtapas.length ? 'aviso' : '',
+        valor: F.numero(misEtapas.length), pie: 'Asignadas a tu nombre' }));
+      k.push(U.kpi({ titulo: 'Mis honorarios', icono: 'badge',
+        valor: F.dineroCorto(miHonorario), pie: 'Solo se muestra tu propio monto' }));
+    } else if (rol === 'direccion') {
+      k.push(U.kpi({ titulo: 'Cartera contratada', icono: 'trending_up',
+        valor: F.dineroCorto(presupuesto), pie: 'Suma de presupuestos vigentes' }));
+      k.push(U.kpi({ titulo: 'Ejecutado', icono: 'analytics',
+        valor: F.dineroCorto(egresos),
+        pie: presupuesto ? F.porcentaje(egresos / presupuesto * 100) + ' del contratado' : '—' }));
+    } else {
+      k.push(U.kpi({ titulo: 'Esperando aprobación', icono: 'hourglass_top', tono: enEspera.length ? 'aviso' : '',
+        valor: F.numero(enEspera.length), pie: enEspera.length ? 'Compuertas detenidas' : 'Sin pendientes' }));
+      k.push(U.kpi({ titulo: 'Cartera contratada', icono: 'trending_up',
+        valor: F.dineroCorto(presupuesto), pie: activos.length + ' proyectos activos' }));
+    }
+    return '<div class="kpis">' + k.join('') + '</div>';
+  }
+
+  /* --- Qué requiere atención hoy ------------------------------------------ */
+  function pendientes() {
+    var filas = [];
+    enEspera.forEach(function (x) {
+      filas.push({
+        p: x.p, etapa: x.e, motivo: 'Compuerta esperando aprobación',
+        detalle: 'Etapa ' + x.e.num + ' &middot; ' + U.esc(x.e.nombre),
+        tono: 'aviso', orden: 0,
+        accion: A.puede('aprobarEtapa')
+          ? '<a class="btn btn-sm btn-secundario" href="aprobaciones.html">Revisar</a>'
+          : '<a class="btn btn-sm btn-borde" href="proyecto.html?id=' + x.p.id + '&tab=etapas">Ver</a>'
+      });
+    });
+    vencidas.forEach(function (x) {
+      filas.push({
+        p: x.p, etapa: x.e, motivo: 'Etapa vencida',
+        detalle: 'Etapa ' + x.e.num + ' &middot; ' + U.esc(x.e.nombre),
+        tono: 'mal', orden: 1,
+        accion: '<a class="btn btn-sm btn-borde" href="proyecto.html?id=' + x.p.id + '&tab=etapas">Atender</a>'
+      });
+    });
+    if (rol === 'administracion' || rol === 'admin') {
+      porLiquidar.slice(0, 6).forEach(function (x) {
+        filas.push({
+          p: x.p, etapa: null, motivo: 'Partida por liquidar',
+          detalle: U.esc(x.m.categoria) + ' &middot; ' + F.dinero(x.m.monto) + ' USD',
+          tono: 'aviso', orden: 2,
+          accion: '<a class="btn btn-sm btn-borde" href="proyecto.html?id=' + x.p.id + '&tab=finanzas">Liquidar</a>'
+        });
+      });
+    }
+    if (rol === 'profesional') {
+      misEtapas.forEach(function (x) {
+        if (S.etapaVencida(x.e)) return;
+        filas.push({
+          p: x.p, etapa: x.e, motivo: 'Etapa asignada a ti',
+          detalle: 'Etapa ' + x.e.num + ' &middot; ' + U.esc(x.e.nombre),
+          tono: '', orden: 3,
+          accion: '<a class="btn btn-sm btn-borde" href="proyecto.html?id=' + x.p.id + '&tab=etapas">Trabajar</a>'
+        });
+      });
+    }
+    filas.sort(function (a, b) { return a.orden - b.orden; });
+
+    if (!filas.length) {
+      return '<div class="tarjeta"><div class="tarjeta-cab"><h2>Qué requiere tu atención hoy</h2></div>' +
+        U.vacio({ icono: 'check_circle', titulo: 'Nada pendiente', texto: 'No hay etapas vencidas ni aprobaciones en espera para tu rol.' }) + '</div>';
+    }
+
+    var html = '<div class="tarjeta"><div class="tarjeta-cab">' +
+      '<h2>Qué requiere tu atención hoy</h2>' +
+      '<span class="badge ' + (vencidas.length ? 'badge-mal' : 'badge-aviso') + '">' + filas.length + ' asuntos</span>' +
+      '</div><div class="tabla-envoltura"><table class="tabla responsiva"><thead><tr>' +
+      '<th>Proyecto</th><th>Motivo</th><th>Detalle</th><th>Plazo</th><th class="derecha">Acción</th>' +
+      '</tr></thead><tbody>';
+    filas.forEach(function (f) {
+      var plazo = f.etapa ? f.etapa.fechaFin : '—';
+      var txtPlazo = f.etapa ? F.plazo(f.etapa.fechaFin) : '';
+      html += '<tr' + (f.tono === 'mal' ? ' class="alerta"' : '') + '>' +
+        '<td data-eti="Proyecto"><a class="principal" href="proyecto.html?id=' + f.p.id + '">' + U.esc(f.p.nombre) + '</a>' +
+        '<span class="sub mono">' + U.esc(f.p.id) + '</span></td>' +
+        '<td data-eti="Motivo">' + U.badge(f.motivo, f.tono === 'mal' ? 'badge-mal' : (f.tono === 'aviso' ? 'badge-aviso' : 'badge-neutro')) + '</td>' +
+        '<td data-eti="Detalle">' + f.detalle + '</td>' +
+        '<td data-eti="Plazo" class="mono">' + U.esc(plazo) + '<span class="sub">' + U.esc(txtPlazo) + '</span></td>' +
+        '<td data-eti="" class="acciones">' + f.accion + '</td></tr>';
+    });
+    html += '</tbody></table></div></div>';
+    return html;
+  }
+
+  /* --- Agenda de las próximas dos semanas --------------------------------- */
+  function agenda() {
+    var evs = S.agenda(yo.id, rol).filter(function (e) {
+      var d = S.diasHasta(e.fecha);
+      return d !== null && d >= -3 && d <= 21;
+    }).sort(function (a, b) { return S.diasHasta(a.fecha) - S.diasHasta(b.fecha); }).slice(0, 8);
+
+    var html = '<div class="tarjeta"><div class="tarjeta-cab"><h2>Agenda de las próximas semanas</h2>' +
+      '<a class="btn btn-sm btn-plano pi-acciones" href="calendario.html">Ver calendario</a></div>';
+    if (!evs.length) {
+      html += U.vacio({ icono: 'calendar_month', titulo: 'Sin vencimientos próximos', texto: 'No hay etapas con plazo en las próximas tres semanas.' });
+    } else {
+      html += '<div class="tarjeta-cuerpo pila-sm">';
+      evs.forEach(function (e) {
+        var d = S.diasHasta(e.fecha);
+        var tono = e.vencida ? 'mal' : (d <= 5 ? 'aviso' : 'ok');
+        html += '<div class="fila" style="gap:12px;align-items:flex-start;padding-bottom:8px;border-bottom:1px solid var(--borde-fino)">' +
+          '<span class="badge badge-' + tono + ' sin-punto" style="min-width:96px;justify-content:center">' + U.esc(e.fecha) + '</span>' +
+          '<div style="flex:1;min-width:180px"><strong class="sm">' + U.esc(e.titulo) + '</strong>' +
+          '<div class="sm tenue">' + U.esc(e.proyectoNombre) + '</div></div>' +
+          '<span class="sm ' + (e.vencida ? '' : 'tenue') + '" style="' + (e.vencida ? 'color:var(--error);font-weight:600' : '') + '">' +
+          U.esc(F.plazo(e.fecha)) + '</span></div>';
+      });
+      html += '</div>';
+    }
+    return html + '</div>';
+  }
+
+  /* --- Atajos por rol ------------------------------------------------------ */
+  function atajos() {
+    var lista = [];
+    if (A.puede('crearProyecto')) lista.push(['proyecto-nuevo.html', 'add_circle', 'Nuevo proyecto', 'Alta con las 10 etapas de la plantilla']);
+    if (A.puedeVer('aprobaciones.html')) lista.push(['aprobaciones.html', 'task_alt', 'Aprobaciones', enEspera.length + ' etapas en espera']);
+    if (A.puede('registrarFinanzas')) lista.push(['reportes.html', 'analytics', 'Reportes', 'Cierre de mes en dólares']);
+    if (A.puede('capturarCampo')) lista.push(['proyectos.html', 'forest', 'Mediciones de campo', 'Captura por parcela']);
+    if (A.puede('gestionarUsuarios')) lista.push(['usuarios.html', 'manage_accounts', 'Usuarios', S.estado.usuarios.length + ' registrados']);
+    if (A.puede('editarCatalogos')) lista.push(['catalogos.html', 'menu_book', 'Catálogos', 'Listas controladas del sistema']);
+    if (A.puedeVer('direccion.html')) lista.push(['direccion.html', 'monitoring', 'Vista de Dirección', 'Consolidado para proyectar']);
+    if (!lista.length) return '';
+    return '<div class="tarjeta"><div class="tarjeta-cab"><h2>Accesos rapidos</h2></div>' +
+      '<div class="tarjeta-cuerpo rejilla rejilla-2">' +
+      lista.map(function (a) {
+        return '<a class="pozo fila" style="gap:12px;text-decoration:none;color:inherit" href="' + a[0] + '">' +
+          U.icono(a[1], 'icono-lg') + '<span><strong class="sm">' + U.esc(a[2]) + '</strong>' +
+          '<span class="sm tenue" style="display:block">' + U.esc(a[3]) + '</span></span></a>';
+      }).join('') + '</div></div>';
+  }
+
+  cont.innerHTML =
+    PI.shell.cabecera({
+      kicker: A.nombreRol() + ' \u00b7 ' + yo.nombre,
+      titulo: 'Panel de inicio',
+      texto: 'Lo que tu rol necesita atender hoy. Cada rol ve un panel distinto.'
+    }) +
+    kpis() +
+    '<div style="height:24px"></div>' +
+    pendientes() +
+    '<div style="height:24px"></div>' +
+    '<div class="rejilla rejilla-2">' + agenda() + atajos() + '</div>';
+});
+</script>
+</body>
+</html>

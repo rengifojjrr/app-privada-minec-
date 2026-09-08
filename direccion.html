@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dirección &middot; Beta &middot; Proyectos Integrales</title>
+<meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/app.css">
+<!-- seed, store y auth van en el head: la guarda de permisos debe correr
+     ANTES de pintar. Si el rol no puede ver esta pagina, auth.js redirige. -->
+<script src="assets/seed.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/auth.js"></script>
+</head>
+<body class="pi-verificando">
+<main class="pi-lienzo">
+  <div id="pi-cabecera"></div>
+  <div id="pi-alerta"></div>
+  <div id="pi-kpis"></div>
+  <div style="height:24px"></div>
+  <div class="proyeccion">
+    <div id="pi-matriz"></div>
+    <div id="pi-lateral"></div>
+  </div>
+</main>
+<script src="assets/icons.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/demo.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+
+PI.listo(function () {
+  var S = PI.store, U = PI.ui, A = PI.auth, F = PI.fmt;
+  /* Esta es la única pantalla en oscuro del sistema. El tema lo aplica
+     shell.js al leer PAGINAS['direccion.html'].oscuro, y los colores se
+     derivan de los mismos tokens: no hay una paleta nueva. */
+
+  var proyectos = S.estado.proyectos;
+  var activos = proyectos.filter(function (p) { return p.estado !== 'Cerrado'; });
+
+  var contratado = 0, ejecutado = 0, ingresos = 0, porLiquidar = 0, avanceSuma = 0;
+  var vencidas = [], enEspera = [];
+  proyectos.forEach(function (p) {
+    contratado += p.presupuesto;
+    var t = S.totalesFinancieros(p);
+    ejecutado += t.egresos; ingresos += t.ingresos; porLiquidar += t.porLiquidar;
+    avanceSuma += S.avance(p);
+    S.etapasVencidas(p).forEach(function (e) { vencidas.push({ p: p, e: e }); });
+    S.esperandoAprobacion(p).forEach(function (e) { enEspera.push({ p: p, e: e }); });
+  });
+  var avanceMedio = proyectos.length ? Math.round(avanceSuma / proyectos.length) : 0;
+
+  document.getElementById('pi-cabecera').innerHTML = PI.shell.cabecera({
+    kicker: 'Vista de Dirección · para proyectar en sala',
+    titulo: 'Consolidado de la cartera',
+    texto: 'Situación al ' + S.fechaHoy() + '. Solo lectura. Todos los montos en dólares.',
+    acciones: '<button type="button" class="btn btn-borde" id="b-rotar">' + U.icono('refresh') + ' Rotación automática</button>' +
+              '<button type="button" class="btn btn-borde" id="b-imprimir">' + U.icono('print') + ' Imprimir</button>'
+  });
+
+  /* --- Alerta directiva --------------------------------------------------- */
+  var caja = document.getElementById('pi-alerta');
+  if (vencidas.length || enEspera.length) {
+    var partes = [];
+    if (vencidas.length) partes.push(vencidas.length + (vencidas.length === 1 ? ' etapa vencida' : ' etapas vencidas'));
+    if (enEspera.length) partes.push(enEspera.length + (enEspera.length === 1 ? ' compuerta detenida' : ' compuertas detenidas'));
+    var afectados = {};
+    vencidas.concat(enEspera).forEach(function (x) { afectados[x.p.id] = 1; });
+    caja.innerHTML = '<div class="aviso aviso-mal" style="margin-bottom:24px">' + U.icono('warning', 'icono-lg') +
+      '<div><strong>Requiere decisión de Dirección: ' + U.esc(partes.join(' y ')) + '</strong>' +
+      'Expedientes afectados: ' + U.esc(Object.keys(afectados).join(', ')) + '.</div></div>';
+  } else {
+    caja.innerHTML = '<div class="aviso aviso-ok" style="margin-bottom:24px">' + U.icono('check_circle', 'icono-lg') +
+      '<div><strong>Cartera sin alertas</strong>Ninguna etapa fuera de plazo ni compuerta detenida.</div></div>';
+  }
+
+  document.getElementById('pi-kpis').innerHTML = '<div class="kpis">' +
+    U.kpi({ titulo: 'Cartera contratada', icono: 'account_balance_wallet', valor: F.dineroCorto(contratado),
+      pie: proyectos.length + ' expedientes, ' + activos.length + ' activos' }) +
+    U.kpi({ titulo: 'Ejecutado', icono: 'payments', valor: F.dineroCorto(ejecutado),
+      pie: contratado ? F.porcentaje(ejecutado / contratado * 100) + ' del contratado' : '—' }) +
+    U.kpi({ titulo: 'Avance medio', icono: 'trending_up', tono: vencidas.length ? 'alerta' : 'ok',
+      valor: avanceMedio + '<small>%</small>', pie: 'promedio de la cartera' }) +
+    U.kpi({ titulo: 'Por liquidar', icono: 'hourglass_top', tono: porLiquidar ? 'aviso' : '',
+      valor: F.dineroCorto(porLiquidar), pie: 'partidas en custodia' }) +
+    '</div>';
+
+  /* --- Matriz de expedientes ---------------------------------------------- */
+  var html = '<div class="tarjeta"><div class="tarjeta-cab"><h2>Matriz de expedientes</h2>' +
+    '<div class="pi-acciones"><span class="badge badge-neutro sin-punto">físico y financiero</span></div></div>' +
+    '<div class="tabla-envoltura"><table class="tabla responsiva"><thead><tr>' +
+    '<th>Código y denominación</th><th>Estado</th><th class="num">Contratado</th>' +
+    '<th class="num">Ejecutado</th><th class="num">Avance</th><th class="num">Desvío</th>' +
+    '</tr></thead><tbody>';
+  proyectos.forEach(function (p) {
+    var t = S.totalesFinancieros(p);
+    var pctFin = p.presupuesto ? Math.round(t.egresos / p.presupuesto * 100) : 0;
+    var av = S.avance(p);
+    var desvio = av - pctFin;
+    var venc = S.etapasVencidas(p).length;
+    html += '<tr' + (venc ? ' class="alerta"' : '') + '>' +
+      '<td data-eti="Expediente"><span class="mono">' + U.esc(p.id) + '</span>' +
+      '<span class="sub">' + U.esc(p.nombre) + '</span></td>' +
+      '<td data-eti="Estado">' + U.badge(p.estado) +
+      (venc ? ' <span class="badge badge-mal sin-punto">' + venc + '</span>' : '') + '</td>' +
+      '<td data-eti="Contratado" class="num">' + F.dinero(p.presupuesto) + '</td>' +
+      '<td data-eti="Ejecutado" class="num">' + F.dinero(t.egresos) + '</td>' +
+      '<td data-eti="Avance" class="num"><div class="fila" style="gap:6px;justify-content:flex-end">' +
+      '<span class="mono">' + av + '%</span>' + U.barra(av, venc ? 'mal' : '') + '</div></td>' +
+      '<td data-eti="Desvío" class="num"><span style="font-weight:700;color:' +
+      (desvio < -10 ? 'var(--error)' : (desvio > 10 ? 'var(--secundario)' : 'var(--texto-suave)')) + '">' +
+      (desvio > 0 ? '+' : '') + desvio + ' pp</span></td></tr>';
+  });
+  html += '</tbody><tfoot><tr style="background:var(--superficie-media);font-weight:700">' +
+    '<td data-eti="">Total de la cartera</td><td data-eti=""></td>' +
+    '<td data-eti="Contratado" class="num">' + F.dinero(contratado) + '</td>' +
+    '<td data-eti="Ejecutado" class="num">' + F.dinero(ejecutado) + '</td>' +
+    '<td data-eti="Avance" class="num">' + avanceMedio + '%</td>' +
+    '<td data-eti="Desvío" class="num"></td></tr></tfoot></table></div>' +
+    '<div class="tarjeta-pie"><span>El desvío compara el avance físico con el porcentaje de presupuesto ejecutado. ' +
+    'Negativo grande: se gasta más rápido de lo que se avanza.</span></div></div>';
+  document.getElementById('pi-matriz').innerHTML = html;
+
+  /* --- Panel lateral ------------------------------------------------------ */
+  var lat = '<div class="pila">';
+
+  lat += '<div class="tarjeta"><div class="tarjeta-cab"><h3>Ejecución presupuestaria</h3></div>' +
+    '<div class="tarjeta-cuerpo centro">' +
+    U.anillo(contratado ? ejecutado / contratado * 100 : 0,
+             (contratado ? Math.round(ejecutado / contratado * 100) : 0) + '%', 132) +
+    '<div class="rejilla rejilla-2" style="margin-top:12px">' +
+    '<div class="pozo"><span class="eti">Ingresos</span><div class="mono">' + F.dineroCorto(ingresos) + '</div></div>' +
+    '<div class="pozo"><span class="eti">Egresos</span><div class="mono">' + F.dineroCorto(ejecutado) + '</div></div>' +
+    '<div class="pozo"><span class="eti">Por liquidar</span><div class="mono" style="color:var(--secundario)">' + F.dineroCorto(porLiquidar) + '</div></div>' +
+    '<div class="pozo"><span class="eti">Margen</span><div class="mono">' + F.dineroCorto(contratado - ejecutado) + '</div></div>' +
+    '</div></div></div>';
+
+  var porEstado = {};
+  proyectos.forEach(function (p) { porEstado[p.estado] = (porEstado[p.estado] || 0) + 1; });
+  lat += '<div class="tarjeta"><div class="tarjeta-cab"><h3>Cartera por estado</h3></div>' +
+    '<div class="tarjeta-cuerpo pila-sm">';
+  S.catalogos().estadosProyecto.forEach(function (e) {
+    var n = porEstado[e] || 0;
+    lat += '<div class="fila" style="gap:10px">' + U.badge(e) +
+      '<div style="flex:1">' + U.barra(proyectos.length ? n / proyectos.length * 100 : 0) + '</div>' +
+      '<span class="mono">' + n + '</span></div>';
+  });
+  lat += '</div></div>';
+
+  lat += '<div class="tarjeta"><div class="tarjeta-cab"><h3>Puntos de decisión</h3>' +
+    '<span class="badge badge-' + (enEspera.length + vencidas.length ? 'mal' : 'ok') + ' sin-punto pi-acciones">' +
+    (enEspera.length + vencidas.length) + '</span></div><div class="tarjeta-cuerpo pila-sm">';
+  if (!enEspera.length && !vencidas.length) {
+    lat += '<p class="sm tenue">Nada que decidir hoy.</p>';
+  } else {
+    enEspera.concat(vencidas).slice(0, 6).forEach(function (x) {
+      var esp = x.e.estado === 'Esperando aprobación' || x.e.estado === 'Esperando aprobacion';
+      lat += '<div style="padding-bottom:8px;border-bottom:1px solid var(--borde-fino)">' +
+        '<div class="fila" style="gap:6px"><span class="mono sm">' + U.esc(x.p.id) + '</span>' +
+        '<span class="badge badge-' + (esp ? 'aviso' : 'mal') + ' sin-punto">E' + x.e.num + '</span></div>' +
+        '<strong class="sm">' + U.esc(x.e.nombre) + '</strong>' +
+        '<div class="sm tenue">' + U.esc(esp ? 'esperando aprobación' : F.plazo(x.e.fechaFin)) + '</div></div>';
+    });
+  }
+  lat += '</div></div>';
+
+  lat += '<div class="tarjeta"><div class="tarjeta-cab"><h3>Producción de campo</h3></div>' +
+    '<div class="tarjeta-cuerpo pila-sm">';
+  var totalVol = 0, totalArb = 0, totalMed = 0;
+  proyectos.forEach(function (p) {
+    (p.mediciones || []).forEach(function (m) { totalVol += m.volumen; totalArb += m.arboles; totalMed++; });
+  });
+  [['Mediciones registradas', F.numero(totalMed)], ['Árboles censados', F.numero(totalArb)],
+   ['Volumen capturado', F.numero(totalVol, 1) + ' m³']].forEach(function (f) {
+    lat += '<div class="fila" style="justify-content:space-between;gap:10px;padding-bottom:5px;border-bottom:1px solid var(--borde-fino)">' +
+      '<span class="sm">' + U.esc(f[0]) + '</span><span class="mono">' + U.esc(f[1]) + '</span></div>';
+  });
+  lat += '<p class="sm tenue" style="margin-top:6px">El volumen es captura manual del profesional en campo. ' +
+    'El sistema solo lo suma.</p></div></div>';
+
+  lat += '</div>';
+  document.getElementById('pi-lateral').innerHTML = lat;
+
+  /* --- Rotación para proyectar ------------------------------------------- */
+  var rotando = false, temporizador = null;
+  var bloques = ['pi-kpis', 'pi-matriz', 'pi-lateral'];
+  var indice = 0;
+  document.getElementById('b-rotar').addEventListener('click', function () {
+    rotando = !rotando;
+    this.textContent = '';
+    this.innerHTML = U.icono('refresh') + (rotando ? ' Detener rotación' : ' Rotación automática');
+    if (!rotando) {
+      window.clearInterval(temporizador);
+      bloques.forEach(function (b) { document.getElementById(b).scrollIntoView({ block: 'nearest' }); });
+      return;
+    }
+    temporizador = window.setInterval(function () {
+      indice = (indice + 1) % bloques.length;
+      var el = document.getElementById(bloques[indice]);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 9000);
+  });
+  document.getElementById('b-imprimir').addEventListener('click', function () { window.print(); });
+});
+</script>
+</body>
+</html>

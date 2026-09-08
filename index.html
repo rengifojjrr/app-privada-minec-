@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seleccionar rol &middot; Beta &middot; Proyectos Integrales</title>
+<meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/app.css">
+<!-- seed, store y auth van en el head: la guarda de permisos debe correr
+     ANTES de pintar. Si el rol no puede ver esta página, auth.js redirige. -->
+<script src="assets/seed.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/auth.js"></script>
+</head>
+<body class="pi-verificando">
+<main class="pi-portada">
+  <div class="pi-portada-caja" id="pi-contenido"></div>
+</main>
+<script src="assets/icons.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/demo.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+
+PI.listo(function () {
+  var S = PI.store, U = PI.ui, A = PI.auth;
+  var cont = document.getElementById('pi-contenido');
+
+  /* La entrada al sistema es un selector de rol, no un ingreso con
+     contrasena: esta beta no tiene servidor ni cuentas reales. */
+  var porRol = {};
+  S.estado.usuarios.forEach(function (u) { if (!porRol[u.rol] && u.activo) porRol[u.rol] = u; });
+  Object.keys(window.PI_USUARIO_POR_ROL).forEach(function (r) {
+    var u = S.buscarUsuario(window.PI_USUARIO_POR_ROL[r]);
+    if (u) porRol[r] = u;
+  });
+
+  var loQueVe = {
+    admin: ['Usuarios, catálogos y bitácora general', 'Acceso completo a todos los proyectos'],
+    coordinador: ['Crea proyectos y asigna equipo', 'Aprueba o devuelve etapas'],
+    profesional: ['Solo sus proyectos asignados', 'Captura mediciones y sube documentos', 'Ve el equipo, pero solo su honorario'],
+    administracion: ['Registra y liquida movimientos', 'Reportes de cierre de mes'],
+    direccion: ['Consolidado de la cartera en pantalla oscura', 'Solo lectura']
+  };
+
+  function pintar() {
+    var html = '<div class="pi-portada-cab">' +
+      '<span class="logo">' + PI.shell.LOGO + '</span>' +
+      '<div><h1>Proyectos Integrales</h1>' +
+      '<p class="suave">Sistema de gestion de proyectos ambientales y forestales. ' +
+      'Elige un rol para recorrer el sistema: cada uno ve una aplicación distinta.</p></div></div>';
+
+    html += '<div class="aviso aviso-aviso" style="margin-bottom:24px">' + U.icono('warning') +
+      '<div><strong>Beta de demostración con datos de ejemplo</strong>' +
+      'No hay servidor ni base de datos. Todo se guarda en este navegador y no se comparte entre equipos. ' +
+      'No se pide contrasena porque no existen cuentas reales.</div></div>';
+
+    html += '<div class="pi-roles">';
+    S.catalogos().roles.forEach(function (r) {
+      var u = porRol[r.id];
+      if (!u) return;
+      html += '<button type="button" class="pi-rol" data-rol="' + r.id + '">' +
+        '<div class="pi-rol-cab"><span class="pi-avatar">' + U.esc(PI.fmt.iniciales(u.nombre)) + '</span>' +
+        '<span><strong>' + U.esc(r.nombre) + '</strong>' +
+        '<span class="sm tenue">' + U.esc(u.nombre) + '</span></span></div>' +
+        '<p class="sm suave">' + U.esc(r.descripcion) + '</p>' +
+        '<ul>' + (loQueVe[r.id] || []).map(function (x) { return '<li>' + U.esc(x) + '</li>'; }).join('') + '</ul>' +
+        '</button>';
+    });
+    html += '</div>';
+
+    html += '<div class="fila" style="margin-top:24px;justify-content:space-between">' +
+      '<p class="sm tenue">También puedes cambiar de rol en cualquier momento desde la barra inferior.</p>' +
+      '<button type="button" class="btn btn-sm btn-borde" id="btn-reiniciar">' +
+      U.icono('restart_alt', 'icono-sm') + ' Reiniciar datos de ejemplo</button></div>';
+
+    cont.innerHTML = html;
+
+    Array.prototype.forEach.call(cont.querySelectorAll('[data-rol]'), function (b) {
+      b.addEventListener('click', function () {
+        S.cambiarRol(b.getAttribute('data-rol'));
+        window.location.href = 'panel.html';
+      });
+    });
+    document.getElementById('btn-reiniciar').addEventListener('click', function () {
+      U.confirmar({
+        titulo: 'Reiniciar datos de ejemplo',
+        texto: 'Se borran los datos guardados en este navegador y se recarga la semilla original.',
+        confirmar: 'Reiniciar', peligro: true,
+        alConfirmar: function () { S.reiniciar(); window.location.reload(); }
+      });
+    });
+  }
+
+  pintar();
+});
+</script>
+</body>
+</html>

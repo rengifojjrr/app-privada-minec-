@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ficha del proyecto &middot; Beta &middot; Proyectos Integrales</title>
+<meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/app.css">
+<!-- seed, store y auth van en el head: la guarda de permisos debe correr
+     ANTES de pintar. Si el rol no puede ver esta pagina, auth.js redirige. -->
+<script src="assets/seed.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/auth.js"></script>
+</head>
+<body class="pi-verificando">
+<main class="pi-lienzo">
+  <div id="pi-ficha"></div>
+  <div id="pi-pestanas"></div>
+  <div id="pi-contenido"></div>
+</main>
+<script src="assets/icons.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/demo.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+
+PI.listo(function () {
+  var S = PI.store, U = PI.ui, A = PI.auth, F = PI.fmt;
+  var cat = S.catalogos(), yo = S.usuario(), rol = A.rol();
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get('id') || (S.proyectosVisibles(yo.id, rol)[0] || {}).id;
+  var p = S.buscarProyecto(id);
+  var cont = document.getElementById('pi-contenido');
+
+  /* --- El proyecto debe existir y ser visible para este rol --------------- */
+  if (!p) {
+    document.getElementById('pi-ficha').innerHTML =
+      '<div class="tarjeta">' + U.vacio({ icono: 'error', titulo: 'Proyecto no encontrado',
+        texto: 'El expediente solicitado no existe en los datos de ejemplo.',
+        accion: '<a class="btn btn-primario" href="proyectos.html">Volver al listado</a>' }) + '</div>';
+    return;
+  }
+  if (!S.proyectosVisibles(yo.id, rol).some(function (x) { return x.id === p.id; })) {
+    window.location.replace('sin-permiso.html?pagina=proyecto.html&rol=' + encodeURIComponent(rol));
+    return;
+  }
+
+  var pestanas = A.pestanasVisibles(rol);
+  var tab = params.get('tab') || 'resumen';
+  if (!pestanas.some(function (t) { return t.id === tab; })) tab = 'resumen';
+
+  function url(t) { return 'proyecto.html?id=' + encodeURIComponent(p.id) + '&tab=' + t; }
+  function ir(t) { window.location.href = url(t); }
+  function recargar() { window.location.reload(); }
+
+  /* ======================================================================
+     Cabecera de la ficha
+     ==================================================================== */
+  function ficha() {
+    var c = S.buscarContratante(p.contratanteId);
+    var venc = S.etapasVencidas(p), espera = S.esperandoAprobacion(p);
+    var act = S.etapaActual(p);
+    return '<div class="tarjeta" style="margin-bottom:16px"><div class="tarjeta-cuerpo">' +
+      '<div class="pi-cabecera-fila">' +
+      '<div style="flex:1;min-width:260px">' +
+      '<div class="fila" style="gap:8px;margin-bottom:6px">' +
+      '<span class="badge badge-info sin-punto">' + U.esc(p.id) + '</span>' +
+      U.badge(p.estado) +
+      (venc.length ? '<span class="badge badge-mal">' + venc.length + (venc.length === 1 ? ' etapa vencida' : ' etapas vencidas') + '</span>' : '') +
+      (espera.length ? '<span class="badge badge-aviso">Compuerta en espera</span>' : '') +
+      '</div>' +
+      '<h1>' + U.esc(p.nombre) + '</h1>' +
+      '<p class="suave sm" style="margin-top:6px">' +
+      U.icono('domain', 'icono-sm') + ' ' + U.esc(c ? c.nombre : '—') + ' &nbsp;·&nbsp; ' +
+      U.icono('person', 'icono-sm') + ' ' + U.esc(S.nombreUsuario(p.coordinadorId)) + ' &nbsp;·&nbsp; ' +
+      U.icono('location_on', 'icono-sm') + ' ' + U.esc(p.ubicacion || 'sin ubicación') + '</p>' +
+      '</div>' +
+      '<div class="fila" style="gap:20px;align-items:center">' +
+      '<div style="text-align:right"><span class="eti">Avance</span>' +
+      '<div class="kpi-val" style="font-size:26px">' + S.avance(p) + '<small>%</small></div>' +
+      '<span class="sm tenue">' + (act ? 'etapa ' + act.num + ' de 10' : '10 de 10') + '</span></div>' +
+      '<div style="text-align:right"><span class="eti">Entrega prevista</span>' +
+      '<div class="mono" style="font-size:15px">' + U.esc(p.fechaFin) + '</div>' +
+      '<span class="sm ' + (S.diasHasta(p.fechaFin) < 0 && p.estado !== 'Cerrado' ? '' : 'tenue') + '"' +
+      (S.diasHasta(p.fechaFin) < 0 && p.estado !== 'Cerrado' ? ' style="color:var(--error);font-weight:600"' : '') + '>' +
+      U.esc(p.estado === 'Cerrado' ? 'proyecto cerrado' : F.plazo(p.fechaFin)) + '</span></div>' +
+      '</div></div></div></div>';
+  }
+
+  function barraPestanas() {
+    return '<div class="pestanas">' + pestanas.map(function (t) {
+      return '<a href="' + url(t.id) + '"' + (t.id === tab ? ' aria-current="page"' : '') + '>' +
+        U.icono(t.iconoReal || t.icono, 'icono-sm') + ' ' + U.esc(t.titulo) + '</a>';
+    }).join('') + '</div>';
+  }
+
+  /* ======================================================================
+     Pestaña 5: Resumen
+     ==================================================================== */
+  function vistaResumen() {
+    var t = S.totalesFinancieros(p);
+    var venc = S.etapasVencidas(p);
+    var puedeFin = A.puede('verFinanzas');
+    var html = '<div class="kpis">' +
+      U.kpi({ titulo: 'Avance', icono: 'trending_up', tono: venc.length ? 'alerta' : 'ok',
+        valor: S.avance(p) + '<small>%</small>',
+        pie: p.etapas.filter(function (e) { return e.estado === 'Aprobada'; }).length + ' de 10 etapas aprobadas' }) +
+      U.kpi({ titulo: 'Presupuesto contratado', icono: 'account_balance_wallet',
+        valor: F.dineroCorto(p.presupuesto), pie: 'en dólares' }) +
+      (puedeFin
+        ? U.kpi({ titulo: 'Ejecutado', icono: 'payments',
+            valor: F.dineroCorto(t.egresos),
+            pie: p.presupuesto ? F.porcentaje(t.egresos / p.presupuesto * 100) + ' del contratado' : '—' })
+        : U.kpi({ titulo: 'Equipo', icono: 'groups', valor: F.numero(p.equipo.length), pie: 'profesionales asignados' })) +
+      U.kpi({ titulo: 'Etapas vencidas', icono: 'event_busy', tono: venc.length ? 'alerta' : '',
+        valor: F.numero(venc.length), pie: venc.length ? 'fuera de plazo' : 'todo en plazo' }) +
+      '</div><div style="height:24px"></div>';
+
+    html += '<div class="tarjeta"><div class="tarjeta-cab"><h2>Recorrido de las 10 etapas</h2>' +
+      '<a class="btn btn-sm btn-plano pi-acciones" href="' + url('etapas') + '">Ver detalle</a></div>' +
+      '<div class="tarjeta-cuerpo"><div class="etapas-tira">' + tiraEtapas() + '</div></div></div>';
+
+    html += '<div style="height:24px"></div><div class="rejilla rejilla-2">';
+
+    html += '<div class="tarjeta"><div class="tarjeta-cab"><h2>Datos del expediente</h2></div>' +
+      '<div class="tarjeta-cuerpo pila-sm">';
+    var c = S.buscarContratante(p.contratanteId);
+    [['Código', p.id], ['Tipo', p.tipo], ['Estado', p.estado],
+     ['Contratante', c ? c.nombre : '—'], ['RIF', c ? c.rif : '—'],
+     ['Contacto', c ? c.contacto + ' — ' + c.telefono : '—'],
+     ['Coordinador', S.nombreUsuario(p.coordinadorId)],
+     ['Inicio', p.fechaInicio], ['Entrega prevista', p.fechaFin],
+     ['Ubicación', p.ubicacion || '—']
+    ].forEach(function (f) {
+      html += '<div class="fila" style="gap:12px;align-items:baseline;border-bottom:1px solid var(--borde-fino);padding-bottom:6px">' +
+        '<span class="eti" style="min-width:140px">' + U.esc(f[0]) + '</span>' +
+        '<span style="flex:1" class="sm">' + U.esc(f[1]) + '</span></div>';
+    });
+    html += '</div></div>';
+
+    html += '<div class="tarjeta"><div class="tarjeta-cab"><h2>Contenido del expediente</h2></div>' +
+      '<div class="tarjeta-cuerpo rejilla rejilla-2">' +
+      [['Documentos', p.documentos.length, 'folder', 'documentos'],
+       ['Mediciones de campo', p.mediciones.length, 'forest', 'mediciones'],
+       ['Profesionales', p.equipo.length, 'groups', 'equipo'],
+       ['Movimientos', puedeFin ? p.finanzas.length : '—', 'payments', puedeFin ? 'finanzas' : 'resumen']
+      ].map(function (x) {
+        return '<a class="pozo" style="text-decoration:none;color:inherit;display:block" href="' + url(x[3]) + '">' +
+          '<div class="fila" style="gap:8px">' + U.icono(x[2]) + '<span class="eti">' + U.esc(x[0]) + '</span></div>' +
+          '<div class="kpi-val" style="font-size:24px;margin-top:4px">' + U.esc(x[1]) + '</div></a>';
+      }).join('') + '</div></div>';
+
+    html += '</div>';
+    return html;
+  }
+
+  function tiraEtapas() {
+    return p.etapas.map(function (e) {
+      var clase = e.estado === 'Aprobada' ? 'ok'
+        : e.estado === 'Esperando aprobacion' || e.estado === 'Esperando aprobación' ? 'espera'
+        : e.estado === 'Devuelta' ? 'mal'
+        : e.estado === 'En proceso' ? 'proceso'
+        : e.estado === 'Bloqueada' ? 'bloqueada' : '';
+      if (S.etapaVencida(e)) clase = 'mal';
+      return '<div class="etapa-mini ' + clase + (e.compuerta ? ' compuerta' : '') + '">' +
+        '<div class="fila" style="justify-content:space-between">' +
+        '<span class="n">' + String(e.num).padStart(2, '0') + '</span>' +
+        (e.estado === 'Aprobada' ? U.icono('check_circle', 'icono-sm')
+          : e.estado === 'Bloqueada' ? U.icono('lock', 'icono-sm')
+          : e.compuerta ? U.icono('gavel', 'icono-sm') : '') + '</div>' +
+        '<div class="t">' + U.esc(e.nombre) + '</div>' +
+        '<div class="sm tenue mono">' + U.esc(e.fechaFin) + '</div>' +
+        '<div style="margin-top:6px">' + U.badgeEtapa(e) + '</div></div>';
+    }).join('');
+  }
+
+  /* ======================================================================
+     Pestaña 6: Etapas
+     ==================================================================== */
+  function vistaEtapas() {
+    var html = '<div class="tarjeta"><div class="tarjeta-cab"><h2>Flujo de las 10 etapas</h2>' +
+      '<span class="badge badge-neutro sin-punto pi-acciones">La etapa 6 es la compuerta</span></div>' +
+      '<div class="tarjeta-cuerpo"><div class="etapas-tira">' + tiraEtapas() + '</div></div></div>' +
+      '<div style="height:24px"></div>';
+
+    html += '<div class="pila">';
+    p.etapas.forEach(function (e) {
+      var abierta = e.estado !== 'Aprobada' && e.estado !== 'Bloqueada';
+      if (!abierta && !e.comentario) return;
+      html += panelEtapa(e);
+    });
+    html += '</div>';
+
+    html += '<div style="height:24px"></div><div class="tarjeta"><div class="tarjeta-cab"><h2>Todas las etapas</h2></div>' +
+      '<div class="tabla-envoltura"><table class="tabla responsiva"><thead><tr>' +
+      '<th>#</th><th>Etapa</th><th>Responsable</th><th>Plazo</th><th>Estado</th><th class="derecha">Acción</th>' +
+      '</tr></thead><tbody>';
+    p.etapas.forEach(function (e) {
+      html += '<tr' + (S.etapaVencida(e) ? ' class="alerta"' : '') + '>' +
+        '<td data-eti="#" class="mono">' + String(e.num).padStart(2, '0') + '</td>' +
+        '<td data-eti="Etapa"><span class="principal">' + U.esc(e.nombre) + '</span>' +
+        (e.compuerta ? '<span class="sub">compuerta de aprobación</span>' : '') + '</td>' +
+        '<td data-eti="Responsable" class="sm">' + U.esc(e.responsableId ? S.nombreUsuario(e.responsableId) : '—') + '</td>' +
+        '<td data-eti="Plazo" class="mono">' + U.esc(e.fechaFin) + '<span class="sub">' + U.esc(F.plazo(e.fechaFin)) + '</span></td>' +
+        '<td data-eti="Estado">' + U.badgeEtapa(e) + '</td>' +
+        '<td data-eti="" class="acciones">' + accionesEtapa(e, true) + '</td></tr>';
+    });
+    html += '</tbody></table></div></div>';
+    return html;
+  }
+
+  function accionesEtapa(e, compacto) {
+    var b = [];
+    var clase = compacto ? 'btn btn-sm' : 'btn';
+    var esEspera = e.estado === 'Esperando aprobacion' || e.estado === 'Esperando aprobación';
+    var mia = e.responsableId === yo.id;
+
+    if (esEspera && A.puede('aprobarEtapa')) {
+      b.push('<button type="button" class="' + clase + ' btn-primario" data-aprobar="' + e.num + '">Aprobar</button>');
+      b.push('<button type="button" class="' + clase + '" data-devolver="' + e.num + '">Devolver</button>');
+    } else if ((e.estado === 'En proceso' || e.estado === 'Devuelta' || e.estado === 'Pendiente')) {
+      if (A.puede('completarEtapa') && (rol !== 'profesional' || mia)) {
+        b.push('<button type="button" class="' + clase + ' ' + (compacto ? '' : 'btn-primario') + '" data-completar="' + e.num + '">' +
+          (e.compuerta ? 'Enviar a aprobación' : 'Marcar completada') + '</button>');
+      }
+    }
+    if (!b.length && e.estado === 'Bloqueada') return '<span class="sm tenue">bloqueada</span>';
+    if (!b.length && e.estado === 'Aprobada') return '<span class="sm tenue">' + U.esc(e.fechaAprobacion || '') + '</span>';
+    if (!b.length) return '<span class="sm tenue">sin acción para tu rol</span>';
+    return b.join(' ');
+  }
+
+  function panelEtapa(e) {
+    var esEspera = e.estado === 'Esperando aprobacion' || e.estado === 'Esperando aprobación';
+    var tono = S.etapaVencida(e) ? 'mal' : (esEspera ? '' : (e.estado === 'Devuelta' ? 'mal' : ''));
+    return '<div class="tarjeta etapa-panel ' + tono + '"><div class="tarjeta-cab">' +
+      '<span class="mono" style="font-size:15px">Etapa ' + String(e.num).padStart(2, '0') + '</span>' +
+      '<h2 style="flex:1">' + U.esc(e.nombre) + '</h2>' + U.badgeEtapa(e) + '</div>' +
+      '<div class="tarjeta-cuerpo">' +
+      '<div class="fila" style="gap:24px;margin-bottom:12px">' +
+      '<div><span class="eti">Responsable</span><div class="sm">' + U.esc(e.responsableId ? S.nombreUsuario(e.responsableId) : '—') + '</div></div>' +
+      '<div><span class="eti">Plazo</span><div class="mono">' + U.esc(e.fechaFin) + ' <span class="sm ' +
+      (S.etapaVencida(e) ? '' : 'tenue') + '"' + (S.etapaVencida(e) ? ' style="color:var(--error);font-weight:600"' : '') + '>' +
+      U.esc(F.plazo(e.fechaFin)) + '</span></div></div>' +
+      (e.compuerta ? '<div><span class="eti">Tipo</span><div class="sm">Compuerta de aprobación</div></div>' : '') +
+      '</div>' +
+      (e.comentario
+        ? '<div class="aviso ' + (e.estado === 'Devuelta' ? 'aviso-mal' : '') + '">' + U.icono('info') +
+          '<div><strong>' + (e.estado === 'Devuelta' ? 'Devuelta con observaciones' : 'Comentario') + '</strong>' +
+          U.esc(e.comentario) + '</div></div>'
+        : '') +
+      '</div><div class="pi-modal-pie">' + accionesEtapa(e, false) + '</div></div>';
+  }
+
+  function conectarEtapas() {
+    Array.prototype.forEach.call(cont.querySelectorAll('[data-completar]'), function (b) {
+      b.addEventListener('click', function () {
+        var n = Number(b.getAttribute('data-completar'));
+        var e = p.etapas[n - 1];
+        U.confirmar({
+          titulo: e.compuerta ? 'Enviar la etapa a aprobación' : 'Marcar la etapa como completada',
+          texto: e.compuerta
+            ? 'La etapa ' + n + ' queda esperando la revisión del Coordinador. El proyecto pasa a Detenido hasta que se apruebe.'
+            : 'La etapa ' + n + ' queda aprobada y se desbloquea la siguiente.',
+          confirmar: e.compuerta ? 'Enviar a aprobación' : 'Completar',
+          alConfirmar: function () {
+            S.completarEtapa(p.id, n);
+            U.aviso('Etapa actualizada', 'Etapa ' + n + ' de ' + p.id + '.', 'ok');
+            window.setTimeout(recargar, 500);
+          }
+        });
+      });
+    });
+
+    Array.prototype.forEach.call(cont.querySelectorAll('[data-aprobar],[data-devolver]'), function (b) {
+      b.addEventListener('click', function () {
+        var aprobar = b.hasAttribute('data-aprobar');
+        var n = Number(b.getAttribute(aprobar ? 'data-aprobar' : 'data-devolver'));
+        U.modal({
+          titulo: (aprobar ? 'Aprobar' : 'Devolver') + ' la etapa ' + n,
+          cuerpo: '<div class="campo"><label for="m-com">Comentario ' +
+            (aprobar ? 'de aprobación' : 'de devolución') + ' <span class="req">*</span></label>' +
+            '<textarea id="m-com" placeholder="' +
+            (aprobar ? 'Deja constancia de la conformidad técnica.' : 'Explica qué falta o qué hay que corregir.') +
+            '"></textarea><span class="ayuda">Obligatorio, mínimo 20 caracteres. Queda en la bitácora.</span>' +
+            '<span class="error-txt oculto" id="m-err">Escribe al menos 20 caracteres.</span></div>' +
+            (aprobar ? '<div class="aviso aviso-ok">' + U.icono('check_circle') +
+              '<div><strong>Al aprobar se desbloquea la etapa ' + (n + 1) + '</strong>' +
+              'El proyecto vuelve a estado En ejecución.</div></div>' : ''),
+          confirmar: aprobar ? 'Aprobar etapa' : 'Devolver etapa',
+          claseConfirmar: aprobar ? 'btn-primario' : 'btn-secundario',
+          alConfirmar: function (caja, cerrar) {
+            var txt = caja.querySelector('#m-com').value.trim();
+            if (txt.length < 20) { caja.querySelector('#m-err').classList.remove('oculto'); return; }
+            if (aprobar) S.aprobarEtapa(p.id, n, txt); else S.devolverEtapa(p.id, n, txt);
+            cerrar();
+            U.aviso(aprobar ? 'Etapa aprobada' : 'Etapa devuelta',
+              aprobar ? 'Se desbloqueó la etapa ' + (n + 1) + '.' : 'El responsable debe corregir y reenviar.', 'ok');
+            window.setTimeout(recargar, 600);
+          }
+        });
+      });
+    });
+  }
+
+  /* ======================================================================
+     Pestaña 7: Equipo y honorarios
+     ==================================================================== */
+  function vistaEquipo() {
+    var verTodos = A.puede('verHonorariosDeTodos');
+    var verTotal = A.puede('verTotalHonorarios');
+    var total = S.honorariosTotales(p);
+
+    var nota = verTodos
+      ? 'Ves el honorario de cada profesional porque tu rol lo permite.'
+      : (rol === 'profesional'
+          ? 'Ves el equipo completo, pero solo el monto de tu propio honorario. El resto aparece con un guion.'
+          : 'Ves el total consolidado, no el desglose persona por persona.');
+
+    var html = '<div class="aviso" style="margin-bottom:16px">' + U.icono('lock') +
+      '<div><strong>Visibilidad de honorarios para ' + U.esc(A.nombreRol()) + '</strong>' + U.esc(nota) + '</div></div>';
+
+    html += '<div class="tarjeta"><div class="tarjeta-cab"><h2>Equipo del proyecto</h2>' +
+      '<div class="pi-acciones">' +
+      '<span class="badge badge-neutro sin-punto">' + p.equipo.length + ' profesionales</span>' +
+      (A.puede('asignarEquipo') ? '<button type="button" class="btn btn-sm btn-primario" id="b-asignar">' +
+        U.icono('add', 'icono-sm') + ' Asignar profesional</button>' : '') +
+      '</div></div>';
+
+    if (!p.equipo.length) {
+      html += U.vacio({ icono: 'groups', titulo: 'Sin equipo asignado', texto: 'Todavía no hay profesionales en este proyecto.' });
+    } else {
+      html += '<div class="tabla-envoltura"><table class="tabla responsiva"><thead><tr>' +
+        '<th>Profesional</th><th>Rol en el proyecto</th><th>Especialidad</th>' +
+        '<th class="num">Honorario</th><th class="derecha">Acción</th>' +
+        '</tr></thead><tbody>';
+      p.equipo.forEach(function (m) {
+        var u = S.buscarUsuario(m.usuarioId);
+        var esMio = m.usuarioId === yo.id;
+        var monto;
+        if (verTodos) monto = '<span class="mono">' + F.dinero(m.honorario) + '</span>';
+        else if (rol === 'profesional' && esMio) monto = '<span class="mono" style="color:var(--primario);font-weight:700">' + F.dinero(m.honorario) + '</span>';
+        else monto = '<span class="tenue">—</span>';
+        html += '<tr' + (esMio ? ' style="background:var(--primario-tenue)"' : '') + '>' +
+          '<td data-eti="Profesional"><div class="fila" style="gap:8px">' +
+          '<span class="pi-avatar" style="width:28px;height:28px;font-size:11px">' + U.esc(F.iniciales(u ? u.nombre : '?')) + '</span>' +
+          '<span><span class="principal">' + U.esc(u ? u.nombre : '—') + '</span>' +
+          (esMio ? '<span class="sub" style="color:var(--primario);font-weight:600">tú</span>' : '') + '</span></div></td>' +
+          '<td data-eti="Rol">' + U.esc(m.rolProyecto) + '</td>' +
+          '<td data-eti="Especialidad" class="sm tenue">' + U.esc(u ? u.especialidad : '—') + '</td>' +
+          '<td data-eti="Honorario" class="num">' + monto + '</td>' +
+          '<td data-eti="" class="acciones">' +
+          (A.puede('asignarEquipo') && m.usuarioId !== p.coordinadorId
+            ? '<button type="button" class="btn btn-sm" data-quitar="' + m.usuarioId + '">Quitar</button>'
+            : '<span class="sm tenue">—</span>') + '</td></tr>';
+      });
+      html += '</tbody></table></div>' +
+        '<div class="tarjeta-pie"><span>Total de honorarios pactados</span>' +
+        '<strong class="mono" style="margin-left:auto">' +
+        (verTotal ? F.dinero(total) + ' USD' : '<span class="tenue">confidencial</span>') + '</strong></div>';
+    }
+    return html + '</div>';
+  }
+
+  function conectarEquipo() {
+    var b = document.getElementById('b-asignar');
+    if (b) b.addEventListener('click', function () {
+      var libres = S.estado.usuarios.filter(function (u) {
+        return u.activo && !p.equipo.some(function (m) { return m.usuarioId === u.id; });
+      });
+      if (!libres.length) { U.aviso('Sin candidatos', 'Todos los usuarios activos ya están en el equipo.', 'aviso'); return; }
+      U.modal({
+        titulo: 'Asignar profesional',
+        cuerpo: '<div class="rejilla"><div class="campo"><label for="a-u">Profesional</label>' +
+          '<select id="a-u">' + U.selectOpciones(libres.map(function (u) { return { valor: u.id, texto: u.nombre + ' — ' + u.especialidad }; }), '', 'Elige') + '</select></div>' +
+          '<div class="campo"><label for="a-r">Rol en el proyecto</label>' +
+          '<select id="a-r">' + U.selectOpciones(cat.rolesProyecto, '', 'Elige') + '</select>' +
+          '<span class="ayuda">Lista controlada del catálogo.</span></div>' +
+          '<div class="campo"><label for="a-h">Honorario pactado</label>' +
+          '<div class="campo-unidad"><input id="a-h" type="number" min="0" step="50" placeholder="0"><span class="unidad">USD</span></div></div></div>',
+        confirmar: 'Asignar',
+        alConfirmar: function (caja, cerrar) {
+          var uid = caja.querySelector('#a-u').value, rp = caja.querySelector('#a-r').value, h = caja.querySelector('#a-h').value;
+          if (!uid || !rp) { U.aviso('Datos incompletos', 'Elige el profesional y su rol.', 'aviso'); return; }
+          S.asignarMiembro(p.id, uid, rp, h);
+          cerrar(); U.aviso('Profesional asignado', S.nombreUsuario(uid) + ' se sumó al equipo.', 'ok');
+          window.setTimeout(recargar, 500);
+        }
+      });
+    });
+    Array.prototype.forEach.call(cont.querySelectorAll('[data-quitar]'), function (btn) {
+      btn.addEventListener('click', function () {
+        var uid = btn.getAttribute('data-quitar');
+        U.confirmar({
+          titulo: 'Quitar del equipo', texto: '¿Quitar a ' + S.nombreUsuario(uid) + ' del equipo de este proyecto?',
+          confirmar: 'Quitar', peligro: true,
+          alConfirmar: function () { S.quitarMiembro(p.id, uid); recargar(); }
+        });
+      });
+    });
+  }
+
+  /* ======================================================================
+     Pestaña 8: Documentos. Se registra el nombre, no el contenido.
+     ==================================================================== */
+  function vistaDocumentos() {
+    var html = '<div class="aviso" style="margin-bottom:16px">' + U.icono('info') +
+      '<div><strong>Los documentos se registran por nombre</strong>' +
+      'Esta beta no almacena archivos ni los sube a ningún servidor: guarda el nombre, el tipo, la etapa, la versión y el autor.</div></div>';
+
+    html += '<div id="tabla-docs"></div>';
+    return html;
+  }
+
+  function conectarDocumentos() {
+    var caja = document.getElementById('tabla-docs');
+    if (!caja) return;
+    U.tabla(caja, {
+      datos: p.documentos.slice(),
+      textoBuscar: 'Nombre del archivo, tipo o autor',
+      buscar: ['nombre', 'tipo', 'version', function (d) { return S.nombreUsuario(d.autorId); }],
+      filtros: [
+        { id: 'tipo', titulo: 'Tipo', todos: 'Todos los tipos', campo: 'tipo', opciones: cat.tiposDocumento },
+        { id: 'etapa', titulo: 'Etapa', todos: 'Todas', campo: 'etapa',
+          opciones: p.etapas.map(function (e) { return { valor: e.num, texto: String(e.num).padStart(2, '0') + ' · ' + e.nombre }; }) }
+      ],
+      ordenPor: 'fecha', ordenDir: 'desc',
+      csv: { nombre: 'documentos-' + p.id + '.csv' },
+      vacio: { icono: 'folder', titulo: 'Sin documentos', texto: 'Todavía no se ha registrado ningún documento en este expediente.' },
+      columnas: [
+        { clave: 'nombre', titulo: 'Documento', orden: true,
+          render: function (d) { return '<span class="principal">' + U.esc(d.nombre) + '</span>' +
+            '<span class="sub">' + U.esc(S.nombreUsuario(d.autorId)) + '</span>'; },
+          csv: function (d) { return d.nombre; } },
+        { clave: 'tipo', titulo: 'Tipo', orden: true,
+          render: function (d) { return '<span class="sm">' + U.esc(d.tipo) + '</span>'; } },
+        { clave: 'etapa', titulo: 'Etapa', tipo: 'mono', orden: true,
+          render: function (d) { return '<span class="mono">' + String(d.etapa).padStart(2, '0') + '</span>'; } },
+        { clave: 'version', titulo: 'Versión', tipo: 'mono', orden: true },
+        { clave: 'fecha', titulo: 'Fecha', tipo: 'mono', orden: true },
+        { clave: 'acciones', titulo: 'Acción', tipo: 'acciones',
+          render: function (d) {
+            return A.puede('eliminarDocumento')
+              ? '<button type="button" class="btn btn-sm" data-borrar="' + d.id + '">Quitar</button>'
+              : '<span class="sm tenue">—</span>';
+          } }
+      ]
+    });
+
+    /* Botón de carga sobre la tabla */
+    if (A.puede('subirDocumento')) {
+      var barra = caja.querySelector('.filtros .fin');
+      if (barra) {
+        var b = U.el('<button type="button" class="btn btn-sm btn-primario" id="b-subir">' +
+          U.icono('upload_file', 'icono-sm') + ' Registrar documento</button>');
+        barra.appendChild(b);
+        b.addEventListener('click', abrirSubida);
+      }
+    }
+    caja.addEventListener('click', function (ev) {
+      var t = ev.target.closest('[data-borrar]');
+      if (!t) return;
+      var d = p.documentos.filter(function (x) { return x.id === t.getAttribute('data-borrar'); })[0];
+      U.confirmar({
+        titulo: 'Quitar el registro', texto: '¿Quitar "' + d.nombre + '" del expediente? Solo se borra el registro.',
+        confirmar: 'Quitar', peligro: true,
+        alConfirmar: function () { S.eliminarDocumento(p.id, d.id); recargar(); }
+      });
+    });
+  }
+
+  function abrirSubida() {
+    U.modal({
+      titulo: 'Registrar documento',
+      cuerpo: '<div class="rejilla">' +
+        '<div class="campo"><label for="d-n">Nombre del archivo <span class="req">*</span></label>' +
+        '<input id="d-n" type="text" placeholder="informe_preliminar.pdf"></div>' +
+        '<div class="campo"><label for="d-t">Tipo de documento <span class="req">*</span></label>' +
+        '<select id="d-t">' + U.selectOpciones(cat.tiposDocumento, '', 'Elige un tipo') + '</select>' +
+        '<span class="ayuda">Lista controlada del catálogo.</span></div>' +
+        '<div class="rejilla rejilla-2">' +
+        '<div class="campo"><label for="d-e">Etapa asociada</label><select id="d-e">' +
+        U.selectOpciones(p.etapas.map(function (e) { return { valor: e.num, texto: String(e.num).padStart(2, '0') + ' · ' + e.nombre }; }), '') + '</select></div>' +
+        '<div class="campo"><label for="d-v">Versión</label><input id="d-v" type="text" value="v1.0"></div>' +
+        '</div>' +
+        '<div class="aviso">' + U.icono('info') + '<div><strong>No se sube ningún archivo</strong>' +
+        'Se registra el nombre para que el expediente quede completo en la demostración.</div></div></div>',
+      confirmar: 'Registrar',
+      alConfirmar: function (caja, cerrar) {
+        var n = caja.querySelector('#d-n').value.trim(), t = caja.querySelector('#d-t').value;
+        if (!n || !t) { U.aviso('Datos incompletos', 'Indica el nombre del archivo y su tipo.', 'aviso'); return; }
+        S.agregarDocumento(p.id, { nombre: n, tipo: t, etapa: caja.querySelector('#d-e').value, version: caja.querySelector('#d-v').value.trim() || 'v1.0' });
+        cerrar(); U.aviso('Documento registrado', n + ' quedó en el expediente.', 'ok');
+        window.setTimeout(recargar, 500);
+      }
+    });
+  }
+
+  /* ======================================================================
+     Pestaña 9: Mediciones de campo.
+     El volumen es SIEMPRE captura manual. No hay ninguna ecuación de
+     cubicación ni factor de conversión en ningún punto del sistema.
+     ==================================================================== */
+  function vistaMediciones() {
+    var resumen = S.resumenPorEspecie(p);
+    var totalVol = resumen.reduce(function (a, r) { return a + r.volumen; }, 0);
+    var totalArb = resumen.reduce(function (a, r) { return a + r.arboles; }, 0);
+    var parcelas = {};
+    p.mediciones.forEach(function (m) { parcelas[m.parcela] = true; });
+
+    var html = '<div class="aviso aviso-aviso" style="margin-bottom:16px">' + U.icono('warning') +
+      '<div><strong>El volumen es captura manual</strong>' +
+      'El sistema no calcula el volumen ni aplica ninguna ecuación de cubicación o factor de conversión. ' +
+      'Registra el valor en metros cúbicos tal como lo determina el profesional en campo, y solo lo suma por especie.</div></div>';
+
+    html += '<div class="kpis">' +
+      U.kpi({ titulo: 'Parcelas medidas', icono: 'straighten', valor: F.numero(Object.keys(parcelas).length), pie: 'con al menos un registro' }) +
+      U.kpi({ titulo: 'Registros', icono: 'table_chart', valor: F.numero(p.mediciones.length), pie: 'mediciones capturadas' }) +
+      U.kpi({ titulo: 'Árboles', icono: 'forest', valor: F.numero(totalArb), pie: 'suma de individuos' }) +
+      U.kpi({ titulo: 'Volumen capturado', icono: 'inventory_2', valor: F.numero(totalVol, 1) + '<small> m³</small>', pie: 'suma de los valores manuales' }) +
+      '</div><div style="height:24px"></div>';
+
+    html += '<div class="rejilla rejilla-lateral-sm">';
+
+    /* Formulario de captura */
+    if (A.puede('capturarCampo')) {
+      html += '<div class="tarjeta"><div class="tarjeta-cab"><h2>Capturar medición</h2></div>' +
+        '<div class="tarjeta-cuerpo pila-sm">' +
+        '<div class="campo"><label for="c-parcela">Finca o parcela <span class="req">*</span></label>' +
+        '<input id="c-parcela" type="text" placeholder="P-04"></div>' +
+        '<div class="campo"><label for="c-ha">Superficie</label>' +
+        '<div class="campo-unidad"><input id="c-ha" type="number" min="0" step="0.1" placeholder="0,0"><span class="unidad">ha</span></div></div>' +
+        '<div class="campo"><label for="c-especie">Especie <span class="req">*</span></label>' +
+        '<select id="c-especie">' + U.selectOpciones(
+          cat.especies.map(function (e) { return { valor: e.id, texto: e.comun + ' — ' + e.cientifico }; }), '', 'Elige una especie') + '</select>' +
+        '<span class="ayuda">Lista controlada. No se escribe a mano.</span></div>' +
+        '<div class="rejilla rejilla-2">' +
+        '<div class="campo"><label for="c-arboles">N.º de árboles</label>' +
+        '<div class="campo-unidad"><input id="c-arboles" type="number" min="0" step="1" placeholder="0"><span class="unidad">ind</span></div></div>' +
+        '<div class="campo"><label for="c-altura">Altura</label>' +
+        '<div class="campo-unidad"><input id="c-altura" type="number" min="0" step="0.1" placeholder="0,0"><span class="unidad">m</span></div></div>' +
+        '</div>' +
+        '<div class="campo"><label for="c-dap">Diámetro a la altura del pecho</label>' +
+        '<div class="campo-unidad"><input id="c-dap" type="number" min="0" step="0.1" placeholder="0,0"><span class="unidad">cm</span></div></div>' +
+        '<div class="campo"><label for="c-volumen" style="color:var(--secundario)">Volumen (captura manual) <span class="req">*</span></label>' +
+        '<div class="campo-unidad"><input id="c-volumen" type="number" min="0" step="0.001" placeholder="0,000"><span class="unidad">m³</span></div>' +
+        '<span class="ayuda">Lo determina el profesional. El sistema no lo calcula.</span></div>' +
+        '<button type="button" class="btn btn-primario" id="b-medir">' + U.icono('add') + ' Registrar medición</button>' +
+        '</div></div>';
+    } else {
+      html += '<div class="tarjeta"><div class="tarjeta-cuerpo">' +
+        U.vacio({ icono: 'lock', titulo: 'Solo lectura', texto: 'Tu rol puede consultar las mediciones, pero no capturarlas.' }) +
+        '</div></div>';
+    }
+
+    /* Resumen por especie */
+    html += '<div class="tarjeta"><div class="tarjeta-cab"><h2>Resumen por especie</h2>' +
+      '<span class="badge badge-neutro sin-punto pi-acciones">suma de volúmenes capturados</span></div>';
+    if (!resumen.length) {
+      html += U.vacio({ icono: 'forest', titulo: 'Sin mediciones', texto: 'Captura la primera medición para ver el resumen.' });
+    } else {
+      html += '<div class="tabla-envoltura"><table class="tabla responsiva tabla-compacta"><thead><tr>' +
+        '<th>Especie</th><th class="num">Parcelas</th><th class="num">Árboles</th>' +
+        '<th class="num">Superficie (ha)</th><th class="num">Volumen (m³)</th></tr></thead><tbody>';
+      resumen.forEach(function (r) {
+        var e = S.buscarEspecie(r.especieId);
+        html += '<tr><td data-eti="Especie"><span class="principal">' + U.esc(e ? e.comun : '—') + '</span>' +
+          '<span class="sub" style="font-style:italic">' + U.esc(e ? e.cientifico : '') + '</span></td>' +
+          '<td data-eti="Parcelas" class="num">' + r.numParcelas + '</td>' +
+          '<td data-eti="Árboles" class="num">' + F.numero(r.arboles) + '</td>' +
+          '<td data-eti="Superficie" class="num">' + F.numero(r.hectareas, 1) + '</td>' +
+          '<td data-eti="Volumen" class="num" style="font-weight:700;color:var(--secundario)">' + F.numero(r.volumen, 3) + '</td></tr>';
+      });
+      html += '</tbody></table></div><div class="tarjeta-pie"><span>Total capturado</span>' +
+        '<strong class="mono" style="margin-left:auto">' + F.numero(totalVol, 3) + ' m³</strong></div>';
+    }
+    html += '</div></div>';
+
+    html += '<div style="height:24px"></div><div id="tabla-med"></div>';
+    return html;
+  }
+
+  function conectarMediciones() {
+    var b = document.getElementById('b-medir');
+    if (b) b.addEventListener('click', function () {
+      function v(id) { return document.getElementById(id).value.trim(); }
+      var parcela = v('c-parcela'), especie = v('c-especie'), vol = v('c-volumen');
+      if (!parcela) { U.aviso('Falta la parcela', 'Indica la finca o parcela.', 'aviso'); return; }
+      if (!especie) { U.aviso('Falta la especie', 'Elige una especie de la lista controlada.', 'aviso'); return; }
+      if (vol === '' || isNaN(Number(vol))) { U.aviso('Falta el volumen', 'El volumen es captura manual y es obligatorio.', 'aviso'); return; }
+      var m = S.agregarMedicion(p.id, {
+        parcela: parcela, hectareas: v('c-ha'), especieId: especie,
+        arboles: v('c-arboles'), altura: v('c-altura'), dap: v('c-dap'), volumen: vol
+      });
+      U.aviso('Medición registrada', 'Parcela ' + m.parcela + ', volumen ' + F.numero(m.volumen, 3) + ' m³ tal como se capturó.', 'ok');
+      window.setTimeout(recargar, 600);
+    });
+
+    var caja = document.getElementById('tabla-med');
+    if (!caja) return;
+    U.tabla(caja, {
+      datos: p.mediciones.slice(),
+      textoBuscar: 'Parcela, especie o responsable',
+      buscar: ['parcela', function (m) { return S.nombreEspecie(m.especieId); }, function (m) { return S.nombreUsuario(m.responsableId); }],
+      filtros: [
+        { id: 'especie', titulo: 'Especie', todos: 'Todas', campo: 'especieId',
+          opciones: cat.especies.map(function (e) { return { valor: e.id, texto: e.comun }; }) },
+        { id: 'parcela', titulo: 'Parcela', todos: 'Todas', campo: 'parcela',
+          opciones: Object.keys(p.mediciones.reduce(function (a, m) { a[m.parcela] = 1; return a; }, {})) }
+      ],
+      ordenPor: 'fecha', ordenDir: 'desc', compacta: true,
+      csv: { nombre: 'mediciones-' + p.id + '.csv' },
+      vacio: { icono: 'forest', titulo: 'Libro de campo vacío', texto: 'No hay mediciones registradas en este proyecto.' },
+      columnas: [
+        { clave: 'parcela', titulo: 'Parcela', tipo: 'mono', orden: true },
+        { clave: 'especieId', titulo: 'Especie', orden: true,
+          valorOrden: function (m) { return S.nombreEspecie(m.especieId); },
+          render: function (m) { return U.esc(S.nombreEspecie(m.especieId)); },
+          csv: function (m) { return S.nombreEspecie(m.especieId); } },
+        { clave: 'hectareas', titulo: 'Sup. (ha)', tipo: 'num', orden: true,
+          render: function (m) { return F.numero(m.hectareas, 1); } },
+        { clave: 'arboles', titulo: 'Árboles', tipo: 'num', orden: true,
+          render: function (m) { return F.numero(m.arboles); } },
+        { clave: 'altura', titulo: 'Altura (m)', tipo: 'num', orden: true,
+          render: function (m) { return F.numero(m.altura, 1); } },
+        { clave: 'dap', titulo: 'DAP (cm)', tipo: 'num', orden: true,
+          render: function (m) { return F.numero(m.dap, 1); } },
+        { clave: 'volumen', titulo: 'Volumen (m³)', tipo: 'num', orden: true,
+          render: function (m) { return '<span style="font-weight:700;color:var(--secundario)">' + F.numero(m.volumen, 3) + '</span>'; },
+          csv: function (m) { return F.numero(m.volumen, 3); } },
+        { clave: 'fecha', titulo: 'Fecha', tipo: 'mono', orden: true },
+        { clave: 'responsableId', titulo: 'Responsable', orden: true,
+          render: function (m) { return '<span class="sm">' + U.esc(S.nombreUsuario(m.responsableId)) + '</span>'; },
+          csv: function (m) { return S.nombreUsuario(m.responsableId); } }
+      ]
+    });
+  }
+
+  /* ======================================================================
+     Pestaña 10: Finanzas
+     ==================================================================== */
+  function vistaFinanzas() {
+    var t = S.totalesFinancieros(p);
+    var html = '<div class="kpis">' +
+      U.kpi({ titulo: 'Presupuesto', icono: 'account_balance_wallet', valor: F.dineroCorto(p.presupuesto), pie: 'contratado, en dólares' }) +
+      U.kpi({ titulo: 'Ingresos', icono: 'arrow_downward', tono: 'ok', valor: F.dineroCorto(t.ingresos), pie: 'liquidados' }) +
+      U.kpi({ titulo: 'Egresos', icono: 'arrow_upward', valor: F.dineroCorto(t.egresos), pie: 'liquidados' }) +
+      U.kpi({ titulo: 'Por liquidar', icono: 'hourglass_top', tono: t.porLiquidar ? 'aviso' : '',
+        valor: F.dineroCorto(t.porLiquidar), pie: 'no suma al ejecutado' }) +
+      '</div>' +
+      '<div class="aviso" style="margin:16px 0">' + U.icono('info') +
+      '<div><strong>Lo que está por liquidar se contabiliza aparte</strong>' +
+      'Solo los movimientos liquidados entran en ingresos y egresos. El sistema no procesa pagos ni mueve dinero real.</div></div>' +
+      '<div id="tabla-fin"></div>';
+    return html;
+  }
+
+  function conectarFinanzas() {
+    var caja = document.getElementById('tabla-fin');
+    if (!caja) return;
+    U.tabla(caja, {
+      datos: p.finanzas.slice(),
+      textoBuscar: 'Concepto, categoría o responsable',
+      buscar: ['concepto', 'categoria', function (m) { return S.nombreUsuario(m.responsableId); }],
+      filtros: [
+        { id: 'tipo', titulo: 'Tipo', todos: 'Ingresos y egresos', campo: 'tipo', opciones: cat.tiposMovimiento },
+        { id: 'categoria', titulo: 'Categoría', todos: 'Todas', campo: 'categoria',
+          opciones: cat.categoriasIngreso.concat(cat.categoriasEgreso) },
+        { id: 'estado', titulo: 'Estado', todos: 'Todos', campo: 'estado', opciones: cat.estadosMovimiento }
+      ],
+      ordenPor: 'fecha', ordenDir: 'desc',
+      csv: { nombre: 'finanzas-' + p.id + '.csv' },
+      vacio: { icono: 'payments', titulo: 'Sin movimientos', texto: 'Este proyecto todavía no tiene movimientos financieros.' },
+      columnas: [
+        { clave: 'fecha', titulo: 'Fecha', tipo: 'mono', orden: true },
+        { clave: 'tipo', titulo: 'Tipo', orden: true, render: function (m) { return U.badge(m.tipo); } },
+        { clave: 'categoria', titulo: 'Categoría', orden: true,
+          render: function (m) { return '<span class="sm">' + U.esc(m.categoria) + '</span>'; } },
+        { clave: 'concepto', titulo: 'Concepto', orden: true,
+          render: function (m) { return '<span class="principal">' + U.esc(m.concepto) + '</span>' +
+            '<span class="sub">' + U.esc(S.nombreUsuario(m.responsableId)) + '</span>'; },
+          csv: function (m) { return m.concepto; } },
+        { clave: 'monto', titulo: 'Monto (USD)', tipo: 'num', orden: true,
+          render: function (m) {
+            return '<span style="font-weight:700;color:' + (m.tipo === 'Ingreso' ? 'var(--primario)' : 'var(--texto)') + '">' +
+              (m.tipo === 'Egreso' ? '−' : '') + F.dinero(m.monto) + '</span>';
+          },
+          csv: function (m) { return (m.tipo === 'Egreso' ? '-' : '') + F.dinero(m.monto, false); } },
+        { clave: 'estado', titulo: 'Estado', orden: true, render: function (m) { return U.badge(m.estado); } },
+        { clave: 'acciones', titulo: 'Acción', tipo: 'acciones',
+          render: function (m) {
+            if (m.estado === 'Por liquidar' && A.puede('liquidarFinanzas')) {
+              return '<button type="button" class="btn btn-sm btn-primario" data-liquidar="' + m.id + '">Liquidar</button>';
+            }
+            return '<span class="sm tenue">—</span>';
+          } }
+      ]
+    });
+
+    if (A.puede('registrarFinanzas')) {
+      var barra = caja.querySelector('.filtros .fin');
+      if (barra) {
+        var b = U.el('<button type="button" class="btn btn-sm btn-primario">' +
+          U.icono('add', 'icono-sm') + ' Registrar movimiento</button>');
+        barra.appendChild(b);
+        b.addEventListener('click', abrirMovimiento);
+      }
+    }
+    caja.addEventListener('click', function (ev) {
+      var t = ev.target.closest('[data-liquidar]');
+      if (!t) return;
+      var m = p.finanzas.filter(function (x) { return x.id === t.getAttribute('data-liquidar'); })[0];
+      U.confirmar({
+        titulo: 'Liquidar el movimiento',
+        texto: 'Se marca como liquidado ' + F.dinero(m.monto) + ' USD en ' + m.categoria + '. Pasa a contar en el ejecutado.',
+        confirmar: 'Liquidar',
+        alConfirmar: function () { S.liquidarMovimiento(p.id, m.id); recargar(); }
+      });
+    });
+  }
+
+  function abrirMovimiento() {
+    function cats(tipo) { return tipo === 'Ingreso' ? cat.categoriasIngreso : cat.categoriasEgreso; }
+    var cerrar = U.modal({
+      titulo: 'Registrar movimiento financiero',
+      cuerpo: '<div class="rejilla">' +
+        '<div class="rejilla rejilla-2">' +
+        '<div class="campo"><label for="m-tipo">Tipo <span class="req">*</span></label>' +
+        '<select id="m-tipo">' + U.selectOpciones(cat.tiposMovimiento, 'Egreso') + '</select></div>' +
+        '<div class="campo"><label for="m-monto">Monto <span class="req">*</span></label>' +
+        '<div class="campo-unidad"><input id="m-monto" type="number" min="0" step="0.01" placeholder="0,00"><span class="unidad">USD</span></div></div>' +
+        '</div>' +
+        '<div class="campo"><label for="m-cat">Categoría <span class="req">*</span></label>' +
+        '<select id="m-cat">' + U.selectOpciones(cats('Egreso'), '', 'Elige una categoría') + '</select>' +
+        '<span class="ayuda">Lista controlada. Si intentas usar una categoría que no está en el catálogo, el sistema rechaza el movimiento.</span></div>' +
+        '<div class="campo"><label for="m-concepto">Concepto <span class="req">*</span></label>' +
+        '<textarea id="m-concepto" placeholder="Detalle de la partida"></textarea></div>' +
+        '<div class="rejilla rejilla-2">' +
+        '<div class="campo"><label for="m-estado">Estado <span class="req">*</span></label>' +
+        '<select id="m-estado">' + U.selectOpciones(cat.estadosMovimiento, 'Por liquidar') + '</select></div>' +
+        '<div class="campo"><label for="m-resp">Responsable</label>' +
+        '<select id="m-resp">' + U.selectOpciones(
+          S.estado.usuarios.filter(function (u) { return u.activo; }).map(function (u) { return { valor: u.id, texto: u.nombre }; }),
+          S.usuario().id) + '</select></div>' +
+        '</div></div>',
+      confirmar: 'Registrar',
+      alConfirmar: function (caja, cierra) {
+        var tipo = caja.querySelector('#m-tipo').value;
+        var mov = {
+          tipo: tipo,
+          categoria: caja.querySelector('#m-cat').value,
+          concepto: caja.querySelector('#m-concepto').value.trim(),
+          monto: caja.querySelector('#m-monto').value,
+          estado: caja.querySelector('#m-estado').value,
+          responsableId: caja.querySelector('#m-resp').value
+        };
+        if (!mov.categoria || !mov.concepto || !mov.monto) {
+          U.aviso('Datos incompletos', 'Completa categoría, concepto y monto.', 'aviso'); return;
+        }
+        if (!S.agregarMovimiento(p.id, mov)) {
+          U.aviso('Movimiento rechazado', 'La categoría o el estado no están en el catálogo.', 'mal'); return;
+        }
+        cierra(); U.aviso('Movimiento registrado', F.dinero(mov.monto) + ' USD en ' + mov.categoria + '.', 'ok');
+        window.setTimeout(recargar, 500);
+      }
+    });
+    /* Al cambiar el tipo cambian las categorías disponibles. */
+    var selTipo = document.querySelector('#m-tipo'), selCat = document.querySelector('#m-cat');
+    if (selTipo && selCat) {
+      selTipo.addEventListener('change', function () {
+        selCat.innerHTML = U.selectOpciones(cats(selTipo.value), '', 'Elige una categoría');
+      });
+    }
+  }
+
+  /* ======================================================================
+     Pestaña 11: Bitácora del proyecto
+     ==================================================================== */
+  function vistaBitacora() {
+    var logs = S.bitacoraDe(p.id);
+    var html = '<div class="tarjeta"><div class="tarjeta-cab"><h2>Bitácora del proyecto</h2>' +
+      '<span class="badge badge-neutro sin-punto pi-acciones">' + logs.length + ' registros</span></div>';
+    if (!logs.length) {
+      html += U.vacio({ icono: 'history_edu', titulo: 'Sin registros', texto: 'Todavía no hay movimientos registrados para este expediente.' });
+    } else {
+      html += '<div class="tarjeta-cuerpo"><div class="bitacora-lista">';
+      logs.forEach(function (b) {
+        html += '<div class="bitacora-item"><div><div class="cuando">' + U.esc(b.fechaHora) + '</div>' +
+          '<div class="quien">' + U.esc(S.nombreUsuario(b.usuarioId)) + '</div></div>' +
+          '<div><div class="accion">' + U.esc(S.etiquetaAccion(b.accion)) + '</div>' +
+          '<div class="sm suave">' + U.esc(b.detalle) + '</div></div></div>';
+      });
+      html += '</div></div>';
+    }
+    return html + '</div>';
+  }
+
+  /* ======================================================================
+     Montaje
+     ==================================================================== */
+  document.getElementById('pi-ficha').innerHTML = ficha();
+  document.getElementById('pi-pestanas').innerHTML = barraPestanas();
+
+  var vistas = {
+    resumen: vistaResumen, etapas: vistaEtapas, equipo: vistaEquipo,
+    documentos: vistaDocumentos, mediciones: vistaMediciones,
+    finanzas: vistaFinanzas, bitacora: vistaBitacora
+  };
+  cont.innerHTML = (vistas[tab] || vistaResumen)();
+
+  if (tab === 'etapas') conectarEtapas();
+  if (tab === 'equipo') conectarEquipo();
+  if (tab === 'documentos') conectarDocumentos();
+  if (tab === 'mediciones') conectarMediciones();
+  if (tab === 'finanzas') conectarFinanzas();
+});
+</script>
+</body>
+</html>

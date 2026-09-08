@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contratantes &middot; Beta &middot; Proyectos Integrales</title>
+<meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/app.css">
+<!-- seed, store y auth van en el head: la guarda de permisos debe correr
+     ANTES de pintar. Si el rol no puede ver esta pagina, auth.js redirige. -->
+<script src="assets/seed.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/auth.js"></script>
+</head>
+<body class="pi-verificando">
+<main class="pi-lienzo">
+  <div id="pi-cabecera"></div>
+  <div id="pi-kpis"></div>
+  <div style="height:24px"></div>
+  <div class="rejilla rejilla-lateral">
+    <div id="pi-lista"></div>
+    <div id="pi-detalle"></div>
+  </div>
+</main>
+<script src="assets/icons.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/demo.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+
+PI.listo(function () {
+  var S = PI.store, U = PI.ui, A = PI.auth, F = PI.fmt;
+  var sel = S.estado.contratantes[0] ? S.estado.contratantes[0].id : null;
+
+  function proyectosDe(cid) {
+    return S.estado.proyectos.filter(function (p) { return p.contratanteId === cid; });
+  }
+  function contratadoDe(cid) {
+    return proyectosDe(cid).reduce(function (a, p) { return a + p.presupuesto; }, 0);
+  }
+
+  var totalContratado = S.estado.contratantes.reduce(function (a, c) { return a + contratadoDe(c.id); }, 0);
+  var conActivos = S.estado.contratantes.filter(function (c) {
+    return proyectosDe(c.id).some(function (p) { return p.estado !== 'Cerrado'; });
+  });
+
+  document.getElementById('pi-cabecera').innerHTML = PI.shell.cabecera({
+    kicker: 'Directorio',
+    titulo: 'Contratantes',
+    texto: 'Empresas e instituciones que contratan a la consultora. De aquí salen las opciones al dar de alta un proyecto.',
+    acciones: A.puede('gestionarContratantes')
+      ? '<button type="button" class="btn btn-primario" id="b-nuevo">' + U.icono('add_circle') + ' Nuevo contratante</button>' : ''
+  });
+
+  document.getElementById('pi-kpis').innerHTML = '<div class="kpis">' +
+    U.kpi({ titulo: 'Contratantes', icono: 'domain', valor: F.numero(S.estado.contratantes.length), pie: 'en el directorio' }) +
+    U.kpi({ titulo: 'Con proyectos activos', icono: 'folder_open', tono: 'ok', valor: F.numero(conActivos.length), pie: 'relación vigente' }) +
+    U.kpi({ titulo: 'Contratado acumulado', icono: 'trending_up', valor: F.dineroCorto(totalContratado), pie: 'suma de presupuestos, en dólares' }) +
+    U.kpi({ titulo: 'Sectores', icono: 'inventory_2',
+      valor: F.numero(Object.keys(S.estado.contratantes.reduce(function (a, c) { a[c.sector] = 1; return a; }, {})).length),
+      pie: 'distintos en la cartera' }) +
+    '</div>';
+
+  function pintarLista() {
+    var html = '<div class="tarjeta"><div class="tarjeta-cab"><h2>Directorio</h2></div>' +
+      '<div class="tarjeta-cuerpo"><div class="campo" style="margin-bottom:12px">' +
+      '<label for="c-q">Buscar</label><input id="c-q" type="search" placeholder="Nombre, RIF o sector"></div>' +
+      '<div class="pila-sm" id="c-items"></div></div></div>';
+    document.getElementById('pi-lista').innerHTML = html;
+    var q = document.getElementById('c-q');
+    q.addEventListener('input', function () { pintarItems(q.value); });
+    pintarItems('');
+  }
+
+  function pintarItems(filtro) {
+    var f = U.sinAcentos(filtro);
+    var lista = S.estado.contratantes.filter(function (c) {
+      return !f || U.sinAcentos(c.nombre + ' ' + c.rif + ' ' + c.sector).indexOf(f) !== -1;
+    });
+    var caja = document.getElementById('c-items');
+    if (!lista.length) { caja.innerHTML = '<p class="sm tenue">Sin resultados.</p>'; return; }
+    caja.innerHTML = lista.map(function (c) {
+      var ps = proyectosDe(c.id);
+      var activos = ps.filter(function (p) { return p.estado !== 'Cerrado'; }).length;
+      return '<button type="button" class="pozo" data-c="' + c.id + '" style="text-align:left;width:100%;border-color:' +
+        (c.id === sel ? 'var(--primario)' : 'var(--borde-fino)') + '">' +
+        '<div class="fila" style="justify-content:space-between;gap:8px">' +
+        '<strong class="sm">' + U.esc(c.nombre) + '</strong>' +
+        '<span class="badge badge-neutro sin-punto">' + ps.length + '</span></div>' +
+        '<div class="sm tenue mono">' + U.esc(c.rif) + '</div>' +
+        '<div class="sm tenue">' + U.esc(c.sector) + ' · ' + activos + (activos === 1 ? ' proyecto activo' : ' proyectos activos') + '</div>' +
+        '</button>';
+    }).join('');
+    Array.prototype.forEach.call(caja.querySelectorAll('[data-c]'), function (b) {
+      b.addEventListener('click', function () { sel = b.getAttribute('data-c'); pintarItems(filtro); pintarDetalle(); });
+    });
+  }
+
+  function pintarDetalle() {
+    var c = S.buscarContratante(sel);
+    var caja = document.getElementById('pi-detalle');
+    if (!c) {
+      caja.innerHTML = '<div class="tarjeta">' + U.vacio({ icono: 'domain', titulo: 'Elige un contratante', texto: 'Selecciona una empresa del directorio.' }) + '</div>';
+      return;
+    }
+    var ps = proyectosDe(c.id);
+    var html = '<div class="tarjeta"><div class="tarjeta-cab">' +
+      '<h2 style="flex:1">' + U.esc(c.nombre) + '</h2>' +
+      '<span class="badge badge-info sin-punto">' + U.esc(c.sector) + '</span></div>' +
+      '<div class="tarjeta-cuerpo rejilla rejilla-2">';
+    [['RIF', c.rif], ['Persona de contacto', c.contacto], ['Cargo', c.cargo],
+     ['Teléfono', c.telefono], ['Correo', c.correo], ['Dirección', c.direccion]
+    ].forEach(function (f) {
+      html += '<div><span class="eti">' + U.esc(f[0]) + '</span><div class="sm">' + U.esc(f[1] || '—') + '</div></div>';
+    });
+    html += '</div>' +
+      '<div class="tarjeta-pie"><span>Contratado acumulado</span>' +
+      '<strong class="mono" style="margin-left:auto">' + F.dinero(contratadoDe(c.id)) + ' USD</strong></div></div>';
+
+    html += '<div style="height:16px"></div><div class="tarjeta"><div class="tarjeta-cab">' +
+      '<h2>Proyectos de este contratante</h2>' +
+      '<span class="badge badge-neutro sin-punto pi-acciones">' + ps.length + '</span></div>';
+    if (!ps.length) {
+      html += U.vacio({ icono: 'folder_open', titulo: 'Sin proyectos', texto: 'Este contratante todavía no tiene expedientes.' });
+    } else {
+      html += '<div class="tabla-envoltura"><table class="tabla responsiva"><thead><tr>' +
+        '<th>Código</th><th>Proyecto</th><th>Estado</th><th class="num">Avance</th><th class="num">Presupuesto</th>' +
+        '</tr></thead><tbody>';
+      ps.forEach(function (p) {
+        html += '<tr' + (S.etapasVencidas(p).length ? ' class="alerta"' : '') + '>' +
+          '<td data-eti="Código" class="mono">' + U.esc(p.id) + '</td>' +
+          '<td data-eti="Proyecto"><a class="principal" href="proyecto.html?id=' + encodeURIComponent(p.id) + '">' + U.esc(p.nombre) + '</a></td>' +
+          '<td data-eti="Estado">' + U.badge(p.estado) + '</td>' +
+          '<td data-eti="Avance" class="num">' + S.avance(p) + '%</td>' +
+          '<td data-eti="Presupuesto" class="num">' + F.dinero(p.presupuesto) + '</td></tr>';
+      });
+      html += '</tbody></table></div>';
+    }
+    caja.innerHTML = html + '</div>';
+  }
+
+  pintarLista();
+  pintarDetalle();
+
+  var bn = document.getElementById('b-nuevo');
+  if (bn) bn.addEventListener('click', function () {
+    U.modal({
+      titulo: 'Nuevo contratante',
+      ancho: true,
+      cuerpo: '<div class="rejilla rejilla-2">' +
+        '<div class="campo ancho-total"><label for="n-nombre">Razón social <span class="req">*</span></label>' +
+        '<input id="n-nombre" type="text" placeholder="Nombre de la empresa o institución"></div>' +
+        '<div class="campo"><label for="n-rif">RIF <span class="req">*</span></label>' +
+        '<input id="n-rif" type="text" placeholder="J-00000000-0"></div>' +
+        '<div class="campo"><label for="n-sector">Sector <span class="req">*</span></label>' +
+        '<select id="n-sector">' + U.selectOpciones(
+          ['Forestal', 'Energía', 'Servicios', 'Agroforestal', 'Fundación', 'Obras civiles', 'Minería'], '', 'Elige un sector') + '</select>' +
+        '<span class="ayuda">Lista controlada.</span></div>' +
+        '<div class="campo"><label for="n-contacto">Persona de contacto</label><input id="n-contacto" type="text"></div>' +
+        '<div class="campo"><label for="n-cargo">Cargo</label><input id="n-cargo" type="text"></div>' +
+        '<div class="campo"><label for="n-tel">Teléfono</label><input id="n-tel" type="text" placeholder="0000-0000000"></div>' +
+        '<div class="campo"><label for="n-correo">Correo</label><input id="n-correo" type="email"></div>' +
+        '<div class="campo ancho-total"><label for="n-dir">Dirección</label><input id="n-dir" type="text"></div>' +
+        '</div>',
+      confirmar: 'Registrar contratante',
+      alConfirmar: function (caja, cerrar) {
+        function v(id) { return caja.querySelector('#' + id).value.trim(); }
+        if (!v('n-nombre') || !v('n-rif') || !v('n-sector')) {
+          U.aviso('Datos incompletos', 'Razón social, RIF y sector son obligatorios.', 'aviso'); return;
+        }
+        var c = S.crearContratante({
+          nombre: v('n-nombre'), rif: v('n-rif'), sector: v('n-sector'),
+          contacto: v('n-contacto'), cargo: v('n-cargo'), telefono: v('n-tel'),
+          correo: v('n-correo'), direccion: v('n-dir')
+        });
+        cerrar(); sel = c.id;
+        U.aviso('Contratante registrado', c.nombre + ' ya está en el directorio.', 'ok');
+        window.setTimeout(function () { window.location.reload(); }, 600);
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

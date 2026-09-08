@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nuevo proyecto &middot; Beta &middot; Proyectos Integrales</title>
+<meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/app.css">
+<!-- seed, store y auth van en el head: la guarda de permisos debe correr
+     ANTES de pintar. Si el rol no puede ver esta pagina, auth.js redirige. -->
+<script src="assets/seed.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/auth.js"></script>
+</head>
+<body class="pi-verificando">
+<main class="pi-lienzo">
+  <div id="pi-cabecera"></div>
+  <div id="pi-pasos"></div>
+  <div id="pi-contenido"></div>
+</main>
+<script src="assets/icons.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/demo.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+
+PI.listo(function () {
+  var S = PI.store, U = PI.ui, A = PI.auth, F = PI.fmt;
+  var cont = document.getElementById('pi-contenido');
+  var cat = S.catalogos();
+
+  var paso = 1;
+  var datos = {
+    nombre: '', contratanteId: '', tipo: '', ubicacion: '',
+    presupuesto: '', coordinadorId: S.usuario().rol === 'coordinador' ? S.usuario().id : '',
+    equipo: []
+  };
+
+  var PASOS = [
+    { n: 1, titulo: 'Datos del proyecto', texto: 'Nombre, contratante, tipo y presupuesto' },
+    { n: 2, titulo: 'Equipo y honorarios', texto: 'Quién trabaja y con qué honorario' },
+    { n: 3, titulo: 'Etapas y confirmación', texto: 'Las 10 etapas de la plantilla' }
+  ];
+
+  document.getElementById('pi-cabecera').innerHTML = PI.shell.cabecera({
+    kicker: 'Alta de expediente',
+    titulo: 'Nuevo proyecto',
+    texto: 'Tres pasos. El proyecto nace con las 10 etapas de la plantilla y la compuerta de aprobación en la etapa 6.',
+    acciones: '<a class="btn btn-borde" href="proyectos.html">' + U.icono('arrow_back') + ' Volver al listado</a>'
+  });
+
+  function pintarPasos() {
+    document.getElementById('pi-pasos').innerHTML =
+      '<div class="rejilla rejilla-3" style="margin-bottom:24px">' +
+      PASOS.map(function (p) {
+        var estado = p.n < paso ? 'ok' : (p.n === paso ? 'proceso' : 'bloqueada');
+        return '<div class="etapa-mini ' + estado + '">' +
+          '<div class="fila" style="justify-content:space-between">' +
+          '<span class="n">0' + p.n + '</span>' +
+          (p.n < paso ? U.icono('check_circle', 'icono-sm') : '') + '</div>' +
+          '<div class="t">' + U.esc(p.titulo) + '</div>' +
+          '<div class="sm tenue">' + U.esc(p.texto) + '</div></div>';
+      }).join('') + '</div>';
+  }
+
+  function leer(id) { var e = document.getElementById(id); return e ? e.value.trim() : ''; }
+
+  function paso1() {
+    return '<div class="tarjeta"><div class="tarjeta-cab"><h2>Datos del proyecto</h2>' +
+      '<span class="badge badge-info sin-punto">Paso 1 de 3</span></div>' +
+      '<div class="tarjeta-cuerpo rejilla rejilla-2">' +
+      '<div class="campo ancho-total"><label for="f-nombre">Nombre del proyecto <span class="req">*</span></label>' +
+      '<input id="f-nombre" type="text" value="' + U.esc(datos.nombre) + '" placeholder="Por ejemplo: Inventario forestal cuenca del río Aro"></div>' +
+
+      '<div class="campo"><label for="f-contratante">Contratante <span class="req">*</span></label>' +
+      '<select id="f-contratante">' + U.selectOpciones(
+        S.estado.contratantes.map(function (c) { return { valor: c.id, texto: c.nombre + ' — ' + c.rif }; }),
+        datos.contratanteId, 'Elige un contratante') + '</select>' +
+      '<span class="ayuda">Los contratantes salen del directorio. No es texto libre.</span></div>' +
+
+      '<div class="campo"><label for="f-tipo">Tipo de proyecto <span class="req">*</span></label>' +
+      '<select id="f-tipo">' + U.selectOpciones(cat.tiposProyecto, datos.tipo, 'Elige un tipo') + '</select>' +
+      '<span class="ayuda">Lista controlada del catálogo.</span></div>' +
+
+      '<div class="campo"><label for="f-coordinador">Coordinador responsable <span class="req">*</span></label>' +
+      '<select id="f-coordinador">' + U.selectOpciones(
+        S.estado.usuarios.filter(function (u) { return u.activo && (u.rol === 'coordinador' || u.rol === 'admin'); })
+          .map(function (u) { return { valor: u.id, texto: u.nombre + ' — ' + u.especialidad }; }),
+        datos.coordinadorId, 'Elige un coordinador') + '</select></div>' +
+
+      '<div class="campo"><label for="f-presupuesto">Presupuesto contratado <span class="req">*</span></label>' +
+      '<div class="campo-unidad"><input id="f-presupuesto" type="number" min="0" step="100" value="' + U.esc(datos.presupuesto) + '" placeholder="0">' +
+      '<span class="unidad">USD</span></div></div>' +
+
+      '<div class="campo ancho-total"><label for="f-ubicacion">Ubicación</label>' +
+      '<input id="f-ubicacion" type="text" value="' + U.esc(datos.ubicacion) + '" placeholder="Sector, municipio y estado"></div>' +
+
+      '<div class="ancho-total aviso">' + U.icono('info') +
+      '<div><strong>El código se asigna solo</strong>Se genera al guardar, con el año en curso y el número que siga en la serie.</div></div>' +
+      '</div>' +
+      '<div class="pi-modal-pie"><a class="btn" href="proyectos.html">Cancelar</a>' +
+      '<button type="button" class="btn btn-primario" id="b-sig">Continuar al equipo ' + U.icono('arrow_forward') + '</button></div></div>';
+  }
+
+  function paso2() {
+    var disponibles = S.estado.usuarios.filter(function (u) {
+      return u.activo && !datos.equipo.some(function (m) { return m.usuarioId === u.id; });
+    });
+    var total = datos.equipo.reduce(function (a, m) { return a + Number(m.honorario || 0); }, 0);
+
+    var html = '<div class="tarjeta"><div class="tarjeta-cab"><h2>Equipo y honorarios</h2>' +
+      '<span class="badge badge-info sin-punto">Paso 2 de 3</span></div><div class="tarjeta-cuerpo">';
+
+    if (!datos.equipo.length) {
+      html += U.vacio({ icono: 'groups', titulo: 'Todavía no hay equipo',
+        texto: 'Agrega al menos al coordinador responsable. Puedes sumar más personas después.' });
+    } else {
+      html += '<div class="tabla-envoltura"><table class="tabla responsiva"><thead><tr>' +
+        '<th>Profesional</th><th>Rol en el proyecto</th><th class="num">Honorario</th><th class="derecha">Acción</th>' +
+        '</tr></thead><tbody>';
+      datos.equipo.forEach(function (m, i) {
+        var u = S.buscarUsuario(m.usuarioId);
+        html += '<tr><td data-eti="Profesional"><span class="principal">' + U.esc(u.nombre) + '</span>' +
+          '<span class="sub">' + U.esc(u.especialidad) + '</span></td>' +
+          '<td data-eti="Rol">' + U.esc(m.rolProyecto) + '</td>' +
+          '<td data-eti="Honorario" class="num">' + F.dinero(m.honorario) + '</td>' +
+          '<td data-eti="" class="acciones"><button type="button" class="btn btn-sm" data-quitar="' + i + '">Quitar</button></td></tr>';
+      });
+      html += '</tbody></table></div>' +
+        '<div class="fila" style="justify-content:flex-end;margin-top:12px">' +
+        '<span class="eti">Total de honorarios</span><strong class="mono">' + F.dinero(total) + ' USD</strong></div>';
+    }
+
+    html += '<div class="pozo" style="margin-top:16px"><span class="eti">Agregar profesional</span>' +
+      '<div class="rejilla rejilla-3" style="margin-top:8px">' +
+      '<div class="campo"><label for="a-usuario">Profesional</label><select id="a-usuario">' +
+      U.selectOpciones(disponibles.map(function (u) { return { valor: u.id, texto: u.nombre }; }), '', 'Elige') + '</select></div>' +
+      '<div class="campo"><label for="a-rol">Rol en el proyecto</label><select id="a-rol">' +
+      U.selectOpciones(cat.rolesProyecto, '', 'Elige') + '</select></div>' +
+      '<div class="campo"><label for="a-honorario">Honorario</label>' +
+      '<div class="campo-unidad"><input id="a-honorario" type="number" min="0" step="50" placeholder="0"><span class="unidad">USD</span></div></div>' +
+      '</div><button type="button" class="btn btn-sm btn-primario" id="b-agregar" style="margin-top:8px">' +
+      U.icono('add', 'icono-sm') + ' Agregar al equipo</button></div>';
+
+    html += '</div><div class="pi-modal-pie">' +
+      '<button type="button" class="btn" id="b-ant">' + U.icono('arrow_back') + ' Volver</button>' +
+      '<button type="button" class="btn btn-primario" id="b-sig">Continuar a las etapas ' + U.icono('arrow_forward') + '</button>' +
+      '</div></div>';
+    return html;
+  }
+
+  function paso3() {
+    var c = S.buscarContratante(datos.contratanteId);
+    var html = '<div class="rejilla rejilla-2"><div class="tarjeta"><div class="tarjeta-cab"><h2>Resumen del alta</h2>' +
+      '<span class="badge badge-info sin-punto">Paso 3 de 3</span></div><div class="tarjeta-cuerpo pila-sm">';
+    [['Nombre', datos.nombre], ['Contratante', c ? c.nombre : '—'], ['RIF', c ? c.rif : '—'],
+     ['Tipo', datos.tipo], ['Coordinador', S.nombreUsuario(datos.coordinadorId)],
+     ['Presupuesto', F.dinero(datos.presupuesto) + ' USD'], ['Ubicación', datos.ubicacion || '—'],
+     ['Equipo', datos.equipo.length + (datos.equipo.length === 1 ? ' persona' : ' personas')]
+    ].forEach(function (f) {
+      html += '<div class="fila" style="gap:12px;align-items:baseline;border-bottom:1px solid var(--borde-fino);padding-bottom:6px">' +
+        '<span class="eti" style="min-width:130px">' + U.esc(f[0]) + '</span>' +
+        '<span style="flex:1">' + U.esc(f[1]) + '</span></div>';
+    });
+    html += '</div><div class="pi-modal-pie">' +
+      '<button type="button" class="btn" id="b-ant">' + U.icono('arrow_back') + ' Volver</button>' +
+      '<button type="button" class="btn btn-primario" id="b-guardar">' + U.icono('check') + ' Crear proyecto</button>' +
+      '</div></div>';
+
+    html += '<div class="tarjeta"><div class="tarjeta-cab"><h2>Etapas del proyecto</h2>' +
+      '<span class="badge badge-neutro sin-punto">10 etapas</span></div><div class="tarjeta-cuerpo pila-sm">';
+    cat.plantillaEtapas.forEach(function (e) {
+      html += '<div class="fila" style="gap:10px;padding:6px 0;border-bottom:1px solid var(--borde-fino)">' +
+        '<span class="mono tenue" style="min-width:26px">' + String(e.num).padStart(2, '0') + '</span>' +
+        '<span style="flex:1" class="sm">' + U.esc(e.nombre) + '</span>' +
+        (e.compuerta ? '<span class="badge badge-aviso sin-punto">Compuerta</span>' : '<span class="sm tenue mono">' + e.dias + ' d</span>') +
+        '</div>';
+    });
+    html += '<div class="aviso" style="margin-top:8px">' + U.icono('lock') +
+      '<div><strong>La plantilla no se edita aquí</strong>Las etapas y sus nombres se administran en Catálogos. ' +
+      'La etapa 6 es la única compuerta: hasta que se apruebe, la 7 queda bloqueada.</div></div>';
+    html += '</div></div></div>';
+    return html;
+  }
+
+  function validarPaso1() {
+    datos.nombre = leer('f-nombre');
+    datos.contratanteId = leer('f-contratante');
+    datos.tipo = leer('f-tipo');
+    datos.coordinadorId = leer('f-coordinador');
+    datos.presupuesto = leer('f-presupuesto');
+    datos.ubicacion = leer('f-ubicacion');
+    var faltan = [];
+    if (datos.nombre.length < 6) faltan.push('el nombre del proyecto');
+    if (!datos.contratanteId) faltan.push('el contratante');
+    if (!datos.tipo) faltan.push('el tipo de proyecto');
+    if (!datos.coordinadorId) faltan.push('el coordinador');
+    if (!datos.presupuesto || Number(datos.presupuesto) <= 0) faltan.push('el presupuesto');
+    if (faltan.length) {
+      U.aviso('Faltan datos', 'Completa ' + faltan.join(', ') + '.', 'aviso');
+      return false;
+    }
+    /* El coordinador entra al equipo automáticamente. */
+    if (!datos.equipo.some(function (m) { return m.usuarioId === datos.coordinadorId; })) {
+      datos.equipo.unshift({ usuarioId: datos.coordinadorId, rolProyecto: 'Coordinador responsable', honorario: 0 });
+    }
+    return true;
+  }
+
+  function pintar() {
+    pintarPasos();
+    cont.innerHTML = paso === 1 ? paso1() : (paso === 2 ? paso2() : paso3());
+
+    var sig = document.getElementById('b-sig');
+    if (sig) sig.addEventListener('click', function () {
+      if (paso === 1 && !validarPaso1()) return;
+      if (paso === 2 && !datos.equipo.length) {
+        U.aviso('Equipo vacío', 'Agrega al menos una persona al equipo.', 'aviso');
+        return;
+      }
+      paso++; pintar();
+    });
+    var ant = document.getElementById('b-ant');
+    if (ant) ant.addEventListener('click', function () { paso--; pintar(); });
+
+    var agregar = document.getElementById('b-agregar');
+    if (agregar) agregar.addEventListener('click', function () {
+      var uid = leer('a-usuario'), rp = leer('a-rol'), h = leer('a-honorario');
+      if (!uid || !rp) { U.aviso('Datos incompletos', 'Elige el profesional y su rol en el proyecto.', 'aviso'); return; }
+      datos.equipo.push({ usuarioId: uid, rolProyecto: rp, honorario: Number(h) || 0 });
+      pintar();
+    });
+    Array.prototype.forEach.call(cont.querySelectorAll('[data-quitar]'), function (b) {
+      b.addEventListener('click', function () {
+        datos.equipo.splice(Number(b.getAttribute('data-quitar')), 1);
+        pintar();
+      });
+    });
+
+    var guardar = document.getElementById('b-guardar');
+    if (guardar) guardar.addEventListener('click', function () {
+      var p = S.crearProyecto(datos);
+      U.aviso('Proyecto creado', p.id + ' quedó registrado con sus 10 etapas.', 'ok');
+      window.setTimeout(function () {
+        window.location.href = 'proyecto.html?id=' + encodeURIComponent(p.id) + '&tab=etapas';
+      }, 700);
+    });
+  }
+
+  pintar();
+});
+</script>
+</body>
+</html>

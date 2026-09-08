@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reportes &middot; Beta &middot; Proyectos Integrales</title>
+<meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/app.css">
+<!-- seed, store y auth van en el head: la guarda de permisos debe correr
+     ANTES de pintar. Si el rol no puede ver esta pagina, auth.js redirige. -->
+<script src="assets/seed.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/auth.js"></script>
+</head>
+<body class="pi-verificando">
+<main class="pi-lienzo">
+  <div id="pi-cabecera"></div>
+  <div id="pi-filtros"></div>
+  <div id="pi-contenido"></div>
+</main>
+<script src="assets/icons.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/demo.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+
+PI.listo(function () {
+  var S = PI.store, U = PI.ui, A = PI.auth, F = PI.fmt;
+  var MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  var hoy = new Date();
+  var mes = hoy.getMonth(), anio = hoy.getFullYear();
+  var tipo = 'cierre';
+
+  document.getElementById('pi-cabecera').innerHTML = PI.shell.cabecera({
+    kicker: 'Consolidados',
+    titulo: 'Reportes',
+    texto: 'Reportes de cierre para la reunión de coordinación. Todo en dólares. Se exportan a CSV o se imprimen.'
+  });
+
+  function pintarFiltros() {
+    var anios = [];
+    for (var a = anio - 3; a <= anio + 1; a++) anios.push(a);
+    document.getElementById('pi-filtros').innerHTML =
+      '<div class="filtros"><div class="campo"><label for="r-tipo">Reporte</label>' +
+      '<select id="r-tipo">' + U.selectOpciones([
+        { valor: 'cierre', texto: 'Cierre de mes' },
+        { valor: 'cartera', texto: 'Avance de cartera' },
+        { valor: 'campo', texto: 'Mediciones de campo' },
+        { valor: 'honorarios', texto: 'Honorarios por profesional' }
+      ], tipo) + '</select></div>' +
+      '<div class="campo"><label for="r-mes">Mes</label><select id="r-mes">' +
+      U.selectOpciones(MESES.map(function (m, i) { return { valor: i, texto: m.charAt(0).toUpperCase() + m.slice(1) }; }), mes) + '</select></div>' +
+      '<div class="campo"><label for="r-anio">Año</label><select id="r-anio">' +
+      U.selectOpciones(anios, anio) + '</select></div>' +
+      '<div class="fin">' +
+      '<button type="button" class="btn btn-sm btn-borde" id="r-csv">' + U.icono('download', 'icono-sm') + ' Exportar CSV</button>' +
+      '<button type="button" class="btn btn-sm btn-borde" id="r-imprimir">' + U.icono('print', 'icono-sm') + ' Imprimir</button>' +
+      '</div></div>';
+    document.getElementById('r-tipo').addEventListener('change', function () { tipo = this.value; pintar(); });
+    document.getElementById('r-mes').addEventListener('change', function () { mes = Number(this.value); pintar(); });
+    document.getElementById('r-anio').addEventListener('change', function () { anio = Number(this.value); pintar(); });
+    document.getElementById('r-imprimir').addEventListener('click', function () { window.print(); });
+    document.getElementById('r-csv').addEventListener('click', exportar);
+  }
+
+  function enElMes(txt) {
+    var d = S.aDate(txt);
+    return d && d.getMonth() === mes && d.getFullYear() === anio;
+  }
+
+  /* --- Cierre de mes ---------------------------------------------------- */
+  function datosCierre() {
+    var filas = [];
+    S.estado.proyectos.forEach(function (p) {
+      var ing = 0, egr = 0, pen = 0;
+      (p.finanzas || []).forEach(function (m) {
+        if (!enElMes(m.fecha)) return;
+        if (m.estado === 'Por liquidar') { pen += m.monto; return; }
+        if (m.tipo === 'Ingreso') ing += m.monto; else egr += m.monto;
+      });
+      var aprobadas = p.etapas.filter(function (e) { return e.estado === 'Aprobada' && enElMes(e.fechaAprobacion); }).length;
+      if (ing || egr || pen || aprobadas) {
+        filas.push({ p: p, ingresos: ing, egresos: egr, porLiquidar: pen, etapas: aprobadas, saldo: ing - egr });
+      }
+    });
+    return filas;
+  }
+
+  function datosCartera() {
+    return S.estado.proyectos.map(function (p) {
+      var t = S.totalesFinancieros(p);
+      return { p: p, avance: S.avance(p), vencidas: S.etapasVencidas(p).length,
+               ejecutado: t.egresos, porLiquidar: t.porLiquidar,
+               etapa: S.etapaActual(p) };
+    });
+  }
+
+  function datosCampo() {
+    var filas = [];
+    S.estado.proyectos.forEach(function (p) {
+      S.resumenPorEspecie(p).forEach(function (r) {
+        filas.push({ p: p, especie: S.buscarEspecie(r.especieId), r: r });
+      });
+    });
+    return filas;
+  }
+
+  function datosHonorarios() {
+    var mapa = {};
+    S.estado.proyectos.forEach(function (p) {
+      (p.equipo || []).forEach(function (m) {
+        if (!mapa[m.usuarioId]) mapa[m.usuarioId] = { usuarioId: m.usuarioId, total: 0, proyectos: 0, roles: {} };
+        mapa[m.usuarioId].total += m.honorario;
+        mapa[m.usuarioId].proyectos++;
+        mapa[m.usuarioId].roles[m.rolProyecto] = 1;
+      });
+    });
+    return Object.keys(mapa).map(function (k) { return mapa[k]; })
+      .sort(function (a, b) { return b.total - a.total; });
+  }
+
+  function pintar() {
+    var cont = document.getElementById('pi-contenido');
+    var titulo = { cierre: 'Cierre de mes', cartera: 'Avance de cartera', campo: 'Mediciones de campo', honorarios: 'Honorarios por profesional' }[tipo];
+    var sub = tipo === 'cierre' || tipo === 'campo'
+      ? MESES[mes] + ' de ' + anio
+      : 'situación al ' + S.fechaHoy();
+
+    var html = '<div class="tarjeta"><div class="tarjeta-cab">' +
+      '<div style="flex:1"><h2>' + U.esc(titulo) + '</h2>' +
+      '<span class="sm tenue" style="text-transform:capitalize">' + U.esc(sub) + '</span></div>' +
+      '<span class="badge badge-info sin-punto pi-acciones">Montos en USD</span></div>';
+
+    if (tipo === 'cierre') {
+      var f = datosCierre();
+      var tI = f.reduce(function (a, x) { return a + x.ingresos; }, 0);
+      var tE = f.reduce(function (a, x) { return a + x.egresos; }, 0);
+      var tP = f.reduce(function (a, x) { return a + x.porLiquidar; }, 0);
+      var tEt = f.reduce(function (a, x) { return a + x.etapas; }, 0);
+      html = '<div class="kpis">' +
+        U.kpi({ titulo: 'Ingresos del mes', icono: 'arrow_downward', tono: 'ok', valor: F.dineroCorto(tI), pie: 'liquidados' }) +
+        U.kpi({ titulo: 'Egresos del mes', icono: 'arrow_upward', valor: F.dineroCorto(tE), pie: 'liquidados' }) +
+        U.kpi({ titulo: 'Saldo del mes', icono: 'account_balance_wallet', tono: tI - tE >= 0 ? 'ok' : 'alerta',
+          valor: F.dineroCorto(tI - tE), pie: 'ingresos menos egresos' }) +
+        U.kpi({ titulo: 'Etapas aprobadas', icono: 'task_alt', valor: F.numero(tEt), pie: 'cerradas en el mes' }) +
+        '</div><div style="height:24px"></div>' + html;
+
+      if (!f.length) {
+        html += U.vacio({ icono: 'analytics', titulo: 'Sin movimientos en el mes', texto: 'No hay ingresos, egresos ni etapas cerradas en ' + MESES[mes] + ' de ' + anio + '.' });
+      } else {
+        html += tablaHtml(
+          ['Código', 'Proyecto', 'Contratante', 'Etapas cerradas', 'Ingresos', 'Egresos', 'Por liquidar', 'Saldo'],
+          f.map(function (x) {
+            return ['<span class="mono">' + U.esc(x.p.id) + '</span>',
+              '<span class="principal">' + U.esc(x.p.nombre) + '</span>',
+              '<span class="sm">' + U.esc(S.nombreContratante(x.p.contratanteId)) + '</span>',
+              { num: F.numero(x.etapas) },
+              { num: F.dinero(x.ingresos) },
+              { num: F.dinero(x.egresos) },
+              { num: '<span style="color:var(--secundario)">' + F.dinero(x.porLiquidar) + '</span>' },
+              { num: '<strong>' + F.dinero(x.saldo) + '</strong>' }];
+          }),
+          ['', 'Total del mes', '', F.numero(tEt), F.dinero(tI), F.dinero(tE), F.dinero(tP), F.dinero(tI - tE)]);
+      }
+    }
+
+    if (tipo === 'cartera') {
+      var c = datosCartera();
+      html += tablaHtml(
+        ['Código', 'Proyecto', 'Estado', 'Etapa actual', 'Avance', 'Vencidas', 'Presupuesto', 'Ejecutado'],
+        c.map(function (x) {
+          return ['<span class="mono">' + U.esc(x.p.id) + '</span>',
+            '<span class="principal">' + U.esc(x.p.nombre) + '</span>',
+            U.badge(x.p.estado),
+            '<span class="sm">' + (x.etapa ? String(x.etapa.num).padStart(2, '0') + ' · ' + U.esc(x.etapa.nombre) : 'cerrado') + '</span>',
+            { num: x.avance + '%' },
+            { num: x.vencidas ? '<span style="color:var(--error);font-weight:700">' + x.vencidas + '</span>' : '0' },
+            { num: F.dinero(x.p.presupuesto) },
+            { num: F.dinero(x.ejecutado) }];
+        }),
+        ['', 'Total de la cartera', '', '',
+         Math.round(c.reduce(function (a, x) { return a + x.avance; }, 0) / (c.length || 1)) + '%',
+         F.numero(c.reduce(function (a, x) { return a + x.vencidas; }, 0)),
+         F.dinero(c.reduce(function (a, x) { return a + x.p.presupuesto; }, 0)),
+         F.dinero(c.reduce(function (a, x) { return a + x.ejecutado; }, 0))]);
+    }
+
+    if (tipo === 'campo') {
+      var m = datosCampo();
+      if (!m.length) {
+        html += U.vacio({ icono: 'forest', titulo: 'Sin mediciones', texto: 'No hay mediciones de campo registradas.' });
+      } else {
+        html += '<div class="tarjeta-cuerpo" style="padding-bottom:0"><div class="aviso aviso-aviso">' + U.icono('warning') +
+          '<div><strong>Volumen de captura manual</strong>Las cifras de volumen son las que registró el profesional en campo. ' +
+          'El sistema solo las suma: no aplica ninguna ecuación de cubicación.</div></div></div>';
+        html += tablaHtml(
+          ['Código', 'Proyecto', 'Especie', 'Nombre científico', 'Parcelas', 'Árboles', 'Superficie (ha)', 'Volumen (m³)'],
+          m.map(function (x) {
+            return ['<span class="mono">' + U.esc(x.p.id) + '</span>',
+              '<span class="sm">' + U.esc(x.p.nombre) + '</span>',
+              '<span class="principal">' + U.esc(x.especie ? x.especie.comun : '—') + '</span>',
+              '<span class="sm" style="font-style:italic">' + U.esc(x.especie ? x.especie.cientifico : '') + '</span>',
+              { num: x.r.numParcelas },
+              { num: F.numero(x.r.arboles) },
+              { num: F.numero(x.r.hectareas, 1) },
+              { num: '<strong style="color:var(--secundario)">' + F.numero(x.r.volumen, 3) + '</strong>' }];
+          }),
+          ['', '', 'Total capturado', '',
+           F.numero(m.reduce(function (a, x) { return a + x.r.numParcelas; }, 0)),
+           F.numero(m.reduce(function (a, x) { return a + x.r.arboles; }, 0)),
+           F.numero(m.reduce(function (a, x) { return a + x.r.hectareas; }, 0), 1),
+           F.numero(m.reduce(function (a, x) { return a + x.r.volumen; }, 0), 3)]);
+      }
+    }
+
+    if (tipo === 'honorarios') {
+      if (!A.puede('verHonorariosDeTodos')) {
+        html += U.vacio({ icono: 'lock', titulo: 'Reporte restringido',
+          texto: 'Tu rol ve el total consolidado, no el desglose por profesional.' });
+      } else {
+        var h = datosHonorarios();
+        html += tablaHtml(
+          ['Profesional', 'Rol principal', 'Especialidad', 'Proyectos', 'Honorarios pactados'],
+          h.map(function (x) {
+            var u = S.buscarUsuario(x.usuarioId);
+            return ['<span class="principal">' + U.esc(u ? u.nombre : '—') + '</span>',
+              '<span class="sm">' + U.esc(Object.keys(x.roles)[0] || '—') + '</span>',
+              '<span class="sm tenue">' + U.esc(u ? u.especialidad : '') + '</span>',
+              { num: F.numero(x.proyectos) },
+              { num: '<strong>' + F.dinero(x.total) + '</strong>' }];
+          }),
+          ['Total', '', '', F.numero(h.reduce(function (a, x) { return a + x.proyectos; }, 0)),
+           F.dinero(h.reduce(function (a, x) { return a + x.total; }, 0))]);
+      }
+    }
+
+    html += '<div class="tarjeta-pie"><span>Generado el ' + S.fechaHoy() + ' por ' + U.esc(S.usuario().nombre) + '</span>' +
+      '<span class="mono" style="margin-left:auto">Beta · datos de ejemplo</span></div></div>';
+
+    cont.innerHTML = html;
+  }
+
+  function tablaHtml(cabeceras, filas, total) {
+    var html = '<div class="tabla-envoltura"><table class="tabla responsiva"><thead><tr>';
+    cabeceras.forEach(function (c, i) {
+      html += '<th' + (i >= cabeceras.length - 4 && i > 2 ? ' class="num"' : '') + '>' + U.esc(c) + '</th>';
+    });
+    html += '</tr></thead><tbody>';
+    filas.forEach(function (f) {
+      html += '<tr>';
+      f.forEach(function (c, i) {
+        var esNum = c && typeof c === 'object';
+        html += '<td data-eti="' + U.esc(cabeceras[i]) + '"' + (esNum ? ' class="num"' : '') + '>' +
+          (esNum ? c.num : c) + '</td>';
+      });
+      html += '</tr>';
+    });
+    html += '</tbody>';
+    if (total) {
+      html += '<tfoot><tr style="background:var(--superficie-media);font-weight:700">';
+      total.forEach(function (c, i) {
+        html += '<td data-eti="' + U.esc(cabeceras[i]) + '"' + (i > 2 ? ' class="num"' : '') + '>' + c + '</td>';
+      });
+      html += '</tr></tfoot>';
+    }
+    return html + '</table></div>';
+  }
+
+  function exportar() {
+    var nombre, cab, filas;
+    if (tipo === 'cierre') {
+      nombre = 'cierre-' + anio + '-' + String(mes + 1).padStart(2, '0') + '.csv';
+      cab = ['Codigo', 'Proyecto', 'Contratante', 'Etapas cerradas', 'Ingresos USD', 'Egresos USD', 'Por liquidar USD', 'Saldo USD'];
+      filas = datosCierre().map(function (x) {
+        return [x.p.id, x.p.nombre, S.nombreContratante(x.p.contratanteId), x.etapas,
+                F.dinero(x.ingresos, false), F.dinero(x.egresos, false), F.dinero(x.porLiquidar, false), F.dinero(x.saldo, false)];
+      });
+    } else if (tipo === 'cartera') {
+      nombre = 'cartera-' + S.fechaHoy().replace(/\//g, '-') + '.csv';
+      cab = ['Codigo', 'Proyecto', 'Contratante', 'Estado', 'Etapa actual', 'Avance', 'Etapas vencidas', 'Presupuesto USD', 'Ejecutado USD'];
+      filas = datosCartera().map(function (x) {
+        return [x.p.id, x.p.nombre, S.nombreContratante(x.p.contratanteId), x.p.estado,
+                x.etapa ? x.etapa.num + ' ' + x.etapa.nombre : 'cerrado', x.avance + '%', x.vencidas,
+                F.dinero(x.p.presupuesto, false), F.dinero(x.ejecutado, false)];
+      });
+    } else if (tipo === 'campo') {
+      nombre = 'mediciones-' + S.fechaHoy().replace(/\//g, '-') + '.csv';
+      cab = ['Codigo', 'Proyecto', 'Especie', 'Nombre cientifico', 'Parcelas', 'Arboles', 'Superficie ha', 'Volumen m3 (captura manual)'];
+      filas = datosCampo().map(function (x) {
+        return [x.p.id, x.p.nombre, x.especie ? x.especie.comun : '', x.especie ? x.especie.cientifico : '',
+                x.r.numParcelas, x.r.arboles, F.numero(x.r.hectareas, 1), F.numero(x.r.volumen, 3)];
+      });
+    } else {
+      if (!A.puede('verHonorariosDeTodos')) { U.aviso('Reporte restringido', 'Tu rol no ve el desglose por profesional.', 'aviso'); return; }
+      nombre = 'honorarios-' + S.fechaHoy().replace(/\//g, '-') + '.csv';
+      cab = ['Profesional', 'Especialidad', 'Proyectos', 'Honorarios USD'];
+      filas = datosHonorarios().map(function (x) {
+        var u = S.buscarUsuario(x.usuarioId);
+        return [u ? u.nombre : '', u ? u.especialidad : '', x.proyectos, F.dinero(x.total, false)];
+      });
+    }
+    U.csv(nombre, cab, filas);
+    S.registrar('REPORTE_GENERADO', 'Reporte', null, 'Exportación del reporte ' + tipo + ' a ' + nombre + '.');
+  }
+
+  pintarFiltros();
+  pintar();
+});
+</script>
+</body>
+</html>

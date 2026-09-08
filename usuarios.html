@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Usuarios &middot; Beta &middot; Proyectos Integrales</title>
+<meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/app.css">
+<!-- seed, store y auth van en el head: la guarda de permisos debe correr
+     ANTES de pintar. Si el rol no puede ver esta pagina, auth.js redirige. -->
+<script src="assets/seed.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/auth.js"></script>
+</head>
+<body class="pi-verificando">
+<main class="pi-lienzo">
+  <div id="pi-cabecera"></div>
+  <div id="pi-kpis"></div>
+  <div style="height:24px"></div>
+  <div id="pi-tabla"></div>
+  <div style="height:24px"></div>
+  <div id="pi-matriz"></div>
+</main>
+<script src="assets/icons.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/demo.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+
+PI.listo(function () {
+  var S = PI.store, U = PI.ui, A = PI.auth, F = PI.fmt;
+  function recargar() { window.location.reload(); }
+
+  var activos = S.estado.usuarios.filter(function (u) { return u.activo; });
+
+  document.getElementById('pi-cabecera').innerHTML = PI.shell.cabecera({
+    kicker: 'Gobierno del sistema',
+    titulo: 'Usuarios y roles',
+    texto: 'Alta, baja y rol de cada persona. Los usuarios no se borran: se desactivan, para que su rastro en la bitácora y en los proyectos siga siendo válido.',
+    acciones: '<button type="button" class="btn btn-primario" id="b-nuevo">' + U.icono('add_circle') + ' Nuevo usuario</button>'
+  });
+
+  var porRol = {};
+  S.catalogos().roles.forEach(function (r) {
+    porRol[r.id] = S.estado.usuarios.filter(function (u) { return u.rol === r.id; }).length;
+  });
+
+  document.getElementById('pi-kpis').innerHTML = '<div class="kpis">' +
+    U.kpi({ titulo: 'Usuarios', icono: 'manage_accounts', valor: F.numero(S.estado.usuarios.length), pie: 'registrados en total' }) +
+    U.kpi({ titulo: 'Activos', icono: 'check_circle', tono: 'ok', valor: F.numero(activos.length), pie: 'pueden entrar al sistema' }) +
+    U.kpi({ titulo: 'Desactivados', icono: 'block', tono: S.estado.usuarios.length - activos.length ? 'aviso' : '',
+      valor: F.numero(S.estado.usuarios.length - activos.length), pie: 'sin borrado físico' }) +
+    U.kpi({ titulo: 'Roles en uso', icono: 'badge',
+      valor: F.numero(Object.keys(porRol).filter(function (k) { return porRol[k] > 0; }).length) + '<small> de 5</small>',
+      pie: 'cobertura de la matriz' }) +
+    '</div>';
+
+  U.tabla(document.getElementById('pi-tabla'), {
+    datos: S.estado.usuarios.slice(),
+    textoBuscar: 'Nombre, correo o especialidad',
+    buscar: ['nombre', 'correo', 'especialidad'],
+    filtros: [
+      { id: 'rol', titulo: 'Rol', todos: 'Todos los roles', campo: 'rol',
+        opciones: S.catalogos().roles.map(function (r) { return { valor: r.id, texto: r.nombre }; }) },
+      { id: 'activo', titulo: 'Estado', todos: 'Todos', opciones: [{ valor: 'si', texto: 'Activos' }, { valor: 'no', texto: 'Desactivados' }],
+        prueba: function (u, v) { return v === 'si' ? u.activo : !u.activo; } }
+    ],
+    ordenPor: 'nombre', ordenDir: 'asc',
+    csv: { nombre: 'usuarios.csv' },
+    claseFila: function (u) { return u.activo ? '' : 'alerta'; },
+    vacio: { icono: 'manage_accounts', titulo: 'Sin usuarios', texto: 'No hay usuarios que coincidan con el filtro.' },
+    columnas: [
+      { clave: 'nombre', titulo: 'Nombre', orden: true,
+        render: function (u) {
+          return '<div class="fila" style="gap:8px"><span class="pi-avatar" style="width:28px;height:28px;font-size:11px">' +
+            U.esc(F.iniciales(u.nombre)) + '</span><span><span class="principal">' + U.esc(u.nombre) + '</span>' +
+            '<span class="sub mono">' + U.esc(u.id) + '</span></span></div>';
+        },
+        csv: function (u) { return u.nombre; } },
+      { clave: 'especialidad', titulo: 'Especialidad', orden: true,
+        render: function (u) { return '<span class="sm">' + U.esc(u.especialidad) + '</span>'; } },
+      { clave: 'correo', titulo: 'Correo', orden: true,
+        render: function (u) { return '<span class="sm mono" style="font-size:11px">' + U.esc(u.correo) + '</span>'; } },
+      { clave: 'rol', titulo: 'Rol', orden: true,
+        render: function (u) { return '<span class="badge badge-info sin-punto">' + U.esc(A.nombreRol(u.rol)) + '</span>'; },
+        csv: function (u) { return A.nombreRol(u.rol); } },
+      { clave: 'fechaAlta', titulo: 'Alta', tipo: 'mono', orden: true },
+      { clave: 'activo', titulo: 'Estado', orden: true,
+        render: function (u) { return U.badge(u.activo ? 'Activo' : 'Inactivo'); },
+        csv: function (u) { return u.activo ? 'Activo' : 'Inactivo'; } },
+      { clave: 'acciones', titulo: 'Acción', tipo: 'acciones',
+        render: function (u) {
+          if (u.id === S.usuario().id) return '<span class="sm tenue">sesión actual</span>';
+          return '<button type="button" class="btn btn-sm' + (u.activo ? '' : ' btn-primario') + '" data-alternar="' + u.id + '">' +
+            (u.activo ? 'Desactivar' : 'Reactivar') + '</button>';
+        } }
+    ]
+  });
+
+  document.getElementById('pi-tabla').addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-alternar]');
+    if (!b) return;
+    var u = S.buscarUsuario(b.getAttribute('data-alternar'));
+    U.confirmar({
+      titulo: (u.activo ? 'Desactivar' : 'Reactivar') + ' usuario',
+      texto: u.activo
+        ? u.nombre + ' dejará de poder entrar al sistema. No se borra ningún dato: su nombre sigue en los proyectos y en la bitácora, y la acción queda registrada con fecha, hora y autor.'
+        : u.nombre + ' vuelve a tener acceso. La reactivación también queda en la bitácora.',
+      confirmar: u.activo ? 'Desactivar' : 'Reactivar',
+      peligro: u.activo,
+      alConfirmar: function () {
+        S.alternarUsuario(u.id);
+        U.aviso('Usuario actualizado', u.nombre + ' quedó ' + (u.activo ? 'desactivado' : 'reactivado') + '. Búscalo en la bitácora.', 'ok');
+        window.setTimeout(recargar, 700);
+      }
+    });
+  });
+
+  /* --- Matriz de permisos ------------------------------------------------ */
+  var caps = Object.keys(A.CAPACIDADES);
+  var etiquetas = {
+    crearProyecto: 'Crear proyectos', editarProyecto: 'Editar proyectos',
+    completarEtapa: 'Completar etapas', aprobarEtapa: 'Aprobar etapas', devolverEtapa: 'Devolver etapas',
+    subirDocumento: 'Registrar documentos', eliminarDocumento: 'Quitar documentos',
+    capturarCampo: 'Capturar mediciones', verFinanzas: 'Ver finanzas',
+    registrarFinanzas: 'Registrar movimientos', liquidarFinanzas: 'Liquidar movimientos',
+    verHonorariosDeTodos: 'Ver honorarios de todos', verTotalHonorarios: 'Ver total de honorarios',
+    asignarEquipo: 'Asignar equipo', gestionarContratantes: 'Gestionar contratantes',
+    gestionarUsuarios: 'Gestionar usuarios', editarCatalogos: 'Editar catálogos',
+    verBitacoraGeneral: 'Ver bitácora general', verDireccion: 'Ver vista de Dirección',
+    exportar: 'Exportar reportes'
+  };
+  var roles = S.catalogos().roles;
+  var html = '<div class="tarjeta"><div class="tarjeta-cab"><h2>Matriz de permisos</h2>' +
+    '<span class="badge badge-neutro sin-punto pi-acciones">solo lectura</span></div>' +
+    '<div class="tabla-envoltura"><table class="tabla tabla-compacta"><thead><tr><th>Capacidad</th>' +
+    roles.map(function (r) { return '<th class="centro">' + U.esc(r.nombre) + '</th>'; }).join('') +
+    '</tr></thead><tbody>';
+  caps.forEach(function (c) {
+    html += '<tr><td>' + U.esc(etiquetas[c] || c) + '</td>' +
+      roles.map(function (r) {
+        var si = A.puede(c, r.id);
+        return '<td class="centro">' + (si
+          ? '<span style="color:var(--primario)">' + U.icono('check_circle', 'icono-sm') + '</span>'
+          : '<span class="tenue">—</span>') + '</td>';
+      }).join('') + '</tr>';
+  });
+  html += '</tbody></table></div>' +
+    '<div class="tarjeta-pie"><span>El permiso no es solo esconder el enlace: escribir la dirección de una página prohibida lleva a "Sin permiso".</span></div></div>';
+  document.getElementById('pi-matriz').innerHTML = html;
+
+  document.getElementById('b-nuevo').addEventListener('click', function () {
+    U.modal({
+      titulo: 'Nuevo usuario',
+      cuerpo: '<div class="rejilla">' +
+        '<div class="campo"><label for="u-nombre">Nombre y apellidos <span class="req">*</span></label>' +
+        '<input id="u-nombre" type="text" placeholder="Nombre completo"></div>' +
+        '<div class="campo"><label for="u-rol">Rol <span class="req">*</span></label>' +
+        '<select id="u-rol">' + U.selectOpciones(
+          S.catalogos().roles.map(function (r) { return { valor: r.id, texto: r.nombre + ' — ' + r.descripcion }; }), '', 'Elige un rol') + '</select>' +
+        '<span class="ayuda">Lista controlada: los cinco roles del sistema.</span></div>' +
+        '<div class="campo"><label for="u-esp">Especialidad</label><input id="u-esp" type="text"></div>' +
+        '<div class="campo"><label for="u-correo">Correo institucional</label><input id="u-correo" type="email"></div>' +
+        '<div class="campo"><label for="u-tel">Teléfono</label><input id="u-tel" type="text" placeholder="0000-0000000"></div>' +
+        '<div class="aviso">' + U.icono('info') + '<div><strong>Sin contraseña</strong>' +
+        'Esta beta no tiene cuentas reales: se entra eligiendo un rol. No hay registro público ni recuperación por correo.</div></div>' +
+        '</div>',
+      confirmar: 'Crear usuario',
+      alConfirmar: function (caja, cerrar) {
+        function v(id) { return caja.querySelector('#' + id).value.trim(); }
+        if (!v('u-nombre') || !v('u-rol')) { U.aviso('Datos incompletos', 'El nombre y el rol son obligatorios.', 'aviso'); return; }
+        var u = S.crearUsuario({ nombre: v('u-nombre'), rol: v('u-rol'), especialidad: v('u-esp') || 'Sin especificar',
+          correo: v('u-correo'), telefono: v('u-tel') });
+        cerrar(); U.aviso('Usuario creado', u.nombre + ' quedó registrado como ' + A.nombreRol(u.rol) + '.', 'ok');
+        window.setTimeout(recargar, 600);
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

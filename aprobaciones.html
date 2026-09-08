@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aprobaciones &middot; Beta &middot; Proyectos Integrales</title>
+<meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/app.css">
+<!-- seed, store y auth van en el head: la guarda de permisos debe correr
+     ANTES de pintar. Si el rol no puede ver esta pagina, auth.js redirige. -->
+<script src="assets/seed.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/auth.js"></script>
+</head>
+<body class="pi-verificando">
+<main class="pi-lienzo">
+  <div id="pi-cabecera"></div>
+  <div id="pi-kpis"></div>
+  <div style="height:24px"></div>
+  <div id="pi-cola"></div>
+  <div style="height:24px"></div>
+  <div id="pi-otras"></div>
+</main>
+<script src="assets/icons.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/demo.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+
+PI.listo(function () {
+  var S = PI.store, U = PI.ui, A = PI.auth, F = PI.fmt;
+  var cont = document.getElementById('pi-cola');
+  function recargar() { window.location.reload(); }
+
+  var cola = S.colaAprobaciones();
+  /* Etapas que ya van tarde y todavía no han llegado a la compuerta. */
+  var atrasadas = [];
+  S.estado.proyectos.forEach(function (p) {
+    S.etapasVencidas(p).forEach(function (e) {
+      if (e.estado !== 'Esperando aprobación' && e.estado !== 'Esperando aprobacion') atrasadas.push({ proyecto: p, etapa: e });
+    });
+  });
+  var devueltas = [];
+  S.estado.proyectos.forEach(function (p) {
+    p.etapas.forEach(function (e) { if (e.estado === 'Devuelta') devueltas.push({ proyecto: p, etapa: e }); });
+  });
+
+  document.getElementById('pi-cabecera').innerHTML = PI.shell.cabecera({
+    kicker: 'Coordinación técnica',
+    titulo: 'Aprobaciones',
+    texto: 'Etapas que esperan tu decisión. Aprobar desbloquea la etapa siguiente; devolver exige un comentario y deja la etapa en manos del responsable.'
+  });
+
+  document.getElementById('pi-kpis').innerHTML = '<div class="kpis">' +
+    U.kpi({ titulo: 'Esperando aprobación', icono: 'hourglass_top', tono: cola.length ? 'aviso' : 'ok',
+      valor: F.numero(cola.length), pie: cola.length ? 'proyectos detenidos' : 'nada pendiente' }) +
+    U.kpi({ titulo: 'Etapas atrasadas', icono: 'event_busy', tono: atrasadas.length ? 'alerta' : '',
+      valor: F.numero(atrasadas.length), pie: 'fuera de plazo, sin llegar a la compuerta' }) +
+    U.kpi({ titulo: 'Devueltas', icono: 'undo', valor: F.numero(devueltas.length), pie: 'esperando corrección del responsable' }) +
+    U.kpi({ titulo: 'Aprobadas por ti', icono: 'task_alt', tono: 'ok',
+      valor: F.numero(S.estado.bitacora.filter(function (b) {
+        return b.accion === 'ETAPA_APROBADA' && b.usuarioId === S.usuario().id;
+      }).length), pie: 'según la bitácora' }) +
+    '</div>';
+
+  function tarjetaCola(x) {
+    var p = x.proyecto, e = x.etapa;
+    var c = S.buscarContratante(p.contratanteId);
+    return '<div class="tarjeta etapa-panel"><div class="tarjeta-cab">' +
+      '<span class="badge badge-info sin-punto">' + U.esc(p.id) + '</span>' +
+      '<h2 style="flex:1">' + U.esc(p.nombre) + '</h2>' +
+      '<span class="badge badge-aviso">Etapa ' + e.num + ' en espera</span></div>' +
+      '<div class="tarjeta-cuerpo">' +
+      '<div class="fila" style="gap:24px;margin-bottom:12px">' +
+      '<div><span class="eti">Etapa</span><div class="sm"><strong>' + String(e.num).padStart(2, '0') + '</strong> · ' + U.esc(e.nombre) + '</div></div>' +
+      '<div><span class="eti">Contratante</span><div class="sm">' + U.esc(c ? c.nombre : '—') + '</div></div>' +
+      '<div><span class="eti">Responsable</span><div class="sm">' + U.esc(S.nombreUsuario(e.responsableId)) + '</div></div>' +
+      '<div><span class="eti">Plazo</span><div class="mono">' + U.esc(e.fechaFin) +
+      ' <span class="sm ' + (S.etapaVencida(e) ? '' : 'tenue') + '"' +
+      (S.etapaVencida(e) ? ' style="color:var(--error);font-weight:600"' : '') + '>' + U.esc(F.plazo(e.fechaFin)) + '</span></div></div>' +
+      '</div>' +
+      (e.comentario ? '<div class="aviso">' + U.icono('info') + '<div><strong>Nota del responsable</strong>' + U.esc(e.comentario) + '</div></div>' : '') +
+      '<div class="pozo" style="margin-top:12px"><span class="eti">Al aprobar</span>' +
+      '<p class="sm">Se desbloquea la etapa ' + (e.num + 1) + ' (' +
+      U.esc(p.etapas[e.num] ? p.etapas[e.num].nombre : 'cierre') + ') y el proyecto vuelve a estado En ejecución.</p></div>' +
+      '</div><div class="pi-modal-pie">' +
+      '<a class="btn btn-plano" href="proyecto.html?id=' + encodeURIComponent(p.id) + '&tab=etapas">Ver el expediente</a>' +
+      '<button type="button" class="btn" data-devolver="' + p.id + '|' + e.num + '">' + U.icono('undo') + ' Devolver</button>' +
+      '<button type="button" class="btn btn-primario" data-aprobar="' + p.id + '|' + e.num + '">' + U.icono('check') + ' Aprobar etapa</button>' +
+      '</div></div>';
+  }
+
+  if (!cola.length) {
+    cont.innerHTML = '<div class="tarjeta">' + U.vacio({
+      icono: 'task_alt', titulo: 'No hay nada esperando aprobación',
+      texto: 'Ninguna compuerta está detenida en este momento.',
+      accion: '<a class="btn btn-borde" href="proyectos.html">Ver todos los proyectos</a>'
+    }) + '</div>';
+  } else {
+    cont.innerHTML = '<div class="pila">' + cola.map(tarjetaCola).join('') + '</div>';
+  }
+
+  cont.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-aprobar],[data-devolver]');
+    if (!b) return;
+    var aprobar = b.hasAttribute('data-aprobar');
+    var partes = b.getAttribute(aprobar ? 'data-aprobar' : 'data-devolver').split('|');
+    var pid = partes[0], n = Number(partes[1]);
+    U.modal({
+      titulo: (aprobar ? 'Aprobar' : 'Devolver') + ' la etapa ' + n + ' de ' + pid,
+      cuerpo: '<div class="campo"><label for="ap-com">Comentario ' + (aprobar ? 'de aprobación' : 'de devolución') +
+        ' <span class="req">*</span></label><textarea id="ap-com" placeholder="' +
+        (aprobar ? 'Deja constancia de la conformidad técnica.' : 'Explica con precisión qué falta o qué hay que corregir.') +
+        '"></textarea><span class="ayuda">Obligatorio, mínimo 20 caracteres. Queda en la bitácora con fecha, hora y autor.</span>' +
+        '<span class="error-txt oculto" id="ap-err">Escribe al menos 20 caracteres.</span></div>',
+      confirmar: aprobar ? 'Aprobar etapa' : 'Devolver etapa',
+      claseConfirmar: aprobar ? 'btn-primario' : 'btn-secundario',
+      alConfirmar: function (caja, cerrar) {
+        var txt = caja.querySelector('#ap-com').value.trim();
+        if (txt.length < 20) { caja.querySelector('#ap-err').classList.remove('oculto'); return; }
+        if (aprobar) S.aprobarEtapa(pid, n, txt); else S.devolverEtapa(pid, n, txt);
+        cerrar();
+        U.aviso(aprobar ? 'Etapa aprobada' : 'Etapa devuelta',
+          aprobar ? 'Se desbloqueó la etapa ' + (n + 1) + ' de ' + pid + '.' : 'El responsable debe corregir y reenviar.', 'ok');
+        window.setTimeout(recargar, 700);
+      }
+    });
+  });
+
+  /* --- Otras etapas que piden atención ---------------------------------- */
+  var otras = atrasadas.concat(devueltas);
+  var caja = document.getElementById('pi-otras');
+  if (!otras.length) { caja.innerHTML = ''; return; }
+  U.tabla(caja, {
+    datos: otras,
+    textoBuscar: 'Proyecto, etapa o responsable',
+    buscar: [function (x) { return x.proyecto.nombre; }, function (x) { return x.proyecto.id; },
+             function (x) { return x.etapa.nombre; }, function (x) { return S.nombreUsuario(x.etapa.responsableId); }],
+    filtros: [{ id: 'estado', titulo: 'Estado', todos: 'Todos', opciones: ['Devuelta', 'En proceso', 'Pendiente'],
+      prueba: function (x, v) { return x.etapa.estado === v; } }],
+    csv: { nombre: 'etapas-en-riesgo.csv' },
+    vacio: { icono: 'check_circle', titulo: 'Sin etapas en riesgo', texto: 'Nada más que revisar.' },
+    columnas: [
+      { clave: 'proyecto', titulo: 'Proyecto', orden: true,
+        valorOrden: function (x) { return x.proyecto.nombre; },
+        render: function (x) { return '<a class="principal" href="proyecto.html?id=' + encodeURIComponent(x.proyecto.id) + '&tab=etapas">' +
+          U.esc(x.proyecto.nombre) + '</a><span class="sub mono">' + U.esc(x.proyecto.id) + '</span>'; },
+        csv: function (x) { return x.proyecto.id + ' ' + x.proyecto.nombre; } },
+      { clave: 'etapa', titulo: 'Etapa', orden: true,
+        valorOrden: function (x) { return x.etapa.num; },
+        render: function (x) { return '<span class="mono">' + String(x.etapa.num).padStart(2, '0') + '</span> ' + U.esc(x.etapa.nombre); },
+        csv: function (x) { return x.etapa.num + ' ' + x.etapa.nombre; } },
+      { clave: 'responsable', titulo: 'Responsable', orden: true,
+        valorOrden: function (x) { return S.nombreUsuario(x.etapa.responsableId); },
+        render: function (x) { return '<span class="sm">' + U.esc(S.nombreUsuario(x.etapa.responsableId)) + '</span>'; },
+        csv: function (x) { return S.nombreUsuario(x.etapa.responsableId); } },
+      { clave: 'plazo', titulo: 'Plazo', tipo: 'mono', orden: true,
+        valorOrden: function (x) { var d = S.aDate(x.etapa.fechaFin); return d ? d.getTime() : 0; },
+        render: function (x) { return '<span class="mono">' + U.esc(x.etapa.fechaFin) + '</span><span class="sub">' + U.esc(F.plazo(x.etapa.fechaFin)) + '</span>'; },
+        csv: function (x) { return x.etapa.fechaFin; } },
+      { clave: 'estado', titulo: 'Estado', orden: true,
+        valorOrden: function (x) { return x.etapa.estado; },
+        render: function (x) { return U.badgeEtapa(x.etapa); },
+        csv: function (x) { return x.etapa.estado; } },
+      { clave: 'acciones', titulo: 'Acción', tipo: 'acciones',
+        render: function (x) { return '<a class="btn btn-sm btn-borde" href="proyecto.html?id=' +
+          encodeURIComponent(x.proyecto.id) + '&tab=etapas">Atender</a>'; } }
+    ]
+  });
+  caja.insertBefore(U.el('<div class="pi-cabecera"><h2>Otras etapas que piden atención</h2>' +
+    '<p class="sm suave">Etapas fuera de plazo o devueltas que todavía no llegan a la compuerta.</p></div>'), caja.firstChild);
+});
+</script>
+</body>
+</html>

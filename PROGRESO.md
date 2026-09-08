@@ -2,7 +2,7 @@
 
 ## Fase 0 · Inventario, cobertura, tokens y contradicciones
 
-**Estado: reporte entregado. A la espera de visto bueno. No se ha escrito ni una línea de código de la beta.**
+**Estado: aprobada.** El usuario dio el visto bueno a las cuatro decisiones de la sección 5 con el criterio propuesto en cada una.
 
 Insumos recibidos: dos exports de Stitch (el segundo amplía el primero de 9 a 27 pantallas). Método: inventario pantalla por pantalla, extracción de tokens contra las capturas renderizadas, y un pase crítico de 70 hallazgos candidatos verificados con dos lentes independientes (¿existe la cita? ¿contradice de verdad la regla?). Sobrevivieron 50; se descartaron 20 por evidencia falsa, redundancia o irrelevancia.
 
@@ -195,14 +195,12 @@ Para no dar la impresión de que hay que tirar todo:
 
 ---
 
-## 5. Decisiones que necesito de ti
+## 5. Las cuatro decisiones, y cómo quedaron
 
-Cuatro. El resto lo resuelvo yo y queda documentado arriba.
-
-1. **La especificación.** ¿La envías, o arranco derivando el modelo de datos y la matriz de permisos del prototipo SPA? Puedo construir la beta entera sin ella, pero entonces no puedo verificar el criterio de aceptación de la sección 12, que es tu propia definición de "terminado".
-2. **Venezuela.** Confirmo que reescribo toda la semilla en clave venezolana (RIF, autoridad ambiental nacional, estados y municipios, especies locales, dólares) y borro todo el aparato regulatorio chileno. Si el cliente es chileno, dímelo ahora: cambia el 40 % del contenido de las pantallas.
-3. **Cuánto se queda de la función inventada.** Mi criterio es quitar hash criptográfico, cadena inmutable, sistema geográfico, facturación electrónica, telemetría, notificaciones, avance ponderado y parte de horas. Son visualmente vistosos y pueden ayudar en la reunión, pero ninguno funciona sin servidor y en una demo un botón muerto se nota.
-4. **Dos selectores de rol.** Stitch pone un "Entrar como" en la barra superior de las 27 pantallas, y el encargo pide una barra de demo con cinco botones abajo. Son lo mismo dos veces. Propongo quitar el de la barra superior y dejar solo la barra de demo, que es la que se elimina antes de un uso real.
+1. **La especificación.** No llegó. Se construyó derivando el modelo de datos y la matriz de permisos del prototipo SPA, con todos los supuestos documentados en este archivo. Queda un hueco real: el criterio de aceptación de la sección 12 no se pudo verificar contra el original, porque no se conoce. Lo que sí se verificó son los diez pasos que el propio encargo enumera en su sección 10, y están todos cubiertos.
+2. **Venezuela.** Confirmado. Toda la semilla se reescribió: RIF en lugar de RUT, estados y municipios venezolanos, diez especies forestales locales, razones sociales del país, montos en dólares. Se borró el aparato regulatorio chileno completo.
+3. **La función inventada.** Se quitó toda: sellos criptográficos, cadena inmutable, sistema geográfico, facturación electrónica, telemetría de cuadrillas, notificaciones automáticas, avance ponderado con pesos y parte de horas. Donde el diseño de Stitch prometía algo que la beta no puede sostener, el aviso ahora explica la limitación en lugar de simularla.
+4. **Dos selectores de rol.** Se quitó el de la barra superior. Queda solo la barra de demostración, que es la que se elimina antes de un uso real. La barra superior conserva un enlace "Cambiar rol" que lleva a la portada.
 
 ---
 

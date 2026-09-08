@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proyectos &middot; Beta &middot; Proyectos Integrales</title>
+<meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/app.css">
+<!-- seed, store y auth van en el head: la guarda de permisos debe correr
+     ANTES de pintar. Si el rol no puede ver esta pagina, auth.js redirige. -->
+<script src="assets/seed.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/auth.js"></script>
+</head>
+<body class="pi-verificando">
+<main class="pi-lienzo">
+  <div id="pi-cabecera"></div>
+  <div id="pi-kpis"></div>
+  <div style="height:24px"></div>
+  <div id="pi-tabla"></div>
+</main>
+<script src="assets/icons.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/demo.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+
+PI.listo(function () {
+  var S = PI.store, U = PI.ui, A = PI.auth, F = PI.fmt;
+  var rol = A.rol(), yo = S.usuario();
+  var proyectos = S.proyectosVisibles(yo.id, rol);
+  var q = new URLSearchParams(window.location.search).get('q') || '';
+
+  var vencidos = proyectos.filter(function (p) { return S.etapasVencidas(p).length > 0; });
+  var enEspera = proyectos.filter(function (p) { return S.esperandoAprobacion(p).length > 0; });
+  var contratado = proyectos.reduce(function (a, p) { return a + p.presupuesto; }, 0);
+
+  document.getElementById('pi-cabecera').innerHTML = PI.shell.cabecera({
+    kicker: 'Registro maestro',
+    titulo: rol === 'profesional' ? 'Mis proyectos' : 'Proyectos',
+    texto: rol === 'profesional'
+      ? 'Solo aparecen los proyectos en los que formas parte del equipo o tienes una etapa asignada.'
+      : 'Expedientes técnicos, estudios y trámites en curso. Busca, filtra y ordena por cualquier columna.',
+    acciones: (A.puede('crearProyecto')
+      ? '<a class="btn btn-primario" href="proyecto-nuevo.html">' + U.icono('add_circle') + ' Nuevo proyecto</a>'
+      : '')
+  });
+
+  document.getElementById('pi-kpis').innerHTML = '<div class="kpis">' +
+    U.kpi({ titulo: 'Proyectos', icono: 'folder_open', tono: 'ok', valor: F.numero(proyectos.length),
+            pie: proyectos.filter(function (p) { return p.estado !== 'Cerrado'; }).length + ' activos' }) +
+    U.kpi({ titulo: 'Con etapas vencidas', icono: 'event_busy', tono: vencidos.length ? 'alerta' : '',
+            valor: F.numero(vencidos.length), pie: vencidos.length ? 'Requieren intervención' : 'Todo en plazo' }) +
+    U.kpi({ titulo: 'Esperando aprobación', icono: 'hourglass_top', tono: enEspera.length ? 'aviso' : '',
+            valor: F.numero(enEspera.length), pie: enEspera.length ? 'Compuertas detenidas' : 'Sin compuertas abiertas' }) +
+    U.kpi({ titulo: 'Cartera contratada', icono: 'trending_up', valor: F.dineroCorto(contratado),
+            pie: 'Suma de presupuestos, en dólares' }) +
+    '</div>';
+
+  var coordinadores = {};
+  proyectos.forEach(function (p) { coordinadores[p.coordinadorId] = S.nombreUsuario(p.coordinadorId); });
+
+  U.tabla(document.getElementById('pi-tabla'), {
+    datos: proyectos,
+    textoBuscar: 'Código, nombre del proyecto, contratante o coordinador',
+    buscar: ['id', 'nombre', 'ubicacion',
+      function (p) { return S.nombreContratante(p.contratanteId); },
+      function (p) { return S.nombreUsuario(p.coordinadorId); }],
+    filtros: [
+      { id: 'estado', titulo: 'Estado', todos: 'Todos los estados', campo: 'estado',
+        opciones: S.catalogos().estadosProyecto },
+      { id: 'tipo', titulo: 'Tipo', todos: 'Todos los tipos', campo: 'tipo',
+        opciones: S.catalogos().tiposProyecto },
+      { id: 'contratante', titulo: 'Contratante', todos: 'Todos', campo: 'contratanteId',
+        opciones: S.estado.contratantes.map(function (c) { return { valor: c.id, texto: c.nombre }; }) },
+      { id: 'coordinador', titulo: 'Coordinador', todos: 'Todos', campo: 'coordinadorId',
+        opciones: Object.keys(coordinadores).map(function (k) { return { valor: k, texto: coordinadores[k] }; }) },
+      { id: 'alerta', titulo: 'Alertas', todos: 'Sin filtro',
+        opciones: [{ valor: 'vencidas', texto: 'Con etapas vencidas' }, { valor: 'espera', texto: 'Esperando aprobación' }],
+        prueba: function (p, v) {
+          if (v === 'vencidas') return S.etapasVencidas(p).length > 0;
+          return S.esperandoAprobacion(p).length > 0;
+        } }
+    ],
+    ordenPor: 'id', ordenDir: 'asc', porPagina: 10,
+    csv: { nombre: 'proyectos.csv' },
+    claseFila: function (p) { return S.etapasVencidas(p).length ? 'alerta' : ''; },
+    alClicFila: function (p) { window.location.href = 'proyecto.html?id=' + encodeURIComponent(p.id); },
+    vacio: { icono: 'folder_open', titulo: 'Sin proyectos', texto: 'No hay proyectos que coincidan con el filtro.' },
+    columnas: [
+      { clave: 'id', titulo: 'Código', tipo: 'mono', orden: true, ancho: '116px',
+        render: function (p) { return '<span class="mono">' + U.esc(p.id) + '</span>'; } },
+      { clave: 'nombre', titulo: 'Proyecto', orden: true,
+        render: function (p) {
+          var v = S.etapasVencidas(p);
+          return '<a class="principal" href="proyecto.html?id=' + encodeURIComponent(p.id) + '">' + U.esc(p.nombre) + '</a>' +
+            '<span class="sub">' + U.esc(p.ubicacion) + '</span>' +
+            (v.length ? '<span class="sub" style="color:var(--error);font-weight:600">' +
+              v.length + (v.length === 1 ? ' etapa vencida' : ' etapas vencidas') + '</span>' : '');
+        },
+        csv: function (p) { return p.nombre; } },
+      { clave: 'contratanteId', titulo: 'Contratante', orden: true,
+        valorOrden: function (p) { return S.nombreContratante(p.contratanteId); },
+        render: function (p) { return U.esc(S.nombreContratante(p.contratanteId)); },
+        csv: function (p) { return S.nombreContratante(p.contratanteId); } },
+      { clave: 'tipo', titulo: 'Tipo', orden: true,
+        render: function (p) { return '<span class="sm">' + U.esc(p.tipo) + '</span>'; } },
+      { clave: 'coordinadorId', titulo: 'Coordinador', orden: true,
+        valorOrden: function (p) { return S.nombreUsuario(p.coordinadorId); },
+        render: function (p) { return '<span class="sm">' + U.esc(S.nombreUsuario(p.coordinadorId)) + '</span>'; },
+        csv: function (p) { return S.nombreUsuario(p.coordinadorId); } },
+      { clave: 'estado', titulo: 'Estado', orden: true,
+        render: function (p) { return U.badge(p.estado); } },
+      { clave: 'avance', titulo: 'Avance', tipo: 'num', orden: true,
+        valorOrden: function (p) { return S.avance(p); },
+        render: function (p) {
+          var a = S.avance(p), tono = S.etapasVencidas(p).length ? 'mal' : (a < 40 ? 'aviso' : '');
+          var e = S.etapaActual(p);
+          return '<div style="min-width:104px"><div class="fila" style="gap:6px;justify-content:flex-end">' +
+            '<span class="mono">' + a + '%</span>' + U.barra(a, tono) + '</div>' +
+            (e ? '<span class="sub">Etapa ' + e.num + ' de 10</span>' : '<span class="sub">Cerrado</span>') + '</div>';
+        },
+        csv: function (p) { return S.avance(p) + '%'; } },
+      { clave: 'fechaFin', titulo: 'Entrega', tipo: 'mono', orden: true,
+        valorOrden: function (p) { var d = S.aDate(p.fechaFin); return d ? d.getTime() : 0; },
+        render: function (p) {
+          return '<span class="mono">' + U.esc(p.fechaFin) + '</span>' +
+            '<span class="sub">' + U.esc(p.estado === 'Cerrado' ? 'entregado' : F.plazo(p.fechaFin)) + '</span>';
+        },
+        csv: function (p) { return p.fechaFin; } },
+      { clave: 'acciones', titulo: 'Acción', tipo: 'acciones',
+        render: function (p) {
+          return '<a class="btn btn-sm btn-borde" href="proyecto.html?id=' + encodeURIComponent(p.id) + '">Abrir</a>';
+        } }
+    ]
+  });
+
+  /* Si llega texto desde la búsqueda global, se aplica al cuadro de la tabla. */
+  if (q) {
+    var caja = document.querySelector('#pi-tabla [data-q]');
+    if (caja) {
+      caja.value = q;
+      caja.dispatchEvent(new Event('input'));
+    }
+  }
+});
+</script>
+</body>
+</html>

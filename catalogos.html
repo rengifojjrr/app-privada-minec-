@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catálogos &middot; Beta &middot; Proyectos Integrales</title>
+<meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/app.css">
+<!-- seed, store y auth van en el head: la guarda de permisos debe correr
+     ANTES de pintar. Si el rol no puede ver esta pagina, auth.js redirige. -->
+<script src="assets/seed.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/auth.js"></script>
+</head>
+<body class="pi-verificando">
+<main class="pi-lienzo">
+  <div id="pi-cabecera"></div>
+  <div id="pi-aviso"></div>
+  <div id="pi-contenido"></div>
+</main>
+<script src="assets/icons.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/demo.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+
+PI.listo(function () {
+  var S = PI.store, U = PI.ui, A = PI.auth, F = PI.fmt;
+  function recargar() { window.location.reload(); }
+
+  var LISTAS = [
+    { clave: 'tiposProyecto',      titulo: 'Tipos de proyecto',      icono: 'folder_open', uso: 'Alta de proyecto' },
+    { clave: 'estadosProyecto',    titulo: 'Estados de proyecto',    icono: 'flag',        uso: 'Listado y ficha', fijo: true, iconoReal: 'task_alt' },
+    { clave: 'estadosEtapa',       titulo: 'Estados de etapa',       icono: 'task_alt',    uso: 'Flujo de etapas', fijo: true },
+    { clave: 'rolesProyecto',      titulo: 'Roles en el proyecto',   icono: 'groups',      uso: 'Equipo y honorarios' },
+    { clave: 'tiposDocumento',     titulo: 'Tipos de documento',     icono: 'folder',      uso: 'Repositorio del expediente' },
+    { clave: 'categoriasIngreso',  titulo: 'Categorías de ingreso',  icono: 'arrow_downward', uso: 'Movimientos financieros' },
+    { clave: 'categoriasEgreso',   titulo: 'Categorías de egreso',   icono: 'arrow_upward',   uso: 'Movimientos financieros' },
+    { clave: 'estadosMovimiento',  titulo: 'Estados de movimiento',  icono: 'payments',    uso: 'Finanzas', fijo: true },
+    { clave: 'tiposMovimiento',    titulo: 'Tipos de movimiento',    icono: 'account_balance_wallet', uso: 'Finanzas', fijo: true }
+  ];
+
+  document.getElementById('pi-cabecera').innerHTML = PI.shell.cabecera({
+    kicker: 'Gobierno del sistema',
+    titulo: 'Catálogos',
+    texto: 'Las listas controladas del sistema. Ningún campo de clasificación del sistema acepta texto libre: todo sale de aquí.'
+  });
+
+  document.getElementById('pi-aviso').innerHTML =
+    '<div class="aviso aviso-ok" style="margin-bottom:24px">' + U.icono('lock') +
+    '<div><strong>Por qué el texto libre no es una opción</strong>' +
+    'Si cada persona escribiera "combustible", "Combustible" y "comb." como categorías distintas, ningún reporte cuadraría. ' +
+    'Las listas marcadas como fijas las usa la lógica del sistema y no se pueden editar desde aquí.</div></div>';
+
+  function pintar() {
+    var cat = S.catalogos();
+    var html = '<div class="rejilla rejilla-2">';
+
+    LISTAS.forEach(function (L) {
+      var items = cat[L.clave] || [];
+      html += '<div class="tarjeta"><div class="tarjeta-cab">' +
+        U.icono(L.iconoReal || L.icono) +
+        '<div style="flex:1"><h3>' + U.esc(L.titulo) + '</h3>' +
+        '<span class="sm tenue">' + U.esc(L.uso) + '</span></div>' +
+        (L.fijo ? '<span class="badge badge-neutro sin-punto">fija</span>'
+                : '<span class="badge badge-ok sin-punto">' + items.length + '</span>') + '</div>' +
+        '<div class="tarjeta-cuerpo pila-sm">';
+      items.forEach(function (v) {
+        html += '<div class="fila" style="gap:8px;justify-content:space-between;padding-bottom:5px;border-bottom:1px solid var(--borde-fino)">' +
+          '<span class="sm">' + U.esc(v) + '</span>' +
+          (L.fijo ? '<span class="sm tenue mono">sistema</span>'
+                  : '<button type="button" class="btn btn-sm" data-quitar="' + L.clave + '|' + U.esc(v) + '">Quitar</button>') +
+          '</div>';
+      });
+      if (!L.fijo) {
+        html += '<div class="fila" style="gap:6px;margin-top:6px">' +
+          '<input type="text" data-nuevo="' + L.clave + '" placeholder="Agregar a la lista" style="flex:1">' +
+          '<button type="button" class="btn btn-sm btn-primario" data-agregar="' + L.clave + '">' + U.icono('add', 'icono-sm') + '</button></div>';
+      }
+      html += '</div></div>';
+    });
+
+    /* Especies: dos campos, no texto libre suelto */
+    html += '<div class="tarjeta ancho-total"><div class="tarjeta-cab">' + U.icono('forest') +
+      '<div style="flex:1"><h3>Especies forestales</h3>' +
+      '<span class="sm tenue">Captura de mediciones de campo</span></div>' +
+      '<span class="badge badge-ok sin-punto">' + cat.especies.length + '</span></div>' +
+      '<div class="tabla-envoltura"><table class="tabla responsiva tabla-compacta"><thead><tr>' +
+      '<th>Código</th><th>Nombre común</th><th>Nombre científico</th><th class="num">Usos</th><th class="derecha">Acción</th>' +
+      '</tr></thead><tbody>';
+    cat.especies.forEach(function (e) {
+      var usos = 0;
+      S.estado.proyectos.forEach(function (p) {
+        (p.mediciones || []).forEach(function (m) { if (m.especieId === e.id) usos++; });
+      });
+      html += '<tr><td data-eti="Código" class="mono">' + U.esc(e.id) + '</td>' +
+        '<td data-eti="Nombre común"><span class="principal">' + U.esc(e.comun) + '</span></td>' +
+        '<td data-eti="Nombre científico" class="sm" style="font-style:italic">' + U.esc(e.cientifico) + '</td>' +
+        '<td data-eti="Usos" class="num">' + usos + '</td>' +
+        '<td data-eti="" class="acciones">' + (usos ? '<span class="sm tenue">en uso</span>' : '<span class="sm tenue">—</span>') + '</td></tr>';
+    });
+    html += '</tbody></table></div>' +
+      '<div class="tarjeta-cuerpo"><div class="rejilla rejilla-3">' +
+      '<div class="campo"><label for="e-comun">Nombre común</label><input id="e-comun" type="text" placeholder="Araguaney"></div>' +
+      '<div class="campo"><label for="e-cientifico">Nombre científico</label><input id="e-cientifico" type="text" placeholder="Handroanthus chrysanthus"></div>' +
+      '<div class="campo"><label>&nbsp;</label><button type="button" class="btn btn-primario" id="b-especie">' +
+      U.icono('add') + ' Agregar especie</button></div></div></div></div>';
+
+    /* Unidades y plantilla de etapas */
+    html += '<div class="tarjeta"><div class="tarjeta-cab">' + U.icono('straighten') +
+      '<div style="flex:1"><h3>Unidades de medida</h3><span class="sm tenue">Mediciones de campo</span></div>' +
+      '<span class="badge badge-neutro sin-punto">fija</span></div><div class="tarjeta-cuerpo pila-sm">';
+    cat.unidades.forEach(function (u) {
+      html += '<div class="fila" style="gap:8px;justify-content:space-between;padding-bottom:5px;border-bottom:1px solid var(--borde-fino)">' +
+        '<span class="sm">' + U.esc(u.nombre) + '</span><span class="mono">' + U.esc(u.simbolo === 'm3' ? 'm³' : u.simbolo) + '</span></div>';
+    });
+    html += '<div class="aviso aviso-aviso" style="margin-top:8px">' + U.icono('warning') +
+      '<div><strong>El metro cúbico se captura, no se calcula</strong>' +
+      'No existe ningún factor de conversión entre estas unidades en el sistema.</div></div></div></div>';
+
+    html += '<div class="tarjeta"><div class="tarjeta-cab">' + U.icono('drag_indicator') +
+      '<div style="flex:1"><h3>Plantilla de etapas</h3><span class="sm tenue">Alta de proyecto</span></div>' +
+      '<span class="badge badge-neutro sin-punto">fija</span></div><div class="tarjeta-cuerpo pila-sm">';
+    cat.plantillaEtapas.forEach(function (e) {
+      html += '<div class="fila" style="gap:8px;padding-bottom:5px;border-bottom:1px solid var(--borde-fino)">' +
+        '<span class="mono tenue" style="min-width:24px">' + String(e.num).padStart(2, '0') + '</span>' +
+        '<span class="sm" style="flex:1">' + U.esc(e.nombre) + '</span>' +
+        (e.compuerta ? '<span class="badge badge-aviso sin-punto">compuerta</span>' : '<span class="sm tenue mono">' + e.dias + ' d</span>') + '</div>';
+    });
+    html += '</div></div>';
+
+    html += '</div>';
+    document.getElementById('pi-contenido').innerHTML = html;
+    conectar();
+  }
+
+  function conectar() {
+    var cont = document.getElementById('pi-contenido');
+    Array.prototype.forEach.call(cont.querySelectorAll('[data-agregar]'), function (b) {
+      b.addEventListener('click', function () {
+        var lista = b.getAttribute('data-agregar');
+        var campo = cont.querySelector('[data-nuevo="' + lista + '"]');
+        var valor = campo.value.trim();
+        if (valor.length < 3) { U.aviso('Valor demasiado corto', 'Escribe al menos tres caracteres.', 'aviso'); return; }
+        if (!S.agregarAlCatalogo(lista, valor)) { U.aviso('Ya existe', '"' + valor + '" ya está en la lista.', 'aviso'); return; }
+        U.aviso('Catálogo actualizado', '"' + valor + '" quedó disponible en los formularios.', 'ok');
+        window.setTimeout(recargar, 500);
+      });
+    });
+    Array.prototype.forEach.call(cont.querySelectorAll('[data-quitar]'), function (b) {
+      b.addEventListener('click', function () {
+        var partes = b.getAttribute('data-quitar').split('|');
+        U.confirmar({
+          titulo: 'Quitar del catálogo',
+          texto: '¿Quitar "' + partes[1] + '"? Los registros que ya lo usan no cambian, pero dejará de aparecer en los formularios.',
+          confirmar: 'Quitar', peligro: true,
+          alConfirmar: function () { S.quitarDelCatalogo(partes[0], partes[1]); recargar(); }
+        });
+      });
+    });
+    var be = document.getElementById('b-especie');
+    if (be) be.addEventListener('click', function () {
+      var c = document.getElementById('e-comun').value.trim();
+      var s = document.getElementById('e-cientifico').value.trim();
+      if (c.length < 3 || s.length < 3) { U.aviso('Datos incompletos', 'Indica el nombre común y el científico.', 'aviso'); return; }
+      if (!S.agregarEspecie(c, s)) { U.aviso('Ya existe', 'Esa especie ya está en el catálogo.', 'aviso'); return; }
+      U.aviso('Especie agregada', c + ' ya se puede elegir al capturar mediciones.', 'ok');
+      window.setTimeout(recargar, 500);
+    });
+  }
+
+  pintar();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calendario &middot; Beta &middot; Proyectos Integrales</title>
+<meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/app.css">
+<!-- seed, store y auth van en el head: la guarda de permisos debe correr
+     ANTES de pintar. Si el rol no puede ver esta pagina, auth.js redirige. -->
+<script src="assets/seed.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/auth.js"></script>
+</head>
+<body class="pi-verificando">
+<main class="pi-lienzo">
+  <div id="pi-cabecera"></div>
+  <div id="pi-kpis"></div>
+  <div style="height:24px"></div>
+  <div class="rejilla rejilla-lateral-inv">
+    <div id="pi-calendario"></div>
+    <div id="pi-lateral"></div>
+  </div>
+</main>
+<script src="assets/icons.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/demo.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+
+PI.listo(function () {
+  var S = PI.store, U = PI.ui, A = PI.auth, F = PI.fmt;
+  var yo = S.usuario(), rol = A.rol();
+  var eventos = S.agenda(yo.id, rol);
+
+  var MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  var DIAS = ['lun','mar','mié','jue','vie','sáb','dom'];
+
+  var hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+  var mes = hoy.getMonth(), anio = hoy.getFullYear();
+
+  var vencidos = eventos.filter(function (e) { return e.vencida; });
+  var proximos = eventos.filter(function (e) {
+    var d = S.diasHasta(e.fecha); return d !== null && d >= 0 && d <= 7;
+  });
+  var compuertas = eventos.filter(function (e) { return e.compuerta && e.estado !== 'Aprobada'; });
+
+  document.getElementById('pi-cabecera').innerHTML = PI.shell.cabecera({
+    kicker: 'Planificación',
+    titulo: 'Calendario de entregas',
+    texto: 'Plazos de todas las etapas abiertas. Las etapas aprobadas no aparecen.'
+  });
+
+  document.getElementById('pi-kpis').innerHTML = '<div class="kpis">' +
+    U.kpi({ titulo: 'Etapas abiertas', icono: 'calendar_month', valor: F.numero(eventos.length), pie: 'con plazo asignado' }) +
+    U.kpi({ titulo: 'Vencidas', icono: 'event_busy', tono: vencidos.length ? 'alerta' : '',
+      valor: F.numero(vencidos.length), pie: vencidos.length ? 'requieren intervención' : 'ninguna' }) +
+    U.kpi({ titulo: 'Vencen esta semana', icono: 'schedule', tono: proximos.length ? 'aviso' : '',
+      valor: F.numero(proximos.length), pie: 'en los próximos 7 días' }) +
+    U.kpi({ titulo: 'Compuertas abiertas', icono: 'gavel', valor: F.numero(compuertas.length), pie: 'etapa 6 de cada proyecto' }) +
+    '</div>';
+
+  function pintarMes() {
+    var primero = new Date(anio, mes, 1);
+    var desplazamiento = (primero.getDay() + 6) % 7;   /* la semana empieza en lunes */
+    var diasMes = new Date(anio, mes + 1, 0).getDate();
+    var diasPrev = new Date(anio, mes, 0).getDate();
+
+    var celdas = [];
+    for (var i = desplazamiento; i > 0; i--) celdas.push({ n: diasPrev - i + 1, fuera: true });
+    for (var d = 1; d <= diasMes; d++) celdas.push({ n: d, fuera: false, fecha: new Date(anio, mes, d) });
+    while (celdas.length % 7 !== 0) celdas.push({ n: celdas.length - desplazamiento - diasMes + 1, fuera: true });
+
+    var html = '<div class="tarjeta"><div class="tarjeta-cab">' +
+      '<button type="button" class="btn btn-sm btn-icono" id="c-ant" aria-label="Mes anterior">' + U.icono('chevron_left') + '</button>' +
+      '<h2 style="flex:1;text-align:center;text-transform:capitalize">' + MESES[mes] + ' de ' + anio + '</h2>' +
+      '<button type="button" class="btn btn-sm btn-icono" id="c-sig" aria-label="Mes siguiente">' + U.icono('chevron_right') + '</button>' +
+      '<button type="button" class="btn btn-sm" id="c-hoy">Hoy</button></div>' +
+      '<div class="tarjeta-cuerpo"><div class="cal-rejilla">';
+
+    DIAS.forEach(function (n) { html += '<div class="cal-dia-nom eti">' + n + '</div>'; });
+
+    celdas.forEach(function (c) {
+      if (c.fuera) { html += '<div class="cal-dia fuera"><span class="n">' + c.n + '</span></div>'; return; }
+      var txt = S.deDate(c.fecha);
+      var delDia = eventos.filter(function (e) { return e.fecha === txt; });
+      var esHoy = c.fecha.getTime() === hoy.getTime();
+      html += '<div class="cal-dia' + (esHoy ? ' hoy' : '') + '"><span class="n">' + c.n + '</span><div class="cal-eventos">';
+      delDia.forEach(function (e) {
+        var tono = e.vencida ? 'mal' : (e.compuerta ? 'aviso' : 'ok');
+        html += '<a class="cal-evento ' + tono + '" href="proyecto.html?id=' + encodeURIComponent(e.proyectoId) +
+          '&tab=etapas" title="' + U.esc(e.proyectoNombre + ' — etapa ' + e.etapa + ': ' + e.titulo) + '">' +
+          U.esc(e.proyectoId.slice(-3) + ' · E' + e.etapa) + '</a>';
+      });
+      html += '</div></div>';
+    });
+
+    html += '</div><div class="fila" style="gap:16px;margin-top:12px">' +
+      '<span class="fila" style="gap:5px"><span class="badge badge-ok sin-punto" style="width:12px;height:12px;padding:0"></span><span class="sm tenue">en plazo</span></span>' +
+      '<span class="fila" style="gap:5px"><span class="badge badge-aviso sin-punto" style="width:12px;height:12px;padding:0"></span><span class="sm tenue">compuerta</span></span>' +
+      '<span class="fila" style="gap:5px"><span class="badge badge-mal sin-punto" style="width:12px;height:12px;padding:0"></span><span class="sm tenue">vencida</span></span>' +
+      '</div></div></div>';
+
+    document.getElementById('pi-calendario').innerHTML = html;
+    document.getElementById('c-ant').addEventListener('click', function () { mes--; if (mes < 0) { mes = 11; anio--; } pintarMes(); });
+    document.getElementById('c-sig').addEventListener('click', function () { mes++; if (mes > 11) { mes = 0; anio++; } pintarMes(); });
+    document.getElementById('c-hoy').addEventListener('click', function () { mes = hoy.getMonth(); anio = hoy.getFullYear(); pintarMes(); });
+  }
+
+  function pintarLateral() {
+    function lista(titulo, items, tono, vacioTxt) {
+      var html = '<div class="tarjeta"><div class="tarjeta-cab"><h2>' + U.esc(titulo) + '</h2>' +
+        '<span class="badge badge-' + tono + ' sin-punto pi-acciones">' + items.length + '</span></div>';
+      if (!items.length) {
+        html += '<div class="tarjeta-cuerpo"><p class="sm tenue">' + U.esc(vacioTxt) + '</p></div>';
+      } else {
+        html += '<div class="tarjeta-cuerpo pila-sm">';
+        items.slice(0, 8).forEach(function (e) {
+          html += '<a href="proyecto.html?id=' + encodeURIComponent(e.proyectoId) + '&tab=etapas" ' +
+            'style="text-decoration:none;color:inherit;display:block;padding-bottom:8px;border-bottom:1px solid var(--borde-fino)">' +
+            '<div class="fila" style="gap:8px"><span class="mono sm">' + U.esc(e.fecha) + '</span>' +
+            '<span class="badge badge-' + tono + ' sin-punto">E' + e.etapa + '</span></div>' +
+            '<strong class="sm">' + U.esc(e.titulo) + '</strong>' +
+            '<div class="sm tenue">' + U.esc(e.proyectoNombre) + '</div></a>';
+        });
+        html += '</div>';
+      }
+      return html + '</div>';
+    }
+    document.getElementById('pi-lateral').innerHTML = '<div class="pila">' +
+      lista('Vencidas', vencidos.sort(function (a, b) { return S.diasHasta(a.fecha) - S.diasHasta(b.fecha); }), 'mal', 'Ninguna etapa fuera de plazo.') +
+      lista('Vencen esta semana', proximos.sort(function (a, b) { return S.diasHasta(a.fecha) - S.diasHasta(b.fecha); }), 'aviso', 'Sin vencimientos en los próximos siete días.') +
+      '</div>';
+  }
+
+  pintarMes();
+  pintarLateral();
+});
+</script>
+</body>
+</html>

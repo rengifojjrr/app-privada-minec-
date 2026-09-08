@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bitácora general &middot; Beta &middot; Proyectos Integrales</title>
+<meta name="description" content="Beta navegable del sistema de gestion de proyectos de Proyectos Integrales. Datos de ejemplo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%231F4D3D'/%3E%3Cpath d='M50 22l14 24-14-4-14 4z' fill='%23F7F6F2'/%3E%3Cpath d='M50 42l16 26-16-6-16 6z' fill='%23F7F6F2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/app.css">
+<!-- seed, store y auth van en el head: la guarda de permisos debe correr
+     ANTES de pintar. Si el rol no puede ver esta pagina, auth.js redirige. -->
+<script src="assets/seed.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/auth.js"></script>
+</head>
+<body class="pi-verificando">
+<main class="pi-lienzo">
+  <div id="pi-cabecera"></div>
+  <div id="pi-kpis"></div>
+  <div style="height:24px"></div>
+  <div id="pi-tabla"></div>
+</main>
+<script src="assets/icons.js"></script>
+<script src="assets/ui.js"></script>
+<script src="assets/demo.js"></script>
+<script src="assets/shell.js"></script>
+<script>
+
+PI.listo(function () {
+  var S = PI.store, U = PI.ui, A = PI.auth, F = PI.fmt;
+  var logs = S.estado.bitacora.slice();
+
+  var acciones = Object.keys(logs.reduce(function (a, b) { a[b.accion] = 1; return a; }, {})).sort();
+  var entidades = Object.keys(logs.reduce(function (a, b) { a[b.entidad] = 1; return a; }, {})).sort();
+  var hoyTxt = S.fechaHoy();
+  var deHoy = logs.filter(function (b) { return b.fechaHora.indexOf(hoyTxt) === 0; });
+
+  document.getElementById('pi-cabecera').innerHTML = PI.shell.cabecera({
+    kicker: 'Gobierno del sistema',
+    titulo: 'Bitácora general',
+    texto: 'Todo lo que ocurre en el sistema, con fecha, hora y autor. Sirve para responder quién hizo qué y cuándo.'
+  });
+
+  document.getElementById('pi-kpis').innerHTML = '<div class="kpis">' +
+    U.kpi({ titulo: 'Registros', icono: 'history_edu', valor: F.numero(logs.length), pie: 'en la bitácora' }) +
+    U.kpi({ titulo: 'De hoy', icono: 'schedule', tono: deHoy.length ? 'ok' : '', valor: F.numero(deHoy.length), pie: hoyTxt }) +
+    U.kpi({ titulo: 'Tipos de acción', icono: 'table_chart', valor: F.numero(acciones.length), pie: 'distintos' }) +
+    U.kpi({ titulo: 'Usuarios con actividad', icono: 'groups',
+      valor: F.numero(Object.keys(logs.reduce(function (a, b) { a[b.usuarioId] = 1; return a; }, {})).length),
+      pie: 'de ' + S.estado.usuarios.length + ' registrados' }) +
+    '</div>';
+
+  U.tabla(document.getElementById('pi-tabla'), {
+    datos: logs,
+    textoBuscar: 'Autor, acción, proyecto o detalle',
+    buscar: ['accion', 'detalle', 'proyectoId', function (b) { return S.nombreUsuario(b.usuarioId); }],
+    filtros: [
+      { id: 'usuario', titulo: 'Autor', todos: 'Todos', campo: 'usuarioId',
+        opciones: S.estado.usuarios.map(function (u) { return { valor: u.id, texto: u.nombre }; }) },
+      { id: 'accion', titulo: 'Acción', todos: 'Todas', campo: 'accion',
+        opciones: acciones.map(function (a) { return { valor: a, texto: S.etiquetaAccion(a) }; }) },
+      { id: 'entidad', titulo: 'Entidad', todos: 'Todas', campo: 'entidad', opciones: entidades },
+      { id: 'proyecto', titulo: 'Proyecto', todos: 'Todos', campo: 'proyectoId',
+        opciones: S.estado.proyectos.map(function (p) { return { valor: p.id, texto: p.id }; }) }
+    ],
+    ordenPor: 'fechaHora', ordenDir: 'desc', porPagina: 20,
+    csv: { nombre: 'bitacora-general.csv' },
+    vacio: { icono: 'history_edu', titulo: 'Sin registros', texto: 'No hay entradas que coincidan con el filtro.' },
+    columnas: [
+      { clave: 'fechaHora', titulo: 'Fecha y hora', tipo: 'mono', orden: true, ancho: '150px',
+        valorOrden: function (b) { var d = S.aDate(b.fechaHora); return d ? d.getTime() : 0; },
+        render: function (b) { return '<span class="mono">' + U.esc(b.fechaHora) + '</span>'; } },
+      { clave: 'usuarioId', titulo: 'Autor', orden: true,
+        valorOrden: function (b) { return S.nombreUsuario(b.usuarioId); },
+        render: function (b) {
+          var u = S.buscarUsuario(b.usuarioId);
+          return '<span class="principal">' + U.esc(u ? u.nombre : '—') + '</span>' +
+            '<span class="sub">' + U.esc(u ? A.nombreRol(u.rol) : '') + '</span>';
+        },
+        csv: function (b) { return S.nombreUsuario(b.usuarioId); } },
+      { clave: 'accion', titulo: 'Acción', orden: true,
+        render: function (b) { return '<span class="badge badge-info sin-punto">' + U.esc(S.etiquetaAccion(b.accion)) + '</span>'; },
+        csv: function (b) { return b.accion; } },
+      { clave: 'entidad', titulo: 'Entidad', orden: true,
+        render: function (b) { return '<span class="sm">' + U.esc(b.entidad || '—') + '</span>'; } },
+      { clave: 'proyectoId', titulo: 'Proyecto', tipo: 'mono', orden: true,
+        render: function (b) {
+          return b.proyectoId
+            ? '<a class="mono" href="proyecto.html?id=' + encodeURIComponent(b.proyectoId) + '&tab=bitacora">' + U.esc(b.proyectoId) + '</a>'
+            : '<span class="tenue">—</span>';
+        },
+        csv: function (b) { return b.proyectoId || ''; } },
+      { clave: 'detalle', titulo: 'Detalle', orden: false,
+        render: function (b) { return '<span class="sm suave">' + U.esc(b.detalle) + '</span>'; } }
+    ]
+  });
+});
+</script>
+</body>
+</html>
