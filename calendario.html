@@ -23,6 +23,7 @@
 <main class="pi-lienzo">
   <div id="pi-cabecera"></div>
   <div id="pi-kpis"></div>
+  <div id="pi-filtros"></div>
   <div style="height:24px"></div>
   <div class="rejilla rejilla-lateral-inv">
     <div id="pi-calendario"></div>
@@ -38,7 +39,27 @@
 PI.listo(function () {
   var S = PI.store, U = PI.ui, A = PI.auth, F = PI.fmt;
   var yo = S.usuario(), rol = A.rol();
-  var eventos = S.agenda(yo.id, rol);
+  var todos = S.agenda(yo.id, rol);
+
+  /* Filtros por proyecto y por responsable. El calendario pintaba las etapas de
+     todos los proyectos visibles y no habia manera de aislar uno: con seis
+     proyectos abiertos la rejilla se lee, con treinta no. Los dos filtros salen
+     de los propios eventos, asi que solo ofrecen valores que existen. */
+  var filtro = { proyecto: '', responsable: '' };
+  var eventos = todos;
+
+  function aplicarFiltros() {
+    eventos = todos.filter(function (e) {
+      if (filtro.proyecto && e.proyectoId !== filtro.proyecto) return false;
+      if (filtro.responsable && e.responsableId !== filtro.responsable) return false;
+      return true;
+    });
+    vencidos = eventos.filter(function (e) { return e.vencida; });
+    proximos = eventos.filter(function (e) {
+      var d = S.diasHasta(e.fecha); return d !== null && d >= 0 && d <= 7;
+    });
+    compuertas = eventos.filter(function (e) { return e.compuerta && e.estado !== 'Aprobada'; });
+  }
 
   var MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
   var DIAS = ['lun','mar','mié','jue','vie','sáb','dom'];
@@ -48,11 +69,8 @@ PI.listo(function () {
   var hoy = new Date(); hoy.setHours(0, 0, 0, 0);
   var mes = hoy.getMonth(), anio = hoy.getFullYear();
 
-  var vencidos = eventos.filter(function (e) { return e.vencida; });
-  var proximos = eventos.filter(function (e) {
-    var d = S.diasHasta(e.fecha); return d !== null && d >= 0 && d <= 7;
-  });
-  var compuertas = eventos.filter(function (e) { return e.compuerta && e.estado !== 'Aprobada'; });
+  var vencidos, proximos, compuertas;
+  aplicarFiltros();
 
   document.getElementById('pi-cabecera').innerHTML = PI.shell.cabecera({
     kicker: 'Planificación',
@@ -60,6 +78,7 @@ PI.listo(function () {
     texto: 'Plazos de todas las etapas abiertas. Las etapas aprobadas no aparecen.'
   });
 
+  function pintarKpis() {
   document.getElementById('pi-kpis').innerHTML = '<div class="kpis">' +
     U.kpi({ titulo: 'Etapas abiertas', icono: 'calendar_month', valor: F.numero(eventos.length), pie: 'con plazo asignado' }) +
     U.kpi({ titulo: 'Vencidas', icono: 'event_busy', tono: vencidos.length ? 'alerta' : '',
@@ -68,6 +87,54 @@ PI.listo(function () {
       valor: F.numero(proximos.length), pie: 'en los próximos 7 días' }) +
     U.kpi({ titulo: 'Compuertas abiertas', icono: 'gavel', valor: F.numero(compuertas.length), pie: 'etapa 6 de cada proyecto' }) +
     '</div>';
+  }
+
+  /* --- Los dos filtros -------------------------------------------------- */
+  function pintarFiltros() {
+    var proyectos = [], vistos = {};
+    todos.forEach(function (e) {
+      if (vistos[e.proyectoId]) return;
+      vistos[e.proyectoId] = true;
+      proyectos.push({ valor: e.proyectoId, texto: e.proyectoId + ' · ' + e.proyectoNombre });
+    });
+    var responsables = [], vistosR = {};
+    todos.forEach(function (e) {
+      if (!e.responsableId || vistosR[e.responsableId]) return;
+      vistosR[e.responsableId] = true;
+      responsables.push({ valor: e.responsableId, texto: S.nombreUsuario(e.responsableId) });
+    });
+    responsables.sort(function (a, b) { return a.texto.localeCompare(b.texto, 'es'); });
+
+    document.getElementById('pi-filtros').innerHTML =
+      '<div class="filtros">' +
+      '<div class="campo crece"><label for="c-proyecto">Proyecto</label><select id="c-proyecto">' +
+      U.selectOpciones([{ valor: '', texto: 'Todos los proyectos' }].concat(proyectos), filtro.proyecto) +
+      '</select></div>' +
+      '<div class="campo crece"><label for="c-responsable">Responsable</label><select id="c-responsable">' +
+      U.selectOpciones([{ valor: '', texto: 'Todos los responsables' }].concat(responsables), filtro.responsable) +
+      '</select></div>' +
+      '<div class="fin"><button type="button" class="btn btn-sm btn-borde" id="c-limpiar">' +
+      U.icono('close', 'icono-sm') + ' Limpiar</button></div>' +
+      '</div>';
+
+    document.getElementById('c-proyecto').addEventListener('change', function () {
+      filtro.proyecto = this.value; repintar();
+    });
+    document.getElementById('c-responsable').addEventListener('change', function () {
+      filtro.responsable = this.value; repintar();
+    });
+    document.getElementById('c-limpiar').addEventListener('click', function () {
+      filtro.proyecto = ''; filtro.responsable = ''; repintar();
+    });
+  }
+
+  function repintar() {
+    aplicarFiltros();
+    pintarFiltros();
+    pintarKpis();
+    pintarMes();
+    pintarLateral();
+  }
 
   function pintarMes() {
     var primero = new Date(anio, mes, 1);
@@ -142,8 +209,7 @@ PI.listo(function () {
       '</div>';
   }
 
-  pintarMes();
-  pintarLateral();
+  repintar();
 });
 </script>
 </body>

@@ -35,8 +35,34 @@ PI.listo(function () {
   var S = PI.store, U = PI.ui, A = PI.auth, F = PI.fmt;
   var MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
   var hoy = new Date();
-  var mes = hoy.getMonth(), anio = hoy.getFullYear();
   var tipo = 'cierre';
+
+  /* El periodo arranca en el ultimo mes que TIENE movimientos, no en el mes en
+     curso. Antes arrancaba en el mes actual y, como la semilla genera las
+     fechas hacia atras, el reporte abria en un mes vacio: decia "Sin
+     movimientos en el mes", que es correcto, pero se lee como que el reporte
+     no funciona. Un consolidado que abre en blanco no se puede mostrar.
+     Si de verdad no hay nada en ningun mes, cae en el mes en curso. */
+  function ultimoPeriodoConDatos() {
+    var visibles = S.proyectosVisibles(S.usuario().id, A.rol());
+    var mejor = null;
+    visibles.forEach(function (p) {
+      var fechas = (p.finanzas || []).map(function (f) { return f.fecha; })
+        .concat((p.etapas || []).filter(function (e) { return e.estado === 'Aprobada' && e.fechaAprobacion; })
+          .map(function (e) { return e.fechaAprobacion; }));
+      fechas.forEach(function (f) {
+        var d = S.aDate(f);
+        if (!d) return;
+        var clave = d.getFullYear() * 12 + d.getMonth();
+        if (mejor === null || clave > mejor) mejor = clave;
+      });
+    });
+    if (mejor === null) return { mes: hoy.getMonth(), anio: hoy.getFullYear() };
+    return { mes: mejor % 12, anio: Math.floor(mejor / 12) };
+  }
+
+  var inicial = ultimoPeriodoConDatos();
+  var mes = inicial.mes, anio = inicial.anio;
 
   document.getElementById('pi-cabecera').innerHTML = PI.shell.cabecera({
     kicker: 'Consolidados',

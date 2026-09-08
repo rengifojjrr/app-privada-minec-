@@ -49,7 +49,7 @@ python3 -m http.server 8080     # y abrir http://localhost:8080
 Pero el escenario de la reunión es `file://`: abrir `index.html` directamente, con la red apagada.
 Todo cambio debe probarse ahí, porque es lo que se rompe primero.
 
-En `pruebas/` hay ocho guiones que hacen exactamente eso. Los de navegador abren las páginas por
+En `pruebas/` hay nueve guiones que hacen exactamente eso. Los de navegador abren las páginas por
 `file://` **abortando toda petición que no sea `file:`, `data:` o `blob:`**, que es la única forma de
 sostener la promesa de que funciona sin red.
 
@@ -61,7 +61,8 @@ node pruebas/navegador-flujos.js         # los recorridos completos
 node pruebas/navegador-responsive.js     # 360, 390, 768 y 1440 px
 node pruebas/navegador-barras.js         # barras fijas, --demo-alto y contraste
 node pruebas/navegador-ingreso.js        # los ocho usuarios
-node pruebas/publicacion.js             # la beta publicada: en vivo y por HTTP
+node pruebas/calendario-y-reportes.js    # las dos pantallas consolidadas
+node pruebas/publicacion.js              # la beta publicada: en vivo y por HTTP
 ```
 
 Todos salen con código 0 si pasan. Los de navegador necesitan la ruta de Chromium que llevan
@@ -270,6 +271,11 @@ de bitácora de días anteriores.
   proyecto viejo se leía como "vencido hace 210 días".
 - **Un parámetro de dirección se escribe y se lee con el mismo nombre, sin acentos.** La guarda de
   `auth.js` escribe `?pagina=`, y `sin-permiso.html` lo lee así. Ya se rompió una vez.
+- **Una pantalla que abre en un período vacío se lee como una pantalla rota.** Los reportes
+  arrancaban en el mes en curso, y como la semilla genera las fechas hacia atrás, abrían sin
+  movimientos. Decían "Sin movimientos en el mes", que es correcto, y aun así el informe que llegó
+  fue "reportes no produce salida". Ahora `reportes.html` arranca en el último mes que tiene datos.
+  Lo mismo vale para cualquier consolidado que se agregue.
 - **Si escondes un control en móvil, comprueba que quede otra forma de hacer lo mismo.** El bloque de
   720 px escondía el botón "Ocultar" de la barra de demostración en la misma regla que la pista de la
   tecla D. En un teléfono no hay teclado, así que la barra quedaba pegada al pie sin ninguna manera
