@@ -79,23 +79,42 @@ Dos trampas que ya se pisaron al construirlo, por si hay que tocarlo:
 
 ## La beta publicada como página web
 
-La rama del repositorio está conectada a Vercel, así que **cada push republica la página**. No hay
-paso de compilación: Vercel sirve los archivos tal cual, porque no hay `package.json` ni nada que
-construir. Es la carpeta real, no la vista previa de una página, así que aquí la navegación entre
-archivos, la exportación a CSV y la impresión sí funcionan.
+**https://rengifojjrr.github.io/app-privada-minec-/**
 
-`.vercelignore` deja fuera `stitch/`, `pruebas/`, `herramientas/` y las notas: son material de
-trabajo, y el export de Stitch además es el sistema regulatorio de otro país.
+Está en GitHub Pages, sirviendo la rama por defecto, que es la rama de trabajo. **Cada push
+republica la página**, con un minuto de retraso. No hay paso de compilación: `.nojekyll` apaga Jekyll
+y Pages entrega los archivos tal cual, que es justo lo que hace falta en un proyecto sin compilación.
 
-**La página lleva `noindex`, y conviene no quitarlo.** Va por dos caminos: la cabecera
-`X-Robots-Tag` de `vercel.json` y `robots.txt`. La razón no es pudor técnico: la página muestra el
-logo y el RIF reales de MONPICA junto a ocho personas, montos y fechas inventados. Si eso se indexa,
-alguien puede encontrarla buscando la empresa y creer que Carlos Montilla Rangel trabaja ahí. El
-`noindex` es lo que separa una demostración de una ficha falsa de una empresa real.
+Es la carpeta real, no la vista previa de una sola página, así que aquí la navegación entre archivos,
+la exportación a CSV y la impresión funcionan igual que en local.
 
-La URL es pública para quien la tenga, porque el cliente tiene que poder abrirla desde cualquier
-dispositivo sin credenciales. Si en algún momento hace falta cerrarla, Vercel tiene protección por
-contraseña a nivel de proyecto; no hace falta tocar el código.
+### El repositorio es público, y eso importa
+
+A pesar del nombre, `app-privada-minec-` **es un repositorio público**. Cualquiera puede leer el
+código, el brochure del cliente, sus logos y su RIF. Es lo que permite que Pages funcione sin pagar,
+pero conviene saberlo y no confundirlo con privacidad. Si el cliente quiere que no se vea, hay que
+cambiar el repositorio a privado, y entonces Pages exige un plan de pago.
+
+### El noindex no es un detalle
+
+La página muestra el logo y el RIF **reales** de MONPICA junto a ocho personas, todos los montos y
+todas las fechas **inventados**. Si un buscador la indexa, alguien puede encontrarla buscando la
+empresa y creer que Carlos Montilla Rangel trabaja ahí y que la cartera son 372.500 dólares. Eso ya
+no es una demostración, es una ficha falsa de una empresa que existe.
+
+Va por dos caminos, y hacen falta los dos:
+
+- **`robots.txt`** con `Disallow: /`, que pide a los rastreadores que no entren.
+- **`<meta name="robots" content="noindex, nofollow">` en las 17 páginas**, que es lo único que da un
+  noindex de verdad. GitHub Pages no permite poner cabeceras HTTP, así que no se puede usar
+  `X-Robots-Tag`; el meta es el sustituto. Es inerte al abrir con `file://`, así que no afecta al
+  entregable.
+
+Si se añade una página nueva, **lleva el meta**. Sin él, esa página sí es indexable.
+
+Pages sirve todo lo que hay en la rama, incluidos `stitch/`, `pruebas/`, `herramientas/` y estas
+notas: Pages no tiene un archivo de exclusión. Como el repositorio ya es público, no añade
+exposición, pero está dicho para que no sorprenda.
 
 ## Cómo está organizado
 
@@ -135,9 +154,8 @@ stitch/        export original de Stitch. Solo referencia, no se publica
 pruebas/       guiones de verificación. No se publican
 herramientas/  generador de la vista previa de una sola página. No se publica
 
-vercel.json    configuración del despliegue. No es un paso de compilación
-.vercelignore  qué no se sirve: stitch/, pruebas/, herramientas/ y las notas
-robots.txt     prohíbe la indexación. Ver más abajo
+.nojekyll      apaga Jekyll en GitHub Pages: los archivos se sirven tal cual
+robots.txt     prohíbe el rastreo. Ver más abajo
 ```
 
 Las 23 páginas de la especificación caben en estos 17 archivos: las páginas 5 a 11 son las siete
