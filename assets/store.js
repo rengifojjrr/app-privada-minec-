@@ -11,7 +11,7 @@ window.PI = window.PI || {};
 (function (PI) {
   'use strict';
 
-  var CLAVE = 'PI_BETA_DATOS_V4';
+  var CLAVE = 'PI_BETA_DATOS_V5';
   var estado = null;
   var disponible = true;
 
@@ -33,7 +33,7 @@ window.PI = window.PI || {};
     if (crudo) {
       try {
         var d = JSON.parse(crudo);
-        if (d && d.version === 4 && Array.isArray(d.proyectos)) return d;
+        if (d && d.version === 5 && Array.isArray(d.proyectos)) return d;
       } catch (e) { /* dato corrupto: se resiembra */ }
     }
     var fresco = window.PI_SEED();

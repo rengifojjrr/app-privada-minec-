@@ -28,7 +28,7 @@ function bien(m){ console.log('  OK  ' + m); }
   await pag.waitForFunction(() => window.PI && window.PI.store, null, { timeout: 8000 });
   await pag.waitForTimeout(250);
   if (!pag.url().endsWith('panel.html')) malo('ingresar no llevó al panel');
-  else bien('ingresar como Carlos Montilla lleva al panel');
+  else bien('ingresar como Andrés Peñalver lleva al panel');
   const rolActivo = await pag.evaluate(() => PI.store.rol());
   if (rolActivo !== 'coordinador') malo('el rol no quedó activo'); else bien('el rol quedó guardado: ' + rolActivo);
 
@@ -226,7 +226,7 @@ function bien(m){ console.log('  OK  ' + m); }
   await pag.click('[data-alternar="u-07"]'); await pag.waitForSelector('.pi-modal');
   await pag.click('.pi-modal [data-confirmar]'); await pag.waitForTimeout(1200);
   const inactivo = await pag.evaluate(() => PI.store.buscarUsuario('u-07').activo);
-  if (inactivo) malo('el usuario no quedó desactivado'); else bien('Diego Torres quedó desactivado');
+  if (inactivo) malo('el usuario no quedó desactivado'); else bien('Diego Fuenmayor quedó desactivado');
   await ir('bitacora.html');
   await pag.fill('[data-q]', 'desactiv'); await pag.waitForTimeout(350);
   const enBitacora = await pag.evaluate(() => {

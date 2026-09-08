@@ -1,25 +1,38 @@
 /* ============================================================================
-   seed.js — Datos de ejemplo.
+   seed.js — Datos de ejemplo. TODO lo que hay aqui es inventado.
 
-   El contexto es el real de MONPICA — Montilla Proyectos Integrales C.A.,
-   tomado de su brochure: su sede en Guanare, su portafolio de servicios, las
-   especies que comercializa con sus cifras de producción, y los cinco clientes
-   que declara como experiencia comprobada (AGROALVENCIA, CAMINPEG, ANSAFORCA,
-   FLOR DE PARAÍSO y AURIVENEZUELA).
+   QUE ES REAL Y QUE NO, porque la distincion importa y este repositorio es
+   publico:
 
-   Lo que SÍ es inventado, y conviene tenerlo claro:
-   - Las ocho personas del equipo. Son ficticias.
-   - Los montos, las fechas, los presupuestos y los movimientos financieros.
-   - Los códigos de expediente y los avances.
-   - El RIF de los contratantes: dice "Por confirmar" a propósito, porque
-     inventar un número fiscal de una empresa real sería fabricar un dato.
-     MONPICA los completa cuando cargue los suyos.
+     - REAL: el contexto de la empresa y su cartera de servicios, que son los
+       tipos de proyecto del catalogo, y las tres especies comerciales con las
+       que trabaja (puy, algarrobo, teca). Salen de material que la propia
+       empresa publica.
 
-   Las fechas se generan RELATIVAS al día en que se siembra, para que en cada
-   ensayo de la demo haya siempre etapas vencidas y plazos próximos. Por eso
-   PI_SEED es una función y no un objeto literal.
+     - INVENTADO: absolutamente todo lo demas. Las ocho personas del equipo con
+       sus correos y telefonos, los cinco contratantes, todos los montos, todas
+       las fechas, todos los codigos de proyecto, todas las mediciones y todos
+       los movimientos financieros.
 
-   Define window.PI_SEED. No usa módulos ni fetch: funciona con file://
+   Los cinco contratantes eran empresas reales hasta que se limpio esta semilla:
+   eran terceros que no consintieron aparecer en una demostracion publica. Ahora
+   son nombres compuestos que no corresponden a ninguna empresa, y su RIF dice
+   "Dato de ejemplo" en lugar de un numero, porque inventar un numero fiscal
+   produce un registro falso, no un dato de ejemplo.
+
+   Las ubicaciones quedan genericas a proposito ("Reserva forestal, estado
+   Bolivar" y no una unidad de manejo concreta).
+
+   Los correos usan el dominio monpica.example: el TLD .example esta reservado
+   por la RFC 2606 y no puede pertenecer a nadie, asi que ninguna direccion de
+   aqui puede coincidir con la de una persona real.
+
+   MIENTRAS EL REPOSITORIO SEA PUBLICO, ESTA SEMILLA NO PUEDE CONTENER NINGUN
+   DATO REAL. Ver la nota al principio de CLAUDE.md.
+
+   PI_SEED es una FUNCION, no un objeto: las fechas se generan relativas al dia
+   en que se siembra, asi que en cada ensayo de la demo siempre hay etapas
+   vencidas y plazos proximos sin tener que editar nada.
    ========================================================================= */
 (function () {
   'use strict';
@@ -156,29 +169,31 @@
      ======================================================================= */
   function usuarios() {
     return [
-      { id: 'u-01', nombre: 'Carlos Montilla Rangel',   rol: 'coordinador',    especialidad: 'Ingeniería forestal y planes de manejo',      correo: 'carlos.montilla@monpica.com.ve',  telefono: '0414-2183940', activo: true, fechaAlta: fecha(-1240) },
-      { id: 'u-02', nombre: 'Elena Ramos Pineda',       rol: 'profesional',    especialidad: 'Dasonomía e inventario forestal',             correo: 'elena.ramos@monpica.com.ve',      telefono: '0412-7745012', activo: true, fechaAlta: fecha(-980) },
-      { id: 'u-03', nombre: 'Marcos Silva Betancourt',  rol: 'coordinador',    especialidad: 'Recurso hídrico y obras civiles',             correo: 'marcos.silva@monpica.com.ve',     telefono: '0424-3390118', activo: true, fechaAlta: fecha(-1120) },
-      { id: 'u-04', nombre: 'Patricia Duarte Ochoa',    rol: 'administracion', especialidad: 'Contabilidad y control presupuestario',       correo: 'patricia.duarte@monpica.com.ve',  telefono: '0416-5528374', activo: true, fechaAlta: fecha(-860) },
-      { id: 'u-05', nombre: 'Roberto Gómez Alcántara',  rol: 'direccion',      especialidad: 'Dirección general y operaciones',             correo: 'roberto.gomez@monpica.com.ve',    telefono: '0414-9014572', activo: true, fechaAlta: fecha(-1580) },
-      { id: 'u-06', nombre: 'Sofía Alcalá Moreno',      rol: 'profesional',    especialidad: 'Permisología ambiental y minería legal',      correo: 'sofia.alcala@monpica.com.ve',     telefono: '0412-2286601', activo: true, fechaAlta: fecha(-640) },
-      { id: 'u-07', nombre: 'Diego Torres Villamizar',  rol: 'profesional',    especialidad: 'Topografía, cartografía y obras civiles',     correo: 'diego.torres@monpica.com.ve',     telefono: '0426-7712045', activo: true, fechaAlta: fecha(-720) },
-      { id: 'u-08', nombre: 'Luis Vallenilla Prado',    rol: 'admin',          especialidad: 'Administración del sistema',                  correo: 'luis.vallenilla@monpica.com.ve',  telefono: '0414-3350892', activo: true, fechaAlta: fecha(-1600) }
+      { id: 'u-01', nombre: 'Andrés Peñalver Cardozo',   rol: 'coordinador',    especialidad: 'Ingeniería forestal y planes de manejo',      correo: 'andres.penalver@monpica.example',  telefono: '0414-2183940', activo: true, fechaAlta: fecha(-1240) },
+      { id: 'u-02', nombre: 'Elena Bastidas Quintero',       rol: 'profesional',    especialidad: 'Dasonomía e inventario forestal',             correo: 'elena.bastidas@monpica.example',      telefono: '0412-7745012', activo: true, fechaAlta: fecha(-980) },
+      { id: 'u-03', nombre: 'Marcos Aguilera Rondón',  rol: 'coordinador',    especialidad: 'Recurso hídrico y obras civiles',             correo: 'marcos.aguilera@monpica.example',     telefono: '0424-3390118', activo: true, fechaAlta: fecha(-1120) },
+      { id: 'u-04', nombre: 'Patricia Escalante Nieves',    rol: 'administracion', especialidad: 'Contabilidad y control presupuestario',       correo: 'patricia.escalante@monpica.example',  telefono: '0416-5528374', activo: true, fechaAlta: fecha(-860) },
+      { id: 'u-05', nombre: 'Roberto Sanabria Uzcátegui',  rol: 'direccion',      especialidad: 'Dirección general y operaciones',             correo: 'roberto.sanabria@monpica.example',    telefono: '0414-9014572', activo: true, fechaAlta: fecha(-1580) },
+      { id: 'u-06', nombre: 'Sofía Carrillo Mendoza',      rol: 'profesional',    especialidad: 'Permisología ambiental y minería legal',      correo: 'sofia.carrillo@monpica.example',     telefono: '0412-2286601', activo: true, fechaAlta: fecha(-640) },
+      { id: 'u-07', nombre: 'Diego Fuenmayor Aranguren',  rol: 'profesional',    especialidad: 'Topografía, cartografía y obras civiles',     correo: 'diego.fuenmayor@monpica.example',     telefono: '0426-7712045', activo: true, fechaAlta: fecha(-720) },
+      { id: 'u-08', nombre: 'Luis Berroterán Pacheco',    rol: 'admin',          especialidad: 'Administración del sistema',                  correo: 'luis.berroteran@monpica.example',  telefono: '0414-3350892', activo: true, fechaAlta: fecha(-1600) }
     ];
   }
 
   /* ==========================================================================
-     Contratantes. Son los cinco clientes que MONPICA declara en su brochure
-     como experiencia comprobada. El RIF queda por confirmar a propósito: no se
-     inventa un número fiscal de una empresa real.
+     Contratantes. TODOS INVENTADOS. Antes eran los cinco clientes reales que
+     el brochure declara como experiencia comprobada, y este repositorio es
+     publico: eran empresas de terceros que no consintieron aparecer en una
+     demostracion abierta. Se sustituyeron por nombres compuestos que no
+     corresponden a ninguna empresa, y el RIF es de ejemplo y se ve como tal.
      ======================================================================= */
   function contratantes() {
     return [
-      { id: 'c-01', nombre: 'AGROALVENCIA',    rif: 'Por confirmar', sector: 'Agroforestal', contacto: 'Por confirmar', cargo: '', telefono: '', correo: '', direccion: 'Estado Portuguesa' },
-      { id: 'c-02', nombre: 'CAMINPEG',        rif: 'Por confirmar', sector: 'Minería',      contacto: 'Por confirmar', cargo: '', telefono: '', correo: '', direccion: 'Estado Bolívar' },
-      { id: 'c-03', nombre: 'ANSAFORCA',       rif: 'Por confirmar', sector: 'Forestal',     contacto: 'Por confirmar', cargo: '', telefono: '', correo: '', direccion: 'Reserva Forestal de Imataca, estado Bolívar' },
-      { id: 'c-04', nombre: 'FLOR DE PARAÍSO', rif: 'Por confirmar', sector: 'Agrícola',     contacto: 'Por confirmar', cargo: '', telefono: '', correo: '', direccion: 'Estado Portuguesa' },
-      { id: 'c-05', nombre: 'AURIVENEZUELA',   rif: 'Por confirmar', sector: 'Minería',      contacto: 'Por confirmar', cargo: '', telefono: '', correo: '', direccion: 'Arco Minero del Orinoco, estado Bolívar' }
+      { id: 'c-01', nombre: 'AGROLLANOS DEL SUR, C.A.',      rif: 'Dato de ejemplo', sector: 'Agroforestal', contacto: 'Contacto de ejemplo', cargo: '', telefono: '', correo: '', direccion: 'Zona agroforestal, estado Portuguesa' },
+      { id: 'c-02', nombre: 'MINERALES ORIENTE ALTO, C.A.',  rif: 'Dato de ejemplo', sector: 'Minería',      contacto: 'Contacto de ejemplo', cargo: '', telefono: '', correo: '', direccion: 'Zona minera, estado Bolívar' },
+      { id: 'c-03', nombre: 'MADERAS SERRANIA VERDE, C.A.',  rif: 'Dato de ejemplo', sector: 'Forestal',     contacto: 'Contacto de ejemplo', cargo: '', telefono: '', correo: '', direccion: 'Reserva forestal, estado Bolívar' },
+      { id: 'c-04', nombre: 'AGROPECUARIA VALLE HONDO, C.A.', rif: 'Dato de ejemplo', sector: 'Agrícola',    contacto: 'Contacto de ejemplo', cargo: '', telefono: '', correo: '', direccion: 'Zona agrícola, estado Portuguesa' },
+      { id: 'c-05', nombre: 'EXTRACTORA RIO CLARO, C.A.',    rif: 'Dato de ejemplo', sector: 'Minería',      contacto: 'Contacto de ejemplo', cargo: '', telefono: '', correo: '', direccion: 'Zona minera, estado Bolívar' }
     ];
   }
 
@@ -211,14 +226,14 @@
       /* --- P-001: plan de manejo forestal, con DOS etapas vencidas -------- */
       {
         id: 'MP-2024-001',
-        nombre: 'Plan de manejo forestal finca Las Palmitas',
+        nombre: 'Plan de manejo forestal en hato ganadero',
         contratanteId: 'c-01',
         tipo: 'Plan de manejo forestal',
         estado: 'En ejecución',
-        ubicacion: 'Sector Las Palmitas, municipio Guanarito, estado Portuguesa',
+        ubicacion: 'Zona agroforestal, estado Portuguesa',
         fechaInicio: fecha(-232),
         fechaFin: fecha(42),
-        presupuesto: 48500,
+        presupuesto: 41200,
         coordinadorId: 'u-01',
         etapas: etapas([
           ['Aprobada', -210, 'u-01', 'Contrato firmado y anticipo recibido.', 'u-01'],
@@ -258,7 +273,7 @@
           { id: 'f-0104', tipo: 'Egreso',  categoria: 'Equipos y alquiler de vehículos',    concepto: 'Alquiler de vehículo rústico con conductor', monto: 2100,  fecha: fecha(-149), estado: 'Por liquidar', responsableId: 'u-07' },
           { id: 'f-0105', tipo: 'Egreso',  categoria: 'Cartografía e imágenes satelitales', concepto: 'Imágenes multiespectrales de 3 metros',      monto: 1450,  fecha: fecha(-140), estado: 'Liquidado',    responsableId: 'u-07' },
           { id: 'f-0106', tipo: 'Egreso',  categoria: 'Combustible y transporte',           concepto: 'Combustible de la comisión de campo',        monto: 640,   fecha: fecha(-148), estado: 'Liquidado',    responsableId: 'u-02' },
-          { id: 'f-0107', tipo: 'Egreso',  categoria: 'Alimentación y hospedaje',           concepto: 'Estadía de la cuadrilla en Guanarito',       monto: 980,   fecha: fecha(-146), estado: 'Liquidado',    responsableId: 'u-02' },
+          { id: 'f-0107', tipo: 'Egreso',  categoria: 'Alimentación y hospedaje',           concepto: 'Estadía de la cuadrilla en campo',       monto: 980,   fecha: fecha(-146), estado: 'Liquidado',    responsableId: 'u-02' },
           { id: 'f-0108', tipo: 'Ingreso', categoria: 'Valuación por avance',               concepto: 'Valuación por cierre de la etapa 4',         monto: 12000, fecha: fecha(-92),  estado: 'Liquidado',    responsableId: 'u-04' }
         ]
       },
@@ -266,14 +281,14 @@
       /* --- P-002: DETENIDO, con la compuerta esperando aprobación --------- */
       {
         id: 'MP-2024-002',
-        nombre: 'Manejo forestal en la Reserva Forestal de Imataca',
+        nombre: 'Manejo forestal en reserva forestal',
         contratanteId: 'c-03',
         tipo: 'Plan de manejo forestal',
         estado: 'Detenido',
-        ubicacion: 'Unidad de manejo IV, Reserva Forestal de Imataca, estado Bolívar',
+        ubicacion: 'Reserva forestal, estado Bolívar',
         fechaInicio: fecha(-188),
         fechaFin: fecha(78),
-        presupuesto: 96000,
+        presupuesto: 87300,
         coordinadorId: 'u-01',
         etapas: etapas([
           ['Aprobada', -172, 'u-01', 'Contrato suscrito con el concesionario.', 'u-01'],
@@ -316,14 +331,14 @@
       /* --- P-003: recurso hídrico, con una etapa devuelta ----------------- */
       {
         id: 'MP-2024-003',
-        nombre: 'Estudio de recurso hídrico y pozo profundo Flor de Paraíso',
+        nombre: 'Estudio de recurso hídrico y pozo profundo',
         contratanteId: 'c-04',
         tipo: 'Estudio de recurso hídrico',
         estado: 'En ejecución',
-        ubicacion: 'Sector Papelón, municipio Papelón, estado Portuguesa',
+        ubicacion: 'Zona agrícola, estado Portuguesa',
         fechaInicio: fecha(-146),
         fechaFin: fecha(64),
-        presupuesto: 52000,
+        presupuesto: 58900,
         coordinadorId: 'u-03',
         etapas: etapas([
           ['Aprobada', -130, 'u-03', 'Contrato adjudicado.', 'u-03'],
@@ -350,7 +365,7 @@
           { id: 'f-0301', tipo: 'Ingreso', categoria: 'Anticipo contractual',            concepto: 'Primer anticipo de la obra',          monto: 15600, fecha: fecha(-140), estado: 'Liquidado',    responsableId: 'u-04' },
           { id: 'f-0302', tipo: 'Egreso',  categoria: 'Equipos y alquiler de vehículos', concepto: 'Equipo de prospección geoeléctrica',  monto: 5400,  fecha: fecha(-104), estado: 'Liquidado',    responsableId: 'u-07' },
           { id: 'f-0303', tipo: 'Egreso',  categoria: 'Logística y viáticos de campo',   concepto: 'Estadía de la cuadrilla técnica',     monto: 2900,  fecha: fecha(-70),  estado: 'Por liquidar', responsableId: 'u-03' },
-          { id: 'f-0304', tipo: 'Egreso',  categoria: 'Combustible y transporte',        concepto: 'Traslados al sector Papelón',         monto: 720,   fecha: fecha(-66),  estado: 'Liquidado',    responsableId: 'u-07' }
+          { id: 'f-0304', tipo: 'Egreso',  categoria: 'Combustible y transporte',        concepto: 'Traslados al sector de trabajo',         monto: 720,   fecha: fecha(-66),  estado: 'Liquidado',    responsableId: 'u-07' }
         ]
       },
 
@@ -361,10 +376,10 @@
         contratanteId: 'c-01',
         tipo: 'Estructuras en madera',
         estado: 'En oferta',
-        ubicacion: 'Zona industrial de Guanare, estado Portuguesa',
+        ubicacion: 'Zona industrial, estado Portuguesa',
         fechaInicio: fecha(-24),
         fechaFin: fecha(158),
-        presupuesto: 34000,
+        presupuesto: 29600,
         coordinadorId: 'u-03',
         etapas: etapas([
           ['En proceso', 8,  'u-03', ''],
@@ -395,10 +410,10 @@
         contratanteId: 'c-05',
         tipo: 'Viabilidad minera y legal',
         estado: 'En permisología',
-        ubicacion: 'Bloque 2, Arco Minero del Orinoco, estado Bolívar',
+        ubicacion: 'Zona minera, estado Bolívar',
         fechaInicio: fecha(-284),
         fechaFin: fecha(56),
-        presupuesto: 78000,
+        presupuesto: 66400,
         coordinadorId: 'u-01',
         etapas: etapas([
           ['Aprobada', -270, 'u-01', 'Contrato suscrito.', 'u-01'],
@@ -437,10 +452,10 @@
         contratanteId: 'c-02',
         tipo: 'Estudio de impacto ambiental',
         estado: 'Cerrado',
-        ubicacion: 'Municipio Sifontes, estado Bolívar',
+        ubicacion: 'Zona minera, estado Bolívar',
         fechaInicio: fecha(-520),
         fechaFin: fecha(-118),
-        presupuesto: 64000,
+        presupuesto: 71800,
         coordinadorId: 'u-01',
         etapas: etapas([
           ['Aprobada', -506, 'u-01', 'Contrato suscrito.', 'u-01'],
@@ -500,7 +515,7 @@
       [-5,  13, 44, 'u-04', 'MOVIMIENTO_REGISTRADO',      'Finanza',   'MP-2024-001', 'Ingreso por 12.000,00 USD en Valuación por avance.'],
       [-6,  17, 12, 'u-01', 'ETAPA_APROBADA',             'Etapa',     'MP-2024-005', 'Etapa 7 aprobada. Informe entregado al contratante.'],
       [-6,  10, 26, 'u-02', 'MEDICION_REGISTRADA',        'Medición',  'MP-2024-001', 'Parcela P-02: 25 árboles de Puy, volumen 39,2 m3 de captura manual.'],
-      [-7,  15, 50, 'u-08', 'USUARIO_ACTUALIZADO',        'Usuario',   null,          'Actualización de la especialidad de Diego Torres Villamizar.'],
+      [-7,  15, 50, 'u-08', 'USUARIO_ACTUALIZADO',        'Usuario',   null,          'Actualización de la especialidad de Diego Fuenmayor Aranguren.'],
       [-7,  11, 35, 'u-03', 'PROYECTO_CREADO',            'Proyecto',  'MP-2024-004', 'Alta del expediente MP-2024-004 con las 10 etapas de la plantilla.'],
       [-8,  16,  2, 'u-04', 'REPORTE_GENERADO',           'Reporte',   null,          'Generación del reporte de cierre de mes en dólares.'],
       [-8,  12, 40, 'u-07', 'DOCUMENTO_CARGADO',          'Documento', 'MP-2024-002', 'Carga de planos_unidad_manejo_iv.dwg en la etapa 3.'],
@@ -511,9 +526,9 @@
       [-12, 15, 10, 'u-08', 'CATALOGO_ACTUALIZADO',       'Catálogo',  null,          'Alta de la categoría Aserradero y procesamiento primario en el catálogo financiero.'],
       [-13, 11, 55, 'u-02', 'MEDICION_REGISTRADA',        'Medición',  'MP-2024-001', 'Parcela P-01: 42 árboles de Puy, volumen 68,4 m3 de captura manual.'],
       [-14, 17, 30, 'u-05', 'CONSULTA_DIRECCION',         'Proyecto',  null,          'Revisión de la cartera en sesión de Dirección.'],
-      [-15, 12,  8, 'u-01', 'EQUIPO_ASIGNADO',            'Equipo',    'MP-2024-002', 'Asignación de Elena Ramos Pineda como Ingeniero forestal.'],
+      [-15, 12,  8, 'u-01', 'EQUIPO_ASIGNADO',            'Equipo',    'MP-2024-002', 'Asignación de Elena Bastidas Quintero como Ingeniero forestal.'],
       [-16, 14, 46, 'u-01', 'PROYECTO_ACTUALIZADO',       'Proyecto',  'MP-2024-005', 'Cambio de estado a En permisología.'],
-      [-18, 10, 20, 'u-08', 'USUARIO_CREADO',             'Usuario',   null,          'Alta del usuario Sofía Alcalá Moreno con rol Profesional.']
+      [-18, 10, 20, 'u-08', 'USUARIO_CREADO',             'Usuario',   null,          'Alta del usuario Sofía Carrillo Mendoza con rol Profesional.']
     ];
     return b.map(function (r, i) {
       return {
@@ -533,7 +548,7 @@
      ======================================================================= */
   window.PI_SEED = function () {
     return {
-      version: 4,
+      version: 5,
       sembradoEn: fechaHora(0, new Date().getHours(), new Date().getMinutes()),
       rolActivo: 'coordinador',
       usuarioActivo: 'u-01',

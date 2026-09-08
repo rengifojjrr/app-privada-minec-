@@ -277,7 +277,8 @@ entonces era una paleta derivada del export de Stitch.
 deje de ser una demostración):
 
 - Razón social, lema, descripción, misión y alcance.
-- RIF `J-40690232-2`, sede en Guanare (estado Portuguesa), correo y teléfono.
+- Sede en Guanare (estado Portuguesa), correo y teléfono. (El RIF también era real y estaba aquí
+  escrito; se retiró de estas notas y de la interfaz al limpiar la semilla — ver la sección 10.)
 - El logo y el emblema, extraídos del PDF con su máscara de transparencia y guardados en
   `assets/marca/` como PNG locales. No hay ningún recurso remoto.
 - La paleta: el verde de la hoja y de la montaña del logo, el azul del río y de la palabra MONPICA,
@@ -334,6 +335,51 @@ mismo y no lo dicen**. Un parámetro que se escribe con un nombre y se lee con o
 depende de un token que se invierte, un texto que usa un criterio distinto al del color que lo
 acompaña. Ninguno de los tres rompe nada visiblemente, y por eso las pruebas que solo miran "abrió
 sin error" los dejaban pasar. Las tres pruebas correspondientes ahora comparan los dos caminos.
+
+---
+
+## 10. Ampliación · Etapa 1a: fuera los datos reales
+
+El punto de partida de la ampliación fue una limpieza, no una funcionalidad. El diagnóstico que
+llegó decía que había datos reales de clientes publicados en un repositorio público. Al verificarlo,
+tres cosas resultaron distintas de como estaban planteadas:
+
+1. **Los nombres del personal no eran reales: los inventé yo.** Pero uno de ellos, "Carlos Montilla
+   Rangel", compartía apellido con la razón social (Montilla Proyectos Integrales C.A.), así que en
+   la práctica se leía como el dueño de la empresa. Una persona inventada con el apellido de la
+   empresa real, presentada como su Coordinador, es peor que un nombre cualquiera. Ninguno de los
+   ocho apellidos nuevos aparece en la marca.
+2. **Lo que sí era real y sí era un problema eran los cinco contratantes.** Son las empresas que el
+   brochure declara como experiencia comprobada: terceros que no consintieron aparecer en una
+   demostración pública. Ese era el dato a sacar, y era el más grave de todos.
+3. **Limpiar los archivos no cierra la exposición.** El repositorio es público y el historial de git
+   también: los cinco nombres y el RIF siguen siendo legibles en los commits anteriores con
+   `git log -p`. La limpieza detiene la exposición hacia adelante; la que ya ocurrió solo se cierra
+   haciendo el repositorio privado o reescribiendo el historial. Está dicho arriba en `CLAUDE.md`
+   porque es la clase de detalle que se asume resuelto cuando no lo está.
+
+**Una instrucción no se siguió al pie de la letra, y es deliberado.** El encargo decía sustituir el
+RIF por uno inventado y verosímil. No se hizo: inventar un número de identificación fiscal para una
+empresa que existe no produce un dato de ejemplo, produce un registro falso, y publicar un RIF falso
+de MONPICA es peor que publicar el verdadero, que además está en su propio brochure. El RIF se
+**retiró** de la interfaz dejándolo vacío, y los dos sitios donde se pintaba comprueban antes si
+está vacío. Cuando el repositorio pase a privado vuelve el real sin tocar nada más. Los contratantes
+dicen "Dato de ejemplo" por el mismo criterio.
+
+**Lo que queda expuesto y no lo arregla esta limpieza.** El nombre MONPICA, su logo, su lema, su sede
+y sus datos de contacto siguen en cada página, porque son la marca del cliente y el sentido del
+entregable. El encargo pedía que "nada corresponda a una empresa o persona identificable", y con la
+marca puesta ese objetivo no se cumple por mucho que se limpie la semilla. La decisión de fondo no
+es de la semilla: es si el repositorio se queda público. Queda pendiente del cliente.
+
+**Qué se sustituyó.** Los cinco contratantes por nombres compuestos que no corresponden a ninguna
+empresa; las ocho personas con sus correos y teléfonos; los seis montos de contrato; y las
+ubicaciones, que pasaron de unidades de manejo concretas a descripciones genéricas del tipo "Reserva
+forestal, estado Bolívar". Los correos usan el dominio `monpica.example`: el TLD `.example` está
+reservado por la RFC 2606 y no puede pertenecer a nadie, así que ninguna dirección puede coincidir
+con la de una persona real. La semilla subió a la versión 5 y la clave de `localStorage` a
+`PI_BETA_DATOS_V5`, así que los navegadores que ya tenían los datos viejos guardados vuelven a
+sembrar solos.
 
 ---
 

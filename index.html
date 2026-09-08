@@ -72,7 +72,7 @@ PI.listo(function () {
       '<div class="pila-sm">' +
       '<div class="campo"><label for="a-correo">Correo</label>' +
       '<input id="a-correo" type="email" autocomplete="username" spellcheck="false" ' +
-      'placeholder="usuario@monpica.com.ve" value="' + U.esc(elegido ? elegido.correo : '') + '"></div>' +
+      'placeholder="usuario@monpica.example" value="' + U.esc(elegido ? elegido.correo : '') + '"></div>' +
       '<div class="campo"><label for="a-clave">Contraseña</label>' +
       '<input id="a-clave" type="password" autocomplete="current-password" ' +
       'value="' + U.esc(elegido ? CLAVE : '') + '"></div>' +
@@ -116,7 +116,7 @@ PI.listo(function () {
     html += '<div class="pi-acceso-pie">' +
       '<div class="fila" style="justify-content:center;gap:16px">' +
       '<span>' + U.icono('location_on', 'icono-sm') + ' ' + U.esc(M.sede) + '</span>' +
-      '<span>RIF ' + U.esc(M.rif) + '</span></div>' +
+      (M.rif ? '<span>RIF ' + U.esc(M.rif) + '</span>' : '') + '</div>' +
       '<div class="fila" style="justify-content:center;gap:16px">' +
       '<span>' + U.esc(M.correo) + '</span>' +
       '<span>' + U.esc(M.telefono) + '</span></div>' +

@@ -164,7 +164,7 @@ ok(!A.puede('verTotalHonorarios'), 'el profesional no ve el total consolidado');
 ok(A.puede('verTotalHonorarios','direccion'), 'direccion si ve el total');
 ok(!A.puede('verHonorariosDeTodos','direccion'), 'direccion no ve el desglose por persona');
 const visiblesProf = S.proyectosVisibles('u-02','profesional').map(p=>p.id);
-console.log('  proyectos visibles para Elena Ramos:', visiblesProf.join(', '));
+console.log('  proyectos visibles para Elena Bastidas:', visiblesProf.join(', '));
 ok(visiblesProf.length < E.proyectos.length, 'el profesional no ve toda la cartera');
 
 console.log('\n=== USUARIOS: sin borrado fisico ===');
@@ -192,7 +192,7 @@ console.log('  ' + nuevo.id + ' creado con 10 etapas');
 console.log('\n=== PERSISTENCIA ===');
 const antesJson = JSON.stringify(S.estado.proyectos.length);
 ok(Object.keys(almacen).length > 0, 'algo se guardo en localStorage');
-const guardado = JSON.parse(almacen['PI_BETA_DATOS_V4']);
+const guardado = JSON.parse(almacen['PI_BETA_DATOS_V5']);
 ok(guardado.proyectos.length === S.estado.proyectos.length, 'lo guardado coincide con el estado en memoria');
 S.reiniciar();
 ok(S.estado.proyectos.length === 6, 'reiniciar vuelve a 6 proyectos, hay ' + S.estado.proyectos.length);

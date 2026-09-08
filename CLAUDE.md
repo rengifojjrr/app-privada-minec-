@@ -1,5 +1,33 @@
 # CLAUDE.md — Beta navegable · Sistema de Proyectos Integrales
 
+> ## Lo primero: la semilla no puede contener datos reales
+>
+> **Mientras `app-privada-minec-` sea un repositorio público y el sitio esté en una URL abierta,
+> `assets/seed.js` no puede contener ni un solo dato real.** Ni empresas contratantes, ni nombres de
+> personas, ni RIF, ni montos de contrato, ni unidades de manejo concretas.
+>
+> No es una precaución teórica: la semilla tuvo durante varios commits los cinco clientes reales que
+> el brochure declara como experiencia comprobada, y el RIF real de la empresa, en un sitio público
+> e indexable cuya contraseña está impresa en la pantalla de entrada. Eran **terceros que no
+> consintieron** aparecer en una demostración abierta.
+>
+> **Y limpiar los archivos no basta: el historial de git sigue siendo público.** Cualquiera puede
+> leer `git log -p` y sacar los nombres y el RIF de los commits anteriores. La limpieza detiene la
+> exposición hacia adelante, no la que ya ocurrió. Lo único que la cierra es **hacer el repositorio
+> privado** (y con él GitHub Pages pasa a exigir plan de pago), o reescribir el historial.
+>
+> Si en algún momento se quiere demostrar con datos reales: repositorio privado, sitio protegido con
+> contraseña de verdad, y autenticación contra un servidor. Las tres cosas, no una.
+>
+> Dos decisiones de esta limpieza que conviene no deshacer:
+>
+> - **Ningún RIF se inventa.** Los contratantes dicen "Dato de ejemplo" y el de la empresa se retiró
+>   de la interfaz dejándolo vacío. Inventar un número fiscal para una empresa que existe no produce
+>   un dato de ejemplo, produce un registro falso, y eso es peor que publicar el verdadero.
+> - **Los correos usan el dominio `monpica.example`.** El TLD `.example` está reservado por la RFC
+>   2606 y no puede pertenecer a nadie, así que ninguna dirección de la semilla puede coincidir con
+>   la de una persona real.
+
 Notas para quien retome este proyecto. La bitácora de decisiones está en `PROGRESO.md`.
 
 ## Qué es esto
@@ -108,8 +136,8 @@ cambiar el repositorio a privado, y entonces Pages exige un plan de pago.
 
 La página muestra el logo y el RIF **reales** de MONPICA junto a ocho personas, todos los montos y
 todas las fechas **inventados**. Si un buscador la indexa, alguien puede encontrarla buscando la
-empresa y creer que Carlos Montilla Rangel trabaja ahí y que la cartera son 372.500 dólares. Eso ya
-no es una demostración, es una ficha falsa de una empresa que existe.
+empresa y creer que las ocho personas del equipo trabajan ahí y que esos son sus números. Eso ya no
+es una demostración, es una ficha falsa de una empresa que existe.
 
 Va por dos caminos, y hacen falta los dos:
 
@@ -269,8 +297,13 @@ tienen menú lateral, su barra superior ocupa todo el ancho y no muestra la iden
 
 La identidad del cliente vive en el objeto `MARCA` de `assets/shell.js`, no en `seed.js`, y la
 distinción importa: **es lo único de esta beta que no es un dato de ejemplo**. Razón social, lema,
-RIF, sede, correo, teléfono, logo y emblema son los reales, así que sobreviven cuando el sistema
-deje de ser una demostración. Todo lo demás de la semilla se borra.
+sede, correo, teléfono, logo y emblema son los reales, así que sobreviven cuando el sistema deje de
+ser una demostración. Todo lo demás de la semilla se borra.
+
+**El RIF es la excepción: está vacío a propósito** mientras el sitio sea público. No se sustituyó por
+uno inventado, por la razón de la nota del principio. Cuando el repositorio pase a privado, ahí
+vuelve el verdadero y la interfaz lo muestra sola: los dos sitios donde aparece ya comprueban si
+está vacío antes de pintarlo.
 
 La paleta de `tokens.css` se muestreó del logo y de los vectores del brochure; la cabecera del
 archivo lista cada hexadecimal con su procedencia. La marca aporta el color; el export de Stitch
@@ -283,10 +316,9 @@ El logo y el emblema son PNG locales en `assets/marca/`, con transparencia. Se u
 
 Dos cosas que el cliente tiene que resolver y que conviene no rellenar por cuenta propia:
 
-- **Los RIF y los contactos de los cinco contratantes dicen "Por confirmar".** Son empresas reales
-  que el brochure nombra sin dar su RIF. Inventar un número de identificación fiscal para una
-  empresa que existe no produce un dato de ejemplo, produce un registro falso. El hueco se dejó a la
-  vista a propósito.
+- **Los cinco contratantes ya no son las empresas reales del brochure.** Se sustituyeron por
+  nombres inventados: eran terceros en un repositorio público. Sus RIF y contactos dicen "Dato de
+  ejemplo". Si algún día hace falta la cartera real, va con el repositorio en privado.
 - **El brochure dice "RECURSO HÍBRIDOS" y "GESTIÓN HÍBRIDA".** Es casi con seguridad un error de
   tipeo por "HÍDRICOS" e "HÍDRICA". Se usó la palabra corregida en el catálogo `tiposProyecto` de
   `seed.js`.

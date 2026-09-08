@@ -27,7 +27,12 @@ window.PI = window.PI || {};
                  'y desarrolladora de planes y modelos de inversión en el sector forestal.',
     mision: 'Viabilizar proyectos respetando el marco jurídico.',
     alcance: 'Diagnóstico, permisología y ejecución de obras.',
-    rif: 'J-40690232-2',
+    /* El RIF se retira del sitio publicado. NO se sustituye por uno inventado:
+       inventar un numero fiscal de una empresa que existe no produce un dato de
+       ejemplo, produce un registro falso, y eso es peor que publicar el real.
+       Se deja vacio y la interfaz lo omite. Cuando el sitio deje de ser publico,
+       aqui vuelve el RIF verdadero. */
+    rif: '',
     sede: 'Guanare, estado Portuguesa',
     correo: 'monpica2025@gmail.com',
     telefono: '0414-536 53 05',
@@ -118,7 +123,8 @@ window.PI = window.PI || {};
     });
     html += '</nav><div class="pi-menu-pie">' +
       '<span class="eti">' + esc(MARCA.sede) + '</span>' +
-      '<div class="mono">RIF ' + esc(MARCA.rif) + '</div></div></aside>';
+      (MARCA.rif ? '<div class="mono">RIF ' + esc(MARCA.rif) + '</div>' : '') +
+      '</div></aside>';
     return html;
   }
 
