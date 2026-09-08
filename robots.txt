@@ -1,0 +1,6 @@
+# Esta es una beta de demostracion con datos de ejemplo, no el sitio de
+# MONPICA. No debe aparecer en buscadores: las ocho personas del equipo, los
+# montos y las fechas son inventados, y confundirla con informacion real de la
+# empresa seria un problema para el cliente.
+User-agent: *
+Disallow: /

@@ -77,6 +77,26 @@ Dos trampas que ya se pisaron al construirlo, por si hay que tocarlo:
   enrutador espera al DOM, y el generador escribe además una copia envuelta (`-suelta.html`) para
   poder probar con un navegador exactamente lo que se publica.
 
+## La beta publicada como página web
+
+La rama del repositorio está conectada a Vercel, así que **cada push republica la página**. No hay
+paso de compilación: Vercel sirve los archivos tal cual, porque no hay `package.json` ni nada que
+construir. Es la carpeta real, no la vista previa de una página, así que aquí la navegación entre
+archivos, la exportación a CSV y la impresión sí funcionan.
+
+`.vercelignore` deja fuera `stitch/`, `pruebas/`, `herramientas/` y las notas: son material de
+trabajo, y el export de Stitch además es el sistema regulatorio de otro país.
+
+**La página lleva `noindex`, y conviene no quitarlo.** Va por dos caminos: la cabecera
+`X-Robots-Tag` de `vercel.json` y `robots.txt`. La razón no es pudor técnico: la página muestra el
+logo y el RIF reales de MONPICA junto a ocho personas, montos y fechas inventados. Si eso se indexa,
+alguien puede encontrarla buscando la empresa y creer que Carlos Montilla Rangel trabaja ahí. El
+`noindex` es lo que separa una demostración de una ficha falsa de una empresa real.
+
+La URL es pública para quien la tenga, porque el cliente tiene que poder abrirla desde cualquier
+dispositivo sin credenciales. Si en algún momento hace falta cerrarla, Vercel tiene protección por
+contraseña a nivel de proyecto; no hace falta tocar el código.
+
 ## Cómo está organizado
 
 ```
@@ -114,6 +134,10 @@ assets/
 stitch/        export original de Stitch. Solo referencia, no se publica
 pruebas/       guiones de verificación. No se publican
 herramientas/  generador de la vista previa de una sola página. No se publica
+
+vercel.json    configuración del despliegue. No es un paso de compilación
+.vercelignore  qué no se sirve: stitch/, pruebas/, herramientas/ y las notas
+robots.txt     prohíbe la indexación. Ver más abajo
 ```
 
 Las 23 páginas de la especificación caben en estos 17 archivos: las páginas 5 a 11 son las siete
