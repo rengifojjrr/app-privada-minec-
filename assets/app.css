@@ -179,6 +179,12 @@ button { cursor: pointer; }
 }
 .pi-demo-fin { margin-left: auto; display: flex; align-items: center; gap: var(--e-sm); }
 .pi-demo-fin .mono { font-size: var(--mono-sm); color: var(--demo-tenue); }
+/* El resumen que despliega la barra. Solo aparece en teléfono: en escritorio
+   la barra cabe entera en una fila y no hay nada que plegar. */
+.pi-demo-resumen { display: none; gap: 6px; align-items: center; font-weight: 600; }
+.pi-demo-resumen .icono { transition: transform 0.15s ease; }
+@media (prefers-reduced-motion: reduce) { .pi-demo-resumen .icono { transition: none; } }
+.pi-demo:not(.plegada) .pi-demo-resumen .icono { transform: rotate(180deg); }
 
 /* ============================================================================
    Botones
@@ -651,11 +657,21 @@ table.tabla td.acciones { text-align: right; white-space: nowrap; }
   .filtros .fin { margin-left: 0; width: 100%; }
   .filtros .campo, .filtros .campo.crece { min-width: 0; flex-basis: 100%; }
   .bitacora-item { grid-template-columns: 1fr; gap: 2px; }
+  /* La barra de demostración en teléfono. Arranca plegada a una sola fila:
+     desplegada ocupa tres, y como pie fijo se comía un cuarto de la pantalla.
+     El botón "Ocultar" vuelve a verse, que es el arreglo de fondo: antes se
+     escondía junto a la pista de la tecla D, y en un teléfono no hay teclado,
+     así que la barra no se podía quitar de ninguna manera. */
   .pi-demo { height: auto; padding: 6px var(--e-sm); flex-wrap: wrap; row-gap: 5px; column-gap: 6px; }
   .pi-demo-eti { display: none; }
   .pi-demo button { padding: 3px 8px; font-size: 12px; }
   .pi-demo-fin { margin-left: 0; }
-  .pi-demo-fin .mono, .pi-demo [data-ocultar] { display: none; }
+  .pi-demo-fin .mono { display: none; }
+  .pi-demo-resumen { display: inline-flex; }
+  .pi-demo.plegada { flex-wrap: nowrap; }
+  .pi-demo.plegada .pi-demo-roles,
+  .pi-demo.plegada [data-reiniciar] { display: none; }
+  .pi-demo.plegada .pi-demo-fin { margin-left: auto; }
   .cal-rejilla { grid-template-columns: 1fr; }
   .cal-dia-nom { display: none; }
   .cal-dia { min-height: 0; flex-direction: row; align-items: flex-start; gap: var(--e-xs); }

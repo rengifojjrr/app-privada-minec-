@@ -86,6 +86,80 @@ let fallos = 0;
     }
     await ctx.close();
   }
+
+  /* ==========================================================================
+     La barra de demostracion en telefono. Es un pie FIJO: si ocupa tres filas,
+     se come un cuarto de la pantalla en todo momento. Y el bloque movil
+     escondia el boton "Ocultar" junto a la pista de la tecla D, asi que en un
+     telefono, sin teclado, la barra no se podia quitar de ninguna manera.
+     ====================================================================== */
+  console.log('\n=== la barra de demo en telefono: plegada, desplegable y quitable ===');
+  {
+    const ctx = await nav.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
+    const p = await ctx.newPage();
+    await p.goto('file:///home/user/app-privada-minec-/panel.html');
+    await p.waitForFunction(() => !document.body.classList.contains('pi-verificando'));
+    await p.waitForTimeout(300);
+
+    const leer = () => p.evaluate(() => {
+      const d = document.getElementById('pi-demo');
+      const vis = (sel) => {
+        const el = d.querySelector(sel);
+        return !!el && getComputedStyle(el).display !== 'none';
+      };
+      return {
+        alto: Math.round(d.getBoundingClientRect().height),
+        plegada: d.classList.contains('plegada'),
+        varDemo: getComputedStyle(document.documentElement).getPropertyValue('--demo-alto').trim(),
+        resumen: vis('.pi-demo-resumen'),
+        roles: vis('.pi-demo-roles'),
+        ocultar: vis('[data-ocultar]'),
+        oculta: d.hidden,
+        expandido: (d.querySelector('[data-plegar]') || {}).getAttribute
+          ? d.querySelector('[data-plegar]').getAttribute('aria-expanded') : null
+      };
+    });
+
+    let e = await leer();
+    if (!e.plegada) malo('en telefono la barra no arranca plegada');
+    else if (e.alto > 60) malo(`plegada mide ${e.alto}px, deberia caber en una fila`);
+    else if (!e.resumen) malo('el resumen que despliega la barra no se ve');
+    else if (e.roles) malo('plegada, los botones de rol no deberian verse');
+    else if (e.expandido !== 'false') malo(`aria-expanded dice "${e.expandido}", deberia ser false`);
+    else console.log(`  OK  arranca plegada en una fila de ${e.alto}px`);
+
+    /* El arreglo de fondo: en telefono se puede quitar. */
+    if (!e.ocultar) malo('el boton Ocultar sigue escondido: en telefono la barra no se puede quitar');
+    else console.log('  OK  el boton Ocultar se ve (en telefono no hay tecla D)');
+
+    await p.click('[data-plegar]');
+    await p.waitForTimeout(250);
+    e = await leer();
+    if (e.plegada) malo('al tocar el resumen la barra no se desplego');
+    else if (!e.roles) malo('desplegada, los botones de rol siguen escondidos');
+    else if (e.expandido !== 'true') malo(`desplegada, aria-expanded dice "${e.expandido}"`);
+    else if (e.varDemo !== e.alto + 'px') malo(`--demo-alto (${e.varDemo}) no siguio a la altura real (${e.alto}px)`);
+    else console.log(`  OK  se despliega a ${e.alto}px y --demo-alto lo sigue`);
+
+    const roles = await p.$$eval('#pi-demo [data-rol]', (b) => b.length);
+    if (roles !== 5) malo(`desplegada muestra ${roles} roles, se esperaban 5`);
+    else console.log('  OK  desplegada estan los 5 roles');
+
+    await p.click('[data-plegar]');
+    await p.waitForTimeout(250);
+    e = await leer();
+    if (!e.plegada) malo('no se vuelve a plegar');
+    else console.log(`  OK  se vuelve a plegar (${e.alto}px)`);
+
+    await p.click('[data-ocultar]');
+    await p.waitForTimeout(250);
+    e = await leer();
+    if (!e.oculta) malo('el boton Ocultar no quito la barra');
+    else if (e.varDemo !== '0px') malo(`oculta, --demo-alto quedo en ${e.varDemo} y deberia ser 0px`);
+    else console.log('  OK  Ocultar la quita y el hueco del pie desaparece');
+    await ctx.close();
+  }
+
   await nav.close();
   console.log('\n' + (fallos ? 'FALLOS: ' + fallos : 'SIN CORTES NI CONTENIDO TAPADO EN NINGUN TAMAÑO'));
   process.exit(fallos ? 1 : 0);

@@ -242,6 +242,11 @@ de bitácora de días anteriores.
   proyecto viejo se leía como "vencido hace 210 días".
 - **Un parámetro de dirección se escribe y se lee con el mismo nombre, sin acentos.** La guarda de
   `auth.js` escribe `?pagina=`, y `sin-permiso.html` lo lee así. Ya se rompió una vez.
+- **Si escondes un control en móvil, comprueba que quede otra forma de hacer lo mismo.** El bloque de
+  720 px escondía el botón "Ocultar" de la barra de demostración en la misma regla que la pista de la
+  tecla D. En un teléfono no hay teclado, así que la barra quedaba pegada al pie sin ninguna manera
+  de quitarla. Ahora en móvil arranca plegada a una fila de 43 px, se despliega tocándola, y el botón
+  "Ocultar" se ve.
 
 ## El ingreso
 
