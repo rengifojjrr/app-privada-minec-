@@ -21,7 +21,7 @@ python3 -m http.server 8080     # y abrir http://localhost:8080
 Pero el escenario de la reunión es `file://`: abrir `index.html` directamente, con la red apagada.
 Todo cambio debe probarse ahí, porque es lo que se rompe primero.
 
-En `pruebas/` hay siete guiones que hacen exactamente eso. Los de navegador abren las páginas por
+En `pruebas/` hay ocho guiones que hacen exactamente eso. Los de navegador abren las páginas por
 `file://` **abortando toda petición que no sea `file:`, `data:` o `blob:`**, que es la única forma de
 sostener la promesa de que funciona sin red.
 
@@ -33,6 +33,7 @@ node pruebas/navegador-flujos.js         # los recorridos completos
 node pruebas/navegador-responsive.js     # 360, 390, 768 y 1440 px
 node pruebas/navegador-barras.js         # barras fijas, --demo-alto y contraste
 node pruebas/navegador-ingreso.js        # los ocho usuarios
+node pruebas/publicacion.js             # la beta publicada: en vivo y por HTTP
 ```
 
 Todos salen con código 0 si pasan. Los de navegador necesitan la ruta de Chromium que llevan
@@ -87,6 +88,14 @@ y Pages entrega los archivos tal cual, que es justo lo que hace falta en un proy
 
 Es la carpeta real, no la vista previa de una sola página, así que aquí la navegación entre archivos,
 la exportación a CSV y la impresión funcionan igual que en local.
+
+`pruebas/publicacion.js` lo comprueba en dos mitades, y hacen falta las dos. El sitio en vivo se
+verifica **con curl**, no con el navegador: en este entorno Chromium no puede salir a la red porque
+el relay del proxy le corta los túneles, aunque curl pasa sin problema. Así que curl comprueba que
+cada archivo se sirva con su tipo de contenido y su tamaño, y que el `noindex` esté publicado; y
+luego los mismos archivos se sirven en local por HTTP y ahí sí entra el navegador, que es donde se
+comprueba lo que cambia al pasar de `file://` a HTTP: rutas relativas, tipos MIME, y que el CSV se
+descargue de verdad.
 
 ### El repositorio es público, y eso importa
 
