@@ -106,7 +106,7 @@ button { cursor: pointer; }
   border: 1px solid var(--secundario-borde); border-radius: var(--r-xs);
   padding: 4px var(--e-xs);
   font-family: var(--fuente-mono); font-size: var(--mono-sm); font-weight: 600;
-  letter-spacing: 0.04em; text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 .pi-buscar { position: relative; flex: 1; max-width: 460px; }
 .pi-buscar svg { position: absolute; left: var(--e-sm); top: 8px; color: var(--texto-tenue); }
@@ -152,7 +152,7 @@ button { cursor: pointer; }
 .pi-demo[hidden] { display: none; }
 .pi-demo-eti {
   font-family: var(--fuente-mono); font-size: var(--mono-sm); font-weight: 600;
-  letter-spacing: 0.1em; color: var(--primario-claro); flex: none;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--primario-claro); flex: none;
 }
 .pi-demo-roles { display: flex; gap: 4px; flex-wrap: wrap; }
 .pi-demo button {
@@ -539,13 +539,17 @@ table.tabla td.acciones { text-align: right; white-space: nowrap; }
 }
 
 @media (max-width: 900px) {
+  /* El menu lateral se convierte en un carril horizontal fijo arriba. La barra
+     superior deja de ser fija y se desplaza con el contenido: asi no hace falta
+     calcular su altura, que en pantallas estrechas crece a dos o tres lineas y
+     acababa tapando el encabezado de la pagina. */
   :root { --menu-ancho: 0px; }
   .pi-menu {
-    inset: 0 auto auto 0; width: 100%; height: auto; z-index: 40;
+    position: sticky; inset: 0 auto auto 0; width: 100%; height: auto; z-index: 40;
     flex-direction: row; align-items: center; gap: var(--e-xs);
-    overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--borde-suave);
+    padding-bottom: 0; overflow-x: auto;
+    border-right: 0; border-bottom: 1px solid var(--borde-suave);
   }
-  .pi-menu { padding-bottom: 0; }
   .pi-marca { border-bottom: 0; padding: var(--e-xs) var(--e-sm); flex: none; }
   .pi-marca-txt { display: none; }
   .pi-nav { padding: var(--e-xs); display: flex; gap: var(--e-xs); overflow-x: auto; }
@@ -556,9 +560,19 @@ table.tabla td.acciones { text-align: right; white-space: nowrap; }
   .pi-nav a[aria-current='page'] span.txt { display: inline; }
   .pi-nav .pi-chip-oscuro { display: none; }
   .pi-menu-pie { display: none; }
-  .pi-barra { left: 0; top: 52px; height: auto; padding: var(--e-xs) var(--e-sm); flex-wrap: wrap; }
+  .pi-barra {
+    position: static; left: auto; height: auto;
+    padding: var(--e-xs) var(--e-md); gap: var(--e-xs);
+    flex-wrap: wrap; row-gap: 6px;
+    background: var(--superficie-baja);
+  }
+  .pi-beta { font-size: 10px; padding: 3px 6px; }
+  .pi-barra-fin { margin-left: auto; }
+  /* El buscador global sobra en pantalla estrecha: cada listado trae el suyo. */
+  .pi-buscar { display: none; }
   .pi-usuario-txt { display: none; }
-  .pi-lienzo { margin-left: 0; padding: 118px var(--e-md) calc(var(--demo-alto) + var(--e-2xl)); }
+  .pi-barra-fin .btn span, .pi-barra-fin .btn { font-size: var(--c-sm); }
+  .pi-lienzo { margin-left: 0; padding: var(--e-md) var(--e-md) calc(var(--demo-alto) + var(--e-2xl)); }
   .rejilla-2, .rejilla-3, .rejilla-4 { grid-template-columns: 1fr; }
 }
 
@@ -571,9 +585,11 @@ table.tabla td.acciones { text-align: right; white-space: nowrap; }
   .filtros .fin { margin-left: 0; width: 100%; }
   .filtros .campo, .filtros .campo.crece { min-width: 0; flex-basis: 100%; }
   .bitacora-item { grid-template-columns: 1fr; gap: 2px; }
-  .pi-demo { height: auto; padding: var(--e-xs) var(--e-sm); flex-wrap: wrap; row-gap: 6px; }
+  .pi-demo { height: auto; padding: 6px var(--e-sm); flex-wrap: wrap; row-gap: 5px; column-gap: 6px; }
+  .pi-demo-eti { display: none; }
+  .pi-demo button { padding: 3px 8px; font-size: 12px; }
   .pi-demo-fin { margin-left: 0; }
-  .pi-demo-fin .mono { display: none; }
+  .pi-demo-fin .mono, .pi-demo [data-ocultar] { display: none; }
   .cal-rejilla { grid-template-columns: 1fr; }
   .cal-dia-nom { display: none; }
   .cal-dia { min-height: 0; flex-direction: row; align-items: flex-start; gap: var(--e-xs); }

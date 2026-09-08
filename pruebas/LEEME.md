@@ -18,6 +18,7 @@ node pruebas/sintaxis-html.js *.html    # sintaxis de los guiones en línea de l
 node pruebas/navegador-navegacion.js    # las 17 páginas en file:// con la red bloqueada
 node pruebas/navegador-flujos.js        # los diez pasos del criterio de aceptación
 node pruebas/navegador-responsive.js    # 1440, 768 y 390 px; deja capturas en el scratchpad
+node pruebas/navegador-barras.js        # que las barras no se corten ni tapen el contenido
 node pruebas/acentos.js                 # busca texto visible al que le falte una tilde
 ```
 

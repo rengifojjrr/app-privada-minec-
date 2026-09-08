@@ -70,6 +70,17 @@
     barra.querySelector('[data-ocultar]').addEventListener('click', function () { alternar(true); });
 
     if (oculta()) barra.hidden = true;
+    medir();
+  }
+
+  /* La barra crece a dos o tres filas en pantalla estrecha. En vez de fijar su
+     altura en el CSS, se mide y se publica en --demo-alto, que es lo que usa
+     el relleno inferior del lienzo. Asi el contenido nunca queda debajo. */
+  function medir() {
+    var barra = document.getElementById('pi-demo');
+    if (!barra) return;
+    var alto = barra.hidden ? 0 : barra.getBoundingClientRect().height;
+    document.documentElement.style.setProperty('--demo-alto', Math.round(alto) + 'px');
   }
 
   function alternar(forzarOcultar) {
@@ -78,6 +89,7 @@
     var nuevo = forzarOcultar === true ? true : !barra.hidden;
     barra.hidden = nuevo;
     guardarOculta(nuevo);
+    medir();
   }
 
   window.PI_DEMO = {
@@ -91,7 +103,9 @@
         if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
         alternar();
       });
+      window.addEventListener('resize', medir);
     },
-    alternar: alternar
+    alternar: alternar,
+    medir: medir
   };
 })();

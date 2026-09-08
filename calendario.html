@@ -38,6 +38,8 @@ PI.listo(function () {
   var MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
   var DIAS = ['lun','mar','mié','jue','vie','sáb','dom'];
 
+  function mayus(t) { return t.charAt(0).toUpperCase() + t.slice(1); }
+
   var hoy = new Date(); hoy.setHours(0, 0, 0, 0);
   var mes = hoy.getMonth(), anio = hoy.getFullYear();
 
@@ -75,7 +77,7 @@ PI.listo(function () {
 
     var html = '<div class="tarjeta"><div class="tarjeta-cab">' +
       '<button type="button" class="btn btn-sm btn-icono" id="c-ant" aria-label="Mes anterior">' + U.icono('chevron_left') + '</button>' +
-      '<h2 style="flex:1;text-align:center;text-transform:capitalize">' + MESES[mes] + ' de ' + anio + '</h2>' +
+      '<h2 style="flex:1;text-align:center">' + mayus(MESES[mes]) + ' de ' + anio + '</h2>' +
       '<button type="button" class="btn btn-sm btn-icono" id="c-sig" aria-label="Mes siguiente">' + U.icono('chevron_right') + '</button>' +
       '<button type="button" class="btn btn-sm" id="c-hoy">Hoy</button></div>' +
       '<div class="tarjeta-cuerpo"><div class="cal-rejilla">';

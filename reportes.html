@@ -125,12 +125,12 @@ PI.listo(function () {
     var cont = document.getElementById('pi-contenido');
     var titulo = { cierre: 'Cierre de mes', cartera: 'Avance de cartera', campo: 'Mediciones de campo', honorarios: 'Honorarios por profesional' }[tipo];
     var sub = tipo === 'cierre' || tipo === 'campo'
-      ? MESES[mes] + ' de ' + anio
-      : 'situación al ' + S.fechaHoy();
+      ? MESES[mes].charAt(0).toUpperCase() + MESES[mes].slice(1) + ' de ' + anio
+      : 'Situación al ' + S.fechaHoy();
 
     var html = '<div class="tarjeta"><div class="tarjeta-cab">' +
       '<div style="flex:1"><h2>' + U.esc(titulo) + '</h2>' +
-      '<span class="sm tenue" style="text-transform:capitalize">' + U.esc(sub) + '</span></div>' +
+      '<span class="sm tenue">' + U.esc(sub) + '</span></div>' +
       '<span class="badge badge-info sin-punto pi-acciones">Montos en USD</span></div>';
 
     if (tipo === 'cierre') {

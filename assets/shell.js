@@ -39,7 +39,7 @@ window.PI = window.PI || {};
 
   function marcaBeta() {
     return '<span class="pi-beta" title="Versión de demostración con datos de ejemplo">' +
-      icono('warning', 'icono-sm') + 'Beta &middot; datos de ejemplo</span>';
+      icono('warning', 'icono-sm') + 'BETA &middot; datos de ejemplo</span>';
   }
 
   function barraSuperior(simple) {
