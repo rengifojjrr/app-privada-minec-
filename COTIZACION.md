@@ -1,15 +1,24 @@
 # Levantamiento de proyecto — plantilla para cotizar
 
 > **Nota de quien rellenó este archivo.** Se completó analizando el repositorio existente y las
-> conversaciones que lo produjeron. Todo lo que no se habló está marcado `POR DEFINIR`. **Los precios
-> están vacíos a propósito**: no se ha hablado de presupuesto ni una sola vez en este proyecto, y
-> poner cifras inventadas en un documento que se convierte en una cotización real es exactamente lo
-> que después hay que desmentir frente al cliente. El alcance sí está descrito con el detalle
-> suficiente para que quien ponga los precios sepa qué está valorando.
+> conversaciones que lo produjeron. Todo lo que no se habló está marcado `POR DEFINIR`.
 >
-> Lo que sí lleva número son los **rangos de horas**, porque salen de trabajo ya hecho: la beta
-> completa son 6.783 líneas de código publicable más 1.850 de pruebas y herramientas, construidas en
-> 13 commits, y eso da una base real para estimar lo que falta.
+> **Sobre los precios.** El cliente no ha dado presupuesto: la cifra de 60.000 USD es un **objetivo
+> fijado por nosotros**, no un monto que MONPICA haya aprobado. Conviene no presentarlo como si
+> viniera de él.
+>
+> Los costos por entregable **no se estimaron uno a uno**: se repartieron los 60.000 en proporción a
+> las horas de cada entregable, a una tarifa única. Eso tiene una consecuencia que hay que entender
+> antes de negociar: **quitar un entregable baja el total exactamente lo que ese entregable cuesta en
+> horas**, ni más ni menos. No hay colchón repartido ni partidas infladas de las que recortar.
+>
+> La tarifa que sale de dividir 60.000 entre 364 horas es de **164,84 USD por hora**. Si esa no es la
+> tarifa con la que trabajas, el total no es 60.000: con 80 USD/hora son 29.000 y con 250 son 91.000.
+> Antes de mandar esto, decide si 60.000 es el precio o si la tarifa es el precio, porque no pueden
+> ser las dos cosas.
+>
+> Los **rangos de horas** sí salen de trabajo medido: la beta completa son 6.783 líneas de código
+> publicable más 1.850 de pruebas y herramientas, construidas en 13 commits.
 
 ---
 
@@ -60,13 +69,19 @@ la parte de servidor.
 
 | Campo | Valor |
 |---|---|
-| Presupuesto aprobado o rango | `POR DEFINIR` — no se ha mencionado ninguna cifra en todo el proyecto |
+| Presupuesto aprobado o rango | **60.000 USD como objetivo interno.** El cliente no ha aprobado ni mencionado ninguna cifra: la puso nuestro equipo para dimensionar la propuesta |
 | Moneda | USD |
-| ¿El monto es cerrado o hay margen? | `POR DEFINIR` |
+| ¿El monto es cerrado o hay margen? | `POR DEFINIR`. Lo que sí está fijo es la relación: 60.000 son 364 horas a 164,84 USD/hora. Bajar el total sin bajar la tarifa significa quitar entregables, y cada uno está valorado por sus horas |
 | ¿Hay algo que el cliente ya dijo que NO quiere pagar ahora? | Sí, y está documentado como fuera de alcance: mapas y visor cartográfico (queda para un desarrollo aparte y posterior), portal de contratantes funcional, asistente de informes funcional, carbono y servicios ambientales, y conexión con drones, GPS o estaciones totales. También se descartó exigir comprobante fotográfico de cada gasto. |
 
-> Los costos de la sección 4 están vacíos porque no hay presupuesto de referencia. El alcance está
-> descrito para que se puedan poner encima.
+> Los costos de la sección 4 suman exactamente 60.000 USD. Se repartieron en proporción a las horas,
+> no entregable por entregable, así que **el precio de cada línea es su peso real en el trabajo**:
+> quitar una línea baja el total justo en esa cantidad.
+>
+> **Los dos entregables con horas `POR DEFINIR` quedan fuera de los 60.000** y se cotizan aparte: la
+> carga de los proyectos en curso y el acompañamiento posterior. No se pueden valorar sin saber
+> cuántos expedientes hay, en qué formato están y cuánto dura el acompañamiento. Ponerles un número
+> ahora es comprometerse con un trabajo de volumen desconocido.
 
 ## 4. Fases y entregables
 
@@ -121,16 +136,16 @@ la parte de servidor.
 
 | Entregable | Qué incluye | Costo | Obligatorio / Opcional | Tiempo estimado |
 |---|---|---|---|---|
-| Corrección de magnitud: CAP en lugar de DAP | El campo de captura pasa a ser circunferencia (CAP), que es lo que se mide con la cinta en campo; el DAP se deriva (`CAP / π`) y se muestra como calculado, nunca se captura; el área basal sale del DAP derivado. Incluye migrar los datos existentes y revisar cada pantalla, reporte y exportación donde hoy dice DAP | | Obligatorio | 8 a 10 horas |
-| Modelo de predios, zonas y régimen especial | Predio con superficie y coordenada de referencia; zonas de trabajo dentro del predio; áreas de régimen especial que atraviesan varios predios. Navegación de predio a zona y de zona a árboles, filtro dentro de filtro | | Obligatorio | 12 a 15 horas |
-| Registro individual de árboles | Pestaña "Inventario" en la ficha: tabla filtrable por predio, zona, especie y estado, con número, especie, CAP, DAP derivado, altura, volumen estimado y estado; búsqueda y exportación a CSV; ficha de árbol con su historial | | Obligatorio | 16 a 20 horas |
-| Formulario de captura en campo | Pensado para teléfono: campos grandes, orden natural de captura y botón de guardar y seguir con el siguiente sin volver al listado. Es el que más se va a usar y el que peor conexión va a tener | | Obligatorio | 10 a 12 horas |
-| Cubicación por Smalian | Pestaña "Cubicación": trozas con diámetro de base, de punta y longitud; el sistema calcula `V = ((A_base + A_punta) / 2) × longitud` y **muestra la fórmula usada**; varias trozas por árbol; totales por árbol, especie y proyecto | | Obligatorio | 12 a 15 horas |
-| Factores de forma por especie | Catálogo de especies con su factor, su respaldo y quién lo cargó. El volumen en pie se estima **solo si hay factor**; sin factor el sistema dice "sin estimar", explica por qué y ofrece el enlace para cargarlo. Nunca un valor por defecto, nunca 0,5 asumido | | Obligatorio | 8 a 10 horas |
-| Fotografías por árbol | Varias por árbol, agrupadas por parte (base, fuste, copa, tocón, general), con quién la subió y cuándo. **En la beta se registran solo por nombre de archivo**: sin servidor no hay dónde guardar la imagen | | Obligatorio | 6 a 8 horas |
-| Página de inventario consolidado | `inventario.html` en el menú, con el inventario de todos los proyectos que el rol puede ver y los mismos filtros | | Obligatorio | 8 a 10 horas |
-| Cuatro reportes técnicos | Volumen por especie (árboles, área basal, estimado y cubicado); distribución por rango diamétrico; contadores por estado de árbol; resumen de cubicación. Todos exportables | | Obligatorio | 12 a 15 horas |
-| Rangos diamétricos configurables | Catálogo editable por especie, con límite inferior y superior | | Opcional | 4 a 5 horas |
+| Corrección de magnitud: CAP en lugar de DAP | El campo de captura pasa a ser circunferencia (CAP), que es lo que se mide con la cinta en campo; el DAP se deriva (`CAP / π`) y se muestra como calculado, nunca se captura; el área basal sale del DAP derivado. Incluye migrar los datos existentes y revisar cada pantalla, reporte y exportación donde hoy dice DAP | 1.475 | Obligatorio | 8 a 10 horas |
+| Modelo de predios, zonas y régimen especial | Predio con superficie y coordenada de referencia; zonas de trabajo dentro del predio; áreas de régimen especial que atraviesan varios predios. Navegación de predio a zona y de zona a árboles, filtro dentro de filtro | 2.225 | Obligatorio | 12 a 15 horas |
+| Registro individual de árboles | Pestaña "Inventario" en la ficha: tabla filtrable por predio, zona, especie y estado, con número, especie, CAP, DAP derivado, altura, volumen estimado y estado; búsqueda y exportación a CSV; ficha de árbol con su historial | 2.975 | Obligatorio | 16 a 20 horas |
+| Formulario de captura en campo | Pensado para teléfono: campos grandes, orden natural de captura y botón de guardar y seguir con el siguiente sin volver al listado. Es el que más se va a usar y el que peor conexión va a tener | 1.825 | Obligatorio | 10 a 12 horas |
+| Cubicación por Smalian | Pestaña "Cubicación": trozas con diámetro de base, de punta y longitud; el sistema calcula `V = ((A_base + A_punta) / 2) × longitud` y **muestra la fórmula usada**; varias trozas por árbol; totales por árbol, especie y proyecto | 2.225 | Obligatorio | 12 a 15 horas |
+| Factores de forma por especie | Catálogo de especies con su factor, su respaldo y quién lo cargó. El volumen en pie se estima **solo si hay factor**; sin factor el sistema dice "sin estimar", explica por qué y ofrece el enlace para cargarlo. Nunca un valor por defecto, nunca 0,5 asumido | 1.475 | Obligatorio | 8 a 10 horas |
+| Fotografías por árbol | Varias por árbol, agrupadas por parte (base, fuste, copa, tocón, general), con quién la subió y cuándo. **En la beta se registran solo por nombre de archivo**: sin servidor no hay dónde guardar la imagen | 1.150 | Obligatorio | 6 a 8 horas |
+| Página de inventario consolidado | `inventario.html` en el menú, con el inventario de todos los proyectos que el rol puede ver y los mismos filtros | 1.475 | Obligatorio | 8 a 10 horas |
+| Cuatro reportes técnicos | Volumen por especie (árboles, área basal, estimado y cubicado); distribución por rango diamétrico; contadores por estado de árbol; resumen de cubicación. Todos exportables | 2.225 | Obligatorio | 12 a 15 horas |
+| Rangos diamétricos configurables | Catálogo editable por especie, con límite inferior y superior | 750 | Opcional | 4 a 5 horas |
 
 ### Fase 4 — Administración, costos y cartera
 
@@ -143,13 +158,13 @@ la parte de servidor.
 
 | Entregable | Qué incluye | Costo | Obligatorio / Opcional | Tiempo estimado |
 |---|---|---|---|---|
-| Registro de gastos | `gastos.html` con categoría, concepto, monto, responsable, origen (proyecto, estructura fija o reportado por el contratante), quién lo asume, estado, factura y observación. Filtros por proyecto, categoría, origen, estado y fechas. **Las partidas por liquidar se muestran aparte y no suman al ejecutado** | | Obligatorio | 14 a 18 horas |
-| Movilización con tabulador | Al elegir movilización el formulario cambia: vehículo, tipo de vía y kilómetros, y el monto sale de la tarifa mostrando el cálculo. Queda editable con observación obligatoria si se corrige | | Obligatorio | 8 a 10 horas |
-| Vehículos y tarifas | Catálogo de vehículos con su valor, y tarifa por kilómetro para vía pavimentada y no pavimentada | | Obligatorio | 5 a 6 horas |
-| Nómina por proyecto | `nomina.html`: persona, rol en el proyecto, responsabilidades, monto, periodicidad y estado de pago. Totales por proyecto y período. Es distinta de los honorarios profesionales, que se conservan | | Obligatorio | 10 a 12 horas |
-| Estructura fija | `estructura-fija.html`: personal permanente, alquiler o administración propia, condominio, servicios, mantenimiento y vigilancia, con su inmueble. **No pertenece a ningún proyecto** y no debe aparecer dentro de uno | | Obligatorio | 10 a 12 horas |
-| Cartera por proyecto | `cartera.html`: contratado, ejecutado, por liquidar y resultado, segregado por actividad y responsable | | Obligatorio | 10 a 12 horas |
-| Carga del reporte de gastos del contratante | Registro de un lote de gastos marcados como reportados por el cliente, con fecha de recepción e identificador del reporte | | Opcional | 6 a 8 horas |
+| Registro de gastos | `gastos.html` con categoría, concepto, monto, responsable, origen (proyecto, estructura fija o reportado por el contratante), quién lo asume, estado, factura y observación. Filtros por proyecto, categoría, origen, estado y fechas. **Las partidas por liquidar se muestran aparte y no suman al ejecutado** | 2.625 | Obligatorio | 14 a 18 horas |
+| Movilización con tabulador | Al elegir movilización el formulario cambia: vehículo, tipo de vía y kilómetros, y el monto sale de la tarifa mostrando el cálculo. Queda editable con observación obligatoria si se corrige | 1.475 | Obligatorio | 8 a 10 horas |
+| Vehículos y tarifas | Catálogo de vehículos con su valor, y tarifa por kilómetro para vía pavimentada y no pavimentada | 900 | Obligatorio | 5 a 6 horas |
+| Nómina por proyecto | `nomina.html`: persona, rol en el proyecto, responsabilidades, monto, periodicidad y estado de pago. Totales por proyecto y período. Es distinta de los honorarios profesionales, que se conservan | 1.825 | Obligatorio | 10 a 12 horas |
+| Estructura fija | `estructura-fija.html`: personal permanente, alquiler o administración propia, condominio, servicios, mantenimiento y vigilancia, con su inmueble. **No pertenece a ningún proyecto** y no debe aparecer dentro de uno | 1.825 | Obligatorio | 10 a 12 horas |
+| Cartera por proyecto | `cartera.html`: contratado, ejecutado, por liquidar y resultado, segregado por actividad y responsable | 1.825 | Obligatorio | 10 a 12 horas |
+| Carga del reporte de gastos del contratante | Registro de un lote de gastos marcados como reportados por el cliente, con fecha de recepción e identificador del reporte | 1.150 | Opcional | 6 a 8 horas |
 
 ### Fase 5 — Los tres roles nuevos y la revisión legal
 
@@ -163,10 +178,10 @@ la parte de servidor.
 
 | Entregable | Qué incluye | Costo | Obligatorio / Opcional | Tiempo estimado |
 |---|---|---|---|---|
-| Tres roles nuevos en la matriz | Gerente de proyecto, Técnico forestal de campo y Asesor legal, con sus capacidades, su menú y su entrada en la pantalla de usuarios | | Obligatorio | 8 a 10 horas |
-| Paso de revisión legal en la etapa 8 | El Asesor legal la marca como revisada, queda con autor y fecha, y mientras no esté marcada la ficha lo muestra como pendiente | | Obligatorio | 5 a 6 horas |
-| Nueve catálogos nuevos | Estados de árbol, partes del árbol, tipos de régimen especial, categorías de gasto ampliadas, tipos de vía, conceptos de estructura fija, tipos de inmueble, rangos diamétricos y especies con factor | | Obligatorio | 8 a 10 horas |
-| Datos de ejemplo del levantamiento | Tres predios en dos proyectos con sus zonas y un régimen especial que atraviesa dos predios; sesenta árboles con coordenadas coherentes y CAP entre 40 y 220 cm; factores para tres de cuatro especies **y la cuarta sin factor a propósito**, para que se vea el mensaje de "sin estimar"; quince trozas cubicadas; cuarenta gastos en ocho categorías con tres de movilización, dos por liquidar y cinco del contratante; dos vehículos con tarifas; nómina en dos proyectos y una estructura fija con dos inmuebles | | Obligatorio | 10 a 12 horas |
+| Tres roles nuevos en la matriz | Gerente de proyecto, Técnico forestal de campo y Asesor legal, con sus capacidades, su menú y su entrada en la pantalla de usuarios | 1.475 | Obligatorio | 8 a 10 horas |
+| Paso de revisión legal en la etapa 8 | El Asesor legal la marca como revisada, queda con autor y fecha, y mientras no esté marcada la ficha lo muestra como pendiente | 900 | Obligatorio | 5 a 6 horas |
+| Nueve catálogos nuevos | Estados de árbol, partes del árbol, tipos de régimen especial, categorías de gasto ampliadas, tipos de vía, conceptos de estructura fija, tipos de inmueble, rangos diamétricos y especies con factor | 1.475 | Obligatorio | 8 a 10 horas |
+| Datos de ejemplo del levantamiento | Tres predios en dos proyectos con sus zonas y un régimen especial que atraviesa dos predios; sesenta árboles con coordenadas coherentes y CAP entre 40 y 220 cm; factores para tres de cuatro especies **y la cuarta sin factor a propósito**, para que se vea el mensaje de "sin estimar"; quince trozas cubicadas; cuarenta gastos en ocho categorías con tres de movilización, dos por liquidar y cinco del contratante; dos vehículos con tarifas; nómina en dos proyectos y una estructura fija con dos inmuebles | 1.825 | Obligatorio | 10 a 12 horas |
 
 ### Fase 6 — De demostración a sistema: servidor, base de datos y autenticación
 
@@ -180,13 +195,13 @@ la parte de servidor.
 
 | Entregable | Qué incluye | Costo | Obligatorio / Opcional | Tiempo estimado |
 |---|---|---|---|---|
-| Servidor y base de datos | Lo que hoy es `localStorage` en cada navegador pasa a una base de datos compartida. Incluye el modelo de datos completo, las migraciones y el despliegue | | Obligatorio | 40 a 55 horas |
-| Autenticación real | Contraseñas con cifrado, sesiones, recuperación por correo y cambio de contraseña. **Hoy la contraseña es la misma para las ocho cuentas y está impresa en la pantalla de entrada** | | Obligatorio | 20 a 26 horas |
-| Permisos verificados en el servidor | Hoy la guarda corre en el navegador, que es lo correcto para una demostración pero no basta para un sistema real: quien manipule el navegador se salta la guarda. Cada operación tiene que autorizarse también del lado del servidor | | Obligatorio | 16 a 20 horas |
-| Almacenamiento real de archivos | Documentos y fotografías de árbol se suben y se descargan de verdad, con control de versiones. **Hoy solo se registra el nombre del archivo** | | Obligatorio | 18 a 22 horas |
-| Respaldo automático | Copia diaria con retención y prueba de restauración | | Obligatorio | 8 a 10 horas |
-| Bitácora del lado del servidor | La auditoría deja de poder alterarse desde el navegador | | Obligatorio | 8 a 10 horas |
-| Retirada de todo lo de demostración | Barra de demo, ingreso de prueba, botón de reiniciar datos, marca BETA, semilla completa y los avisos que explican las limitaciones. Está enumerado uno por uno en `CLAUDE.md` | | Obligatorio | 5 a 6 horas |
+| Servidor y base de datos | Lo que hoy es `localStorage` en cada navegador pasa a una base de datos compartida. Incluye el modelo de datos completo, las migraciones y el despliegue | 7.850 | Obligatorio | 40 a 55 horas |
+| Autenticación real | Contraseñas con cifrado, sesiones, recuperación por correo y cambio de contraseña. **Hoy la contraseña es la misma para las ocho cuentas y está impresa en la pantalla de entrada** | 3.800 | Obligatorio | 20 a 26 horas |
+| Permisos verificados en el servidor | Hoy la guarda corre en el navegador, que es lo correcto para una demostración pero no basta para un sistema real: quien manipule el navegador se salta la guarda. Cada operación tiene que autorizarse también del lado del servidor | 2.975 | Obligatorio | 16 a 20 horas |
+| Almacenamiento real de archivos | Documentos y fotografías de árbol se suben y se descargan de verdad, con control de versiones. **Hoy solo se registra el nombre del archivo** | 3.300 | Obligatorio | 18 a 22 horas |
+| Respaldo automático | Copia diaria con retención y prueba de restauración | 1.475 | Obligatorio | 8 a 10 horas |
+| Bitácora del lado del servidor | La auditoría deja de poder alterarse desde el navegador | 1.475 | Obligatorio | 8 a 10 horas |
+| Retirada de todo lo de demostración | Barra de demo, ingreso de prueba, botón de reiniciar datos, marca BETA, semilla completa y los avisos que explican las limitaciones. Está enumerado uno por uno en `CLAUDE.md` | 900 | Obligatorio | 5 a 6 horas |
 
 ### Fase 7 — Puesta en marcha y acompañamiento
 
@@ -198,33 +213,59 @@ la parte de servidor.
 | Entregable | Qué incluye | Costo | Obligatorio / Opcional | Tiempo estimado |
 |---|---|---|---|---|
 | Carga de los proyectos en curso | Los expedientes abiertos, sus etapas, su equipo y su histórico de gasto | | Obligatorio | `POR DEFINIR` — depende de cuántos proyectos y en qué formato están hoy |
-| Capacitación por rol | Una sesión por grupo: coordinación, campo, administración y dirección | | Obligatorio | 8 a 12 horas |
-| Manual de uso | Guía corta por rol, con las pantallas reales | | Opcional | 8 a 10 horas |
+| Capacitación por rol | Una sesión por grupo: coordinación, campo, administración y dirección | 1.650 | Obligatorio | 8 a 12 horas |
+| Manual de uso | Guía corta por rol, con las pantallas reales | 1.475 | Opcional | 8 a 10 horas |
 | Acompañamiento posterior | Período acotado de corrección de defectos y ajustes de uso | | Opcional | `POR DEFINIR` |
 
 ## 5. Comprobación de números
 
 | Concepto | Monto |
 |---|---|
-| Suma de todos los entregables **obligatorios** | `POR DEFINIR` — sin precios cargados |
-| Suma de todos los entregables **opcionales** | `POR DEFINIR` |
-| **Total (obligatorios + opcionales)** | `POR DEFINIR` |
-| ¿Coincide con el presupuesto de la sección 3? | No aplica: no hay presupuesto de referencia |
+| Suma de todos los entregables **obligatorios** | $56.625 |
+| Suma de todos los entregables **opcionales** | $3.375 |
+| **Total (obligatorios + opcionales)** | **$60.000** |
+| ¿Coincide con el presupuesto de la sección 3? | **Sí**, exacto |
 
-**Lo que sí cuadra: las horas.** Sirven para poner precio por hora o para dimensionar.
+Fuera de ese total, cotizados aparte: la **carga de los proyectos en curso** y el **acompañamiento
+posterior**. Los dos tienen horas `POR DEFINIR` y no se pueden valorar sin saber el volumen.
 
-| Concepto | Horas |
-|---|---|
-| Fase 3 · Inventario y cubicación (obligatorio) | 92 a 115 |
-| Fase 3 · Opcional | 4 a 5 |
-| Fase 4 · Administración y costos (obligatorio) | 57 a 70 |
-| Fase 4 · Opcional | 6 a 8 |
-| Fase 5 · Roles nuevos y catálogos (obligatorio) | 31 a 38 |
-| Fase 6 · Servidor, autenticación y archivos (obligatorio) | 115 a 149 |
-| Fase 7 · Puesta en marcha (obligatorio, sin la carga de datos) | 8 a 12 |
-| Fase 7 · Opcional | 8 a 10 |
-| **Total obligatorio (fases 3 a 7)** | **303 a 384** |
-| **Total con opcionales** | **321 a 407** |
+### Reparto por fase
+
+| Fase | Obligatorio | Opcional | Total |
+|---|---|---|---|
+| Fase 3 · Inventario y cubicación | $17.050 | $750 | **$17.800** |
+| Fase 4 · Administración y costos | $10.475 | $1.150 | **$11.625** |
+| Fase 5 · Roles nuevos y catálogos | $5.675 | — | **$5.675** |
+| Fase 6 · Servidor y autenticación | $21.775 | — | **$21.775** |
+| Fase 7 · Puesta en marcha | $1.650 | $1.475 | **$3.125** |
+| **TOTAL** | **$56.625** | **$3.375** | **$60.000** |
+
+### De dónde sale cada precio
+
+Los 60.000 se repartieron en proporción a las horas, a una tarifa única de **164,84 USD/hora** sobre
+364 horas (el punto medio de cada rango). No hay partidas infladas ni colchón repartido, y eso tiene
+dos consecuencias prácticas:
+
+- **Quitar un entregable baja el total exactamente su precio.** Si el cliente saca los cuatro
+  reportes técnicos, son 2.225 menos y nada más.
+- **Si la tarifa real no es 164,84, el total no es 60.000.** A 80 USD/hora el mismo alcance son
+  29.000; a 250, son 91.000. La cifra y la tarifa no se pueden fijar las dos a la vez.
+
+### Si 60.000 es un techo y hay que bajar
+
+El orden de recorte no es obvio, así que conviene decirlo antes de que lo decida el cliente:
+
+| Palanca | Ahorro | Qué se pierde |
+|---|---|---|
+| Los tres entregables opcionales | $3.375 | Rangos diamétricos configurables, carga del reporte del contratante y manual de uso |
+| Fase 4 completa (administración y costos) | $11.625 | Gastos, movilización, nómina, estructura fija y cartera. Queda el sistema técnico sin la parte administrativa |
+| Fase 3 completa (inventario y cubicación) | $17.800 | El levantamiento con el ingeniero forestal entero. Es la fase más cara y la razón por la que se pidió la ampliación |
+
+**La Fase 6 no es una palanca de recorte aunque sea la más cara ($21.775).** Es la que convierte la
+demostración en un sistema: sin ella los datos siguen viviendo en el navegador de cada persona, no se
+comparten entre el equipo y se pierden si alguien limpia su navegador. Se puede comprar todo lo demás
+y seguir sin tener un sistema. Si hay que elegir, la pregunta correcta no es "qué módulo quito" sino
+"quiero una demostración más completa o quiero empezar a usarlo".
 
 ## 6. Tiempos de entrega
 
@@ -361,16 +402,76 @@ Tres cosas que conviene tener claras antes de presentar la cotización.
       "scope_limit": "Ningún mapa: las coordenadas se guardan y se muestran como dato, no se dibujan. Sin GPS, drones ni estaciones totales. Sin cálculo de carbono. Las fotografías se registran solo por nombre mientras no haya servidor.",
       "timeline": "POR DEFINIR",
       "items": [
-        { "title": "Corrección de magnitud: CAP en lugar de DAP", "description": "El campo de captura pasa a circunferencia, que es lo que se mide con cinta; el DAP se deriva y se muestra como calculado; el área basal sale del DAP derivado. Incluye migrar los datos y revisar cada pantalla, reporte y exportación.", "cost": 0, "mandatory": "required", "time_estimate": "8 a 10 horas" },
-        { "title": "Modelo de predios, zonas y régimen especial", "description": "Predio con superficie y coordenada; zonas dentro del predio; áreas de régimen especial que atraviesan varios predios. Navegación de predio a zona y de zona a árboles.", "cost": 0, "mandatory": "required", "time_estimate": "12 a 15 horas" },
-        { "title": "Registro individual de árboles", "description": "Pestaña Inventario con tabla filtrable por predio, zona, especie y estado; ficha de árbol con su historial; búsqueda y exportación.", "cost": 0, "mandatory": "required", "time_estimate": "16 a 20 horas" },
-        { "title": "Formulario de captura en campo", "description": "Para teléfono: campos grandes, orden natural y guardar y seguir con el siguiente sin volver al listado.", "cost": 0, "mandatory": "required", "time_estimate": "10 a 12 horas" },
-        { "title": "Cubicación por Smalian", "description": "Trozas con diámetro de base, de punta y longitud; el sistema calcula el volumen y muestra la fórmula; varias trozas por árbol; totales por árbol, especie y proyecto.", "cost": 0, "mandatory": "required", "time_estimate": "12 a 15 horas" },
-        { "title": "Factores de forma por especie", "description": "Catálogo con factor, respaldo y autor. El volumen en pie se estima solo si hay factor; sin factor dice sin estimar y ofrece cargarlo. Nunca un valor por defecto.", "cost": 0, "mandatory": "required", "time_estimate": "8 a 10 horas" },
-        { "title": "Fotografías por árbol", "description": "Varias por árbol agrupadas por parte, con autor y fecha. Registradas solo por nombre mientras no haya servidor.", "cost": 0, "mandatory": "required", "time_estimate": "6 a 8 horas" },
-        { "title": "Página de inventario consolidado", "description": "Inventario de todos los proyectos que el rol puede ver, con los mismos filtros.", "cost": 0, "mandatory": "required", "time_estimate": "8 a 10 horas" },
-        { "title": "Cuatro reportes técnicos", "description": "Volumen por especie, distribución por rango diamétrico, contadores por estado de árbol y resumen de cubicación. Exportables.", "cost": 0, "mandatory": "required", "time_estimate": "12 a 15 horas" },
-        { "title": "Rangos diamétricos configurables", "description": "Catálogo editable por especie con límite inferior y superior.", "cost": 0, "mandatory": "optional", "time_estimate": "4 a 5 horas" }
+        {
+          "title": "Corrección de magnitud: CAP en lugar de DAP",
+          "description": "El campo de captura pasa a circunferencia, que es lo que se mide con cinta; el DAP se deriva y se muestra como calculado; el área basal sale del DAP derivado. Incluye migrar los datos y revisar cada pantalla, reporte y exportación.",
+          "cost": 1475,
+          "mandatory": "required",
+          "time_estimate": "8 a 10 horas"
+        },
+        {
+          "title": "Modelo de predios, zonas y régimen especial",
+          "description": "Predio con superficie y coordenada; zonas dentro del predio; áreas de régimen especial que atraviesan varios predios. Navegación de predio a zona y de zona a árboles.",
+          "cost": 2225,
+          "mandatory": "required",
+          "time_estimate": "12 a 15 horas"
+        },
+        {
+          "title": "Registro individual de árboles",
+          "description": "Pestaña Inventario con tabla filtrable por predio, zona, especie y estado; ficha de árbol con su historial; búsqueda y exportación.",
+          "cost": 2975,
+          "mandatory": "required",
+          "time_estimate": "16 a 20 horas"
+        },
+        {
+          "title": "Formulario de captura en campo",
+          "description": "Para teléfono: campos grandes, orden natural y guardar y seguir con el siguiente sin volver al listado.",
+          "cost": 1825,
+          "mandatory": "required",
+          "time_estimate": "10 a 12 horas"
+        },
+        {
+          "title": "Cubicación por Smalian",
+          "description": "Trozas con diámetro de base, de punta y longitud; el sistema calcula el volumen y muestra la fórmula; varias trozas por árbol; totales por árbol, especie y proyecto.",
+          "cost": 2225,
+          "mandatory": "required",
+          "time_estimate": "12 a 15 horas"
+        },
+        {
+          "title": "Factores de forma por especie",
+          "description": "Catálogo con factor, respaldo y autor. El volumen en pie se estima solo si hay factor; sin factor dice sin estimar y ofrece cargarlo. Nunca un valor por defecto.",
+          "cost": 1475,
+          "mandatory": "required",
+          "time_estimate": "8 a 10 horas"
+        },
+        {
+          "title": "Fotografías por árbol",
+          "description": "Varias por árbol agrupadas por parte, con autor y fecha. Registradas solo por nombre mientras no haya servidor.",
+          "cost": 1150,
+          "mandatory": "required",
+          "time_estimate": "6 a 8 horas"
+        },
+        {
+          "title": "Página de inventario consolidado",
+          "description": "Inventario de todos los proyectos que el rol puede ver, con los mismos filtros.",
+          "cost": 1475,
+          "mandatory": "required",
+          "time_estimate": "8 a 10 horas"
+        },
+        {
+          "title": "Cuatro reportes técnicos",
+          "description": "Volumen por especie, distribución por rango diamétrico, contadores por estado de árbol y resumen de cubicación. Exportables.",
+          "cost": 2225,
+          "mandatory": "required",
+          "time_estimate": "12 a 15 horas"
+        },
+        {
+          "title": "Rangos diamétricos configurables",
+          "description": "Catálogo editable por especie con límite inferior y superior.",
+          "cost": 750,
+          "mandatory": "optional",
+          "time_estimate": "4 a 5 horas"
+        }
       ]
     },
     {
@@ -379,13 +480,55 @@ Tres cosas que conviene tener claras antes de presentar la cotización.
       "scope_limit": "Sin procesamiento de pagos, sin facturación electrónica, sin conexión con sistemas contables, y sin comprobante fotográfico obligatorio.",
       "timeline": "POR DEFINIR",
       "items": [
-        { "title": "Registro de gastos", "description": "Categoría, concepto, monto, responsable, origen, quién lo asume, estado y factura. Filtros por proyecto, categoría, origen, estado y fechas. Las partidas por liquidar no suman al ejecutado.", "cost": 0, "mandatory": "required", "time_estimate": "14 a 18 horas" },
-        { "title": "Movilización con tabulador", "description": "Vehículo, tipo de vía y kilómetros; el monto sale de la tarifa mostrando el cálculo, editable con observación obligatoria.", "cost": 0, "mandatory": "required", "time_estimate": "8 a 10 horas" },
-        { "title": "Vehículos y tarifas", "description": "Vehículos con su valor y tarifa por kilómetro para vía pavimentada y no pavimentada.", "cost": 0, "mandatory": "required", "time_estimate": "5 a 6 horas" },
-        { "title": "Nómina por proyecto", "description": "Persona, rol en el proyecto, responsabilidades, monto, periodicidad y estado de pago. Distinta de los honorarios profesionales.", "cost": 0, "mandatory": "required", "time_estimate": "10 a 12 horas" },
-        { "title": "Estructura fija", "description": "Personal permanente, alquiler o administración propia, condominio, servicios, mantenimiento y vigilancia, con su inmueble. No pertenece a ningún proyecto.", "cost": 0, "mandatory": "required", "time_estimate": "10 a 12 horas" },
-        { "title": "Cartera por proyecto", "description": "Contratado, ejecutado, por liquidar y resultado, segregado por actividad y responsable.", "cost": 0, "mandatory": "required", "time_estimate": "10 a 12 horas" },
-        { "title": "Carga del reporte de gastos del contratante", "description": "Lote de gastos marcados como reportados por el cliente, con fecha de recepción e identificador.", "cost": 0, "mandatory": "optional", "time_estimate": "6 a 8 horas" }
+        {
+          "title": "Registro de gastos",
+          "description": "Categoría, concepto, monto, responsable, origen, quién lo asume, estado y factura. Filtros por proyecto, categoría, origen, estado y fechas. Las partidas por liquidar no suman al ejecutado.",
+          "cost": 2625,
+          "mandatory": "required",
+          "time_estimate": "14 a 18 horas"
+        },
+        {
+          "title": "Movilización con tabulador",
+          "description": "Vehículo, tipo de vía y kilómetros; el monto sale de la tarifa mostrando el cálculo, editable con observación obligatoria.",
+          "cost": 1475,
+          "mandatory": "required",
+          "time_estimate": "8 a 10 horas"
+        },
+        {
+          "title": "Vehículos y tarifas",
+          "description": "Vehículos con su valor y tarifa por kilómetro para vía pavimentada y no pavimentada.",
+          "cost": 900,
+          "mandatory": "required",
+          "time_estimate": "5 a 6 horas"
+        },
+        {
+          "title": "Nómina por proyecto",
+          "description": "Persona, rol en el proyecto, responsabilidades, monto, periodicidad y estado de pago. Distinta de los honorarios profesionales.",
+          "cost": 1825,
+          "mandatory": "required",
+          "time_estimate": "10 a 12 horas"
+        },
+        {
+          "title": "Estructura fija",
+          "description": "Personal permanente, alquiler o administración propia, condominio, servicios, mantenimiento y vigilancia, con su inmueble. No pertenece a ningún proyecto.",
+          "cost": 1825,
+          "mandatory": "required",
+          "time_estimate": "10 a 12 horas"
+        },
+        {
+          "title": "Cartera por proyecto",
+          "description": "Contratado, ejecutado, por liquidar y resultado, segregado por actividad y responsable.",
+          "cost": 1825,
+          "mandatory": "required",
+          "time_estimate": "10 a 12 horas"
+        },
+        {
+          "title": "Carga del reporte de gastos del contratante",
+          "description": "Lote de gastos marcados como reportados por el cliente, con fecha de recepción e identificador.",
+          "cost": 1150,
+          "mandatory": "optional",
+          "time_estimate": "6 a 8 horas"
+        }
       ]
     },
     {
@@ -394,10 +537,34 @@ Tres cosas que conviene tener claras antes de presentar la cotización.
       "scope_limit": "La matriz de permisos sigue siendo código, no una pantalla de administración de roles.",
       "timeline": "Conviene antes de las fases de inventario y costos, no después.",
       "items": [
-        { "title": "Tres roles nuevos en la matriz", "description": "Gerente de proyecto, Técnico forestal y Asesor legal, con capacidades, menú y entrada en usuarios.", "cost": 0, "mandatory": "required", "time_estimate": "8 a 10 horas" },
-        { "title": "Paso de revisión legal en la etapa 8", "description": "El Asesor legal la marca como revisada con autor y fecha; sin marcar, la ficha lo muestra pendiente.", "cost": 0, "mandatory": "required", "time_estimate": "5 a 6 horas" },
-        { "title": "Nueve catálogos nuevos", "description": "Estados de árbol, partes del árbol, tipos de régimen especial, categorías de gasto, tipos de vía, conceptos de estructura fija, tipos de inmueble, rangos diamétricos y especies con factor.", "cost": 0, "mandatory": "required", "time_estimate": "8 a 10 horas" },
-        { "title": "Datos de ejemplo del levantamiento", "description": "Tres predios, sesenta árboles con CAP entre 40 y 220 cm, factores para tres de cuatro especies y la cuarta sin factor a propósito, quince trozas, cuarenta gastos, dos vehículos, nómina en dos proyectos y estructura fija con dos inmuebles.", "cost": 0, "mandatory": "required", "time_estimate": "10 a 12 horas" }
+        {
+          "title": "Tres roles nuevos en la matriz",
+          "description": "Gerente de proyecto, Técnico forestal y Asesor legal, con capacidades, menú y entrada en usuarios.",
+          "cost": 1475,
+          "mandatory": "required",
+          "time_estimate": "8 a 10 horas"
+        },
+        {
+          "title": "Paso de revisión legal en la etapa 8",
+          "description": "El Asesor legal la marca como revisada con autor y fecha; sin marcar, la ficha lo muestra pendiente.",
+          "cost": 900,
+          "mandatory": "required",
+          "time_estimate": "5 a 6 horas"
+        },
+        {
+          "title": "Nueve catálogos nuevos",
+          "description": "Estados de árbol, partes del árbol, tipos de régimen especial, categorías de gasto, tipos de vía, conceptos de estructura fija, tipos de inmueble, rangos diamétricos y especies con factor.",
+          "cost": 1475,
+          "mandatory": "required",
+          "time_estimate": "8 a 10 horas"
+        },
+        {
+          "title": "Datos de ejemplo del levantamiento",
+          "description": "Tres predios, sesenta árboles con CAP entre 40 y 220 cm, factores para tres de cuatro especies y la cuarta sin factor a propósito, quince trozas, cuarenta gastos, dos vehículos, nómina en dos proyectos y estructura fija con dos inmuebles.",
+          "cost": 1825,
+          "mandatory": "required",
+          "time_estimate": "10 a 12 horas"
+        }
       ]
     },
     {
@@ -406,13 +573,55 @@ Tres cosas que conviene tener claras antes de presentar la cotización.
       "scope_limit": "Sin app móvil nativa, sin trabajo sin conexión con sincronización posterior, sin firma electrónica. Es la fase que decide si el sistema se puede usar en producción; ninguna de las anteriores la sustituye.",
       "timeline": "POR DEFINIR",
       "items": [
-        { "title": "Servidor y base de datos", "description": "Lo que hoy es localStorage en cada navegador pasa a una base compartida: modelo de datos, migraciones y despliegue.", "cost": 0, "mandatory": "required", "time_estimate": "40 a 55 horas" },
-        { "title": "Autenticación real", "description": "Contraseñas cifradas, sesiones, recuperación por correo y cambio de contraseña. Hoy la contraseña es la misma para las ocho cuentas y está impresa en pantalla.", "cost": 0, "mandatory": "required", "time_estimate": "20 a 26 horas" },
-        { "title": "Permisos verificados en el servidor", "description": "Hoy la guarda corre en el navegador, correcto para una demostración pero insuficiente: quien manipule el navegador se la salta. Cada operación se autoriza también en el servidor.", "cost": 0, "mandatory": "required", "time_estimate": "16 a 20 horas" },
-        { "title": "Almacenamiento real de archivos", "description": "Documentos y fotografías se suben y descargan de verdad, con versiones. Hoy solo se registra el nombre.", "cost": 0, "mandatory": "required", "time_estimate": "18 a 22 horas" },
-        { "title": "Respaldo automático", "description": "Copia diaria con retención y prueba de restauración.", "cost": 0, "mandatory": "required", "time_estimate": "8 a 10 horas" },
-        { "title": "Bitácora del lado del servidor", "description": "La auditoría deja de poder alterarse desde el navegador.", "cost": 0, "mandatory": "required", "time_estimate": "8 a 10 horas" },
-        { "title": "Retirada de todo lo de demostración", "description": "Barra de demo, ingreso de prueba, reiniciar datos, marca BETA, semilla y avisos de limitaciones. Enumerado uno por uno en CLAUDE.md.", "cost": 0, "mandatory": "required", "time_estimate": "5 a 6 horas" }
+        {
+          "title": "Servidor y base de datos",
+          "description": "Lo que hoy es localStorage en cada navegador pasa a una base compartida: modelo de datos, migraciones y despliegue.",
+          "cost": 7850,
+          "mandatory": "required",
+          "time_estimate": "40 a 55 horas"
+        },
+        {
+          "title": "Autenticación real",
+          "description": "Contraseñas cifradas, sesiones, recuperación por correo y cambio de contraseña. Hoy la contraseña es la misma para las ocho cuentas y está impresa en pantalla.",
+          "cost": 3800,
+          "mandatory": "required",
+          "time_estimate": "20 a 26 horas"
+        },
+        {
+          "title": "Permisos verificados en el servidor",
+          "description": "Hoy la guarda corre en el navegador, correcto para una demostración pero insuficiente: quien manipule el navegador se la salta. Cada operación se autoriza también en el servidor.",
+          "cost": 2975,
+          "mandatory": "required",
+          "time_estimate": "16 a 20 horas"
+        },
+        {
+          "title": "Almacenamiento real de archivos",
+          "description": "Documentos y fotografías se suben y descargan de verdad, con versiones. Hoy solo se registra el nombre.",
+          "cost": 3300,
+          "mandatory": "required",
+          "time_estimate": "18 a 22 horas"
+        },
+        {
+          "title": "Respaldo automático",
+          "description": "Copia diaria con retención y prueba de restauración.",
+          "cost": 1475,
+          "mandatory": "required",
+          "time_estimate": "8 a 10 horas"
+        },
+        {
+          "title": "Bitácora del lado del servidor",
+          "description": "La auditoría deja de poder alterarse desde el navegador.",
+          "cost": 1475,
+          "mandatory": "required",
+          "time_estimate": "8 a 10 horas"
+        },
+        {
+          "title": "Retirada de todo lo de demostración",
+          "description": "Barra de demo, ingreso de prueba, reiniciar datos, marca BETA, semilla y avisos de limitaciones. Enumerado uno por uno en CLAUDE.md.",
+          "cost": 900,
+          "mandatory": "required",
+          "time_estimate": "5 a 6 horas"
+        }
       ]
     },
     {
@@ -421,10 +630,34 @@ Tres cosas que conviene tener claras antes de presentar la cotización.
       "scope_limit": "El acompañamiento es un período acotado que hay que fijar, no soporte indefinido.",
       "timeline": "POR DEFINIR",
       "items": [
-        { "title": "Carga de los proyectos en curso", "description": "Expedientes abiertos, etapas, equipo e histórico de gasto. El tiempo depende de cuántos y en qué formato están.", "cost": 0, "mandatory": "required", "time_estimate": "POR DEFINIR" },
-        { "title": "Capacitación por rol", "description": "Una sesión por grupo: coordinación, campo, administración y dirección.", "cost": 0, "mandatory": "required", "time_estimate": "8 a 12 horas" },
-        { "title": "Manual de uso", "description": "Guía corta por rol con las pantallas reales.", "cost": 0, "mandatory": "optional", "time_estimate": "8 a 10 horas" },
-        { "title": "Acompañamiento posterior", "description": "Período acotado de corrección de defectos y ajustes de uso.", "cost": 0, "mandatory": "optional", "time_estimate": "POR DEFINIR" }
+        {
+          "title": "Carga de los proyectos en curso",
+          "description": "Expedientes abiertos, etapas, equipo e histórico de gasto. El tiempo depende de cuántos y en qué formato están. Se cotiza aparte: queda fuera de los 60.000 porque no se puede valorar sin saber el volumen.",
+          "cost": 0,
+          "mandatory": "required",
+          "time_estimate": "POR DEFINIR"
+        },
+        {
+          "title": "Capacitación por rol",
+          "description": "Una sesión por grupo: coordinación, campo, administración y dirección.",
+          "cost": 1650,
+          "mandatory": "required",
+          "time_estimate": "8 a 12 horas"
+        },
+        {
+          "title": "Manual de uso",
+          "description": "Guía corta por rol con las pantallas reales.",
+          "cost": 1475,
+          "mandatory": "optional",
+          "time_estimate": "8 a 10 horas"
+        },
+        {
+          "title": "Acompañamiento posterior",
+          "description": "Período acotado de corrección de defectos y ajustes de uso. Se cotiza aparte: queda fuera de los 60.000 porque no se puede valorar sin saber el volumen.",
+          "cost": 0,
+          "mandatory": "optional",
+          "time_estimate": "POR DEFINIR"
+        }
       ]
     }
   ],
@@ -445,17 +678,54 @@ Tres cosas que conviene tener claras antes de presentar la cotización.
     "Migración de expedientes históricos más allá de los proyectos en curso"
   ],
   "dependencies": [
-    { "title": "Factores de forma por especie, con su respaldo", "description": "Sin factor el volumen en pie no se estima: el sistema dice sin estimar y explica por qué. Es una decisión técnica de la empresa, no un dato que se pueda asumir, y nunca se usará 0,5 por defecto.", "responsible": "MONPICA — su ingeniero forestal" },
-    { "title": "Tarifas de kilometraje por vehículo y tipo de vía", "description": "Es lo que multiplica los kilómetros para calcular el gasto de movilización. Sin la tabla el módulo no calcula.", "responsible": "MONPICA — administración" },
-    { "title": "Decisión sobre el repositorio: público o privado", "description": "Hoy es público y por eso la semilla no puede llevar datos reales. El historial de git también es público: los nombres de los cinco clientes y el RIF siguen legibles en commits anteriores, y eso solo se cierra pasando el repositorio a privado o reescribiendo el historial.", "responsible": "MONPICA decide, nosotros ejecutamos" },
-    { "title": "RIF y contactos de los contratantes reales", "description": "Están en Dato de ejemplo a propósito: no se inventa un número fiscal de una empresa que existe. Van cuando el repositorio sea privado.", "responsible": "MONPICA" },
-    { "title": "Confirmar si RECURSO HÍBRIDOS del brochure es HÍDRICOS", "description": "Se usó la palabra corregida en el catálogo de tipos de proyecto. Si el brochure está mal, ese documento sale a clientes con la falta.", "responsible": "MONPICA" },
-    { "title": "Decisión sobre exigir factura en cada gasto", "description": "El campo existe y se registra pero no es obligatorio. Hacerlo obligatorio es una decisión del cliente, no una limitación técnica.", "responsible": "MONPICA" },
-    { "title": "Servidor y dominio para la fase de producción", "description": "Habilitar hosting, dominio y certificado suele tardar días entre trámite y propagación.", "responsible": "POR DEFINIR" },
-    { "title": "Proyectos en curso en formato utilizable", "description": "Para la carga inicial. El tiempo depende de si están en hojas de cálculo o en papel.", "responsible": "MONPICA" }
-  ]
+    {
+      "title": "Factores de forma por especie, con su respaldo",
+      "description": "Sin factor el volumen en pie no se estima: el sistema dice sin estimar y explica por qué. Es una decisión técnica de la empresa, no un dato que se pueda asumir, y nunca se usará 0,5 por defecto.",
+      "responsible": "MONPICA — su ingeniero forestal"
+    },
+    {
+      "title": "Tarifas de kilometraje por vehículo y tipo de vía",
+      "description": "Es lo que multiplica los kilómetros para calcular el gasto de movilización. Sin la tabla el módulo no calcula.",
+      "responsible": "MONPICA — administración"
+    },
+    {
+      "title": "Decisión sobre el repositorio: público o privado",
+      "description": "Hoy es público y por eso la semilla no puede llevar datos reales. El historial de git también es público: los nombres de los cinco clientes y el RIF siguen legibles en commits anteriores, y eso solo se cierra pasando el repositorio a privado o reescribiendo el historial.",
+      "responsible": "MONPICA decide, nosotros ejecutamos"
+    },
+    {
+      "title": "RIF y contactos de los contratantes reales",
+      "description": "Están en Dato de ejemplo a propósito: no se inventa un número fiscal de una empresa que existe. Van cuando el repositorio sea privado.",
+      "responsible": "MONPICA"
+    },
+    {
+      "title": "Confirmar si RECURSO HÍBRIDOS del brochure es HÍDRICOS",
+      "description": "Se usó la palabra corregida en el catálogo de tipos de proyecto. Si el brochure está mal, ese documento sale a clientes con la falta.",
+      "responsible": "MONPICA"
+    },
+    {
+      "title": "Decisión sobre exigir factura en cada gasto",
+      "description": "El campo existe y se registra pero no es obligatorio. Hacerlo obligatorio es una decisión del cliente, no una limitación técnica.",
+      "responsible": "MONPICA"
+    },
+    {
+      "title": "Servidor y dominio para la fase de producción",
+      "description": "Habilitar hosting, dominio y certificado suele tardar días entre trámite y propagación.",
+      "responsible": "POR DEFINIR"
+    },
+    {
+      "title": "Proyectos en curso en formato utilizable",
+      "description": "Para la carga inicial. El tiempo depende de si están en hojas de cálculo o en papel.",
+      "responsible": "MONPICA"
+    }
+  ],
+  "budget_target": 60000,
+  "budget_note": "Objetivo fijado por nuestro equipo, no un monto aprobado por el cliente. Los 60.000 se repartieron en proporcion a las horas a una tarifa unica de 164,84 USD/hora sobre 364 horas. Quitar un entregable baja el total exactamente su precio. Los dos entregables con horas POR DEFINIR quedan fuera del total y se cotizan aparte.",
+  "hourly_rate": 164.84,
+  "total_hours": 364
 }
 ```
 
-`mandatory` solo acepta `"required"` u `"optional"`. Los `cost` están en `0` porque no hay
-presupuesto de referencia: hay que cargarlos antes de generar el PDF.
+`mandatory` solo acepta `"required"` u `"optional"`. Los `cost` suman **60.000 exactos**. Los dos que
+están en `0` son los que se cotizan aparte: la carga de proyectos en curso y el acompañamiento
+posterior, ambos con horas `POR DEFINIR`.
