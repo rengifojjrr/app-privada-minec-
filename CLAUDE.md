@@ -27,6 +27,13 @@
 > - **Los correos usan el dominio `monpica.example`.** El TLD `.example` está reservado por la RFC
 >   2606 y no puede pertenecer a nadie, así que ninguna dirección de la semilla puede coincidir con
 >   la de una persona real.
+> - **Ningún documento comercial vive aquí.** `COTIZACION.md` estuvo versionado en esta rama, y por
+>   tanto servido en `https://rengifojjrr.github.io/app-privada-minec-/COTIZACION.md` con HTTP 200.
+>   Llevaba escrita la posición de negociación —que la cifra objetivo la fijábamos nosotros y no el
+>   cliente— a la vista de la contraparte. Se retiró. Las cotizaciones, los precios, las tarifas y
+>   las notas de negociación se quedan fuera del repositorio mientras sea público; y el historial de
+>   git conserva lo que ya estuvo, así que retirarlo detiene la exposición hacia adelante, no la que
+>   ya ocurrió.
 
 Notas para quien retome este proyecto. La bitácora de decisiones está en `PROGRESO.md`.
 
