@@ -236,7 +236,7 @@ contexto, la cartera de servicios, los cinco contratantes y las tres especies co
 brochure del cliente; las ocho personas, todos los montos, todas las fechas y todos los códigos son
 invento. Los RIF de los contratantes dicen "Por confirmar" a propósito — ver más abajo.
 
-La semilla trae ocho usuarios que cubren los cinco roles, seis contratantes, seis proyectos en
+La semilla trae ocho usuarios que cubren los cinco roles, cinco contratantes, seis proyectos en
 estados distintos (uno detenido esperando aprobación, uno con dos etapas vencidas), mediciones en
 tres parcelas, movimientos en más de seis categorías con partidas por liquidar, y treinta registros
 de bitácora de días anteriores.
