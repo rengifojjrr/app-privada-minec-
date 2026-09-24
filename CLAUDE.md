@@ -56,7 +56,7 @@ python3 -m http.server 8080     # y abrir http://localhost:8080
 Pero el escenario de la reunión es `file://`: abrir `index.html` directamente, con la red apagada.
 Todo cambio debe probarse ahí, porque es lo que se rompe primero.
 
-En `pruebas/` hay nueve guiones que hacen exactamente eso. Los de navegador abren las páginas por
+En `pruebas/` hay diez guiones que hacen exactamente eso. Los de navegador abren las páginas por
 `file://` **abortando toda petición que no sea `file:`, `data:` o `blob:`**, que es la única forma de
 sostener la promesa de que funciona sin red.
 
@@ -69,6 +69,7 @@ node pruebas/navegador-responsive.js     # 360, 390, 768 y 1440 px
 node pruebas/navegador-barras.js         # barras fijas, --demo-alto y contraste
 node pruebas/navegador-ingreso.js        # los ocho usuarios
 node pruebas/calendario-y-reportes.js    # las dos pantallas consolidadas
+node pruebas/navegador-cajon.js          # el cajon de navegacion, a 360, 390, 768 y 900 px
 node pruebas/publicacion.js              # la beta publicada: en vivo y por HTTP
 ```
 
@@ -283,6 +284,18 @@ de bitácora de días anteriores.
   movimientos. Decían "Sin movimientos en el mes", que es correcto, y aun así el informe que llegó
   fue "reportes no produce salida". Ahora `reportes.html` arranca en el último mes que tiene datos.
   Lo mismo vale para cualquier consolidado que se agregue.
+- **El menú en pantalla estrecha es un cajón, no un carril de iconos.** Por debajo de 900 px
+  `.pi-menu` se convierte en un cajón que entra desde la izquierda, y `.pi-barra` queda como única
+  barra: hamburguesa, marca, aviso de beta e identidad, en una sola fila. El carril horizontal que
+  había antes mostraba cuatro iconos sin rótulo en un teléfono y escondía el resto detrás de un
+  desplazamiento que no se anuncia, además de perder los títulos de grupo. Tres cosas que conviene
+  no deshacer: **«Mi perfil» y «Salir» salen de la barra y viven en el cajón** — esconderlos sin más
+  dejaría al usuario sin manera de salir; **el velo se apaga con `visibility`, nunca con el atributo
+  `hidden`**, porque una regla de autor con `display:block` le gana al `hidden` del navegador y el
+  velo se queda invisible pero encima de todo, tragándose cada clic de la página; y **la hamburguesa
+  recupera el foco al cerrar**. Lo cubre `pruebas/navegador-cajon.js`, que existe porque ninguna otra
+  prueba hacía clic con ancho de teléfono: el fallo del velo pasó las seis suites sin que ninguna lo
+  notara.
 - **Si escondes un control en móvil, comprueba que quede otra forma de hacer lo mismo.** El bloque de
   720 px escondía el botón "Ocultar" de la barra de demostración en la misma regla que la pista de la
   tecla D. En un teléfono no hay teclado, así que la barra quedaba pegada al pie sin ninguna manera

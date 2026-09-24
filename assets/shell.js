@@ -68,13 +68,24 @@ window.PI = window.PI || {};
 
   function marcaBeta() {
     return '<span class="pi-beta" title="Versión de demostración con datos de ejemplo">' +
-      icono('warning', 'icono-sm') + 'BETA &middot; datos de ejemplo</span>';
+      icono('warning', 'icono-sm') + 'BETA' +
+      '<span class="pi-beta-larga"> &middot; datos de ejemplo</span></span>';
   }
 
   function barraSuperior(simple) {
     var u = PI.store.usuario();
     var rol = PI.auth.nombreRol();
     var html = '<header class="pi-barra' + (simple ? ' sola' : '') + '">';
+    /* En pantalla estrecha el menu lateral se convierte en un cajon, y esta es
+       la unica manera de abrirlo. En escritorio el boton no se muestra. */
+    if (!simple) {
+      html += '<button type="button" class="pi-hamburguesa" id="pi-hamburguesa" ' +
+        'aria-controls="pi-menu" aria-expanded="false" aria-label="Abrir el menú">' +
+        icono('menu') + '</button>' +
+        '<a class="pi-barra-logo" href="' + PI.auth.inicioDe(PI.auth.rol()) + '" ' +
+        'aria-label="Ir al inicio">' + emblema(26) +
+        '<strong>' + esc(MARCA.nombre) + '</strong></a>';
+    }
     if (simple) {
       html += '<div class="pi-barra-marca">' + emblema(30) +
         '<strong>' + esc(MARCA.nombre) + '</strong>' +
@@ -104,11 +115,15 @@ window.PI = window.PI || {};
 
   function menuLateral() {
     var actual = PI.auth.paginaActual();
-    var html = '<aside class="pi-menu"><a class="pi-marca" href="' + PI.auth.inicioDe(PI.auth.rol()) + '">' +
+    var html = '<aside class="pi-menu" id="pi-menu">' +
+      '<div class="pi-menu-cab">' +
+      '<a class="pi-marca" href="' + PI.auth.inicioDe(PI.auth.rol()) + '">' +
       emblema(34) +
       '<span class="pi-marca-txt"><strong>' + esc(MARCA.nombre) + '</strong>' +
-      '<span>Proyectos integrales</span></span>' +
-      '</a><nav class="pi-nav" aria-label="Navegación principal">';
+      '<span>Proyectos integrales</span></span></a>' +
+      '<button type="button" class="pi-menu-cerrar" id="pi-menu-cerrar" ' +
+      'aria-label="Cerrar el menú">' + icono('close') + '</button>' +
+      '</div><nav class="pi-nav" aria-label="Navegación principal">';
     PI.auth.menu().forEach(function (g) {
       html += '<div class="pi-nav-grupo"><span class="eti">' + esc(g.titulo) + '</span>';
       g.enlaces.forEach(function (e) {
@@ -121,7 +136,18 @@ window.PI = window.PI || {};
       });
       html += '</div>';
     });
-    html += '</nav><div class="pi-menu-pie">' +
+    /* Identidad y salida. Solo se ven en pantalla estrecha: en escritorio
+       siguen viviendo en la barra superior, y duplicarlas sobraria. */
+    var u = PI.store.usuario();
+    html += '</nav><div class="pi-menu-cuenta">' +
+      '<div class="pi-menu-usuario">' +
+      '<span class="pi-avatar">' + esc(PI.fmt.iniciales(u ? u.nombre : '?')) + '</span>' +
+      '<div class="pi-menu-usuario-txt"><strong>' + esc(u ? u.nombre : '—') + '</strong>' +
+      '<span class="eti">' + esc(PI.auth.nombreRol()) + '</span></div></div>' +
+      '<div class="pi-menu-acciones">' +
+      '<a class="btn btn-sm" href="index.html">' +
+      icono('logout', 'icono-sm') + ' Salir</a>' +
+      '</div></div><div class="pi-menu-pie">' +
       '<span class="eti">' + esc(MARCA.sede) + '</span>' +
       (MARCA.rif ? '<div class="mono">RIF ' + esc(MARCA.rif) + '</div>' : '') +
       '</div></aside>';
@@ -136,6 +162,57 @@ window.PI = window.PI || {};
       if (ev.key !== 'Enter' || !q.value.trim()) return;
       window.location.href = 'proyectos.html?q=' + encodeURIComponent(q.value.trim());
     });
+  }
+
+  /* El cajon de navegacion de pantalla estrecha. El CSS solo lo convierte en
+     cajon por debajo de 900 px; aqui arriba la clase no hace nada, asi que la
+     misma logica sirve para los dos tamanos sin preguntar por el ancho salvo
+     para bloquear el desplazamiento del cuerpo. */
+  function conectarMenu() {
+    var boton = document.getElementById('pi-hamburguesa');
+    var menu = document.getElementById('pi-menu');
+    var velo = document.getElementById('pi-velo');
+    if (!boton || !menu || !velo) return;
+    var raiz = document.documentElement;
+    var estrecha = window.matchMedia('(max-width: 900px)');
+
+    function abierto() { return raiz.classList.contains('pi-menu-abierto'); }
+
+    function poner(v, devolverFoco) {
+      if (v === abierto()) return;
+      raiz.classList.toggle('pi-menu-abierto', v);
+      boton.setAttribute('aria-expanded', v ? 'true' : 'false');
+      boton.setAttribute('aria-label', v ? 'Cerrar el menú' : 'Abrir el menú');
+      velo.setAttribute('aria-hidden', v ? 'false' : 'true');
+      if (v) {
+        var primero = menu.querySelector('.pi-menu-cerrar');
+        if (primero) primero.focus();
+      } else if (devolverFoco) {
+        boton.focus();
+      }
+    }
+
+    boton.addEventListener('click', function () { poner(!abierto(), false); });
+    velo.addEventListener('click', function () { poner(false, true); });
+    var cerrar = document.getElementById('pi-menu-cerrar');
+    if (cerrar) cerrar.addEventListener('click', function () { poner(false, true); });
+
+    /* Un enlace del cajon navega y la pagina se recarga cerrada, pero el de la
+       pagina actual no navega a ninguna parte: sin esto el cajon se quedaria
+       abierto encima del contenido. */
+    menu.addEventListener('click', function (ev) {
+      if (ev.target.closest && ev.target.closest('.pi-nav a, .pi-menu-acciones a')) poner(false, false);
+    });
+
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape' && abierto()) poner(false, true);
+    });
+
+    /* Al pasar a escritorio el cajon deja de existir: hay que soltar el bloqueo
+       del desplazamiento, o el cuerpo se queda congelado. */
+    function alEnsanchar() { if (!estrecha.matches) poner(false, false); }
+    if (estrecha.addEventListener) estrecha.addEventListener('change', alEnsanchar);
+    else if (estrecha.addListener) estrecha.addListener(alEnsanchar);
   }
 
   var shell = {
@@ -153,12 +230,14 @@ window.PI = window.PI || {};
       montarSprite();
 
       var marco = document.createElement('div');
-      marco.innerHTML = (simple ? '' : menuLateral()) + barraSuperior(simple);
+      marco.innerHTML = (simple ? '' : menuLateral() + '<div class="pi-velo" id="pi-velo"></div>') +
+        barraSuperior(simple);
       while (marco.firstChild) {
         document.body.insertBefore(marco.firstChild, document.getElementById('pi-sprite').nextSibling);
       }
 
       conectarBusqueda();
+      conectarMenu();
 
       if (window.PI_DEMO) window.PI_DEMO.montar();
 

@@ -63,9 +63,10 @@ button { cursor: pointer; }
   border-right: 1px solid var(--borde-suave);
   padding-bottom: var(--demo-alto);
 }
+.pi-menu-cab { display: flex; align-items: center; border-bottom: 1px solid var(--borde-fino); }
 .pi-marca {
-  display: flex; align-items: center; gap: var(--e-sm);
-  padding: var(--e-md); border-bottom: 1px solid var(--borde-fino);
+  display: flex; align-items: center; gap: var(--e-sm); flex: 1; min-width: 0;
+  padding: var(--e-md);
   color: inherit; text-decoration: none;
 }
 .pi-marca:hover { background: var(--superficie-media); text-decoration: none; }
@@ -83,7 +84,7 @@ button { cursor: pointer; }
 .pi-barra-marca img { display: block; flex: none; }
 .pi-barra-marca strong { font-size: var(--c-lg); font-weight: 700; letter-spacing: 0.02em; color: var(--azul); }
 
-.pi-nav { flex: 1; overflow-y: auto; padding: var(--e-md) var(--e-sm); }
+.pi-nav { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: var(--e-md) var(--e-sm); }
 .pi-nav-grupo { margin-bottom: var(--e-lg); }
 .pi-nav-grupo > .eti { padding: 0 var(--e-xs) var(--e-xs); }
 .pi-nav a {
@@ -105,6 +106,48 @@ button { cursor: pointer; }
   background: var(--superficie-alta);
 }
 .pi-menu-pie .mono { font-size: var(--mono-sm); color: var(--texto-suave); }
+
+/* ---------------------------------------------------------------------------
+   El cajon de navegacion. En escritorio el menu lateral esta siempre a la
+   vista, asi que estas piezas no se muestran; por debajo de 900 px son la
+   unica manera de llegar al menu, y el bloque movil del final las enciende.
+   ------------------------------------------------------------------------ */
+.pi-hamburguesa, .pi-barra-logo, .pi-menu-cerrar, .pi-menu-cuenta, .pi-velo { display: none; }
+
+.pi-hamburguesa, .pi-menu-cerrar {
+  width: 40px; height: 40px; flex: none; place-items: center;
+  background: transparent; border: 1px solid transparent; border-radius: var(--r-md);
+  color: var(--texto-suave); cursor: pointer; padding: 0;
+}
+.pi-hamburguesa:hover, .pi-menu-cerrar:hover { background: var(--superficie-media); color: var(--texto); }
+.pi-hamburguesa:active, .pi-menu-cerrar:active { background: var(--superficie-alta); }
+.pi-menu-cerrar { margin-right: var(--e-xs); }
+
+.pi-barra-logo {
+  align-items: center; gap: var(--e-xs); flex: none;
+  color: inherit; text-decoration: none; min-width: 0;
+}
+.pi-barra-logo img { width: 26px; height: 26px; flex: none; display: block; }
+.pi-barra-logo strong {
+  font-size: var(--c-md); font-weight: 700; letter-spacing: 0.02em; color: var(--azul);
+  white-space: nowrap;
+}
+.pi-barra-logo:hover { text-decoration: none; }
+
+/* La sombra hace que el menu pase por debajo del bloque de cuenta en vez de
+   cortarse en seco: asi se lee que la lista sigue y se puede desplazar. */
+.pi-menu-cuenta {
+  padding: var(--e-sm); border-top: 1px solid var(--borde-fino);
+  box-shadow: 0 -6px 12px -8px rgba(22, 33, 15, 0.18);
+}
+.pi-menu-usuario { display: flex; align-items: center; gap: var(--e-sm); padding: 0 var(--e-2xs) var(--e-sm); }
+.pi-menu-usuario-txt { min-width: 0; line-height: 1.25; }
+.pi-menu-usuario-txt strong {
+  display: block; font-size: var(--c-md); font-weight: 600;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.pi-menu-acciones { display: grid; gap: var(--e-xs); }
+.pi-menu-acciones .btn { justify-content: center; }
 
 .pi-barra {
   position: fixed; top: 0; right: 0; left: var(--menu-ancho); height: var(--barra-alto); z-index: 25;
@@ -608,44 +651,80 @@ table.tabla td.acciones { text-align: right; white-space: nowrap; }
 }
 
 @media (max-width: 900px) {
-  /* El menu lateral se convierte en un carril horizontal fijo arriba. La barra
-     superior deja de ser fija y se desplaza con el contenido: asi no hace falta
-     calcular su altura, que en pantallas estrechas crece a dos o tres lineas y
-     acababa tapando el encabezado de la pagina. */
+  /* El menu lateral se convierte en un cajon que entra desde la izquierda, y la
+     barra superior pasa a ser la unica barra visible, en una sola fila fija.
+     Antes el menu era un carril horizontal de iconos sin rotulo: cabian cuatro
+     en un telefono, el resto quedaba fuera de pantalla detras de un
+     desplazamiento que no se anuncia, y los grupos del menu desaparecian. */
   :root { --menu-ancho: 0px; }
+
   .pi-menu {
-    position: sticky; inset: 0 auto auto 0; width: 100%; height: auto; z-index: 40;
-    flex-direction: row; align-items: center; gap: var(--e-xs);
-    padding-bottom: 0; overflow-x: auto;
-    border-right: 0; border-bottom: 1px solid var(--borde-suave);
+    position: fixed; inset: 0 auto 0 0; width: min(86vw, 320px); height: 100%;
+    z-index: 60; flex-direction: column;
+    border-right: 1px solid var(--borde-suave);
+    box-shadow: var(--sombra-lg);
+    transform: translateX(-100%); visibility: hidden;
+    transition: transform 220ms ease, visibility 0s linear 220ms;
   }
-  .pi-marca { border-bottom: 0; padding: var(--e-xs) var(--e-sm); flex: none; }
-  .pi-marca-txt { display: none; }
-  .pi-nav { padding: var(--e-xs); display: flex; gap: var(--e-xs); overflow-x: auto; }
-  .pi-nav-grupo { display: flex; gap: 2px; margin: 0; }
-  .pi-nav-grupo > .eti { display: none; }
-  .pi-nav a { margin: 0; white-space: nowrap; }
-  .pi-nav a span.txt { display: none; }
-  .pi-nav a[aria-current='page'] span.txt { display: inline; }
-  .pi-nav .pi-chip-oscuro { display: none; }
-  .pi-menu-pie { display: none; }
+  html.pi-menu-abierto .pi-menu {
+    transform: none; visibility: visible;
+    transition: transform 220ms ease;
+  }
+  /* El velo se apaga con visibility y no con el atributo hidden: una regla de
+     autor con display:block le gana al hidden del navegador, y el velo se
+     quedaba invisible pero encima de todo, tragandose cada clic de la pagina. */
+  .pi-velo {
+    display: block; position: fixed; inset: 0; z-index: 55;
+    background: rgba(22, 33, 15, 0.5);
+    opacity: 0; visibility: hidden;
+    transition: opacity 220ms ease, visibility 0s linear 220ms;
+  }
+  html.pi-menu-abierto .pi-velo {
+    opacity: 1; visibility: visible;
+    transition: opacity 220ms ease;
+  }
+  html.pi-menu-abierto, html.pi-menu-abierto body { overflow: hidden; }
+
+  .pi-menu-cerrar { display: grid; }
+  .pi-nav { padding: var(--e-sm); }
+  .pi-nav a { padding: 11px var(--e-sm); font-size: var(--c-lg); }
+  .pi-menu-cuenta { display: block; }
+
+  /* La barra queda en una sola fila: abrir, marca, aviso de beta e identidad.
+     "Mi perfil" y "Salir" se mudan al cajon, que es donde hay sitio para ellos
+     con su rotulo; esconderlos sin mas dejaria al usuario sin manera de salir. */
   .pi-barra {
-    position: static; left: auto; height: auto;
-    padding: var(--e-xs) var(--e-md); gap: var(--e-xs);
-    flex-wrap: wrap; row-gap: 6px;
-    background: var(--superficie-baja);
+    position: sticky; top: 0; left: auto; height: var(--barra-alto);
+    padding: 0 var(--e-sm); gap: var(--e-xs);
+    flex-wrap: nowrap;
+    background: var(--fondo);
   }
-  .pi-beta { font-size: 10px; padding: 3px 6px; }
+  .pi-hamburguesa { display: grid; }
+  .pi-barra-logo { display: flex; }
+  .pi-beta { font-size: 10px; padding: 3px 6px; margin-left: auto; }
   .pi-barra-marca .sm { display: none; }
-  .pi-barra-fin { margin-left: auto; }
+  .pi-barra-fin { margin-left: 0; }
+  .pi-barra-fin .btn { display: none; }
   /* El buscador global sobra en pantalla estrecha: cada listado trae el suyo. */
   .pi-buscar { display: none; }
   .pi-usuario-txt { display: none; }
-  .pi-barra-fin .btn span, .pi-barra-fin .btn { font-size: var(--c-sm); }
   .pi-lienzo { margin-left: 0; padding: var(--e-md) var(--e-md) calc(var(--demo-alto) + var(--e-2xl)); }
-  /* En móvil la barra no es fija, así que el ingreso no necesita ese hueco. */
   .pi-portada { padding-top: var(--e-lg); }
   .rejilla-2, .rejilla-3, .rejilla-4 { grid-template-columns: 1fr; }
+}
+
+/* En telefono el distintivo de beta se queda en la palabra: el aviso sigue
+   ahi y le deja sitio al nombre de la empresa, que es lo que el cliente
+   reconoce. Por debajo de 360 px cede el nombre y queda solo el emblema. */
+@media (max-width: 720px) {
+  .pi-beta-larga { display: none; }
+}
+@media (max-width: 360px) {
+  .pi-barra-logo strong { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pi-menu, .pi-velo { transition: none; }
 }
 
 @media (max-width: 720px) {
